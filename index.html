@@ -88,6 +88,9 @@ Calc's theme: <select id="theme" onChange="themes()"><option value="0">Original<
               <br>• Fixed resistance to monster element cards (ex. Tatacho, Luciola Vespa).
               <br>• Added additional information under "Other Info" tab.
               <br>• Fixed Ghostring Card not reducing damage from Neutral element.
+              <br>• Fixed "Cast Time/delay" tab not properly showing cast time reduction from all gears.
+              <br>• Fixed Cast Delay from Bragi not additively stacking with other modifiers.
+              <br>• Fixed Heal and Sanctuary not being affected by all MATK% based Damage modifiers.
               <br>• Other small fixes.
               <br>
               <span id="changelog"><br><b>Changelog 2023-04-16:</b>
@@ -2871,7 +2874,7 @@ Calc's theme: <select id="theme" onChange="themes()"><option value="0">Original<
                           </option>
                           <option value="16">+% MATK based Damage Modifiers
                           </option>
-                          <option value="18">Cast Time/delay
+                          <option value="18">Cast Time/Delay
                           </option>
                           <option value="20">Experience
                           </option>

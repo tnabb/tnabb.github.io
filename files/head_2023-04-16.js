@@ -1129,27 +1129,18 @@ function BattleCalc999() {
         } else if (244 == n_A_ActiveSkill) { // acid terror n_B_DEF2[2] = soft def
             n_PerHIT_DMG = 0,
                 n_rangedAtk = 1,
-                //wMod = (50 + 50 * n_A_ActiveSkillLV) / 100;
                 wMod = (100 + 130 * n_A_ActiveSkillLV) / 100;
             for (s = 0; s <= 2; s++)
-                //console.log(BattleCalc(n_A_DMG[s], s) * wMod),
-                /* w_DMG[s] = Math.floor((BK_n_A_DMG[s] - n_B_DEF2[s]) * wMod), 
-                    w_DMG[s] = Math.floor(w_DMG[s] * element[n_B[3]][n_A_Weapon_element]),
-                    w_DMG[s] = Math.floor(ApplyModifiers(w_DMG[s])),
-                    Last_DMG_B[s] = Math.floor(w_DMG[s] / 5),
-                    Last_DMG_A[s] = w_DMG[s], */
-
-                w_DMG[s] = BattleCalc(n_A_DMG[s], s) * wMod,
+                w_DMG[s] = BK_n_A_DMG[s] * wMod,
+                    w_DMG[s] = BattleCalc(w_DMG[s], s),
                     w_DMG[s] = Math.floor(ApplyModifiers(w_DMG[s])),
                     a = BK_n_A_MATK[s],
                     a *= .4 * n_A_ActiveSkillLV + 1,
-                    a = a * mdefReduction(n_B[15]) - n_B_MDEF2,
-                    a = Math.floor(a * element[n_B[3]][n_A_Weapon_element]),
+                    a = BattleMagicCalc(a),
                     a < 0 && (a = 0),
-                    w_DMG[s] += a,
-                    Last_DMG_B[s] = w_DMG[s],
+                    Last_DMG_B[s] = w_DMG[s] + a,
                     Last_DMG_A[s] = Last_DMG_B[s],
-                    InnStr[s] += Last_DMG_A[s];
+                    InnStr[s] += Last_DMG_A[s] + " (" + w_DMG[s] + " + " + a + ")";
             wCast = 1 * n_A_CAST,
                 CastAndDelay(),
                 BattleCalc998()
@@ -1189,7 +1180,7 @@ function BattleCalc999() {
             w_HIT_HYOUJI = 100,
                 CastAndDelay(),
                 BattleCalc998()
-        } else if (25 == n_A_ActiveSkill) {
+        } else if (25 == n_A_ActiveSkill) { // heal
             n_PerHIT_DMG = 0,
                 n_A_Weapon_element = 6,
                 n_Delay[2] = 1,
@@ -1198,7 +1189,11 @@ function BattleCalc999() {
                 w_DMG[2] = Math.floor(Math.floor(w_DMG[2] / 2) * Math.max(0, element[n_B[3]][6])),
                 n_B[3] < 90 && (w_DMG[2] = 0);
             _ = n_tok[170 + n_B[2]];
+            nEle = n_B[3] < 5 ? n_tok[340] : n_tok[340 + Math.floor(Math.abs(n_B[3]) / (10 ** (String(n_B[3]).length - 1)))]; 
+            nBoss = n_B[19] ? n_tok[353] : 0; 
             w_DMG[2] = Math.floor(w_DMG[2] * (100 + _) / 100),
+            w_DMG[2] = Math.floor(w_DMG[2] * (100 + nEle) / 100),
+            w_DMG[2] = Math.floor(w_DMG[2] * (100 + nBoss) / 100),
                 wHealMOD = 100 + n_tok[93],
                 w_DMG[2] = Math.floor(w_DMG[2] * wHealMOD / 100),
                 w_DMG[2] = tPlusDamCut(w_DMG[2]),
@@ -1209,7 +1204,7 @@ function BattleCalc999() {
             w_HIT_HYOUJI = 100,
                 CastAndDelay(),
                 BattleCalc998()
-        } else if (94 == n_A_ActiveSkill) {
+        } else if (94 == n_A_ActiveSkill) { // sanc
             n_PerHIT_DMG = 0,
                 n_A_Weapon_element = 6,
                 wCast = 5 * n_A_CAST,
@@ -1221,7 +1216,11 @@ function BattleCalc999() {
                 w_DMG[2] = Math.floor(Math.floor(w_DMG[2] / 2) * Math.max(0, element[n_B[3]][6])),
                 n_B[3] < 90 && 6 != n_B[2] && (w_DMG[2] = 0);
             _ = n_tok[170 + n_B[2]];
+            nEle = n_B[3] < 5 ? n_tok[340] : n_tok[340 + Math.floor(Math.abs(n_B[3]) / (10 ** (String(n_B[3]).length - 1)))]; 
+            nBoss = n_B[19] ? n_tok[353] : 0; 
             w_DMG[2] = Math.floor(w_DMG[2] * (100 + _) / 100),
+            w_DMG[2] = Math.floor(w_DMG[2] * (100 + nEle) / 100),
+            w_DMG[2] = Math.floor(w_DMG[2] * (100 + nBoss) / 100),
                 w_HEAL_MOD = 100 + n_tok[96],
                 w_DMG[2] = Math.floor(w_DMG[2] * w_HEAL_MOD / 100),
                 w_DMG[2] = tPlusDamCut(w_DMG[2]),
@@ -4913,7 +4912,8 @@ function CastAndDelay() {
     var n = 0;
     n_Delay[1] > wDelay && (wDelay = n_Delay[1],
         n = 1),
-        n_Delay[2] = Math.floor(n_Delay[2] * (100 - AC_I - (100 - AC_I) * n_tok[74] / 100)) / 100,
+        eqDelay = (100 - AC_I - n_tok[74]) < 0 ? 0 : 100 - AC_I - n_tok[74],
+        n_Delay[2] = Math.floor(n_Delay[2] * eqDelay) / 100,
         n_Delay[2] > wDelay && (wDelay = n_Delay[2],
             n = 2),
         n_Delay[3] > wDelay && (wDelay = n_Delay[3],

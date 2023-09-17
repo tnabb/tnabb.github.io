@@ -1288,20 +1288,20 @@ function StAllCalc() {
         n_A_CAST < 0 && (n_A_CAST = 0);
     M = 100;
     nb_tok = 0,
+        25 == n_A_JOB && (n_tok[73] -= 50 * CardNumSearch(533)),
+        EquipNumSearch(750) && (n_tok[73] -= n_A_Weapon_refine),
+        EquipNumSearch(1005) & EquipNumSearch(442) && (n_tok[73] -= n_A_Weapon_refine / 2),
+        n_A_Weapon_refine >= 9 && 1084 == n_A_Equip[0] && (n_tok[73] -= 5),
+        n_A_Weapon_refine >= 9 && 1095 == n_A_Equip[0] && (n_tok[73] -= 5),
+        10 == n_A_Weapon_refine && EquipNumSearch(1493) && (n_tok[73] -= 10),
+        n_A_HEAD_REFINE >= 8 && 1279 == n_A_Equip[2] && (n_tok[73] -= 3),
+        n_A_HEAD_REFINE >= 8 && 1476 == n_A_Equip[2] && (n_tok[73] -= 3),
+        n_A_HEAD_REFINE >= 7 && 1289 == n_A_Equip[2] && (n_tok[73] -= 3),
+        n_A_HEAD_REFINE >= 9 && 1289 == n_A_Equip[2] && (n_tok[73] -= 2),
+        5 == n_A_JobClass() && CardNumSearch(454) && (n_tok[73] -= 15),
+        18 != n_A_JOB && 32 != n_A_JOB || !CardNumSearch(460) || (n_tok[73] -= 15),
+        177 == n_A_card[8] && (n_tok[73] -= n_A_HEAD_REFINE),
         M += n_tok[73],
-        25 == n_A_JOB && (M -= 50 * CardNumSearch(533)),
-        EquipNumSearch(750) && (M -= n_A_Weapon_refine),
-        EquipNumSearch(1005) & EquipNumSearch(442) && (M -= n_A_Weapon_refine / 2),
-        n_A_Weapon_refine >= 9 && 1084 == n_A_Equip[0] && (M -= 5),
-        n_A_Weapon_refine >= 9 && 1095 == n_A_Equip[0] && (M -= 5),
-        10 == n_A_Weapon_refine && EquipNumSearch(1493) && (M -= 10),
-        n_A_HEAD_REFINE >= 8 && 1279 == n_A_Equip[2] && (M -= 3),
-        n_A_HEAD_REFINE >= 8 && 1476 == n_A_Equip[2] && (M -= 3),
-        n_A_HEAD_REFINE >= 7 && 1289 == n_A_Equip[2] && (M -= 3),
-        n_A_HEAD_REFINE >= 9 && 1289 == n_A_Equip[2] && (M -= 2),
-        5 == n_A_JobClass() && CardNumSearch(454) && (M -= 15),
-        18 != n_A_JOB && 32 != n_A_JOB || !CardNumSearch(460) || (M -= 15),
-        177 == n_A_card[8] && (M -= n_A_HEAD_REFINE),
         0 != n_A_Buf3[2] && (SRV ? (M -= M / 100 * ((3 * n_A_Buf3[2] + n_A_Buf3[32] + Math.floor(n_A_Buf3[22] / 10)) / 100) * 100,
             nb_tok += (3 * n_A_Buf3[2] + n_A_Buf3[32] + Math.floor(n_A_Buf3[22] / 10)) / 100 * 100) : (M -= 3 * n_A_Buf3[2] + n_A_Buf3[32] + Math.floor(n_A_Buf3[22] / 10),
                 nb_tok += (3 * n_A_Buf3[2] + n_A_Buf3[32] + Math.floor(n_A_Buf3[22] / 10)) / 100 * 100)),
@@ -1867,8 +1867,8 @@ function StPlusCard(_) { // buffs / stats from cards perhaps
     for (a = 47; a < 53; a++)
         _ == a - 46 && (n += n_A_Buf9[a]); // stats
     for (a = 0; a <= 26; a += 2) // adds effects from random options
-        if(_ == 73) console.log(_);
-        _ == m_RandomOpt[n_A_randopt[a]][2] && (n += n_A_randopt[a + 1], console.log("option number : " + n_A_randopt[a] + " amount: " + n));
+        _ == m_RandomOpt[n_A_randopt[a]][2] && _ == 73 && (n -= n_A_randopt[a + 1]),
+        _ == m_RandomOpt[n_A_randopt[a]][2] && _ != 73 && (n += n_A_randopt[a + 1]);
     return 80 == _ && (n += n_A_Buf9[41]), // atk% based dmg on any target
         290 == _ && (n += n_A_Buf9[16]), // def ignore
         295 == _ && (n += n_A_Buf9[17]), // mdef ignore
@@ -2502,9 +2502,9 @@ function KakutyouKansuu() {
                 myInnerHtml("A_KakutyouSel", l, 0)
         } else if (18 == wKK) {
             var a;
-            SRV < 50 ? a = "<b>Cast Time: </b>" + Math.floor(1e4 * n_A_CAST) / 100 + " % (<b>" + skillName(204, SRV) + ":</b> " + nb_tok + " %| <b>Gear:</b> " + -n_tok[73] + " % | <b>DEX:</b> " + n_A_DEX + " )<BR>" : (a = "<b>Variable Cast Time: </b>" + Math.floor(1e4 * n_A_CAST) / 100 + " % (<b>" + skillName(204, SRV) + ":</b> " + nb_tok + " %| <b>Gear:</b> " + -n_tok[73] + " % | <b>INT+DEX*2:</b> " + (2 * n_A_DEX + n_A_INT) + " )<BR>",
-                a += "<b>Fixed Cast Time: </b>" + Math.floor(1e4 * n_A_fCAST) / 100 + " % (<b>Skills:</b> " + (100 * (1 - n_A_fCAST) - n_tok[72]) + " %| <b>Gear:</b> " + -n_tok[72] + " % )<BR>"),
-                a += "<b>Cast Delay: </b>" + Math.floor(100 - AC_I - (100 - AC_I) * n_tok[74] / 100) + " % (<b>" + skillName(204, SRV) + ":</b> " + n_tok[74] + " % | <b>Gear:</b> " + AC_I + " %)<BR>",
+            SRV < 50 ? a = "<b>Cast Time: </b>" + Math.floor(1e4 * n_A_CAST) / 100 + "% (<b>" + skillName(204, SRV) + ":</b> " + nb_tok + " %| <b>Gear:</b> " + -n_tok[73] + "% | <b>DEX:</b> " + n_A_DEX + " )<BR>" : (a = "<b>Variable Cast Time: </b>" + Math.floor(1e4 * n_A_CAST) / 100 + " % (<b>" + skillName(204, SRV) + ":</b> " + nb_tok + " %| <b>Gear:</b> " + -n_tok[73] + " % | <b>INT+DEX*2:</b> " + (2 * n_A_DEX + n_A_INT) + " )<BR>",
+                a += "<b>Fixed Cast Time: </b>" + Math.floor(1e4 * n_A_fCAST) / 100 + "% (<b>Skills:</b> " + (100 * (1 - n_A_fCAST) - n_tok[72]) + " %| <b>Gear:</b> " + -n_tok[72] + "% )<BR>"),
+                a += "<b>Cast Delay: </b>" + Math.floor(100 - AC_I - n_tok[74]) + " % (<b>" + skillName(204, SRV) + ":</b> " + n_tok[74] + " % | <b>Gear:</b> " + AC_I + " %)<BR>",
                 myInnerHtml("A_KakutyouData", a, 0)
         } else if (20 == wKK) {
             var e = 1 * c.A_KakutyouSelNum.value
