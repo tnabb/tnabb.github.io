@@ -3338,7 +3338,7 @@ function SUPURE_MONSTER() {
 }
 function SaveLocal() {
     if ("undefined" == typeof Storage)
-        alert("Sorry, your browser does not support local storage. Please let me know if you see this message at kurimet@gmail.com");
+        alert("Sorry, your browser does not support local storage. Please let me know if you see this message at tnaab on Discord");
     else {
         for (SaveData = new Array,
             n = 0; n <= 414; n++)
@@ -3508,7 +3508,7 @@ function SaveLocal() {
 }
 function LoadLocal() {
     if ("undefined" == typeof Storage)
-        alert("Sorry, your browser does not support local storage. If you see this message, please let me know at kurimet@gmail.com");
+        alert("Sorry, your browser does not support local storage. If you see this message, please let me know at tnaab on Discord");
     else if (myInnerHtml("bREFLECT2", "", 0),
         myInnerHtml("bREFLECT2name", "", 0),
         slotNum = c.A_SaveSlotLocal.value,

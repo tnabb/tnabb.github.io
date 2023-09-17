@@ -2781,7 +2781,7 @@ function LoadChangelog() {
             document.getElementById("changelog").innerHTML = "")
 }
 function SaveTheme() {
-    "undefined" == typeof Storage ? alert("Sorry, your browser does not support local storage. Please let me know if you see this message at kurimet@gmail.com") : (SaveData = new Array,
+    "undefined" == typeof Storage ? alert("Sorry, your browser does not support local storage. Please let me know if you see this message at tnaab on Discord") : (SaveData = new Array,
         SaveData[0] = 1,
         SaveData[1] = c.theme.value,
         SaveData[2] = 1 * c.server.value,
@@ -2789,7 +2789,7 @@ function SaveTheme() {
         localStorage["Slot" + slotNum] = JSON.stringify(SaveData))
 }
 function LoadTheme() {
-    "undefined" == typeof Storage ? alert("Sorry, your browser does not support local storage. If you see this message, please let me know at kurimet@gmail.com") : (slotNum = 20,
+    "undefined" == typeof Storage ? alert("Sorry, your browser does not support local storage. If you see this message, please let me know at tnaab on Discord") : (slotNum = 20,
         SaveData = new Array,
         void 0 === localStorage["Slot" + slotNum] ? (c.theme.value = 0,
             c.server.value = 0) : (SaveData = JSON.parse(localStorage["Slot" + slotNum]),
