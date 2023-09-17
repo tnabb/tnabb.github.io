@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+   <meta name="keywords" content="Ragnarok Online Calculator, Changelog">
+   <meta name="description"
+      content="A Ragnarok Online Pre-Renewal Calculator, updated by Kurimet, able to simulate characters in PvM, PvP and MvP environments.">
+   <link rel="shortcut icon" href="https://rocalc.com/images/icon.gif" type="image/x-icon">
+   <link rel="stylesheet" type="text/css" href="./Ragnarok Online Classic Calc - Changelog_files/style.css">
+   <!--<base target="_blank">-->
+   <base href="." target="_blank">
+   <title>Ragnarok Online Classic Calc - Changelog</title>
+   <style>
+      body {
+         font-family: Tahoma, Arial, Verdana;
+         font-size: 0.75em;
+         margin: 15px auto;
+         line-height: 140%;
+      }
+
+      b {
+         background-color: #466;
+         color: #FFF;
+      }
+
+      div {
+         white-space: pre;
+      }
+   </style>
+</head>
+
+<body data-new-gr-c-s-check-loaded="14.1125.0" data-gr-ext-installed="">
+   <h1>Full changeLog:</h1>
+   <div class="main" style="padding-left: 20px;"><strong>2023-03-07</strong>
+   • Added Boss type to "+% ATK based damage" dropdown menus in <b> Additional Enchants &amp; Manual Edits on Player</b>.
+   • Added "+% skill damage" in <b> Additional Enchants &amp; Manual Edits on Player </b>.
+   • Fixed "Player's Dodge Ratio" when the enemy uses a magic attack.
+   • Fixed <b> Player Attack Skills </b> dropdown menu excluding "All Damage Skills" checkbox when loading an URL or
+   "Full Save".
+   • Fixed player's element vs enemy ATK/MATK skill reducing damage to 1 instead of 0.";
+   • Improved <b> Equipment &amp; Cards </b> visual presentation in small screens when selecting Assassin or Assassin
+   Cross job.
+   • Fixed borders disappearing on Firefox based browsers.
+   • Added code to prevent a crash when loading a bugged URL from another calc.
+   • Other small fixes.
+
+<strong>2023-02-24</strong>
+   • Fixed Critical from LUK being incremented by LUK*0.3 instead of LUK/3 (this meant that each 30 LUK there was
+   missing 1 CRIT)
+   • Fixed Soft DEF (VIT DEF) and Soft MDEF reducing damage to 0 instead of 1.
+
+<strong>2023-02-21</strong>
+   • Added "Weapon/Skill Size Modifier" in Combat window for Basic Attacks and some special skills.
+   • Fixed the following Enemy Attack Skills: Envenom, Double Strafe, Cart Revolution, Pierce, Bowling&nbsp;Bash,
+   Venom&nbsp;Splasher, Magnus&nbsp;Exorcismus,
+   High Speed Cart Ram (alt. name: Cart Termination).
+   • Fixed Ghostring Card reducing Monster's Basic Attacks when "iRO classic" RO server was selected in OPTIONS.
+   • Other small fixes.
+
+<strong>2023-02-16</strong>
+   • Fixed skills names in <b> Debuffs on Enemy </b> and <b> Buffs on Enemy </b> not showing alt./iRO name when
+   hovering over them.
+   • Fixed "Providence / Resistant Souls" in <b> Supportive / Party Skills </b> not showing a line-through when
+   selecting Crusader or Paladin jobs.
+
+<strong>2023-02-15</strong>
+   • Fixed some cards not being loaded properly when loading an URL from another calc ("Load URL from another calc"
+   button).
+
+<strong>2023-02-14</strong>
+   • "All Damage Skills" checkbox and "ReCalculate" button are now placed over <b> Player Attack Skills </b>.
+   • Enemy select window and Combat window will now be placed on the left side on wide screens.
+   • "Auto-adjust Base Lvl" checkbox has been relocated beside "Base Lvl" dropdown.
+   • Added "All Cards everywhere" checkbox in OPTIONS (buggy with complex cards).
+   • Added "Dark" theme, which is like "Darker" theme but with white letters.
+   • "Nifelheim" theme is now darker.
+   • Changing the equipped arrow/ammunition will now auto-calculate combat.
+   • Renamed "Neutral" to "(unchanged)" option in Weapon's "Attribute:".
+   • Added message "(no shield equipped)" if no shield when selecting a shield attack skill.
+   • Unequiping a card that grants the player an attack skill will now automatically recalculate combat without that
+   skill.
+   • Fixed "MasterSmith Card" not being in alphabetical order in weapon card dropdown list.
+   • Fixed "Strip chance &amp; duration" in <b> Other Info </b> not being updated automatically when selecting a
+   Metaling Card, Wikebine Tres Card or Drill Katar.
+   • Fixed left-hand weapon 4th card slot showing "* Star Crumb" option instead of "* Top 10 ranked".
+   • Fixed left-hand weapon 4th card slot not showing "* All Size +15%, ATK +5" option.
+   • Small visual fixes.
+
+<strong>2023-01-17</strong>
+   • When using "Load URL from another calc" now "iRO (classic)" server option will be automatically selected.
+   • Changed "SLS Shadow" % ASPD buff to stack with other % ASPD buffs when "Private (classic)" server option is
+   selected.
+   • Fixed "Impressive Rift", "Adrenaline Rush" and "SLS Shadow" % ASPD interactions (it wasn't giving the highest +%
+   ASPD increase among them in some cases).
+   • "Cavalier Mastery" now reduces ASPD for all skills if not maxed.
+   • Small visual fixes.
+
+<strong>2023-01-11</strong>
+   • Job's and skill's names now will match the selected server (iRO name / alt. name).
+   • Fixed "Monster Exclusive Debuffs" not showing in <b> Debuffs on Enemy </b> in some cases.
+   • Fixed MaxHP input in <b> Manual Edits on Enemy </b>.
+   • Fixed "Load URL from another calc" not loading data in opened (show) frames.
+   • Fixed "Rune Strawberry Cake" from % to flat increase in ATK and MATK.
+
+<strong>2023-01-05</strong>
+   • Changed "Party Members (Kihop bonus)" behaviour on "iRO (classic)" server.
+   • Fixed a calc crash when equipping "Ribbon Of Bride", "Ribbon Of Bride (old)", "Defolty Doll Hat", "Angel's Kiss"
+   set and "Enchanted Peach Tree Card".
+   • and happy new year! :)
+
+<strong>2022-12-31</strong>
+   • Fixed Aloevera, Provoke on self and Auto-Berserk adding more damage than should with "iRO (classic)" server
+   option.
+   • Fixed Rogues and Stalkers being unable to equip Windhawk axe.
+   • Fixed Orc Archer Bow: weapon lvl 4 --&gt; 3.
+   • Fixed Power-Thrust when using 2 weapons (Assassin).
+   • Fixed Super Novice's ASPD with 2H axes.
+   • Added "Platinum Shotel (custom)" and "Curved Sword (custom)" equip-able by non-transcendent classes.
+   • and happy new year eve! :)
+
+<strong>2022-12-25</strong>
+   • When visiting the website for the first time, now the default RO server rules will be "iRO (classic)".
+   • Fixed "Concentration" skill adding too much ATK.
+   • Fixed "Hilt Binding" skill adding ATK +3 instead of +4.
+   • Fixed "Schwartzwald Pine Jubilee" item adding Perfect Dodge +20 instead of FLEE +20.
+   • Fixed "A Whistle (Perfect Tablature)" buff not adding Perfect Dodge.
+   • Minor visual fixes for Chromium based browsers.
+   • and merry Christmas, everyone :)
+
+<strong>2022-04-13</strong>
+   • Fixed "RO server" not applying properly when 1st loading the website on some cases.
+
+<strong>2021-12-24</strong>
+   • Fixed Merman card set description: 10% Coma --&gt; 1% Coma.
+   • Fixed Ragged Zombie card set description: when killing monsters --&gt; when killing Demi-human.
+   • Fixed Green Ferus card set description: Tarot card Lv 5 --&gt; Lv 2.
+   • Fixed Myst Case card set description: Recover 1 SP --&gt; 2 SP.
+   • Fixed Yellow Novus card set description: 5% to reflect --&gt; 20%.
+   • Fixed Fantastic Wig, Shiny Wig, Marvelous Wig, and Happy Wig.
+
+<strong>2021-12-14</strong>
+   • Improved "Player Resistance", "+% ATK based Damage Modifiers" and "+% MATK based Damage Modifiers" readability
+   in <b> Other Info </b>.
+   • Now, negative damage received by the Player will show 0 damage in <b> COMBAT SIMULATOR </b>.
+   • Fixed "Lady Solace Card" showing [Grand Cross] level 1 instead of level 5 in <b> Player Attack Skills </b>.
+   • Fixed "Gryphon Card" showing [Bowling Bash] level 1 instead of level 5 in <b> Player Attack Skills </b>.
+   • Added 28 rental items:
+   • Asura (rental)
+   • Ballista (rental)
+   • Combat Knife (rental)
+   • Cutlas (rental)
+   • Dagger of Counter (rental)
+   • Executioner (rental)
+   • Light Epsilon (rental)
+   • Moonlight Dagger (rental)
+   • Pole Axe (rental)
+   • Rudra Bow (rental)
+   • Sage's Diary (rental)
+   • Solar Sword (rental)
+   • Tomahawk (rental)
+   • Wrench (rental)
+   • Apple of Archer (rental)
+   • Bunny Band (rental)
+   • Grand Circlet (rental)
+   • Majestic Goat (rental)
+   • Steel Flower (rental)
+   • Elven Ears (rental)
+   • Brooch (rental)
+   • Critical Ring (rental)
+   • Earring (rental)
+   • Glove (rental)
+   • Necklace (rental)
+   • Ring (rental)
+   • Rosary (rental)
+   • Safety Ring (rental)
+
+<strong>2021-12-11</strong>
+   • Fixed 44 item names:
+   • Bireta --&gt; Biretta
+   • Sabre --&gt; Saber
+   • Hallberd --&gt; Halberd
+   • Javalin --&gt; Javelin
+   • Gold Mace --&gt; Golden Mace
+   • Zorro Mask --&gt; Zorro Masque
+   • Angel Helm --&gt; Helm of Angel
+   • Nut Shell --&gt; Nutshell
+   • Army Hat --&gt; Army Cap
+   • Machoman's Classes --&gt; Machoman's Glasses
+   • Jewel Helm --&gt; Gemmed Sallet
+   • Boys Cap --&gt; Boy's Cap
+   • Evin Wing --&gt; Evil Wing
+   • Light Bulb Band --&gt; Bulb Band
+   • Hairband --&gt; Hair Band
+   • Heart Hairbin --&gt; Heart Hairpin
+   • Tail --&gt; Tail Whip
+   • Wire --&gt; Wire Whip
+   • Rudra's Bow --&gt; Rudra Bow
+   • Swordmace --&gt; Sword Mace
+   • Glave --&gt; Glaive
+   • Sword Breaker --&gt; Swordbreaker
+   • Mail Breaker --&gt; Mailbreaker
+   • Orc Hero Helm --&gt; Helmet of Orc Hero
+   • Mistress Crown --&gt; Crown of Mistress
+   • Martyr's Leash --&gt; Matyr's Leash
+   • Saint Robe --&gt; Saint's Robe
+   • Adventure Novice Suit --&gt; Novice Adventurer's Suit
+   • Adventure Suit --&gt; Adventurer's Suit
+   • Leather Jacket --&gt; Jacket
+   • Chemeti --&gt; Chemeti Whip
+   • Stardust Blade --&gt; Star Dust Blade
+   • Takius Blindfold --&gt; Takius's Blindfold
+   • Luciu's Fierce Armor of Volcano --&gt; Lucius's Fierce Armor of Volcano
+   • Schweizer Sabel --&gt; Schweizersabel
+   • Advanced Arm Guard --&gt; Improved Arm Guard
+   • Morrigane Manteau --&gt; Morrigane's Manteau
+   • Falcon Robe --&gt; Falcon Muffler
+   • Captain Hat --&gt; Captain's Hat
+   • Accuracy Gauntlet --&gt; Gauntlet of Hit
+   • Angel Dress --&gt; Angel's Dress
+   • Peco Wing Ears --&gt; Peco Ears
+   • Cyclops Eyes --&gt; Cyclop's Eye
+   • Chullos / Shafka --&gt; Shafka / Chullos
+   • Librarians Gloves --&gt; Librarian Glove
+   • Fixed 54 item weight, required level, and effects:
+   • War Axe: ATK 145 --&gt; 140
+   • Mysteltainn: ATK 160 --&gt; 170
+   • Cutlus: weight 30 --&gt; 90
+   • Katzbalger: VIT 10 --&gt; 5
+   • Gungnir: required level 48 --&gt; 4
+   • Golden Mace: 1 slot --&gt; 1/2 slots
+   • Sleipnir: refinable --&gt; unrefinable
+   • Safety Helmet: breakable --&gt; unbreakable
+   • Huuma Wing Shuriken: breakable --&gt; unbreakable
+   • Huuma Blaze Shuriken: breakable --&gt; unbreakable
+   • Ship Captain Hat: weight 60 --&gt; 30, required level 30 --&gt; 60
+   • Boy's Cap: DEF 3 --&gt; 2, weight 20 --&gt; 10
+   • Ph.D Hat: DEF 2 --&gt; 3, weight 10 --&gt; 20
+   • Hair Band: DEF 0 --&gt; 1
+   • Iron Wrist: DEF 0 --&gt; 1
+   • Book of the Apocalypse: added +5% damage to Holy Property
+   • Dagger of Counter: weight 50 --&gt; 55
+   • Sea Otter Hat: required level 1 --&gt; 50
+   • Critical Ring: weight 5 --&gt; 10
+   • Clip: weight 5 --&gt; 10
+   • Blade Whip: added description "When performing an ATK based attack, 1% chance to cause [Bleeding] status effect
+   on your target."
+   • Jitte: chance to break target's weapon 5% --&gt; 2%
+   • Gaia Whip: weight 90 --&gt; 70
+   • Icicle Whip: weight 90 --&gt; 70
+   • Baseball Cap: weight 0 --&gt; 20
+   • Vanilmirth Hat: weight 100 --&gt; 10
+   • Red Flame Whip: weight 90 --&gt; 70
+   • Cinquedea: required level 55 --&gt; 30
+   • Gate Keeper: required level 55 --&gt; 24
+   • Diabolus Robe: required level 60 --&gt; 55
+   • Diabolus Armor: required level 60 --&gt; 55
+   • Crescent Helm: applicable to All Jobs --&gt; Swordsman Class, Merchant Class
+   • Alice Doll: applicable to All Jobs --&gt; All except Novice
+   • Magic Eyes: applicable to All Jobs --&gt; Magician Class, Soul Linker
+   • Blue Mage Hat: applicable to All Jobs --&gt; Magician Class, Soul Linker
+   • Bloody Eater: applicable to Swordman Class --&gt; Transcendent Swordsman Class
+   • Sacred Mission: DEF 6 --&gt; 5
+   • Shinobi Sash: DEF 0 --&gt; 1
+   • Angel's Reincarnation: required level 54 --&gt; 25
+   • High Fashion Sandals: required level 1 --&gt; 40
+   • Note Headphones: required level 10 --&gt; 1
+   • Novice Shield: required level 30 --&gt; 40
+   • Banana Hat: chance to cast Provoke lvl 1 --&gt; lvl 3
+   • Branch: removed HIT+10
+   • Destroyer: added +2% to break enemy's armor
+   • Pecopeco Hairband: refinable --&gt; unrefinable
+   • Pecopeco Hairband (aRO): refinable --&gt; unrefinable
+   • Brionac: added +5% damage against Boss monsters
+   • Berserk: required lvl 46 --&gt; 36, weight 36 --&gt; 50
+   • Dokebi's Wig: "[Neutral] element resistance +1%" --&gt; "[Neutral] element resistance +5%, [Fire] element
+   resistance -5%, [Water] element resistance -5%"
+   • Kaiser Knuckle: required lvl 46 --&gt; 36, "Deal +5% ATK based damage against [Undead] element monsters." --&gt;
+   "Deal +5% ATK based damage against [Undead] race monsters."
+   • Quadrille: required lvl 46 --&gt; 36, "Deal +5% ATK based damage against [Undead] element monsters." --&gt;
+   "Deal +5% ATK based damage against [Undead] race monsters."
+   • Elephant Hat: added "When performing an ATK based attack, 1% chance to cast [Water Ball] Lv 3. Enables use of
+   [Aqua Benedicta] Lv 1."
+   • Spiritual Ring + Clip/Rosary set: removed "[Sanctuary] skill damage +50%"
+   • Added 5 headgears: Neko Mimi, Elephant Hat_, Classic Hat_J, Moonlight Ring_, Upgraded Elephant Hat [1].
+   • Fixed Sniper Cecil (MVP) AGI and DEX.
+
+<strong>2021-10-12</strong>
+   • Improved usability in cell phones; <b> Additional Enchants &amp; Manual Edits on Player </b> and <b> Manual
+      Edits on Enemy </b> inputs now will use the numeric keyboard instead of
+   text keyboard to introduce values.
+   • When loading this website, now it will automatically load the last used server on your device.
+
+<strong>2021-10-07</strong>
+   • Added Double Bolt in "Passive/Duration Skills" for Professor job.
+
+<strong>2021-10-03</strong>
+   • Added Hindsight autocasts (Fire/Cold/Lightning bolts) to <b> Player Attack Skills </b> in <b> COMBAT SIMULATOR
+   </b> for Sage and Professor jobs.
+   • RJC Katusa Flower's refine level now properly increases "Earth Spike" and "Heaven's Drive" damage further.
+   • Fix to prevent a crash happening at certain job levels when changing server while having Experience option from
+   <b> Other Info </b> open.
+
+<strong>2021-10-01</strong>
+   • When loading this website, now it will automatically load the last used theme on your device.
+   • Changed Nifelheim theme background colour.
+
+<strong>2021-08-24</strong>
+   • Fixed browser showing a security alert when accessing this web page.
+   • Deleted custom aRO renewal to pre-renewal equipment and cards.
+   • Fixed "Thorn Staff of Darkness" reducing delay by 1% per refine instead of 3% each 2 refines.
+
+<strong>2020-12-01</strong>
+   • Added Ninja's "Throw Coins" damage skill.
+   • Fixed "% Size Resistance" in <b> Manual Edits on Enemy </b>.
+
+<strong>2020-11-12</strong>
+   • Added Expanded Classes' attack skills to "All Damage Skills" checkbox.
+
+<strong>2017-07-05</strong>
+   • Fixed a bug when receiving damage of an element the player resists by 100%.
+
+<strong>2016-10-24</strong>
+   • Fixed a crash when Gunslinger job was selected.
+
+<strong>2016-05-09</strong>
+   • Fixed "+% Size Resistance" in <b> Manual Edits on Enemy </b>.
+   • Fixed "+% ATK based damage on any target" in <b> Manual Edits on Enemy </b>.
+   • Fixed "+% MATK based damage on any target" in <b> Manual Edits on Enemy </b>.
+   • Fixed "Player's Dodge Ratio" in <b> COMBAT SIMULATOR </b> when an enemy attacks with magic.
+   • Fixed critical damage calculation when attacking with 2 weapons.
+   • Added "+% Additional Reflect (Equip/Card)" in <b> Additional Enchants &amp; Manual Edits on Player </b>.
+
+<strong>2016-04-29</strong>
+   • Fixed "Other Info: Weigh Limit".
+   • Improved the way calculated damage is shown in "Combat results" when equipping 2 weapons.
+   • Improved the way calculated reflected damage is shown in "Combat results"
+   • The number of enemies attacking the player won't reduce DEF obtained by Steel Body.
+   • The number of enemies attacking the player won't reduce DEF over 99, it will reduce DEF from 99 instead.
+   • Added a maximum of 99 to MDEF (pre-renewal servers).
+   • Added "Critical Shield" in <b> Stats </b>.
+   • Added "Type" (Normal or Boss) in enemy's info.
+
+<strong>2016-01-28</strong>
+   • Enemy's magic skills will do 0 damage when equipping "Golden Thief Bug Card".
+   • Fixed "Pitman Card": now increases "Heaven's Drive" when casted by a Rogue or Stalker.
+   • Fixed an error when processing Earthquake's damage.
+   • Added "Turn Undead" and "Resurrection" to attack skills list when "All Damage Skills" is selected.
+   • Added "Dark Blessing" to monster's attack skills when available by selected monster.
+
+<strong>2016-01-22</strong>
+   • "Equip Level Restrictions" now restricts equipable weapons.
+   • Fixed a problem causing "Average Damage Received (w/dodge)" to have negative values when a character has a lot
+   of Flee and Perfect Dodge.
+   • Fixed negative stats behaviour in private servers:
+   --- Can be less than 0: DEF, MDEF.
+   --- Cannot be less than 0: STR, AGI, VIT, INT, DEX, LUK, ATK bonus (not provided by STR or weapon).
+   --- Cannot be less than 1: HIT, FLEE.
+
+<strong>2016-01-10</strong>
+   • Major performance improvement (-55% required time to calculate in most cases)..
+   • Fused "Weapon Type:" and "Weapon:" into a sole droplist including all equipable weapons in <b> Equipment &amp;
+      Cards </b>.
+   • Fixed "Monster Exclusive Debuffs" in <b> Debuffs on Enemy </b>.
+   • Fixed items: Diabolus Armor, Academy Freshman Hat_.
+   • Fixed "Heaven's Drive" skill on Stalkers: now skill's level can be selected.
+
+<strong>2015-12-30</strong>
+   • Fixed monster's [Spiral Pierce] skill damage.
+   • Added "+% race/element/size resistance" in <b> Additional Enchants &amp; Manual Edits on Player </b>.
+   • Added "+% Long-range ATK and MATK based damage resistance" in <b> Additional Enchants &amp; Manual Edits on
+      Player </b>.
+   • Added "+% DEF ignoring on any target" in <b> Additional Enchants &amp; Manual Edits on Player </b>.
+   • Added "+% MDEF ignoring on any target" in <b> Additional Enchants &amp; Manual Edits on Player </b>.
+
+<strong>2015-12-13</strong>
+   • Added +% Long range damage in <b> Additional Enchants &amp; Manual Edits on Player </b>.
+   • Added +% Critical damage in <b> Additional Enchants &amp; Manual Edits on Player </b>.
+   • Fixed items: Red Pirate Bandana.
+   • Added items: Big Crossbow (aRO), Bloody Cross (aRO), Recovery Light (aRO), Chilly Spell Book (aRO), Gigantic
+   Lance (aRO), Cannon Spear (aRO), Guillotine Katar (aRO),
+   Agent Katar (aRO), Giant Shield (aRO), Salvage Cape (aRO), Ancient Gold Ornament (aRO), Donut In Mouth, Black Tail
+   Ribbon, TM, Refresh Shoes, Valley Shoes, Spiritual Tunic,
+   Drooping Morroc Minion, Drooping Morroc Minion (old).
+
+<strong>2015-12-11</strong>
+   • Fixed items: Bible Promise Vol2 (aRO), Radio Antenna (aRO).
+   • Added items: Aztoe Nail (aRO), Scarletto Nail (aRO), Ygnus Stale (aRO), End Sektura (aRO), Green Operating Gown
+   (aRO), Assassin Handcuffs, Geffenia Water Book (aRO).
+
+<strong>2015-12-10</strong>
+   • Fixed items: Glorious Destruction Staff, Glorious Arc Wand, Glorious Cure Wand, Witch Pumpkin Hat (all
+   versions).
+   • Added items: Glorious Destruction Staff (old), Glorious Arc Wand (old), Glorious Cure Wand (old), Staff Of
+   Light.
+
+<strong>2015-11-29</strong>
+   • "Provoke", "Frozen", and "Stone" from <b> Debuffs on Enemy </b> will be disabled when a Boss type or Undead
+   element enemy is selected.
+   • "Blessing" and "Signum Crucis" from <b> Debuffs on Enemy </b> will only be enabled when a Undead element or
+   Demon race enemy is selected.
+   • Added input to enter custom weapon/shield weight when selecting the following player attack skills: Shield
+   Boomerang, Shield Boomerang (soul linked), Spiral Pierce.
+   • Added headgear: Benevolent Guardian.
+   • Fixed equipment that increased healing skills effectiveness.
+
+<strong>2015-11-18</strong>
+   • Fixed items: Afro wig, Chinese Crown, Wandering Wolf Hat, Tiger Arhat Mask, Telekinetic Orb.
+   • Renamed items:
+   Tiara Samambaia --&gt; Samambaia
+   Earpad Hat --&gt; Chullos / Shafka
+   RO 5th Wedding Anniversary --&gt; Chinese Wedding Veil
+   Fox Mask --&gt; Kitsune Mask
+   White Fox Mask --&gt; Fox Hat J
+   Pumpkin Hat --&gt; Pumpkin-Head
+   Pumpkin Hat 2007 --&gt; Fantastic Pumpkin-Head
+   Pumpkin Hat 2008 --&gt; Festival Pumpkin Hat
+   Reindeer Nose --&gt; Rudolph's Nose
+   • Added items: Orc Hero Helm [1], Luxurious Wedding Veil [1], Refined Helmet of Orc Hero, Skull Hood, Fox Hat,
+   Odin Mask_.
+   • Deleted some repeated headgears.
+   • Added ocuped slots to a lot of headgears (you may activate it using "Equip Slot Restrictions" checkbox).
+
+<strong>2015-10-15</strong>
+   • Renamed "Brave Assault Katzbalger" to "Valorous Assault Katzbalger".
+   • Renamed "Valorous Assault Katzbalger" to "Brave Assault Katzbalger".
+
+<strong>2015-10-08</strong>
+   • Fixed "EDP creation" formula in <b> Other Info </b>.
+   • Fixed "Potion creation" formula in <b> Other Info </b>.
+
+<strong>2015-09-13</strong>
+   • Fixed Guarana Candy buff: now gives ASPD+10% and AGI Lv 5.
+   • Added items: Bubble Gum In Mouth (aRO), 4 Leaf Clover In Mouth (aRO), 4 Leaf Clover In Mouth (old).
+
+<strong>2015-08-28</strong>
+   • Added items: Bradium Ring (iRO), Bradium Earring (iRO), Bradium Earring (old), Bradium Brooch (iRO), Bradium
+   Brooch (old).
+
+<strong>2015-08-26</strong>
+   • "Save as URL" button now saves data from <b> Additional Enchants &amp; Manual Edits on Player </b> and <b>
+      Manual Edits on Enemy </b>.
+   • "Full Save" and "Save as URL" now save: Enemy Attack Range, Enemy Attack Element, Calc's theme, RO server, All
+   Damage Skills, Equip Job Restrictions, Equip Level Restrictions,
+   Equip Slot Restrictions, and Equip Card Slot Restrictions
+   • "Full Save" and "Save as URL" now save the number of meteors from "Meteor Storm" that hit the player.
+   • Added "Enemy Attack Element" in <b> COMBAT SIMULATOR </b>, allowing to change attack element regardless of
+   anything else.
+   • Fixed some items from <b> Food / Speed Potions / other Items </b> field which were not showing "Active" when
+   loading an URL.
+   • Fixed "Full Load", now resets values before loading data from an empty Full Save slot.
+   • Fixed "Full Load" when an empty slot is selected.
+   • Fixed <b> Item Data </b> field when loading an URL, it will show the correct equipped weapon info.
+   • Fixed "Random Attack".
+
+<strong>2015-08-11</strong>
+   • Added character's "Mov. Speed" in <b> Stats </b> field.
+   • Added "Perfect HIT" in <b> Additional Enchants &amp; Manual Edits on Player </b>.
+   • Fixed a bug in <b> Manual Edits on Enemy </b>.
+
+<strong>2015-07-14</strong>
+   • Fixed a bug when opening <b> Miscellaneous Effects on Player </b> field.
+   • Fixed WoE / BG damage ("Environment: WoE / BG"), now reduces skill damage properly.
+   • Added item "Diabolus Ring [1] (iRO)".
+   • Added "All Damage Skills" option, allowing to use all damage skills on any character.
+
+<strong>2015-07-13</strong>
+   • Changed <b> Stats </b> and added following info: race, size, body element, and Perfect HIT.
+   • Improved web loading.
+   • Fixed MATK +(fixed value) from <b> Additional Enchants &amp; Manual Edits on Player </b>.
+   • Fixed MATK +% to increase MATK +(fixed bonus) as well.
+   • Fixed ATK +5% from item "Rune Strawberry Cake" to increase Weapon's ATK as well.
+
+<strong>2015-07-06</strong>
+   • Added 1 ATK arrows (status ailments).
+   • Added "Two-Handed Staff" property to Mora staffs.
+   • Changed tab order from <b> Equipment &amp; Cards </b>: now weapon settings go before any other equipment
+   settings.
+   • Character won't be de-equiped when modifying "Base Lv" while "Equip Level Restrictions" is unchecked.
+   • Fixed "Equip Slot Restrictions".
+
+<strong>2015-07-01</strong>
+   • Changed ASPD formula.
+   • Added equip restrictions options: "Equip Job Restrictions", "Equip Level Restrictions", "Equip Slot
+   Restrictions", and "Equip Card Slot Restrictions".
+   • Added "Attack Element" and "Enemy Attack Element" information in <b> COMBAT SIMULATOR </b>.
+
+<strong>2015-06-02</strong>
+   • Fixed Frozen, Stone Curse, Undead Attribute Change, and Holy Armor [B.S.S.]. Now they modify elemental damage
+   taken from enemies.
+
+<strong>2015-06-01</strong>
+   • Added attack skills to all monsters.
+
+<strong>2015-04-20</strong>
+   • Added "RO server" at the top of the calc, allowing to simulate special server behaviour (Ghostring Card,
+   ShieldBoom+Icepick, etc).
+   • Fixed "Shield Chain" damage on private servers (damage divergence should be lower than 100 damage points per
+   hit).
+   • Added self-Provoke effect to "Shield Boomerang" damage on private servers.
+
+<strong>2015-04-19</strong>
+   • Fixed Ruber" (now Whitesmith and Creators will be able to equip it).
+   • Deleted "Roubel" (it was exactly the same as "Ruber", but with another name).
+   • Fixed "Chrome Metal Sword" (it was in "Two-Handed Swords" list, instead of "Swords" list).
+
+<strong>2015-04-18</strong>
+   • Changed "Alchemy Glove" auto-cast.
+
+<strong>2015-04-13</strong>
+   • Fixed Perfect Dodge (it was increasing "Player's Dodge Ratio" against enemy skills, instead of just basic
+   attacks).
+   • Fixed "Load URL from another calc" (it wasn't loading data from shown fields).
+   • Fixed "Load URL from another calc" (it wasn't showing [Active] fields).
+   • Fixed "Full Load" (it wasn't loading data from <b> Additional Enchants &amp; Manual Edits on Player </b> field
+   when it was being shown).
+   • Fixed "Full Load" (it wasn't loading data from <b> Manual Edits on Enemy </b> field when it was being shown).
+   • Fixed "Full Load" (calc crashed when loading twice data from <b> Music and Dance Skills </b> field when it was
+   being shown).
+   • Fixed <b> Item Data </b> field when loading data from "Full Load" (it was showing data from the incorrect item).
+   • Performance improvement to "Full Load".
+
+<strong>2015-04-08</strong>
+   • Added "Capture Pet Success Rate" in <b> Other Info </b>.
+   • Added "NPC Refinement Cost &amp; Success Rate" in <b> Other Info </b>.
+   • Added "NPC Socket Enchant Cost &amp; Success Rate" in <b> Other Info </b>.
+   • Added Stat+20 foods in <b> Food / Speed Potions / other Items </b>.
+   • Added "Tyr's Blessing" in <b> Food / Speed Potions / other Items </b>.
+   • Added automatic calculation when modifying player's skill level in <b> Player Attack Skills </b> (before it
+   required to push "Calculate" button).
+   • Added automatic calculation when typing a value in text fields from <b> Additional Enchants &amp; Manual Edits
+      on Player </b> and <b> Manual Edits on Enemy </b> (before it required
+   to select another element after typing).
+   • Added "Enemy Attack Range" in <b> COMBAT SIMULATOR </b>, allowing to ignore <i>enemy basic attack range</i> and
+   <i>enemy skill attack range</i>.
+   • Fixed enemy attack skill "Dark Breath".
+   • Fixed enemy attack skill "Suicide Bombing / Self-Destruction".
+   • Fixed a visual issue when changing enemies related to multiple hit enemy attack skills.
+   • Fixed <b> Manual Edits on Enemy </b> in <b> COMBAT SIMULATOR </b> (except text with a line-through).
+
+<strong>2015-03-11 and before</strong>
+   • Added PvP: select enemy "[Custom Player]" and modify it's stats using <b> Manual Edits on Enemy </b> field.
+   • Added <b> Enemy Attack Skills </b> to all monsters in <b> COMBAT SIMULATOR </b>.
+   • Added color themes.
+   • "Full Save" now saves everything in the calc.
+   • "Save as URL" now saves almost everything in the calc.
+   • Use the "Load URL from another calc" button to load your characters from other calcs.
+   • Added <b> Additional Enchants &amp; Manual Edits on Player </b>" under <b> Item Data </b> in <b> CHARACTER
+      SIMULATOR </b> (enables Mora, Feral, and other enchants).
+   • Added "Headgear Hidden Slot Enchant" in <b> Equipment &amp; Cards </b>.
+   • Added "+% MATK based Damage Modifiers" in <b> Other Info </b>.
+   • Added "Long-range" and "Critical damage" in "+% ATK based Damage Modifiers" in <b> Other Info </b>.
+   • Fixed elemental bows: when equipping Neutral element arrows and an elemental bow, damage will have bow's element
+   instead of Neutral.
+   • Visual improvements and fixes
+   • Rearranged buffs/items/effects
+   • Added buffs/items/effects/pets
+   • Added a huge amount of equipments and cards.
+   • Fixed lots of equipment and cards.
+   • Added aRO's Revalorize System.
+   • Added aRO's custom versions of Renewal mob.
+   </div>
+
+</body><grammarly-desktop-integration data-grammarly-shadow-root="true"><template shadowrootmode="open">
+      <style>
+         div.grammarly-desktop-integration {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+            -moz-user-select: none;
+            -webkit-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+         }
+
+         div.grammarly-desktop-integration:before {
+            content: attr(data-content);
+         }
+      </style>
+      <div aria-label="grammarly-integration" role="group" tabindex="-1" class="grammarly-desktop-integration"
+         data-content="{&quot;mode&quot;:&quot;full&quot;,&quot;isActive&quot;:true,&quot;isUserDisabled&quot;:false}">
+      </div>
+   </template></grammarly-desktop-integration>
+
+</html>
