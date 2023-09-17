@@ -1867,6 +1867,7 @@ function StPlusCard(_) { // buffs / stats from cards perhaps
     for (a = 47; a < 53; a++)
         _ == a - 46 && (n += n_A_Buf9[a]); // stats
     for (a = 0; a <= 26; a += 2) // adds effects from random options
+        if(_ == 73) console.log(_);
         _ == m_RandomOpt[n_A_randopt[a]][2] && (n += n_A_randopt[a + 1], console.log("option number : " + n_A_randopt[a] + " amount: " + n));
     return 80 == _ && (n += n_A_Buf9[41]), // atk% based dmg on any target
         290 == _ && (n += n_A_Buf9[16]), // def ignore
