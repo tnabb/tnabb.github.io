@@ -821,7 +821,7 @@ function BattleCalc999() {
             }
             CastAndDelay(),
                 BattleCalc998()
-        } else if (259 == n_A_ActiveSkill) {
+        } else if (259 == n_A_ActiveSkill) { // spiral pierce
             n_rangedAtk = 1,
                 wSPP2 = SRV ? n_A_Weapon_refine * Math.max(0, element[n_B[3]][n_A_Weapon_element]) : n_A_WeaponLV_refineATK * Math.max(0, element[n_B[3]][n_A_Weapon_element]),
                 wSPP2 = ApplyModifiers(wSPP2),
@@ -829,9 +829,12 @@ function BattleCalc999() {
                 n_PerHIT_DMG = 5 * wSPP2,
                 5 == n_A_ActiveSkillLV ? wCast = 1 * n_A_CAST : wCast = (.1 + .2 * n_A_ActiveSkillLV) * n_A_CAST,
                 n_Delay[2] = 1 + .2 * n_A_ActiveSkillLV,
-                wSPP = Math.floor(n_A_STR / 10),
+                wSPP = 0;
+                for(b = 1; b <= (n_A_STR / 10); b++){
+                    wSPP += (b * 10) -  5;
+                }
                 Weaponw = 1 * c.SkillSubNum.value,
-                w_DMG[2] = wSPP * wSPP + .8 * Weaponw * (1 + .5 * n_A_ActiveSkillLV),
+                w_DMG[2] = wSPP + (.8 * Weaponw * (1 + .5 * n_A_ActiveSkillLV)),
                 wSPP = 1.25 - .25 * n_B[4],
                 w_DMG[2] = SRV ? Math.floor(w_DMG[2] * wSPP) + 10 + 1.5 * n_A_Weapon_refine : Math.floor(w_DMG[2] * wSPP + n_A_WeaponLV_refineATK),
                 w_DMG[2] = w_DMG[2] * Math.max(0, element[n_B[3]][n_A_Weapon_element]),
@@ -1383,11 +1386,11 @@ function BattleCalc999() {
                                                                                                                     n_A_ActiveSkillLV % 2 == 0 ? n_Delay[2] = .8 + n_A_ActiveSkillLV / 2 * .2 : n_Delay[2] = 1 + (n_A_ActiveSkillLV + 1) / 2 * .2) : 373 == n_A_ActiveSkill ? (n_A_Weapon_element = 1 * c.A_Weapon_element.value,
                                                                                                                         wCast = .1,
                                                                                                                         n_Delay[2] = .5,
-                                                                                                                        0 == n_B[4] ? wMod = .1 * n_A_ActiveSkillLV : wMod = .01,
+                                                                                                                        0 == n_B[4] ? wMod =  1 + .1 * n_A_ActiveSkillLV : wMod = .01,
                                                                                                                         1 == PvP && (wMod = 0)) : 374 == n_A_ActiveSkill ? (n_A_Weapon_element = 1 * c.A_Weapon_element.value,
                                                                                                                             wCast = .1,
                                                                                                                             n_Delay[2] = .5,
-                                                                                                                            wMod = .05 * n_A_ActiveSkillLV,
+                                                                                                                            wMod = 1 + .05 * n_A_ActiveSkillLV,
                                                                                                                             1 == PvP && (wMod = 0)) : 375 == n_A_ActiveSkill ? (n_A_Weapon_element = 1 * c.A_Weapon_element.value,
                                                                                                                                 n_Delay[0] = 1,
                                                                                                                                 wHITsuu = n_A_ActiveSkillLV,
@@ -2171,7 +2174,7 @@ function BattleHiDam() {
         wBHD
 }
 function BattleMagicCalc(e) {
-    console.log("pre reduction magic dmg: " + e)
+    //console.log("pre reduction magic dmg: " + e)
     SRV = 1 * c.server.value,
         wBMC_MDEF = n_B[15];
     var _ = 0;
@@ -2180,7 +2183,7 @@ function BattleMagicCalc(e) {
             n_B_MDEF2 = 0),
         122 == n_A_ActiveSkill ? wBMC2 = Math.floor(e + 50) : wBMC2 = Math.floor(e * mdefReduction(wBMC_MDEF) - n_B_MDEF2),
         wBMC2 < 1 && (wBMC2 = 1),
-        console.log("post reduction magic dmg : " + wBMC2)
+        //console.log("post reduction magic dmg : " + wBMC2)
         //104 == n_A_ActiveSkill && 6 != n_B[2] && n_B[3] < 90 && (wBMC2 = 0), // make magnus exorcismus hit all
         wBMC2 = SRV < 50 ? Math.floor(wBMC2 * Math.max(0, element[n_B[3]][n_A_Weapon_element])) : Math.floor(wBMC2 * Math.max(0, element_R[n_B[3]][n_A_Weapon_element])),
         SRV ? n_B[3] > 89 && n_B[3] < 95 && 47 == n_A_ActiveSkill && (wBMC2 = Math.floor(wBMC2 * (1 + .05 * n_A_ActiveSkillLV))) : 90 <= n_B[3] && 47 == n_A_ActiveSkill && (wBMC2 = Math.floor(wBMC2 * (1 + .05 * n_A_ActiveSkillLV)));
@@ -2363,7 +2366,6 @@ function Bskill() {
         957 == n_A_Equip[7] && calc()
 }
 function ClickWeaponType(e) {
-    //console.log(m_Item[e][1]), // weapon type of new weapon chosen
     n_A_JobSet(),
         e = m_Item[c.A_weapon1.value][1],
         c.A_Arrow.disabled = !1;
@@ -4933,7 +4935,7 @@ function CastAndDelay() {
         2 == n && (e += "Delay (fixed skills)<BR>",
             _ += n_Delay[2] + " seconds<BR>"),
         3 == n && (188 == n_A_ActiveSkill || 189 == n_A_ActiveSkill || 289 == n_A_ActiveSkill ? (e += "Delay (+delay reception combo)<BR>",
-            _ += (Math.round(n_Delay[3]*1000)/1000) + "~" + ((Math.round(n_Delay[3]*1000)/1000) + .3) + " seconds<BR>") : (e += "Delay (forced motion)<BR>",
+            _ += 1.5 + " seconds<BR>") : (e += "Delay (forced motion)<BR>",
                 _ += n_Delay[3] + " seconds<BR>")),
         4 == n && (e += "Delay (input limit)<BR>",
             _ += n_Delay[4] + " seconds<BR>"),

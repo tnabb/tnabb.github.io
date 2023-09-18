@@ -1111,7 +1111,7 @@ function Click_RandOpt(){
 	n_A_randopt[26] = 1 * c.A_shoes_ropt2.value;
 	n_A_randopt[27] = 1 * c.SHOES_ROPT2.value;
 
-	console.log(n_A_randopt);
+	//console.log(n_A_randopt);
 }
 
 function RandOptWeapon1Reset(){

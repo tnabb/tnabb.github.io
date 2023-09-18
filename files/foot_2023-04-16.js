@@ -546,7 +546,6 @@ function StAllCalc() {
         0 != SRV && SkillSearch(342) && (SkillSearch(380) <= 1 ? M += 0 : M += 2 * SkillSearch(342) * SkillSearch(380)),
         1799 == n_A_Equip[2] && (wSPVS = n_A_JobClass(),
             1 != wSPVS && 2 != wSPVS && 6 != wSPVS || (M += 8)),
-        1825 == n_A_Equip[6] && (1 == n_A_JobClass() || 2 == n_A_JobClass() || 6 == n_A_JobClass() || 41 == n_A_JOB || 42 == n_A_JOB) && (M += 3),
         V_ATK < 0 && 0 == SRV && (V_ATK = 0),
         V_ATK += Math.floor(V_ATK * (M / 100)),
         SkillSearch(256) && (V_ATK = Math.floor(V_ATK * (1 + .05 * SkillSearch(256)))),
@@ -985,7 +984,8 @@ function StAllCalc() {
         n_A_LUCKY = Math.round(10 * n_A_LUCKY) / 10,
         n_A_LUCKY < 0 && (n_A_LUCKY = 0),
         myInnerHtml("A_LUCKY", n_A_LUCKY, 0),
-        n_A_CRI = 1 + Math.floor(n_A_LUK / 3),
+        //n_A_CRI = 1 + Math.floor(n_A_LUK / 3),
+        n_A_CRI = 1 + (n_A_LUK / 3),
         M = 0,
         M += n_tok[10] + n_A_Buf9[39], // crit rate
         M += n_tok[110 + n_B[2]],
@@ -1021,7 +1021,7 @@ function StAllCalc() {
         n_A_CRI += M,
         n_A_Buf3[5] && (n_A_CRI += 10 + n_A_Buf3[5] + Math.floor(n_A_Buf3[35] / 2) + Math.floor(n_A_Buf3[25] / 10)),
         11 == n_A_WeaponType && (n_A_CRI *= 2),
-        n_A_CRI = Math.round(10 * n_A_CRI) / 10,
+        n_A_CRI = Math.floor(Math.round(10 * n_A_CRI) / 10),
         n_A_Buf6[9] && (n_A_CRI = 0),
         myInnerHtml("A_CRI", n_A_CRI, 0),
         n_A_CRITshield = 1 + .2 * n_A_LUK,
@@ -1435,7 +1435,8 @@ function StAllCalc() {
         n_A_HEAD_REFINE >= 7 && 1407 == n_A_Equip[2] && (n_tok[80] += 2),
         n_A_HEAD_REFINE >= 9 && 1407 == n_A_Equip[2] && (n_tok[80] += 2),
         n_A_HEAD_REFINE >= 7 && 1812 == n_A_Equip[2] && (n_tok[70] += 10),
-        n_A_HEAD_REFINE >= 9 && 1812 == n_A_Equip[2] && (n_tok[80] += 5),
+        n_A_HEAD_REFINE >= 9 && 1812 == n_A_Equip[2] && (n_tok[80] += 5), 
+        1825 == n_A_Equip[6] && (1 == n_A_JobClass() || 2 == n_A_JobClass() || 6 == n_A_JobClass() || 41 == n_A_JOB || 42 == n_A_JOB) && (n_tok[80] += 3),
         n_A_HEAD_REFINE >= 9 && 1612 == n_A_Equip[2] && (n_tok[80] += 5),
         n_A_HEAD_REFINE >= 9 && 1612 == n_A_Equip[2] && (n_tok[25] += 5),
         n_A_HEAD_REFINE >= 7 && 1768 == n_A_Equip[2] && (n_tok[99] += 3),
@@ -3750,8 +3751,8 @@ function LoadLocal() {
             c.B_AtkRange.value = SaveData[434],
             c.B_AtkElem.value = SaveData[435];
         for(n = 0; n <= 27; n++) // rand options load
-            n_A_randopt[n] = SaveData[436 + n]
-        console.log(n_A_randopt);
+            n_A_randopt[n] = SaveData[436 + n];
+        //console.log(n_A_randopt);
     }
     refreshFields(),
         SRV = 1 * c.server.value,
