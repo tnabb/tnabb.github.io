@@ -4992,5 +4992,4 @@ Bskill(),
 LoadLocal3(),
 URLIN(),
 refreshFields(),
-restrictCardslot(0),
-LoadChangelog();
+restrictCardslot(0);

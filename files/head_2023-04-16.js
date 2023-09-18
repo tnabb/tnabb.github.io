@@ -7,7 +7,6 @@
     n_rangedAtk = 0,
     w_AG = [100, 95, 90, 86, 82, 79, 76, 74, 72, 71, 70],
     n_FeatSW = 0,
-    n_LogSW = 0,
     n_itemSW = 0,
     n_SkillSW = 0,
     n_Skill3SW = 0,
@@ -2776,11 +2775,6 @@ function ClickActiveSkill2() {
             c.SkillSubNum.options[2] = new Option("Good luck (100%)", 10),
             c.SkillSubNum.value = n
     }
-}
-function LoadChangelog() {
-    1 != n_LogSW ? (n_LogSW = 1,
-        document.getElementById("changelog").innerHTML = "<br><b>Changelog 2023-04-16:</b><br>• Added renewal's new &amp; evolved pets in ''Additional Effects''.<br>• Fixed ''Real ATK'' in ''Stats'' showing more ATK increase than should (calculated damage was fine) with +% ATK buffs.<br>• Fixed Aloevera, Provoke on self and Auto-Berserk adding more damage than should with ''Private (classic)'' server option.<br>• Fixed ''+% vs Guardian'' shown in ''% ATK based Damage Modifiers'' in ''Other Info'' not showing all % added (calculated damage was fine).<br>• Status effects &amp; debuffs in ''Debuffs on Enemy'' that don't affect Boss type enemies will now be disabled if the selected enemy is Boss type.<br>• Other small fixes.") : 1 == n_LogSW && (n_LogSW = 0,
-            document.getElementById("changelog").innerHTML = "")
 }
 function SaveTheme() {
     "undefined" == typeof Storage ? alert("Sorry, your browser does not support local storage. Please let me know if you see this message at tnaab on Discord") : (SaveData = new Array,
