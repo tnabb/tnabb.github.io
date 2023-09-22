@@ -1026,14 +1026,17 @@ function BattleCalc999() {
                 w_HIT_HYOUJI = 100,
                 n_A_Weapon_element = 0,
                 ATKmod02(wMod, 0),
-                SRV ? 197 == n_A_ActiveSkill ? wMod += 8 + 1 * c.SkillSubNum.value / 10 : wMod += 8 + (n_A_MaxSP - 1) / 10 : 197 == n_A_ActiveSkill ? wMod += 7 + 1 * c.SkillSubNum.value / 10 : wMod += 7 + (n_A_MaxSP - 1) / 10,
+                SRV ? 197 == n_A_ActiveSkill ? wMod += 8 + 1 * c.SkillSubNum.value / 10 : wMod += 8 + (n_A_MaxSP - 1) / 10 : 197 == n_A_ActiveSkill ? wMod += 6 + 1 * c.SkillSubNum.value / 10 : wMod += 6 + (n_A_MaxSP - 1) / 10,
                 wASYU = 250 + 150 * n_A_ActiveSkillLV;
             for (s = 0; s <= 2; s++)
-                w_DMG[s] = Math.floor(BK_n_A_DMG[s] * wMod) + wASYU,
+                w_DMG[s] = BK_n_A_DMG[s],
+                1 == n_A_Buf2[19] && (w_DMG[s] *= 2),
+                w_DMG[s] = Math.floor(w_DMG[s] * wMod) + wASYU,
                     w_DMG[s] = ApplyModifiers(w_DMG[s]),
                     w_DMG[s] = Math.floor(w_DMG[s] * element[n_B[3]][0]),
                     SRV && (n_A_Buf6[5] ? w_DMG[s] += Math.floor((.02 + .03 * n_A_Buf6[5]) * w_DMG[s]) : n_A_Buf7[31] && (w_DMG[s] += Math.floor(.05 * w_DMG[s])),
                         1 == n_A_Buf2[19] && (w_DMG[s] = 2 * w_DMG[s])),
+                    
                     Last_DMG_A[s] = Last_DMG_B[s] = w_DMG[s] + EDP_DMG(s),
                     InnStr[s] += Last_DMG_A[s];
             EDPplus(1),
@@ -4513,6 +4516,9 @@ function calc() {
             l = 1),
         CardNumSearch(32) && (n = "Drake Card",
             wCSize = 1,
+            l = 1),
+        (197 == n_A_ActiveSkill || 321 == n_A_ActiveSkill) && (n = "Asura Strike", 
+            wCSize = 1, 
             l = 1),
         // kagekiri
         n_A_Weapon_refine >= 7 && 1845 == n_A_Equip[0] && (n = "Kagekiri",

@@ -1836,7 +1836,7 @@ m_Item = [
 	, [1831, 64, 78, 0, 0, 1, 10, 90, "Black Rosary", 0, "", 78, 10, 0]
 	, [1832, 50, 0, 0, 0, 1, 10, 70, "Drooping Neko Crew", 0, "<b>[Refine Rate 7~10]</b><br>MATK +4%<br> Ignore 12% of target's MDEF", 4, 1, 19, 5, 0]
 	, [1833, 50, 0, 1, 0, 1, 50, 70, "Evil Marching Hat", 0, "<b>[Refine Rate 7~10]</b> Critical Damage +10%", 1, 2, 0]
-	, [1834, 63, 0, 1, 0, 1, 50, 70, "Boots of Evil Spirits", 0, "", 1, 1, 4, 1, 48, 5, 348, 5, 0]
+	, [1834, 63, 0, 1, 0, "0/1", 50, 70, "Boots of Evil Spirits", 0, "", 1, 1, 4, 1, 48, 5, 348, 5, 0]
 	, [1835, 62, 143, 3, 0, 1, 60, 55, "Adventurer's Spirit", 0, "<b>[Refine Rate 7~10]</b> Esma Damage +5%", 4, 1, 0]
 	, [1836, 62, 117, 3, 0, 1, 60, 55, "Skeleton Manteau", 0, "<b>[Refine Rate 7~10]</b> Long Range Damage +5%", 5, 1, 0]
 	, [1837, 50, 122, 3, 0, 1, 10, 1, "Evil Jester Hat", 0, "", 0]
