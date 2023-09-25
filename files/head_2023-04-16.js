@@ -2477,56 +2477,67 @@ function ClickWeaponType(e) {
                 c.A_acces1_card.style.width = "auto",
                 c.A_acces2_card.style.width = "auto")
     }
-
+    var oldWeapon = n_A_Equip[0];
     n_A_Equip[0] = 1 * c.A_weapon1.value;
     // random options for weapons here
-    RandOptWeapon1Reset();
-    if(m_RandomOptSpecialType.includes(parseInt(e)) || m_RandomOptSpecialWeapons.includes(parseInt(n_A_Equip[0]))){ // special
-        for(i = 0; "NULL" != m_RandomOptSpecial[0][i]; i++){
-            c.A_weapon1_ropt1.options[i] = new Option(m_RandomOpt[m_RandomOptSpecial[0][i]][1], m_RandomOpt[m_RandomOptSpecial[0][i]][0]);
-        }
-        for(i = 0; "NULL" != m_RandomOptSpecial[1][i]; i++){
-            c.A_weapon1_ropt2.options[i] = new Option(m_RandomOpt[m_RandomOptSpecial[1][i]][1], m_RandomOpt[m_RandomOptSpecial[1][i]][0]);
-        }
-        for(i = 0; "NULL" != m_RandomOptSpecial[2][i]; i++){
-            c.A_weapon1_ropt3.options[i] = new Option(m_RandomOpt[m_RandomOptSpecial[2][i]][1], m_RandomOpt[m_RandomOptSpecial[2][i]][0]);
-        }
-        for(i = 0; "NULL" != m_RandomOptSpecial[3][i]; i++){
-            c.A_weapon1_ropt4.options[i] = new Option(m_RandomOpt[m_RandomOptSpecial[3][i]][1], m_RandomOpt[m_RandomOptSpecial[3][i]][0]);
+    if(parseInt(e) == 0){
+        RandOptWeapon1Reset();
+    }else if(m_RandomOptSpecialType.includes(parseInt(e)) || m_RandomOptSpecialWeapons.includes(parseInt(n_A_Equip[0]))){ // special
+        if(!(m_RandomOptSpecialType.includes(parseInt(n_A_WeaponType)) || m_RandomOptSpecialWeapons.includes(parseInt(oldWeapon))) || parseInt(oldWeapon) == 0){
+            RandOptWeapon1Reset();
+            for(i = 0; "NULL" != m_RandomOptSpecial[0][i]; i++){
+                c.A_weapon1_ropt1.options[i] = new Option(m_RandomOpt[m_RandomOptSpecial[0][i]][1], m_RandomOpt[m_RandomOptSpecial[0][i]][0]);
+            }
+            for(i = 0; "NULL" != m_RandomOptSpecial[1][i]; i++){
+                c.A_weapon1_ropt2.options[i] = new Option(m_RandomOpt[m_RandomOptSpecial[1][i]][1], m_RandomOpt[m_RandomOptSpecial[1][i]][0]);
+            }
+            for(i = 0; "NULL" != m_RandomOptSpecial[2][i]; i++){
+                c.A_weapon1_ropt3.options[i] = new Option(m_RandomOpt[m_RandomOptSpecial[2][i]][1], m_RandomOpt[m_RandomOptSpecial[2][i]][0]);
+            }
+            for(i = 0; "NULL" != m_RandomOptSpecial[3][i]; i++){
+                c.A_weapon1_ropt4.options[i] = new Option(m_RandomOpt[m_RandomOptSpecial[3][i]][1], m_RandomOpt[m_RandomOptSpecial[3][i]][0]);
+            }
         }
     }else if(m_RandomOptMeleeType.includes(parseInt(e))){ // melee
-        for(i = 0; "NULL" != m_RandomOptMelee[0][i]; i++){
-            c.A_weapon1_ropt1.options[i] = new Option(m_RandomOpt[m_RandomOptMelee[0][i]][1], m_RandomOpt[m_RandomOptMelee[0][i]][0]);
+        if(!(m_RandomOptMeleeType.includes(parseInt(n_A_WeaponType))) || m_RandomOptSpecialWeapons.includes(parseInt(oldWeapon)) || parseInt(oldWeapon) == 0){
+            RandOptWeapon1Reset();
+            for(i = 0; "NULL" != m_RandomOptMelee[0][i]; i++){
+                c.A_weapon1_ropt1.options[i] = new Option(m_RandomOpt[m_RandomOptMelee[0][i]][1], m_RandomOpt[m_RandomOptMelee[0][i]][0]);
+            }
+            for(i = 0; "NULL" != m_RandomOptMelee[1][i]; i++){
+                c.A_weapon1_ropt2.options[i] = new Option(m_RandomOpt[m_RandomOptMelee[1][i]][1], m_RandomOpt[m_RandomOptMelee[1][i]][0]);
+            }
+            for(i = 0; "NULL" != m_RandomOptMelee[2][i]; i++){
+                c.A_weapon1_ropt3.options[i] = new Option(m_RandomOpt[m_RandomOptMelee[2][i]][1], m_RandomOpt[m_RandomOptMelee[2][i]][0]);
+            }
+            c.A_weapon1_ropt4.options[0] = new Option(m_RandomOpt[0][1], m_RandomOpt[0][0]);
         }
-        for(i = 0; "NULL" != m_RandomOptMelee[1][i]; i++){
-            c.A_weapon1_ropt2.options[i] = new Option(m_RandomOpt[m_RandomOptMelee[1][i]][1], m_RandomOpt[m_RandomOptMelee[1][i]][0]);
-        }
-        for(i = 0; "NULL" != m_RandomOptMelee[2][i]; i++){
-            c.A_weapon1_ropt3.options[i] = new Option(m_RandomOpt[m_RandomOptMelee[2][i]][1], m_RandomOpt[m_RandomOptMelee[2][i]][0]);
-        }
-        c.A_weapon1_ropt4.options[0] = new Option(m_RandomOpt[0][1], m_RandomOpt[0][0]);
     }else if(m_RandomOptRangedType.includes(parseInt(e))){ // ranged
-        for(i = 0; "NULL" != m_RandomOptRanged[0][i]; i++){
-            c.A_weapon1_ropt1.options[i] = new Option(m_RandomOpt[m_RandomOptRanged[0][i]][1], m_RandomOpt[m_RandomOptRanged[0][i]][0]);
+        if(!(m_RandomOptRangedType.includes(parseInt(n_A_WeaponType))) || m_RandomOptSpecialWeapons.includes(parseInt(oldWeapon)) || parseInt(oldWeapon) == 0){
+            for(i = 0; "NULL" != m_RandomOptRanged[0][i]; i++){
+                c.A_weapon1_ropt1.options[i] = new Option(m_RandomOpt[m_RandomOptRanged[0][i]][1], m_RandomOpt[m_RandomOptRanged[0][i]][0]);
+            }
+            for(i = 0; "NULL" != m_RandomOptRanged[1][i]; i++){
+                c.A_weapon1_ropt2.options[i] = new Option(m_RandomOpt[m_RandomOptRanged[1][i]][1], m_RandomOpt[m_RandomOptRanged[1][i]][0]);
+            }
+            for(i = 0; "NULL" != m_RandomOptRanged[2][i]; i++){
+                c.A_weapon1_ropt3.options[i] = new Option(m_RandomOpt[m_RandomOptRanged[2][i]][1], m_RandomOpt[m_RandomOptRanged[2][i]][0]);
+            }
+            c.A_weapon1_ropt4.options[0] = new Option(m_RandomOpt[0][1], m_RandomOpt[0][0]);
         }
-        for(i = 0; "NULL" != m_RandomOptRanged[1][i]; i++){
-            c.A_weapon1_ropt2.options[i] = new Option(m_RandomOpt[m_RandomOptRanged[1][i]][1], m_RandomOpt[m_RandomOptRanged[1][i]][0]);
-        }
-        for(i = 0; "NULL" != m_RandomOptRanged[2][i]; i++){
-            c.A_weapon1_ropt3.options[i] = new Option(m_RandomOpt[m_RandomOptRanged[2][i]][1], m_RandomOpt[m_RandomOptRanged[2][i]][0]);
-        }
-        c.A_weapon1_ropt4.options[0] = new Option(m_RandomOpt[0][1], m_RandomOpt[0][0]);
     }else if(m_RandomOptMagicType.includes(parseInt(e))){ // magic
-        for(i = 0; "NULL" != m_RandomOptMagic[0][i]; i++){
-            c.A_weapon1_ropt1.options[i] = new Option(m_RandomOpt[m_RandomOptMagic[0][i]][1], m_RandomOpt[m_RandomOptMagic[0][i]][0]);
+        if(!(m_RandomOptMagicType.includes(parseInt(n_A_WeaponType))) || m_RandomOptSpecialWeapons.includes(parseInt(oldWeapon)) || parseInt(oldWeapon) == 0){
+            for(i = 0; "NULL" != m_RandomOptMagic[0][i]; i++){
+                c.A_weapon1_ropt1.options[i] = new Option(m_RandomOpt[m_RandomOptMagic[0][i]][1], m_RandomOpt[m_RandomOptMagic[0][i]][0]);
+            }
+            for(i = 0; "NULL" != m_RandomOptMagic[1][i]; i++){
+                c.A_weapon1_ropt2.options[i] = new Option(m_RandomOpt[m_RandomOptMagic[1][i]][1], m_RandomOpt[m_RandomOptMagic[1][i]][0]);
+            }
+            for(i = 0; "NULL" != m_RandomOptMagic[2][i]; i++){
+                c.A_weapon1_ropt3.options[i] = new Option(m_RandomOpt[m_RandomOptMagic[2][i]][1], m_RandomOpt[m_RandomOptMagic[2][i]][0]);
+            }
+            c.A_weapon1_ropt4.options[0] = new Option(m_RandomOpt[0][1], m_RandomOpt[0][0]);
         }
-        for(i = 0; "NULL" != m_RandomOptMagic[1][i]; i++){
-            c.A_weapon1_ropt2.options[i] = new Option(m_RandomOpt[m_RandomOptMagic[1][i]][1], m_RandomOpt[m_RandomOptMagic[1][i]][0]);
-        }
-        for(i = 0; "NULL" != m_RandomOptMagic[2][i]; i++){
-            c.A_weapon1_ropt3.options[i] = new Option(m_RandomOpt[m_RandomOptMagic[2][i]][1], m_RandomOpt[m_RandomOptMagic[2][i]][0]);
-        }
-        c.A_weapon1_ropt4.options[0] = new Option(m_RandomOpt[0][1], m_RandomOpt[0][0]);
     }
     ActiveSkillSetPlus(),
     ClickB_Item(n_A_Equip[0])
@@ -2534,10 +2545,6 @@ function ClickWeaponType(e) {
 function ClickWeaponType2(e) {
     if (n_A_JobSet(),
         0 != e) {
-        myInnerHtml("nA_weapon2_ropt1", '<select name="A_weapon2_ropt1" onchange="Click_RandOpt(this[this.selectedIndex].value)|RandOptUpdate(1)" style="width: 218px; background-color: rgb(255, 204, 136);"></select> + <input type="text" inputmode="numeric" style="width: 30px; height: 13px;" maxlength="3" onkeypress="return isNumeric(event)" onkeyup="RandOptUpdate(1)" name="WEAP2_ROPT1" value="0" class="center">', 0),
-        myInnerHtml("nA_weapon2_ropt2", '<select name="A_weapon2_ropt2" onchange="Click_RandOpt(this[this.selectedIndex].value)|RandOptUpdate(1)" style="width: 218px; background-color: rgb(255, 204, 136);"></select> + <input type="text" inputmode="numeric" style="width: 30px; height: 13px;" maxlength="3" onkeypress="return isNumeric(event)" onkeyup="RandOptUpdate(1)" name="WEAP2_ROPT2" value="0" class="center">', 0),
-        myInnerHtml("nA_weapon2_ropt3", '<select name="A_weapon2_ropt3" onchange="Click_RandOpt(this[this.selectedIndex].value)|RandOptUpdate(1)" style="width: 218px; background-color: rgb(255, 204, 136);"></select> + <input type="text" inputmode="numeric" style="width: 30px; height: 13px;" maxlength="3" onkeypress="return isNumeric(event)" onkeyup="RandOptUpdate(1)" name="WEAP2_ROPT3" value="0" class="center">', 0),
-        myInnerHtml("nA_weapon2_ropt4", '<select name="A_weapon2_ropt4" onchange="Click_RandOpt(this[this.selectedIndex].value)|RandOptUpdate(1)" style="width: 218px; background-color: rgb(255, 204, 136);"></select> + <input type="text" inputmode="numeric" style="width: 30px; height: 13px;" maxlength="3" onkeypress="return isNumeric(event)" onkeyup="RandOptUpdate(1)" name="WEAP2_ROPT4" value="0" class="center">', 0);
         if (0 == n_Nitou) {
             for (myInnerHtml("A_weapon2refine", 'Refine (Left): <select name="A_Weapon2_refine" onChange = "StAllCalc()"></select>', 0),
                 i = 0; i <= 10; i++)
@@ -2560,29 +2567,35 @@ function ClickWeaponType2(e) {
 
             // add random options to 2nd weapon for assassin
             if(m_RandomOptSpecialWeapons.includes(parseInt(e))){ // special weapons that assassins can use
-                for(i = 0; "NULL" != m_RandomOptSpecial[0][i]; i++){
-                    c.A_weapon2_ropt1.options[i] = new Option(m_RandomOpt[m_RandomOptSpecial[0][i]][1], m_RandomOpt[m_RandomOptSpecial[0][i]][0]);
-                }
-                for(i = 0; "NULL" != m_RandomOptSpecial[1][i]; i++){
-                    c.A_weapon2_ropt2.options[i] = new Option(m_RandomOpt[m_RandomOptSpecial[1][i]][1], m_RandomOpt[m_RandomOptSpecial[1][i]][0]);
-                }
-                for(i = 0; "NULL" != m_RandomOptSpecial[2][i]; i++){
-                    c.A_weapon2_ropt3.options[i] = new Option(m_RandomOpt[m_RandomOptSpecial[2][i]][1], m_RandomOpt[m_RandomOptSpecial[2][i]][0]);
-                }
-                for(i = 0; "NULL" != m_RandomOptSpecial[3][i]; i++){
-                    c.A_weapon2_ropt4.options[i] = new Option(m_RandomOpt[m_RandomOptSpecial[3][i]][1], m_RandomOpt[m_RandomOptSpecial[3][i]][0]);
+                if(!(m_RandomOptSpecialWeapons.includes(parseInt(n_A_Equip[1])))){
+                    RandOptWeapon2Reset();
+                    for(i = 0; "NULL" != m_RandomOptSpecial[0][i]; i++){
+                        c.A_weapon2_ropt1.options[i] = new Option(m_RandomOpt[m_RandomOptSpecial[0][i]][1], m_RandomOpt[m_RandomOptSpecial[0][i]][0]);
+                    }
+                    for(i = 0; "NULL" != m_RandomOptSpecial[1][i]; i++){
+                        c.A_weapon2_ropt2.options[i] = new Option(m_RandomOpt[m_RandomOptSpecial[1][i]][1], m_RandomOpt[m_RandomOptSpecial[1][i]][0]);
+                    }
+                    for(i = 0; "NULL" != m_RandomOptSpecial[2][i]; i++){
+                        c.A_weapon2_ropt3.options[i] = new Option(m_RandomOpt[m_RandomOptSpecial[2][i]][1], m_RandomOpt[m_RandomOptSpecial[2][i]][0]);
+                    }
+                    for(i = 0; "NULL" != m_RandomOptSpecial[3][i]; i++){
+                        c.A_weapon2_ropt4.options[i] = new Option(m_RandomOpt[m_RandomOptSpecial[3][i]][1], m_RandomOpt[m_RandomOptSpecial[3][i]][0]);
+                    }
                 }
             }else{ // melee weapons
-                for(i = 0; "NULL" != m_RandomOptMelee[0][i]; i++){
-                    c.A_weapon2_ropt1.options[i] = new Option(m_RandomOpt[m_RandomOptMelee[0][i]][1], m_RandomOpt[m_RandomOptMelee[0][i]][0]);
+                if(m_RandomOptSpecialWeapons.includes(parseInt(n_A_Equip[1])) || parseInt(n_A_Equip[1]) == 0){
+                    RandOptWeapon2Reset();
+                    for(i = 0; "NULL" != m_RandomOptMelee[0][i]; i++){
+                        c.A_weapon2_ropt1.options[i] = new Option(m_RandomOpt[m_RandomOptMelee[0][i]][1], m_RandomOpt[m_RandomOptMelee[0][i]][0]);
+                    }
+                    for(i = 0; "NULL" != m_RandomOptMelee[1][i]; i++){
+                        c.A_weapon2_ropt2.options[i] = new Option(m_RandomOpt[m_RandomOptMelee[1][i]][1], m_RandomOpt[m_RandomOptMelee[1][i]][0]);
+                    }
+                    for(i = 0; "NULL" != m_RandomOptMelee[2][i]; i++){
+                        c.A_weapon2_ropt3.options[i] = new Option(m_RandomOpt[m_RandomOptMelee[2][i]][1], m_RandomOpt[m_RandomOptMelee[2][i]][0]);
+                    }
+                    c.A_weapon2_ropt4.options[0] = new Option(m_RandomOpt[0][1], m_RandomOpt[0][0]);
                 }
-                for(i = 0; "NULL" != m_RandomOptMelee[1][i]; i++){
-                    c.A_weapon2_ropt2.options[i] = new Option(m_RandomOpt[m_RandomOptMelee[1][i]][1], m_RandomOpt[m_RandomOptMelee[1][i]][0]);
-                }
-                for(i = 0; "NULL" != m_RandomOptMelee[2][i]; i++){
-                    c.A_weapon2_ropt3.options[i] = new Option(m_RandomOpt[m_RandomOptMelee[2][i]][1], m_RandomOpt[m_RandomOptMelee[2][i]][0]);
-                }
-                c.A_weapon2_ropt4.options[0] = new Option(m_RandomOpt[0][1], m_RandomOpt[0][0]);
             }
 
             var _ = Math.max(document.documentElement.clientWidth, document.body.scrollWidth, document.documentElement.scrollWidth, document.body.offsetWidth, document.documentElement.offsetWidth);
@@ -2599,30 +2612,37 @@ function ClickWeaponType2(e) {
                     c.A_weapon2_card4.style.width = "auto");
             n_Nitou = 1;
         }else{
+            console.log(c.A_weapon2.value);
             if(m_RandomOptSpecialWeapons.includes(parseInt(e))){ // special weapons that assassins can use
-                for(i = 0; "NULL" != m_RandomOptSpecial[0][i]; i++){
-                    c.A_weapon2_ropt1.options[i] = new Option(m_RandomOpt[m_RandomOptSpecial[0][i]][1], m_RandomOpt[m_RandomOptSpecial[0][i]][0]);
-                }
-                for(i = 0; "NULL" != m_RandomOptSpecial[1][i]; i++){
-                    c.A_weapon2_ropt2.options[i] = new Option(m_RandomOpt[m_RandomOptSpecial[1][i]][1], m_RandomOpt[m_RandomOptSpecial[1][i]][0]);
-                }
-                for(i = 0; "NULL" != m_RandomOptSpecial[2][i]; i++){
-                    c.A_weapon2_ropt3.options[i] = new Option(m_RandomOpt[m_RandomOptSpecial[2][i]][1], m_RandomOpt[m_RandomOptSpecial[2][i]][0]);
-                }
-                for(i = 0; "NULL" != m_RandomOptSpecial[3][i]; i++){
-                    c.A_weapon2_ropt4.options[i] = new Option(m_RandomOpt[m_RandomOptSpecial[3][i]][1], m_RandomOpt[m_RandomOptSpecial[3][i]][0]);
+                if(!(m_RandomOptSpecialWeapons.includes(parseInt(n_A_Equip[1])))){
+                    RandOptWeapon2Reset();
+                    for(i = 0; "NULL" != m_RandomOptSpecial[0][i]; i++){
+                        c.A_weapon2_ropt1.options[i] = new Option(m_RandomOpt[m_RandomOptSpecial[0][i]][1], m_RandomOpt[m_RandomOptSpecial[0][i]][0]);
+                    }
+                    for(i = 0; "NULL" != m_RandomOptSpecial[1][i]; i++){
+                        c.A_weapon2_ropt2.options[i] = new Option(m_RandomOpt[m_RandomOptSpecial[1][i]][1], m_RandomOpt[m_RandomOptSpecial[1][i]][0]);
+                    }
+                    for(i = 0; "NULL" != m_RandomOptSpecial[2][i]; i++){
+                        c.A_weapon2_ropt3.options[i] = new Option(m_RandomOpt[m_RandomOptSpecial[2][i]][1], m_RandomOpt[m_RandomOptSpecial[2][i]][0]);
+                    }
+                    for(i = 0; "NULL" != m_RandomOptSpecial[3][i]; i++){
+                        c.A_weapon2_ropt4.options[i] = new Option(m_RandomOpt[m_RandomOptSpecial[3][i]][1], m_RandomOpt[m_RandomOptSpecial[3][i]][0]);
+                    }
                 }
             }else{ // melee weapons
-                for(i = 0; "NULL" != m_RandomOptMelee[0][i]; i++){
-                    c.A_weapon2_ropt1.options[i] = new Option(m_RandomOpt[m_RandomOptMelee[0][i]][1], m_RandomOpt[m_RandomOptMelee[0][i]][0]);
+                if(m_RandomOptSpecialWeapons.includes(parseInt(n_A_Equip[1])) || parseInt(n_A_Equip[1]) == 0){
+                    RandOptWeapon2Reset();
+                    for(i = 0; "NULL" != m_RandomOptMelee[0][i]; i++){
+                        c.A_weapon2_ropt1.options[i] = new Option(m_RandomOpt[m_RandomOptMelee[0][i]][1], m_RandomOpt[m_RandomOptMelee[0][i]][0]);
+                    }
+                    for(i = 0; "NULL" != m_RandomOptMelee[1][i]; i++){
+                        c.A_weapon2_ropt2.options[i] = new Option(m_RandomOpt[m_RandomOptMelee[1][i]][1], m_RandomOpt[m_RandomOptMelee[1][i]][0]);
+                    }
+                    for(i = 0; "NULL" != m_RandomOptMelee[2][i]; i++){
+                        c.A_weapon2_ropt3.options[i] = new Option(m_RandomOpt[m_RandomOptMelee[2][i]][1], m_RandomOpt[m_RandomOptMelee[2][i]][0]);
+                    }
+                    c.A_weapon2_ropt4.options[0] = new Option(m_RandomOpt[0][1], m_RandomOpt[0][0]);
                 }
-                for(i = 0; "NULL" != m_RandomOptMelee[1][i]; i++){
-                    c.A_weapon2_ropt2.options[i] = new Option(m_RandomOpt[m_RandomOptMelee[1][i]][1], m_RandomOpt[m_RandomOptMelee[1][i]][0]);
-                }
-                for(i = 0; "NULL" != m_RandomOptMelee[2][i]; i++){
-                    c.A_weapon2_ropt3.options[i] = new Option(m_RandomOpt[m_RandomOptMelee[2][i]][1], m_RandomOpt[m_RandomOptMelee[2][i]][0]);
-                }
-                c.A_weapon2_ropt4.options[0] = new Option(m_RandomOpt[0][1]);
             }
         }
     } else

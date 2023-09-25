@@ -1058,7 +1058,7 @@ m_RandomOptMagic = [
 ];
 
 m_RandomOptSpecial = [
-	[0, 1, 7, 5, 3, 4, 16, 11, 12, 54, 55, 56, 58, "NULL"],
+	[0, 1, 7, 5, 4, 16, 11, 12, 54, 55, 56, 58, "NULL"],
 	[0, 2, 3, 8, 6, 9, 17, 18, 13, 14, 99, "NULL"],
 	[0, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, "NULL"],
 	[0, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, "NULL"],
@@ -1123,4 +1123,15 @@ function RandOptWeapon1Reset(){
     c.A_weapon1_ropt2.options[0] = new Option(m_RandomOpt[0][1], m_RandomOpt[0][0]);
     c.A_weapon1_ropt3.options[0] = new Option(m_RandomOpt[0][1], m_RandomOpt[0][0]);
     c.A_weapon1_ropt4.options[0] = new Option(m_RandomOpt[0][1], m_RandomOpt[0][0]);
+}
+
+function RandOptWeapon2Reset(){
+	myInnerHtml("nA_weapon2_ropt1", '<select name="A_weapon2_ropt1" onchange="Click_RandOpt(this[this.selectedIndex].value)|RandOptUpdate(1)" style="width: 218px; background-color: rgb(255, 204, 136);"></select> + <input type="text" inputmode="numeric" style="width: 30px; height: 13px;" maxlength="3" onkeypress="return isNumeric(event)" onkeyup="RandOptUpdate(1)" name="WEAP2_ROPT1" value="0" class="center">', 0),
+	myInnerHtml("nA_weapon2_ropt2", '<select name="A_weapon2_ropt2" onchange="Click_RandOpt(this[this.selectedIndex].value)|RandOptUpdate(1)" style="width: 218px; background-color: rgb(255, 204, 136);"></select> + <input type="text" inputmode="numeric" style="width: 30px; height: 13px;" maxlength="3" onkeypress="return isNumeric(event)" onkeyup="RandOptUpdate(1)" name="WEAP2_ROPT2" value="0" class="center">', 0),
+	myInnerHtml("nA_weapon2_ropt3", '<select name="A_weapon2_ropt3" onchange="Click_RandOpt(this[this.selectedIndex].value)|RandOptUpdate(1)" style="width: 218px; background-color: rgb(255, 204, 136);"></select> + <input type="text" inputmode="numeric" style="width: 30px; height: 13px;" maxlength="3" onkeypress="return isNumeric(event)" onkeyup="RandOptUpdate(1)" name="WEAP2_ROPT3" value="0" class="center">', 0),
+	myInnerHtml("nA_weapon2_ropt4", '<select name="A_weapon2_ropt4" onchange="Click_RandOpt(this[this.selectedIndex].value)|RandOptUpdate(1)" style="width: 218px; background-color: rgb(255, 204, 136);"></select> + <input type="text" inputmode="numeric" style="width: 30px; height: 13px;" maxlength="3" onkeypress="return isNumeric(event)" onkeyup="RandOptUpdate(1)" name="WEAP2_ROPT4" value="0" class="center">', 0);
+	c.A_weapon2_ropt1.options[0] = new Option(m_RandomOpt[0][1], m_RandomOpt[0][0]);
+	c.A_weapon2_ropt2.options[0] = new Option(m_RandomOpt[0][1], m_RandomOpt[0][0]);
+	c.A_weapon2_ropt3.options[0] = new Option(m_RandomOpt[0][1], m_RandomOpt[0][0]);
+	c.A_weapon2_ropt4.options[0] = new Option(m_RandomOpt[0][1], m_RandomOpt[0][0]);
 }

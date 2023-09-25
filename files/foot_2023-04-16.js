@@ -2503,7 +2503,7 @@ function KakutyouKansuu() {
                 myInnerHtml("A_KakutyouSel", l, 0)
         } else if (18 == wKK) {
             var a;
-            SRV < 50 ? a = "<b>Cast Time: </b>" + Math.floor(1e4 * n_A_CAST) / 100 + "% (<b>" + skillName(204, SRV) + ":</b> " + nb_tok + " %| <b>Gear:</b> " + -n_tok[73] + "% | <b>DEX:</b> " + n_A_DEX + " )<BR>" : (a = "<b>Variable Cast Time: </b>" + Math.floor(1e4 * n_A_CAST) / 100 + " % (<b>" + skillName(204, SRV) + ":</b> " + nb_tok + " %| <b>Gear:</b> " + -n_tok[73] + " % | <b>INT+DEX*2:</b> " + (2 * n_A_DEX + n_A_INT) + " )<BR>",
+            SRV < 50 ? a = "<b>Cast Time: </b>" + Math.floor(1e4 * n_A_CAST) / 100 + "% (<b>" + skillName(204, SRV) + ":</b> " + Math.round(nb_tok) + " %| <b>Gear:</b> " + -n_tok[73] + "% | <b>DEX:</b> " + n_A_DEX + " )<BR>" : (a = "<b>Variable Cast Time: </b>" + Math.floor(1e4 * n_A_CAST) / 100 + " % (<b>" + skillName(204, SRV) + ":</b> " + nb_tok + " %| <b>Gear:</b> " + -n_tok[73] + " % | <b>INT+DEX*2:</b> " + (2 * n_A_DEX + n_A_INT) + " )<BR>",
                 a += "<b>Fixed Cast Time: </b>" + Math.floor(1e4 * n_A_fCAST) / 100 + "% (<b>Skills:</b> " + (100 * (1 - n_A_fCAST) - n_tok[72]) + " %| <b>Gear:</b> " + -n_tok[72] + "% )<BR>"),
                 a += "<b>Cast Delay: </b>" + Math.floor(100 - AC_I - n_tok[74]) + " % (<b>" + skillName(204, SRV) + ":</b> " + n_tok[74] + " % | <b>Gear:</b> " + AC_I + " %)<BR>",
                 myInnerHtml("A_KakutyouData", a, 0)
@@ -3639,7 +3639,7 @@ function LoadLocal() {
             n_A_WeaponType = SaveData[13],
             ClickWeaponType(SaveData[13]),
             8 != SaveData[2] && 22 != SaveData[2] || 11 == SaveData[13] || (n_A_Weapon2Type = SaveData[20],
-                ClickWeaponType2(n_A_Weapon2Type)),
+                ClickWeaponType2(SaveData[21])),
             n_A_JobSet(),
             (2 == n_A_JobClass() || 4 == n_A_JobClass() || 45 == n_A_JOB && 0 != SaveData[13]) && (c.A_Arrow.value = SaveData[27]),
             ClickB_Item(SaveData[14]),
@@ -4223,7 +4223,7 @@ function URLIN() {
             n_A_WeaponType = StoN2(n.substr(20, 1)),
             ClickWeaponType(n_A_WeaponType),
             8 != c.A_JOB.value && 22 != c.A_JOB.value || 11 == n_A_WeaponType || (n_A_Weapon2Type = StoN2(n.substr(21, 1)),
-                ClickWeaponType2(n_A_Weapon2Type)),
+                ClickWeaponType2(StoN2(n.substr(34, 2)))),
             n_A_JobSet(),
             (2 == n_A_JobClass() || 4 == n_A_JobClass() || 45 == n_A_JOB && 0 != n_A_WeaponType) && (c.A_Arrow.value = StoN2(n.substr(22, 1))),
             ClickB_Item(StoN2(n.substr(23, 2))),
