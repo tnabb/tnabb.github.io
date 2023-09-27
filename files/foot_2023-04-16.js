@@ -3250,7 +3250,7 @@ for (wESx = new Array,
 function EnemySort() {
     for (var _ = c.B_Enemy.length, n = 0; n < _; n++)
         c.B_Enemy.options[0] = null;
-    if (ESNum = [1, 3, 2, 21, 22, 16, 17, 13, 100],
+    if (ESNum = [1, 3, 2, 4, 21, 22, 16, 17, 13, 100],
         0 != 1 * c.ENEMY_SORT.value) {
         for (wES = ESNum[1 * c.ENEMY_SORT.value],
             wESx[0][0] = "S",
@@ -3295,6 +3295,9 @@ function EnemySort() {
         else if (3 == wES)
             for (n = 0; n <= EnemyNum; n++)
                 ESwork2[n] = "[" + v_Element_[Math.floor(m_Monster[n][3] / 10)] + m_Monster[n][3] % 10 + "] ";
+        else if(4 == wES)
+            for (n = 0; n <= EnemyNum; n++)
+                ESwork2[n] = "[" + v_Size[m_Monster[n][4]] + "] ";
         else
             for (n = 0; n <= EnemyNum; n++)
                 ESwork2[n] = "";
