@@ -724,100 +724,80 @@ function BattleCalc999() {
                 EDPplus(1),
                 CastAndDelay(),
                 BattleCalc998()
-        } else if (159 == n_A_ActiveSkill || 384 == n_A_ActiveSkill) {
-            if (n_PerHIT_DMG = 0,
-                n_rangedAtk = 1,
-                n_A_Weapon_element = 0,
-                Shieldw = 1 * c.SkillSubNum.value,
-                n_Delay[2] = .7,
-                wMod2 = 1 + .3 * n_A_ActiveSkillLV,
-                384 == n_A_ActiveSkill && (n_Delay[2] = .35,
-                    wMod2 *= 2),
-                SRV) {
-                wSBr = 10 * n_A_LEFT_REFINE, 
-                    EquipNumSearch(620) || EquipNumSearch(409) || CardNumSearch(255) || EquipNumSearch(43) || (EquipNumSearch(393) || EquipNumSearch(904)) && 7 == n_B[2] || (EquipNumSearch(392) || EquipNumSearch(401)) && 3 == n_B[2] || (EquipNumSearch(467) || EquipNumSearch(405) || EquipNumSearch(471)) && 9 == n_B[2] || EquipNumSearch(394) && 6 == n_B[2] ? (M_DEF1 = n_B[14],
-                        M_DEF2 = n_B_DEF2[0]) : (M_DEF1 = 0,
-                            M_DEF2 = 0);
-                var o = n_A_ATK + .05 * n_A_ATK * n_A_Buf2[8];
-                SkillSearch(12) ? o += .32 * o : n_A_Buf6[5] ? o += Math.floor(o * (.02 + .03 * n_A_Buf6[5])) : n_A_Buf7[31] && (o += Math.floor(.05 * o));
-                for (e = 0; e <= 2; e++)
-                    n_tok[23] > 0 ? (n_A_ATK_IP = Math.round((o + Shieldw) * (n_B_DEF2[2 - e] + n_B[14]) / 100),
-                        w_DMG[e] = n_A_ATK_IP * wMod) : (w_DMG[e] = (o + Shieldw) * wMod,
-                            w_DMG[e] = Math.floor(w_DMG[e] * defReduction(n_B[14] - M_DEF1) - (n_B_DEF2[e] - M_DEF2))),
-                        w_DMG[e] = Math.floor(w_DMG[e] * wMod2),
-                        w_DMG[e] = ApplyModifiers(w_DMG[e]) + wSBr,
-                        0 != M_DEF1 && (w_DMG[2] = w_DMG[1] = w_DMG[0]),
-                        w_DMG[e] < 1 && (w_DMG[e] = 1),
-                        305 == m_Item[n_A_Equip[5]][0] ? (w_DMG[e] = 0,
-                            InnStr[e] += w_DMG[e] + " (no shield equiped)") : (w_DMG[e] = Math.floor(w_DMG[e] * element[n_B[3]][0]),
-                                Last_DMG_A[e] = Last_DMG_B[e] = w_DMG[e],
-                                InnStr[e] += Last_DMG_A[e])
-            } else {
-                wSBr = 4 * n_A_LEFT_REFINE,
-                    n_A_ATK_w = Math.round(Math.floor(n_A_STR / 10) * Math.floor(n_A_STR / 10)),
-                    n_A_ATK = n_A_STR + n_A_ATK_w + Math.floor(n_A_DEX / 5) + Math.floor(n_A_LUK / 5);
-                for (e = 0; e <= 2; e++)
-                    w_DMG[e] = n_A_ATK * wMod + Shieldw + wSBr,
-                        w_DMG[e] = Math.floor(Math.floor(w_DMG[e] * defReduction(n_B[14]) - n_B_DEF2[e]) * wMod2),
-                        w_DMG[e] = ApplyModifiers(w_DMG[e]),
-                        w_DMG[e] < 1 && (w_DMG[e] = 1),
-                        305 == m_Item[n_A_Equip[5]][0] ? (w_DMG[e] = 0,
-                            InnStr[e] += w_DMG[e] + " (no shield equiped)") : (w_DMG[e] = Math.floor(w_DMG[e] * element[n_B[3]][0]),
-                                Last_DMG_A[e] = Last_DMG_B[e] = w_DMG[e],
-                                InnStr[e] += Last_DMG_A[e])
-            }
+        } else if (159 == n_A_ActiveSkill || 384 == n_A_ActiveSkill) { // SHIELD BOOM
+            n_PerHIT_DMG = 0,
+            n_rangedAtk = 1,
+            n_A_Weapon_element = 0,
+            Shieldw = 1 * c.SkillSubNum.value,
+            n_Delay[2] = .7,
+            wMod2 = 1 + .3 * n_A_ActiveSkillLV,
+            384 == n_A_ActiveSkill && (n_Delay[2] = .35, wMod2 *= 2),
+            wSBr = 10 * n_A_LEFT_REFINE;
+            // applying every modifier to shield weight except skill% dmg
+            wSBr = Math.floor(wSBr * (100 + n_tok[30 + n_B[2]]) / 100),
+            wSBr = Math.floor(wSBr * (100 + n_tok[40 + Math.floor(n_B[3] / 10)]) / 100),
+            wSBr = Math.floor(wSBr * (100 + n_tok[27 + n_B[4]]) / 100),
+            1 == n_rangedAtk && -1 != TyouEnkakuSousa3dan && (wSBr = Math.floor(wSBr * (100 + n_tok[25]) / 100)),
+            _ = 0,
+            1 == n_B[19] && (_ += n_tok[26]),
+            _ += n_tok[80],
+            wSBr = Math.floor(wSBr * (100 + _) / 100);
+            _ = 0;
+            // shield boom dmg is not affected by def pierce weapons on alfheim
+            /* EquipNumSearch(620) || EquipNumSearch(409) || CardNumSearch(255) || (EquipNumSearch(43) || EquipNumSearch(393) || EquipNumSearch(904)) && 7 == n_B[2] || (EquipNumSearch(392) || EquipNumSearch(401)) && 3 == n_B[2] || (EquipNumSearch(467) || EquipNumSearch(405) || EquipNumSearch(471)) && 9 == n_B[2] || EquipNumSearch(394) && 6 == n_B[2] ? (M_DEF1 = n_B[14],
+                M_DEF2 = n_B_DEF2[0]) : (M_DEF1 = 0,
+                    M_DEF2 = 0);  */
+            var o = n_A_ATK + .05 * n_A_ATK * n_A_Buf2[8];
+            SkillSearch(12) ? o += .32 * o : n_A_Buf6[5] ? o += Math.floor(o * (.02 + .03 * n_A_Buf6[5])) : n_A_Buf7[31] && (o += Math.floor(.05 * o));
+            for (e = 0; e <= 2; e++)
+                // ice pick does not effect shield boom on alfheim
+                /* n_tok[23] > 0 ? (n_A_ATK_IP = Math.round((o + Shieldw) * (n_B_DEF2[2 - e] + n_B[14]) / 100),
+                    w_DMG[e] = n_A_ATK_IP * wMod) : (w_DMG[e] = (o + Shieldw) * wMod,
+                        w_DMG[e] = Math.floor(w_DMG[e] * defReduction(n_B[14] - M_DEF1) - (n_B_DEF2[e] - M_DEF2))), */
+                w_DMG[e] = (o + Shieldw) * wMod2,
+                w_DMG[e] = Math.floor(w_DMG[e] * defReduction(n_B[14]) - n_B_DEF2[e]),
+                w_DMG[e] = ApplyModifiers(w_DMG[e]) + wSBr,
+                w_DMG[e] < 1 && (w_DMG[e] = 1),
+                305 == m_Item[n_A_Equip[5]][0] ? (w_DMG[e] = 0, InnStr[e] += w_DMG[e] + " (no shield equiped)") 
+                : (w_DMG[e] = Math.floor(w_DMG[e] * element[n_B[3]][0]),
+                console.log("4: " + w_DMG[e]),
+                    Last_DMG_A[e] = Last_DMG_B[e] = w_DMG[e],
+                    InnStr[e] += Last_DMG_A[e]);
             w_DMG[1] = w_DMG[1] * w_HIT / 100,
-                CastAndDelay(),
-                BattleCalc998()
+            CastAndDelay(),
+            BattleCalc998()
         } else if (324 == n_A_ActiveSkill) {
-            if (n_PerHIT_DMG = 0,
-                n_rangedAtk = 1,
-                n_A_Weapon_element = 0,
-                wCast = 1 * n_A_CAST,
-                n_Delay[2] = 1,
-                Shieldw = 1 * c.SkillSubNum.value,
-                SRV) {
-                wMod2 = 1 + .3 * n_A_ActiveSkillLV;
-                var A = 20 * CardNumSearch(11) + 5 * CardNumSearch(28) + 5 * CardNumSearch(29) + 5 * CardNumSearch(30) + 5 * CardNumSearch(33) + 5 * CardNumSearch(34) + 5 * CardNumSearch(35) + 5 * CardNumSearch(36) + 5 * CardNumSearch(37) + 10 * CardNumSearch(38) + 5 * CardNumSearch(39) + 5 * CardNumSearch(110) + 5 * CardNumSearch(163) + 5 * CardNumSearch(165) + 5 * CardNumSearch(254) + 5 * CardNumSearch(259) + 5 * CardNumSearch(326) + 5 * CardNumSearch(356) + 5 * CardNumSearch(366) + 5 * CardNumSearch(380) + 5 * CardNumSearch(463) + 5 * CardNumSearch(498) + 5 * CardNumSearch(525)
-                    , r = n_A_ATK - A;
-                SkillSearch(12) ? r += .32 * r : n_A_Buf6[5] ? o += Math.floor(o * (.02 + .03 * n_A_Buf6[5])) : n_A_Buf7[31] && (o += Math.floor(.05 * o));
-                for (e = 0; e <= 2; e++)
-                    w_DMG[e] = r * wMod + Shieldw,
-                        w_DMG[e] = Math.floor(Math.floor(5 * w_DMG[e] * defReduction(n_B[14]) - n_B_DEF2[e]) * wMod2) + 5 * n_A_LEFT_REFINE * 2,
-                        w_DMG[e] = ApplyModifiers(w_DMG[e]),
-                        w_DMG[e] < 1 && (w_DMG[e] = 1),
-                        305 == m_Item[n_A_Equip[5]][0] ? (w_DMG[e] = 0,
-                            InnStr[e] += w_DMG[e] + " (no shield equiped)") : (w_DMG[e] = Math.floor(w_DMG[e] * element[n_B[3]][0]),
-                                Last_DMG_B[e] = Math.floor(w_DMG[e] / 5) + Math.floor(n_B_DEF2[e] / 3 - 1),
-                                Last_DMG_A[e] = 5 * Last_DMG_B[e],
-                                InnStr[e] += Last_DMG_A[e] + " (" + Last_DMG_B[e] + SubName[8] + "5 hits)",
-                                w_DMG[e] = Last_DMG_A[e]);
-                w_DMG[1] = w_DMG[1] * w_HIT / 100
-            } else {
-                wSBr = n_A_LEFT_REFINE,
-                    wMod2 = 1 + .3 * n_A_ActiveSkillLV,
-                    n_A_ATK_w = Math.round(Math.floor(n_A_STR / 10) * Math.floor(n_A_STR / 10)),
-                    n_A_ATK = n_A_STR + n_A_ATK_w + Math.floor(n_A_DEX / 5) + Math.floor(n_A_LUK / 5),
-                    n_A_ATK = n_A_ATK * wMod + Shieldw + 4 * wSBr,
-                    Shieldw -= 100,
-                    Shieldw < 0 && (Shieldw = 0),
-                    wSC2 = [0, 0, 0],
-                    wSC2[2] = 100 + Shieldw + 2 * wSBr * wSBr,
-                    wSC2[1] = 100 + (Shieldw + 2 * wSBr * wSBr) / 2,
-                    wSC2[0] = 100;
-                for (e = 0; e <= 2; e++)
-                    w_DMG[e] = (n_A_ATK * defReduction(n_B[14]) - n_B_DEF2[e]) * wMod2,
-                        w_DMG[e] += wSC2[e],
-                        w_DMG[e] = ApplyModifiers(w_DMG[e]),
-                        w_DMG[e] < 1 && (w_DMG[e] = 1),
-                        305 == m_Item[n_A_Equip[5]][0] ? (w_DMG[e] = 0,
-                            InnStr[e] += w_DMG[e] + " (no shield equiped)") : (w_DMG[e] = Math.floor(w_DMG[e] * element[n_B[3]][0]),
-                                Last_DMG_A[e] = 5 * w_DMG[e],
-                                Last_DMG_B[e] = w_DMG[e],
-                                InnStr[e] += Last_DMG_A[e] + " (" + Last_DMG_B[e] + SubName[8] + "5 hits)",
-                                w_DMG[e] = Last_DMG_A[e]);
-                w_DMG[1] = w_DMG[1] * w_HIT / 100
-            }
+            n_PerHIT_DMG = 0,
+            n_rangedAtk = 1,
+            n_A_Weapon_element = 0,
+            wCast = 1 * n_A_CAST,
+            n_Delay[2] = 1,
+            Shieldw = 1 * c.SkillSubNum.value,
+            wMod2 = 1 + .3 * n_A_ActiveSkillLV,
+            wSBr = 10 * n_A_LEFT_REFINE,
+            // applying every modifier to shield weight except skill% dmg
+            wSBr = Math.floor(wSBr * (100 + n_tok[30 + n_B[2]]) / 100),
+            wSBr = Math.floor(wSBr * (100 + n_tok[40 + Math.floor(n_B[3] / 10)]) / 100),
+            wSBr = Math.floor(wSBr * (100 + n_tok[27 + n_B[4]]) / 100),
+            1 == n_rangedAtk && -1 != TyouEnkakuSousa3dan && (wSBr = Math.floor(wSBr * (100 + n_tok[25]) / 100)),
+            _ = 0,
+            1 == n_B[19] && (_ += n_tok[26]),
+            _ += n_tok[80],
+            wSBr = Math.floor(wSBr * (100 + _) / 100),
+            _ = 0;
+            SkillSearch(12) ? n_A_ATK += .32 * n_A_ATK : n_A_Buf6[5] ? n_A_ATK += Math.floor(n_A_ATK * (.02 + .03 * n_A_Buf6[5])) : n_A_Buf7[31] && (n_A_ATK += Math.floor(.05 * n_A_ATK));
+            for (e = 0; e <= 2; e++)
+                w_DMG[e] = (n_A_ATK + Shieldw) * wMod2,
+                w_DMG[e] = Math.floor(5 * Math.floor(w_DMG[e] * defReduction(n_B[14]) - n_B_DEF2[e])),
+                w_DMG[e] = ApplyModifiers(w_DMG[e]) + (wSBr * 5),
+                w_DMG[e] < 1 && (w_DMG[e] = 1),
+                305 == m_Item[n_A_Equip[5]][0] ? (w_DMG[e] = 0, InnStr[e] += w_DMG[e] + " (no shield equiped)") 
+                : (w_DMG[e] = Math.floor(w_DMG[e] * element[n_B[3]][0]),
+                    Last_DMG_B[e] = Math.floor(w_DMG[e] / 5),
+                    Last_DMG_A[e] = 5 * Last_DMG_B[e],
+                    InnStr[e] += Last_DMG_A[e] + " (" + Last_DMG_B[e] + SubName[8] + "5 hits)",
+                    w_DMG[e] = Last_DMG_A[e]);
+            w_DMG[1] = w_DMG[1] * w_HIT / 100
             CastAndDelay(),
                 BattleCalc998()
         } else if (259 == n_A_ActiveSkill) { // spiral pierce
@@ -2175,28 +2155,59 @@ function BattleHiDam() {
         wBHD
 }
 function BattleMagicCalc(e) {
-    //console.log("pre reduction magic dmg: " + e)
+    wBMC2 = e;
+    n = StPlusCalc2(5e3 + n_A_ActiveSkill) + StPlusCard(5e3 + n_A_ActiveSkill); // moved skill dmg % modifiers to before mdef reduction
+    n_A_Buf9[20] == n_A_ActiveSkill && (n += n_A_Buf9[19]), // skill dmg % on top
+    n_A_Buf9[22] == n_A_ActiveSkill && (n += n_A_Buf9[21]), // skill dmg % on bottom
+    46 != n_A_ActiveSkill && 47 != n_A_ActiveSkill && 277 != n_A_ActiveSkill || 5 == n_A_JobClass() && (n += 20 * CardNumSearch(474)),
+    132 != n_A_ActiveSkill && 133 != n_A_ActiveSkill || EquipNumSearch(1146) && (n += 15 + n_A_HEAD_REFINE),
+    131 == n_A_ActiveSkill && EquipNumSearch(1169) && (n += n_A_Weapon_refine),
+    // kraken card
+    (54 == n_A_ActiveSkill || 541 == n_A_ActiveSkill || 55 == n_A_ActiveSkill || 128 == n_A_ActiveSkill || 130 == n_A_ActiveSkill || 131 == n_A_ActiveSkill || 410 == n_A_ActiveSkill || 412 == n_A_ActiveSkill) && CardNumSearch(583) && (n += 10),
+    (373 == n_A_ActiveSkill || 374 == n_A_ActiveSkill || 375 == n_A_ActiveSkill) && CardNumSearch(583) && n_A_Weapon_element == 1 && (n += 10),
+    // sedora pet n_A_Buf8[0] = petID
+    (54 == n_A_ActiveSkill || 541 == n_A_ActiveSkill || 55 == n_A_ActiveSkill || 128 == n_A_ActiveSkill || 130 == n_A_ActiveSkill || 131 == n_A_ActiveSkill || 410 == n_A_ActiveSkill || 412 == n_A_ActiveSkill) && 92 == n_A_Buf8[0] && (n += 5),
+    (373 == n_A_ActiveSkill || 374 == n_A_ActiveSkill || 375 == n_A_ActiveSkill) && 92 == n_A_Buf8[0] && n_A_Weapon_element == 1 && (n += 5),
+    // gloom pet - esma dmg increase
+    (373 == n_A_ActiveSkill || 374 == n_A_ActiveSkill || 375 == n_A_ActiveSkill) && 94 == n_A_Buf8[0] && (n_A_Weapon_element == 3 || n_A_Weapon_element == 8) && (n += 7),
+    // mavka card
+    (407 == n_A_ActiveSkill || 408 == n_A_ActiveSkill || 409 == n_A_ActiveSkill) && CardNumSearch(597) && 44 == n_A_JOB && (n += 7),
+    // adventurers spirit
+    375 == n_A_ActiveSkill && n_A_SHOULDER_REFINE >= 7 && 1835 == n_A_Equip[7] && (n += 5),
+    // exquisite yellow foxtail
+    (126 == n_A_ActiveSkill || 127 == n_A_ActiveSkill) && (1873 == n_A_Equip[0] || 1874 == n_A_Equip[0]) && (n += n_A_Weapon_refine),
+    540 == n_A_ActiveSkill && (n += 25 * CardNumSearch(493)),
+    541 == n_A_ActiveSkill && (n += 25 * CardNumSearch(488)),
+    542 == n_A_ActiveSkill && (n += 25 * CardNumSearch(591)),
+    37 != n_A_ActiveSkill && 387 != n_A_ActiveSkill || 3 == n_A_JobClass() && EquipNumSearch(1247) && (n += 5, n_A_HEAD_REFINE >= 7 && (n += 5)),
+    wBMC2 = wBMC2 * (100 + n) / 100, // applying skill modifiers
+    n_A_Buf7[21] && MANUKU_MONSTER() && (wBMC2 = 110 * wBMC2 / 100),
+    n_A_Buf7[24] && SUPURE_MONSTER() && (wBMC2 = 110 * wBMC2 / 100),
+    131 == n_A_ActiveSkill && n_B_debuf[4] && 0 == n_B[19] && n_B[3] < 90 && (wBMC2 = 0),
+    // mdef
     SRV = 1 * c.server.value,
-        wBMC_MDEF = n_B[15];
+    wBMC_MDEF = n_B[15];
     var _ = 0;
     0 == n_B[19] && CardNumSearch(424) && (_ = 1),
         0 != _ && (wBMC_MDEF = 0,
             n_B_MDEF2 = 0),
-        122 == n_A_ActiveSkill ? wBMC2 = Math.floor(e + 50) : wBMC2 = Math.floor(e * mdefReduction(wBMC_MDEF) - n_B_MDEF2),
+        122 == n_A_ActiveSkill ? wBMC2 = Math.floor(wBMC2 + 50) : wBMC2 = Math.floor(wBMC2 * mdefReduction(wBMC_MDEF) - n_B_MDEF2),
         wBMC2 < 1 && (wBMC2 = 1),
         //console.log("post reduction magic dmg : " + wBMC2)
         //104 == n_A_ActiveSkill && 6 != n_B[2] && n_B[3] < 90 && (wBMC2 = 0), // make magnus exorcismus hit all
         wBMC2 = SRV < 50 ? Math.floor(wBMC2 * Math.max(0, element[n_B[3]][n_A_Weapon_element])) : Math.floor(wBMC2 * Math.max(0, element_R[n_B[3]][n_A_Weapon_element])),
         SRV ? n_B[3] > 89 && n_B[3] < 95 && 47 == n_A_ActiveSkill && (wBMC2 = Math.floor(wBMC2 * (1 + .05 * n_A_ActiveSkillLV))) : 90 <= n_B[3] && 47 == n_A_ActiveSkill && (wBMC2 = Math.floor(wBMC2 * (1 + .05 * n_A_ActiveSkillLV)));
+    // magic damage modifiers
     var n = n_tok[170 + n_B[2]]; // MAGIC DAMAGE RACE MODIFIER
-    var nEle = n_B[3] < 5 ? n_tok[340] : n_tok[340 + Math.floor(Math.abs(n_B[3]) / (10 ** (String(n_B[3]).length - 1)))]; // MAGIC DAMAGE ELEMENT MODIFIER
+    var nEle = n_tok[340 + Math.floor(n_B[3] / 10)]; // MAGIC DAMAGE ELEMENT MODIFIER
     var nBoss = n_B[19] ? n_tok[353] : 0; // MAGIC DAMAGE BOSS MODIFIER
     9 == n_B[2] && SkillSearch(234) && (n += 2 * SkillSearch(234)), // dragonology
     wBMC2 = wBMC2 * (100 + n) / 100,
     wBMC2 = wBMC2 * (100 + nEle) / 100,
     wBMC2 = wBMC2 * (100 + nBoss) / 100,
     wBMC2 = tPlusDamCut(wBMC2);
-    n = StPlusCalc2(5e3 + n_A_ActiveSkill) + StPlusCard(5e3 + n_A_ActiveSkill);
+    return Math.floor(wBMC2);
+    /* n = StPlusCalc2(5e3 + n_A_ActiveSkill) + StPlusCard(5e3 + n_A_ActiveSkill);
     return n_A_Buf9[20] == n_A_ActiveSkill && (n += n_A_Buf9[19]), // skill dmg % on top
         n_A_Buf9[22] == n_A_ActiveSkill && (n += n_A_Buf9[21]), // skill dmg % on bottom
         46 != n_A_ActiveSkill && 47 != n_A_ActiveSkill && 277 != n_A_ActiveSkill || 5 == n_A_JobClass() && (n += 20 * CardNumSearch(474)),
@@ -2226,7 +2237,7 @@ function BattleMagicCalc(e) {
         n_A_Buf7[24] && SUPURE_MONSTER() && (wBMC2 = 110 * wBMC2 / 100),
         131 == n_A_ActiveSkill && n_B_debuf[4] && 0 == n_B[19] && n_B[3] < 90 && (wBMC2 = 0),
         wBMC2 = Math.floor(wBMC2),
-        wBMC2
+        wBMC2 */
 }
 function ClickJob(e) {
     if (SRV = 1 * c.server.value,
