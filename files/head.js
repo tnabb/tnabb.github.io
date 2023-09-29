@@ -800,7 +800,7 @@ function BattleCalc999() {
             w_DMG[1] = w_DMG[1] * w_HIT / 100
             CastAndDelay(),
                 BattleCalc998()
-        } else if (259 == n_A_ActiveSkill) { // spiral pierce
+        } else if (259 == n_A_ActiveSkill) { // SPIRAL PIERCE
             n_rangedAtk = 1,
                 wSPP2 = n_A_WeaponLV_refineATK * Math.max(0, element[n_B[3]][n_A_Weapon_element]),
                 wSPP2 = ApplyModifiers(wSPP2),
