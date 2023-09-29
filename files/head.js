@@ -2526,6 +2526,7 @@ function ClickWeaponType(e) {
         }
     }else if(m_RandomOptRangedType.includes(parseInt(e))){ // ranged
         if(!(m_RandomOptRangedType.includes(parseInt(n_A_WeaponType))) || m_RandomOptSpecialWeapons.includes(parseInt(oldWeapon)) || parseInt(oldWeapon) == 0){
+            RandOptWeapon1Reset();
             for(i = 0; "NULL" != m_RandomOptRanged[0][i]; i++){
                 c.A_weapon1_ropt1.options[i] = new Option(m_RandomOpt[m_RandomOptRanged[0][i]][1], m_RandomOpt[m_RandomOptRanged[0][i]][0]);
             }
@@ -2539,6 +2540,7 @@ function ClickWeaponType(e) {
         }
     }else if(m_RandomOptMagicType.includes(parseInt(e))){ // magic
         if(!(m_RandomOptMagicType.includes(parseInt(n_A_WeaponType))) || m_RandomOptSpecialWeapons.includes(parseInt(oldWeapon)) || parseInt(oldWeapon) == 0){
+            RandOptWeapon1Reset();
             for(i = 0; "NULL" != m_RandomOptMagic[0][i]; i++){
                 c.A_weapon1_ropt1.options[i] = new Option(m_RandomOpt[m_RandomOptMagic[0][i]][1], m_RandomOpt[m_RandomOptMagic[0][i]][0]);
             }
