@@ -802,7 +802,7 @@ function BattleCalc999() {
                 BattleCalc998()
         } else if (259 == n_A_ActiveSkill) { // spiral pierce
             n_rangedAtk = 1,
-                wSPP2 = SRV ? n_A_Weapon_refine * Math.max(0, element[n_B[3]][n_A_Weapon_element]) : n_A_WeaponLV_refineATK * Math.max(0, element[n_B[3]][n_A_Weapon_element]),
+                wSPP2 = n_A_WeaponLV_refineATK * Math.max(0, element[n_B[3]][n_A_Weapon_element]),
                 wSPP2 = ApplyModifiers(wSPP2),
                 wSPP2 = tPlusDamCut(wSPP2),
                 n_PerHIT_DMG = 5 * wSPP2,
@@ -812,10 +812,14 @@ function BattleCalc999() {
                 for(b = 1; b <= (n_A_STR / 10); b++){
                     wSPP += (b * 10) -  5;
                 }
+                spearMasteryDMG = 4 * SkillSearch(69);
+                if(SkillSearch(78) > 0){
+                    spearMasteryDMG += 1 * SkillSearch(69);
+                }
                 Weaponw = 1 * c.SkillSubNum.value,
-                w_DMG[2] = wSPP + (.8 * Weaponw * (1 + .5 * n_A_ActiveSkillLV)),
+                w_DMG[2] = n_A_WeaponLV_refineATK + (wSPP / 5) + spearMasteryDMG + (.8 * Weaponw * (1 + .5 * n_A_ActiveSkillLV)),
                 wSPP = 1.25 - .25 * n_B[4],
-                w_DMG[2] = SRV ? Math.floor(w_DMG[2] * wSPP) + 10 + 1.5 * n_A_Weapon_refine : Math.floor(w_DMG[2] * wSPP + n_A_WeaponLV_refineATK),
+                w_DMG[2] = Math.floor(w_DMG[2] * wSPP),
                 w_DMG[2] = w_DMG[2] * Math.max(0, element[n_B[3]][n_A_Weapon_element]),
                 w_DMG[2] = ApplyModifiers(w_DMG[2]),
                 w_DMG[0] = w_DMG[1] = w_DMG[2];

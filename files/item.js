@@ -1802,7 +1802,7 @@ m_Item = [
 	, [1797, 999, 127, 6, 0, 1, 280, 99, "Giant Shield (aRO)", 0, "<b>[Refine Rate 9~10]</b><br>Reduces damage from [Large] size enemies by an additional 5%", 192, 5, 0]     //revisar def, weight, req.level, req.job
 	, [1798, 999, 136, 1, 0, 0, 40, 99, "Salvage Cape (aRO)", 0, "Enables the use of [" + skillName(402, SRV) + "] Lvl 1.<BR>[" + skillName(402, SRV) + "] skill cooldown +30 seconds.<BR>All skill's SP cost x2<BR>Consumes 1200 SP when unequipped.", 0]     //revisar def, weight, req.level, req.job
 	, [1799, 999, 82, 7, 0, 1, 40, 99, "Ancient Gold Ornament (aRO)", 0, "<b>[Swordman, Merchant, Thief Class]</b><BR>ATK +8%<BR><b>[Mage, Acolyte Class]</b><BR>MATK +8%<BR>All your healing skills effectiveness +7%<BR><b>[Archer Class]</b><BR>DEX +3<BR>Deal +10% long ranged ATK based damage.", 7, 2, 0]     //revisar def, weight, req.level, req.job
-	, [1800, 52, 0, 1, 0, 0, 10, 1, "Donut In Mouth", 0, "Recover 1 HP every 10 seconds.", 15, 100, 0]		//bonus2 bHPRegenRate,1,10000; bonus bMaxHP,100;
+	, [1800, 52, 0, 1, 0, 0, 10, 1, "Donut In Mouth", 0, "Recover 1 HP every 10 seconds.", 13, 100, 0]		//bonus2 bHPRegenRate,1,10000; bonus bMaxHP,100;
 	, [1801, 50, 0, 1, 0, 1, 10, 1, "Black Tail Ribbon", 0, "", 19, 5, 78, 5, 60, 5, 0]	//revisar def, weight, req.level, req.job
 	, [1802, 50, 0, 0, 0, 1, 50, 45, "TM", 0, "",/*200,1,*/7, 5, 221, 161, 221, 162, 221, 163, 0]	//revisar def, weight, req.level, req.job
 	, [1803, 63, 0, 2, 0, 0, 40, 1, "Refresh Shoes", 0, "Recover 20 HP every 10 seconds.<BR>Recover 3 SP every 10 seconds.", 13, 17, 14, 8, 0]	//revisar def, weight, req.level, req.job
