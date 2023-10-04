@@ -4104,6 +4104,7 @@ function URLOUT() {
         SaveData[t + 3] = NtoS2(c.theme.value, 1),
         SaveData[t + 4] = NtoS2(1 * c.server.value, 1),
         SaveData[t + 5] = NtoS01(0, c.all_dmgSkills.checked, c.restrict_jobequip.checked, c.restrict_lvlequip.checked, c.restrict_equipslot.checked),
+        console.log(NtoS01(0, c.all_dmgSkills.checked, c.restrict_jobequip.checked, c.restrict_lvlequip.checked, c.restrict_equipslot.checked)),
         SaveData[t + 6] = NtoS01(c.restrict_cardslot.checked, c.all_card.checked, 0, 0, 0),
         t += 6,
         SaveData[t + 1] = NtoS2(n_A_randopt[0], 2), // save rand options to url
@@ -4167,6 +4168,10 @@ function URLIN() {
         , n = location.href.match(/\?/)
         , a = otherURL_TEXT.value.match(/\#/)
         , e = otherURL_TEXT.value.match(/\?/);
+    console.log(_),
+    console.log(n),
+    console.log(a),
+    console.log(e);
     if (n || e || _ || a) {
         for (r = 0; r <= 21; r++)
             n_A_Buf2[r] = 0;
