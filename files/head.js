@@ -760,7 +760,6 @@ function BattleCalc999() {
                 w_DMG[e] < 1 && (w_DMG[e] = 1),
                 305 == m_Item[n_A_Equip[5]][0] ? (w_DMG[e] = 0, InnStr[e] += w_DMG[e] + " (no shield equiped)") 
                 : (w_DMG[e] = Math.floor(w_DMG[e] * element[n_B[3]][0]),
-                console.log("4: " + w_DMG[e]),
                     Last_DMG_A[e] = Last_DMG_B[e] = w_DMG[e],
                     InnStr[e] += Last_DMG_A[e]);
             w_DMG[1] = w_DMG[1] * w_HIT / 100,
@@ -800,7 +799,7 @@ function BattleCalc999() {
             w_DMG[1] = w_DMG[1] * w_HIT / 100
             CastAndDelay(),
                 BattleCalc998()
-        } else if (259 == n_A_ActiveSkill) { // SPIRAL PIERCE
+        } else if (259 == n_A_ActiveSkill) { // spiral pierce
             n_rangedAtk = 1,
                 wSPP2 = n_A_WeaponLV_refineATK * Math.max(0, element[n_B[3]][n_A_Weapon_element]),
                 wSPP2 = ApplyModifiers(wSPP2),
@@ -813,9 +812,7 @@ function BattleCalc999() {
                     wSPP += (b * 10) -  5;
                 }
                 spearMasteryDMG = 4 * SkillSearch(69);
-                if(SkillSearch(78) > 0){
-                    spearMasteryDMG += 1 * SkillSearch(69);
-                }
+                SkillSearch(78) > 0 && (spearMasteryDMG += SkillSearch(69)),
                 Weaponw = 1 * c.SkillSubNum.value,
                 w_DMG[2] = n_A_WeaponLV_refineATK + (wSPP / 5) + spearMasteryDMG + (.8 * Weaponw * (1 + .5 * n_A_ActiveSkillLV)),
                 wSPP = 1.25 - .25 * n_B[4],
@@ -2087,19 +2084,19 @@ function BattleHiDam() {
         for (i = 0; i <= 6; i++)
             w_HiDam[i] = Math.floor(w_HiDam[i] / A)
     }
-    if ((446 == n_B_AtkSkill || 447 == n_B_AtkSkill) && 7 == n_A_Bodyelement)
+    /* if ((446 == n_B_AtkSkill || 447 == n_B_AtkSkill) && 7 == n_A_Bodyelement) // hells judgement doing 0 dmg to shadow ???
         for (i = 0; i <= 6; i++)
-            w_HiDam[i] = 0;
+            w_HiDam[i] = 0; */
     if (488 == n_B_AtkSkill)
         for (i = 0; i <= 6; i++)
             w_HiDam[i] = Math.floor(a * n_A_MaxHP / 10);
     if (510 == n_B_AtkSkill)
-        if (7 == n_A_Bodyelement)
+        /* if (7 == n_A_Bodyelement)
             for (i = 0; i <= 6; i++)
                 w_HiDam[i] = 0;
-        else
-            for (i = 0; i <= 6; i++)
-                w_HiDam[i] = n_A_MaxHP - 1;
+        else */
+        for (i = 0; i <= 6; i++)
+            w_HiDam[i] = n_A_MaxHP - 1;
     if (489 == n_B_AtkSkill)
         for (l = 3,
             wBHD = n_tok[60 + l],
@@ -2630,7 +2627,6 @@ function ClickWeaponType2(e) {
                     c.A_weapon2_card4.style.width = "auto");
             n_Nitou = 1;
         }else{
-            console.log(c.A_weapon2.value);
             if(m_RandomOptSpecialWeapons.includes(parseInt(e))){ // special weapons that assassins can use
                 if(!(m_RandomOptSpecialWeapons.includes(parseInt(n_A_Equip[1])))){
                     RandOptWeapon2Reset();
@@ -4801,7 +4797,7 @@ function BattleCalc2(e) {
             e += 3 * SkillSearch(393),
             e += 4 * n_A_ActiveSkillLV),
         395 == n_A_ActiveSkill && (e += 3 * m_Kunai[1 * document.calcForm.SkillSubNum.value][0]),
-        1 * c.server.value < 50 && (e = ApplyModifiers(e)),
+        1 * c.server.value < 50 && 244 != n_A_ActiveSkill && (e = ApplyModifiers(e)),
         169 == n_A_ActiveSkill && 10 == n_A_WeaponType && (e = Math.floor(e / 2)),
         169 == n_A_ActiveSkill && 1 == n_A_WeaponType && (e *= 2), // backstab double damage with dagger
         n_Nitou && 0 == n_A_ActiveSkill && 0 != n_A_WeaponType && (e = Math.floor(e * (50 + 10 * SkillSearch(79)) / 100)),
