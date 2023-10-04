@@ -86,8 +86,6 @@ Calc's theme: <select id="theme" onChange="themes()"><option value="0">Original<
               <br>• Attempted to remove all items not available on Alfheim. If I missed any, or removed some that are actually in-game, please DM me.
               <br>• Removed DEF from Blush of Groom.
               <br>• Fixed Hell's Judgement and Dark Blessing doing 0 damage if Bathory was equipped.
-              <br>• Weapon weight on Spiral Pierce now changes when switching weapon.
-              <br>• Shield weight on Shield Boomerang and Shield Chain now changes when switching shield.
               <br>• Other small fixes.
               <br><br>
               <b>(A) Changelog 2023-09-29:</b>
@@ -1137,9 +1135,9 @@ Calc's theme: <select id="theme" onChange="themes()"><option value="0">Original<
                     </td>
                   </tr>
                   <tr>
-                    <!--<td><select name="A_weapon1" onchange="StAllCalc()|ClickB_Item(this[this.selectedIndex].value)|ClickActiveSkill2()|restrictCardslot(1)"></select></td>-->
+                    <!--<td><select name="A_weapon1" onchange="StAllCalc()|ClickB_Item(this[this.selectedIndex].value)|restrictCardslot(1)"></select></td>-->
                     <td id="A_w1"><select name="A_weapon1" style="width: auto; background-color: rgb(255, 204, 136);"
-                        onchange="ClickWeaponType(this[this.selectedIndex].value) | Click_Item(this[this.selectedIndex].value)| ClickActiveSkill2() |restrictCardslot(1)">
+                        onchange="ClickWeaponType(this[this.selectedIndex].value) | Click_Item(this[this.selectedIndex].value)|restrictCardslot(1)">
                         <option value="0">(no weapon)</option>
                         <optgroup label="Dagger">
                           <option value="1459">Angelic Wing Dagger [2]</option>
@@ -2193,7 +2191,7 @@ Calc's theme: <select id="theme" onChange="themes()"><option value="0">Original<
                         <option value="10">+10</option>
                       </select>
                       <select name="A_left" style="width: 200px; background-color: rgb(255, 204, 136);"
-                        onchange="StAllCalc()|ClickB_Item(this[this.selectedIndex].value)|ClickActiveSkill2()|restrictCardslot(5)">
+                        onchange="StAllCalc()|ClickB_Item(this[this.selectedIndex].value)|restrictCardslot(5)">
                         <option value="305">(no shield)</option>
                       </select>
                       <select name="A_left_card" onchange="StAllCalc()|Card(this[this.selectedIndex].value)"

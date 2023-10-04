@@ -1889,7 +1889,7 @@ function sort(_) {
 function WeaponSet(_) {
     void 0 === _ && (_ = n_A_JOB),
         SRV = 1 * c.server.value,
-        myInnerHtml("A_w1", '<select name="A_weapon1" style="width:185px;" onchange="ClickWeaponType(this[this.selectedIndex].value) | Click_Item(this[this.selectedIndex].value) | ClickActiveSkill2() | restrictCardslot(1)"><option value="0">(no weapon)</option></select>', 0);
+        myInnerHtml("A_w1", '<select name="A_weapon1" style="width:185px;" onchange="ClickWeaponType(this[this.selectedIndex].value) | Click_Item(this[this.selectedIndex].value)|restrictCardslot(1)"><option value="0">(no weapon)</option></select>', 0);
     var n = 1 * c.restrict_lvlequip.checked
         , a = 0;
     for (k = 1; k <= 21; k++) {
