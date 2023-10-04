@@ -2073,7 +2073,6 @@ function JobEquipItemSearch(_) {
     }
     for (var n = 0; 999 != m_JobEquip[n_A_JOB][n]; n++)
         if (m_JobEquip[n_A_JOB][n] == _) 
-            //console.log(m_JobEquip[n_A_JOB]); //CHECK JOB REQ
             return 1;
     return 0
 }
