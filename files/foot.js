@@ -4168,10 +4168,6 @@ function URLIN() {
         , n = location.href.match(/\?/)
         , a = otherURL_TEXT.value.match(/\#/)
         , e = otherURL_TEXT.value.match(/\?/);
-    console.log(_),
-    console.log(n),
-    console.log(a),
-    console.log(e);
     if (n || e || _ || a) {
         for (r = 0; r <= 21; r++)
             n_A_Buf2[r] = 0;
@@ -4208,6 +4204,8 @@ function URLIN() {
             _ && (t = location.href.split("#")),
             20 == StoN2((n = t[1].replace(/undefined/g, "a")).substr(1, 2)) && StoN2(n.substr(90, 1)) ? SuperNoviceFullWeaponCHECK = 1 : SuperNoviceFullWeaponCHECK = 0;
         var A = StoN2(n.substr(0, 1));
+        console.log(n),
+        console.log(A);
         A >= 6 && (l = StoN2(n.substr(237, 1)),
             c.all_dmgSkills.checked = Math.floor(l % 16 / 8),
             c.restrict_equipslot.checked = Math.floor(l % 2 / 1),
