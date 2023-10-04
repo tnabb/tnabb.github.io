@@ -1832,7 +1832,7 @@ m_Item = [
 	, [1827, 63, 0, 2, 0, "1", 40, 70, "Witch's Shoes", 0, 0, 5, 1, 19, 5, 0]
 	, [1828, 100, 0, 0, 0, 0, 0, 0, "", 0, 0, 74, 15, 0]
 	, [1829, 50, 0, 3, 0, 0, 50, 70, "Witch's Hat", 0, "", 19, 10, 351, 10, 352, 10, 0]
-	, [1830, 61, 0, 0, 0, "1", 0, 70, "Cursed Knight's Shield", 0, "<b>[Refine Rate 7~10]</b> ATK +10", 1, 1, 0]
+	, [1830, 61, 0, 0, 0, "1", 80, 70, "Cursed Knight's Shield", 0, "<b>[Refine Rate 7~10]</b> ATK +10", 1, 1, 0]
 	, [1831, 64, 78, 0, 0, 1, 10, 90, "Black Rosary", 0, "", 78, 10, 0]
 	, [1832, 50, 0, 0, 0, 1, 10, 70, "Drooping Neko Crew", 0, "<b>[Refine Rate 7~10]</b><br>MATK +4%<br> Ignore 12% of target's MDEF", 4, 1, 19, 5, 0]
 	, [1833, 50, 0, 1, 0, 1, 50, 70, "Evil Marching Hat", 0, "<b>[Refine Rate 7~10]</b> Critical Damage +10%", 1, 2, 0]

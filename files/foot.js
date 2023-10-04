@@ -1889,7 +1889,7 @@ function sort(_) {
 function WeaponSet(_) {
     void 0 === _ && (_ = n_A_JOB),
         SRV = 1 * c.server.value,
-        myInnerHtml("A_w1", '<select name="A_weapon1" style="width:185px;" onchange="ClickWeaponType(this[this.selectedIndex].value) | Click_Item(this[this.selectedIndex].value)|restrictCardslot(1)"><option value="0">(no weapon)</option></select>', 0);
+        myInnerHtml("A_w1", '<select name="A_weapon1" style="width:185px;" onchange="ClickWeaponType(this[this.selectedIndex].value) | Click_Item(this[this.selectedIndex].value) | ClickActiveSkill2() | restrictCardslot(1)"><option value="0">(no weapon)</option></select>', 0);
     var n = 1 * c.restrict_lvlequip.checked
         , a = 0;
     for (k = 1; k <= 21; k++) {
@@ -3458,7 +3458,7 @@ function SaveLocal() {
             SaveData[242] = 0,
             SaveData[243] = 1 * c.A_ActiveSkill.value,
             SaveData[244] = 1 * c.A_ActiveSkillLV.value,
-            (66 == n_A_ActiveSkill || 326 == n_A_ActiveSkill || 131 == n_A_ActiveSkill || 88 == n_A_ActiveSkill || 197 == n_A_ActiveSkill || 394 == n_A_ActiveSkill || 395 == n_A_ActiveSkill || 405 == n_A_ActiveSkill || 429 == n_A_ActiveSkill || SkillSearch(441) && (51 == n_A_ActiveSkill || 54 == n_A_ActiveSkill || 56 == n_A_ActiveSkill || 540 == n_A_ActiveSkill || 541 == n_A_ActiveSkill || 542 == n_A_ActiveSkill)) && (SaveData[245] = 1 * c.SkillSubNum.value),
+            (66 == n_A_ActiveSkill || 326 == n_A_ActiveSkill || 159 == n_A_ActiveSkill || 384 == n_A_ActiveSkill || 324 == n_A_ActiveSkill || 131 == n_A_ActiveSkill || 88 == n_A_ActiveSkill || 197 == n_A_ActiveSkill || 394 == n_A_ActiveSkill || 395 == n_A_ActiveSkill || 405 == n_A_ActiveSkill || 429 == n_A_ActiveSkill || SkillSearch(441) && (51 == n_A_ActiveSkill || 54 == n_A_ActiveSkill || 56 == n_A_ActiveSkill || 540 == n_A_ActiveSkill || 541 == n_A_ActiveSkill || 542 == n_A_ActiveSkill)) && (SaveData[245] = 1 * c.SkillSubNum.value),
             SaveData[246] = c.B_Enemy.value,
             SaveData[247] = 1 * c.B_AtkSkill.value,
             444 != n_B_AtkSkill && 445 != n_B_AtkSkill && 125 != n_B_AtkSkill && 131 != n_B_AtkSkill || (SaveData[248] = 1 * c.BSkillSubNum.value),
@@ -3595,7 +3595,7 @@ function LoadLocal() {
             c.A_ActiveSkill.value = 0,
             ClickActiveSkill(),
             c.A_ActiveSkillLV.value = 0,
-            (66 == n_A_ActiveSkill || 326 == n_A_ActiveSkill || 131 == n_A_ActiveSkill || 88 == n_A_ActiveSkill || 197 == n_A_ActiveSkill || 394 == n_A_ActiveSkill || 395 == n_A_ActiveSkill || 405 == n_A_ActiveSkill || 429 == n_A_ActiveSkill || SkillSearch(441) && (51 == n_A_ActiveSkill || 54 == n_A_ActiveSkill || 56 == n_A_ActiveSkill || 540 == n_A_ActiveSkill || 541 == n_A_ActiveSkill || 542 == n_A_ActiveSkill)) && (c.SkillSubNum.value = 0),
+            (66 == n_A_ActiveSkill || 326 == n_A_ActiveSkill || 159 == n_A_ActiveSkill || 384 == n_A_ActiveSkill || 324 == n_A_ActiveSkill || 131 == n_A_ActiveSkill || 88 == n_A_ActiveSkill || 197 == n_A_ActiveSkill || 394 == n_A_ActiveSkill || 395 == n_A_ActiveSkill || 405 == n_A_ActiveSkill || 429 == n_A_ActiveSkill || SkillSearch(441) && (51 == n_A_ActiveSkill || 54 == n_A_ActiveSkill || 56 == n_A_ActiveSkill || 540 == n_A_ActiveSkill || 541 == n_A_ActiveSkill || 542 == n_A_ActiveSkill)) && (c.SkillSubNum.value = 0),
             c.B_Enemy.value = 144,
             c.B_AtkRange.value = 0,
             Bskill(),
@@ -3696,7 +3696,7 @@ function LoadLocal() {
             c.A_ActiveSkill.value = SaveData[243],
             ClickActiveSkill(),
             c.A_ActiveSkillLV.value = SaveData[244],
-            66 != n_A_ActiveSkill && 326 != n_A_ActiveSkill && 131 != n_A_ActiveSkill && 88 != n_A_ActiveSkill && 197 != n_A_ActiveSkill && 394 != n_A_ActiveSkill && 395 != n_A_ActiveSkill && 405 != n_A_ActiveSkill && 429 != n_A_ActiveSkill || (c.SkillSubNum.value = SaveData[245]);
+            66 != n_A_ActiveSkill && 326 != n_A_ActiveSkill && 159 != n_A_ActiveSkill && 384 != n_A_ActiveSkill && 324 != n_A_ActiveSkill && 131 != n_A_ActiveSkill && 88 != n_A_ActiveSkill && 197 != n_A_ActiveSkill && 394 != n_A_ActiveSkill && 395 != n_A_ActiveSkill && 405 != n_A_ActiveSkill && 429 != n_A_ActiveSkill || (c.SkillSubNum.value = SaveData[245]);
         for (var a = 0, e = 0; e <= 14; e++)
             if (441 == m_JobBuff[n_A_JOB][e]) {
                 if ((a = c.A_skill6.value) && (51 == n_A_ActiveSkill || 54 == n_A_ActiveSkill || 56 == n_A_ActiveSkill || 540 == n_A_ActiveSkill || 541 == n_A_ActiveSkill || 542 == n_A_ActiveSkill)) {
@@ -4094,7 +4094,7 @@ function URLOUT() {
         SaveData[t + 5] = NtoS01(0, 0, 0, 0, 0),
         SaveData[t + 6] = NtoS2(c.A_ActiveSkill.value, 2),
         SaveData[t + 7] = NtoS2(1 * c.A_ActiveSkillLV.value, 1),
-        66 == n_A_ActiveSkill || 326 == n_A_ActiveSkill || 131 == n_A_ActiveSkill || 88 == n_A_ActiveSkill || 197 == n_A_ActiveSkill || 394 == n_A_ActiveSkill || 395 == n_A_ActiveSkill || 405 == n_A_ActiveSkill || 429 == n_A_ActiveSkill || SkillSearch(441) && (51 == n_A_ActiveSkill || 54 == n_A_ActiveSkill || 56 == n_A_ActiveSkill || 540 == n_A_ActiveSkill || 541 == n_A_ActiveSkill || 542 == n_A_ActiveSkill) ? SaveData[t + 8] = NtoS2(1 * c.SkillSubNum.value, 3) : SaveData[t + 8] = NtoS2(0, 3),
+        66 == n_A_ActiveSkill || 326 == n_A_ActiveSkill || 159 == n_A_ActiveSkill || 384 == n_A_ActiveSkill || 324 == n_A_ActiveSkill || 131 == n_A_ActiveSkill || 88 == n_A_ActiveSkill || 197 == n_A_ActiveSkill || 394 == n_A_ActiveSkill || 395 == n_A_ActiveSkill || 405 == n_A_ActiveSkill || 429 == n_A_ActiveSkill || SkillSearch(441) && (51 == n_A_ActiveSkill || 54 == n_A_ActiveSkill || 56 == n_A_ActiveSkill || 540 == n_A_ActiveSkill || 541 == n_A_ActiveSkill || 542 == n_A_ActiveSkill) ? SaveData[t + 8] = NtoS2(1 * c.SkillSubNum.value, 3) : SaveData[t + 8] = NtoS2(0, 3),
         SaveData[t + 9] = NtoS2(n_B[0], 2),
         SaveData[t + 10] = NtoS2(c.B_AtkSkill.value, 2),
         444 == n_B_AtkSkill || 445 == n_B_AtkSkill || 125 == n_B_AtkSkill || 131 == n_B_AtkSkill ? SaveData[t + 11] = NtoS2(c.BSkillSubNum.value, 3) : SaveData[t + 11] = NtoS2(0, 3),
@@ -4496,7 +4496,7 @@ function URLIN() {
                 c.A_ActiveSkill.value = StoN2(n.substr(S + 1, 2)),
                 ClickActiveSkill(),
                 c.A_ActiveSkillLV.value = StoN2(n.substr(S + 3, 1)),
-                66 != n_A_ActiveSkill && 326 != n_A_ActiveSkill && 131 != n_A_ActiveSkill && 88 != n_A_ActiveSkill && 197 != n_A_ActiveSkill && 394 != n_A_ActiveSkill && 395 != n_A_ActiveSkill && 405 != n_A_ActiveSkill && 429 != n_A_ActiveSkill || (c.SkillSubNum.value = StoN2(n.substr(S + 4, 3))),
+                66 != n_A_ActiveSkill && 326 != n_A_ActiveSkill && 159 != n_A_ActiveSkill && 384 != n_A_ActiveSkill && 324 != n_A_ActiveSkill && 131 != n_A_ActiveSkill && 88 != n_A_ActiveSkill && 197 != n_A_ActiveSkill && 394 != n_A_ActiveSkill && 395 != n_A_ActiveSkill && 405 != n_A_ActiveSkill && 429 != n_A_ActiveSkill || (c.SkillSubNum.value = StoN2(n.substr(S + 4, 3))),
                 c.B_Enemy.value = StoN2(n.substr(S + 7, 2))
         } else if (A >= 4) {
             c.A_HSE_HEAD1.value = StoN2(n.substr(82, 2));
@@ -4848,7 +4848,7 @@ function URLIN() {
                 c.A_ActiveSkill.value = StoN2(n.substr(S + 8, 2)),
                 ClickActiveSkill(),
                 c.A_ActiveSkillLV.value = StoN2(n.substr(S + 10, 1)),
-                66 != n_A_ActiveSkill && 326 != n_A_ActiveSkill && 131 != n_A_ActiveSkill && 88 != n_A_ActiveSkill && 197 != n_A_ActiveSkill && 394 != n_A_ActiveSkill && 395 != n_A_ActiveSkill && 405 != n_A_ActiveSkill && 429 != n_A_ActiveSkill || (c.SkillSubNum.value = StoN2(n.substr(S + 11, 3)));
+                66 != n_A_ActiveSkill && 326 != n_A_ActiveSkill && 159 != n_A_ActiveSkill && 384 != n_A_ActiveSkill && 324 != n_A_ActiveSkill && 131 != n_A_ActiveSkill && 88 != n_A_ActiveSkill && 197 != n_A_ActiveSkill && 394 != n_A_ActiveSkill && 395 != n_A_ActiveSkill && 405 != n_A_ActiveSkill && 429 != n_A_ActiveSkill || (c.SkillSubNum.value = StoN2(n.substr(S + 11, 3)));
             for (var f = 0, E = 0; E <= 14; E++)
                 if (441 == m_JobBuff[n_A_JOB][E]) {
                     if ((f = c.A_skill6.value) && (51 == n_A_ActiveSkill || 54 == n_A_ActiveSkill || 56 == n_A_ActiveSkill || 540 == n_A_ActiveSkill || 541 == n_A_ActiveSkill || 542 == n_A_ActiveSkill)) {
