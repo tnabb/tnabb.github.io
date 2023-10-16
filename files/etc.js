@@ -531,67 +531,35 @@ m_TempEffect = [
 	, [3, "Atroce Card", "ASPD +100%", 2, 463, 12, 100, 0]
 	, [4, "Anolian Card", "Attention Concentrate Lv1", 2, 224, 0]
 	, [5, "Alchemist Card Set", "Adrenaline Rush", 2, 461, 0]
-	, [6, "Valorous Assassin Damascus", "Ice Pick Effect", 1, 898, 23, 1, 0]
-	, [7, "Ixion Wings", "ASPD +7%", 1, 821, 12, 7, 0]
-	, [8, "Vanberk Card", "CRIT +100", 2, 471, 10, 100, 0]
-	, [9, "Ulfhedinn", "DEF +20, MDEF -20 [Stone Skin Lv1]", 1, 708, 0]	//mejorable ? --> NO
-	, [10, "Angelic Ring", "Heal/Sanctuary/Potion Pitcher Effectiveness +20%", 1, 1000, 99, 20, 0]
-	, [11, "Glorious Grenade Launcher", "ASPD + 20%", 1, 1103, 12, 20, 0]
-	, [12, "Glorious Jamadhar [+9]", "ASPD + 100%", 1, 1091, 12, 100, 0]
-	, [13, "Glorious Tablet", "ATK + 200", 1, 1094, 17, 200, 0]
-	, [14, "Glorious Shuriken", "Throw Fuuma Shuriken/Final Strike Damage +100%", 1, 1098, 5396, 100, 5405, 100, 5438, 100, 0]
-	, [15, "Glorious Bloody Roar [+9]", "ASPD +100%", 1, 1090, 12, 100, 0]
-	, [16, "Naght Sieger Twin-Blade [Red]", "Ignore [Non-Boss] Monster Defense", 1, 933, 22, 1, 0]
-	, [17, "Her National Treasury", "Loud Exclamation", 1, 1012, 0]
-	, [18, "Desert Twilight + Desert Wind", "190 ASPD", 1, 818, 12, 100, 0]
-	, [19, "Shadow Guard Set [Shadow Walk + Shadow Guard]", "FLEE +20", 1, 995, 9, 20, 0]
-	, [20, "Valorous Huuma Front Shuriken", "Throw Fuuma Shuriken/Final Strike Damage +100%", 1, 931, 5396, 100, 5405, 100, 5438, 100, 0]
-	, [21, "Naght Sieger Twin-Blade [Blue]", "Ignore [Non-Boss] Monster Defense", 1, 932, 22, 1, 0]
-	, [22, "Soldier Gatling Gun", "ATK +80", 1, 927, 17, 80, 0]
-	, [23, "Soldier Grenade Launcher", "ATK +300", 1, 929, 17, 300, 0]
-	, [24, "Soldier Revolver", "ASPD +100%", 1, 925, 12, 100, 0]
-	, [25, "Tae Goo Lyeon [JobLv70]", "ATK +50", 1, 934, 17, 50, 0]
-	, [26, "Brave Battle Fist", "Asura Strike Cast Time -100%", 1, 916, 7197, 100, 7321, 100, 0]
-	, [27, "Armor of Naga", "ATK +20", 1, 989, 17, 20, 0]
-	, [28, "Violet Fear", "Ignore [Non-Boss] Monster Defense", 1, 935, 22, 1, 0]
-	, [29, "Bloody Eater", "CRIT +100, ATK +50", 1, 819, 10, 100, 17, 50, 0]
-	, [30, "Blue Ribbon", "Attention Concentrate Lv2", 1, 885, 0]
-	, [31, "Hodremlin Card", "Perfect Dodge +30", 2, 467, 11, 30, 0]
-	, [32, "Mithril Magic Cape", "DEF -20, MDEF +20 [Anti-Magic Lv1]", 1, 709, 0]	//mejorable ? --> NO
-	, [33, "Ring of Flame Lord", "Critical Explosion Lv1", 1, 728, 0]
-	, [34, "Lord Knight Card", "Berserk", 2, 178, 0]
-	, [35, "Soldier Shotgun", "ATK +80", 1, 928, 17, 80, 0]
-	, [36, "Weihna", "Physical Damage +10%", 1, 1157, 80, 10, 0]
-	, [37, "Ruber", "Bash / Bowling Bash Damage +20%", 1, 1158, 5006, 20, 5076, 20, 0]
-	, [38, "Chronos", "MATK +12%", 1, 1172, 89, 12, 0]
-	, [39, "Nemesis", "ATK +50", 1, 820, 17, 50, 0]
-	, [40, "Sorin Doll Hat", "ATK +50", 1, 892, 17, 50, 0]
-	, [41, "Sagittarius Diadem", "DEX/AGI +10", 1, 1288, 2, 10, 5, 10, 0]
-	, [42, "Virgo Crown", "DEX +20", 1, 1294, 5, 20, 0]
-	, [43, "Benit Doll Hat", "ASPD +5%", 1, 1028, 12, 5, 0]
-	, [44, "Dark Knight Glove [Type A]", "ASPD +2%", 1, 1052, 12, 2, 0]
-	, [45, "Dark Knight Glove [Type B]", "MaxHP +10%", 1, 1310, 15, 10, 0]
-	, [46, "Jaguar Hat", "Loud Exclamation", 1, 1317, 1, 4, 0]
-	, [47, "Duneyrr Card", "Perfect Dodge +10", 2, 511, 11, 10, 0]
-	, [48, "Phylla Card", "CRIT +20", 2, 512, 10, 20, 0]
-	, [49, "Twin Ribbon", "DEF +20, MDEF -20 [Stone Skin Lv1]", 1, 531, 0]	//mejorable ? --> NO
-	, [50, "Twin Ribbon", "DEF -20, MDEF +20 [Anti-Magic Lv1]", 1, 531, 0]	//mejorable ? --> NO
-	, [51, "Shield of Naga", "Reflect Melee Physical Attacks by 3*(refine)%", 1, 993, 0]
-	, [52, "Power of Thor (iRO)", "ATK +40", 1, 1545, 17, 40, 0]
-	, [53, "Power of Thor (iRO)", "MATK +40", 1, 1545, 88, 40, 0]
-	, [54, "Duneyrr Card (aRO)", "ASPD +5%", 2, 545, 12, 5, 0]
-	, [55, "Kafra Blossom Card", "Elemental resistance +10%", 2, 546, 61, 10, 62, 10, 63, 10, 64, 10, 66, 10, 67, 10, 0]
-	, [56, "Witch's Pumpkin Hat + Hahoe Mask", "ATK +50", 1, 1567, 17, 50, 0]
-	, [57, "Weihna (iRO)", "Physical Damage +5%", 1, 1157, 80, 5, 0]
-	, [58, "Drooping Alicel", "ASPD +100%", 1, 1617, 12, 100, 0]
-	, [59, "Mace Of Judgement", "+20% ATK/MATK based damage against Demon race", 1, 1662, 36, 20, 176, 20, 0]
-	, [60, "Empowered Mace Of Judgement", "+20% ATK/MATK based damage against Demon race", 1, 1663, 36, 20, 176, 20, 0]
-	, [61, "White Wing Manteau", "FLEE +20", 1, 1719, 9, 20, 0]
-	, [62, "Bible Promise Vol1", "Odin's Power Lv1 (ATK +70, MATK +70, DEF -20, MDEF -20)", 1, 1728, 17, 70, 88, 70, 18, -20, 19, -20, 0]		//mejorable: deberia estar en "Supportive / Party Skills "
-	, [63, "Bible Promise Vol2", "Odin's Power Lv2 (ATK +100, MATK +100, DEF -20, MDEF -20)", 1, 1729, 17, 100, 88, 100, 18, -20, 19, -20, 0]	//mejorable: deberia estar en "Supportive / Party Skills "
+	, [6, "Ixion Wings", "ASPD +7%", 1, 821, 12, 7, 0]
+	, [7, "Vanberk Card", "CRIT +100", 2, 471, 10, 100, 0]
+	, [8, "Ulfhedinn", "DEF +20, MDEF -20 [Stone Skin Lv1]", 1, 708, 0]	//mejorable ? --> NO
+	, [9, "Angelic Ring", "Heal/Sanctuary/Potion Pitcher Effectiveness +20%", 1, 1000, 99, 20, 0]
+	, [10, "Naght Sieger Twin-Blade [Red]", "Ignore [Non-Boss] Monster Defense", 1, 933, 22, 1, 0]
+	, [11, "Desert Twilight + Desert Wind", "190 ASPD", 1, 818, 12, 100, 0]
+	, [12, "Shadow Guard Set [Shadow Walk + Shadow Guard]", "FLEE +20", 1, 995, 9, 20, 0]
+	, [13, "Naght Sieger Twin-Blade [Blue]", "Ignore [Non-Boss] Monster Defense", 1, 932, 22, 1, 0]
+	, [14, "Tae Goo Lyeon [JobLv70]", "ATK +50", 1, 934, 17, 50, 0]
+	, [15, "Armor of Naga", "ATK +20", 1, 989, 17, 20, 0]
+	, [16, "Violet Fear", "Ignore [Non-Boss] Monster Defense", 1, 935, 22, 1, 0]
+	, [17, "Bloody Eater", "CRIT +100, ATK +50", 1, 819, 10, 100, 17, 50, 0]
+	, [18, "Hodremlin Card", "Perfect Dodge +30", 2, 467, 11, 30, 0]
+	, [19, "Mithril Magic Cape", "DEF -20, MDEF +20 [Anti-Magic Lv1]", 1, 709, 0]	//mejorable ? --> NO
+	, [20, "Ring of Flame Lord", "Critical Explosion Lv1", 1, 728, 0]
+	, [21, "Lord Knight Card", "Berserk", 2, 178, 0]
+	, [22, "Weihna", "Physical Damage +10%", 1, 1157, 80, 10, 0]
+	, [23, "Ruber", "Bash / Bowling Bash Damage +20%", 1, 1158, 5006, 20, 5076, 20, 0]
+	, [24, "Chronos", "MATK +12%", 1, 1172, 89, 12, 0]
+	, [25, "Nemesis", "ATK +50", 1, 820, 17, 50, 0]
+	, [26, "Duneyrr Card", "Perfect Dodge +10", 2, 511, 11, 10, 0]
+	, [27, "Phylla Card", "CRIT +20", 2, 512, 10, 20, 0]
+	, [28, "Shield of Naga", "Reflect Melee Physical Attacks by 3*(refine)%", 1, 993, 0]
+	, [29, "Flare Whip", "ATK +33 [Windmill Rush]", 1, 1996, 17, 33, 0]
+	, [30, "Jackson Rhoads", "MATK +33 [Moonlight Serenade]", 1, 1997, 88, 33, 0]
 ];
 //m_TempEffect = [ id, name, description, item/card, item/card ID, ... ]
-m_TempEffect_SORT = [0, 5, 10, 4, 27, 3, 43, 62, 63, 29, 30, 26, 38, 44, 45, 18, 58, 47, 54, 60, 15, 11, 12, 14, 13, 17, 31, 2, 1, 7, 46, 55, 34, 59, 32, 21, 16, 40, 48, 52, 53, 33, 37, 41, 19, 51, 22, 23, 24, 35, 40, 25, 49, 50, 9, 6, 20, 8, 28, 42, 36, 57, 61, 56]
+m_TempEffect_SORT = [0, 5, 9, 4, 15, 3, 17, 24, 11, 26, 29, 18, 2, 1, 6, 30, 21, 19, 13, 10, 25, 27, 20, 23, 12, 28, 14, 8, 7, 16, 22]
+//m_TempEffect_SORT = [0, 5, 10, 4, 27, 3, 43, 62, 63, 29, 30, 26, 38, 44, 45, 18, 58, 47, 54, 60, 15, 11, 12, 14, 13, 17, 31, 2, 1, 7, 46, 55, 34, 59, 32, 21, 16, 40, 48, 52, 53, 33, 37, 41, 19, 51, 22, 23, 24, 35, 40, 25, 49, 50, 9, 6, 20, 8, 28, 42, 36, 57, 61, 56]
 
 //WeaponName = ["(Unarmed)","Dagger","Sword","Two-handed Sword","Spear","Two-handed Spear","Axe","Two-handed Axe","Mace","Rod / Staff","Bow","Katar","Book","Knuckle","Instrument","Whip","Huuma Shuriken","Handgun","Rifle","Shotgun","Gatling Gun","Grenade Launcher"];
 WeaponName = ["Bare Hand", "Dagger", "Sword", "Two-handed Sword", "Spear", "Two-handed Spear", "Axe", "Two-handed Axe", "Mace", "Rod / Staff", "Bow", "Katar", "Book", "Knuckle", "Instrument", "Whip", "Huuma Shuriken", "Handgun", "Rifle", "Shotgun", "Gatling Gun", "Grenade Launcher"];
@@ -636,6 +604,12 @@ m_Bullet = [
 	[10, 0, "Bullet"]
 	, [15, 6, "Silver Bullet"]
 	, [30, 0, "Blood Bullet"]
+	, [20, 5, "Poison Bullet"]
+	, [20, 7, "Blinding Bullet"]
+	, [20, 3, "Flare Bullet"]
+	, [20, 1, "Ice Bullet"]
+	, [20, 4, "Lightning Bullet"]
+	, [40, 2, "Magic Stone Bullet"]
 ];
 
 m_Grenade = [
@@ -670,33 +644,33 @@ m_JobEquip = [
 	, [0, 1, 54, 104, 75, 76, 83, 89, 95, 999] // archer
 	, [0, 1, 55, 105, 71, 77, 89, 57, 95, 999] // magician
 	, [0, 1, 56, 106, 70, 71, 72, 73, 74, 75, 78, 83, 84, 85, 86, 90, 91, 95, 999] // merchant
-	, [0, 1, 51, 61, 107, 70, 71, 72, 74, 75, 78, 79, 83, 84, 85, 86, 87, 90, 91, 95, 999]  //knight
-	, [0, 1, 52, 62, 108, 72, 74, 75, 78, 79, 81, 83, 84, 85, 90, 91, 95, 999]   //assassin
-	, [0, 1, 53, 63, 109, 71, 73, 74, 77, 78, 79, 81, 85, 89, 57, 999]  //priest
-	, [0, 1, 54, 64, 110, 75, 76, 79, 80, 83, 88, 89, 95, 999]   //hunter
-	, [0, 1, 55, 65, 111, 71, 77, 79, 89, 57, 95, 999]     //wizard
-	, [0, 1, 56, 66, 112, 70, 71, 72, 73, 74, 75, 78, 79, 83, 84, 85, 86, 90, 91, 95, 999]  //blacksmith
-	, [0, 1, 51, 61, 113, 70, 71, 72, 74, 75, 78, 79, 83, 84, 85, 86, 87, 90, 91, 95, 999]  //crusader
-	, [0, 1, 52, 62, 114, 72, 74, 75, 76, 78, 79, 80, 83, 84, 85, 88, 91, 95, 999]    //rogue
-	, [0, 1, 53, 63, 115, 71, 73, 74, 77, 78, 79, 85, 89, 57, 999]     //monk
-	, [0, 1, 54, 64, 116, 74, 75, 76, 79, 83, 89, 95, 999]     //bard
-	, [0, 1, 54, 64, 117, 74, 75, 76, 79, 83, 89, 95, 999]      //dancer
-	, [0, 1, 55, 65, 118, 71, 77, 79, 89, 57, 95, 999]     //sage
-	, [0, 1, 56, 66, 119, 70, 71, 72, 73, 74, 75, 78, 79, 83, 84, 85, 86, 90, 91, 95, 999]     //alchemist
-	, [0, 50, 90, 120, 999]      //super novice
-	, [0, 1, 51, 61, 107, 121, 70, 71, 72, 74, 75, 78, 79, 82, 83, 84, 85, 86, 87, 90, 91, 95, 999]    //lord knight
-	, [0, 1, 52, 62, 108, 122, 72, 74, 75, 78, 79, 81, 82, 83, 84, 85, 90, 91, 95, 999]     //assassin cross
-	, [0, 1, 53, 63, 109, 123, 71, 73, 74, 77, 78, 79, 81, 82, 85, 89, 57, 134, 136, 999]    //high priest
-	, [0, 1, 54, 64, 110, 124, 75, 76, 79, 80, 82, 83, 88, 89, 95, 135, 999]     //sniper
-	, [0, 1, 55, 65, 111, 125, 71, 77, 79, 82, 89, 57, 95, 136, 999]       //high wizard
-	, [0, 1, 56, 66, 112, 126, 70, 71, 72, 73, 74, 75, 78, 79, 82, 83, 84, 85, 86, 90, 91, 95, 999]    //whitesmith
-	, [0, 1, 51, 61, 113, 127, 70, 71, 72, 74, 75, 78, 79, 82, 83, 84, 85, 86, 87, 90, 91, 95, 999]    //paladin
-	, [0, 1, 52, 62, 114, 128, 72, 74, 75, 76, 78, 79, 80, 82, 83, 84, 85, 88, 91, 95, 999]      //stalker
-	, [0, 1, 53, 63, 115, 129, 71, 73, 74, 77, 78, 79, 82, 85, 89, 57, 134, 999]   //champion
-	, [0, 1, 54, 64, 116, 130, 74, 75, 76, 79, 82, 83, 89, 95, 135, 999]    //clown
-	, [0, 1, 54, 64, 117, 131, 74, 75, 76, 79, 82, 83, 89, 95, 135, 999]    //gypsie
-	, [0, 1, 55, 65, 118, 132, 71, 77, 79, 82, 89, 57, 95, 999]       //professor
-	, [0, 1, 56, 66, 119, 133, 70, 71, 72, 73, 74, 75, 78, 79, 82, 83, 84, 85, 86, 90, 91, 95, 999]    //creator
+	, [0, 1, 51, 61, 107, 70, 71, 72, 74, 75, 78, 79, 83, 84, 85, 86, 87, 90, 91, 95, 96, 999]  //knight
+	, [0, 1, 52, 62, 108, 72, 74, 75, 78, 79, 81, 83, 84, 85, 90, 91, 95, 96, 999]   //assassin
+	, [0, 1, 53, 63, 109, 71, 73, 74, 77, 78, 79, 81, 85, 89, 57, 96, 99, 999]  //priest
+	, [0, 1, 54, 64, 110, 75, 76, 79, 80, 83, 88, 89, 95, 96, 98, 999]   //hunter
+	, [0, 1, 55, 65, 111, 71, 77, 79, 89, 57, 95, 96, 99, 999]     //wizard
+	, [0, 1, 56, 66, 112, 70, 71, 72, 73, 74, 75, 78, 79, 83, 84, 85, 86, 90, 91, 95, 96, 999]  //blacksmith
+	, [0, 1, 51, 61, 113, 70, 71, 72, 74, 75, 78, 79, 83, 84, 85, 86, 87, 90, 91, 95, 96, 999]  //crusader
+	, [0, 1, 52, 62, 114, 72, 74, 75, 76, 78, 79, 80, 83, 84, 85, 88, 91, 95, 96, 999]    //rogue
+	, [0, 1, 53, 63, 115, 71, 73, 74, 77, 78, 79, 85, 89, 57, 96, 999]     //monk
+	, [0, 1, 54, 64, 116, 74, 75, 76, 79, 83, 89, 95, 96, 98, 999]     //bard
+	, [0, 1, 54, 64, 117, 74, 75, 76, 79, 83, 89, 95, 96, 98, 999]      //dancer
+	, [0, 1, 55, 65, 118, 71, 77, 79, 89, 57, 95, 96, 99, 999]     //sage
+	, [0, 1, 56, 66, 119, 70, 71, 72, 73, 74, 75, 78, 79, 83, 84, 85, 86, 90, 91, 95, 96, 999]     //alchemist
+	, [0, 50, 90, 120, 96, 99, 999]      //super novice
+	, [0, 1, 51, 61, 107, 121, 70, 71, 72, 74, 75, 78, 79, 82, 83, 84, 85, 86, 87, 90, 91, 95, 96, 97, 999]    //lord knight
+	, [0, 1, 52, 62, 108, 122, 72, 74, 75, 78, 79, 81, 82, 83, 84, 85, 90, 91, 95, 96, 97, 999]     //assassin cross
+	, [0, 1, 53, 63, 109, 123, 71, 73, 74, 77, 78, 79, 81, 82, 85, 89, 57, 134, 136, 96, 99, 999]    //high priest
+	, [0, 1, 54, 64, 110, 124, 75, 76, 79, 80, 82, 83, 88, 89, 95, 135, 96, 98, 999]     //sniper
+	, [0, 1, 55, 65, 111, 125, 71, 77, 79, 82, 89, 57, 95, 136, 96, 99, 999]       //high wizard
+	, [0, 1, 56, 66, 112, 126, 70, 71, 72, 73, 74, 75, 78, 79, 82, 83, 84, 85, 86, 90, 91, 95, 96, 97, 999]    //whitesmith
+	, [0, 1, 51, 61, 113, 127, 70, 71, 72, 74, 75, 78, 79, 82, 83, 84, 85, 86, 87, 90, 91, 95, 96, 97, 999]    //paladin
+	, [0, 1, 52, 62, 114, 128, 72, 74, 75, 76, 78, 79, 80, 82, 83, 84, 85, 88, 91, 95, 96, 97, 999]      //stalker
+	, [0, 1, 53, 63, 115, 129, 71, 73, 74, 77, 78, 79, 82, 85, 89, 57, 134, 96, 999]   //champion
+	, [0, 1, 54, 64, 116, 130, 74, 75, 76, 79, 82, 83, 89, 95, 135, 96, 98, 999]    //clown
+	, [0, 1, 54, 64, 117, 131, 74, 75, 76, 79, 82, 83, 89, 95, 135, 96, 98, 999]    //gypsie
+	, [0, 1, 55, 65, 118, 132, 71, 77, 79, 82, 89, 57, 95, 96, 99, 999]       //professor
+	, [0, 1, 56, 66, 119, 133, 70, 71, 72, 73, 74, 75, 78, 79, 82, 83, 84, 85, 86, 90, 91, 95, 96, 97, 999]    //creator
 	, [0]
 	, [0]
 	, [0]
@@ -704,11 +678,11 @@ m_JobEquip = [
 	, [0]
 	, [0]
 	, [0]
-	, [0, 1, 141, 83, 84, 85, 86, 999]		//taekwon kid
-	, [0, 1, 142, 79, 83, 84, 85, 86, 87, 91, 999]   //star gladiator
-	, [0, 1, 143, 55, 65, 71, 77, 79, 89, 95, 999]    //soul linker
-	, [0, 1, 144, 58, 52, 91, 95, 999]		//ninja
-	, [0, 1, 145, 59, 83, 999]		//gunslinger
+	, [0, 1, 141, 83, 84, 85, 86, 96, 999]		//taekwon kid
+	, [0, 1, 142, 79, 83, 84, 85, 86, 87, 91, 96, 999]   //star gladiator
+	, [0, 1, 143, 55, 65, 71, 77, 79, 89, 95, 96, 99, 999]    //soul linker
+	, [0, 1, 144, 58, 52, 91, 95, 96, 99, 999]		//ninja
+	, [0, 1, 145, 59, 83, 96, 98, 999]		//gunslinger
 	, [0, 1, 51, 61, 107, 121, 70, 71, 72, 74, 75, 78, 79, 82, 83, 84, 85, 86, 87, 90, 91, 93, 147, 999]		// Rune Knight
 	, [0, 1, 51, 61, 107, 121, 70, 71, 72, 74, 75, 78, 79, 82, 83, 84, 85, 86, 87, 90, 91, 93, 147, 999]		// Rune Knight
 	, [0, 1, 52, 62, 108, 122, 72, 74, 75, 78, 79, 81, 82, 83, 84, 85, 90, 91, 147, 999]		// Guillotine Cross

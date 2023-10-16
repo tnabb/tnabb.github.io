@@ -515,15 +515,15 @@ m_Card = [
 	, [511, 2, "Duneyrr", "When dealing ATK based damage, 1% chance you gain Perfect Dodge +10 for 4 seconds.", 17, 10, 0]
 	, [512, 2, "Phylla", "When dealing ATK based damage, 1.5% chance you gain CRIT +20 for 4 seconds.", 2, 1, 5, 1, 0]
 	, [513, 3, "Rhyncho", "<b>[Priest Classes]</b><BR>INT +1<br><hr><b>When compounded into a [Rose of Eden]:</b><br>Your [Heal], [Sanctuary], and [Aid Potion] effectiveness +5%", 190, 12, 191, 12, 192, 12, 99, 5, 0]		//COMPROBAR SCRIPT
-	, [514, 1, "Zakudam", "[Weapon Level 1~2] Deal +3% MATK based damage against [<b style='color:orange'>Demi-Human</b>] race monsters.<BR>[Weapon Level 3~4] Deal +8% MATK based damage against [<b style='color:orange'>Demi-Human</b>] race monsters.", 0]
-	, [515, 1, "Pinguicula", "[Weapon Level 1~2] Deal +3% MATK based damage against [<b style='color:green'>Insect</b>] race monsters.<BR>[Weapon Level 3~4] Deal +8% MATK based damage against [<b style='color:green'>Insect</b>] race monsters.", 0]
-	, [516, 1, "Nepenthes", "[Weapon Level 1~2] Deal +3% MATK based damage against [<b style='color:#00DD00'>Plant</b>] race monsters.<BR>[Weapon Level 3~4] Deal +8% MATK based damage against [<b style='color:#00DD00'>Plant</b>] race monsters.", 0]
-	, [517, 1, "Naga", "[Weapon Level 1~2] Deal +3% MATK based damage against [<b style='color:blue'>Fish</b>] race monsters.<BR>[Weapon Level 3~4] Deal +8% MATK based damage against [<b style='color:blue'>Fish</b>] race monsters.", 0]
-	, [518, 1, "Hell Apocalypse", "[Weapon Level 1~2] Deal +3% MATK based damage against [<b style='color:black'>Demon</b>] race monsters.<BR>[Weapon Level 3~4] Deal +8% MATK based damage against [<b style='color:black'>Demon</b>] race monsters.", 0]
-	, [519, 1, "Draco Egg", "[Weapon Level 1~2] Deal +3% MATK based damage against [<b style='color:red'>Dragon</b>] race monsters.<BR>[Weapon Level 3~4] Deal +8% MATK based damage against [<b style='color:red'>Dragon</b>] race monsters.", 0]
-	, [520, 1, "Cobalt Mineral", "[Weapon Level 1~2] Deal +3% MATK based damage against [<b style='color:#9F9E9B'>Formless</b>] race monsters.<BR>[Weapon Level 3~4] Deal +8% MATK based damage against [<b style='color:#9F9E9B'>Formless</b>] race monsters.", 0]
-	, [521, 1, "Bradium Golem", "[Weapon Level 1~2] Deal +3% MATK based damage against [<b style='color:brown'>Brute</b>] race monsters.<BR>[Weapon Level 3~4] Deal +8% MATK based damage against [<b style='color:brown'>Brute</b>] race monsters.", 0]
-	, [522, 1, "Ancient Tree", "[Weapon Level 1~2] Deal +3% MATK based damage against [<b style='color:purple'>Undead</b>] race monsters.<BR>[Weapon Level 3~4] Deal +8% MATK based damage against [<b style='color:purple'>Undead</b>] race monsters.", 0]
+	, [514, 1, "Zakudam", "<b>[Weapon Level 1~2]</b> Deal +3% MATK based damage against [<b style='color:orange'>Demi-Human</b>] race monsters.<BR><b>[Weapon Level 3~4]</b> Deal +8% MATK based damage against [<b style='color:orange'>Demi-Human</b>] race monsters.", 0]
+	, [515, 1, "Pinguicula", "<b>[Weapon Level 1~2]</b> Deal +3% MATK based damage against [<b style='color:green'>Insect</b>] race monsters.<BR><b>[Weapon Level 3~4]</b> Deal +8% MATK based damage against [<b style='color:green'>Insect</b>] race monsters.", 0]
+	, [516, 1, "Nepenthes", "<b>[Weapon Level 1~2]</b> Deal +3% MATK based damage against [<b style='color:#00DD00'>Plant</b>] race monsters.<BR><b>[Weapon Level 3~4]</b> Deal +8% MATK based damage against [<b style='color:#00DD00'>Plant</b>] race monsters.", 0]
+	, [517, 1, "Naga", "<b>[Weapon Level 1~2]</b> Deal +3% MATK based damage against [<b style='color:blue'>Fish</b>] race monsters.<BR><b>[Weapon Level 3~4]</b> Deal +8% MATK based damage against [<b style='color:blue'>Fish</b>] race monsters.", 0]
+	, [518, 1, "Hell Apocalypse", "<b>[Weapon Level 1~2]</b> Deal +3% MATK based damage against [<b style='color:black'>Demon</b>] race monsters.<BR><b>[Weapon Level 3~4]</b> Deal +8% MATK based damage against [<b style='color:black'>Demon</b>] race monsters.", 0]
+	, [519, 1, "Draco Egg", "<b>[Weapon Level 1~2]</b> Deal +3% MATK based damage against [<b style='color:red'>Dragon</b>] race monsters.<BR><b>[Weapon Level 3~4]</b> Deal +8% MATK based damage against [<b style='color:red'>Dragon</b>] race monsters.", 0]
+	, [520, 1, "Cobalt Mineral", "<b>[Weapon Level 1~2]</b> Deal +3% MATK based damage against [<b style='color:#9F9E9B'>Formless</b>] race monsters.<BR><b>[Weapon Level 3~4]</b> Deal +8% MATK based damage against [<b style='color:#9F9E9B'>Formless</b>] race monsters.", 0]
+	, [521, 1, "Bradium Golem", "<b>[Weapon Level 1~2]</b> Deal +3% MATK based damage against [<b style='color:brown'>Brute</b>] race monsters.<BR><b>[Weapon Level 3~4]</b> Deal +8% MATK based damage against [<b style='color:brown'>Brute</b>] race monsters.", 0]
+	, [522, 1, "Ancient Tree", "<b>[Weapon Level 1~2]</b> Deal +3% MATK based damage against [<b style='color:purple'>Undead</b>] race monsters.<BR><b>[Weapon Level 3~4]</b> Deal +8% MATK based damage against [<b style='color:purple'>Undead</b>] race monsters.", 0]
 	, [523, 6, "Heavy Metaling", "If equipped by a [Merchant] class job: [Cart Revolution] skill damage +50% and [Cart Revolution] SP cost +12", 1, 2, 0]
 	, [524, 1, "Aunoe", 0, 70, 20, 0]
 	, [525, 1, "Fanat", "<b>If compounded on a two-handed sword:</b><BR>ASPD +5%", 17, 10, 0]
@@ -569,6 +569,7 @@ m_Card = [
 	, [565, 4, "Minstel Alphoccio (aRO)", "<b>[Base VIT >= 110]</b> FLEE +20<BR>Enables use of [" + skillName(204, SRV) + "] Lvl 10 (this skill can only be used when an instrument is equipped).", 9, 20, 0]
 	, [566, 5, "Trentini (aRO)", "<b>[Dancer Class]</b> MaxHP +10%, MaxSP +5%.", 9, 10, 0]
 	, [567, 4, "Gypsi Trentini (aRO)", "<b>[Base VIT >= 110]</b> FLEE +20<BR>Enables use of [" + skillName(212, SRV) + "] Lvl 10 (this skill can only be used when a whip or an instrument is equipped).", 9, 20, 0]
+	// custom alfheim cards
 	, [568, 6, "Death Witch", 0, 16, -50, 176, 50, 170, 50, 0]
 	, [569, 4, "Lude Gal", 0, 15, -8, 16, 5, 0]
 	, [570, 100, 0, 0, 16, 5, 0]
@@ -577,10 +578,10 @@ m_Card = [
 	, [573, 5, "Gan Ceann", 0, 17, 5, 47, 10, 0]
 	, [574, 1, "Brutal Murderer", 0, 31, 20, 0]
 	, [575, 2, "Blue Moon Loli Ruri", "All skill's SP cost +10%", 4, 2, 99, 10, 0]
-	, [576, 1, "Pierrotzoist", "[Weapon Level 1~2] Deal +3% MATK based damage against [<b style='color:#BFBEBB'>Ghost</b>] element monsters.<BR>[Weapon Level 3~4] Deal +8% MATK based damage against [<b style='color:#BFBEBB'>Ghost</b>] element monsters.", 0]
+	, [576, 1, "Pierrotzoist", "<b>[Weapon Level 1~2]</b> Deal +3% MATK based damage against [<b style='color:#BFBEBB'>Ghost</b>] element monsters.<BR><b>[Weapon Level 3~4]</b> Deal +8% MATK based damage against [<b style='color:#BFBEBB'>Ghost</b>] element monsters.", 0]
 	, [577, 1, "Grote", 0, 49, 20, 0]
 	, [578, 2, "Disguiser", "<b>[Refine Rate 9~10]</b> Deal +5% ranged ATK based damage.", 5, 1, 0]
-	, [579, 1, "Sropho", "[Weapon Level 1~2] Deal +3% MATK based damage against [<b style='color:blue'>Water</b>] element monsters.<BR>[Weapon Level 3~4] Deal +8% MATK based damage against [<b style='color:blue'>Water</b>] element monsters.", 0]
+	, [579, 1, "Sropho", "<b>[Weapon Level 1~2]</b> Deal +3% MATK based damage against [<b style='color:blue'>Water</b>] element monsters.<BR><b>[Weapon Level 3~4]</b> Deal +8% MATK based damage against [<b style='color:blue'>Water</b>] element monsters.", 0]
 	, [580, 1, "Sedora", 0, 17, 10, 70, 15, 0]
 	, [581, 5, "Pot Dofle", 0, 60, 15, 61, 10, 0]
 	, [582, 2, "King Dramoh", "<b>For every 3 refine levels:</b> STR+1", 0]
@@ -589,8 +590,8 @@ m_Card = [
 	, [585, 3, "Combat Basilisk", 0, 191, 20, 192, -15, 0]
 	, [586, 3, "Charge Basilisk", 0, 192, 20, 191, -15, 0]
 	, [587, 7, "Trans Spore", 0, 4, 1, 3, 1, 0]
-	, [588, 1, "Fruit Pom Spider", "[Weapon Level 1~2] Deal +3% MATK based damage against [<b style='color:red'>Fire</b>] element monsters.<BR>[Weapon Level 3~4] Deal +8% MATK based damage against [<b style='color:red'>Fire</b>] element monsters.", 0]
-	, [589, 1, "Jungle Mandragora", "[Weapon Level 1~2] Deal +3% MATK based damage against [<b style='color:#00CC00'>Wind</b>] element monsters.<BR>[Weapon Level 3~4] Deal +8% MATK based damage against [<b style='color:#00CC00'>Wind</b>] element monsters.", 0]
+	, [588, 1, "Fruit Pom Spider", "<b>[Weapon Level 1~2]</b> Deal +3% MATK based damage against [<b style='color:red'>Fire</b>] element monsters.<BR><b>[Weapon Level 3~4]</b> Deal +8% MATK based damage against [<b style='color:red'>Fire</b>] element monsters.", 0]
+	, [589, 1, "Jungle Mandragora", "<b>[Weapon Level 1~2]</b> Deal +3% MATK based damage against [<b style='color:#00CC00'>Wind</b>] element monsters.<BR><b>[Weapon Level 3~4]</b> Deal +8% MATK based damage against [<b style='color:#00CC00'>Wind</b>] element monsters.", 0]
 	, [590, 1, "Big Eggring", 0, 221, 173, 0]
 	, [591, 7, "Eggring", 0, 5056, 25, 7056, 25, 0]
 	, [592, 2, "Leaf Lunatic", 0, 13, 150, 0]
@@ -598,7 +599,7 @@ m_Card = [
 	, [594, 1, "Hunter Wolf", 0, 8, 10, 0]
 	, [595, 6, "Baba Yaga", "<b>For each refine level:</b> FLEE+2", 0]
 	, [596, 3, "Les", 0, 334, 25, 0]
-	, [597, 7, "Mavka", "<b>[Ninja Class]</b><BR><b style='color:red'>Fire</b> property magic damage +7%<BR><b style='color:brown'>Earth</b> property magic damage +7%", 4, 1, 5, 1, 0]
+	, [597, 7, "Mavka", "<b>[Ninja Class]</b><BR>[<b style='color:red'>Fire</b>] property magic damage +7%<BR>[<b style='color:brown'>Earth</b>] property magic damage +7%", 4, 1, 5, 1, 0]
 	, [598, 2, "Uzhas", "<b>[Refine Rate 9~10]</b><br>Deal +5% MATK based damage against [<b style='color:brown'>Earth</b>] element monsters.", 342, 5, 0]
 	, [599, 4, "Wood Goblin", "", 41, 7, 42, 7, 331, -7, 332, -7, 0]
 	, [600, 2, "Gopinich", "Recover 5 SP when dealing ATK based damage.<BR>All skill's SP cost +50%", 0]
@@ -611,21 +612,61 @@ m_Card = [
 	, [607, 2, "Toucan", "<b>[Refine Rate 9~10]</b><br>Deal +5% MATK based damage against [<b style='color:purple'>Poison</b>] element monsters.", 345, 5, 0]
 	, [608, 2, "* All Race Magical +8%", "", 170, 8, 171, 8, 172, 8, 173, 8, 174, 8, 175, 8, 176, 8, 177, 8, 178, 8, 179, 8, 0]
 	, [609, 2, "* All Element Magical +8%", "", 340, 8, 341, 8, 342, 8, 343, 8, 344, 8, 345, 8, 346, 8, 347, 8, 348, 8, 349, 8, 0]
+	// patch a1
+	, [610, 7, "Contaminated Raydric", "", 45, 5, 0]
+	, [611, 5, "Contaminated Raydric Archer", "", 61, 20, 62, 20, 63, 20, 64, 20, 65, 20, 66, 20, 67, 20, 68, 20, 69, 20, 60, -20, 0]
+	, [612, 1, "Corrupted Wanderer", "<hr><b>When equipping [Corrupted Wanderer Card]+[Sigrun's Wings] at the same time:</b><br>When dealing ATK based damage, 2% chance you gain 1% of the damage inflicted on your target as SP.", 28, 5, 29, 5, 0]
+	, [613, 1, "Cursed Raydric", "", 88, 15, 0]
+	, [614, 6, "Cursed Raydric Archer", "", 5, 1, 15, 10, 0]
+	, [615, 5, "Flame Ghost", "", 60, 15, 63, 10, 0]
+	, [616, 5, "Ice Ghost", "", 17, 5, 43, 10, 0]
+	, [617, 1, "Gigantes", "<b>[Weapon Level 1~2]</b> On all monsters ignore 1% DEF<BR><b>[Weapon Level 3]</b> On all monsters ignore 2% DEF<br><b>[Weapon Level 4]</b> On all monsters ignore 3% DEF<br><hr><b>When equipped with a [Axe] or [Two-Handed Axe] class weapon:</b><br>DEF Pierce values on the card are doubled.", 17, 20, 0]
+	, [618, 3, "Khalitzburg Knight", "", 190, -15, 191, 18, 192, 18, 0]
+	, [619, 1, "White Knight", "", 17, 10, 28, 13, 29, 13, 0]
+	, [620, 100, 0, 0, 357, 4, 358, 4, 0]
+	, [621, 100, 0, 0, 28, 5, 29, 5, 0]
+	, [622, 5, "Polluted Spider Queen", "Auto Cast Rate +100%", 12, 5, 0]
+	, [623, 2, "Polluted Dark Lord", "", 1, 2, 292, 30, 0]
+	, [624, 5, "Bloody Wraith", "", 15, 5, 0]
+	, [625, 6, "Corrupted Bishop", "", 4, 1, 15, 10, 0]
+	, [626, 1, "Corrupted Duke", "<b>[Weapon Level 1~2]</b> Deal +3% MATK based damage against [<b style='color:#A89682'>Neutral</b>] element monsters.<BR><b>[Weapon Level 3~4]</b> Deal +8% MATK based damage against [<b style='color:#A89682'>Neutral</b>] element monsters.", 0]
+	, [627, 6, "Dark Chimera", "", 15, 6, 11, 4, 0]
+	, [628, 7, "Mutating Prisoner", 0, 5132, 25, 7132, 25, 0]
+	, [629, 7, "Royal Clergy", "<b>[Ninja Class]</b><BR>[<b style='color:blue'>Water</b>] property magic damage +7%<BR>[<b style='color:#00CC00'>Wind</b>] property magic damage +7%", 4, 1, 5, 1, 0]
+	, [630, 2, "Royal Druid", "<b>[Refine Rate 9~10]</b> On all monsters, ignore 5% MDEF", 4, 1, 0]
+	, [631, 3, "Standing Soul", "", 337, 25, 0]
+	, [632, 3, "Undead Noble", "", 5, 1, 74, 5, 0]
+	, [633, 4, "Himmelmez", "", 48, 40, 49, 40, 37, 40, 31, 40, 0]
+	, [634, 7, "Contaminated Sting", "", 2, 3, 0]
+	, [635, 5, "Frozen Gargoyle", "", 60, 10, 5199, 10, 5207, 10, 0]
+	, [636, 1, "Roaming Spellbook", "<b>[Weapon Level 1~2]</b> Deal +3% MATK based damage against [<b style='color:brown'>Earth</b>] element monsters.<BR><b>[Weapon Level 3~4]</b> Deal +8% MATK based damage against [<b style='color:brown'>Earth</b>] element monsters.", 0]
+	, [637, 1, "Corruption Root", "When performing an ATK based attack, 5% chance to cast [Wide Curse], [Wide Sleep], and [Wide Stone]", 17, 20, 0]
+	, [638, 6, "King Schmidt", "When performing an ATK based attack, 7.5% chance to cast [Sonic Blow] Lvl 5", 17, 25, 0]
+	, [639, 7, "Moskillro", "", 5, 1, 17, 5, 123, 5, 0]
+	, [640, 7, "Brain Sucker", "", 1, 1, 17, 5, 123, 5, 0]
+	, [641, 7, "Grave Worm", "", 4, 1, 295, 2, 123, 5, 0]
+	, [642, 3, "Unidentified Creature", "", 11, 30, 9, -100, 0]
+	, [643, 1, "Warden Kades", "<b>[Weapon Level 3~4]</b><br><b style='color:#A89682'>Neutral</b> property magic damage +6%<BR><b style='color:#CDCD00'>Holy</b> property magic damage +6%<BR><b style='color:#000000'>Shadow</b> property magic damage +6%", 88, 25, 0]
+	, [644, 6, "Dark Priest", "<b>[Rogue Class]</b> Auto Cast Rate +20%", 2, 1, 0]
 ];
 
 // positions (1 = weapon, 2 = headgear, 3 = shield, 4 = armor, 5 = garment, 6 = footgear, 7 = accessory, 100 = combos)
+// races (def = 5 + num, atk = 3 + num) (0 = formless, 1 = undead, 2 = brute, 3 = plant, 4 = insect, 5 = fish, 6 = demon, 7 = demi-human, 8 = angel, 9 = dragon)
+// elements (atk = 4 + num, def1 = 6, def2 = 33 + num) (0 = neutral, 1 = water, 2 = earth, 3 = fire, 4 = wind, 5 = poison, 6 = holy, 7 = shadow, 8 = ghost, 9 = undead)
+// sizes (27 = small, 28 = medium, 29 = large)
 
 CardNum = m_Card.length - 1;
 
 m_CardSort = [	//cards renewal comentadas
-	[0, 201, 202, 203, 204, 106, 1, 2, 3, 608, 609, 156, 31, 25, 522, 11, /* 112, */ 107, 223, 356, 463, 524, 305, 45, 355, 528, /* 544, */ 590, 361, 217, 465, 521, 163, 574, 15, 265, 160, 499, 325, 520, 259, 279, 311, 169, 28, 20, 329, 427, 42, 519, 47, 21, 32, 343, 5, 462, 215, 19, 244, 158, 4, 359, 525, 110, 8, 17, 588, 253, 263, 14, 286, 288, 287, 39, 277, 577, 518, 167, 498, 6, 159, 46, 594, 13, 255, 235, 589, 26, 289, 290, 164, 168, 382,/*548,*/219, 7, 165, 37, 23, 398, 35, 161, 166, 157, 36,/*549,*/30, 328, 40, 380, 517, 466, 516, 345, 252, 27, 353, 12, 360, 44, 576, 515, 171, 33,/*547,*/170, 111, 390, 22, 109, 16, /* 108, */ 580, 254, 43, 428, 29, 9, 34, 162, 41, 579, 366, 313, 18, 593, 464, /* 526, */ 532, 233, 296, 323, 24, 363, 10, 514, 38, 326, 319, "NULL"],
-	[0, 106, 1, 2, 3, 608, 609, 156, 31, 25, 522, 11, /* 112, */ 107, 223, 356, 463, 524, 305, 45, 355, 528, /* 544, */ 590, 361, 217, 465, 521, 163, 574, 15, 265, 160, 499, 325, 520, 259, 279, 311, 169, 28, 20, 329, 427, 42, 519, 47, 21, 32, 343, 5, 462, 215, 19, 244, 158, 4, 359, 525, 110, 8, 17, 588, 253, 263, 14, 286, 288, 287, 39, 277, 577, 518, 167, 498, 6, 159, 46, 594, 13, 255, 235, 589, 26, 289, 290, 164, 168, 382,/*548,*/219, 7, 165, 37, 23, 398, 35, 161, 166, 157, 36,/*549,*/30, 328, 40, 380, 517, 466, 516, 345, 252, 27, 353, 12, 360, 44, 576, 515, 171, 33,/*547,*/170, 111, 390, 22, 109, 16, /* 108, */ 580, 254, 43, 428, 29, 9, 34, 162, 41, 579, 366, 313, 18, 593, 464, /* 526, */ 532, 233, 296, 323, 24, 363, 10, 514, 38, 326, 319, "NULL"],
-	[0, 153,/*550,*/221, 332, 474, 179, 575, 298, 339, 114, 273, 602, 320, 510, 51, 578, 342, /* 540, */ 511, /* 545, */ 49, 337, 284, 176, 116, 303, 213, 117, /* 543, */ 600, 274, 603, 424, 175, 234, 472, 605, 177, 357, 582, 473, 397, 592, 387, 178, 118, 426, 115, 374, 119, 376, 50, 52,/*551,*/347, 120, 512, 509, 383, 180, 113, 309, 607, 174, 598, 471, 425, 48, 239, 238, "NULL"],
-	[0, 154, 155, 231, /* 537, */ 55, 245, 54, 122, 502, 222, 124, 58, 503, 586, 585, 504, 506, 173, /* 505, */ 538, 307, 241, 470, 126, 348, 467, 62, 61, 596, 507, 127, 63, 123, 272, 125, 469, 375, 57, 358, 368, 59, 513, 584, 468, 60, 121, 310, 396, /*508,*/ 539, 172, 56, 53, 249, 306, "NULL"],
-	[0, 476, 194, 282, 191, 136, 224, 232, 225, 190, 135, 69, 281, 500, 137,/*557,*/364, 601, 479,/*561,*/264, 280,/*552,*/128, 275, 321, 330, 422, 198, 214, 134, 334, 477, 187, 501, 139, 199, 349, 301, 138, 571, 302, 475, 283, 276,/*567,*/530, /* 531, */ 421, 261, 268, 299, 583, 478, 220, 569, 285, 75, 184,/*565,*/196, 529, 527, /* 533, */ 344, 197, 185, 140,/*555,*/133, 73, 367, 65, 183, 64, 71, 420, 192, 186, 68, 72, 384, 132, 293, 70,/*559,*/308, 195, 333, 317,/*563,*/74, 291, /* 66, */ 131, 392, 67, 189, 182, 181, 240, 599, 331, 193, "NULL"],
-	[0, 405,/*564,*/404, 78,/*558,560,*/327, 402, 79, 394, 341, 340, 80, 243,/*556,*/141, 573,/*562,*/267, 346, 83, 86, 82, 258, 482, 401,/*553,*/483, 84, 81, 372, 87, 271, 400, 403, 85, 352, 581,/*554,*/77, 480, 481, 338,/*566,*/294, 369, 295, 76, 393, "NULL"],
-	[0, 229, 227, 228, 246, 595, 266, 88, 269, 322, 568, 95, 94, 242, 486, 304, 362, 257, 423, 407, 408, 278, 523, 604, 484, 399, 409, 89, 90, 381, 351, 377, 379, 129, 406, 606, 388, 300, 91, 92, 391, 93, 318, 485, "NULL"],
-	[0, 230, 412, 188, 416, 142, 411, 365, 350, 370, 270, 147, 395, 417, 324, 591, 414, 262, 490, 256, 489, /* 542, */ 335, 410, 418, 354, 495, 389, 151, 419, 216, 492, 493, 226, 152, /* 546, */ 103, 97, 218, 101, 371, 144, 597, 378, 104, 149, 250, 130, 248, 247, 105, 150, 415, 143, 251, 148, 212, 494, 386, 316, /* 541, */ 297, 260, 488, 315, 146, 487, 96, 314, 491, 312, 336, 98, 292, 587, 236, 145, 413, 237, 99, 385, 102, 100, "NULL"]
+	[0, 201, 202, 203, 204, 106, 1, 2, 3, 608, 609, 156, 31, 25, 522, 11, /* 112, */ 107, 223, 356, 463, 524, 305, 45, 355, 528, /* 544, */ 590, 361, 217, 465, 521, 163, 574, 15, 265, 160, 499, 325, 520, 626, 612, 637, 259, 279, 613, 311, 169, 28, 20, 329, 427, 42, 519, 47, 21, 32, 343, 5, 462, 215, 19, 244, 158, 4, 359, 525, 110, 8, 17, 588, 253, 263, 617, 14, 286, 288, 287, 39, 277, 577, 518, 167, 498, 6, 159, 46, 13, 255, 235, 589, 26, 289, 290, 164, 168, 382,/*548,*/219, 7, 165, 37, 23, 398, 35, 161, 166, 157, 36,/*549,*/30, 328, 40, 380, 517, 466, 516, 345, 252, 27, 353, 12, 360, 44, 576, 515, 171, 33,/*547,*/170, 111, 636, 390, 22, 109, 16, /* 108, */ 580, 254, 43, 428, 29, 9, 34, 162, 41, 579, 366, 313, 18, 593, 464, /* 526, */ 532, 233, 296, 323, 24, 363, 643, 619, 10, 514, 38, 326, 319, "NULL"],
+	[0, 106, 1, 2, 3, 608, 609, 156, 31, 25, 522, 11, /* 112, */ 107, 223, 356, 463, 524, 305, 45, 355, 528, /* 544, */ 590, 361, 217, 465, 521, 163, 574, 15, 265, 160, 499, 325, 520, 626, 612, 637, 259, 279, 613, 311, 169, 28, 20, 329, 427, 42, 519, 47, 21, 32, 343, 5, 462, 215, 19, 244, 158, 4, 359, 525, 110, 8, 17, 588, 253, 263, 617, 14, 286, 288, 287, 39, 277, 577, 518, 167, 498, 6, 159, 46, 13, 255, 235, 589, 26, 289, 290, 164, 168, 382,/*548,*/219, 7, 165, 37, 23, 398, 35, 161, 166, 157, 36,/*549,*/30, 328, 40, 380, 517, 466, 516, 345, 252, 27, 353, 12, 360, 44, 576, 515, 171, 33,/*547,*/170, 111, 636, 390, 22, 109, 16, /* 108, */ 580, 254, 43, 428, 29, 9, 34, 162, 41, 579, 366, 313, 18, 593, 464, /* 526, */ 532, 233, 296, 323, 24, 363, 643, 619, 10, 514, 38, 326, 319, "NULL"],
+	[0, 153,/*550,*/221, 332, 474, 179, 575, 298, 339, 114, 273, 602, 320, 510, 51, 578, 342, /* 540, */ 511, /* 545, */ 49, 337, 284, 176, 116, 303, 213, 117, /* 543, */ 600, 274, 603, 424, 175, 234, 472, 605, 177, 357, 582, 473, 397, 592, 387, 178, 118, 426, 115, 374, 119, 376, 50, 52,/*551,*/347, 120, 512, 623, 509, 383, 630, 180, 113, 309, 607, 174, 632, 598, 471, 425, 48, 239, 238, "NULL"],
+	[0, 153,/*550,*/221, 332, 474, 179, 575, 298, 339, 114, 273, 602, 320, 510, 51, 578, 342, /* 540, */ 511, /* 545, */ 49, 337, 284, 176, 116, 303, 213, 117, /* 543, */ 600, 274, 603, 424, 175, 234, 472, 605, 177, 357, 582, 473, 397, 592, 387, 178, 118, 426, 115, 374, 119, 376, 50, 52,/*551,*/347, 120, 512, 623, 509, 383, 630, 180, 113, 309, 607, 174, 598, 471, 425, 48, 239, 238, "NULL"],
+	[0, 154, 155, 231, /* 537, */ 55, 245, 54, 122, 502, 222, 124, 58, 503, 586, 585, 504, 506, 173, /* 505, */ 538, 307, 241, 470, 126, 348, 467, 62, 61, 618, 596, 507, 127, 63, 123, 272, 125, 469, 375, 57, 358, 368, 59, 513, 584, 468, 60, 631, 121, 310, 396, /*508,*/ 539, 172, 56, 53, 249, 642, 306, "NULL"],
+	[0, 476, 194, 282, 191, 136, 224, 232, 225, 190, 135, 69, 281, 500, 137,/*557,*/364, 601, 479,/*561,*/264, 280,/*552,*/128, 275, 321, 330, 422, 198, 214, 134, 334, 477, 187, 501, 139, 199, 349, 301, 138, 571, 302, 475, 283, 276,/*567,*/530, /* 531, */ 421, 633, 261, 268, 299, 583, 478, 220, 569, 285, 75, 184,/*565,*/196, 529, 527, /* 533, */ 344, 197, 185, 140,/*555,*/133, 73, 367, 65, 183, 64, 71, 420, 192, 186, 68, 72, 384, 132, 293, 70,/*559,*/308, 195, 333, 317,/*563,*/74, 291, /* 66, */ 131, 392, 67, 189, 182, 181, 240, 599, 331, 193, "NULL"],
+	[0, 405,/*564,*/404, 78, 624,/*558,560,*/327, 402, 79, 611, 394, 341, 340, 80, 243,/*556,*/615, 141, 635, 573,/*562,*/267, 346, 83, 594, 616, 86, 82, 258, 482, 401,/*553,*/483, 84, 81, 372, 87, 271, 400, 403, 85, 352, 622, 581,/*554,*/77, 480, 481, 338,/*566,*/294, 369, 295, 76, 393, "NULL"],
+	[0, 229, 227, 228, 246, 595, 266, 88, 269, 625, 614, 627, 322, 644, 568, 95, 94, 242, 486, 304, 362, 257, 423, 407, 408, 278, 523, 604, 484, 399, 638, 409, 89, 90, 381, 351, 377, 379, 129, 406, 606, 388, 300, 91, 92, 391, 93, 318, 485, "NULL"],
+	[0, 230, 412, 188, 416, 142, 411, 365, 350, 640,  370, 270, 610, 634, 147, 417, 324, 591, 414, 262, 490, 256, 489, 641, /* 542, */ 335, 410, 418, 354, 495, 389, 151, 419, 216, 492, 493, 226, 152, /* 546, */ 103, 97, 218, 101, 371, 144, 597, 378, 639, 104, 628, 149, 250, 130, 248, 247, 105, 150, 415, 143, 251, 148, 212, 494, 386, 629, 316, /* 541, */ 297, 260, 488, 315, 146, 487, 96, 314, 491, 312, 336, 98, 292, 587, 236, 145, 413, 237, 99, 385, 102, 100, 395, "NULL"]
 ];
 
 function allCard() {
@@ -672,19 +713,21 @@ function allCard() {
 
 		for (i = 0; m_CardSort[2][i] != "NULL"; i++) {
 			c.A_head1_card.options[i] = new Option(m_Card[m_CardSort[2][i]][2], m_Card[m_CardSort[2][i]][0]);
-			c.A_head2_card.options[i] = new Option(m_Card[m_CardSort[2][i]][2], m_Card[m_CardSort[2][i]][0]);
 		}
-		for (i = 0; m_CardSort[3][i] != "NULL"; i++)
-			c.A_left_card.options[i] = new Option(m_Card[m_CardSort[3][i]][2], m_Card[m_CardSort[3][i]][0]);
+		for (i = 0; m_CardSort[3][i] != "NULL"; i++) {
+			c.A_head2_card.options[i] = new Option(m_Card[m_CardSort[3][i]][2], m_Card[m_CardSort[3][i]][0]);
+		}
 		for (i = 0; m_CardSort[4][i] != "NULL"; i++)
-			c.A_body_card.options[i] = new Option(m_Card[m_CardSort[4][i]][2], m_Card[m_CardSort[4][i]][0]);
+			c.A_left_card.options[i] = new Option(m_Card[m_CardSort[4][i]][2], m_Card[m_CardSort[4][i]][0]);
 		for (i = 0; m_CardSort[5][i] != "NULL"; i++)
-			c.A_shoulder_card.options[i] = new Option(m_Card[m_CardSort[5][i]][2], m_Card[m_CardSort[5][i]][0]);
+			c.A_body_card.options[i] = new Option(m_Card[m_CardSort[5][i]][2], m_Card[m_CardSort[5][i]][0]);
 		for (i = 0; m_CardSort[6][i] != "NULL"; i++)
-			c.A_shoes_card.options[i] = new Option(m_Card[m_CardSort[6][i]][2], m_Card[m_CardSort[6][i]][0]);
-		for (i = 0; m_CardSort[7][i] != "NULL"; i++) {
-			c.A_acces1_card.options[i] = new Option(m_Card[m_CardSort[7][i]][2], m_Card[m_CardSort[7][i]][0]);
-			c.A_acces2_card.options[i] = new Option(m_Card[m_CardSort[7][i]][2], m_Card[m_CardSort[7][i]][0]);
+			c.A_shoulder_card.options[i] = new Option(m_Card[m_CardSort[6][i]][2], m_Card[m_CardSort[6][i]][0]);
+		for (i = 0; m_CardSort[7][i] != "NULL"; i++)
+			c.A_shoes_card.options[i] = new Option(m_Card[m_CardSort[7][i]][2], m_Card[m_CardSort[7][i]][0]);
+		for (i = 0; m_CardSort[8][i] != "NULL"; i++) {
+			c.A_acces1_card.options[i] = new Option(m_Card[m_CardSort[8][i]][2], m_Card[m_CardSort[8][i]][0]);
+			c.A_acces2_card.options[i] = new Option(m_Card[m_CardSort[8][i]][2], m_Card[m_CardSort[8][i]][0]);
 		}
 	} else {
 		c.A_weapon1_card1.options[0] = new Option(m_Card[0][2], m_Card[0][0]);
@@ -706,7 +749,7 @@ function allCard() {
 		c.A_acces1_card.options[0] = new Option(m_Card[0][2], m_Card[0][0]);
 		c.A_acces2_card.options[0] = new Option(m_Card[0][2], m_Card[0][0]);
 		var n = 0;
-		for (j = 0; j < 8; j++) {
+		for (j = 0; j < 9; j++) {
 			for (i = 1; m_CardSort[j][i] != "NULL"; i++) {
 				if (j != 1) {
 					n++;
@@ -718,7 +761,7 @@ function allCard() {
 			}
 		}
 		n = 0;
-		for (j = 1; j < 8; j++) {
+		for (j = 1; j < 9; j++) {
 			for (i = 1; m_CardSort[j][i] != "NULL"; i++) {
 				n++;
 				c.A_weapon1_card2.options[n] = new Option(m_Card[m_CardSort[j][i]][2], m_Card[m_CardSort[j][i]][0]);
@@ -886,9 +929,11 @@ w_SC = [[429, 235, 306, "NULL"],
 [461, 326, 175, 281, 388, 104, "NULL"],
 [496, 485, 494, "NULL"],
 [570, 218, 569, "NULL"],
-[572, 212, 571, "NULL"]
+[572, 212, 571, "NULL"],
+[620, 618, 613, "NULL"],
+[621, 618, 619, "NULL"]
 ];
-SC_MAXnum = 35;
+SC_MAXnum = 37;
 
 for (var i = 0; i <= SC_MAXnum; i++) {
 	for (var k = 1; w_SC[i][k] != "NULL"; k++) {

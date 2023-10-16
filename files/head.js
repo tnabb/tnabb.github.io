@@ -72,7 +72,7 @@ v_Race = ["<b style='color:#9F9E9B'>Formless</b>", "<b style='color:purple'>Unde
     v_Type = ["Normal", "Boss"],
     SubName = ["%", " seconds", "Damage", "Critical Damage", "Critical Rate", "Over 10000 hits", "Too high to calculate", "Immesurable", " x ", "Cast Time", "Off", "On"],
     JobName = ["Novice", "Swordman", "Thief", "Acolyte", "Archer", "Magician", "Merchant", "Knight", "Assassin", "Priest", "Hunter", "Wizard", "Blacksmith", "Crusader", "Rogue", "Monk", "Bard", "Dancer", "Sage", "Alchemist", "Super Novice", "Lord Knight", "Assassin Cross", "High Priest", "Sniper", "High Wizard", "Whitesmith", "Paladin", "Stalker", "Champion", "Minstrel (alt. name: Clown)", "Gypsy", "Scholar (alt. name: Professor)", "Biochemist (alt. name: Creator)", "High Novice", "High Swordman", "High Thief", "High Acolyte", "High Archer", "High Magician", "High Merchant", "Taekwon Kid", "Taekwon Master (alt. name: Star Gladiator)", "Soul Linker", "Ninja", "Gunslinger", "Rune Knight (non-trans)", "Rune Knight (trans)", "Guillotine Cross (non-trans)", "Guillotine Cross (trans)", "Arch Bishop (non-trans)", "Arch Bishop (trans)", "Ranger (non-trans)", "Ranger (trans)", "Warlock (non-trans)", "Warlock (trans)", "Mechanic (non-trans)", "Mechanic (trans)", "Royal Guard (non-trans)", "Royal Guard (trans)", "Shadow Chaser (non-trans)", "Shadow Chaser (trans)", "Sura (non-trans)", "Sura (trans)", "Maestro (non-trans)", "Maestro (trans)", "Wanderer (non-trans)", "Wanderer (trans)", "Sorcerer (non-trans)", "Sorcerer (trans)", "Geneticist (non-trans)", "Geneticist (trans)", "Kagero/Oboro", "Expanded Super Novice"];
-var All_DMGskill = [0, 6, 7, 17, 19, 40, 41, 44, 46, 47, 51, 52, 53, 54, 55, 56, 57, 65, 66, 70, 71, 72, 73, 76, 83, 84, 88, 97, 102, 104, 106, 111, 112, 113, 118, 122, 124, 125, 126, 127, 128, 130, 131, 132, 133, 158, 159, 161, 162, 167, 169, 171, 188, 189, 192, 193, 197, 199, 207, 244, 248, 259, 260, 261, 263, 264, 271, 272, 275, 277, 324, 325, 391, 326, 328, 321, 382, 339, 331, 333, 335, 337, 317, 318, 373, 374, 375, 407, 408, 409, 410, 412, 413, 414, 415, 397, 398, 399, 400, 401, 405, 438, 417, 418, 419, 423, 424, 302];
+var All_DMGskill = [0, 6, 7, 17, 19, 40, 41, 44, 46, 47, 51, 52, 53, 54, 55, 56, 57, 65, 66, 70, 71, 72, 73, 76, 83, 84, 88, 97, 102, 104, 106, 111, 112, 113, 118, 122, 124, 125, 126, 127, 128, 130, 131, 132, 133, 158, 159, 161, 162, 167, 169, 171, 188, 189, 192, 193, 197, 199, 207, 244, 248, 259, 260, 261, 263, 264, 271, 272, 275, 277, 324, 325, 391, 326, 328, 321, 382, 339, 331, 333, 335, 337, 317, 318, 373, 374, 375, 407, 408, 409, 410, 412, 413, 414, 415, 397, 398, 399, 400, 401, 405, 438, 417, 418, 419, 423, 424, 302, 611];
 function servers() {
     if (SRV = 1 * c.server.value,
         0 == firstLoad)
@@ -255,7 +255,8 @@ function BattleCalc999() {
                 ATKmod02(wMod, 0),
                 n_Min_DMG += w_left_Minatk,
                 n_Max_DMG += w_left_Maxatk,
-                w_DMG[0] = BattleCalc(n_A_DMG[0], 0);
+                w_DMG[0] = BattleCalc(n_A_DMG[0], 0); // auto attack mod
+                w_DMG[0] = Math.floor(w_DMG[0] * (100 + n_tok[355]) / 100); // auto attack damage mod
             var _ = w_DMG[0] + EDP_DMG(0);
             Last_DMG_A[0] = Last_DMG_B[0] = _ + w_left_Minatk,
                 InnStr[0] += Last_DMG_A[0] + " (" + _ + " + " + w_left_Minatk + ")",
@@ -264,6 +265,7 @@ function BattleCalc999() {
                 SRV ? _ + w_left_Minatk < n_Min_DMG && w998G < 100 && (n_Min_DMG = _ + w_left_Minatk) : Last_DMG_A[0] < n_Min_DMG && (w998H > 0 ? n_Min_DMG = Last_DMG_A[0] : w998D > 0 && 2 * _ + w_left_Minatk < n_Min_DMG && (n_Min_DMG = 2 * _ + w_left_Minatk)),
                 w_DMG[0] = n_Min_DMG,
                 w_DMG[2] = BattleCalc(n_A_DMG[2], 2);
+                w_DMG[2] = Math.floor(w_DMG[2] * (100 + n_tok[355]) / 100); // auto attack damage mod
             _ = w_DMG[2] + EDP_DMG(2);
             Last_DMG_A[2] = Last_DMG_B[2] = _ + w_left_Maxatk,
                 InnStr[2] += Last_DMG_A[2] + " (" + _ + " + " + w_left_Maxatk + ")",
@@ -272,6 +274,7 @@ function BattleCalc999() {
                 _ > n_Max_DMG && w998G < 100 && (n_Max_DMG = _),
                 w_DMG[2] = n_Max_DMG,
                 w_DMG[1] = BattleCalc(n_A_DMG[1], 1);
+                w_DMG[1] = Math.floor(w_DMG[1] * (100 + n_tok[355]) / 100); // auto attack damage mod
             _ = w_DMG[1] + EDP_DMG(1);
             Last_DMG_A[1] = Last_DMG_B[1] = _ + w_left_Aveatk,
                 InnStr[1] += Last_DMG_A[1] + " (" + _ + " + " + w_left_Aveatk + ")",
@@ -304,8 +307,9 @@ function BattleCalc999() {
                     n_Max_DMG < l[2] && (n_Max_DMG = l[2])
             }
             ATKmod02(wMod, 0);
-            for (e = 0; e <= 2; e++)
-                w_DMG[e] = BattleCalc(n_A_DMG[e], e);
+            for (e = 0; e <= 2; e++) // auto attack damage
+                w_DMG[e] = BattleCalc(n_A_DMG[e], e),
+                w_DMG[e] = Math.floor(w_DMG[e] * (100 + n_tok[355]) / 100); // auto attack damage mod
             var i = [0, 0, 0]
                 , t = 0;
             if (11 == n_A_WeaponType) {
@@ -335,6 +339,7 @@ function BattleCalc999() {
                     _ += n_TAKA_DMG,
                     n_Max_DMG < _ && (n_Max_DMG = _)
             }
+
             w_DMG[2] = n_Max_DMG,
                 Last_DMG_B[1] = w_DMG[1] + EDP_DMG(1),
                 Last_DMG_A[1] = Last_DMG_B[1] + i[1],
@@ -623,7 +628,7 @@ function BattleCalc999() {
                 EDPplus(1),
                 CastAndDelay(),
                 BattleCalc998()
-        } else if (40 == n_A_ActiveSkill || 70 == n_A_ActiveSkill || 192 == n_A_ActiveSkill || 76 == n_A_ActiveSkill || 418 == n_A_ActiveSkill || 391 == n_A_ActiveSkill || 429 == n_A_ActiveSkill) {
+        } else if (40 == n_A_ActiveSkill || 70 == n_A_ActiveSkill || 192 == n_A_ActiveSkill || 76 == n_A_ActiveSkill || 418 == n_A_ActiveSkill || 391 == n_A_ActiveSkill || 429 == n_A_ActiveSkill || 611 == n_A_ActiveSkill) {
             if (40 == n_A_ActiveSkill)
                 n_rangedAtk = 1,
                     wMod += .1 * n_A_ActiveSkillLV - .1,
@@ -661,6 +666,10 @@ function BattleCalc999() {
                     wMod += .5 * n_A_ActiveSkillLV - .5,
                     n_Delay[2] = 1;
                 wHITsuu = [1, 1.2, 1.6, 2, 2.4, 3, 3.6, 4, 5, 6, 7, 8, 9, 10][1 * c.SkillSubNum.value]
+            } else if (611 == n_A_ActiveSkill) {
+                n_rangedAtk = 1,
+                wMod += 1,
+                wHITsuu = c.SkillSubNum.checked ? 5 : 1;
             }
             ATKmod02(wMod, 0);
             for (e = 0; e <= 2; e++)
@@ -1111,18 +1120,16 @@ function BattleCalc999() {
             CastAndDelay(),
                 w_HIT_HYOUJI = 100,
                 BattleCalc998()
-        } else if (244 == n_A_ActiveSkill) { // acid terror n_B_DEF2[2] = soft def
+        } else if (244 == n_A_ActiveSkill) { // acid terror
             n_PerHIT_DMG = 0,
                 n_rangedAtk = 1,
                 wMod = (100 + 130 * n_A_ActiveSkillLV) / 100;
+                wMod2 = (100 + 40 * n_A_ActiveSkillLV) / 100;
             for (s = 0; s <= 2; s++)
                 w_DMG[s] = BK_n_A_DMG[s] * wMod,
                     w_DMG[s] = BattleCalc(w_DMG[s], s),
-                    w_DMG[s] = Math.floor(ApplyModifiers(w_DMG[s])),
-                    a = BK_n_A_MATK[s],
-                    a *= .4 * n_A_ActiveSkillLV + 1,
-                    a = BattleMagicCalc(a),
-                    a < 0 && (a = 0),
+                    a = BK_n_A_MATK[s] * wMod2,
+                    a = BattleCalc(a, s),
                     Last_DMG_B[s] = w_DMG[s] + a,
                     Last_DMG_A[s] = Last_DMG_B[s],
                     InnStr[s] += Last_DMG_A[s] + " (" + w_DMG[s] + " + " + a + ")";
@@ -1153,10 +1160,10 @@ function BattleCalc999() {
             n_PerHIT_DMG = 0,
                 n_Delay[0] = 1,
                 106 == n_A_ActiveSkill ? (n_A_Weapon_element = 2,
-                    w_DMG[2] = Math.floor(n_A_ActiveSkillLV * (75 + n_A_DEX) * (n_A_INT + 100) / 40 * Math.max(0, element[n_B[3]][2]))) : 112 == n_A_ActiveSkill ? (n_A_Weapon_element = 4,
-                        w_DMG[2] = Math.floor(n_A_ActiveSkillLV * (75 + n_A_DEX) * (n_A_INT + 100) / 40 * Math.max(0, element[n_B[3]][4]))) : 113 == n_A_ActiveSkill ? (n_A_Weapon_element = 3,
-                            w_DMG[2] = Math.floor(n_A_ActiveSkillLV * (75 + n_A_DEX) * (n_A_INT + 100) / 40 * Math.max(0, element[n_B[3]][3]))) : 111 == n_A_ActiveSkill && (n_A_Weapon_element = 1,
-                                w_DMG[2] = Math.floor(n_A_ActiveSkillLV * (75 + n_A_DEX) * (n_A_INT + 100) / 40 * Math.max(0, element[n_B[3]][1]))),
+                    w_DMG[2] = Math.floor(n_A_ActiveSkillLV * (75 + n_A_DEX) * (n_A_INT + 100) / 35 * Math.max(0, element[n_B[3]][2]))) : 112 == n_A_ActiveSkill ? (n_A_Weapon_element = 4,
+                        w_DMG[2] = Math.floor(n_A_ActiveSkillLV * (75 + n_A_DEX) * (n_A_INT + 100) / 35 * Math.max(0, element[n_B[3]][4]))) : 113 == n_A_ActiveSkill ? (n_A_Weapon_element = 3,
+                            w_DMG[2] = Math.floor(n_A_ActiveSkillLV * (75 + n_A_DEX) * (n_A_INT + 100) / 35 * Math.max(0, element[n_B[3]][3]))) : 111 == n_A_ActiveSkill && (n_A_Weapon_element = 1,
+                                w_DMG[2] = Math.floor(n_A_ActiveSkillLV * (75 + n_A_DEX) * (n_A_INT + 100) / 35 * Math.max(0, element[n_B[3]][1]))),
                 w_DMG[2] = tPlusDamCut(w_DMG[2]),
                 w_DMG[0] = w_DMG[1] = w_DMG[2];
             for (e = 0; e <= 2; e++)
@@ -1174,11 +1181,15 @@ function BattleCalc999() {
                 w_DMG[2] = Math.floor(Math.floor(w_DMG[2] / 2) * Math.max(0, element[n_B[3]][6])),
                 n_B[3] < 90 && (w_DMG[2] = 0);
             _ = n_tok[170 + n_B[2]];
-            nEle = n_B[3] < 5 ? n_tok[340] : n_tok[340 + Math.floor(Math.abs(n_B[3]) / (10 ** (String(n_B[3]).length - 1)))]; 
+            nEle = n_tok[340 + Math.floor(n_B[3] / 10)];
+            nSize = n_tok[356 + n_B[4]];
             nBoss = n_B[19] ? n_tok[353] : 0; 
+            nAll = n_tok[354];
             w_DMG[2] = Math.floor(w_DMG[2] * (100 + _) / 100),
             w_DMG[2] = Math.floor(w_DMG[2] * (100 + nEle) / 100),
+            w_DMG[2] = Math.floor(w_DMG[2] * (100 + nSize) / 100),
             w_DMG[2] = Math.floor(w_DMG[2] * (100 + nBoss) / 100),
+            w_DMG[2] = Math.floor(w_DMG[2] * (100 + nAll) / 100),
                 wHealMOD = 100 + n_tok[93],
                 w_DMG[2] = Math.floor(w_DMG[2] * wHealMOD / 100),
                 w_DMG[2] = tPlusDamCut(w_DMG[2]),
@@ -1201,11 +1212,15 @@ function BattleCalc999() {
                 w_DMG[2] = Math.floor(Math.floor(w_DMG[2] / 2) * Math.max(0, element[n_B[3]][6])),
                 n_B[3] < 90 && 6 != n_B[2] && (w_DMG[2] = 0);
             _ = n_tok[170 + n_B[2]];
-            nEle = n_B[3] < 5 ? n_tok[340] : n_tok[340 + Math.floor(Math.abs(n_B[3]) / (10 ** (String(n_B[3]).length - 1)))]; 
+            nEle = n_tok[340 + Math.floor(n_B[3] / 10)];
+            nSize = n_tok[356 + n_B[4]];
             nBoss = n_B[19] ? n_tok[353] : 0; 
+            nAll = n_tok[354];
             w_DMG[2] = Math.floor(w_DMG[2] * (100 + _) / 100),
             w_DMG[2] = Math.floor(w_DMG[2] * (100 + nEle) / 100),
+            w_DMG[2] = Math.floor(w_DMG[2] * (100 + nSize) / 100),
             w_DMG[2] = Math.floor(w_DMG[2] * (100 + nBoss) / 100),
+            w_DMG[2] = Math.floor(w_DMG[2] * (100 + nAll) / 100),
                 w_HEAL_MOD = 100 + n_tok[96],
                 w_DMG[2] = Math.floor(w_DMG[2] * w_HEAL_MOD / 100),
                 w_DMG[2] = tPlusDamCut(w_DMG[2]),
@@ -1334,7 +1349,8 @@ function BattleCalc999() {
                                                                             SG_Special_HITnum = wHITsuu,
                                                                             wCast = n_A_ActiveSkillLV,
                                                                             wMod = 1 + .3 * n_A_ActiveSkillLV,
-                                                                            n_Delay[3] = .1 * wHITsuu) : 130 == n_A_ActiveSkill ? (wMod = .66 + .066 * n_A_ActiveSkillLV,
+                                                                            n_Delay[3] = .1 * wHITsuu,
+                                                                            1965 == n_A_Equip[0] && (n_Delay[3] += 1.5)) : 130 == n_A_ActiveSkill ? (wMod = .66 + .066 * n_A_ActiveSkillLV,
                                                                                 n_A_Weapon_element = 1,
                                                                                 wCast = 6 - .5 * Math.floor((n_A_ActiveSkillLV - 1) / 2),
                                                                                 n_Delay[2] = 1) : 131 == n_A_ActiveSkill ? (n_A_Weapon_element = 1,
@@ -2172,11 +2188,37 @@ function BattleMagicCalc(e) {
     // gloom pet - esma dmg increase
     (373 == n_A_ActiveSkill || 374 == n_A_ActiveSkill || 375 == n_A_ActiveSkill) && 94 == n_A_Buf8[0] && (n_A_Weapon_element == 3 || n_A_Weapon_element == 8) && (n += 7),
     // mavka card
-    (407 == n_A_ActiveSkill || 408 == n_A_ActiveSkill || 409 == n_A_ActiveSkill) && CardNumSearch(597) && 44 == n_A_JOB && (n += 7),
+    (407 == n_A_ActiveSkill || 408 == n_A_ActiveSkill || 409 == n_A_ActiveSkill) && 44 == n_A_JOB && (n += 7*CardNumSearch(597)),
+    // royal clergy card
+    (410 == n_A_ActiveSkill || 412 == n_A_ActiveSkill || 413 == n_A_ActiveSkill || 414 == n_A_ActiveSkill || 414 == n_A_ActiveSkill) && 44 == n_A_JOB && (n += 7*CardNumSearch(629)),
+    // warden kades card - esma dmg increase
+    n_A_WeaponLV >= 3 && (373 == n_A_ActiveSkill || 374 == n_A_ActiveSkill || 375 == n_A_ActiveSkill) && (n_A_Weapon_element == 0 || n_A_Weapon_element == 6 || n_A_Weapon_element == 7) && (n += 6*CardNumSearch(643)),
+    // warden kades card
+    n_A_WeaponLV >= 3 && (37 == n_A_ActiveSkill || 387 == n_A_ActiveSkill || 102 == n_A_ActiveSkill || 104 == n_A_ActiveSkill || 162 == n_A_ActiveSkill || 312 == n_A_ActiveSkill) && (n += 6*CardNumSearch(643)),
     // adventurers spirit
     375 == n_A_ActiveSkill && n_A_SHOULDER_REFINE >= 7 && 1835 == n_A_Equip[7] && (n += 5),
     // exquisite yellow foxtail
     (126 == n_A_ActiveSkill || 127 == n_A_ActiveSkill) && (1873 == n_A_Equip[0] || 1874 == n_A_Equip[0]) && (n += n_A_Weapon_refine),
+    // royal alchemy staff + alchemy glove
+    (51 == n_A_ActiveSkill || 540 == n_A_ActiveSkill || 54 == n_A_ActiveSkill || 541 == n_A_ActiveSkill || 56 == n_A_ActiveSkill || 542 == n_A_ActiveSkill || 132 == n_A_ActiveSkill) && 1983 == n_A_Equip[0] && (1982 == n_A_Equip[9] || 1982 == n_A_Equip[10]) && (n += 2 * n_A_Weapon_refine),
+    // alchemy glove - fire
+    (51 == n_A_ActiveSkill || 540 == n_A_ActiveSkill || 52 == n_A_ActiveSkill || 53 == n_A_ActiveSkill || 122 == n_A_ActiveSkill || 124 == n_A_ActiveSkill || 125 == n_A_ActiveSkill || 407 == n_A_ActiveSkill || 408 == n_A_ActiveSkill || 409 == n_A_ActiveSkill) && (1982 == n_A_Equip[9] || 1982 == n_A_Equip[10]) && (n += 5),
+    // alchemy glove - water
+    (54 == n_A_ActiveSkill || 541 == n_A_ActiveSkill || 128 == n_A_ActiveSkill || 130 == n_A_ActiveSkill || 131 == n_A_ActiveSkill || 320 == n_A_ActiveSkill || 410 == n_A_ActiveSkill || 412 == n_A_ActiveSkill) && (1982 == n_A_Equip[9] || 1982 == n_A_Equip[10]) && (n += 7),
+    // alchemy glove - wind
+    (56 == n_A_ActiveSkill || 542 == n_A_ActiveSkill || 57 == n_A_ActiveSkill || 126 == n_A_ActiveSkill || 127 == n_A_ActiveSkill || 413 == n_A_ActiveSkill || 414 == n_A_ActiveSkill || 415 == n_A_ActiveSkill) && (1982 == n_A_Equip[9] || 1982 == n_A_Equip[10]) && (n += 7),
+    // alchemy glove - earth
+    (132 == n_A_ActiveSkill || 133 == n_A_ActiveSkill || 319 == n_A_ActiveSkill) && (1982 == n_A_Equip[9] || 1982 == n_A_Equip[10]) && (n += 7),
+    // alchemy glove - ghost
+    (46 == n_A_ActiveSkill || 47 == n_A_ActiveSkill || 277 == n_A_ActiveSkill || 307 == n_A_ActiveSkill || 423 == n_A_ActiveSkill) && (1982 == n_A_Equip[9] || 1982 == n_A_Equip[10]) && (n += 7),
+    // alchemy glove - holy
+    (37 == n_A_ActiveSkill || 387 == n_A_ActiveSkill || 102 == n_A_ActiveSkill || 104 == n_A_ActiveSkill || 162 == n_A_ActiveSkill) && (1982 == n_A_Equip[9] || 1982 == n_A_Equip[10]) && (n += 7),
+    // alchemy glove - shadow
+    (312 == n_A_ActiveSkill) && (1982 == n_A_Equip[9] || 1982 == n_A_Equip[10]) && (n += 7),
+    // alchemy glove - esma
+    (373 == n_A_ActiveSkill || 374 == n_A_ActiveSkill || 375 == n_A_ActiveSkill) && (n_A_Weapon_element == 1 || n_A_Weapon_element == 2 || n_A_Weapon_element == 3 || n_A_Weapon_element == 4 || n_A_Weapon_element == 6 || n_A_Weapon_element == 7 || n_A_Weapon_element == 8) && (1982 == n_A_Equip[9] || 1982 == n_A_Equip[10]) && (n += 7),
+    // spectral manteau
+    (47 == n_A_ActiveSkill || 312 == n_A_ActiveSkill) && 1987 == n_A_Equip[7] && (n += 5 * n_A_SHOULDER_REFINE),
     540 == n_A_ActiveSkill && (n += 25 * CardNumSearch(493)),
     541 == n_A_ActiveSkill && (n += 25 * CardNumSearch(488)),
     542 == n_A_ActiveSkill && (n += 25 * CardNumSearch(591)),
@@ -2201,11 +2243,15 @@ function BattleMagicCalc(e) {
     // magic damage modifiers
     var n = n_tok[170 + n_B[2]]; // MAGIC DAMAGE RACE MODIFIER
     var nEle = n_tok[340 + Math.floor(n_B[3] / 10)]; // MAGIC DAMAGE ELEMENT MODIFIER
+    var nSize = n_tok[356 + n_B[4]];
     var nBoss = n_B[19] ? n_tok[353] : 0; // MAGIC DAMAGE BOSS MODIFIER
+    var nAll = n_tok[354];
     9 == n_B[2] && SkillSearch(234) && (n += 2 * SkillSearch(234)), // dragonology
     wBMC2 = wBMC2 * (100 + n) / 100,
     wBMC2 = wBMC2 * (100 + nEle) / 100,
+    wBMC2 = wBMC2 * (100 + nSize) / 100,
     wBMC2 = wBMC2 * (100 + nBoss) / 100,
+    wBMC2 = wBMC2 * (100 + nAll) / 100,
     wBMC2 = tPlusDamCut(wBMC2);
     return Math.floor(wBMC2);
     /* n = StPlusCalc2(5e3 + n_A_ActiveSkill) + StPlusCard(5e3 + n_A_ActiveSkill);
@@ -2390,8 +2436,8 @@ function ClickWeaponType(e) {
             _ = 0; _ <= 4; _++)
             m_Arrow[_] = m_Arrow_[_];
     else if (17 == e || 18 == e || 19 == e || 20 == e)
-        for (j = 2,
-            _ = 0; _ <= 2; _++)
+        for (j = 8,
+            _ = 0; _ <= 8; _++)
             m_Arrow[_] = m_Bullet[_];
     else if (21 == e)
         for (j = 4,
@@ -2783,15 +2829,18 @@ function ClickActiveSkill2() {
             i = 0; i <= 4; i++)
             c.SkillSubNum.options[i] = new Option(m_Kunai[i][2], i);
         c.SkillSubNum.value = 0
-    } else if (405 == n_A_ActiveSkill)
+    } else if (405 == n_A_ActiveSkill) {
         myInnerHtml("AASkill", 'Remaining HP: <input type="text" inputmode="numeric" maxlength="5" name="SkillSubNum" size=3 onkeypress="return isNumeric(event)" onkeyup="calc()">', 0),
             c.SkillSubNum.value = n_A_MaxHP - 1;
-    else if (429 == n_A_ActiveSkill) {
+    } else if (429 == n_A_ActiveSkill) {
         var e = ["1", "1.2", "1.6", "2", "2.4", "3", "3.6", "4", "5", "6", "7", "8", "9", "10"];
         for (myInnerHtml("AASkill", 'Hits (considering the success chance): <select name="SkillSubNum" onChange="calc()"></select>', 0),
             i = 0; i <= 13; i++)
             c.SkillSubNum.options[i] = new Option(e[i] + " hits", i);
         c.SkillSubNum.value = 6
+    } else if (611 == n_A_ActiveSkill) {
+        myInnerHtml("AASkill", 'Immobilized: <input type="checkbox" name="SkillSubNum" onclick="calc()">', 0);
+        c.SkillSubNum.value = 0;
     } else if (!SkillSearch(441) || 51 != n_A_ActiveSkill && 54 != n_A_ActiveSkill && 56 != n_A_ActiveSkill && 540 != n_A_ActiveSkill && 541 != n_A_ActiveSkill && 542 != n_A_ActiveSkill)
         if (308 == n_A_ActiveSkill) {
             myInnerHtml("AASkill", 'Enemy distance: <select name="SkillSubNum" onChange="calc()"></select>', 0);
@@ -2802,7 +2851,7 @@ function ClickActiveSkill2() {
         } else
             159 == n_A_ActiveSkill || 384 == n_A_ActiveSkill || 324 == n_A_ActiveSkill ? (myInnerHtml("AASkill", 'Shield weight: <input type="text" inputmode="numeric" maxlength="4" name="SkillSubNum" size=2 onkeypress="return isNumeric(event)" onkeyup="calc()">', 0),
                 c.SkillSubNum.value = m_Item[n_A_Equip[5]][6]) : 259 == n_A_ActiveSkill ? (myInnerHtml("AASkill", 'Weapon weight: <input type="text" inputmode="numeric" maxlength="4" name="SkillSubNum" size=2 onkeypress="return isNumeric(event)" onkeyup="calc()">', 0),
-                    c.SkillSubNum.value = m_Item[n_A_Equip[0]][6]) : myInnerHtml("AASkill", "", 0);
+                    c.SkillSubNum.value = m_Item[n_A_Equip[0]][6]) : myInnerHtml("AASkill", "", 0), myInnerHtml("ABSkill", "", 0);
     else {
         var n = SkillSearch(441) + 3;
         myInnerHtml("AASkill", 'Double Bolt chance: <select name="SkillSubNum" onChange="calc()"></select>', 0),
@@ -4412,11 +4461,14 @@ function ClickB_Enemy() {
         0 == n_B[19] && n_B_debuf[2] && (n_B[14] -= Math.floor(25 * n_B[14] / 100));
     var l = 0;
     l += n_tok[290],
-        SRV ? (0 == n_B[19] && (l += n_tok[291]),
+    0 == n_B[19] && (l += n_tok[291]),
+    1 == n_B[19] && (l += n_tok[292]),
+    l += n_tok[300 + n_B[2]],
+        /* SRV ? (0 == n_B[19] && (l += n_tok[291]),
             1 == n_B[19] && (l += n_tok[292]),
             l += n_tok[300 + n_B[2]],
             324 != n_A_ActiveSkill && 159 != n_A_ActiveSkill && 384 != n_A_ActiveSkill && 162 != n_A_ActiveSkill && 193 != n_A_ActiveSkill && 405 != n_A_ActiveSkill && 438 != n_A_ActiveSkill || (l = 0)) : (l += n_tok[300 + n_B[2]],
-                324 != n_A_ActiveSkill && 159 != n_A_ActiveSkill && 384 != n_A_ActiveSkill && 162 != n_A_ActiveSkill && 193 != n_A_ActiveSkill && 405 != n_A_ActiveSkill && 438 != n_A_ActiveSkill || (l = 0)),
+                324 != n_A_ActiveSkill && 159 != n_A_ActiveSkill && 384 != n_A_ActiveSkill && 162 != n_A_ActiveSkill && 193 != n_A_ActiveSkill && 405 != n_A_ActiveSkill && 438 != n_A_ActiveSkill || (l = 0)), */
         l && (l < 0 && (l = 0),
             n_B[14] -= Math.floor(n_B[14] * l / 100)),
         n_B_debuf[14] && 0 == PvP && (n_B[14] -= Math.floor(15 * n_B[14] / 100)),
@@ -4591,6 +4643,7 @@ function calc() {
         wDA = 5 * SkillSearch(13),
         1 != n_A_WeaponType && (wDA = 0),
         CardNumSearch(43) && (SkillSearch(13) > 1 ? wDA = 5 * SkillSearch(13) : wDA = 5),
+        0 != n_A_WeaponType && EquipNumSearch(1951) && (SkillSearch(13) > 1 ? wDA = 5 * SkillSearch(13) : wDA = 5),
         0 != n_A_WeaponType && ((EquipNumSearch(570) || EquipNumSearch(1442) || EquipNumSearch(1443)) && (SkillSearch(13) > 2 ? wDA = 5 * SkillSearch(13) : wDA = 10),
             EquipNumSearch(1578) && (wDA = 5 * SkillSearch(13),
                 5 != n_A_SHOULDER_REFINE && 6 != n_A_SHOULDER_REFINE || SkillSearch(13) < 1 && (wDA = 5),
@@ -4692,9 +4745,12 @@ function calc() {
         ATKmod02(1, 1),
         n_PerHIT_DMG = BattleCalc2(0),
         wCriTyuu = 1,
-        n_A_CriATK[1] = BattleCalc(n_A_CriATK[1], 10),
+        n_A_CriATK[1] = BattleCalc(n_A_CriATK[1], 10), // crit damage
+        n_A_CriATK[1] = Math.floor(n_A_CriATK[1] * (100 + n_tok[355]) / 100), // auto attack damage mod
         n_A_CriATK[0] = BattleCalc(n_A_CriATK[0], 10),
+        n_A_CriATK[0] = Math.floor(n_A_CriATK[0] * (100 + n_tok[355]) / 100),
         n_A_CriATK[2] = BattleCalc(n_A_CriATK[2], 10),
+        n_A_CriATK[2] = Math.floor(n_A_CriATK[2] * (100 + n_tok[355]) / 100),
         wCriTyuu = 0,
         n_A_EDP_DMG = [0, 0, 0];
     for (e = 0; e <= 2; e++)
@@ -4797,7 +4853,7 @@ function BattleCalc2(e) {
             e += 3 * SkillSearch(393),
             e += 4 * n_A_ActiveSkillLV),
         395 == n_A_ActiveSkill && (e += 3 * m_Kunai[1 * document.calcForm.SkillSubNum.value][0]),
-        1 * c.server.value < 50 && 244 != n_A_ActiveSkill && (e = ApplyModifiers(e)),
+        1 * c.server.value < 50 && (e = ApplyModifiers(e)),
         169 == n_A_ActiveSkill && 10 == n_A_WeaponType && (e = Math.floor(e / 2)),
         169 == n_A_ActiveSkill && 1 == n_A_WeaponType && (e *= 2), // backstab double damage with dagger
         n_Nitou && 0 == n_A_ActiveSkill && 0 != n_A_WeaponType && (e = Math.floor(e * (50 + 10 * SkillSearch(79)) / 100)),
@@ -4852,6 +4908,14 @@ function ApplyModifiers(e) {
         391 == n_A_ActiveSkill && EquipNumSearch(1912) && (SU_STR < 99 ? _ += Math.floor(SU_STR / 9) : _ += Math.floor(SU_STR / 9) - 1),
         // holy cross change
         161 == n_A_ActiveSkill && 5 == n_A_WeaponType && (_ += 60),
+        // save the king - shield chain
+        324 == n_A_ActiveSkill && 1956 == n_A_Equip[0] && 27 == n_A_JOB && (_ += 1 * n_A_Weapon_refine),
+        // save the king - raid
+        171 == n_A_ActiveSkill && 1956 == n_A_Equip[0] && 28 == n_A_JOB && (_ += 50),
+        // save the king - cart revolution
+        66 == n_A_ActiveSkill && 1956 == n_A_Equip[0] && 26 == n_A_JOB && (_ += 25),
+        // prisoners uniform
+        (331 == n_A_ActiveSkill || 333 == n_A_ActiveSkill || 335 == n_A_ActiveSkill || 337 == n_A_ActiveSkill || 339 == n_A_ActiveSkill || 305 == n_A_ActiveSkill) && 1988 == n_A_Equip[6] && 41 == n_A_JOB && (_ += 15),
         6 != n_A_ActiveSkill && 76 != n_A_ActiveSkill || 10 == n_A_ActiveSkillLV && EquipNumSearch(1159) && (_ += 50),
         65 == n_A_ActiveSkill && SU_LUK >= 90 && SU_DEX >= 90 && EquipNumSearch(1164) && (_ += 15),
         264 == n_A_ActiveSkill && EquipNumSearch(1176) && 10 == SkillSearch(81) && (_ += 20),

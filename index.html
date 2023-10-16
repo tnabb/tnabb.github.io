@@ -81,6 +81,17 @@ Calc's theme: <select id="theme" onChange="themes()"><option value="0">Original<
               [<a href="https://rocalc.com/faq-EN.html">Frequently asked questions</a>] [<a
                 href="https://rocalc.com/faq-ES.html">Preguntas frecuentes</a>]<br>
               <br>
+              <b>(A) Changelog 2023-10-17:</b>
+              <br>• Added all new items available in patch A1.0.
+              <br>• Added all new monsters available in patch A1.0.
+              <br>• Added new regions to sort monsters by.
+              <br>• Added all new cards available in patch A1.0.
+              <br>• Changed Acid Terror formula to match the bug fix.
+              <br>• Changed divisible on Hunter Trap Skills from 40 -> 35.
+              <br>• <a href="https://projectalfheim.net/wiki/index.php/Episode_A_1_0_Old_Glast_Heim">Read more on the new patch here.</a>
+              <br>• Added all the bullets available in-game.
+              <br>• Other small fixes.
+              <br><br>
               <b>(A) Changelog 2023-10-04:</b>
               <br>• Fixed physical part of Acid Terror being affected by modifiers and reductions twice.
               <br>• Attempted to remove all items not available on Alfheim. If I missed any, or removed some that are actually in-game, please DM me.
@@ -95,20 +106,6 @@ Calc's theme: <select id="theme" onChange="themes()"><option value="0">Original<
               <br>• Fixed Spear Mastery not affecting Spiral Pierce damage. Spiral Pierce damage should now be almost 1:1 to in-game.
               <br>• Fixed Little Isis having the wrong ATK% modifier.
               <br>• Other small fixes.
-              <br><br>
-              <b>(A) Changelog 2023-09-28:</b>
-              <br>• Adjusted Shield Boomerang formula to match closer to in-game damage.
-              <br>• Adjusted Shield Chain formula to match closer to in-game damage.
-              <br>• Small adjustment to magic damage calculation.
-              <br>• Other small fixes.
-              <br><br>
-              <b>(A) Changelog 2023-09-27:</b>
-              <br>• Added 'Size' as a sorting option when choosing enemy.
-              <br>• Fixed Hindsight skills not having 100% hitrate.
-              <br><br>
-              <b>(A) Changelog 2023-09-25:</b>
-              <br>• Fixed rounding issue on Bragi.
-              <br>• Made random options on weapon reset only when changing weapon 'category'. 
               <br><br>
               [<a href="./EN-Changelog.html">Read all previous changelogs</a>] [<a
                 href="./ES-Changelog.html">Leer todos los cambios</a>]<br>
@@ -1203,7 +1200,7 @@ Calc's theme: <select id="theme" onChange="themes()"><option value="0">Original<
                       </select></td>
                   </tr>
                   <tr>
-                    <td>Refine: <select disabled="" name="A_Weapon_refine" onchange="StAllCalc()"
+                    <td>Refine: <select disabled="" name="A_Weapon_refine" onchange="StAllCalc() | calc()"
                         style="background-color: rgb(255, 204, 136);">
                         <option value="0">+0</option>
                         <option value="1">+1</option>
@@ -1993,7 +1990,7 @@ Calc's theme: <select id="theme" onChange="themes()"><option value="0">Original<
                 <tbody>
                   <tr>
                     <td>
-                      <select name="A_HEAD_REFINE" onchange="StAllCalc()" style="background-color: rgb(255, 204, 136);">
+                      <select name="A_HEAD_REFINE" onchange="StAllCalc() | calc()" style="background-color: rgb(255, 204, 136);">
                         <option value="0">+0</option>
                         <option value="1">+1</option>
                         <option value="2">+2</option>
@@ -2180,7 +2177,7 @@ Calc's theme: <select id="theme" onChange="themes()"><option value="0">Original<
                   </tr>
                   <tr>
                     <td>
-                      <select name="A_LEFT_REFINE" onchange="StAllCalc()" style="background-color: rgb(255, 204, 136);">
+                      <select name="A_LEFT_REFINE" onchange="StAllCalc() | calc()" style="background-color: rgb(255, 204, 136);">
                         <option value="0">+0</option>
                         <option value="1">+1</option>
                         <option value="2">+2</option>
@@ -2255,7 +2252,7 @@ Calc's theme: <select id="theme" onChange="themes()"><option value="0">Original<
                   </tr>
                   <tr>
                     <td>
-                      <select name="A_BODY_REFINE" onchange="StAllCalc()" style="background-color: rgb(255, 204, 136);">
+                      <select name="A_BODY_REFINE" onchange="StAllCalc() | calc()" style="background-color: rgb(255, 204, 136);">
                         <option value="0">+0</option>
                         <option value="1">+1</option>
                         <option value="2">+2</option>
@@ -2413,7 +2410,7 @@ Calc's theme: <select id="theme" onChange="themes()"><option value="0">Original<
                   </tr>
                   <tr>
                     <td>
-                      <select name="A_SHOULDER_REFINE" onchange="StAllCalc()"
+                      <select name="A_SHOULDER_REFINE" onchange="StAllCalc() | calc()"
                         style="background-color: rgb(255, 204, 136);">
                         <option value="0">+0</option>
                         <option value="1">+1</option>
@@ -2523,7 +2520,7 @@ Calc's theme: <select id="theme" onChange="themes()"><option value="0">Original<
                   </tr>
                   <tr>
                     <td>
-                      <select name="A_SHOES_REFINE" onchange="StAllCalc()"
+                      <select name="A_SHOES_REFINE" onchange="StAllCalc() | calc()"
                         style="background-color: rgb(255, 204, 136);">
                         <option value="0">+0</option>
                         <option value="1">+1</option>
@@ -3944,6 +3941,10 @@ Calc's theme: <select id="theme" onChange="themes()"><option value="0">Original<
             <tr>
               <td colspan="2" class="subheader" style="padding-top: 0px; background-color: rgb(68, 102, 102);"><span
                   id="AASkill" style="float:right;"></span></td>
+            </tr>
+            <tr>
+              <td colspan="2" class="subheader" style="padding-top: 0px; background-color: rgb(68, 102, 102);"><span
+                  id="ABSkill" style="float:right;"></span></td>
             </tr>
 
             <tr>
