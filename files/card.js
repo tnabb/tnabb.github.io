@@ -625,7 +625,7 @@ m_Card = [
 	, [619, 1, "White Knight", "", 17, 10, 28, 13, 29, 13, 0]
 	, [620, 100, 0, 0, 357, 4, 358, 4, 0]
 	, [621, 100, 0, 0, 28, 5, 29, 5, 0]
-	, [622, 5, "Polluted Spider Queen", "Auto Cast Rate +100%", 12, 5, 0]
+	, [622, 6, "Polluted Spider Queen", "Auto Cast Rate +100%", 12, 5, 0]
 	, [623, 2, "Polluted Dark Lord", "", 1, 2, 292, 30, 0]
 	, [624, 5, "Bloody Wraith", "", 15, 5, 0]
 	, [625, 6, "Corrupted Bishop", "", 4, 1, 15, 10, 0]
@@ -664,8 +664,8 @@ m_CardSort = [	//cards renewal comentadas
 	[0, 153,/*550,*/221, 332, 474, 179, 575, 298, 339, 114, 273, 602, 320, 510, 51, 578, 342, /* 540, */ 511, /* 545, */ 49, 337, 284, 176, 116, 303, 213, 117, /* 543, */ 600, 274, 603, 424, 175, 234, 472, 605, 177, 357, 582, 473, 397, 592, 387, 178, 118, 426, 115, 374, 119, 376, 50, 52,/*551,*/347, 120, 512, 623, 509, 383, 630, 180, 113, 309, 607, 174, 598, 471, 425, 48, 239, 238, "NULL"],
 	[0, 154, 155, 231, /* 537, */ 55, 245, 54, 122, 502, 222, 124, 58, 503, 586, 585, 504, 506, 173, /* 505, */ 538, 307, 241, 470, 126, 348, 467, 62, 61, 618, 596, 507, 127, 63, 123, 272, 125, 469, 375, 57, 358, 368, 59, 513, 584, 468, 60, 631, 121, 310, 396, /*508,*/ 539, 172, 56, 53, 249, 642, 306, "NULL"],
 	[0, 476, 194, 282, 191, 136, 224, 232, 225, 190, 135, 69, 281, 500, 137,/*557,*/364, 601, 479,/*561,*/264, 280,/*552,*/128, 275, 321, 330, 422, 198, 214, 134, 334, 477, 187, 501, 139, 199, 349, 301, 138, 571, 302, 475, 283, 276,/*567,*/530, /* 531, */ 421, 633, 261, 268, 299, 583, 478, 220, 569, 285, 75, 184,/*565,*/196, 529, 527, /* 533, */ 344, 197, 185, 140,/*555,*/133, 73, 367, 65, 183, 64, 71, 420, 192, 186, 68, 72, 384, 132, 293, 70,/*559,*/308, 195, 333, 317,/*563,*/74, 291, /* 66, */ 131, 392, 67, 189, 182, 181, 240, 599, 331, 193, "NULL"],
-	[0, 405,/*564,*/404, 78, 624,/*558,560,*/327, 402, 79, 611, 394, 341, 340, 80, 243,/*556,*/615, 141, 635, 573,/*562,*/267, 346, 83, 594, 616, 86, 82, 258, 482, 401,/*553,*/483, 84, 81, 372, 87, 271, 400, 403, 85, 352, 622, 581,/*554,*/77, 480, 481, 338,/*566,*/294, 369, 295, 76, 393, "NULL"],
-	[0, 229, 227, 228, 246, 595, 266, 88, 269, 625, 614, 627, 322, 644, 568, 95, 94, 242, 486, 304, 362, 257, 423, 407, 408, 278, 523, 604, 484, 399, 638, 409, 89, 90, 381, 351, 377, 379, 129, 406, 606, 388, 300, 91, 92, 391, 93, 318, 485, "NULL"],
+	[0, 405,/*564,*/404, 78, 624,/*558,560,*/327, 402, 79, 611, 394, 341, 340, 80, 243,/*556,*/615, 141, 635, 573,/*562,*/267, 346, 83, 594, 616, 86, 82, 258, 482, 401,/*553,*/483, 84, 81, 372, 87, 271, 400, 403, 85, 352, 581,/*554,*/77, 480, 481, 338,/*566,*/294, 369, 295, 76, 393, "NULL"],
+	[0, 229, 227, 228, 246, 595, 266, 88, 269, 625, 614, 627, 322, 644, 568, 95, 94, 242, 486, 304, 362, 257, 423, 407, 408, 278, 523, 604, 484, 399, 638, 409, 89, 90, 381, 351, 377, 379, 129, 406, 606, 622, 388, 300, 91, 92, 391, 93, 318, 485, "NULL"],
 	[0, 230, 412, 188, 416, 142, 411, 365, 350, 640,  370, 270, 610, 634, 147, 417, 324, 591, 414, 262, 490, 256, 489, 641, /* 542, */ 335, 410, 418, 354, 495, 389, 151, 419, 216, 492, 493, 226, 152, /* 546, */ 103, 97, 218, 101, 371, 144, 597, 378, 639, 104, 628, 149, 250, 130, 248, 247, 105, 150, 415, 143, 251, 148, 212, 494, 386, 629, 316, /* 541, */ 297, 260, 488, 315, 146, 487, 96, 314, 491, 312, 336, 98, 292, 587, 236, 145, 413, 237, 99, 385, 102, 100, 395, "NULL"]
 ];
 
@@ -982,105 +982,105 @@ function SetCard() {
 // format is [id, name, effect id, 0]
 m_RandomOpt = [
 	[0, "(no option)", 0, 0]
-	, [1, "ATK", 17, 0]
-	, [2, "MATK", 88, 0]
-	, [3, "VIT", 3, 0]
-	, [4, "DEX", 5, 0]
-	, [5, "AGI", 2, 0]
-	, [6, "LUK", 6, 0]
-	, [7, "STR", 1, 0]
-	, [8, "INT", 4, 0]
-	, [9, "ASPD (%)", 12, 0]
-	, [10, "SP Cost Reduction", 0, 0] // no actual effect for this one
-	, [11, "CRIT", 10, 0]
-	, [12, "Crit Damage", 70, 0]
-	, [13, "Cast Time Reduction", 73, 0] // use negative value here for reduction
-	, [14, "After-cast Delay Reduction", 74, 0]
-	, [15, "FLEE", 9, 0]
-	, [16, "HIT", 8, 0]
-	, [17, "HP", 13, 0]
-	, [18, "SP", 14, 0]
-	, [19, "HP (%)", 15, 0]
-	, [20, "SP (%)", 16, 0]
-	, [21, "HP recovered per 10 seconds", 0, 0] // no actual effect
-	, [22, "SP recovered per 10 seconds", 0, 0] // no actual effect
-	, [23, "Perfect Dodge", 11, 0]
-	, [24, "DEF", 18, 0]
-	, [25, "MDEF", 19, 0]
-	, [26, "Healing Power", 99, 0]
-	, [27, "Freeze Resist", 152, 0]
-	, [28, "Stone Curse Resist", 159, 0]
-	, [29, "Neutral Element Resist", 60, 0]
-	, [30, "Water Element Resist", 61, 0]
-	, [31, "Earth Element Resist", 62, 0]
-	, [32, "Fire Element Resist", 63, 0]
-	, [33, "Wind Element Resist", 64, 0]
-	, [34, "Poison Element Resist", 65, 0]
-	, [35, "Holy Element Resist", 66, 0]
-	, [36, "Shadow Element Resist", 67, 0]
-	, [37, "Ghost Element Resist", 68, 0]
-	, [38, "Undead Element Resist", 69, 0]
-	, [39, "Formless Race Resist", 50, 0]
-	, [40, "Undead Race Resist", 51, 0]
-	, [41, "Brute Race Resist", 52, 0]
-	, [42, "Plant Race Resist", 53, 0]
-	, [43, "Insect Race Resist", 54, 0]
-	, [44, "Fish Race Resist", 55, 0]
-	, [45, "Demon Race Resist", 56, 0]
-	, [46, "Demi-Human Race Resist", 57, 0]
-	, [47, "Angel Race Resist", 58, 0]
-	, [48, "Dragon Race Resist", 59, 0]
-	, [49, "Small Size Resist", 190, 0]
-	, [50, "Medium Size Resist", 191, 0]
-	, [51, "Large Size Resist", 192, 0]
-	, [52, "Long Range Damage Resist", 78, 0]
-	, [53, "Boss Monster Resist", 77, 0]
-	, [54, "Small Physical Damage", 27, 0]
-	, [55, "Medium Physical Damage", 28, 0]
-	, [56, "Large Physical Damage", 29, 0]
-	, [57, "Long Range Physical Damage", 25, 0]
-	, [58, "Boss Physical Damage", 26, 0]
-	, [59, "Neutral Physical Damage", 40, 0]
-	, [60, "Water Physical Damage", 41, 0]
-	, [61, "Earth Physical Damage", 42, 0]
-	, [62, "Fire Physical Damage", 43, 0]
-	, [63, "Wind Physical Damage", 44, 0]
-	, [64, "Poison Physical Damage", 45, 0]
-	, [65, "Holy Physical Damage", 46, 0]
-	, [66, "Shadow Physical Damage", 47, 0]
-	, [67, "Ghost Physical Damage", 48, 0]
-	, [68, "Undead Element Physical Damage", 49, 0]
-	, [69, "Formless Physical Damage", 30, 0]
-	, [70, "Undead Race Physical Damage", 31, 0]
-	, [71, "Brute Physical Damage", 32, 0]
-	, [72, "Plant Physical Damage", 33, 0]
-	, [73, "Insect Physical Damage", 34, 0]
-	, [74, "Fish Physical Damage", 35, 0]
-	, [75, "Demon Physical Damage", 36, 0]
-	, [76, "Demi-Human Physical Damage", 37, 0]
-	, [77, "Angel Physical Damage", 38, 0]
-	, [78, "Dragon Physical Damage", 39, 0]
-	, [79, "Neutral MDEF Pierce", 360, 0] 
-	, [80, "Water MDEF Pierce", 361, 0]
-	, [81, "Earth MDEF Pierce", 362, 0]
-	, [82, "Fire MDEF Pierce", 363, 0]
-	, [83, "Wind MDEF Pierce", 364, 0]
-	, [84, "Poison MDEF Pierce", 365, 0]
-	, [85, "Holy MDEF Pierce", 366, 0]
-	, [86, "Shadow MDEF Pierce", 367, 0]
-	, [87, "Ghost MDEF Pierce", 368, 0]
-	, [88, "Undead Element MDEF Pierce", 369, 0]
-	, [89, "Formless MDEF Pierce", 310, 0] 
-	, [90, "Undead Race MDEF Pierce", 311, 0]
-	, [91, "Brute MDEF Pierce", 312, 0]
-	, [92, "Plant MDEF Pierce", 313, 0]
-	, [93, "Insect MDEF Pierce", 314, 0]
-	, [94, "Fish MDEF Pierce", 315, 0]
-	, [95, "Demon MDEF Pierce", 316, 0]
-	, [96, "Demi-Human MDEF Pierce", 317, 0]
-	, [97, "Angel MDEF Pierce", 318, 0]
-	, [98, "Dragon MDEF Pierce", 319, 0]
-	, [99, "Boss Magical Damage", 353, 0] 
+	, [1, "ATK [17]", 17, 0]
+	, [2, "MATK [19]", 88, 0]
+	, [3, "VIT [5]", 3, 0]
+	, [4, "DEX [7]", 5, 0]
+	, [5, "AGI [4]", 2, 0]
+	, [6, "LUK [8]", 6, 0]
+	, [7, "STR [3]", 1, 0]
+	, [8, "INT [6]", 4, 0]
+	, [9, "ASPD (%) [16]", 12, 0]
+	, [10, "SP Cost Reduction [172]", 0, 0] // no actual effect for this one
+	, [11, "CRIT [24]", 10, 0]
+	, [12, "Crit Damage [164]", 70, 0]
+	, [13, "Cast Time Reduction [170]", 73, 0] // use negative value here for reduction
+	, [14, "After-cast Delay Reduction [171]", 74, 0]
+	, [15, "FLEE [22]", 9, 0]
+	, [16, "HIT [18]", 8, 0]
+	, [17, "HP [1]", 13, 0]
+	, [18, "SP [2]", 14, 0]
+	, [19, "HP (%) [9]", 15, 0]
+	, [20, "SP (%) [10]", 16, 0]
+	, [21, "HP recovered per 10 secs [11]", 0, 0] // no actual effect
+	, [22, "SP recovered per 10 secs [12]", 0, 0] // no actual effect
+	, [23, "Perfect Dodge [23]", 11, 0]
+	, [24, "DEF [20]", 18, 0]
+	, [25, "MDEF [21]", 19, 0]
+	, [26, "Healing Power [168]", 99, 0]
+	, [27, "Freeze Resist [255]", 152, 0]
+	, [28, "Stone Curse Resist [256]", 159, 0]
+	, [29, "Neutral Element Resist [25]", 60, 0]
+	, [30, "Water Element Resist [26]", 61, 0]
+	, [31, "Earth Element Resist [27]", 62, 0]
+	, [32, "Fire Element Resist [28]", 63, 0]
+	, [33, "Wind Element Resist [29]", 64, 0]
+	, [34, "Poison Element Resist [30]", 65, 0]
+	, [35, "Holy Element Resist [31]", 66, 0]
+	, [36, "Shadow Element Resist [32]", 67, 0]
+	, [37, "Ghost Element Resist [33]", 68, 0]
+	, [38, "Undead Element Resist [34]", 69, 0]
+	, [39, "Formless Race Resist [87]", 50, 0]
+	, [40, "Undead Race Resist [88]", 51, 0]
+	, [41, "Brute Race Resist [89]", 52, 0]
+	, [42, "Plant Race Resist [90]", 53, 0]
+	, [43, "Insect Race Resist [91]", 54, 0]
+	, [44, "Fish Race Resist [92]", 55, 0]
+	, [45, "Demon Race Resist [93]", 56, 0]
+	, [46, "Demi-Human Race Resist [94]", 57, 0]
+	, [47, "Angel Race Resist [95]", 58, 0]
+	, [48, "Dragon Race Resist [96]", 59, 0]
+	, [49, "Small Size Resist [160]", 190, 0]
+	, [50, "Medium Size Resist [161]", 191, 0]
+	, [51, "Large Size Resist [162]", 192, 0]
+	, [52, "Long Range Damage Resist [167]", 78, 0]
+	, [53, "Boss Monster Resist [150]", 77, 0]
+	, [54, "Small Physical Damage [157]", 27, 0]
+	, [55, "Medium Physical Damage [158]", 28, 0]
+	, [56, "Large Physical Damage [159]", 29, 0]
+	, [57, "Long Range Physical Damage [148]", 25, 0]
+	, [58, "Boss Physical Damage [51]", 26, 0]
+	, [59, "Neutral Physical Damage [37]", 40, 0]
+	, [60, "Water Physical Damage [39]", 41, 0]
+	, [61, "Earth Physical Damage [41]", 42, 0]
+	, [62, "Fire Physical Damage [43]", 43, 0]
+	, [63, "Wind Physical Damage [45]", 44, 0]
+	, [64, "Poison Physical Damage [47]", 45, 0]
+	, [65, "Holy Physical Damage [49]", 46, 0]
+	, [66, "Shadow Physical Damage [51]", 47, 0]
+	, [67, "Ghost Physical Damage [53]", 48, 0]
+	, [68, "Undead Element Physical Damage [55]", 49, 0]
+	, [69, "Formless Physical Damage [97]", 30, 0]
+	, [70, "Undead Race Physical Damage [98]", 31, 0]
+	, [71, "Brute Physical Damage [99]", 32, 0]
+	, [72, "Plant Physical Damage [100]", 33, 0]
+	, [73, "Insect Physical Damage [101]", 34, 0]
+	, [74, "Fish Physical Damage [102]", 35, 0]
+	, [75, "Demon Physical Damage [103]", 36, 0]
+	, [76, "Demi-Human Physical Damage [104]", 37, 0]
+	, [77, "Angel Physical Damage [105]", 38, 0]
+	, [78, "Dragon Physical Damage [106]", 39, 0]
+	, [79, "Neutral MDEF Pierce [263]", 360, 0] 
+	, [80, "Water MDEF Pierce [264]", 361, 0]
+	, [81, "Earth MDEF Pierce [265]", 362, 0]
+	, [82, "Fire MDEF Pierce [266]", 363, 0]
+	, [83, "Wind MDEF Pierce [267]", 364, 0]
+	, [84, "Poison MDEF Pierce [268]", 365, 0]
+	, [85, "Holy MDEF Pierce [269]", 366, 0]
+	, [86, "Shadow MDEF Pierce [270]", 367, 0]
+	, [87, "Ghost MDEF Pierce [271]", 368, 0]
+	, [88, "Undead Element MDEF Pierce [272]", 369, 0]
+	, [89, "Formless MDEF Pierce [137]", 310, 0] 
+	, [90, "Undead Race MDEF Pierce [138]", 311, 0]
+	, [91, "Brute MDEF Pierce [139]", 312, 0]
+	, [92, "Plant MDEF Pierce [140]", 313, 0]
+	, [93, "Insect MDEF Pierce [141]", 314, 0]
+	, [94, "Fish MDEF Pierce [142]", 315, 0]
+	, [95, "Demon MDEF Pierce [143]", 316, 0]
+	, [96, "Demi-Human MDEF Pierce [144]", 317, 0]
+	, [97, "Angel MDEF Pierce [145]", 318, 0]
+	, [98, "Dragon MDEF Pierce [146]", 319, 0]
+	, [99, "Boss Magical Damage [152]", 353, 0] 
 	, [100, "* All Monster MDEF Pierce", 295, 0]
 ];
 
@@ -1179,4 +1179,37 @@ function RandOptWeapon2Reset(){
 	c.A_weapon2_ropt2.options[0] = new Option(m_RandomOpt[0][1], m_RandomOpt[0][0]);
 	c.A_weapon2_ropt3.options[0] = new Option(m_RandomOpt[0][1], m_RandomOpt[0][0]);
 	c.A_weapon2_ropt4.options[0] = new Option(m_RandomOpt[0][1], m_RandomOpt[0][0]);
+}
+
+function RandOptReset(){
+	c.A_weapon1_ropt1.value = 0;
+	c.WEAP1_ROPT1.value = 0;
+	c.A_weapon1_ropt2.value = 0;
+	c.WEAP1_ROPT2.value = 0;
+	c.A_weapon1_ropt3.value = 0;
+	c.WEAP1_ROPT3.value = 0;
+	c.A_weapon1_ropt4.value = 0;
+	c.WEAP1_ROPT4.value = 0;
+	if(n_Nitou){
+		c.A_weapon2_ropt1.value = 0;
+		c.WEAP2_ROPT1.value = 0;
+		c.A_weapon2_ropt2.value = 0;
+		c.WEAP2_ROPT2.value = 0;
+		c.A_weapon2_ropt3.value = 0;
+		c.WEAP2_ROPT3.value = 0;
+		c.A_weapon2_ropt4.value = 0;
+		c.WEAP2_ROPT4.value = 0;
+	}
+	c.A_body_ropt1.value = 0;
+	c.BODY_ROPT1.value = 0;
+	c.A_body_ropt2.value = 0;
+	c.BODY_ROPT2.value = 0;
+	c.A_shoulder_ropt1.value = 0;
+	c.SHOULDER_ROPT1.value = 0;
+	c.A_shoulder_ropt2.value = 0;
+	c.SHOULDER_ROPT2.value = 0;
+	c.A_shoes_ropt1.value = 0;
+	c.SHOES_ROPT1.value = 0;
+	c.A_shoes_ropt2.value = 0;
+	c.SHOES_ROPT2.value = 0;
 }

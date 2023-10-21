@@ -3646,7 +3646,7 @@ function LoadLocal() {
             n = 0; n <= 15; n++)
             n_A_Buf8[n] = 0;
         for (n_Skill8SW = 0,
-            c.Conf01.value = 33,
+            c.Conf01.value = 20,
             c.B_num.value = 1,
             c.A8_Skill14.value = 0,
             c.A8_Skill15.value = 0,

@@ -79,6 +79,13 @@ Calc's theme: <select id="theme" onChange="themes()"><option value="0">Original<
               [<a href="https://rocalc.com/faq-EN.html">Frequently asked questions</a>] [<a
                 href="https://rocalc.com/faq-ES.html">Preguntas frecuentes</a>]<br>
               <br>
+              <b>(A) Changelog 2023-10-21:</b>
+              <br>• Added a button reset random options.
+              <br>• Added a few forgotten mobs from OGH.
+              <br>• Adjusted Acid Terror's MATK portion to match in-game (though it seems that it's bugged).
+              <br>• Added option ID as a suffix on random options.
+              <br>• Switched default value of minimum delay between Active Skills from 0.33s -> 0.2s.
+              <br><br>
               <b>(A) Changelog 2023-10-17:</b>
               <br>• Fixed Aloevera not working with Asura Strike.
               <br>• Adjusted OGH monster values according to patch A1.1.
@@ -103,11 +110,6 @@ Calc's theme: <select id="theme" onChange="themes()"><option value="0">Original<
               <br>• Weapon weight on Spiral Pierce now changes when switching weapon.
               <br>• Shield weight on Shield Boomerang and Shield Chain now changes when switching shield.
               <br>• Shield weight is now saved.
-              <br>• Other small fixes.
-              <br><br>
-              <b>(A) Changelog 2023-09-29:</b>
-              <br>• Fixed Spear Mastery not affecting Spiral Pierce damage. Spiral Pierce damage should now be almost 1:1 to in-game.
-              <br>• Fixed Little Isis having the wrong ATK% modifier.
               <br>• Other small fixes.
               <br><br>
               [<a href="./EN-Changelog.html">Read all previous changelogs</a>] [<a
@@ -2074,7 +2076,9 @@ Calc's theme: <select id="theme" onChange="themes()"><option value="0">Original<
                         <option value="238">Wootan Shooter</option>
                       </select>
                     </td>
-
+                    <td style="float: right; height: 10px;">
+                      <input type="button" value="Reset Random Options" onclick="RandOptReset() | calc()">
+                    </td>
                   </tr>
                   <tr style=" height:10px;">
                     <td style="padding-left:51px;">
@@ -2277,16 +2281,16 @@ Calc's theme: <select id="theme" onChange="themes()"><option value="0">Original<
                         onchange="Click_RandOpt(this[this.selectedIndex].value)|RandOptUpdate(1)"
                         style="width: auto; background-color: rgb(255, 204, 136);">
                         <option value="0">(no option)</option>
-                        <option value="1">ATK</option>
-                        <option value="2">MATK</option>
-                        <option value="17">HP</option>
-                        <option value="18">SP</option>
-                        <option value="21">HP recovered per 10 seconds</option>
-                        <option value="22">SP recovered per 10 seconds</option>
-                        <option value="3">VIT</option>
-                        <option value="4">DEX</option>
-                        <option value="27">Freeze Resist</option>
-                        <option value="28">Stone Curse Resist</option>
+                        <option value="1">ATK [17]</option>
+                        <option value="2">MATK [19]</option>
+                        <option value="17">HP [1]</option>
+                        <option value="18">SP [2]</option>
+                        <option value="21">HP recovered per 10 secs [11]</option>
+                        <option value="22">SP recovered per 10 secs [12]</option>
+                        <option value="3">VIT [5]</option>
+                        <option value="4">DEX [7]</option>
+                        <option value="27">Freeze Resist [255]</option>
+                        <option value="28">Stone Curse Resist [256]</option>
                       </select>
                       +
                       <input type="text" inputmode="numeric" style="width: 30px; height: 13px;" maxlength="3"
@@ -2394,16 +2398,16 @@ Calc's theme: <select id="theme" onChange="themes()"><option value="0">Original<
                         onchange="Click_RandOpt(this[this.selectedIndex].value)|RandOptUpdate(1)"
                         style="width: 189px; background-color: rgb(255, 204, 136);">
                         <option value="0">(no option)</option>
-                        <option value="29">Neutral Element Resist</option>
-                        <option value="30">Water Element Resist</option>
-                        <option value="31">Earth Element Resist</option>
-                        <option value="32">Fire Element Resist</option>
-                        <option value="33">Wind Element Resist</option>
-                        <option value="34">Poison Element Resist</option>
-                        <option value="35">Holy Element Resist</option>
-                        <option value="36">Shadow Element Resist</option>
-                        <option value="37">Ghost Element Resist</option>
-                        <option value="38">Undead Element Resist</option>
+                        <option value="29">Neutral Element Resist [25]</option>
+                        <option value="30">Water Element Resist [26]</option>
+                        <option value="31">Earth Element Resist [27]</option>
+                        <option value="32">Fire Element Resist [28]</option>
+                        <option value="33">Wind Element Resist [29]</option>
+                        <option value="34">Poison Element Resist [30]</option>
+                        <option value="35">Holy Element Resist [31]</option>
+                        <option value="36">Shadow Element Resist [32]</option>
+                        <option value="37">Ghost Element Resist [33]</option>
+                        <option value="38">Undead Element Resist [34]</option>
                       </select>
                       +
                       <input type="text" inputmode="numeric" style="width: 30px; height: 13px;" maxlength="3"
@@ -2437,16 +2441,16 @@ Calc's theme: <select id="theme" onChange="themes()"><option value="0">Original<
                         onchange="Click_RandOpt(this[this.selectedIndex].value)|RandOptUpdate(1)"
                         style="width: 189px; background-color: rgb(255, 204, 136);">
                         <option value="0">(no option)</option>
-                        <option value="1">ATK</option>
-                        <option value="2">MATK</optin>
-                        <option value="17">HP</option>
-                        <option value="18">SP</option>
-                        <option value="15">FLEE</option>
-                        <option value="16">HIT</option>
-                        <option value="5">AGI</option>
-                        <option value="6">LUK</option>
-                        <option value="27">Freeze Resist</option>
-                        <option value="28">Stone Curse Resist</option>
+                        <option value="1">ATK [17]</option>
+                        <option value="2">MATK [19]</optin>
+                        <option value="17">HP [1]</option>
+                        <option value="18">SP [2]</option>
+                        <option value="15">FLEE [22]</option>
+                        <option value="16">HIT [18]</option>
+                        <option value="5">AGI [4]</option>
+                        <option value="6">LUK [8]</option>
+                        <option value="27">Freeze Resist [255]</option>
+                        <option value="28">Stone Curse Resist [256]</option>
                       </select>
                       +
                       <input type="text" inputmode="numeric" style="width: 30px; height: 13px;" maxlength="3"
@@ -2504,16 +2508,16 @@ Calc's theme: <select id="theme" onChange="themes()"><option value="0">Original<
                         onchange="Click_RandOpt(this[this.selectedIndex].value)|RandOptUpdate(1)"
                         style="width: 189px; background-color: rgb(255, 204, 136);">
                         <option value="0">(no option)</option>
-                        <option value="39">Formless Race Resist</option>
-                        <option value="40">Undead Race Resist</option>
-                        <option value="41">Brute Race Resist</option>
-                        <option value="42">Plant Race Resist</option>
-                        <option value="43">Insect Race Resist</option>
-                        <option value="44">Fish Race Resist</option>
-                        <option value="45">Demon Race Resist</option>
-                        <option value="46">Demi-Human Race Resist</option>
-                        <option value="47">Angel Race Resist</option>
-                        <option value="48">Dragon Race Resist</option>
+                        <option value="39">Formless Race Resist [87]</option>
+                        <option value="40">Undead Race Resist [88]</option>
+                        <option value="41">Brute Race Resist [89]</option>
+                        <option value="42">Plant Race Resist [90]</option>
+                        <option value="43">Insect Race Resist [91]</option>
+                        <option value="44">Fish Race Resist [92]</option>
+                        <option value="45">Demon Race Resist [93]</option>
+                        <option value="46">Demi-Human Race Resist [94]</option>
+                        <option value="47">Angel Race Resist [95]</option>
+                        <option value="48">Dragon Race Resist [96]</option>
                       </select>
                       +
                       <input type="text" inputmode="numeric" style="width: 30px; height: 13px;" maxlength="3"
@@ -2546,16 +2550,16 @@ Calc's theme: <select id="theme" onChange="themes()"><option value="0">Original<
                         onchange="Click_RandOpt(this[this.selectedIndex].value)|RandOptUpdate(1)"
                         style="width: 189px; background-color: rgb(255, 204, 136);">
                         <option value="0">(no option)</option>
-                        <option value="1">ATK</option>
-                        <option value="2">MATK</option>
-                        <option value="17">HP</option>
-                        <option value="18">SP</option>
-                        <option value="23">Perfect Dodge</option>
-                        <option value="11">CRIT</option>
-                        <option value="7">STR</option>
-                        <option value="8">INT</option>
-                        <option value="27">Freeze Resist</option>
-                        <option value="28">Stone Curse Resist</option>
+                        <option value="1">ATK [17]</option>
+                        <option value="2">MATK [19]</option>
+                        <option value="17">HP [1]</option>
+                        <option value="18">SP [2]</option>
+                        <option value="23">Perfect Dodge [23]</option>
+                        <option value="11">CRIT [24]</option>
+                        <option value="7">STR [3]</option>
+                        <option value="8">INT [6]</option>
+                        <option value="27">Freeze Resist [255]</option>
+                        <option value="28">Stone Curse Resist [256]</option>
                       </select>
                       +
                       <input type="text" inputmode="numeric" style="width: 30px; height: 13px;" maxlength="3"
@@ -2611,15 +2615,15 @@ Calc's theme: <select id="theme" onChange="themes()"><option value="0">Original<
                       <select name="A_shoes_ropt2" onchange="Click_RandOpt(this[this.selectedIndex].value)"
                         style="width: 189px; background-color: rgb(255, 204, 136);">
                         <option value="0">(no option)</option>
-                        <option value="52">Long Range Damage Resist</option>
-                        <option value="49">Small Size Resist</option>
-                        <option value="50">Medium Size Resist</option>
-                        <option value="51">Large Size Resist</option>
-                        <option value="53">Boss Monster Resist</option>
-                        <option value="24">DEF</option>
-                        <option value="25">MDEF</option>
-                        <option value="12">Crit damage</option>
-                        <option value="26">Healing Power</option>
+                        <option value="52">Long Range Damage Resist [167]</option>
+                        <option value="49">Small Size Resist [160]</option>
+                        <option value="50">Medium Size Resist [161]</option>
+                        <option value="51">Large Size Resist [162]</option>
+                        <option value="53">Boss Monster Resist [150]</option>
+                        <option value="24">DEF [20]</option>
+                        <option value="25">MDEF [21]</option>
+                        <option value="12">Crit damage [164]</option>
+                        <option value="26">Healing Power [168]</option>
                       </select>
                       +
                       <input type="text" inputmode="numeric" style="width: 30px; height: 13px;" maxlength="3"
@@ -4193,10 +4197,10 @@ Calc's theme: <select id="theme" onChange="themes()"><option value="0">Original<
         <select name="Conf01" style="width: 135px; background-color: rgb(255, 204, 136);">
           <option value="10">0.1s (10 per second) [eAthena's default]</option>
           <option value="15">0.15s</option>
-          <option value="20">0.2s (5 per second)</option>
+          <option value="20" selected="selected">0.2s (5 per second)</option>
           <option value="25">0.25s (4 per second)</option>
           <option value="30">0.3s</option>
-          <option value="33" selected="selected">0.33s (3 per second) [iRO's default]</option>
+          <option value="33">0.33s (3 per second) [iRO's default]</option>
           <option value="40">0.4s</option>
           <option value="50">0.5s (2 per second)</option>
         </select>
