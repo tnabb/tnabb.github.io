@@ -1038,8 +1038,8 @@ m_RandomOpt = [
 	, [54, "Small Physical Damage [157]", 27, 0]
 	, [55, "Medium Physical Damage [158]", 28, 0]
 	, [56, "Large Physical Damage [159]", 29, 0]
-	, [57, "Long Range Physical Damage [148]", 25, 0]
-	, [58, "Boss Physical Damage [51]", 26, 0]
+	, [57, "Long Range Physical Damage [166]", 25, 0]
+	, [58, "Boss Physical Damage [148]", 26, 0]
 	, [59, "Neutral Physical Damage [37]", 40, 0]
 	, [60, "Water Physical Damage [39]", 41, 0]
 	, [61, "Earth Physical Damage [41]", 42, 0]
@@ -1212,4 +1212,76 @@ function RandOptReset(){
 	c.SHOES_ROPT1.value = 0;
 	c.A_shoes_ropt2.value = 0;
 	c.SHOES_ROPT2.value = 0;
+}
+
+function loadNotes(e){
+	_ = '<tbody>',
+	_ += '<tr><td colspan="12" class="subheader" style="background-color: rgb(68, 102, 102);">Notes:</td></tr>';
+	for(i = 0; i < m_MonsterNotes.length; i++){
+		if(e == m_MonsterNotes[i][0]){
+			_ += '<tr><td class="left" style="font-weight: bold">Monster:</td></tr>'
+			for(j = 1; j < m_MonsterNotes[i].length && m_MonsterNotes[i][j] != "NULL"; j += 2){
+				_ += Notes_Setumei(m_MonsterNotes[i][j], m_MonsterNotes[i][j + 1]);
+				n_M_debuff[m_MonsterNotes[i][j]] = m_MonsterNotes[i][j + 1];
+			}
+			break
+		}
+	}
+	for(i = 0; i < m_PlaceNotes.length; i++){
+		if(monsterInPlace(e).includes(m_PlaceNotes[i][0])){
+			_ += '<tr><td class="left" style="font-weight: bold">' + v_Place[m_PlaceNotes[i][0]] + ':</td></tr>'
+			for(j = 1; j < m_PlaceNotes[i].length && m_PlaceNotes[i][j] != "NULL"; j += 2){
+				_ += Notes_Setumei(m_PlaceNotes[i][j], m_PlaceNotes[i][j + 1]);
+				n_M_debuff[m_PlaceNotes[i][j]] = m_PlaceNotes[i][j + 1];
+			}
+		}
+	}
+	_ += '</tbody>',
+	myInnerHtml("monsterNotes", _, 0);
+}
+
+function NotesCalc(e, _){
+	subDmg = 0;
+	for(i = 0; i < m_MonsterNotes.length; i++){
+		if(e == m_MonsterNotes[i][0]){
+			for(j = 1; j < m_MonsterNotes[i].length && m_MonsterNotes[i][j] != "NULL"; j += 2){
+				_ == m_MonsterNotes[i][j] && (subDmg = m_MonsterNotes[i][j + 1]);
+			}
+			break
+		}
+	}
+	for(i = 0; i < m_PlaceNotes.length; i++){
+		if(monsterInPlace(e).includes(m_PlaceNotes[i][0])){
+			for(j = 1; j < m_PlaceNotes[i].length && m_PlaceNotes[i][j] != "NULL"; j += 2){
+				_ == m_PlaceNotes[i][j] && (subDmg = m_PlaceNotes[i][j + 1]);
+			}
+		}
+	}
+	return subDmg;
+}
+
+function resetNotesStats(){
+	for(i = 0; i < n_M_debuff.length; i++){
+		n_M_debuff[i] = 0;
+	}
+}
+
+function Notes_Setumei(nC1, nC2){
+	NotesStr = ""
+	if(nC1 == 0)
+		NotesStr += '<tr><td class="left">• Enchant Deadly Poison effect reduced by ' + nC2 + '%</td></tr>'
+	if (nC1 == 1)
+		if(nC2 == 1) NotesStr += '<tr><td class="left">• Can only receive Melee Damage <b>*NOT IMPLEMENTED*</b></td></tr>'
+		if(nC2 == 2) NotesStr += '<tr><td class="left">• Can only receive Ranged Damage <b>*NOT IMPLEMENTED*</b></td></tr>'
+		if(nC2 == 3) NotesStr += '<tr><td class="left">• Can only receive Magic Damage <b>*NOT IMPLEMENTED*</b></td></tr>'
+	if(nC1 == 2)
+		if(nC2 == 0)
+			NotesStr += '<tr><td class="left">• Can only receive damage from single targeted skills</td></tr>'
+		else
+			NotesStr += '<tr><td class="left">• Can only receive damage from AOE skills</td></tr>'
+	if(nC1 == 3)
+		NotesStr += '<tr><td class="left">• Teleports when hit by any AOE skill</td></tr>'
+	if (5000 <= nC1 && nC1 <= 6999)
+		NotesStr += '<tr><td class="left">• Receives -' + nC2 + '% damage from [' + skillName(m_Skill[nC1 - 5000][0], SRV) + ']</td></tr>'
+	return NotesStr;
 }

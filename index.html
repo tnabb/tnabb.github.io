@@ -79,8 +79,17 @@ Calc's theme: <select id="theme" onChange="themes()"><option value="0">Original<
               [<a href="https://rocalc.com/faq-EN.html">Frequently asked questions</a>] [<a
                 href="https://rocalc.com/faq-ES.html">Preguntas frecuentes</a>]<br>
               <br>
+              <b>(A) Changelog 2023-10-28:</b>
+              <br>• Fixed Shadow Slash not being affected by Critical damage modifiers.
+              <br>• Fixed a few mistypes with random option ID's. 
+              <br>• Added Illusion of Schmidt, Himmelmez, Amdarais, Enraged Amdarais, and Phantom Amdarais to monster list. 
+              <br>• Added "OGH Himmelmez Fight" to the list of locations.
+              <br>• Added option to edit monster's element under "Manual Edits on Enemy".
+              <br>• Added a "Notes" section under certain monsters and places in case of reductions on certain skills.
+              <br>• Added option to add ping in the combat simulator. 
+              <br><br>
               <b>(A) Changelog 2023-10-21:</b>
-              <br>• Added a button reset random options.
+              <br>• Added a button to reset random options.
               <br>• Added a few forgotten mobs from OGH.
               <br>• Adjusted Acid Terror's MATK portion to match in-game (though it seems that it's bugged).
               <br>• Added option ID as a suffix on random options.
@@ -100,16 +109,6 @@ Calc's theme: <select id="theme" onChange="themes()"><option value="0">Original<
               <br>• Changed divisible on Hunter Trap Skills from 40 -> 35.
               <br>• <a href="https://projectalfheim.net/wiki/index.php/Episode_A_1_0_Old_Glast_Heim">Read more on the new patch here.</a>
               <br>• Added all the bullets available in-game.
-              <br>• Other small fixes.
-              <br><br>
-              <b>(A) Changelog 2023-10-04:</b>
-              <br>• Fixed physical part of Acid Terror being affected by modifiers and reductions twice.
-              <br>• Attempted to remove all items not available on Alfheim. If I missed any, or removed some that are actually in-game, please DM me.
-              <br>• Removed DEF from Blush of Groom.
-              <br>• Fixed Hell's Judgement and Dark Blessing doing 0 damage if Bathory was equipped.
-              <br>• Weapon weight on Spiral Pierce now changes when switching weapon.
-              <br>• Shield weight on Shield Boomerang and Shield Chain now changes when switching shield.
-              <br>• Shield weight is now saved.
               <br>• Other small fixes.
               <br><br>
               [<a href="./EN-Changelog.html">Read all previous changelogs</a>] [<a
@@ -3098,7 +3097,7 @@ Calc's theme: <select id="theme" onChange="themes()"><option value="0">Original<
     <div class="main" style="overflow: auto; background-color: rgb(255, 255, 255); color: rgb(0, 0, 0);">
 
       <div id="fixable" style="float:left;">
-        <table class="tborderA" style="font-weight: bold; background-color: rgb(255, 255, 255);">
+        <table class="tborderA" style="font-weight: bold; background-color: rgb(255, 255, 255); margin-bottom: 0;">
           <tbody>
             <tr>
               <td colspan="6" class="subheader" style="background-color: rgb(68, 102, 102);">Place:
@@ -3914,7 +3913,10 @@ Calc's theme: <select id="theme" onChange="themes()"><option value="0">Original<
           </tbody>
         </table>
 
-        <table id="cresults" style="float: left; font-weight: bold; background-color: rgb(255, 255, 255);"
+        <table id="monsterNotes" class="tborderA" style="font-weight: bold; background-color: rgb(255, 255, 255); width: 350.63px; margin-bottom: 0;" hidden>
+        </table>
+
+        <table id="cresults" style="float: left; font-weight: bold; background-color: rgb(255, 255, 255); margin-top: 10px;"
           class="tborderA">
           <tbody>
             <tr>
@@ -4204,6 +4206,10 @@ Calc's theme: <select id="theme" onChange="themes()"><option value="0">Original<
           <option value="40">0.4s</option>
           <option value="50">0.5s (2 per second)</option>
         </select>
+        <br>
+        Ping to server:
+        <input type="text" inputmode="numeric" maxlength="3" onkeypress="return isNumeric(event)" onkeyup="calc()" name="Conf02" value="0" style="width: 25px; height: 12px;" class="center">
+        ms
         <br>
         Environment: <select name="A8_Skill14" onchange="calc()" style="background-color: rgb(255, 204, 136);">
           <option value="0" selected="selected">PvM / PvP</option>

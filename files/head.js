@@ -42,6 +42,9 @@ str_bSUBname = "",
     n_tok = new Array;
 for (var i = 0; i <= 450; i++)
     n_tok[i] = 0;
+n_M_debuff = new Array;
+for (var i = 0; i <= 3; i++)
+    n_M_debuff[i] = 0;
 var first_check = 0;
 n_B = new Array,
     Last_DMG_A = [0, 0, 0],
@@ -2174,7 +2177,7 @@ function BattleHiDam() {
 }
 function BattleMagicCalc(e) {
     wBMC2 = e;
-    n = StPlusCalc2(5e3 + n_A_ActiveSkill) + StPlusCard(5e3 + n_A_ActiveSkill); // moved skill dmg % modifiers to before mdef reduction
+    n = StPlusCalc2(5e3 + n_A_ActiveSkill) + StPlusCard(5e3 + n_A_ActiveSkill); // moved skill dmg % modifiers to before mdef reductionf
     n_A_Buf9[20] == n_A_ActiveSkill && (n += n_A_Buf9[19]), // skill dmg % on top
     n_A_Buf9[22] == n_A_ActiveSkill && (n += n_A_Buf9[21]), // skill dmg % on bottom
     46 != n_A_ActiveSkill && 47 != n_A_ActiveSkill && 277 != n_A_ActiveSkill || 5 == n_A_JobClass() && (n += 20 * CardNumSearch(474)),
@@ -3973,16 +3976,20 @@ function Buf10SW(e) {
             _ += '<tr><TD id="EN1002" class="data" colspan="2"></TD><TD id="EN1004" colspan="2"></TD></tr>',
             _ += '<tr><TD id="EN1000" class="data dotB" colspan="2"></TD><TD id="EN1010" class="dotB" colspan="2"></TD></tr>',
             _ += '<TR><TD id="EN1015" colspan="4"></TD></TR>',
-            myInnerHtml("B_MANUAL", _ += '<TR><TD id="EN1016" colspan="4"></TD></TR>', 0),
+            _ += '<TR><TD id="EN1016" colspan="4"></TD></TR>',
+            _ += '<TR><TD id="EN1100" colspan="4"></TD></TR>',
+            myInnerHtml("B_MANUAL", _, 0),
             myInnerHtml("EN1000", '+<input type="text" inputmode="numeric" maxlength="3" onkeypress="return isNumeric(event)" onkeyup="A10(1)" name="BRG_RC0" value="0" class="center">% Racial Resistance', 0),
             myInnerHtml("EN1001", '+<input type="text" inputmode="numeric" maxlength="3" onkeypress="return isNumeric(event)" onkeyup="A10(1)" name="BRG_RC1" value="0" class="center">vs<select name="Bman1" onChange="A10(1)"></select>', 0),
             myInnerHtml("EN1002", '+<input type="text" inputmode="numeric" maxlength="3" onkeypress="return isNumeric(event)" onkeyup="A10(1)" name="BRG_RC2" value="0" class="center">vs<select name="Bman2" onChange="A10(1)"></select>', 0),
+            myInnerHtml("EN1100", 'Monster element <select name="Bman3" onChange="A10(1)"></select> <select name="Bman4" onChange="A10(1)"></select> <input type="checkbox" name="B_mEle" onclick="A10(1)">', 0),
             myInnerHtml("EN1003", '+<input type="text" inputmode="numeric" maxlength="3" onkeypress="return isNumeric(event)" onkeyup="A10(1)" name="BRG_RC3" value="0" class="center">% Size Resistance', 0),
             myInnerHtml("EN1004", '+<input type="text" inputmode="numeric" maxlength="3" onkeypress="return isNumeric(event)" onkeyup="A10(1)" name="BRG_RC4" value="0" class="center">% Long-range Resistance', 0),
             myInnerHtml("EN1010", '+<input type="text" inputmode="numeric" onkeypress="return isNumeric(event)" maxlength="3" onkeyup="A10(1)" name="BRG_RC10" value="0" class="center">% Additional Reflect (equip/card)', 0),
             i = 0; i < v_Element_.length; i++)
             c.Bman1.options[i] = new Option(v_Element_[i], i),
-                c.Bman2.options[i] = new Option(v_Element_[i], i);
+            c.Bman2.options[i] = new Option(v_Element_[i], i),
+            c.Bman3.options[i] = new Option(v_Element_[i], i);
         myInnerHtml("EN1015", '+<input type="text" inputmode="numeric" maxlength="3" onkeypress="return isNumeric(event)" onkeyup="A10(1)" name="BRG_RC26" value="0" class="center">% ATK based damage on any target.', 0),
             myInnerHtml("EN1016", '+<input type="text" inputmode="numeric" maxlength="3" onkeypress="return isNumeric(event)" onkeyup="A10(1)" name="BRG_RC39" value="0" class="center">% MATK based damage on any target.', 0),
             myInnerHtml("EN1031", '+<input type="text" inputmode="numeric" maxlength="5" onkeypress="return isNumeric(event)" onkeyup="A10(1)" name="BRG_RC15" value="0" class="center" style="width:44px;">MaxHP', 0),
@@ -4003,7 +4010,11 @@ function Buf10SW(e) {
             myInnerHtml("EN1069", '+<input type="text" inputmode="numeric" maxlength="3" onkeypress="return isNumeric(event)" onkeyup="A10(1)" name="BRG_RC34" value="0" class="center">VIT', 0),
             myInnerHtml("EN1071", '+<input type="text" inputmode="numeric" maxlength="3" onkeypress="return isNumeric(event)" onkeyup="A10(1)" name="BRG_RC35" value="0" class="center">INT', 0),
             myInnerHtml("EN1073", '+<input type="text" inputmode="numeric" maxlength="3" onkeypress="return isNumeric(event)" onkeyup="A10(1)" name="BRG_RC36" value="0" class="center">DEX', 0),
-            myInnerHtml("EN1075", '+<input type="text" inputmode="numeric" maxlength="3" onkeypress="return isNumeric(event)" onkeyup="A10(1)" name="BRG_RC37" value="0" class="center">LUK', 0),
+            myInnerHtml("EN1075", '+<input type="text" inputmode="numeric" maxlength="3" onkeypress="return isNumeric(event)" onkeyup="A10(1)" name="BRG_RC37" value="0" class="center">LUK', 0);
+            for(j = 1; j < 5; j++){
+                c.Bman4.options[j-1] = new Option(j, j-1);
+            }
+            
             c.BRG_RC0.value = n_B_manual[1],
             c.Bman1.value = n_B_manual[2],
             c.BRG_RC1.value = n_B_manual[3],
@@ -4032,7 +4043,10 @@ function Buf10SW(e) {
             c.BRG_RC37.value = n_B_manual[52],
             c.BRG_RC38.value = n_B_manual[53],
             c.BRG_RC39.value = n_B_manual[54],
-            c.BRG_RC40.value = n_B_manual[55]
+            c.BRG_RC40.value = n_B_manual[55],
+            c.Bman3.value = n_B_manual[56],
+            c.Bman4.value = n_B_manual[57],
+            c.B_mEle.checked = n_B_manual[58]
     } else {
         var _;
         _ = '<TR><TD id="A10TD" class="subheader point" onclick="Buf10SW(1)">Manual Edits on Enemy <SPAN id="A10used"></SPAN>',
@@ -4563,7 +4577,12 @@ function ClickB_Enemy() {
                 n_B[A[i]] > n_B2[A[i]] && (m = r + n_B[A[i]] + u),
                 myInnerHtml("B_" + A[i], m, 0)
         }
-    myInnerHtml("B_2", v_Race[n_B[2]], 0),
+    myInnerHtml("B_2", v_Race[n_B[2]], 0);
+        if(n_B_manual[58]){
+            manualElement = parseInt(n_B_manual[56].toString() + (n_B_manual[57]+1).toString()),
+            n_B[3] = manualElement;
+            n_B2[3] = manualElement;
+        }
         l = Math.floor(n_B[3] / 10),
         n_B[3] != n_B2[3] ? myInnerHtml("B_3", "<b>" + s + (v_Element[l] + n_B[3] % 10) + u + "</b>", 0) : myInnerHtml("B_3", "<b>" + (v_Element[l] + n_B[3] % 10) + "</b>", 0),
         myInnerHtml("B_4", v_Size[n_B[4]], 0),
@@ -4578,6 +4597,27 @@ function ClickB_Enemy() {
         n_B_MDEF2 = n_B[25],
         n_B_HIT = n_B[26],
         n_B_FLEE = n_B[27]
+
+        for(i = 0; i < m_MonsterNotes.length; i++){
+            if(n_B[0] == m_MonsterNotes[i][0]){
+                document.getElementById("monsterNotes").hidden = false;
+                loadNotes(n_B[0]);
+                break
+            } else {
+                document.getElementById("monsterNotes").hidden = true;
+                resetNotesStats();
+            }
+        }
+
+        for(i = 0; i < m_PlaceNotes.length; i++){
+            if(monsterInPlace(n_B[0]).includes(m_PlaceNotes[i][0])){
+                document.getElementById("monsterNotes").hidden = false;
+                loadNotes(n_B[0]);
+                break
+            }
+        }
+
+
 }
 function calc() {
     SRV = 1 * c.server.value;
@@ -4878,14 +4918,14 @@ function ApplyModifiers(e) {
             1 == n_B[19] && (_ += n_tok[26]),
             _ += n_tok[80],
             e = Math.floor(e * (100 + _) / 100),
-            1 == wCriTyuu && 401 != n_A_ActiveSkill && (e = Math.floor(e * (100 + n_tok[70]) / 100)),
+            1 == wCriTyuu && (e = Math.floor(e * (100 + n_tok[70]) / 100)),
             (108 <= n_B[0] && n_B[0] <= 115 || 319 == n_B[0]) && (e = Math.floor(e * (100 + n_tok[81]) / 100)),
             116 <= n_B[0] && n_B[0] <= 120 && (e = Math.floor(e * (100 + n_tok[82]) / 100)),
             (49 <= n_B[0] && n_B[0] <= 52 || 55 == n_B[0] || 221 == n_B[0]) && (e = Math.floor(e * (100 + n_tok[83]) / 100)),
             106 != n_B[0] && 152 != n_B[0] && 308 != n_B[0] && 32 != n_B[0] && 541 != n_B[0] || (e = Math.floor(e * (100 + n_tok[84]) / 100)),
             e = Math.floor(e * (100 + StPlusCalc2(1e3 + n_B[0]) + StPlusCard(1e3 + n_B[0])) / 100),
             SkillSearch(258) && (e *= 2),
-            SkillSearch(266) && (e = Math.floor(e * (150 + 50 * SkillSearch(266)) / 100)),
+            SkillSearch(266) && (e = Math.floor(e * ((150 + 50 * SkillSearch(266)) * (1 - n_M_debuff[0] / 100)) / 100)), // added edp dmg reduction
             86 == n_A_ActiveSkill && 50 <= n_B[3] && n_B[3] < 60 && (e = Math.floor(e * (100 + 30 * n_A_ActiveSkillLV) / 100)),
             11 == n_A_WeaponType && SkillSearch(262) && (e = Math.floor(e * (110 + 2 * SkillSearch(262)) / 100)),
             _ = 0,
@@ -4923,6 +4963,7 @@ function ApplyModifiers(e) {
         -1 == TyouEnkakuSousa3dan && EquipNumSearch(639) && (_ += 15),
         83 != n_A_ActiveSkill && 388 != n_A_ActiveSkill || !SkillSearch(381) || 0 != wBCEDPch || (_ += 10),
         e = e * (100 + StPlusCalc2(5e3 + n_A_ActiveSkill) + StPlusCard(5e3 + n_A_ActiveSkill) + _) / 100,
+        e = e * (100 - NotesCalc(n_B[0], 5e3 + n_A_ActiveSkill)) / 100, // skill dmg reduction 
         n_A_Buf7[20] && MANUKU_MONSTER() && (e = 110 * e / 100),
         n_A_Buf7[23] && SUPURE_MONSTER() && (e = 110 * e / 100),
         e
@@ -5010,6 +5051,8 @@ function CastAndDelay() {
         , _ = "";
     wDelay = 0;
     var n = 0;
+    var pingDelay = 0;
+    c.Conf02.value > 0 && (pingDelay = (c.Conf02.value) / 1000),
     n_Delay[1] > wDelay && (wDelay = n_Delay[1],
         n = 1),
         eqDelay = (100 - AC_I - n_tok[74]) < 0 ? 0 : 100 - AC_I - n_tok[74],
@@ -5028,7 +5071,8 @@ function CastAndDelay() {
         1 == n && (0 == n_A_ActiveSkill ? SkillSearch(187) ? (e += "Attack interval (normal)<BR>Attack interval (" + skillName(187, c.server.value) + ")<BR>",
             _ += n_Delay[1] + " seconds<BR>" + sandanDelay + " seconds<BR>",
             wDelay = n_Delay[1] * w998A / 100 + sandanDelay * wBC3_3danHatudouRitu / 100) : (e += "Time/Hit<BR>",
-                _ += n_Delay[1] + " seconds<BR>") : (e += "Motion Delay (ASPD based)<BR>",
+                _ += n_Delay[1] + " seconds<BR>") : pingDelay > 0 ? (e += "Motion Delay (ASPD based) + Ping<BR>",
+                    _ += Math.round((n_Delay[1]+pingDelay)*1000)/1000 + " (" + n_Delay[1] + " + " + pingDelay + ") seconds<BR>", wDelay = n_Delay[1] + pingDelay) : (e += "Motion Delay (ASPD based)<BR>",
                     _ += n_Delay[1] + " seconds<BR>")),
         2 == n && (e += "Delay (fixed skills)<BR>",
             _ += n_Delay[2] + " seconds<BR>"),

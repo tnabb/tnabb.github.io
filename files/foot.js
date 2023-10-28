@@ -445,7 +445,10 @@ function StAllCalc() {
             n_B_manual[52] = 1 * c.BRG_RC37.value,
             n_B_manual[53] = 1 * c.BRG_RC38.value,
             n_B_manual[54] = 1 * c.BRG_RC39.value,
-            n_B_manual[55] = 1 * c.BRG_RC40.value),
+            n_B_manual[55] = 1 * c.BRG_RC40.value,
+            n_B_manual[56] = 1 * c.Bman3.value,
+            n_B_manual[57] = 1 * c.Bman4.value,
+            n_B_manual[58] = 1 * c.B_mEle.checked),
         _ = 0; _ <= 22; _++)
         n_B[_] = m_Monster[c.B_Enemy.value][_];
     n_A_Bodyelement = StPlusCard(198),
@@ -3540,12 +3543,12 @@ function SaveLocal() {
             SaveData[303 + n] = n_A_Buf9[n],
                 1 == SaveData[303 + n] ? SaveData[303 + n] = 1 : 0 == SaveData[303 + n] && (SaveData[303 + n] = 0);
         for (SaveData[363] = 0,
-            n = 0; n <= 55; n++) 
+            n = 0; n <= 58; n++) 
             SaveData[364 + n] = n_B_manual[n],
                 1 == SaveData[364 + n] ? SaveData[364 + n] = 1 : 0 == SaveData[364 + n] && (SaveData[364 + n] = 0);
-        SaveData[420] = 0,
+        /* SaveData[420] = 0,
             SaveData[421] = 0,
-            SaveData[422] = 0,
+            SaveData[422] = 0, */
             SaveData[423] = 0,
             SaveData[424] = 0,
             SaveData[425] = c.theme.value,
@@ -3673,7 +3676,7 @@ function LoadLocal() {
             n_A_Buf9[12] = 20,
             n_A_Buf9[14] = 23,
             n_Skill9SW = 0,
-            n = 0; n <= 55; n++)
+            n = 0; n <= 58; n++)
             n_B_manual[n] = 0;
         for(n = 0; n <= 27; n++)
             n_A_randopt[n] = 0;
@@ -3799,7 +3802,7 @@ function LoadLocal() {
         }
         for (n = 0; n <= 59; n++)
             n_A_Buf9[n] = SaveData[293 + n + A];
-        for (n = 0; n <= 55; n++)
+        for (n = 0; n <= 58; n++)
             n_B_manual[n] = SaveData[354 + n + A];
         c.theme.value = SaveData[425],
             c.server.value = SaveData[426],
@@ -4985,7 +4988,7 @@ for (n_A_Buf9[2] = 10,
     n_A_Buf9[12] = 20,
     n_A_Buf9[14] = 23,
     n_B_manual = new Array,
-    i = 0; i <= 55; i++)
+    i = 0; i <= 58; i++)
     n_B_manual[i] = 0;
 for (n_A_debuf = new Array,
     i = 0; i <= 3; i++)
