@@ -1127,8 +1127,7 @@ function BattleCalc999() {
             n_PerHIT_DMG = 0,
                 n_rangedAtk = 1,
                 wMod = (100 + 130 * n_A_ActiveSkillLV) / 100;
-                //wMod2 = (100 + 40 * n_A_ActiveSkillLV) / 100;
-                wMod2 = 1; // adjust skill formula after bug fix
+                wMod2 = (100 + 40 * n_A_ActiveSkillLV) / 100;
             for (s = 0; s <= 2; s++)
                 w_DMG[s] = BK_n_A_DMG[s] * wMod,
                     w_DMG[s] = BattleCalc(w_DMG[s], s),
@@ -4616,8 +4615,6 @@ function ClickB_Enemy() {
                 break
             }
         }
-
-
 }
 function calc() {
     SRV = 1 * c.server.value;
