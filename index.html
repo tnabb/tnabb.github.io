@@ -79,6 +79,15 @@ Calc's theme: <select id="theme" onChange="themes()"><option value="0">Original<
               [<a href="https://rocalc.com/faq-EN.html">Frequently asked questions</a>] [<a
                 href="https://rocalc.com/faq-ES.html">Preguntas frecuentes</a>]<br>
               <br>
+              <b>(A) Changelog 2023-11-09:</b>
+              <br>• Added Zombie Guard card.
+              <br>• Added EDP and Asura Strike reduction on Niflheim Dungeon.
+              <br>• Changed the format of forged weapons. Now all forgeable weapons are seperate weapons with a "[Forged]" suffix.
+              <br>• Added the specific random options to Level 3 forged weapons.
+              <br>• Implemented melee, ranged, and magic only flags.
+              <br>• Implemented the unreducable damage reduction flag.
+              <br>• Other small fixes.
+              <br><br>
               <b>(A) Changelog 2023-10-30:</b>
               <br>• Fixed ratio of Acid Terror's MATK portion according to bug fix.
               <br>• Adjusted OGH monster values according to patch A1.2.
@@ -99,22 +108,6 @@ Calc's theme: <select id="theme" onChange="themes()"><option value="0">Original<
               <br>• Adjusted Acid Terror's MATK portion to match in-game (though it seems that it's bugged).
               <br>• Added option ID as a suffix on random options.
               <br>• Switched default value of minimum delay between Active Skills from 0.33s -> 0.2s.
-              <br><br>
-              <b>(A) Changelog 2023-10-17:</b>
-              <br>• Fixed Aloevera not working with Asura Strike.
-              <br>• Adjusted OGH monster values according to patch A1.1.
-              <br>• <a href="https://projectalfheim.net/wiki/index.php/Patch_A.1.1">Read more on the new patch here.</a>
-              <br><br>
-              <b>(A) Changelog 2023-10-17:</b>
-              <br>• Added all new items available in patch A1.0.
-              <br>• Added all new monsters available in patch A1.0.
-              <br>• Added new regions to sort monsters by.
-              <br>• Added all new cards available in patch A1.0.
-              <br>• Changed Acid Terror formula to match the bug fix.
-              <br>• Changed divisible on Hunter Trap Skills from 40 -> 35.
-              <br>• <a href="https://projectalfheim.net/wiki/index.php/Episode_A_1_0_Old_Glast_Heim">Read more on the new patch here.</a>
-              <br>• Added all the bullets available in-game.
-              <br>• Other small fixes.
               <br><br>
               [<a href="./EN-Changelog.html">Read all previous changelogs</a>] [<a
                 href="./ES-Changelog.html">Leer todos los cambios</a>]<br>
@@ -1310,7 +1303,7 @@ Calc's theme: <select id="theme" onChange="themes()"><option value="0">Original<
                   </tr>
                   <tr>
                     <td><select name="A_weapon1_card1" onchange="Click_Card(this[this.selectedIndex].value)"
-                        style="width: auto; background-color: rgb(255, 204, 136);">
+                        style="width: 208px; background-color: rgb(255, 204, 136);">
                         <option value="0">(no card)</option>
                         <option value="201">* Element Stone (Water)</option>
                         <option value="202">* Element Stone (Earth)</option>
@@ -1459,7 +1452,7 @@ Calc's theme: <select id="theme" onChange="themes()"><option value="0">Original<
                   </tr>
                   <tr>
                     <td><select name="A_weapon1_card2" onchange="Click_Card(this[this.selectedIndex].value)"
-                        style="width: auto; background-color: rgb(255, 204, 136);">
+                        style="width: 208px; background-color: rgb(255, 204, 136);">
                         <option value="0">(no card)</option>
                         <option value="106">* Star Crumb</option>
                         <option value="1">* All Race +20%</option>
@@ -1604,7 +1597,7 @@ Calc's theme: <select id="theme" onChange="themes()"><option value="0">Original<
                   </tr>
                   <tr>
                     <td><select name="A_weapon1_card3" onchange="Click_Card(this[this.selectedIndex].value)"
-                        style="width: auto; background-color: rgb(255, 204, 136);">
+                        style="width: 208px; background-color: rgb(255, 204, 136);">
                         <option value="0">(no card)</option>
                         <option value="106">* Star Crumb</option>
                         <option value="1">* All Race +20%</option>
@@ -1749,7 +1742,7 @@ Calc's theme: <select id="theme" onChange="themes()"><option value="0">Original<
                   </tr>
                   <tr>
                     <td><select name="A_weapon1_card4" onchange="Click_Card(this[this.selectedIndex].value)"
-                        style="width: auto; background-color: rgb(255, 204, 136);">
+                        style="width: 208px; background-color: rgb(255, 204, 136);">
                         <option value="0">(no card)</option>
                         <option value="106">* Top10 ranked</option>
                         <option value="1">* All Race +20%</option>

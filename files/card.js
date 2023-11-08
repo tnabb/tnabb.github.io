@@ -259,7 +259,7 @@ m_Card = [
 	, [255, 1, "Incantation Samurai", "Disables your natural HP Recovery Rate and consumes 666 HP every 10 seconds.<BR>Consumes 999 HP when unequipping.", 22, 1, 0]
 	, [256, 7, "Gargoyle", "1% chance to obtain a [Box of Thunder] item when killing an [" + v_Race[4] + "] race monster.", 0]
 	, [257, 6, "Gajomart", 0, 123, 10, 53, -20, 0]
-	, [258, 5, "Kapha", "<b>[Refine Rate 0~5]</b> MDEF +8", 0]
+	, [258, 5, "Kapha", "<b>[Refine Rate 0~5]</b> MDEF +8<hr><b>When compounded into an [Elegant Manteau]:</b><br>Value lowered to MDEF +1", 0]
 	, [259, 1, "Crab", "Increases ATK based damage against [Aster] by 30%", 1240, 30, 17, 5, 0]
 	, [260, 7, "Shinobi", "When receiving ATK based damage, 10% chance to cast [Cloaking] Lvl 5 on yourself.", 2, 1, 0]
 	, [261, 4, "Karakasa", "When receiving ATK based damage, 3% chance to cause [Chaos] status effect on your attacker.<BR>[Base STR >= 77] 9% chance instead.", 0]
@@ -648,6 +648,7 @@ m_Card = [
 	, [642, 3, "Unidentified Creature", "", 11, 30, 9, -100, 0]
 	, [643, 1, "Warden Kades", "<b>[Weapon Level 3~4]</b><br><b style='color:#A89682'>Neutral</b> property magic damage +6%<BR><b style='color:#CDCD00'>Holy</b> property magic damage +6%<BR><b style='color:#000000'>Shadow</b> property magic damage +6%", 88, 25, 0]
 	, [644, 6, "Dark Priest", "<b>[Rogue Class]</b> Auto Cast Rate +20%", 2, 1, 0]
+	, [645, 1, "Zombie Guard", "<b>[Weapon Level 1~2]</b> Deal +3% MATK based damage against [<b style='color:purple'>Undead</b>] element monsters.<BR><b>[Weapon Level 3~4]</b> Deal +8% MATK based damage against [<b style='color:purple'>Undead</b>] element monsters.", 0]
 ];
 
 // positions (1 = weapon, 2 = headgear, 3 = shield, 4 = armor, 5 = garment, 6 = footgear, 7 = accessory, 100 = combos)
@@ -658,8 +659,8 @@ m_Card = [
 CardNum = m_Card.length - 1;
 
 m_CardSort = [	//cards renewal comentadas
-	[0, 201, 202, 203, 204, 106, 1, 2, 3, 608, 609, 156, 31, 25, 522, 11, /* 112, */ 107, 223, 356, 463, 524, 305, 45, 355, 528, /* 544, */ 590, 361, 217, 465, 521, 163, 574, 15, 265, 160, 499, 325, 520, 626, 612, 637, 259, 279, 613, 311, 169, 28, 20, 329, 427, 42, 519, 47, 21, 32, 343, 5, 462, 215, 19, 244, 158, 4, 359, 525, 110, 8, 17, 588, 253, 263, 617, 14, 286, 288, 287, 39, 277, 577, 518, 167, 498, 6, 159, 46, 13, 255, 235, 589, 26, 289, 290, 164, 168, 382,/*548,*/219, 7, 165, 37, 23, 398, 35, 161, 166, 157, 36,/*549,*/30, 328, 40, 380, 517, 466, 516, 345, 252, 27, 353, 12, 360, 44, 576, 515, 171, 33,/*547,*/170, 111, 636, 390, 22, 109, 16, /* 108, */ 580, 254, 43, 428, 29, 9, 34, 162, 41, 579, 366, 313, 18, 593, 464, /* 526, */ 532, 233, 296, 323, 24, 363, 643, 619, 10, 514, 38, 326, 319, "NULL"],
-	[0, 106, 1, 2, 3, 608, 609, 156, 31, 25, 522, 11, /* 112, */ 107, 223, 356, 463, 524, 305, 45, 355, 528, /* 544, */ 590, 361, 217, 465, 521, 163, 574, 15, 265, 160, 499, 325, 520, 626, 612, 637, 259, 279, 613, 311, 169, 28, 20, 329, 427, 42, 519, 47, 21, 32, 343, 5, 462, 215, 19, 244, 158, 4, 359, 525, 110, 8, 17, 588, 253, 263, 617, 14, 286, 288, 287, 39, 277, 577, 518, 167, 498, 6, 159, 46, 13, 255, 235, 589, 26, 289, 290, 164, 168, 382,/*548,*/219, 7, 165, 37, 23, 398, 35, 161, 166, 157, 36,/*549,*/30, 328, 40, 380, 517, 466, 516, 345, 252, 27, 353, 12, 360, 44, 576, 515, 171, 33,/*547,*/170, 111, 636, 390, 22, 109, 16, /* 108, */ 580, 254, 43, 428, 29, 9, 34, 162, 41, 579, 366, 313, 18, 593, 464, /* 526, */ 532, 233, 296, 323, 24, 363, 643, 619, 10, 514, 38, 326, 319, "NULL"],
+	[0, 1, 2, 3, 608, 609, 156, 31, 25, 522, 11, /* 112, */ 107, 223, 356, 463, 524, 305, 45, 355, 528, /* 544, */ 590, 361, 217, 465, 521, 163, 574, 15, 265, 160, 499, 325, 520, 626, 612, 637, 259, 279, 613, 311, 169, 28, 20, 329, 427, 42, 519, 47, 21, 32, 343, 5, 462, 215, 19, 244, 158, 4, 359, 525, 110, 8, 17, 588, 253, 263, 617, 14, 286, 288, 287, 39, 277, 577, 518, 167, 498, 6, 159, 46, 13, 255, 235, 589, 26, 289, 290, 164, 168, 382,/*548,*/219, 7, 165, 37, 23, 398, 35, 161, 166, 157, 36,/*549,*/30, 328, 40, 380, 517, 466, 516, 345, 252, 27, 353, 12, 360, 44, 576, 515, 171, 33,/*547,*/170, 111, 636, 390, 22, 109, 16, /* 108, */ 580, 254, 43, 428, 29, 9, 34, 162, 41, 579, 366, 313, 18, 593, 464, /* 526, */ 532, 233, 296, 323, 24, 363, 643, 619, 10, 514, 38, 326, 645, 319, "NULL"],
+	//[0, 1, 2, 3, 608, 609, 156, 31, 25, 522, 11, /* 112, */ 107, 223, 356, 463, 524, 305, 45, 355, 528, /* 544, */ 590, 361, 217, 465, 521, 163, 574, 15, 265, 160, 499, 325, 520, 626, 612, 637, 259, 279, 613, 311, 169, 28, 20, 329, 427, 42, 519, 47, 21, 32, 343, 5, 462, 215, 19, 244, 158, 4, 359, 525, 110, 8, 17, 588, 253, 263, 617, 14, 286, 288, 287, 39, 277, 577, 518, 167, 498, 6, 159, 46, 13, 255, 235, 589, 26, 289, 290, 164, 168, 382,/*548,*/219, 7, 165, 37, 23, 398, 35, 161, 166, 157, 36,/*549,*/30, 328, 40, 380, 517, 466, 516, 345, 252, 27, 353, 12, 360, 44, 576, 515, 171, 33,/*547,*/170, 111, 636, 390, 22, 109, 16, /* 108, */ 580, 254, 43, 428, 29, 9, 34, 162, 41, 579, 366, 313, 18, 593, 464, /* 526, */ 532, 233, 296, 323, 24, 363, 643, 619, 10, 514, 38, 326, 645, 319, "NULL"],
 	[0, 153,/*550,*/221, 332, 474, 179, 575, 298, 339, 114, 273, 602, 320, 510, 51, 578, 342, /* 540, */ 511, /* 545, */ 49, 337, 284, 176, 116, 303, 213, 117, /* 543, */ 600, 274, 603, 424, 175, 234, 472, 605, 177, 357, 582, 473, 397, 592, 387, 178, 118, 426, 115, 374, 119, 376, 50, 52,/*551,*/347, 120, 512, 623, 509, 383, 630, 180, 113, 309, 607, 174, 632, 598, 471, 425, 48, 239, 238, "NULL"],
 	[0, 153,/*550,*/221, 332, 474, 179, 575, 298, 339, 114, 273, 602, 320, 510, 51, 578, 342, /* 540, */ 511, /* 545, */ 49, 337, 284, 176, 116, 303, 213, 117, /* 543, */ 600, 274, 603, 424, 175, 234, 472, 605, 177, 357, 582, 473, 397, 592, 387, 178, 118, 426, 115, 374, 119, 376, 50, 52,/*551,*/347, 120, 512, 623, 509, 383, 630, 180, 113, 309, 607, 174, 598, 471, 425, 48, 239, 238, "NULL"],
 	[0, 154, 155, 231, /* 537, */ 55, 245, 54, 122, 502, 222, 124, 58, 503, 586, 585, 504, 506, 173, /* 505, */ 538, 307, 241, 470, 126, 348, 467, 62, 61, 618, 596, 507, 127, 63, 123, 272, 125, 469, 375, 57, 358, 368, 59, 513, 584, 468, 60, 631, 121, 310, 396, /*508,*/ 539, 172, 56, 53, 249, 642, 306, "NULL"],
@@ -675,12 +676,12 @@ function allCard() {
 	c.A_weapon1_card2.length = 0;
 	c.A_weapon1_card3.length = 0;
 	c.A_weapon1_card4.length = 0;
-	if (n_Nitou) {
+	/* if (n_Nitou) {
 		c.A_weapon2_card1.length = 0;
 		c.A_weapon2_card2.length = 0;
 		c.A_weapon2_card3.length = 0;
 		c.A_weapon2_card4.length = 0;
-	}
+	} */
 	c.A_head1_card.length = 0;
 	c.A_head2_card.length = 0;
 	c.A_left_card.length = 0;
@@ -692,42 +693,74 @@ function allCard() {
 	var all_cards = c.all_card.checked;
 	var i = 0;
 	if (!all_cards) {
-		for (i = 0; m_CardSort[0][i] != "NULL"; i++)
-			c.A_weapon1_card1.options[i] = new Option(m_Card[m_CardSort[0][i]][2], m_Card[m_CardSort[0][i]][0]);
-		for (i = 0; m_CardSort[1][i] != "NULL"; i++) {
-			c.A_weapon1_card2.options[i] = new Option(m_Card[m_CardSort[1][i]][2], m_Card[m_CardSort[1][i]][0]);
-			c.A_weapon1_card3.options[i] = new Option(m_Card[m_CardSort[1][i]][2], m_Card[m_CardSort[1][i]][0]);
-			c.A_weapon1_card4.options[i] = new Option(m_Card[m_CardSort[1][i]][2], m_Card[m_CardSort[1][i]][0]);
-		}
-		c.A_weapon1_card4.options[1] = new Option("* Top10 ranked", 106);
-		if (n_Nitou) {
-			for (i = 0; m_CardSort[0][i] != "NULL"; i++)
-				c.A_weapon2_card1.options[i] = new Option(m_Card[m_CardSort[0][i]][2], m_Card[m_CardSort[0][i]][0]);
-			for (i = 0; m_CardSort[1][i] != "NULL"; i++) {
-				c.A_weapon2_card2.options[i] = new Option(m_Card[m_CardSort[1][i]][2], m_Card[m_CardSort[1][i]][0]);
-				c.A_weapon2_card3.options[i] = new Option(m_Card[m_CardSort[1][i]][2], m_Card[m_CardSort[1][i]][0]);
-				c.A_weapon2_card4.options[i] = new Option(m_Card[m_CardSort[1][i]][2], m_Card[m_CardSort[1][i]][0]);
+		if(n_A_Equip[0] == 0 || !(m_ForgedItems.includes(n_A_Equip[0]))){
+			for (i = 0; m_CardSort[0][i] != "NULL"; i++){
+				c.A_weapon1_card1.options[i] = new Option(m_Card[m_CardSort[0][i]][2], m_Card[m_CardSort[0][i]][0]);
+				c.A_weapon1_card2.options[i] = new Option(m_Card[m_CardSort[0][i]][2], m_Card[m_CardSort[0][i]][0]);
+				c.A_weapon1_card3.options[i] = new Option(m_Card[m_CardSort[0][i]][2], m_Card[m_CardSort[0][i]][0]);
+				c.A_weapon1_card4.options[i] = new Option(m_Card[m_CardSort[0][i]][2], m_Card[m_CardSort[0][i]][0]);
 			}
-			c.A_weapon2_card4.options[1] = new Option("* Top10 ranked", 106);
-		}
+			//for (i = 0; m_CardSort[1][i] != "NULL"; i++) {
+				
+			//}
+		}else{
+			c.A_weapon1_card1.options[0] = new Option(m_Card[0][2], m_Card[0][0]);
+			c.A_weapon1_card1.options[1] = new Option(m_Card[201][2], m_Card[201][0]);
+			c.A_weapon1_card1.options[2] = new Option(m_Card[202][2], m_Card[202][0]);
+			c.A_weapon1_card1.options[3] = new Option(m_Card[203][2], m_Card[203][0]);
+			c.A_weapon1_card1.options[4] = new Option(m_Card[204][2], m_Card[204][0]);
+			c.A_weapon1_card1.options[5] = new Option(m_Card[106][2], m_Card[106][0]);
 
+			c.A_weapon1_card2.options[0] = new Option(m_Card[0][2], m_Card[0][0]);
+			c.A_weapon1_card2.options[1] = new Option(m_Card[106][2], m_Card[106][0]);
+			c.A_weapon1_card3.options[0] = new Option(m_Card[0][2], m_Card[0][0]);
+			c.A_weapon1_card3.options[1] = new Option(m_Card[106][2], m_Card[106][0]);
+			c.A_weapon1_card4.options[0] = new Option(m_Card[0][2], m_Card[0][0]);
+			c.A_weapon1_card4.options[1] = new Option("* Top10 ranked", 106);
+		}
+		
+		/* if (n_Nitou) {
+			if(n_A_Equip[1] == 0 || !(m_ForgedItems.includes(n_A_Equip[1]))){
+				for (i = 0; m_CardSort[0][i] != "NULL"; i++){
+					c.A_weapon2_card1.options[i] = new Option(m_Card[m_CardSort[0][i]][2], m_Card[m_CardSort[0][i]][0]);
+					c.A_weapon2_card2.options[i] = new Option(m_Card[m_CardSort[0][i]][2], m_Card[m_CardSort[0][i]][0]);
+					c.A_weapon2_card3.options[i] = new Option(m_Card[m_CardSort[0][i]][2], m_Card[m_CardSort[0][i]][0]);
+					c.A_weapon2_card4.options[i] = new Option(m_Card[m_CardSort[0][i]][2], m_Card[m_CardSort[0][i]][0]);
+				}
+			}else{
+				c.A_weapon2_card1.options[0] = new Option(m_Card[0][2], m_Card[0][0]);
+				c.A_weapon2_card1.options[1] = new Option(m_Card[201][2], m_Card[201][0]);
+				c.A_weapon2_card1.options[2] = new Option(m_Card[202][2], m_Card[202][0]);
+				c.A_weapon2_card1.options[3] = new Option(m_Card[203][2], m_Card[203][0]);
+				c.A_weapon2_card1.options[4] = new Option(m_Card[204][2], m_Card[204][0]);
+				c.A_weapon2_card1.options[5] = new Option(m_Card[106][2], m_Card[106][0]);
+
+				c.A_weapon2_card2.options[0] = new Option(m_Card[0][2], m_Card[0][0]);
+				c.A_weapon2_card2.options[1] = new Option(m_Card[106][2], m_Card[106][0]);
+				c.A_weapon2_card3.options[0] = new Option(m_Card[0][2], m_Card[0][0]);
+				c.A_weapon2_card3.options[1] = new Option(m_Card[106][2], m_Card[106][0]);
+				c.A_weapon2_card4.options[0] = new Option(m_Card[0][2], m_Card[0][0]);
+				c.A_weapon2_card4.options[1] = new Option("* Top10 ranked", 106);
+			}
+		}
+ */
+		for (i = 0; m_CardSort[1][i] != "NULL"; i++) {
+			c.A_head1_card.options[i] = new Option(m_Card[m_CardSort[1][i]][2], m_Card[m_CardSort[1][i]][0]);
+		}
 		for (i = 0; m_CardSort[2][i] != "NULL"; i++) {
-			c.A_head1_card.options[i] = new Option(m_Card[m_CardSort[2][i]][2], m_Card[m_CardSort[2][i]][0]);
+			c.A_head2_card.options[i] = new Option(m_Card[m_CardSort[2][i]][2], m_Card[m_CardSort[2][i]][0]);
 		}
-		for (i = 0; m_CardSort[3][i] != "NULL"; i++) {
-			c.A_head2_card.options[i] = new Option(m_Card[m_CardSort[3][i]][2], m_Card[m_CardSort[3][i]][0]);
-		}
+		for (i = 0; m_CardSort[3][i] != "NULL"; i++)
+			c.A_left_card.options[i] = new Option(m_Card[m_CardSort[3][i]][2], m_Card[m_CardSort[3][i]][0]);
 		for (i = 0; m_CardSort[4][i] != "NULL"; i++)
-			c.A_left_card.options[i] = new Option(m_Card[m_CardSort[4][i]][2], m_Card[m_CardSort[4][i]][0]);
+			c.A_body_card.options[i] = new Option(m_Card[m_CardSort[4][i]][2], m_Card[m_CardSort[4][i]][0]);
 		for (i = 0; m_CardSort[5][i] != "NULL"; i++)
-			c.A_body_card.options[i] = new Option(m_Card[m_CardSort[5][i]][2], m_Card[m_CardSort[5][i]][0]);
+			c.A_shoulder_card.options[i] = new Option(m_Card[m_CardSort[5][i]][2], m_Card[m_CardSort[5][i]][0]);
 		for (i = 0; m_CardSort[6][i] != "NULL"; i++)
-			c.A_shoulder_card.options[i] = new Option(m_Card[m_CardSort[6][i]][2], m_Card[m_CardSort[6][i]][0]);
-		for (i = 0; m_CardSort[7][i] != "NULL"; i++)
-			c.A_shoes_card.options[i] = new Option(m_Card[m_CardSort[7][i]][2], m_Card[m_CardSort[7][i]][0]);
-		for (i = 0; m_CardSort[8][i] != "NULL"; i++) {
-			c.A_acces1_card.options[i] = new Option(m_Card[m_CardSort[8][i]][2], m_Card[m_CardSort[8][i]][0]);
-			c.A_acces2_card.options[i] = new Option(m_Card[m_CardSort[8][i]][2], m_Card[m_CardSort[8][i]][0]);
+			c.A_shoes_card.options[i] = new Option(m_Card[m_CardSort[6][i]][2], m_Card[m_CardSort[6][i]][0]);
+		for (i = 0; m_CardSort[7][i] != "NULL"; i++) {
+			c.A_acces1_card.options[i] = new Option(m_Card[m_CardSort[7][i]][2], m_Card[m_CardSort[7][i]][0]);
+			c.A_acces2_card.options[i] = new Option(m_Card[m_CardSort[7][i]][2], m_Card[m_CardSort[7][i]][0]);
 		}
 	} else {
 		c.A_weapon1_card1.options[0] = new Option(m_Card[0][2], m_Card[0][0]);
@@ -894,44 +927,45 @@ function Card(CBI) {
 	myInnerHtml("B_SETUMEI", CBIstr, 0);
 }
 
-w_SC = [[429, 235, 306, "NULL"],
-[430, 349, 305, "NULL"],
-[431, 254, 259, 356, "NULL"],
-[432, 229, 280, 352, "NULL"],
-[433, 291, 234, "NULL"],
-[434, 322, 320, "NULL"],
-[435, 273, 98, "NULL"],
-[436, 274, 73, "NULL"],
-[437, 245, 40, "NULL"],
-[438, 9, 308, "NULL"],
-[439, 58, 276, "NULL"],
-[440, 50, 344, "NULL"],
-[441, 125, 370, 393, "NULL"],
-[442, 294, 10, "NULL"],
-[442, 341, 88, "NULL"],
-[442, 243, 7, "NULL"],
-[442, 372, 64, "NULL"],
-[442, 369, 68, "NULL"],
-[442, 338, 72, "NULL"],
-[448, 218, 212, "NULL"],
-[449, 248, 247, "NULL"],
-[450, 223, 317, 347, 354, 362, "NULL"],
-[451, 233, 295, 391, 395, 260, "NULL"],
-[452, 253, 383, 307, 301, 270, "NULL"],
-[453, 279, 224, 340, 351, 230, "NULL"],
-[454, 337, 358, 220, 346, 379, 350, "NULL"],
-[455, 326, 376, 281, 388, 216, "NULL"],
-[456, 190, 347, 354, 362, "NULL"],
-[457, 413, 113, 295, 391, 260, "NULL"],
-[458, 253, 383, 181, 270, "NULL"],
-[459, 279, 408, 224, 340, 230, "NULL"],
-[460, 337, 193, 346, 379, 350, "NULL"],
-[461, 326, 175, 281, 388, 104, "NULL"],
-[496, 485, 494, "NULL"],
-[570, 218, 569, "NULL"],
-[572, 212, 571, "NULL"],
-[620, 618, 613, "NULL"],
-[621, 618, 619, "NULL"]
+w_SC = [
+	[429, 235, 306, "NULL"],
+	[430, 349, 305, "NULL"],
+	[431, 254, 259, 356, "NULL"],
+	[432, 229, 280, 352, "NULL"],
+	[433, 291, 234, "NULL"],
+	[434, 322, 320, "NULL"],
+	[435, 273, 98, "NULL"],
+	[436, 274, 73, "NULL"],
+	[437, 245, 40, "NULL"],
+	[438, 9, 308, "NULL"],
+	[439, 58, 276, "NULL"],
+	[440, 50, 344, "NULL"],
+	[441, 125, 370, 393, "NULL"],
+	[442, 294, 10, "NULL"],
+	[442, 341, 88, "NULL"],
+	[442, 243, 7, "NULL"],
+	[442, 372, 64, "NULL"],
+	[442, 369, 68, "NULL"],
+	[442, 338, 72, "NULL"],
+	[448, 218, 212, "NULL"],
+	[449, 248, 247, "NULL"],
+	[450, 223, 317, 347, 354, 362, "NULL"],
+	[451, 233, 295, 391, 395, 260, "NULL"],
+	[452, 253, 383, 307, 301, 270, "NULL"],
+	[453, 279, 224, 340, 351, 230, "NULL"],
+	[454, 337, 358, 220, 346, 379, 350, "NULL"],
+	[455, 326, 376, 281, 388, 216, "NULL"],
+	[456, 190, 347, 354, 362, "NULL"],
+	[457, 413, 113, 295, 391, 260, "NULL"],
+	[458, 253, 383, 181, 270, "NULL"],
+	[459, 279, 408, 224, 340, 230, "NULL"],
+	[460, 337, 193, 346, 379, 350, "NULL"],
+	[461, 326, 175, 281, 388, 104, "NULL"],
+	[496, 485, 494, "NULL"],
+	[570, 218, 569, "NULL"],
+	[572, 212, 571, "NULL"],
+	[620, 618, 613, "NULL"],
+	[621, 618, 619, "NULL"]
 ];
 SC_MAXnum = 37;
 
@@ -1109,11 +1143,19 @@ m_RandomOptSpecial = [
 	[0, 100, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, "NULL"],
 ];
 
+m_RandomOptForged = [
+	[0, 1, 9, 11, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, "NULL"],
+	[0, 17, 18, 16, 15, 13, 14, 10, 57, "NULL"],
+	[0, 12, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, "NULL"],
+	[0, 7, 5, 3, 8, 4, 6, "NULL"],
+];
+
 m_RandomOptMeleeType = [1, 2, 3, 4, 5, 6, 7, 8, 11, 13];
 m_RandomOptRangedType = [10, 14, 15, 16, 17, 18, 19, 20, 21];
 m_RandomOptMagicType = [9];
 m_RandomOptSpecialType = [12];
 m_RandomOptSpecialWeapons = [395, 939, 93, 539, 1869, 1870, 1871, 1851];
+m_RandomOptForgedWeapons = [2019, 2020, 2027, 2028, 2029, 2030, 2034, 2035, 2036, 2043, 2044, 2045, 2049, 2050, 2056, 2057, 2058, 2062, 2063, 2064];
 
 function Click_RandOpt(){
 	n_A_randopt[0] = 1 * c.A_weapon1_ropt1.value;
@@ -1271,9 +1313,9 @@ function Notes_Setumei(nC1, nC2){
 	if(nC1 == 0)
 		NotesStr += '<tr><td class="left">• Enchant Deadly Poison effect reduced by ' + nC2 + '%</td></tr>'
 	if (nC1 == 1)
-		if(nC2 == 1) NotesStr += '<tr><td class="left">• Can only receive Melee Damage <b>*NOT IMPLEMENTED*</b></td></tr>'
-		if(nC2 == 2) NotesStr += '<tr><td class="left">• Can only receive Ranged Damage <b>*NOT IMPLEMENTED*</b></td></tr>'
-		if(nC2 == 3) NotesStr += '<tr><td class="left">• Can only receive Magic Damage <b>*NOT IMPLEMENTED*</b></td></tr>'
+		if(nC2 == 1) NotesStr += '<tr><td class="left">• Can only receive Melee Damage</td></tr>'
+		if(nC2 == 2) NotesStr += '<tr><td class="left">• Can only receive Ranged Damage</td></tr>'
+		if(nC2 == 3) NotesStr += '<tr><td class="left">• Can only receive Magic Damage</td></tr>'
 	if(nC1 == 2)
 		if(nC2 == 0)
 			NotesStr += '<tr><td class="left">• Can only receive damage from single targeted skills</td></tr>'
@@ -1281,6 +1323,8 @@ function Notes_Setumei(nC1, nC2){
 			NotesStr += '<tr><td class="left">• Can only receive damage from AOE skills</td></tr>'
 	if(nC1 == 3)
 		NotesStr += '<tr><td class="left">• Teleports when hit by any AOE skill</td></tr>'
+	if (nC1 == 4)
+		NotesStr += '<tr><td class="left">• Takes ' + nC2 + '% reduced damage</td></tr>'
 	if (5000 <= nC1 && nC1 <= 6999)
 		NotesStr += '<tr><td class="left">• Receives -' + nC2 + '% damage from [' + skillName(m_Skill[nC1 - 5000][0], SRV) + ']</td></tr>'
 	return NotesStr;

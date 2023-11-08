@@ -863,6 +863,7 @@ function StAllCalc() {
         n_A_HEAD_REFINE >= 7 && 1478 == n_A_Equip[2] && (n_A_MDEF += 7),
         n_A_HEAD_REFINE >= 7 && 1483 == n_A_Equip[2] && (n_A_MDEF += 5),
         n_A_SHOULDER_REFINE <= 5 && 258 == n_A_card[12] && (n_A_MDEF += 8),
+        n_A_SHOULDER_REFINE <= 5 && 258 == n_A_card[12] && 1865 == n_A_Equip[7] && (n_A_MDEF -= 7),
         1956 == n_A_Equip[0] && 26 == n_A_JOB && (n_A_MDEF += 5),
         986 != n_A_Equip[6] || 3 != n_A_JobClass() && 4 != n_A_JobClass() && 5 != n_A_JobClass() || (n_A_MDEF += 5),
         SkillSearch(9) ? n_A_MDEF += SkillSearch(9) : SkillSearch(256) && (n_A_MDEF += 1),
@@ -1485,8 +1486,8 @@ function StAllCalc() {
         n_A_HEAD_REFINE >= 9 && 605 == n_A_card[8] && (n_tok[344] += 5),
         n_A_HEAD_REFINE >= 9 && 607 == n_A_card[8] && (n_tok[345] += 5),
         // magic damage element cards
-        n_A_WeaponLV <= 2 && (n_tok[340] += 3*CardNumSearch(626), n_tok[341] += 3*CardNumSearch(579), n_tok[342] += 3*CardNumSearch(636), n_tok[343] += 3*CardNumSearch(588), n_tok[344] += 3*CardNumSearch(589), n_tok[348] += 3*CardNumSearch(576)),
-        n_A_WeaponLV >= 3 && (n_tok[340] += 8*CardNumSearch(626), n_tok[341] += 8*CardNumSearch(579), n_tok[342] += 8*CardNumSearch(636), n_tok[343] += 8*CardNumSearch(588), n_tok[344] += 8*CardNumSearch(589), n_tok[348] += 8*CardNumSearch(576)),
+        n_A_WeaponLV <= 2 && (n_tok[340] += 3*CardNumSearch(626), n_tok[341] += 3*CardNumSearch(579), n_tok[342] += 3*CardNumSearch(636), n_tok[343] += 3*CardNumSearch(588), n_tok[344] += 3*CardNumSearch(589), n_tok[348] += 3*CardNumSearch(576), n_tok[349] += 3*CardNumSearch(645)),
+        n_A_WeaponLV >= 3 && (n_tok[340] += 8*CardNumSearch(626), n_tok[341] += 8*CardNumSearch(579), n_tok[342] += 8*CardNumSearch(636), n_tok[343] += 8*CardNumSearch(588), n_tok[344] += 8*CardNumSearch(589), n_tok[348] += 8*CardNumSearch(576), n_tok[349] += 8*CardNumSearch(645)),
         // magic damage race cards
         n_A_WeaponLV <= 2 && (n_tok[170] += 3*CardNumSearch(520), n_tok[171] += 3*CardNumSearch(522), n_tok[172] += 3*CardNumSearch(521), n_tok[173] += 3*CardNumSearch(516), n_tok[174] += 3*CardNumSearch(515), n_tok[175] += 3*CardNumSearch(517), n_tok[176] += 3*CardNumSearch(518), n_tok[177] += 3*CardNumSearch(514), n_tok[179] += 3*CardNumSearch(519)),
         n_A_WeaponLV >= 3 && (n_tok[170] += 8*CardNumSearch(520), n_tok[171] += 8*CardNumSearch(522), n_tok[172] += 8*CardNumSearch(521), n_tok[173] += 8*CardNumSearch(516), n_tok[174] += 8*CardNumSearch(515), n_tok[175] += 8*CardNumSearch(517), n_tok[176] += 8*CardNumSearch(518), n_tok[177] += 8*CardNumSearch(514), n_tok[179] += 8*CardNumSearch(519)),
@@ -3701,7 +3702,9 @@ function LoadLocal() {
             c.A_weapon1.value = SaveData[14],
             n_A_WeaponType = SaveData[13],
             ClickWeaponType(SaveData[13]),
-            8 != SaveData[2] && 22 != SaveData[2] || 11 == SaveData[13] || (n_A_Weapon2Type = SaveData[20],
+            8 != SaveData[2] && 22 != SaveData[2] || 11 == SaveData[13] || (
+                n_A_Equip[1] = 0,
+                n_A_Weapon2Type = SaveData[20],
                 ClickWeaponType2(SaveData[21])),
             n_A_JobSet(),
             (2 == n_A_JobClass() || 4 == n_A_JobClass() || 45 == n_A_JOB && 0 != SaveData[13]) && (c.A_Arrow.value = SaveData[27]),
