@@ -2635,7 +2635,7 @@ function ClickWeaponType(e) {
             }
         }
     }else if(m_RandomOptMeleeType.includes(parseInt(e))){ // melee
-        if(!(m_RandomOptMeleeType.includes(parseInt(n_A_WeaponType))) || m_RandomOptSpecialWeapons.includes(parseInt(oldWeapon)) || m_RandomOptForgedWeapons.includes(parseInt(oldWeapon)) || parseInt(oldWeapon) == 0){
+        if(!(m_RandomOptMeleeType.includes(parseInt(n_A_WeaponType))) || m_RandomOptSpecialWeapons.includes(parseInt(oldWeapon)) || m_ForgedItems.includes(parseInt(oldWeapon)) || parseInt(oldWeapon) == 0){
             RandOptWeapon1Reset();
             for(i = 0; "NULL" != m_RandomOptMelee[0][i]; i++){
                 c.A_weapon1_ropt1.options[i] = new Option(m_RandomOpt[m_RandomOptMelee[0][i]][1], m_RandomOpt[m_RandomOptMelee[0][i]][0]);
