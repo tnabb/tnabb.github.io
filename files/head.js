@@ -43,7 +43,7 @@ str_bSUBname = "",
 for (var i = 0; i <= 450; i++)
     n_tok[i] = 0;
 n_M_debuff = new Array;
-for (var i = 0; i <= 4; i++)
+for (var i = 0; i <= 3; i++)
     n_M_debuff[i] = 0;
 var first_check = 0;
 n_B = new Array,
@@ -1518,47 +1518,6 @@ function SanctuaryCalc(e, _) {
         wSanctuary
 }
 function BattleCalc998() {
-    // melee = n_rangedAtk = 0
-    // ranged = n_rangedAtk = 1
-    // magic = n_rangedAtk = 2
-
-    for(var s = 0; s < 3; s++){
-        matchedNums = InnStr[s].match(/(?:[0-9.]+)+/g);
-        if(matchedNums[0] != 0){
-            w_DMG[s] = Math.floor(w_DMG[s] * (100 - n_M_debuff[4]) / 100);
-            w_DMG[s] = w_DMG[s] < 1 ? 1 : w_DMG[s];
-            InnStr[s] = Math.floor(matchedNums[0] * ((100 - n_M_debuff[4]) / 100));
-            if(matchedNums.length > 1){
-                dmgPerHit = Math.floor(matchedNums[1] * ((100 - n_M_debuff[4]) / 100));
-                fullDmg = Math.floor(dmgPerHit * matchedNums[2]); 
-                InnStr[s] = fullDmg + " (" + dmgPerHit + " x " + matchedNums[2] + " hits)";
-            }
-        }
-    }
-
-    if(n_M_debuff[1] == 1){
-        if(n_rangedAtk == 1 || n_rangedAtk == 2){
-            for(var s = 0; s < 3; s++){
-                w_DMG[s] = 1;
-                InnStr[s] = 1;
-            }
-        }
-    }else if(n_M_debuff[1] == 2){
-        if(n_rangedAtk == 0 || n_rangedAtk == 2){
-            for(var s = 0; s < 3; s++){
-                w_DMG[s] = 1;
-                InnStr[s] = 1;
-            }
-        }
-    }else if(n_M_debuff[1] == 3){
-        if(n_rangedAtk == 0 || n_rangedAtk == 1){
-            for(var s = 0; s < 3; s++){
-                w_DMG[s] = 1;
-                InnStr[s] = 1;
-            }
-        }
-    }
-
     if (n_PerHIT_DMG > 0 && w_HIT_HYOUJI < 100 && (str_bSUBname += "Damage when missing",
         0 == str_PerHIT_DMG ? str_bSUB += n_PerHIT_DMG : str_bSUB += str_PerHIT_DMG),
         0 == n_A_ActiveSkill && (w_HIT_HYOUJI -= n_B_manual[38] * w_HIT_HYOUJI / 100),
@@ -2513,10 +2472,10 @@ function ClickWeaponType(e) {
             n_Nitou = 0,
             c.A_weapon1.style.width = "auto",
             c.A_cardshort.style.width = "auto",
-            c.A_weapon1_card1.style.width = "208px",
-            c.A_weapon1_card2.style.width = "208px",
-            c.A_weapon1_card3.style.width = "208px",
-            c.A_weapon1_card4.style.width = "208px",
+            c.A_weapon1_card1.style.width = "auto",
+            c.A_weapon1_card2.style.width = "auto",
+            c.A_weapon1_card3.style.width = "auto",
+            c.A_weapon1_card4.style.width = "auto",
             c.A_head1.style.width = "200px",
             c.A_head2.style.width = "200px",
             c.A_head3.style.width = "200px",
@@ -2561,10 +2520,10 @@ function ClickWeaponType(e) {
             c.A_acces1_card.style.width = "43%",
             c.A_acces2_card.style.width = "43%") : (c.A_weapon1.style.width = "auto",
                 c.A_cardshort.style.width = "auto",
-                c.A_weapon1_card1.style.width = "208px",
-                c.A_weapon1_card2.style.width = "208px",
-                c.A_weapon1_card3.style.width = "208px",
-                c.A_weapon1_card4.style.width = "208px",
+                c.A_weapon1_card1.style.width = "auto",
+                c.A_weapon1_card2.style.width = "auto",
+                c.A_weapon1_card3.style.width = "auto",
+                c.A_weapon1_card4.style.width = "auto",
                 c.A_head1.style.width = "200px",
                 c.A_head2.style.width = "200px",
                 c.A_head3.style.width = "200px",
@@ -2580,28 +2539,11 @@ function ClickWeaponType(e) {
                 c.A_acces1_card.style.width = "auto",
                 c.A_acces2_card.style.width = "auto")
     }
-
     var oldWeapon = n_A_Equip[0];
     n_A_Equip[0] = 1 * c.A_weapon1.value;
     // random options for weapons here
-    if(parseInt(e) == 0 || (m_ForgedItems.includes(parseInt(n_A_Equip[0])) && !(m_RandomOptForgedWeapons.includes(parseInt(n_A_Equip[0]))))){
+    if(parseInt(e) == 0){
         RandOptWeapon1Reset();
-    }else if(m_RandomOptForgedWeapons.includes(parseInt(n_A_Equip[0]))){
-        if(!(m_RandomOptForgedWeapons.includes(parseInt(oldWeapon))) || parseInt(oldWeapon) == 0){
-            RandOptWeapon1Reset();
-            for(i = 0; "NULL" != m_RandomOptForged[0][i]; i++){
-                c.A_weapon1_ropt1.options[i] = new Option(m_RandomOpt[m_RandomOptForged[0][i]][1], m_RandomOpt[m_RandomOptForged[0][i]][0]);
-            }
-            for(i = 0; "NULL" != m_RandomOptForged[1][i]; i++){
-                c.A_weapon1_ropt2.options[i] = new Option(m_RandomOpt[m_RandomOptForged[1][i]][1], m_RandomOpt[m_RandomOptForged[1][i]][0]);
-            }
-            for(i = 0; "NULL" != m_RandomOptForged[2][i]; i++){
-                c.A_weapon1_ropt3.options[i] = new Option(m_RandomOpt[m_RandomOptForged[2][i]][1], m_RandomOpt[m_RandomOptForged[2][i]][0]);
-            }
-            for(i = 0; "NULL" != m_RandomOptForged[3][i]; i++){
-                c.A_weapon1_ropt4.options[i] = new Option(m_RandomOpt[m_RandomOptForged[3][i]][1], m_RandomOpt[m_RandomOptForged[3][i]][0]);
-            }
-        }
     }else if(m_RandomOptSpecialType.includes(parseInt(e)) || m_RandomOptSpecialWeapons.includes(parseInt(n_A_Equip[0]))){ // special
         if(!(m_RandomOptSpecialType.includes(parseInt(n_A_WeaponType)) || m_RandomOptSpecialWeapons.includes(parseInt(oldWeapon))) || parseInt(oldWeapon) == 0){
             RandOptWeapon1Reset();
@@ -2619,7 +2561,7 @@ function ClickWeaponType(e) {
             }
         }
     }else if(m_RandomOptMeleeType.includes(parseInt(e))){ // melee
-        if(!(m_RandomOptMeleeType.includes(parseInt(n_A_WeaponType))) || m_RandomOptSpecialWeapons.includes(parseInt(oldWeapon)) || m_RandomOptForgedWeapons.includes(parseInt(oldWeapon)) || parseInt(oldWeapon) == 0){
+        if(!(m_RandomOptMeleeType.includes(parseInt(n_A_WeaponType))) || m_RandomOptSpecialWeapons.includes(parseInt(oldWeapon)) || parseInt(oldWeapon) == 0){
             RandOptWeapon1Reset();
             for(i = 0; "NULL" != m_RandomOptMelee[0][i]; i++){
                 c.A_weapon1_ropt1.options[i] = new Option(m_RandomOpt[m_RandomOptMelee[0][i]][1], m_RandomOpt[m_RandomOptMelee[0][i]][0]);
@@ -2661,17 +2603,6 @@ function ClickWeaponType(e) {
             c.A_weapon1_ropt4.options[0] = new Option(m_RandomOpt[0][1], m_RandomOpt[0][0]);
         }
     }
-
-    if(m_ForgedItems.includes(n_A_Equip[0])){
-        if(!(m_ForgedItems.includes(oldWeapon))){
-            allCard();
-        }
-    }else{
-        if(m_ForgedItems.includes(oldWeapon)){
-            allCard();
-        }
-    }
-
     ActiveSkillSetPlus(),
     ClickB_Item(n_A_Equip[0])
 }
@@ -2686,52 +2617,22 @@ function ClickWeaponType2(e) {
                 c.A_cardshortLeft.options[0] = new Option("(card shortcuts)", 0),
                 i = 1; i <= 50; i++)
                 c.A_cardshortLeft.options[i] = new Option(m_CardShort[i + 1][0], i + 1);
-            myInnerHtml("nA_weapon2_c1", '<select name="A_weapon2_card1" onChange="Click_Card(this[this.selectedIndex].value)"></select>', 0);
-            myInnerHtml("nA_weapon2_c2", '<select name="A_weapon2_card2" onChange="Click_Card(this[this.selectedIndex].value)"></select>', 0);
-            myInnerHtml("nA_weapon2_c3", '<select name="A_weapon2_card3" onChange="Click_Card(this[this.selectedIndex].value)"></select>', 0);
-            myInnerHtml("nA_weapon2_c4", '<select name="A_weapon2_card4" onChange="Click_Card(this[this.selectedIndex].value)"></select>', 0);
-            if(e == 0 || !(m_ForgedItems.includes(parseInt(e)))){
-                for(i = 0; "NULL" != m_CardSort[0][i]; i++){
-                    c.A_weapon2_card1.options[i] = new Option(m_Card[m_CardSort[0][i]][2], m_Card[m_CardSort[0][i]][0]);
-                    c.A_weapon2_card2.options[i] = new Option(m_Card[m_CardSort[0][i]][2], m_Card[m_CardSort[0][i]][0]);
-                    c.A_weapon2_card3.options[i] = new Option(m_Card[m_CardSort[0][i]][2], m_Card[m_CardSort[0][i]][0]);
-                    c.A_weapon2_card4.options[i] = new Option(m_Card[m_CardSort[0][i]][2], m_Card[m_CardSort[0][i]][0]);
-                }
-            }else{
-                c.A_weapon2_card1.options[0] = new Option(m_Card[0][2], m_Card[0][0]);
-				c.A_weapon2_card1.options[1] = new Option(m_Card[201][2], m_Card[201][0]);
-				c.A_weapon2_card1.options[2] = new Option(m_Card[202][2], m_Card[202][0]);
-				c.A_weapon2_card1.options[3] = new Option(m_Card[203][2], m_Card[203][0]);
-				c.A_weapon2_card1.options[4] = new Option(m_Card[204][2], m_Card[204][0]);
-				c.A_weapon2_card1.options[5] = new Option(m_Card[106][2], m_Card[106][0]);
+            for (myInnerHtml("nA_weapon2_c1", '<select name="A_weapon2_card1" onChange="Click_Card(this[this.selectedIndex].value)"></select>', 0),
+                myInnerHtml("nA_weapon2_c2", '<select name="A_weapon2_card2" onChange="Click_Card(this[this.selectedIndex].value)"></select>', 0),
+                myInnerHtml("nA_weapon2_c3", '<select name="A_weapon2_card3" onChange="Click_Card(this[this.selectedIndex].value)"></select>', 0),
+                myInnerHtml("nA_weapon2_c4", '<select name="A_weapon2_card4" onChange="Click_Card(this[this.selectedIndex].value)"></select>', 0),
+                i = 0; "NULL" != m_CardSort[0][i]; i++)
+                c.A_weapon2_card1.options[i] = new Option(m_Card[m_CardSort[0][i]][2], m_Card[m_CardSort[0][i]][0]);
+            for (i = 0; "NULL" != m_CardSort[1][i]; i++)
+                c.A_weapon2_card2.options[i] = new Option(m_Card[m_CardSort[1][i]][2], m_Card[m_CardSort[1][i]][0]),
+                    c.A_weapon2_card3.options[i] = new Option(m_Card[m_CardSort[1][i]][2], m_Card[m_CardSort[1][i]][0]),
+                    c.A_weapon2_card4.options[i] = new Option(m_Card[m_CardSort[1][i]][2], m_Card[m_CardSort[1][i]][0]);
+            c.A_weapon2_card4.options[1] = new Option("* Top10 ranked", 106);
 
-				c.A_weapon2_card2.options[0] = new Option(m_Card[0][2], m_Card[0][0]);
-				c.A_weapon2_card2.options[1] = new Option(m_Card[106][2], m_Card[106][0]);
-				c.A_weapon2_card3.options[0] = new Option(m_Card[0][2], m_Card[0][0]);
-				c.A_weapon2_card3.options[1] = new Option(m_Card[106][2], m_Card[106][0]);
-				c.A_weapon2_card4.options[0] = new Option(m_Card[0][2], m_Card[0][0]);
-				c.A_weapon2_card4.options[1] = new Option("* Top10 ranked", 106);
-            }
-
-            RandOptWeapon2Reset();
             // add random options to 2nd weapon for assassin
-            if(m_RandomOptForgedWeapons.includes(parseInt(e))){
-                if(!(m_RandomOptForgedWeapons.includes(parseInt(n_A_Equip[1])))){
-                    for(i = 0; "NULL" != m_RandomOptForged[0][i]; i++){
-                        c.A_weapon2_ropt1.options[i] = new Option(m_RandomOpt[m_RandomOptForged[0][i]][1], m_RandomOpt[m_RandomOptForged[0][i]][0]);
-                    }
-                    for(i = 0; "NULL" != m_RandomOptForged[1][i]; i++){
-                        c.A_weapon2_ropt2.options[i] = new Option(m_RandomOpt[m_RandomOptForged[1][i]][1], m_RandomOpt[m_RandomOptForged[1][i]][0]);
-                    }
-                    for(i = 0; "NULL" != m_RandomOptForged[2][i]; i++){
-                        c.A_weapon2_ropt3.options[i] = new Option(m_RandomOpt[m_RandomOptForged[2][i]][1], m_RandomOpt[m_RandomOptForged[2][i]][0]);
-                    }
-                    for(i = 0; "NULL" != m_RandomOptForged[3][i]; i++){
-                        c.A_weapon2_ropt4.options[i] = new Option(m_RandomOpt[m_RandomOptForged[3][i]][1], m_RandomOpt[m_RandomOptForged[3][i]][0]);
-                    }
-                }
-            }else if(m_RandomOptSpecialWeapons.includes(parseInt(e))){ // special weapons that assassins can use
+            if(m_RandomOptSpecialWeapons.includes(parseInt(e))){ // special weapons that assassins can use
                 if(!(m_RandomOptSpecialWeapons.includes(parseInt(n_A_Equip[1])))){
+                    RandOptWeapon2Reset();
                     for(i = 0; "NULL" != m_RandomOptSpecial[0][i]; i++){
                         c.A_weapon2_ropt1.options[i] = new Option(m_RandomOpt[m_RandomOptSpecial[0][i]][1], m_RandomOpt[m_RandomOptSpecial[0][i]][0]);
                     }
@@ -2746,7 +2647,8 @@ function ClickWeaponType2(e) {
                     }
                 }
             }else{ // melee weapons
-                if(m_RandomOptSpecialWeapons.includes(parseInt(n_A_Equip[1])) || m_RandomOptForgedWeapons.includes(parseInt(n_A_Equip[1])) || parseInt(n_A_Equip[1]) == 0){
+                if(m_RandomOptSpecialWeapons.includes(parseInt(n_A_Equip[1])) || parseInt(n_A_Equip[1]) == 0){
+                    RandOptWeapon2Reset();
                     for(i = 0; "NULL" != m_RandomOptMelee[0][i]; i++){
                         c.A_weapon2_ropt1.options[i] = new Option(m_RandomOpt[m_RandomOptMelee[0][i]][1], m_RandomOpt[m_RandomOptMelee[0][i]][0]);
                     }
@@ -2760,64 +2662,21 @@ function ClickWeaponType2(e) {
                 }
             }
 
+            var _ = Math.max(document.documentElement.clientWidth, document.body.scrollWidth, document.documentElement.scrollWidth, document.body.offsetWidth, document.documentElement.offsetWidth);
+            1262 <= _ && _ < 1480 || _ < 1013 ? (c.A_weapon2.style.width = "95%",
+                c.A_cardshortLeft.style.width = "95%",
+                c.A_weapon2_card1.style.width = "95%",
+                c.A_weapon2_card2.style.width = "95%",
+                c.A_weapon2_card3.style.width = "95%",
+                c.A_weapon2_card4.style.width = "95%") : (c.A_weapon2.style.width = "auto",
+                    c.A_cardshortLeft.style.width = "auto",
+                    c.A_weapon2_card1.style.width = "auto",
+                    c.A_weapon2_card2.style.width = "auto",
+                    c.A_weapon2_card3.style.width = "auto",
+                    c.A_weapon2_card4.style.width = "auto");
             n_Nitou = 1;
         }else{
-            if(m_ForgedItems.includes(parseInt(e))){
-                if(!(m_ForgedItems.includes(n_A_Equip[1]))){
-                    myInnerHtml("nA_weapon2_c1", '<select name="A_weapon2_card1" onChange="Click_Card(this[this.selectedIndex].value)"></select>', 0);
-                    myInnerHtml("nA_weapon2_c2", '<select name="A_weapon2_card2" onChange="Click_Card(this[this.selectedIndex].value)"></select>', 0);
-                    myInnerHtml("nA_weapon2_c3", '<select name="A_weapon2_card3" onChange="Click_Card(this[this.selectedIndex].value)"></select>', 0);
-                    myInnerHtml("nA_weapon2_c4", '<select name="A_weapon2_card4" onChange="Click_Card(this[this.selectedIndex].value)"></select>', 0);
-
-                    c.A_weapon2_card1.options[0] = new Option(m_Card[0][2], m_Card[0][0]);
-                    c.A_weapon2_card1.options[1] = new Option(m_Card[201][2], m_Card[201][0]);
-                    c.A_weapon2_card1.options[2] = new Option(m_Card[202][2], m_Card[202][0]);
-                    c.A_weapon2_card1.options[3] = new Option(m_Card[203][2], m_Card[203][0]);
-                    c.A_weapon2_card1.options[4] = new Option(m_Card[204][2], m_Card[204][0]);
-                    c.A_weapon2_card1.options[5] = new Option(m_Card[106][2], m_Card[106][0]);
-
-                    c.A_weapon2_card2.options[0] = new Option(m_Card[0][2], m_Card[0][0]);
-                    c.A_weapon2_card2.options[1] = new Option(m_Card[106][2], m_Card[106][0]);
-                    c.A_weapon2_card3.options[0] = new Option(m_Card[0][2], m_Card[0][0]);
-                    c.A_weapon2_card3.options[1] = new Option(m_Card[106][2], m_Card[106][0]);
-                    c.A_weapon2_card4.options[0] = new Option(m_Card[0][2], m_Card[0][0]);
-                    c.A_weapon2_card4.options[1] = new Option("* Top10 ranked", 106);
-                }
-            }else{
-                if(m_ForgedItems.includes(n_A_Equip[1])){
-                    myInnerHtml("nA_weapon2_c1", '<select name="A_weapon2_card1" onChange="Click_Card(this[this.selectedIndex].value)"></select>', 0);
-                    myInnerHtml("nA_weapon2_c2", '<select name="A_weapon2_card2" onChange="Click_Card(this[this.selectedIndex].value)"></select>', 0);
-                    myInnerHtml("nA_weapon2_c3", '<select name="A_weapon2_card3" onChange="Click_Card(this[this.selectedIndex].value)"></select>', 0);
-                    myInnerHtml("nA_weapon2_c4", '<select name="A_weapon2_card4" onChange="Click_Card(this[this.selectedIndex].value)"></select>', 0);
-
-                    for(i = 0; "NULL" != m_CardSort[0][i]; i++){
-                        c.A_weapon2_card1.options[i] = new Option(m_Card[m_CardSort[0][i]][2], m_Card[m_CardSort[0][i]][0]);
-                        c.A_weapon2_card2.options[i] = new Option(m_Card[m_CardSort[0][i]][2], m_Card[m_CardSort[0][i]][0]);
-                        c.A_weapon2_card3.options[i] = new Option(m_Card[m_CardSort[0][i]][2], m_Card[m_CardSort[0][i]][0]);
-                        c.A_weapon2_card4.options[i] = new Option(m_Card[m_CardSort[0][i]][2], m_Card[m_CardSort[0][i]][0]);
-                    }
-                }
-            }
-
-            if(m_ForgedItems.includes(parseInt(e)) && !(m_RandomOptForgedWeapons.includes(parseInt(e)))){
-                RandOptWeapon2Reset();
-            }else if(m_RandomOptForgedWeapons.includes(parseInt(e))){
-                if(!(m_RandomOptForgedWeapons.includes(parseInt(n_A_Equip[1])))){
-                    RandOptWeapon2Reset();
-                    for(i = 0; "NULL" != m_RandomOptForged[0][i]; i++){
-                        c.A_weapon2_ropt1.options[i] = new Option(m_RandomOpt[m_RandomOptForged[0][i]][1], m_RandomOpt[m_RandomOptForged[0][i]][0]);
-                    }
-                    for(i = 0; "NULL" != m_RandomOptForged[1][i]; i++){
-                        c.A_weapon2_ropt2.options[i] = new Option(m_RandomOpt[m_RandomOptForged[1][i]][1], m_RandomOpt[m_RandomOptForged[1][i]][0]);
-                    }
-                    for(i = 0; "NULL" != m_RandomOptForged[2][i]; i++){
-                        c.A_weapon2_ropt3.options[i] = new Option(m_RandomOpt[m_RandomOptForged[2][i]][1], m_RandomOpt[m_RandomOptForged[2][i]][0]);
-                    }
-                    for(i = 0; "NULL" != m_RandomOptForged[3][i]; i++){
-                        c.A_weapon2_ropt4.options[i] = new Option(m_RandomOpt[m_RandomOptForged[3][i]][1], m_RandomOpt[m_RandomOptForged[3][i]][0]);
-                    }
-                }
-            }else if(m_RandomOptSpecialWeapons.includes(parseInt(e))){ // special weapons that assassins can use
+            if(m_RandomOptSpecialWeapons.includes(parseInt(e))){ // special weapons that assassins can use
                 if(!(m_RandomOptSpecialWeapons.includes(parseInt(n_A_Equip[1])))){
                     RandOptWeapon2Reset();
                     for(i = 0; "NULL" != m_RandomOptSpecial[0][i]; i++){
@@ -2834,7 +2693,7 @@ function ClickWeaponType2(e) {
                     }
                 }
             }else{ // melee weapons
-                if(m_RandomOptSpecialWeapons.includes(parseInt(n_A_Equip[1])) || m_RandomOptForgedWeapons.includes(parseInt(n_A_Equip[1])) || parseInt(n_A_Equip[1]) == 0){
+                if(m_RandomOptSpecialWeapons.includes(parseInt(n_A_Equip[1])) || parseInt(n_A_Equip[1]) == 0){
                     RandOptWeapon2Reset();
                     for(i = 0; "NULL" != m_RandomOptMelee[0][i]; i++){
                         c.A_weapon2_ropt1.options[i] = new Option(m_RandomOpt[m_RandomOptMelee[0][i]][1], m_RandomOpt[m_RandomOptMelee[0][i]][0]);
@@ -2849,18 +2708,6 @@ function ClickWeaponType2(e) {
                 }
             }
         }
-        var _ = Math.max(document.documentElement.clientWidth, document.body.scrollWidth, document.documentElement.scrollWidth, document.body.offsetWidth, document.documentElement.offsetWidth);
-            1262 <= _ && _ < 1480 || _ < 1013 ? (c.A_weapon2.style.width = "95%",
-                c.A_cardshortLeft.style.width = "95%",
-                c.A_weapon2_card1.style.width = "95%",
-                c.A_weapon2_card2.style.width = "95%",
-                c.A_weapon2_card3.style.width = "95%",
-                c.A_weapon2_card4.style.width = "95%") : (c.A_weapon2.style.width = "auto",
-                    c.A_cardshortLeft.style.width = "auto",
-                    c.A_weapon2_card1.style.width = "208px",
-                    c.A_weapon2_card2.style.width = "208px",
-                    c.A_weapon2_card3.style.width = "208px",
-                    c.A_weapon2_card4.style.width = "208px");
     } else
         c.A_weapon2.value = 0,
             myInnerHtml("A_weapon2refine", "", 0),
@@ -4750,7 +4597,7 @@ function ClickB_Enemy() {
         n_B_HIT = n_B[26],
         n_B_FLEE = n_B[27]
 
-        for(var i = 0; i < m_MonsterNotes.length; i++){
+        for(i = 0; i < m_MonsterNotes.length; i++){
             if(n_B[0] == m_MonsterNotes[i][0]){
                 document.getElementById("monsterNotes").hidden = false;
                 loadNotes(n_B[0]);
@@ -4761,7 +4608,7 @@ function ClickB_Enemy() {
             }
         }
 
-        for(var i = 0; i < m_PlaceNotes.length; i++){
+        for(i = 0; i < m_PlaceNotes.length; i++){
             if(monsterInPlace(n_B[0]).includes(m_PlaceNotes[i][0])){
                 document.getElementById("monsterNotes").hidden = false;
                 loadNotes(n_B[0]);

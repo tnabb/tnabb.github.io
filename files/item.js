@@ -1405,7 +1405,7 @@ m_Item = [
 	, [1401, 999, 0, 2, 0, 0, 70, 10, "Girlfriend Hat", 0, "", 0]
 	, [1402, 999, 0, 1, 0, 1, 20, 20, "Twin Pompom By JB", 0, "Enables use of [" + skillName(123, SRV) + "] Lvl 1.<br />When performing an ATK based attack, 50% chance to cast [Increase Agility] Lvl 1.", 6, 3, 0]
 	, [1403, 999, 0, 3, 0, 1, 30, 85, "Crown of Deceit", 0, "", 200, 1, 4, 4, 19, 10, 73, -10, 0]
-	, [1404, 51, 0, 1, 0, 0, 10, 70, "Filir's Pinions", 0, "", 12, 2, 73, -2, 0]
+	, [1404, 51, 0, 1, 0, 0, 10, 70, "Filir's Pinions", 0, "", 12, 2, 74, 2, 0]
 	, [1405, 999, 0, 2, 0, 0, 20, 1, "Advanced Mini Propeller", 0, "", 2, 2, 5, 1, 9, 10, 0]
 	, [1406, 999, 0, 4, 0, 1, 30, 1, "Snowman Hat", 0, "10% chance to obtain a [Buche De Noel] item when killing monster ID no.530<br>10% chance to obtain a [Candy Cane] item when killing monster ID no.12354<br><b>[Refine Rate 0~7]</b><br>When receiving ATK or MATK based attack, 2% chance to cast [" + skillName(201, SRV) + "] Lvl 1 on yourself.<br><b>[Refine Rate 8~10]</b><br>When receiving ATK or MATK based attack, 2% chance to cast [" + skillName(201, SRV) + "] Lvl 5 on yourself.", 19, 3, 1, 1, 4, 1, 61, 7, 0]
 	, [1407, 999, 0, 0, 0, 1, 60, 1, "Red Wing Hat", 0, "<b>[Refine Rate 7~10]</b><br>ATK +2%, MATK +2%<br><b>[Refine Rate 9~10]</b><br>Additional ATK+2% and MATK +2%", 0] //{ if (getrefine()>6) { bonus2 bAddRace,RC_NonBoss,2; bonus2 bAddRace,RC_Boss,2; bonus bMatkRate,2; } if (getrefine()>8) { bonus2 bAddRace,RC_NonBoss,2; bonus2 bAddRace,RC_Boss,2; bonus bMatkRate,2; } }
@@ -2017,65 +2017,6 @@ m_Item = [
 	, [2010, 100, 0, 0, 0, 0, 0, 0, "Ferlock Set", 0, 0, 13, 1000, 0]
 	, [2011, 1, 62, 150, 4, 2, 120, 50, "Poison Bayonet", 0, 0, 89, 15, 1, 2, 4, 2, 5006, 15, 5007, 15, 5025, 15, 5076, 15, 5308, 15, 5065, 15, 5161, 15, 5162, 15, 5158, 15, 5159, 15, 5046, 15, 5047, 15, 5051, 15, 5052, 15, 5053, 15, 5054, 15, 5055, 15, 5056, 15, 5057, 15, 5122, 15, 5124, 15, 5126, 15, 5127, 15, 5128, 15, 5130, 15, 5131, 15, 5132, 15, 5133, 15, 5037, 15, 5041, 15, 5044, 15, 5307, 15, 5102, 15, 5097, 15, 5104, 15, 5106, 15, 5111, 15, 5112, 15, 5113, 15, 5244, 15, 5248, 15, 5088, 15, 5306, 15, 5019, 15, 5193, 15, 5192, 15, 5197, 15, 5321, 15, 5339, 15, 5382, 15, 5398, 15, 5400, 15, 5401, 15, 5407, 15, 5408, 15, 5409, 15, 5410, 15, 5412, 15, 5413, 15, 5414, 15, 5415, 15, 5418, 15, 5419, 15, 5423, 15, 5302, 15, 0]
 	, [2012, 62, 0, 3, 0, 1, 30, 0, "Manteau of Mystic Frozen", 0, 0, 61, 10, 64, -10, 0]
-	// forged daggers 
-	, [2013, 1, 0, 17, 1, 0, 40, 1, "Knife [Forged]", 0, "", 0]
-	, [2014, 1, 0, 30, 1, 0, 50, 1, "Cutter [Forged]", 0, "", 0]
-	, [2015, 1, 0, 43, 1, 0, 60, 1, "Main Gauche [Forged]", 0, "", 0]
-	, [2016, 1, 0, 59, 2, 0, 50, 12, "Dirk [Forged]", 0, "", 0]
-	, [2017, 1, 0, 73, 2, 0, 60, 12, "Dagger [Forged]", 0, "", 0]
-	, [2018, 1, 0, 87, 2, 0, 70, 12, "Stilleto [Forged]", 0, "", 0]
-	, [2019, 1, 1, 105, 3, 0, 70, 24, "Gladius [Forged]", 0, "", 0]
-	, [2020, 1, 1, 118, 3, 0, 80, 24, "Damascus [Forged]", 0, "", 194, 1, 0]
-	// forged 1 handed swords
-	, [2021, 2, 0, 25, 1, 0, 50, 2, "Sword [Forged]", 0, "", 0]
-	, [2022, 2, 0, 39, 1, 0, 60, 2, "Falchion [Forged]", 0, "", 0]
-	, [2023, 2, 0, 53, 1, 0, 70, 2, "Blade [Forged]", 0, "", 0]
-	, [2024, 2, 0, 70, 2, 0, 50, 14, "Rapier [Forged]", 0, "", 0]
-	, [2025, 2, 0, 85, 2, 0, 70, 14, "Scimitar [Forged]", 0, "", 0]
-	, [2026, 2, 1, 100, 2, 0, 90, 14, "Ring Pommel Saber [Forged]", 0, "", 0]
-	, [2027, 2, 1, 115, 3, 0, 100, 27, "Saber [Forged]", 0, "", 0]
-	, [2028, 2, 1, 120, 3, 0, 90, 27, "Haedonggum [Forged]", 0, "", 4, 3, 0]
-	, [2029, 2, 1, 130, 3, 0, 120, 27, "Tsurugi [Forged]", 0, "", 0]
-	, [2030, 2, 61, 150, 3, 0, 150, 27, "Flamberge [Forged]", 0, "", 0]
-	// forged 2 handed swords
-	, [2031, 3, 0, 60, 1, 0, 100, 4, "Katana [Forged]", 0, "", 0]
-	, [2032, 3, 0, 90, 2, 0, 130, 18, "Slayer [Forged]", 0, "", 0]
-	, [2033, 3, 0, 115, 2, 0, 160, 18, "Bastard Sword [Forged]", 0, "", 0]
-	, [2034, 3, 0, 140, 3, 0, 200, 33, "Broad Sword [Forged]", 0, "", 18, 5, 0]
-	, [2035, 3, 0, 160, 3, 0, 220, 33, "Two-handed Sword [Forged]", 0, "", 0]
-	, [2036, 3, 61, 180, 3, 0, 250, 33, "Claymore [Forged]", 0, "", 0]
-	// forged spears
-	, [2037, 4, 0, 28, 1, 0, 70, 4, "Javelin [Forged]", 0, "", 0]
-	, [2038, 4, 0, 44, 1, 0, 85, 4, "Spear [Forged]", 0, "", 0]
-	, [2039, 4, 0, 60, 1, 0, 100, 4, "Pike [Forged]", 0, "", 0]
-	, [2040, 5, 0, 84, 2, 0, 100, 18, "Guisarme [Forged]", 0, "", 0]
-	, [2041, 5, 0, 104, 2, 0, 120, 18, "Glaive [Forged]", 0, "", 0]
-	, [2042, 5, 0, 124, 2, 0, 200, 18, "Partizan [Forged]", 0, "", 0]
-	, [2043, 5, 0, 150, 3, 0, 120, 33, "Trident [Forged]", 0, "", 0]
-	, [2044, 5, 0, 165, 3, 0, 250, 33, "Halberd [Forged]", 0, "", 0]
-	, [2045, 5, 0, 185, 3, 0, 250, 33, "Lance [Forged]", 0, "", 0]
-	// forged axes
-	, [2046, 6, 90, 38, 1, 0, 80, 3, "Axe [Forged]", 0, "", 0]
-	, [2047, 7, 1, 80, 1, 0, 150, 3, "Battle Axe [Forged]", 0, "", 0]
-	, [2048, 7, 1, 120, 2, 0, 200, 16, "Hammer [Forged]", 0, "", 0]
-	, [2049, 7, 1, 155, 3, 0, 220, 30, "Buster [Forged]", 0, "", 0]
-	, [2050, 7, 1, 185, 3, 0, 250, 30, "Two-handed Axe [Forged]", 0, "", 0]
-	// forged maces
-	, [2051, 8, 0, 23, 1, 0, 70, 2, "Club [Forged]", 0, "", 0]
-	, [2052, 8, 0, 37, 1, 0, 80, 2, "Mace [Forged]", 0, "", 0]
-	, [2053, 8, 0, 54, 2, 0, 100, 14, "Smasher [Forged]", 0, "", 0]
-	, [2054, 8, 1, 69, 2, 0, 90, 14, "Flail [Forged]", 0, "", 0]
-	, [2055, 8, 1, 84, 2, 0, 80, 14, "Chain [Forged]", 0, "", 0]
-	, [2056, 8, 1, 110, 3, 0, 150, 27, "Morning Star [Forged]", 0, "", 0]
-	, [2057, 8, 1, 130, 3, 0, 120, 27, "Sword Mace [Forged]", 0, "", 0]
-	, [2058, 8, 53, 140, 3, 0, 200, 27, "Stunner [Forged]", 0, "", 131, 10, 0]
-	// forged knuckles
-	, [2059, 13, 0, 30, 1, 0, 40, 1, "Waghnak [Forged]", 0, "", 0]
-	, [2060, 13, 0, 50, 2, 0, 45, 12, "Knuckle Duster [Forged]", 0, "", 0]
-	, [2061, 13, 0, 65, 2, 0, 45, 12, "Studded Knuckles [Forged]", 0, "", 0]
-	, [2062, 13, 0, 86, 3, 0, 50, 24, "Claw [Forged]", 0, "", 1, 2, 0]
-	, [2063, 13, 0, 97, 3, 0, 50, 24, "Finger [Forged]", 0, "", 0]
-	, [2064, 13, 0, 115, 3, 0, 65, 24, "Fist [Forged]", 0, "", 0]
 ];
 
 //[ id, display location, job that can use, atk/def, level of weapon, slots, weight, level required to use, "name of item", ?, "description", effect1, effect2, ..., 0 =? ]
@@ -2083,8 +2024,6 @@ m_Item = [
 // job that can use (70 = swordman + merchant, 72 = swordman + thiefs + merchants, 73 = acolyte + merchant, 74 = swordsman + thief + merchant + acolyte + bard/dancer, 75 = swordsman + archer + merchant + thief, 76 = archer + rogue, 77 = mage + acolyte + soul linker, 78 = swordsman + merchant + acolyte + thief, 79 = all 2nd classes, 80 = thief 84 = swordsman + thief + merchant + taekwon kid + star glad, 89 = mage + acolyte + archer)
 // 3001 = every rebirth job except novice, 
 ItemMax = m_Item.length - 1;
-
-m_ForgedItems = [2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025, 2026, 2027, 2028, 2029, 2030, 2031, 2032, 2033, 2034, 2035, 2036, 2037, 2038, 2039, 2040, 2041, 2042, 2043, 2044, 2045, 2046, 2047, 2048, 2049, 2050, 2051, 2052, 2053, 2054, 2055, 2056, 2057, 2058, 2059, 2060, 2061, 2062, 2063];
 
 function Click_Item(value) {
 	//	if(EquipNumSearch(633) && c.A_Kakutyou.value == 28){
