@@ -1159,7 +1159,7 @@ function BattleCalc999() {
                 w_HIT_HYOUJI = 100,
                 CastAndDelay(),
                 BattleCalc998()
-        } else if (106 == n_A_ActiveSkill || 111 == n_A_ActiveSkill || 112 == n_A_ActiveSkill || 113 == n_A_ActiveSkill) {
+        } else if (106 == n_A_ActiveSkill || 111 == n_A_ActiveSkill || 112 == n_A_ActiveSkill || 113 == n_A_ActiveSkill) { // traps
             n_PerHIT_DMG = 0,
                 n_Delay[0] = 1,
                 106 == n_A_ActiveSkill ? (n_A_Weapon_element = 2,
@@ -1168,6 +1168,10 @@ function BattleCalc999() {
                             w_DMG[2] = Math.floor(n_A_ActiveSkillLV * (75 + n_A_DEX) * (n_A_INT + 100) / 35 * Math.max(0, element[n_B[3]][3]))) : 111 == n_A_ActiveSkill && (n_A_Weapon_element = 1,
                                 w_DMG[2] = Math.floor(n_A_ActiveSkillLV * (75 + n_A_DEX) * (n_A_INT + 100) / 35 * Math.max(0, element[n_B[3]][1]))),
                 w_DMG[2] = tPlusDamCut(w_DMG[2]),
+                _ = 0
+                n_A_Buf9[20] == n_A_ActiveSkill && (_ += n_A_Buf9[19]),
+                n_A_Buf9[22] == n_A_ActiveSkill && (_ += n_A_Buf9[21]),
+                w_DMG[2] = Math.floor(w_DMG[2] * (100 + StPlusCalc2(5e3 + n_A_ActiveSkill) + StPlusCard(5e3 + n_A_ActiveSkill) + _) / 100),
                 w_DMG[0] = w_DMG[1] = w_DMG[2];
             for (e = 0; e <= 2; e++)
                 Last_DMG_A[e] = Last_DMG_B[e] = w_DMG[e],
@@ -1551,26 +1555,39 @@ function BattleCalc998() {
             }
         }
     } */
-
-    if(n_M_debuff[1] == 1){
+    
+    // damage flag
+    if(n_M_debuff[1] == 1){ // melee
         if(n_rangedAtk == 1 || n_rangedAtk == 2){
             for(var s = 0; s < 3; s++){
                 w_DMG[s] = 1;
                 InnStr[s] = 1;
+                if(document.getElementById("CRIATK").innerHTML.length > 0){
+                    n_A_CriATK[s] = 1;
+                    document.getElementById("CRIATK").innerHTML = "1";
+                }
             }
         }
-    }else if(n_M_debuff[1] == 2){
+    }else if(n_M_debuff[1] == 2){ // ranged
         if(n_rangedAtk == 0 || n_rangedAtk == 2){
             for(var s = 0; s < 3; s++){
                 w_DMG[s] = 1;
                 InnStr[s] = 1;
+                if(document.getElementById("CRIATK").innerHTML.length > 0){
+                    n_A_CriATK[s] = 1;
+                    document.getElementById("CRIATK").innerHTML = "1";
+                }
             }
         }
-    }else if(n_M_debuff[1] == 3){
+    }else if(n_M_debuff[1] == 3){ // magic
         if(n_rangedAtk == 0 || n_rangedAtk == 1){
             for(var s = 0; s < 3; s++){
                 w_DMG[s] = 1;
                 InnStr[s] = 1;
+                if(document.getElementById("CRIATK").innerHTML.length > 0){
+                    n_A_CriATK[s] = 1;
+                    document.getElementById("CRIATK").innerHTML = "1";
+                }
             }
         }
     }
@@ -4778,7 +4795,7 @@ function ClickB_Enemy() {
         }
 
         for(var i = 0; i < m_PlaceNotes.length; i++){
-            if(monsterInPlace(n_B[0]).includes(m_PlaceNotes[i][0])){
+            if(c.ENEMY_SORT2.value == m_PlaceNotes[i][0]){
                 document.getElementById("monsterNotes").hidden = false;
                 loadNotes(n_B[0]);
                 break
@@ -5134,6 +5151,7 @@ function ApplyModifiers(e) {
         n_A_Buf7[23] && SUPURE_MONSTER() && (e = 110 * e / 100),
         e
 }
+
 function BattleCalc3(e) {
     return wBC3_3dan = w998B * TyouEnkakuSousa3dan,
         wBC3_DA = w998E * e * 2,

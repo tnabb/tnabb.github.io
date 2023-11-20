@@ -1270,7 +1270,7 @@ function loadNotes(e){
 		}
 	}
 	for(i = 0; i < m_PlaceNotes.length; i++){
-		if(monsterInPlace(e).includes(m_PlaceNotes[i][0])){
+		if(c.ENEMY_SORT2.value == m_PlaceNotes[i][0]){
 			_ += '<tr><td class="left" style="font-weight: bold">' + v_Place[m_PlaceNotes[i][0]] + ':</td></tr>'
 			for(j = 1; j < m_PlaceNotes[i].length && m_PlaceNotes[i][j] != "NULL"; j += 2){
 				_ += Notes_Setumei(m_PlaceNotes[i][j], m_PlaceNotes[i][j + 1]);
@@ -1293,7 +1293,7 @@ function NotesCalc(e, _){
 		}
 	}
 	for(i = 0; i < m_PlaceNotes.length; i++){
-		if(monsterInPlace(e).includes(m_PlaceNotes[i][0])){
+		if(c.ENEMY_SORT2.value == m_PlaceNotes[i][0]){
 			for(j = 1; j < m_PlaceNotes[i].length && m_PlaceNotes[i][j] != "NULL"; j += 2){
 				_ == m_PlaceNotes[i][j] && (subDmg = m_PlaceNotes[i][j + 1]);
 			}
