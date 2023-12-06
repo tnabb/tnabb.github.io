@@ -465,7 +465,7 @@ function StAllCalc() {
         n_tok[_] = 0,
             n_tok[_] += StPlusCalc2(_),
             n_tok[_] += StPlusCard(_);
-    for (_ = 290; _ <= 369; _++) // add more options
+    for (_ = 290; _ <= 370; _++) // add more options
         n_tok[_] = 0,
             n_tok[_] += StPlusCalc2(_),
             n_tok[_] += StPlusCard(_);
@@ -1039,6 +1039,9 @@ function StAllCalc() {
         10 == n_A_WeaponType && 15 == n_A_Arrow && (M += 20),
         (10 == n_A_WeaponType || 17 <= n_A_WeaponType && n_A_WeaponType <= 21) && (M += 15 * CardNumSearch(462)),
         SkillSearch(195) ? M += 7.5 + 2.5 * SkillSearch(195) : TimeItemNumSearch(34) && (M += 10),
+        n_A_HEAD_REFINE >= 5 && 1898 == n_A_Equip[2] && (M += 1),
+        n_A_HEAD_REFINE >= 7 && 1898 == n_A_Equip[2] && (M += 2),
+        n_A_HEAD_REFINE >= 9 && 1898 == n_A_Equip[2] && (M += 2),
         SRV >= 50 && (4 != n_A_WeaponType && 5 != n_A_WeaponType || !SkillSearch(166) || (n_A_CRI += 3 * SkillSearch(166))),
         n_A_CRI += M,
         n_A_Buf3[5] && (n_A_CRI += 10 + n_A_Buf3[5] + Math.floor(n_A_Buf3[35] / 2) + Math.floor(n_A_Buf3[25] / 10)),
@@ -1111,6 +1114,9 @@ function StAllCalc() {
         n_A_Weapon_refine >= 9 && 1950 == n_A_Equip[0] && (M += 10),
         n_A_HEAD_REFINE >= 9 && 1962 == n_A_Equip[2] && (M += 2),
         n_A_HEAD_REFINE >= 9 && 1972 == n_A_Equip[2] && (M += 2),
+        n_A_HEAD_REFINE >= 5 && 1898 == n_A_Equip[2] && (M += 1),
+        n_A_HEAD_REFINE >= 7 && 1898 == n_A_Equip[2] && (M += 1),
+        n_A_HEAD_REFINE >= 9 && 1898 == n_A_Equip[2] && (M += 1),
         3 == n_A_JobClass() && 1950 == n_A_Equip[0] && (M -= 5),
         14 != n_A_JobClass2() && 44 != n_A_JOB || (M += 15 * EquipNumSearch(897)),
         14 != n_A_JobClass2() && 44 != n_A_JOB || (M += 15 * EquipNumSearch(898)),
@@ -1221,6 +1227,9 @@ function StAllCalc() {
         n_A_Weapon2_refine >= 7 && 1077 == n_A_Equip[1] && (M += 5),
         n_A_Weapon2_refine >= 9 && 1077 == n_A_Equip[1] && (M += 5),
         n_A_HEAD_REFINE >= 9 && 1962 == n_A_Equip[2] && (M += 2),
+        n_A_HEAD_REFINE >= 5 && 1898 == n_A_Equip[2] && (M += 1),
+        n_A_HEAD_REFINE >= 7 && 1898 == n_A_Equip[2] && (M += 2),
+        n_A_HEAD_REFINE >= 9 && 1898 == n_A_Equip[2] && (M += 2),
         1966 == n_A_Equip[0] && (M += 1 * n_A_Weapon_refine),
         n_A_SHOULDER_REFINE >= 7 && SU_AGI >= 90 && 1472 == n_A_Equip[7] && (M += 8);
     var B = M;
@@ -1918,8 +1927,8 @@ function StPlusCard(_) { // buffs / stats from cards perhaps
     for (a = 47; a < 53; a++)
         _ == a - 46 && (n += n_A_Buf9[a]); // stats
     for (a = 0; a <= 26; a += 2) // adds effects from random options
-        _ == m_RandomOpt[n_A_randopt[a]][2] && _ == 73 && (n -= n_A_randopt[a + 1]),
-        _ == m_RandomOpt[n_A_randopt[a]][2] && _ != 73 && (n += n_A_randopt[a + 1]);
+        _ == m_RandomOpt[n_A_randopt[a]][2] && (_ == 73 || _ == 370) && (n -= n_A_randopt[a + 1]),
+        _ == m_RandomOpt[n_A_randopt[a]][2] && (_ != 73 && _ != 370) && (n += n_A_randopt[a + 1]);
     return 80 == _ && (n += n_A_Buf9[41]), // atk% based dmg on any target
         290 == _ && (n += n_A_Buf9[16]), // def ignore
         295 == _ && (n += n_A_Buf9[17]), // mdef ignore
@@ -2725,10 +2734,10 @@ function KakutyouKansuu() {
                     frate1 < 0 && (frate1 = 0),
                     frate2 = Math.floor(100 * (srate + brate)) / 100,
                     frate2 < 0 && (frate2 = 0),
-                    myInnerHtml("A_KakutyouData", "<b><br>Sucess rate: </b>" + srate + " % [ " + frate1 + " % ~ " + frate2 + " % ]", 0)) : 22 == n_A_JOB ? (myInnerHtml("A_KakutyouSel", 'Potion to Create: <select name="A_KakutyouSelNum" onChange="StAllCalc()"></select><BR>', 0),
+                    myInnerHtml("A_KakutyouData", "<b><br>Success rate: </b>" + srate + " % [ " + frate1 + " % ~ " + frate2 + " % ]", 0)) : 22 == n_A_JOB ? (myInnerHtml("A_KakutyouSel", 'Potion to Create: <select name="A_KakutyouSelNum" onChange="StAllCalc()"></select><BR>', 0),
                         document.calcForm.A_KakutyouSelNum.options[0] = new Option("Poison Bottle", 0),
                         srate = Math.floor(200 + 4 * n_A_DEX + 2 * n_A_LUK) / 10,
-                        myInnerHtml("A_KakutyouData", "<b><br>Sucess rate: </b>" + srate + " %", 0)) : myInnerHtml("A_KakutyouData", "", 0);
+                        myInnerHtml("A_KakutyouData", "<b><br>Success rate: </b>" + srate + " %", 0)) : myInnerHtml("A_KakutyouData", "", 0);
         else if (26 == wKK) {
             l = "";
             (2 == n_A_JobClass() || EquipNumSearch(1630) || CardNumSearch(152)) && (E_DEX1 = 1 * c.E_DEX.value,
@@ -2899,6 +2908,12 @@ function KakutyouKansuu() {
                 l += "<tr><td>Chance to get Vanilmirth: </td><td>" + Math.floor(10 * Vanilmirth) / 10 + " %</td></tr>",
                 l += "<tr><td>Chance to get Lif: </td><td>" + Math.floor(10 * Lif) / 10 + " %</td></tr></table>") : l = '<p class="center">Not available for this class.</p>',
                 myInnerHtml("A_KakutyouData", l, 0)
+        } else if (42 == wKK) {
+            var e = 1 * c.A_KakutyouSelNum.value
+            var modCost = Math.floor(e * ((100 + n_tok[370]) / 100))
+            l = " -> " + modCost + "<BR>"
+            l += "SP cost modifier: " + n_tok[370] + "%<BR>"
+            myInnerHtml("A_KakutyouData", l, 0)
         }
     } else
         myInnerHtml("A_KakutyouData", "", 0)
@@ -2972,6 +2987,11 @@ function KakutyouKansuu2() {
                                                             _ += '<tr><td>Enchanting zeny cost:</td><td><input type="text" name="npcCost" onkeyup="StAllCalc()" value="0" size="6" class="center"></td></tr></table>',
                                                             void myInnerHtml("A_KakutyouSel", _, 0);
                                                     myInnerHtml("A_KakutyouSel", "", 0)
+                                                    if (42 == wKK){
+                                                        return _ = 'SP cost of skill <input type="tel" name="A_KakutyouSelNum" value="0" size=4 onkeyup="StAllCalc()" style="text-align: center; width: 20px">',
+                                                        void myInnerHtml("A_KakutyouSel", _, 0);
+                                                    }
+                                                        
                                                 } else {
                                                     for (_ = '<table style="text-align:right;"><tr><td>Equipment zeny value:</td><td class=left><input type="text" name="EquipValue" onkeyup="StAllCalc()" value="0" size="9" class="center"></td></tr>',
                                                         _ += '<tr><td>Used item zeny value:</td><td class=left><input type="text" name="ItemValue" onkeyup="StAllCalc()" value="0" size="6" class="center"></td></tr>',
