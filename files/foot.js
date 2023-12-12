@@ -616,6 +616,7 @@ function StAllCalc() {
         n_A_BODY_REFINE >= 9 && 225 == n_A_card[11] && (M += 800),
         n_A_Weapon_refine >= 6 && 1168 == n_A_Equip[0] && (M -= 200 * (n_A_Weapon_refine - 5)),
         1960 == n_A_Equip[5] && (M += 30 * n_A_LEFT_REFINE),
+        955 == n_A_Equip[2] && (M += 50 * n_A_HEAD_REFINE),
         0 != n_A_JOB && 20 != n_A_JOB || 1670 != n_A_Equip[3] || (M += 80),
         536 == n_A_Equip[8] && (3 != (u = n_A_JobClass()) && 4 != u && 5 != u || (M += 5 * n_A_BaseLV)),
         n_A_MaxHP += M,

@@ -955,7 +955,7 @@ m_Item = [
 	, [952, 15, 131, 110, 3, 3, 70, 70, "Rope of Balance", 0, "The [" + skillName(207, SRV) + "] skill pushes your target 2 cells back.<br>The [Arrow Vulcan] skill pushes your target 3 cells back.", 2, 2, 5, 3, 0]
 	, [953, 50, 0, 5, 0, 0, 80, 50, "Gigantic Majestic Goat", 0, "ATK +(JobLevel*2)/7", 37, 12, 0]	//{ bonus2 bAddRace,RC_DemiHuman,12; bonus bBaseAtk,(JobLevel*2)/7; }
 	, [954, 50, 3070, 5, 0, 1, 120, 85, "Bone Head", 0, "", 1, 2, 19, 5, 151, 5, 158, 5, 0]
-	, [955, 50, 2082, 1, 0, 1, 30, 85, "Mandragora Cap", 0, "", 3, 3, 193, 1, 221, 100, 0]
+	, [955, 50, 0, 3, 0, 1, 30, 85, "Mandragora Cap", 0, "MaxHP +(50*refine)", 0]
 	, [956, 999, 0, 3, 0, 1, 10, 1, "Shining Bulb Hairband", 0, "", 67, 10, 220, 16, 0]
 	, [957, 62, 0, 5, 0, 0, 40, 94, "Asprika", 0, "Reduces damage from melee attacks of all elements by 30%", 9, 30, 19, 5, 193, 1, 194, 1, 220, 17, 0]
 	, [958, 999, 86, 7, 0, 1, 0, 80, "Assaulter Plate", 0, "", 13, 150, 19, 2, 57, 2, 0]
