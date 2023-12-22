@@ -1135,7 +1135,8 @@ function BattleCalc999() {
                     a = BattleCalc(a, s),
                     Last_DMG_B[s] = w_DMG[s] + a,
                     Last_DMG_A[s] = Last_DMG_B[s],
-                    InnStr[s] += Last_DMG_A[s] + " (" + w_DMG[s] + " + " + a + ")";
+                    InnStr[s] += Last_DMG_A[s] + " (" + w_DMG[s] + " + " + a + ")", 
+                    w_DMG[s] = w_DMG[s] + a;
             wCast = 1 * n_A_CAST,
                 CastAndDelay(),
                 BattleCalc998()
