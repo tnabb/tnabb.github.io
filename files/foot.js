@@ -701,7 +701,7 @@ function StAllCalc() {
         n_A_SHOES_REFINE <= 4 && 407 == n_A_card[13] && (M += 4),
         405 != n_A_card[12] || 3 != n_A_JobClass() && 4 != n_A_JobClass() && 5 != n_A_JobClass() || (M += 5),
         n_A_Buf3[6] && (SRV ? M += 15 + n_A_Buf3[6] + n_A_Buf3[26] / 10 + n_A_Buf3[36] : M += 15 + n_A_Buf3[6] + Math.floor(n_A_Buf3[36] / 2) + Math.floor(n_A_Buf3[26] / 10)),
-        n_A_MaxSP = Math.floor(n_A_MaxSP * (1 + M / 100)),
+        n_A_MaxSP = Math.round(n_A_MaxSP * (1 + M / 100)),
         n_A_MaxSP >= 100 ? myInnerHtml("A_MaxSP", n_A_MaxSP, 0) : myInnerHtml("A_MaxSP", " " + n_A_MaxSP, 0),
         n_A_DEFplus = n_A_HEAD_REFINE + n_A_BODY_REFINE + n_A_LEFT_REFINE + n_A_SHOULDER_REFINE + n_A_SHOES_REFINE,
         SRV >= 50 && (n_A_HEAD_REFINE >= 5 && (n_A_DEFplus += n_A_HEAD_REFINE - 4),

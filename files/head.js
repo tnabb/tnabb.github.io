@@ -672,6 +672,7 @@ function BattleCalc999() {
             } else if (611 == n_A_ActiveSkill) {
                 n_rangedAtk = 1,
                 wMod += 1,
+                n_Delay[3] = 0.75;
                 wHITsuu = c.SkillSubNum.checked ? 5 : 1;
             }
             ATKmod02(wMod, 0);
@@ -826,9 +827,10 @@ function BattleCalc999() {
                 spearMasteryDMG = 4 * SkillSearch(69);
                 SkillSearch(78) > 0 && (spearMasteryDMG += SkillSearch(69)),
                 Weaponw = 1 * c.SkillSubNum.value,
-                w_DMG[2] = n_A_WeaponLV_refineATK + (wSPP / 5) + spearMasteryDMG + (.8 * Weaponw * (1 + .5 * n_A_ActiveSkillLV)),
-                wSPP = 1.25 - .25 * n_B[4],
-                w_DMG[2] = Math.floor(w_DMG[2] * wSPP),
+                w_DMG[2] = (wSPP / 5) + (.8 * Weaponw * (1 + .5 * n_A_ActiveSkillLV)),
+                weightModifier = 1.25 - .25 * n_B[4],
+                w_DMG[2] = Math.floor(w_DMG[2] * weightModifier),
+                w_DMG[2] += spearMasteryDMG + n_A_WeaponLV_refineATK,
                 w_DMG[2] = w_DMG[2] * Math.max(0, element[n_B[3]][n_A_Weapon_element]),
                 w_DMG[2] = ApplyModifiers(w_DMG[2]),
                 w_DMG[0] = w_DMG[1] = w_DMG[2];
@@ -4932,11 +4934,12 @@ function calc() {
                 u += s,
                 w1 > u && (w1 = u),
                 n_A_DMG[2] < w1 && (n_A_DMG[2] = w1)),
-            10 == n_A_WeaponType || 17 == n_A_WeaponType || 18 == n_A_WeaponType || 19 == n_A_WeaponType || 20 == n_A_WeaponType || 21 == n_A_WeaponType ? (n_A_DMG[0] = n_A_ATK + n_A_WeaponLV_Minplus + Math.floor((n_A_Weapon_ATK * n_A_Weapon_ATK / 100 + wImp) * wCSize),
+            10 == n_A_WeaponType || 17 == n_A_WeaponType || 18 == n_A_WeaponType || 19 == n_A_WeaponType || 20 == n_A_WeaponType || 21 == n_A_WeaponType ? (n_A_DMG[0] = n_A_ATK + n_A_WeaponLV_Minplus + Math.floor((n_A_Weapon_ATK * n_A_Weapon_ATK / 100 + wImp) * wCSize), (n_A_DMG[0] += Math.floor((m_Arrow[n_A_Arrow][0] - 1) * wCSize)),
                 s = n_A_ATK + n_A_WeaponLV_Minplus + Math.floor((n_A_Weapon_ATK * n_A_workDEX / 100 + wImp) * wCSize),
+                s += Math.floor((m_Arrow[n_A_Arrow][0] - 1) * wCSize),
                 n_A_DMG[0] > s && (n_A_DMG[0] = s)) : n_A_workDEX >= n_A_Weapon_ATK ? n_A_DMG[0] = n_A_ATK + n_A_WeaponLV_Minplus + Math.floor((n_A_Weapon_ATK + wImp) * wCSize) : (SkillSearch(155) && (n_A_workDEX = n_A_Weapon_ATK),
                     n_A_DMG[0] = n_A_ATK + n_A_WeaponLV_Minplus + Math.floor((n_A_workDEX + wImp) * wCSize));
-    else {
+    else { // renewal / server version of above > 50 ( does not exist )
         if (n_A_workDEX >= n_A_Weapon_ATK || SkillSearch(155) ? n_A_DMG[2] = n_A_ATK + n_A_WeaponLV_Maxplus + Math.floor((n_A_Weapon_ATK + wImp) * wCSize) : n_A_DMG[2] = n_A_ATK + n_A_WeaponLV_Maxplus + Math.floor((n_A_Weapon_ATK - 1 + wImp) * wCSize),
             10 == n_A_WeaponType || 17 == n_A_WeaponType || 18 == n_A_WeaponType || 19 == n_A_WeaponType || 20 == n_A_WeaponType || 21 == n_A_WeaponType) {
             if (n_A_Weapon_ATK > n_A_workDEX)

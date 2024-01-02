@@ -882,6 +882,10 @@ m_PlaceNotes = [
 	[59, 0, 50, "NULL"],
 	[61, 0, 50, 5197, 75, 5321, 75, "NULL"],
 	[63, 0, 50, "NULL"],
+	[64, 0, 30, "NULL"],
+	[65, 0, 30, "NULL"],
+	[66, 0, 30, "NULL"],
+	[67, 0, 30, "NULL"],
 ];
 
 function monsterInPlace(e){
