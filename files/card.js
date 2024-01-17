@@ -75,7 +75,7 @@ m_Card = [
 	, [71, 4, "Pupa", 0, 13, 700, 0]
 	, [72, 4, "Roda Frog", 0, 13, 400, 14, 50, 0]
 	, [73, 4, "Peco Peco", 0, 15, 10, 0]
-	, [74, 4, "Steel Chonhon", 0, 18, 2, 64, 10, 0]
+	, [74, 4, "Steel Chonchon", "<hr><b>When worn with a [Pink Poo Poo Hat]:</b><br>Status effect [Freeze] resistance +100%", 18, 2, 64, 10, 0]
 	, [75, 4, "Marc", 0, 152, 100, 61, 5, 0]
 	, [76, 5, "Whisper", 0, 9, 20, 68, -50, 0]
 	, [77, 5, "Raydric", 0, 60, 20, 0]

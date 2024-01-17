@@ -1225,7 +1225,7 @@ m_Item = [
 	, [1222, 999, 0, 1, 0, 0, 40, 1, "Gryphon Hat", 0, "", 221, 142, 0]
 	, [1223, 50, 0, 2, 0, 0, 30, 60, "Lady Tanee Doll", 0, "20% chance to obtain a [Banana] item when killing a monster.", 2, 2, 9, 3, 64, 5, 0]
 	, [1224, 999, 0, 0, 0, 1, 40, 1, "Rabbit Earplugs", 0, "", 200, 1, 80, 4, 89, 4, 0]
-	, [1225, 999, 0, 0, 0, 1, 50, 60, "Lyria Doll Hat", 0, "", 193, 1, 13, 500, 57, 5, 0]
+	, [1225, 50, 0, 1, 0, 1, 50, 50, "Lyria Doll Hat", 0, "", 13, 300, 57, 5, 0]
 	, [1226, 999, 0, 0, 0, 1, 50, 60, "Dorothy Doll Hat", 0, "", 193, 1, 14, 80, 57, 5, 0]
 	, [1227, 999, 0, 0, 0, 1, 30, 70, "Incarnation of Morocc Doll", 0, "Recover 10 SP when killing a monster with ATK based damage.<br>When receiving an ATK based attack, 0'2% chance to cast [Critical Wounds] Lvl 2 on your enemy.", 193, 1, 0]
 	, [1228, 999, 0, 3, 0, 1, 60, 50, "Southern Cross", 0, "<b style='color:#F00;'>[missing item data/effects]</b>", 4, 1, 297, 5, 0]
@@ -1615,7 +1615,7 @@ m_Item = [
 	, [1611, 999, 0, 4, 0, 0, 40, 60, "Loki's Muffler", 0, "[Cross Impact] skill damage +5%", 196, 4, 2, 1, 0]
 	, [1612, 999, 0, 6, 0, 1, 50, 1, "Evil Marcher Hat", 0, "<b>[Refine Rate 7~10]</b><br>CRIT +10<BR><b>[Refine Rate 9~10]</b><BR>Deal +5% ATK based damage on [Normal/Boss/Guardian] type monsters.<BR>Deal +5% ranged ATK based damage.", 19, 1, 1, 2, 80, 2, 0]
 	, [1613, 999, 0, 170, 3, 1, 80, 102, "Stem Whip", 0, "Decreases the variable casting time of [Deep Sleep Lullaby] and [Swing Dance] by 2 seconds.<BR>For each refine above +6, decreases the SP cost of those skills by 4 SP.", 88, 50, 0]
-	, [1614, 999, 0, 5, 0, 1, 30, 40, "Black Feather Beret", 0, "", 19, 3, 3, 2, 57, 10, 0]
+	, [1614, 50, 0, 1, 0, 0, 30, 0, "Black Feather Beret", 0, "", 19, 1, 57, 10, 0]
 	, [1615, 999, 1001, 105, 3, 3, 120, 70, "Elemental Sword (aRO)", 0, "When using [Earth Spike] skill, 100% chance to cast [Lightning Bolt] Lvl 3 on your target.<br>When using [Lightning Bolt] skill, 100% chance to cast [Cold Bolt] Lvl 3 on your target.<br>When using [Cold Bolt] skill, 100% chance to cast [Fire Bolt] Lvl 3 on your target.", 1, 2, 4, 4, 5, 1, 89, 5, 40, 10, 221, 146, -221, 6, -221, 1, -221, 2, 0]
 	, [1616, 999, 58, 105, 3, 3, 120, 70, "Elemental Sword (aRO)", 0, "When using [Earth Spike] skill, 100% chance to cast [Lightning Bolt] Lvl 3 on your target.<br>When using [Lightning Bolt] skill, 100% chance to cast [Cold Bolt] Lvl 3 on your target.<br>When using [Cold Bolt] skill, 100% chance to cast [Fire Bolt] Lvl 3 on your target.", 1, 2, 4, 4, 5, 1, 89, 5, 40, 10, 221, 146, -221, 6, -221, 1, -221, 2, 0]
 	, [1617, 999, 1, 6, 0, 0, 50, 70, "Drooping Alicel", 0, "<b>[Refine Rate 7~10]</b><br>When dealing ATK based damage, there is a chance to gain ASPD +100% for 7 seconds.", 37, 10, 36, 10, 0]	//comprobar script en RMS
@@ -2017,6 +2017,7 @@ m_Item = [
 	, [2010, 100, 0, 0, 0, 0, 0, 0, "Ferlock Set", 0, 0, 13, 1000, 0]
 	, [2011, 1, 62, 150, 4, 2, 120, 50, "Poison Bayonet", 0, 0, 89, 15, 1, 2, 4, 2, 5006, 15, 5007, 15, 5025, 15, 5076, 15, 5308, 15, 5065, 15, 5161, 15, 5162, 15, 5158, 15, 5159, 15, 5046, 15, 5047, 15, 5051, 15, 5052, 15, 5053, 15, 5054, 15, 5055, 15, 5056, 15, 5057, 15, 5122, 15, 5124, 15, 5126, 15, 5127, 15, 5128, 15, 5130, 15, 5131, 15, 5132, 15, 5133, 15, 5037, 15, 5041, 15, 5044, 15, 5307, 15, 5102, 15, 5097, 15, 5104, 15, 5106, 15, 5111, 15, 5112, 15, 5113, 15, 5244, 15, 5248, 15, 5088, 15, 5306, 15, 5019, 15, 5193, 15, 5192, 15, 5197, 15, 5321, 15, 5339, 15, 5382, 15, 5398, 15, 5400, 15, 5401, 15, 5407, 15, 5408, 15, 5409, 15, 5410, 15, 5412, 15, 5413, 15, 5414, 15, 5415, 15, 5418, 15, 5419, 15, 5423, 15, 5302, 15, 0]
 	, [2012, 62, 0, 3, 0, 1, 30, 0, "Manteau of Mystic Frozen", 0, 0, 61, 10, 64, -10, 0]
+	// forged weapons
 	, [2013, 1, 0, 17, 1, 0, 40, 1, "Knife [Forged]", 0, "", 0]
 	, [2014, 1, 0, 30, 1, 0, 50, 1, "Cutter [Forged]", 0, "", 0]
 	, [2015, 1, 0, 43, 1, 0, 60, 1, "Main Gauche [Forged]", 0, "", 0]
@@ -2069,6 +2070,7 @@ m_Item = [
 	, [2062, 13, 0, 86, 3, 0, 50, 24, "Claw [Forged]", 0, "", 1, 2, 0]
 	, [2063, 13, 0, 97, 3, 0, 50, 24, "Finger [Forged]", 0, "", 0]
 	, [2064, 13, 0, 115, 3, 0, 65, 24, "Fist [Forged]", 0, "", 0]
+	// paradise set
 	, [2065, 60, 0, 8, 0, 0, 0, 0, "Paradise Uniform", 0, "Recover 15 HP every 10 seconds.<br>Recover 2 SP every 10 seconds.", 193, 1, 0]
 	, [2066, 50, 0, 2, 0, 0, 0, 0, "Paradise Cap", 0, "", 193, 1, 14, 30, 0]
 	, [2067, 62, 0, 3, 0, 0, 0, 0, "Paradise Muffler", 0, "", 193, 1, 60, 5, 9, 3, 0]
@@ -2084,6 +2086,7 @@ m_Item = [
 	, [2077, 16, 0, 85, 3, 0, 0, 1, "Paradise Huuma Shuriken", 0, "", 193, 1, 0]
 	, [2078, 2, 50, 75, 3, 0, 0, 1, "Paradise Town Sword", 0, "", 193, 1, 89, 15, 0]
 	, [2079, 64, 141, 0, 0, 0, 0, 1, "Paradise Taekwon Ring", 0, "<b>[BaseLv 1~19]</b> ATK +75<br><b>[BaseLv 20~39]</b> ATK +50<br><b>[BaseLv 40~59]</b> ATK +25<br><b>[BaseLv 60~99]</b> ATK +10", 193, 1, 0]
+	, [2080, 50, 0, 0, 0, 0, 120, 1, "Pink Poo Poo Hat", 0, "<hr><b>When worn with a [Steel Chonchon Card]:</b><br>Status effect [Freeze] resistance +100%", 57, 10, 0]
 ];
 
 //[ id, display location, job that can use, atk/def, level of weapon, slots, weight, level required to use, "name of item", ?, "description", effect1, effect2, ..., 0 =? ]
