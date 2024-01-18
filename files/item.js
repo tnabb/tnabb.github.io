@@ -696,7 +696,7 @@ m_Item = [
 	, [693, 61, 3001, 5, 0, 0, 120, 68, "Platinum Shield", 0, "When receiving MATK based damage, 1.5% chance to reflect all offensive magic against you at 40% chance for 2 seconds.", 19, 5, 191, 15, 192, 15, 51, 10, 0]
 	, [694, 61, 3001, 5, 0, 1, 100, 55, "Orlean's Server", 0, "5% chance to reflect magic spells targeted at you back to your enemy.", 19, 2, 0]
 	, [695, 61, 3001, 5, 0, 1, 100, 55, "Thorny Buckler", 0, "", 19, 2, 0]
-	, [696, 61, 3001, 4, 0, 1, 250, 75, "Strong Shield", 0, "Player cannot be pushed back.<br>", 60, -20, 61, -20, 62, -20, 63, -20, 64, -20, 66, -20, 67, -20, 68, -20, 0]
+	, [696, 61, 1, 4, 0, 1, 250, 75, "Strong Shield", 0, "Player cannot be pushed back.<br>", 60, -20, 61, -20, 62, -20, 63, -20, 64, -20, 66, -20, 67, -20, 68, -20, 0]
 	, [697, 62, 55, 1, 0, 1, 30, 85, "Eagle Wing", 0, "", 0]
 	, [698, 62, 50, 2, 0, 1, 40, 20, "Angelic Cardigan", 0, "", 75, 5, 0]
 	, [699, 62, 0, 2, 0, "0/1", 15, 1, "Undershirt", 0, "", 19, 1, 0]
