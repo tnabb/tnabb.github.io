@@ -1154,7 +1154,7 @@ m_RandomOptMeleeType = [1, 2, 3, 4, 5, 6, 7, 8, 11, 13];
 m_RandomOptRangedType = [10, 14, 15, 16, 17, 18, 19, 20, 21];
 m_RandomOptMagicType = [9];
 m_RandomOptSpecialType = [12];
-m_RandomOptSpecialWeapons = [395, 939, 93, 539, 1869, 1870, 1871, 1851];
+m_RandomOptSpecialWeapons = [395, 939, 93, 539, 1869, 1870, 1871, 1851, 2011];
 m_RandomOptForgedWeapons = [2019, 2020, 2027, 2028, 2029, 2030, 2034, 2035, 2036, 2043, 2044, 2045, 2049, 2050, 2056, 2057, 2058, 2062, 2063, 2064];
 
 function Click_RandOpt(){

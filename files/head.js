@@ -1029,8 +1029,8 @@ function BattleCalc999() {
                 w_DMG[s] = Math.floor(w_DMG[s] * wMod) + wASYU,
                     w_DMG[s] = ApplyModifiers(w_DMG[s]),
                     w_DMG[s] = Math.floor(w_DMG[s] * element[n_B[3]][0]),
-                    (n_A_Buf6[5] ? w_DMG[s] += Math.floor((.02 + .03 * n_A_Buf6[5]) * w_DMG[s]) : n_A_Buf7[31] && (w_DMG[s] += Math.floor(.05 * w_DMG[s])),
-                        1 == n_A_Buf2[19] && (w_DMG[s] = 2 * w_DMG[s])),
+                    (n_A_Buf6[5] ? w_DMG[s] += Math.floor((.02 + .03 * n_A_Buf6[5]) * w_DMG[s]) : n_A_Buf7[31] && (w_DMG[s] += Math.floor(.05 * w_DMG[s]))),
+                        //1 == n_A_Buf2[19] && (w_DMG[s] = 2 * w_DMG[s])), - Removed 2x damage from 100% ATK Gospel buff
                     Last_DMG_A[s] = Last_DMG_B[s] = w_DMG[s] + EDP_DMG(s),
                     InnStr[s] += Last_DMG_A[s];
             EDPplus(1),
