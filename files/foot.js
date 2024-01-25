@@ -758,10 +758,11 @@ function StAllCalc() {
         EquipNumSearch(764) && (SRV ? n_A_DEF -= n_A_HEAD_REFINE + n_A_LEFT_REFINE : n_A_DEFplus -= n_A_HEAD_REFINE + n_A_LEFT_REFINE),
         EquipNumSearch(742) && 1 == n_A_JobClass() && (n_A_DEF += 6),
         986 != n_A_Equip[6] || 1 != n_A_JobClass() && 2 != n_A_JobClass() && 6 != n_A_JobClass() || (n_A_DEF += 3),
-        809 == n_A_Equip[2] && (n_A_DEFplus -= n_A_HEAD_REFINE),
+        //809 == n_A_Equip[2] && (n_A_DEFplus -= n_A_HEAD_REFINE), - Leaf Cat Hat giving negative DEF?
         (TimeItemNumSearch(9) || TimeItemNumSearch(50)) && (n_A_DEF += 20),
         (TimeItemNumSearch(33) || TimeItemNumSearch(51)) && (n_A_DEF -= 20),
-        1 * c.server.value == 10 ? n_A_totalDEF = n_A_DEF + Math.round(66 * n_A_DEFplus / 100) : 1 * c.server.value < 50 ? n_A_totalDEF = n_A_DEF + Math.round(7 * n_A_DEFplus / 10) : n_A_totalDEF = n_A_DEF + n_A_DEFplus,
+        //1 * c.server.value == 10 ? n_A_totalDEF = n_A_DEF + Math.round(66 * n_A_DEFplus / 100) : 1 * c.server.value < 50 ? n_A_totalDEF = n_A_DEF + Math.round(7 * n_A_DEFplus / 10) : n_A_totalDEF = n_A_DEF + n_A_DEFplus,
+        n_A_totalDEF = n_A_DEF + Math.round(n_A_DEFplus * 0.7), // +0.7 DEF per refine
         n_tok[24] && (n_A_totalDEF = Math.floor(n_A_totalDEF / n_tok[24])),
         n_tok[85] && (n_A_totalDEF -= Math.floor(n_A_totalDEF * n_tok[85] / 100)),
         n_A_Buf6[21] && (n_A_totalDEF -= Math.floor(25 * n_A_totalDEF / 100)),
