@@ -79,6 +79,10 @@ Calc's theme: <select id="theme" onChange="themes()"><option value="0">Original<
               [<a href="https://rocalc.com/faq-EN.html">Frequently asked questions</a>] [<a
                 href="https://rocalc.com/faq-ES.html">Preguntas frecuentes</a>]<br>
               <br>
+              <b>(A) Changelog 2024-01-28:</b>
+              <br>• Added an option to increase ASPD cap to 193 (in anticipation of Night Watch). Can be toggled under "OPTIONS" in the top right corner of the page.
+              <br>• Fixed Spirit Spheres not affecting Spiral Pierce.
+              <br><br>
               <b>(A) Changelog 2024-01-25:</b>
               <br>• Fixed Poison Bayonet having Melee random options instead of Special.
               <br>• Fixed ATK +100% Gospel buff doubling Asura Strike damage.
@@ -136,6 +140,7 @@ Calc's theme: <select id="theme" onChange="themes()"><option value="0">Original<
               <input type="checkbox" id="restrict_cardslot" onclick="restrictCardslot(0)">Equipment Card slot
               restrictions<br>
               <input type="checkbox" id="all_card" onclick="allCard()">All Cards everywhere (with bugs)<br>
+              <input type="checkbox" id="increase_aspdcap" onclick="StAllCalc() | calc()">Increase ASPD cap to 193<br>
             </td>
           </tr>
         </tbody>

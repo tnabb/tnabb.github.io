@@ -1317,8 +1317,12 @@ function StAllCalc() {
         n_A_SHOULDER_REFINE >= 9 && SU_AGI >= 90 && 1472 == n_A_Equip[7] && (M += 1),
         SkillSearch(560) && (M += SkillSearch(555) / 10 * 4),
         1 == SkillSearch(815) && SkillSearch(816) > 0 && 1 == SkillSearch(806) && (M += 5),
-        n_A_ASPD += M,
-        1 === thirdClass && n_A_ASPD > 193 ? n_A_ASPD = 193 : n_A_ASPD > 190 && (n_A_ASPD = 190),
+        n_A_ASPD += M;
+        if(c.increase_aspdcap.checked){
+            n_A_ASPD > 193 && (n_A_ASPD = 193);
+        }else{
+            n_A_ASPD > 190 && (n_A_ASPD = 190);
+        }
         n_A_ASPD = Math.floor(10 * n_A_ASPD) / 10,
         myInnerHtml("A_ASPD", n_A_ASPD, 0),
         n_A_ASPD = (200 - n_A_ASPD) / 50,
@@ -5073,6 +5077,7 @@ document.calcForm.restrict_lvlequip.checked = !1,
 document.calcForm.restrict_equipslot.checked = !1,
 document.calcForm.restrict_cardslot.checked = !1,
 document.calcForm.all_card.checked = !1,
+document.calcForm.increase_aspdcap.checked = !1,
 document.calcForm.A_JOB.value = 0,
 ClickJob(0),
 allCard(),
