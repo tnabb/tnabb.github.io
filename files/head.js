@@ -75,7 +75,7 @@ v_Race = ["<b style='color:#9F9E9B'>Formless</b>", "<b style='color:purple'>Unde
     v_Type = ["Normal", "Boss"],
     SubName = ["%", " seconds", "Damage", "Critical Damage", "Critical Rate", "Over 10000 hits", "Too high to calculate", "Immesurable", " x ", "Cast Time", "Off", "On"],
     JobName = ["Novice", "Swordman", "Thief", "Acolyte", "Archer", "Magician", "Merchant", "Knight", "Assassin", "Priest", "Hunter", "Wizard", "Blacksmith", "Crusader", "Rogue", "Monk", "Bard", "Dancer", "Sage", "Alchemist", "Super Novice", "Lord Knight", "Assassin Cross", "High Priest", "Sniper", "High Wizard", "Whitesmith", "Paladin", "Stalker", "Champion", "Minstrel (alt. name: Clown)", "Gypsy", "Scholar (alt. name: Professor)", "Biochemist (alt. name: Creator)", "High Novice", "High Swordman", "High Thief", "High Acolyte", "High Archer", "High Magician", "High Merchant", "Taekwon Kid", "Taekwon Master (alt. name: Star Gladiator)", "Soul Linker", "Ninja", "Gunslinger", "Rune Knight (non-trans)", "Rune Knight (trans)", "Guillotine Cross (non-trans)", "Guillotine Cross (trans)", "Arch Bishop (non-trans)", "Arch Bishop (trans)", "Ranger (non-trans)", "Ranger (trans)", "Warlock (non-trans)", "Warlock (trans)", "Mechanic (non-trans)", "Mechanic (trans)", "Royal Guard (non-trans)", "Royal Guard (trans)", "Shadow Chaser (non-trans)", "Shadow Chaser (trans)", "Sura (non-trans)", "Sura (trans)", "Maestro (non-trans)", "Maestro (trans)", "Wanderer (non-trans)", "Wanderer (trans)", "Sorcerer (non-trans)", "Sorcerer (trans)", "Geneticist (non-trans)", "Geneticist (trans)", "Kagero/Oboro", "Expanded Super Novice"];
-var All_DMGskill = [0, 6, 7, 17, 19, 40, 41, 44, 46, 47, 51, 52, 53, 54, 55, 56, 57, 65, 66, 70, 71, 72, 73, 76, 83, 84, 88, 97, 102, 104, 106, 111, 112, 113, 118, 122, 124, 125, 126, 127, 128, 130, 131, 132, 133, 158, 159, 161, 162, 167, 169, 171, 188, 189, 192, 193, 197, 199, 207, 244, 248, 259, 260, 261, 263, 264, 271, 272, 275, 277, 324, 325, 391, 326, 328, 321, 382, 339, 331, 333, 335, 337, 317, 318, 373, 374, 375, 407, 408, 409, 410, 412, 413, 414, 415, 397, 398, 399, 400, 401, 405, 438, 417, 418, 419, 423, 424, 302, 611];
+var All_DMGskill = [0, 6, 7, 17, 19, 40, 41, 44, 46, 47, 51, 52, 53, 54, 55, 56, 57, 65, 66, 70, 71, 72, 73, 76, 83, 84, 88, 97, 102, 104, 106, 111, 112, 113, 118, 122, 124, 125, 126, 127, 128, 130, 131, 132, 133, 158, 159, 161, 162, 167, 169, 171, 188, 189, 192, 193, 197, 199, 207, 244, 248, 259, 260, 261, 263, 264, 271, 272, 275, 277, 324, 325, 391, 326, 328, 321, 382, 339, 331, 333, 335, 337, 317, 318, 373, 374, 375, 407, 408, 409, 410, 412, 413, 414, 415, 397, 398, 399, 400, 401, 405, 438, 417, 418, 419, 423, 424, 474, 489, 302, 611, 752, 461, 463, 465, 466, 469, 510, 443];
 function servers() {
     if (SRV = 1 * c.server.value,
         0 == firstLoad)
@@ -199,22 +199,22 @@ function myInnerHtml(e, _, n) {
 }
 function BattleCalc999() {
     SRV = 1 * c.server.value,
-        wMod = 1,
-        wCast = 0,
-        wHITsuu = 1,
-        n_rangedAtk = 0,
-        wLAch = 0,
-        w_DMG = [0, 0, 0],
-        not_use_card = 0,
-        cast_kotei = 0,
-        str_PerHIT_DMG = 0,
-        SG_Special_ch = 0;
+    wMod = 1,
+    wCast = 0,
+    wHITsuu = 1,
+    n_rangedAtk = 0,
+    wLAch = 0,
+    w_DMG = [0, 0, 0],
+    not_use_card = 0,
+    cast_kotei = 0,
+    str_PerHIT_DMG = 0,
+    SG_Special_ch = 0;
     for (var e = 0; e <= 2; e++)
         Last_DMG_A[e] = 0,
             Last_DMG_B[e] = 0;
     if (str_bSUBname = "",
         str_bSUB = "",
-        0 == n_A_ActiveSkill || 272 == n_A_ActiveSkill || 401 == n_A_ActiveSkill || 86 == n_A_ActiveSkill && 50 <= n_B[3] && n_B[3] < 60 || (myInnerHtml("CRIATK", "", 0),
+        0 == n_A_ActiveSkill || 272 == n_A_ActiveSkill || 401 == n_A_ActiveSkill || (86 == n_A_ActiveSkill && 50 <= n_B[3] && n_B[3] < 60) || (n_A_Buf3[47] && 197 != n_A_ActiveSkill && 321 != n_A_ActiveSkill) || (myInnerHtml("CRIATK", "", 0),
             myInnerHtml("CRInum", "", 0),
             myInnerHtml("CRIATKname", "", 0),
             myInnerHtml("bSUB3name", "", 0),
@@ -371,28 +371,28 @@ function BattleCalc999() {
                 e = 0; e <= 2; e++)
                 n_A_CriATK[e] = n_A_DMG[e];
             ATKmod02(wMod, 1),
-                wCriTyuu = 1;
+            wCriTyuu = 1;
             for (e = 0; e <= 2; e++)
                 n_A_CriATK[e] = BattleCalc(n_A_CriATK[e], 10);
             wCriTyuu = 0;
             for (e = 0; e <= 2; e++)
                 n_A_CriATK[e] += EDP_DMG(e);
             w998G >= 100 && (n_Min_DMG = n_A_CriATK[0]),
-                w998G > 0 && (n_Max_DMG = n_A_CriATK[2]),
-                myInnerHtml("CRIATK", n_A_CriATK[0] + "~" + n_A_CriATK[2], 0),
-                ATKmod02(wMod, 0);
+            w998G > 0 && (n_Max_DMG = n_A_CriATK[2]),
+            myInnerHtml("CRIATK", n_A_CriATK[0] + "~" + n_A_CriATK[2], 0),
+            ATKmod02(wMod, 0);
             for (e = 0; e <= 2; e++)
                 w_DMG[e] = BattleCalc(n_A_DMG[e], e),
-                    Last_DMG_A[e] = Last_DMG_B[e] = w_DMG[e] + EDP_DMG(e),
-                    InnStr[e] += Last_DMG_A[e];
+                Last_DMG_A[e] = Last_DMG_B[e] = w_DMG[e] + EDP_DMG(e),
+                InnStr[e] += Last_DMG_A[e];
             return w998G >= 100 && (w_DMG[0] = n_Min_DMG),
-                w998G > 0 && (w_DMG[2] = n_Max_DMG),
-                w_DMG[1] = BattleCalc3(w_DMG[1]),
-                EDPplus(1),
-                CastAndDelay(),
-                void BattleCalc998()
+            w998G > 0 && (w_DMG[2] = n_Max_DMG),
+            w_DMG[1] = BattleCalc3(w_DMG[1]),
+            EDPplus(1),
+            CastAndDelay(),
+            void BattleCalc998()
         }
-        for (w_ActS = [6, 7, 19, 41, 44, 65, 71, 72, 73, 83, 84, 158, 161, 169, 171, 176, 188, 189, 199, 207, 248, 260, 261, 264, 288, 289, 290, 292, 302, 303, 305, 306, 307, 308, 326, 317, 318, 331, 333, 335, 337, 339, 382, 388, 398, 400, 419, 423, 428, 430, 431, 432, 434, 435, 436, 437, "NULL"],
+        for (w_ActS = [6, 7, 19, 41, 44, 65, 71, 72, 73, 83, 84, 158, 161, 169, 171, 176, 188, 189, 199, 207, 248, 260, 261, 264, 288, 289, 290, 292, 302, 303, 305, 306, 307, 308, 326, 317, 318, 331, 333, 335, 337, 339, 382, 388, 398, 400, 419, 423, 428, 430, 431, 432, 434, 435, 436, 437, 461, 463, 465, 466, 469, "NULL"],
             iw = 0; w_ActS[iw] != n_A_ActiveSkill && "NULL" != w_ActS[iw]; iw++)
             ;
         if (n_A_ActiveSkill == w_ActS[iw]) {
@@ -401,273 +401,308 @@ function BattleCalc999() {
                 wMod += .3 * n_A_ActiveSkillLV;
             else if (7 == n_A_ActiveSkill)
                 wMod += .2 * n_A_ActiveSkillLV,
-                    n_A_Weapon_element = 3,
-                    n_Delay[2] = 2;
+                n_A_Weapon_element = 3,
+                n_Delay[2] = 2;
             else if (19 == n_A_ActiveSkill)
                 not_use_card = 1,
-                    wMod += .3,
-                    n_A_Weapon_element = 2;
+                wMod += .3,
+                n_A_Weapon_element = 2;
             else if (41 == n_A_ActiveSkill)
                 n_rangedAtk = 1,
-                    wMod += .05 * n_A_ActiveSkillLV - .25,
-                    n_Delay[2] = 1;
+                wMod += .05 * n_A_ActiveSkillLV - .25,
+                n_Delay[2] = 1;
             else if (44 == n_A_ActiveSkill)
                 n_rangedAtk = 1,
-                    wCast = 1.5,
-                    wMod += .5;
+                wCast = 1.5,
+                wMod += .5;
             else if (65 == n_A_ActiveSkill)
                 wMod += .5 * n_A_ActiveSkillLV;
             else if (71 == n_A_ActiveSkill)
                 wMod += .2 * n_A_ActiveSkillLV,
-                    n_rangedAtk = 1;
+                n_rangedAtk = 1;
             else if (84 == n_A_ActiveSkill)
                 n_A_ActiveSkillLV >= 3 && (n_rangedAtk = 1),
-                    wMod += .2 * n_A_ActiveSkillLV;
+                wMod += .2 * n_A_ActiveSkillLV;
             else if (158 == n_A_ActiveSkill)
                 wMod += .2 * n_A_ActiveSkillLV,
-                    305 == m_Item[n_A_Equip[5]][0] && (wMod = 0);
+                305 == m_Item[n_A_Equip[5]][0] && (wMod = 0);
             else if (161 == n_A_ActiveSkill)
                 wMod += .35 * n_A_ActiveSkillLV,
-                    n_A_Weapon_element = 6;
+                n_A_Weapon_element = 6;
             else if (171 == n_A_ActiveSkill)
                 //wMod += .4 * n_A_ActiveSkillLV;
                 wMod += 1 + .5 * n_A_ActiveSkillLV; // changed to alfheim skill modifier
             else if (72 == n_A_ActiveSkill)
                 wMod += .5 * n_A_ActiveSkillLV,
-                    n_Delay[2] = 1,
-                    n_rangedAtk = 1;
+                n_Delay[2] = 1,
+                n_rangedAtk = 1;
             else if (73 == n_A_ActiveSkill)
                 //a = 1 + .2 * n_A_ActiveSkillLV,
-                    //10 == n_A_ActiveSkillLV ? wMod += 4.625 : n_A_ActiveSkillLV >= 7 ? wMod += a + a / 2 + a / 4 - 1 : n_A_ActiveSkillLV >= 4 ? wMod += a + a / 2 - 1 : wMod += a - 1,
-                    wMod += 3 + .45 * n_A_ActiveSkillLV, // changed to alfheims skill modifier
-                    wCast = .7,
-                    n_rangedAtk = 1;
+                //10 == n_A_ActiveSkillLV ? wMod += 4.625 : n_A_ActiveSkillLV >= 7 ? wMod += a + a / 2 + a / 4 - 1 : n_A_ActiveSkillLV >= 4 ? wMod += a + a / 2 - 1 : wMod += a - 1,
+                wMod += 3 + .45 * n_A_ActiveSkillLV, // changed to alfheims skill modifier
+                wCast = .7,
+                n_rangedAtk = 1;
             else if (83 == n_A_ActiveSkill || 388 == n_A_ActiveSkill)
                 wActiveHitNum = 8,
-                    wMod += .5 * n_A_ActiveSkillLV + 2,
-                    388 == n_A_ActiveSkill && 0 == PvP && (wMod *= 2),
-                    388 == n_A_ActiveSkill && 1 == PvP && (n_WoE ? wMod *= 1.25 : wMod *= 2),
-                    EquipNumSearch(1783) && (wMod *= 1.5),
-                    n_Delay[3] = 2;
+                wMod += .5 * n_A_ActiveSkillLV + 2,
+                388 == n_A_ActiveSkill && 0 == PvP && (wMod *= 2),
+                388 == n_A_ActiveSkill && 1 == PvP && (n_WoE ? wMod *= 1.25 : wMod *= 2),
+                EquipNumSearch(1783) && (wMod *= 1.5),
+                n_Delay[3] = 2;
             else if (169 == n_A_ActiveSkill) // backstab
                 //wMod += .4 * n_A_ActiveSkillLV + 2,
-                wMod += .25 + .15 * n_A_ActiveSkillLV, // alfheim skill modifier
-                    n_Delay[2] = 0, // removed delay
-                    w_HIT = 100,
-                    w_HIT_HYOUJI = 100;
+                wMod += .18 * n_A_ActiveSkillLV, // alfheim skill modifier
+                //wMod *= n_A_WeaponType == 1 ? 2 : 1,
+                wActiveHitNum = n_A_WeaponType == 1 ? 2 : 1,
+                n_Delay[2] = 0, // removed delay
+                w_HIT = 100,
+                w_HIT_HYOUJI = 100;
             else if (176 == n_A_ActiveSkill)
                 wMod += .3 * n_A_ActiveSkillLV,
-                    n_Delay[2] = 1;
+                n_Delay[2] = 1;
             else if (188 == n_A_ActiveSkill)
                 wActiveHitNum = 4,
-                    wMod += 1.5 + .5 * n_A_ActiveSkillLV,
-                    n_Delay[0] = 1,
-                    n_Delay[1] = .1,
-                    n_Delay[3] = 1 - .004 * n_A_AGI - .002 * n_A_DEX;
+                wMod += 1.5 + .5 * n_A_ActiveSkillLV,
+                n_Delay[0] = 1,
+                n_Delay[1] = .1,
+                n_Delay[3] = 1 - .004 * n_A_AGI - .002 * n_A_DEX;
             else if (189 == n_A_ActiveSkill)
                 wMod += 1.75 + .75 * n_A_ActiveSkillLV,
-                    n_Delay[0] = 1,
-                    n_Delay[1] = .1,
-                    n_Delay[3] = .7 - .004 * n_A_AGI - .002 * n_A_DEX;
+                n_Delay[0] = 1,
+                n_Delay[1] = .1,
+                n_Delay[3] = .7 - .004 * n_A_AGI - .002 * n_A_DEX;
             else if (199 == n_A_ActiveSkill || 207 == n_A_ActiveSkill)
                 wCast = 1.5,
-                    wMod += .4 * n_A_ActiveSkillLV - .4,
-                    n_A_Weapon_element = m_Arrow[n_A_Arrow][1],
-                    1 * c.A_Weapon_element.value != 0 && (n_A_Weapon_element = 1 * c.A_Weapon_element.value),
-                    n_rangedAtk = 1;
+                wMod += .4 * n_A_ActiveSkillLV - .4,
+                n_A_Weapon_element = m_Arrow[n_A_Arrow][1],
+                1 * c.A_Weapon_element.value != 0 && (n_A_Weapon_element = 1 * c.A_Weapon_element.value),
+                n_rangedAtk = 1;
             else if (248 == n_A_ActiveSkill)
                 not_use_card = 1,
-                    n_A_Weapon_element = 3,
-                    n_Delay[0] = 1,
-                    wCast = 1,
-                    wMod += .2 * n_A_ActiveSkillLV,
-                    w_HIT = 100,
-                    w_HIT_HYOUJI = 100;
+                n_A_Weapon_element = 3,
+                n_Delay[0] = 1,
+                wCast = 1,
+                wMod += .2 * n_A_ActiveSkillLV,
+                w_HIT = 100,
+                w_HIT_HYOUJI = 100;
             else if (260 == n_A_ActiveSkill)
                 n_rangedAtk = 1,
-                    wMod += .4 * n_A_ActiveSkillLV,
-                    n_Delay[2] = .5;
+                wMod += .4 * n_A_ActiveSkillLV,
+                n_Delay[2] = .5;
             else if (261 == n_A_ActiveSkill)
                 n_rangedAtk = 1,
-                    wMod += .1 * n_A_ActiveSkillLV - .5,
-                    n_A_ActiveSkillLV > 5 ? n_Delay[2] = 1 : n_Delay[2] = .8;
+                wMod += .1 * n_A_ActiveSkillLV - .5,
+                n_A_ActiveSkillLV > 5 ? n_Delay[2] = 1 : n_Delay[2] = .8;
             else if (264 == n_A_ActiveSkill)
                 not_use_card = 1,
-                    wMod += .4 * n_A_ActiveSkillLV - .6,
-                    wCast = .5,
-                    n_Delay[2] = .5;
+                wMod += .4 * n_A_ActiveSkillLV - .6,
+                wCast = .5,
+                n_Delay[2] = .5;
             else if (288 == n_A_ActiveSkill)
                 wMod += 1 + n_A_ActiveSkillLV,
-                    n_Delay[2] = .3;
+                n_Delay[2] = .3;
             else if (289 == n_A_ActiveSkill)
                 n_Delay[0] = 1,
-                    wMod += n_A_ActiveSkillLV - .6,
-                    n_Delay[1] = .1,
-                    n_Delay[3] = .7 - .004 * n_A_AGI - .002 * n_A_DEX;
+                wMod += n_A_ActiveSkillLV - .6,
+                n_Delay[1] = .1,
+                n_Delay[3] = .7 - .004 * n_A_AGI - .002 * n_A_DEX;
             else if (290 == n_A_ActiveSkill)
                 n_Delay[0] = 1,
-                    wMod += 6 + n_A_ActiveSkillLV,
-                    n_A_ActiveSkillLV > 6 ? n_Delay[2] = 1 : n_Delay[2] = .8;
+                wMod += 6 + n_A_ActiveSkillLV,
+                n_A_ActiveSkillLV > 6 ? n_Delay[2] = 1 : n_Delay[2] = .8;
             else if (292 == n_A_ActiveSkill)
                 wActiveHitNum = 9,
-                    wMod += 1 + n_A_ActiveSkillLV,
-                    n_A_Weapon_element = m_Arrow[n_A_Arrow][1],
-                    1 * c.A_Weapon_element.value != 0 && (n_A_Weapon_element = 1 * c.A_Weapon_element.value),
-                    n_rangedAtk = 1,
-                    wCast = 1.8 + .2 * n_A_ActiveSkillLV,
-                    n_Delay[2] = 0.5,
-                    n_Delay[3] = 1.5;
+                wMod += 1 + n_A_ActiveSkillLV,
+                n_A_Weapon_element = m_Arrow[n_A_Arrow][1],
+                1 * c.A_Weapon_element.value != 0 && (n_A_Weapon_element = 1 * c.A_Weapon_element.value),
+                n_rangedAtk = 1,
+                wCast = 1.8 + .2 * n_A_ActiveSkillLV,
+                n_Delay[2] = 0.5,
+                n_Delay[3] = 1.5;
             else if (302 == n_A_ActiveSkill)
                 n_rangedAtk = 1,
-                    not_use_card = 1,
-                    n_A_Weapon_element = 4;
+                not_use_card = 1,
+                n_A_Weapon_element = 4;
             else if (303 == n_A_ActiveSkill)
                 wMod += 1 * (n_A_ActiveSkillLV - 1);
             else if (306 == n_A_ActiveSkill)
                 n_rangedAtk = 1,
-                    not_use_card = 1,
-                    n_A_DMG[1] += Math.floor(14.5 * wCSize),
-                    n_A_DMG[2] += Math.floor(29 * wCSize);
+                not_use_card = 1,
+                n_A_DMG[1] += Math.floor(14.5 * wCSize),
+                n_A_DMG[2] += Math.floor(29 * wCSize);
             else if (307 == n_A_ActiveSkill)
                 n_rangedAtk = 1,
-                    not_use_card = 1,
-                    wMod += .5;
-            else if (308 == n_A_ActiveSkill) {
-                var a;
-                a = 1 * c.SkillSubNum.value,
-                    wMod += a,
-                    wCast = .5 * (a + 1),
-                    wCast > 1.5 && (wCast = 1.5)
-            } else
-                317 == n_A_ActiveSkill ? (n_Delay[0] = 1,
-                    n_Delay[5] = .05,
-                    1 == n_B[19] && (n_Delay[5] = .1),
-                    1 == PvP && (str_bSUBname += "SP damage<BR>",
-                        str_bSUB += "15<BR>")) : 318 == n_A_ActiveSkill ? (n_Delay[5] = .05,
-                            1 == n_B[19] && (n_Delay[5] = .1),
-                            1 == PvP && (n_Delay[0] = 1,
-                                str_bSUBname += "SP damage<BR>",
-                                str_bSUB += "15<BR>")) : 326 == n_A_ActiveSkill ? (not_use_card = 1,
-                                    SRV ? (1 * c.SkillSubNum.value > 8e3 ? CT_WEIGHT = 8e3 : CT_WEIGHT = 1 * c.SkillSubNum.value,
-                                        0 == CT_WEIGHT ? (SkillSearch(154) && (wMod += .146 + Math.floor((n_tok[22] + 5 * SkillSearch(154)) / 100 * 100 / 100)),
-                                            SkillSearch(327) && (wMod += .215 + Math.floor((n_tok[22] + 10 * SkillSearch(327)) / 100 * 100 / 100))) : wMod += .02 + Math.floor((CT_WEIGHT / (16 - n_A_ActiveSkillLV) + n_tok[22] + 5 * SkillSearch(154) + 20 * SkillSearch(327)) / 100 * 100 / 100)) : (not_use_card = 1,
-                                                wMod += Math.floor(100 * (1 * c.SkillSubNum.value / (16 - n_A_ActiveSkillLV) / 100 - 1)) / 100)) : 382 == n_A_ActiveSkill ? (not_use_card = 1,
-                                                    wMod += 2) : 331 == n_A_ActiveSkill || 333 == n_A_ActiveSkill ? (n_Delay[0] = 1,
-                                                        wMod += .6 + .2 * n_A_ActiveSkillLV) : 335 == n_A_ActiveSkill || 337 == n_A_ActiveSkill ? (n_Delay[0] = 1,
-                                                            wMod += .9 + .3 * n_A_ActiveSkillLV,
-                                                            337 == n_A_ActiveSkill && (wActiveHitNum = 3)) : 339 == n_A_ActiveSkill ? (n_Delay[0] = 1,
-                                                                wMod += .1 * n_A_ActiveSkillLV - .7) : 305 == n_A_ActiveSkill ? (n_Delay[0] = 1,
-                                                                    SkillSearch(379) && 0 == n_A_WeaponType ? wMod += .08 * n_A_BaseLV - 1 : wMod += .04 * n_A_BaseLV - 1) : 398 == n_A_ActiveSkill ? (wMod += .1 * n_A_ActiveSkillLV,
-                                                                        n_Delay[2] = 3) : 400 == n_A_ActiveSkill ? (n_Delay[0] = 1,
-                                                                            wMod += .1 * n_A_ActiveSkillLV,
-                                                                            n_Delay[2] = 1) : 419 == n_A_ActiveSkill ? (not_use_card = 1,
-                                                                                wCast = .5,
-                                                                                n_Delay[2] = 1,
-                                                                                n_rangedAtk = 1,
-                                                                                wActiveHitNum = 5,
-                                                                                2 != n_B[2] && 7 != n_B[2] || (wMod += 4)) : 423 == n_A_ActiveSkill ? (n_rangedAtk = 1,
-                                                                                    n_Delay[2] = .5,
-                                                                                    n_A_Weapon_element = 8,
-                                                                                    not_use_card = 1) : 428 == n_A_ActiveSkill ? (n_rangedAtk = 1,
-                                                                                        wActiveHitNum = 5,
-                                                                                        wMod += .5 * n_A_ActiveSkillLV + 4,
-                                                                                        n_Delay[2] = 1.7) : 430 == n_A_ActiveSkill ? (SRV ? (n_A_Weapon_refine > 8 && EquipNumSearch(1100) ? TCcast = 1.25 : EquipNumSearch(926) ? TCcast = .75 : TCcast = 1,
-                                                                                            wCast = (1 + .2 * n_A_ActiveSkillLV) * TCcast) : (wCast = 1 + .2 * n_A_ActiveSkillLV,
-                                                                                                cast_kotei = 1),
-                                                                                            n_rangedAtk = 1,
-                                                                                            wMod += 1 * n_A_ActiveSkillLV + 1,
-                                                                                            n_Delay[2] = 1,
-                                                                                            w_HIT = 5 * w_HIT + 5,
-                                                                                            w_HIT > 100 && (w_HIT = 100),
-                                                                                            w_HIT_HYOUJI = w_HIT) : 431 == n_A_ActiveSkill ? (wCast = 2,
-                                                                                                n_Delay[2] = 1,
-                                                                                                n_rangedAtk = 1) : 432 == n_A_ActiveSkill ? (wCast = 1.5,
-                                                                                                    n_rangedAtk = 1,
-                                                                                                    wMod += .2 * n_A_ActiveSkillLV,
-                                                                                                    n_Delay[2] = .5,
-                                                                                                    w_HIT = 100,
-                                                                                                    w_HIT_HYOUJI = 100) : 434 == n_A_ActiveSkill ? (cast_kotei = 1,
-                                                                                                        wCast = 1,
-                                                                                                        n_rangedAtk = 0,
-                                                                                                        wMod += .5 * n_A_ActiveSkillLV,
-                                                                                                        n_Delay[3] = 1) : 435 == n_A_ActiveSkill ? (n_rangedAtk = 1,
-                                                                                                            wMod += 1 * n_A_ActiveSkillLV + 2,
-                                                                                                            n_Delay[2] = 1 + .2 * n_A_ActiveSkillLV) : 436 == n_A_ActiveSkill ? (n_rangedAtk = 1,
-                                                                                                                wMod += .2 * n_A_ActiveSkillLV - .2,
-                                                                                                                wCast = 1,
-                                                                                                                n_Delay[2] = 1) : 437 == n_A_ActiveSkill && (n_rangedAtk = 1,
-                                                                                                                    not_use_card = 1,
-                                                                                                                    wCast = 1,
-                                                                                                                    n_Delay[2] = 1);
+                not_use_card = 1,
+                wMod += .5;
+            else if (308 == n_A_ActiveSkill)
+                wMod += 1 * c.SkillSubNum.value,
+                wCast = .5 * (1 * c.SkillSubNum.value + 1),
+                wCast > 1.5 && (wCast = 1.5);
+            else if (317 == n_A_ActiveSkill) 
+                n_Delay[0] = 1,
+                n_Delay[5] = .05,
+                1 == n_B[19] && (n_Delay[5] = .1),
+                1 == PvP && (str_bSUBname += "SP damage<BR>", str_bSUB += "15<BR>");
+            else if (318 == n_A_ActiveSkill)
+                n_Delay[5] = .05,
+                1 == n_B[19] && (n_Delay[5] = .1),
+                1 == PvP && (n_Delay[0] = 1, str_bSUBname += "SP damage<BR>", str_bSUB += "15<BR>");
+            else if (326 == n_A_ActiveSkill) // cart termination
+                not_use_card = 1,
+                1 * c.SkillSubNum.value > 8000 ? CT_WEIGHT = 8000 : CT_WEIGHT = 1 * c.SkillSubNum.value,
+                wMod = 100,
+                wMod = CT_WEIGHT == 0 ? wMod / 100 : (wMod + Math.floor(((CT_WEIGHT * 10) / ((16 - n_A_ActiveSkillLV) * 10) * 80000 / 80000 - 100))) / 100;
+            else if (382 == n_A_ActiveSkill)
+                not_use_card = 1,
+                wMod += 2;
+            else if (331 == n_A_ActiveSkill || 333 == n_A_ActiveSkill)
+                n_Delay[0] = 1,
+                wMod += .6 + .2 * n_A_ActiveSkillLV;
+            else if (335 == n_A_ActiveSkill || 337 == n_A_ActiveSkill)
+                n_Delay[0] = 1,
+                wMod += .9 + .3 * n_A_ActiveSkillLV,
+                337 == n_A_ActiveSkill && (wActiveHitNum = 3);
+            else if (339 == n_A_ActiveSkill)
+                n_Delay[0] = 1,
+                wMod += .1 * n_A_ActiveSkillLV - .7;
+            else if (305 == n_A_ActiveSkill)
+                n_Delay[0] = 1,
+                SkillSearch(379) && 0 == n_A_WeaponType ? wMod += .08 * n_A_BaseLV - 1 : wMod += .04 * n_A_BaseLV - 1;
+            else if (398 == n_A_ActiveSkill)
+                wMod += .1 * n_A_ActiveSkillLV,
+                n_Delay[2] = 3;
+            else if (400 == n_A_ActiveSkill) 
+                n_Delay[0] = 1,
+                wMod += .1 * n_A_ActiveSkillLV,
+                n_Delay[2] = 1;
+            else if (419 == n_A_ActiveSkill) 
+                not_use_card = 1,
+                wCast = .5,
+                n_Delay[2] = 1,
+                n_rangedAtk = 1,
+                wActiveHitNum = 5,
+                2 != n_B[2] && 7 != n_B[2] || (wMod += 4);
+            else if (423 == n_A_ActiveSkill)
+                n_rangedAtk = 1,
+                n_Delay[2] = .5,
+                n_A_Weapon_element = 8,
+                not_use_card = 1;
+            else if (428 == n_A_ActiveSkill)
+                n_rangedAtk = 1,
+                wActiveHitNum = 5,
+                wMod += .5 * n_A_ActiveSkillLV + 4,
+                n_Delay[2] = 1.7;
+            else if (430 == n_A_ActiveSkill)
+                SRV ? (n_A_Weapon_refine > 8 && EquipNumSearch(1100) ? TCcast = 1.25 : EquipNumSearch(926) ? TCcast = .75 : TCcast = 1,
+                wCast = (1 + .2 * n_A_ActiveSkillLV) * TCcast) : (wCast = 1 + .2 * n_A_ActiveSkillLV, cast_kotei = 1),
+                n_rangedAtk = 1,
+                wMod += 1 * n_A_ActiveSkillLV + 1,
+                n_Delay[2] = 1,
+                w_HIT = 5 * w_HIT + 5,
+                w_HIT > 100 && (w_HIT = 100),
+                w_HIT_HYOUJI = w_HIT;
+            else if (431 == n_A_ActiveSkill)
+                wCast = 2,
+                n_Delay[2] = 1,
+                n_rangedAtk = 1;
+            else if (432 == n_A_ActiveSkill)
+                wCast = 1.5,
+                n_rangedAtk = 1,
+                wMod += .2 * n_A_ActiveSkillLV,
+                n_Delay[2] = .5,
+                w_HIT = 100,
+                w_HIT_HYOUJI = 100;
+            else if (434 == n_A_ActiveSkill)
+                cast_kotei = 1,
+                wCast = 1,
+                n_rangedAtk = 0,
+                wMod += .5 * n_A_ActiveSkillLV,
+                n_Delay[3] = 1;
+            else if (435 == n_A_ActiveSkill)
+                n_rangedAtk = 1,
+                wMod += 1 * n_A_ActiveSkillLV + 2,
+                n_Delay[2] = 1 + .2 * n_A_ActiveSkillLV;
+            else if (436 == n_A_ActiveSkill)
+                n_rangedAtk = 1,
+                wMod += .2 * n_A_ActiveSkillLV - .2,
+                wCast = 1,
+                n_Delay[2] = 1;
+            else if (437 == n_A_ActiveSkill)
+                n_rangedAtk = 1,
+                not_use_card = 1,
+                wCast = 1,
+                n_Delay[2] = 1;
+            else if (463 == n_A_ActiveSkill)
+                n_A_Weapon_element = 7;
             ATKmod02(wMod, 0),
-                0 == cast_kotei && (SRV && 430 == n_A_ActiveSkill ? wCast = wCast : wCast *= n_A_CAST);
+            0 == cast_kotei && (SRV && 430 == n_A_ActiveSkill ? wCast = wCast : wCast *= n_A_CAST);
             for (e = 0; e <= 2; e++)
                 w_MagiclBulet = e,
-                    w_DMG[e] = BattleCalc(n_A_DMG[e], e),
-                    wActiveHitNum > 1 && (w_DMG[e] = Math.floor(w_DMG[e] / wActiveHitNum) * wActiveHitNum),
-                    Last_DMG_A[e] = Last_DMG_B[e] = w_DMG[e] + EDP_DMG(e),
-                    InnStr[e] += Last_DMG_A[e],
-                    158 == n_A_ActiveSkill && 305 == m_Item[n_A_Equip[5]][0] && (w_DMG[e] = 0,
-                        InnStr[e] = w_DMG[e] + " (no shield equiped)"),
-                    wActiveHitNum > 1 && (InnStr[e] += " (" + w_DMG[e] / wActiveHitNum + " x " + wActiveHitNum + " hits)");
+                w_DMG[e] = BattleCalc(n_A_DMG[e], e),
+                169 == n_A_ActiveSkill && wActiveHitNum == 2 && (w_DMG[e] *= 2),
+                wActiveHitNum > 1 && (w_DMG[e] = Math.floor(w_DMG[e] / wActiveHitNum) * wActiveHitNum),
+                Last_DMG_A[e] = Last_DMG_B[e] = w_DMG[e] + EDP_DMG(e),
+                InnStr[e] += Last_DMG_A[e],
+                158 == n_A_ActiveSkill && 305 == m_Item[n_A_Equip[5]][0] && (w_DMG[e] = 0, InnStr[e] = w_DMG[e] + " (no shield equiped)"),
+                wActiveHitNum > 1 && (InnStr[e] += " (" + w_DMG[e] / wActiveHitNum + " x " + wActiveHitNum + " hits)");
             w_MagiclBulet = 1,
-                w_DMG[1] = (w_DMG[1] * w_HIT + BattleCalc2(0) * (100 - w_HIT)) / 100,
-                EDPplus(1),
-                0 == cast_kotei && CastAndDelay(),
-                BattleCalc998()
+            w_DMG[1] = (w_DMG[1] * w_HIT + BattleCalc2(0) * (100 - w_HIT)) / 100,
+            EDPplus(1),
+            0 == cast_kotei && CastAndDelay(),
+            BattleCalc998()
         } else if (275 == n_A_ActiveSkill) {
             n_rangedAtk = 1,
-                wCast = .3,
-                n_Delay[2] = .3,
-                wCast *= n_A_CAST;
+            wCast = .3,
+            n_Delay[2] = .3,
+            wCast *= n_A_CAST;
             for (e = 0; e <= 2; e++)
                 SRV ? (w_DMG[e] = BattleCalc(BK_n_A_MATK[e] * (1 + .05 * n_A_Buf2[8]), e) - 1,
                     0 == n_A_WeaponType && (w_DMG[1] = w_DMG[0],
-                        w_DMG[2] = w_DMG[0])) : w_DMG[e] = BattleCalc(BK_n_A_MATK[e], e),
+                    w_DMG[2] = w_DMG[0])) : 
+                w_DMG[e] = BattleCalc(BK_n_A_MATK[e], e),
                     Last_DMG_A[e] = Last_DMG_B[e] = w_DMG[e] + EDP_DMG(e),
                     InnStr[e] += Last_DMG_A[e];
             n_PerHIT_DMG = BattleCalc2(0) + n_A_WeaponLV_refineATK,
-                w_DMG[1] = (w_DMG[1] * w_HIT + n_PerHIT_DMG * (100 - w_HIT)) / 100,
-                EDPplus(1),
-                CastAndDelay(),
-                BattleCalc998()
+            w_DMG[1] = (w_DMG[1] * w_HIT + n_PerHIT_DMG * (100 - w_HIT)) / 100,
+            EDPplus(1),
+            CastAndDelay(),
+            BattleCalc998()
         } else if (40 == n_A_ActiveSkill || 70 == n_A_ActiveSkill || 192 == n_A_ActiveSkill || 76 == n_A_ActiveSkill || 418 == n_A_ActiveSkill || 391 == n_A_ActiveSkill || 429 == n_A_ActiveSkill || 611 == n_A_ActiveSkill) {
             if (40 == n_A_ActiveSkill)
                 n_rangedAtk = 1,
-                    wMod += .1 * n_A_ActiveSkillLV - .1,
-                    wHITsuu = 2;
+                wMod += .1 * n_A_ActiveSkillLV - .1,
+                wHITsuu = 2;
             else if (70 == n_A_ActiveSkill)
                 wMod += .1 * n_A_ActiveSkillLV,
-                    wHITsuu = n_B[4] + 1;
+                wHITsuu = n_B[4] + 1;
             else if (76 == n_A_ActiveSkill)
                 wMod += .4 * n_A_ActiveSkillLV,
-                    wCast = .7 * n_A_CAST,
-                    wHITsuu = 2,
-                    1 == n_A_ActiveSkillLV && (wHITsuu = 1),
-                    wLAch = 1,
-                    1 == n_B_debuf[6] && (wHITsuu = 3,
-                        1 == n_A_ActiveSkillLV && (wHITsuu = 2));
+                wCast = .7 * n_A_CAST,
+                wHITsuu = 2,
+                1 == n_A_ActiveSkillLV && (wHITsuu = 1),
+                wLAch = 1,
+                1 == n_B_debuf[6] && (wHITsuu = 3, 1 == n_A_ActiveSkillLV && (wHITsuu = 2));
             else if (192 == n_A_ActiveSkill)
                 wMod += .5 * n_A_ActiveSkillLV,
-                    (a = n_A_Buf2[12]) > n_A_ActiveSkillLV && (a = n_A_ActiveSkillLV),
-                    wHITsuu = a,
-                    wCast = (1 + a) * n_A_CAST,
-                    n_Delay[2] = .5,
-                    n_rangedAtk = 1;
+                (a = n_A_Buf2[12]) > n_A_ActiveSkillLV && (a = n_A_ActiveSkillLV),
+                wHITsuu = a,
+                wCast = (1 + a) * n_A_CAST,
+                n_Delay[2] = .5,
+                n_rangedAtk = 1;
             else if (418 == n_A_ActiveSkill)
                 n_rangedAtk = 1,
-                    n_Delay[2] = 1,
-                    wMod += .5,
-                    wHITsuu = 3;
+                n_Delay[2] = 1,
+                wMod += .5,
+                wHITsuu = 3;
             else if (391 == n_A_ActiveSkill)
                 n_Delay[0] = 1,
-                    n_rangedAtk = 1,
-                    wMod += .08 * n_A_STR - .5,
-                    wHITsuu = 2;
+                n_rangedAtk = 1,
+                wMod += .08 * n_A_STR - .5,
+                wHITsuu = 2;
             else if (429 == n_A_ActiveSkill) {
                 n_rangedAtk = 0,
-                    wMod += .5 * n_A_ActiveSkillLV - .5,
-                    n_Delay[2] = 1;
+                wMod += .5 * n_A_ActiveSkillLV - .5,
+                n_Delay[2] = 1;
                 wHITsuu = [1, 1.2, 1.6, 2, 2.4, 3, 3.6, 4, 5, 6, 7, 8, 9, 10][1 * c.SkillSubNum.value]
             } else if (611 == n_A_ActiveSkill) {
                 n_rangedAtk = 1,
@@ -678,65 +713,65 @@ function BattleCalc999() {
             ATKmod02(wMod, 0);
             for (e = 0; e <= 2; e++)
                 w_DMG[e] = BattleCalc(n_A_DMG[e], e),
-                    391 == n_A_ActiveSkill && 2 != n_B[2] && 4 != n_B[2] && (w_DMG[e] = 0),
-                    w_DMG[e] += EDP_DMG(e),
-                    Last_DMG_B[e] = w_DMG[e],
-                    76 == n_A_ActiveSkill && (Last_DMG_B[e] = 2 * w_DMG[e]),
-                    Last_DMG_A[e] = w_DMG[e] * wHITsuu,
-                    0 == n_B_debuf[6] || 0 == wLAch ? InnStr[e] += Math.floor(w_DMG[e] * wHITsuu) + " (" + w_DMG[e] + SubName[8] + wHITsuu + " hits)" : (InnStr[e] += 3 * w_DMG[e] + "(" + 2 * w_DMG[e] + "+" + w_DMG[e] + ")",
-                        Last_DMG_B[e] = 3 * w_DMG[e]),
-                    w_DMG[e] -= EDP_DMG(e),
-                    w_DMG[e] *= wHITsuu;
+                391 == n_A_ActiveSkill && 2 != n_B[2] && 4 != n_B[2] && (w_DMG[e] = 0),
+                w_DMG[e] += EDP_DMG(e),
+                Last_DMG_B[e] = w_DMG[e],
+                76 == n_A_ActiveSkill && (Last_DMG_B[e] = 2 * w_DMG[e]),
+                Last_DMG_A[e] = w_DMG[e] * wHITsuu,
+                0 == n_B_debuf[6] || 0 == wLAch ? InnStr[e] += Math.floor(w_DMG[e] * wHITsuu) + " (" + w_DMG[e] + SubName[8] + wHITsuu + " hits)" : 
+                (InnStr[e] += 3 * w_DMG[e] + "(" + 2 * w_DMG[e] + "+" + w_DMG[e] + ")", Last_DMG_B[e] = 3 * w_DMG[e]),
+                w_DMG[e] -= EDP_DMG(e),
+                w_DMG[e] *= wHITsuu;
             _ = BattleCalc2(0);
             w_DMG[1] = (w_DMG[1] * w_HIT + _ * wHITsuu * (100 - w_HIT)) / 100,
-                0 == wHITsuu && 192 == n_A_ActiveSkill && (InnStr[0] = "<B style='color:red'># of Spirit Spheres must be higher than 0<BR>Please change it at [Supportive/Party skills]</B>"),
-                EDPplus(wHITsuu),
-                n_PerHIT_DMG = _ * wHITsuu,
-                str_PerHIT_DMG = _ * wHITsuu + " (" + wHITsuu + SubName[8] + _ + " damage)",
-                CastAndDelay(),
-                BattleCalc998()
+            0 == wHITsuu && 192 == n_A_ActiveSkill && (InnStr[0] = "<B style='color:red'># of Spirit Spheres must be higher than 0<BR>Please change it at [Supportive/Party skills]</B>"),
+            EDPplus(wHITsuu),
+            n_PerHIT_DMG = _ * wHITsuu,
+            str_PerHIT_DMG = _ * wHITsuu + " (" + wHITsuu + SubName[8] + _ + " damage)",
+            CastAndDelay(),
+            BattleCalc998()
         } else if (118 == n_A_ActiveSkill || 271 == n_A_ActiveSkill) {
             n_PerHIT_DMG = 0,
-                n_A_Weapon_element = 0,
-                not_use_card = 1,
-                n_rangedAtk = 1,
-                wBT = 80 + 2 * Math.floor(n_A_DEX / 10) + 2 * Math.floor(n_A_INT / 2) + 6 * SkillSearch(119),
-                271 == n_A_ActiveSkill ? (wBT = Math.floor(wBT * (150 + 70 * n_A_ActiveSkillLV) / 100), // falcon assault
-                    wBT = Math.floor(wBT * element[n_B[3]][0]),
-                    wBT = tPlusDamCut(wBT),
-                    wBT *= 5,
-                    wBT = Math.floor(ApplyModifiers(wBT)),
-                    5 == n_B[19] && (wBT = 1),
-                    wCast = 1 * n_A_CAST,
-                    n_Delay[2] = 3) : (wBT = Math.floor(wBT * element[n_B[3]][0]), // blitz beat
-                        wBT = tPlusDamCut(wBT),
-                        wBT *= n_A_ActiveSkillLV,
-                        wBT = Math.floor(ApplyModifiers(wBT)),
-                        wCast = 1.5 * n_A_CAST,
-                        n_Delay[2] = 1);
+            n_A_Weapon_element = 0,
+            not_use_card = 1,
+            n_rangedAtk = 1,
+            wBT = 80 + 2 * Math.floor(n_A_DEX / 10) + 2 * Math.floor(n_A_INT / 2) + 6 * SkillSearch(119),
+            271 == n_A_ActiveSkill ? (wBT = Math.floor(wBT * (150 + 70 * n_A_ActiveSkillLV) / 100), // falcon assault
+                wBT = Math.floor(wBT * element[n_B[3]][0]),
+                wBT = tPlusDamCut(wBT),
+                wBT *= 5,
+                wBT = Math.floor(ApplyModifiers(wBT)),
+                5 == n_B[19] && (wBT = 1),
+                wCast = 1 * n_A_CAST,
+                n_Delay[2] = 3) : 
+            (wBT = Math.floor(wBT * element[n_B[3]][0]), // blitz beat
+                wBT = tPlusDamCut(wBT),
+                wBT *= n_A_ActiveSkillLV,
+                wBT = Math.floor(ApplyModifiers(wBT)),
+                wCast = 1.5 * n_A_CAST,
+                n_Delay[2] = 1);
             for (e = 0; e <= 2; e++)
                 Last_DMG_A[e] = Last_DMG_B[e] = wBT,
-                    InnStr[e] += Last_DMG_A[e],
-                    118 == n_A_ActiveSkill && (Last_DMG_B[e] = wBT / n_A_ActiveSkillLV,
-                        InnStr[e] += " (" + Last_DMG_B[e] + " x " + n_A_ActiveSkillLV + " hits)"),
-                    w_DMG[e] = wBT;
+                InnStr[e] += Last_DMG_A[e],
+                118 == n_A_ActiveSkill && (Last_DMG_B[e] = wBT / n_A_ActiveSkillLV, InnStr[e] += " (" + Last_DMG_B[e] + " x " + n_A_ActiveSkillLV + " hits)"),
+                w_DMG[e] = wBT;
             w_HIT_HYOUJI = 100,
-                CastAndDelay(),
-                BattleCalc998()
+            CastAndDelay(),
+            BattleCalc998()
         } else if (17 == n_A_ActiveSkill || 86 == n_A_ActiveSkill && (n_B[3] < 50 || 60 <= n_B[3])) {
             ATKmod02(wMod, 0),
-                n_A_Weapon_element = 5,
-                wINV = Math.floor(BattleCalc2(0) * Math.max(0, element[n_B[3]][5])),
-                n_PerHIT_DMG = wINV;
+            n_A_Weapon_element = 5,
+            wINV = Math.floor(BattleCalc2(0) * Math.max(0, element[n_B[3]][5])),
+            n_PerHIT_DMG = wINV;
             for (e = 0; e <= 2; e++)
                 w_DMG[e] = BattleCalc(n_A_DMG[e], e),
-                    w_DMG[e] = Math.floor(w_DMG[e] * Math.max(0, element[n_B[3]][5])),
-                    Last_DMG_A[e] = Last_DMG_B[e] = w_DMG[e] + EDP_DMG(e),
-                    InnStr[e] += Last_DMG_A[e];
+                w_DMG[e] = Math.floor(w_DMG[e] * Math.max(0, element[n_B[3]][5])),
+                Last_DMG_A[e] = Last_DMG_B[e] = w_DMG[e] + EDP_DMG(e),
+                InnStr[e] += Last_DMG_A[e];
             w_DMG[1] = (w_DMG[1] * w_HIT + wINV * (100 - w_HIT)) / 100,
-                EDPplus(1),
-                CastAndDelay(),
-                BattleCalc998()
+            EDPplus(1),
+            CastAndDelay(),
+            BattleCalc998()
         } else if (159 == n_A_ActiveSkill || 384 == n_A_ActiveSkill) { // SHIELD BOOM
             n_PerHIT_DMG = 0,
             n_rangedAtk = 1,
@@ -771,8 +806,8 @@ function BattleCalc999() {
                 w_DMG[e] = Math.floor(w_DMG[e] * defReduction(n_B[14]) - n_B_DEF2[e]),
                 w_DMG[e] = ApplyModifiers(w_DMG[e]) + wSBr,
                 w_DMG[e] < 1 && (w_DMG[e] = 1),
-                305 == m_Item[n_A_Equip[5]][0] ? (w_DMG[e] = 0, InnStr[e] += w_DMG[e] + " (no shield equiped)") 
-                : (w_DMG[e] = Math.floor(w_DMG[e] * element[n_B[3]][0]),
+                305 == m_Item[n_A_Equip[5]][0] ? (w_DMG[e] = 0, InnStr[e] += w_DMG[e] + " (no shield equiped)") : 
+                (w_DMG[e] = Math.floor(w_DMG[e] * element[n_B[3]][0]),
                     Last_DMG_A[e] = Last_DMG_B[e] = w_DMG[e],
                     InnStr[e] += Last_DMG_A[e]);
             w_DMG[1] = w_DMG[1] * w_HIT / 100,
@@ -803,292 +838,293 @@ function BattleCalc999() {
                 w_DMG[e] = Math.floor(5 * Math.floor(w_DMG[e] * defReduction(n_B[14]) - n_B_DEF2[e])),
                 w_DMG[e] = ApplyModifiers(w_DMG[e]) + (wSBr * 5),
                 w_DMG[e] < 1 && (w_DMG[e] = 1),
-                305 == m_Item[n_A_Equip[5]][0] ? (w_DMG[e] = 0, InnStr[e] += w_DMG[e] + " (no shield equiped)") 
-                : (w_DMG[e] = Math.floor(w_DMG[e] * element[n_B[3]][0]),
+                305 == m_Item[n_A_Equip[5]][0] ? (w_DMG[e] = 0, InnStr[e] += w_DMG[e] + " (no shield equiped)") : 
+                (w_DMG[e] = Math.floor(w_DMG[e] * element[n_B[3]][0]),
                     Last_DMG_B[e] = Math.floor(w_DMG[e] / 5),
                     Last_DMG_A[e] = 5 * Last_DMG_B[e],
                     InnStr[e] += Last_DMG_A[e] + " (" + Last_DMG_B[e] + SubName[8] + "5 hits)",
                     w_DMG[e] = Last_DMG_A[e]);
             w_DMG[1] = w_DMG[1] * w_HIT / 100
             CastAndDelay(),
-                BattleCalc998()
+            BattleCalc998()
         } else if (259 == n_A_ActiveSkill) { // spiral pierce
             n_rangedAtk = 1,
-                wSPP2 = n_A_WeaponLV_refineATK * Math.max(0, element[n_B[3]][n_A_Weapon_element]),
-                wSPP2 = ApplyModifiers(wSPP2),
-                wSPP2 = tPlusDamCut(wSPP2),
-                n_PerHIT_DMG = 5 * wSPP2,
-                5 == n_A_ActiveSkillLV ? wCast = 1 * n_A_CAST : wCast = (.1 + .2 * n_A_ActiveSkillLV) * n_A_CAST,
-                n_Delay[2] = 1 + .2 * n_A_ActiveSkillLV,
-                wSPP = 0;
-                for(b = 1; b <= (n_A_STR / 10); b++){
-                    wSPP += (b * 10) -  5;
-                }
-                spearMasteryDMG = 4 * SkillSearch(69);
-                SkillSearch(78) > 0 && (spearMasteryDMG += SkillSearch(69)),
-                Weaponw = 1 * c.SkillSubNum.value,
-                w_DMG[2] = (wSPP / 5) + (.8 * Weaponw * (1 + .5 * n_A_ActiveSkillLV)),
-                weightModifier = 1.25 - .25 * n_B[4],
-                w_DMG[2] = Math.floor(w_DMG[2] * weightModifier),
-                w_DMG[2] += spearMasteryDMG + n_A_WeaponLV_refineATK,
-                w_DMG[2] = w_DMG[2] * Math.max(0, element[n_B[3]][n_A_Weapon_element]),
-                w_DMG[2] += n_A_Buf2[12] * 15,
-                w_DMG[2] = ApplyModifiers(w_DMG[2]),
-                w_DMG[0] = w_DMG[1] = w_DMG[2];
+            wSPP2 = n_A_WeaponLV_refineATK * Math.max(0, element[n_B[3]][n_A_Weapon_element]),
+            wSPP2 = ApplyModifiers(wSPP2),
+            wSPP2 = tPlusDamCut(wSPP2),
+            n_PerHIT_DMG = 5 * wSPP2,
+            5 == n_A_ActiveSkillLV ? wCast = 1 * n_A_CAST : wCast = (.1 + .2 * n_A_ActiveSkillLV) * n_A_CAST,
+            n_Delay[2] = 1 + .2 * n_A_ActiveSkillLV,
+            wSPP = 0;
+            for(b = 1; b <= (n_A_STR / 10); b++){
+                wSPP += (b * 10) -  5;
+            }
+            spearMasteryDMG = 4 * SkillSearch(69);
+            SkillSearch(78) > 0 && (spearMasteryDMG += SkillSearch(69)),
+            Weaponw = 1 * c.SkillSubNum.value,
+            w_DMG[2] = (wSPP / 5) + (.8 * Weaponw * (1 + .5 * n_A_ActiveSkillLV)),
+            weightModifier = 1.25 - .25 * n_B[4],
+            w_DMG[2] = Math.floor(w_DMG[2] * weightModifier),
+            w_DMG[2] += spearMasteryDMG + n_A_WeaponLV_refineATK,
+            w_DMG[2] = w_DMG[2] * Math.max(0, element[n_B[3]][n_A_Weapon_element]),
+            w_DMG[2] += n_A_Buf2[12] * 15,
+            w_DMG[2] = ApplyModifiers(w_DMG[2]),
+            w_DMG[0] = w_DMG[1] = w_DMG[2];
             for (e = 0; e <= 2; e++)
                 Last_DMG_B[e] = w_DMG[e] + EDP_DMG(e),
-                    Last_DMG_A[e] = 5 * Last_DMG_B[e],
-                    InnStr[e] += Last_DMG_A[e] + " (" + Last_DMG_B[e] + SubName[8] + "5 hits)",
-                    w_DMG[e] = Last_DMG_A[e];
+                Last_DMG_A[e] = 5 * Last_DMG_B[e],
+                InnStr[e] += Last_DMG_A[e] + " (" + Last_DMG_B[e] + SubName[8] + "5 hits)",
+                w_DMG[e] = Last_DMG_A[e];
             w_DMG[1] = w_DMG[1] * w_HIT / 100 + n_PerHIT_DMG * (100 - w_HIT) / 100,
-                EDPplus(5),
-                CastAndDelay(),
-                BattleCalc998()
+            EDPplus(5),
+            CastAndDelay(),
+            BattleCalc998()
         } else if (88 == n_A_ActiveSkill) {
             if (n_PerHIT_DMG = 0,
                 not_use_card = 1,
                 n_Delay[0] = 1,
                 wCast = 1 * n_A_CAST,
                 0 == n_B[19]) {
-                wMod += (400 + 50 * n_A_ActiveSkillLV + 20 * c.SkillSubNum.value) / 100,
+                    wMod += (400 + 50 * n_A_ActiveSkillLV + 20 * c.SkillSubNum.value) / 100,
                     ATKmod02(wMod, 0);
                 for (e = 0; e <= 2; e++)
                     w_DMG[e] = BattleCalc(n_A_DMG[e], e),
-                        w_DMG[e] = Math.floor(w_DMG[e])
+                    w_DMG[e] = Math.floor(w_DMG[e])
             } else
                 5 == n_B[19] ? w_DMG[0] = w_DMG[1] = w_DMG[2] = 1 : w_DMG[0] = w_DMG[1] = w_DMG[2] = 0;
             for (e = 0; e <= 2; e++)
                 Last_DMG_A[e] = Last_DMG_B[e] = w_DMG[e],
-                    InnStr[e] += Last_DMG_A[e];
+                InnStr[e] += Last_DMG_A[e];
             w_HIT_HYOUJI = 100,
-                CastAndDelay(),
-                BattleCalc998()
+            CastAndDelay(),
+            BattleCalc998()
         } else if (263 == n_A_ActiveSkill) {
             not_use_card = 1,
-                n_rangedAtk = 1,
-                wCast = .5 * n_A_CAST,
-                n_Delay[2] = .8 + .2 * n_A_ActiveSkillLV,
-                w_SBr = new Array,
-                a = 5 * n_A_INT * n_A_ActiveSkillLV,
-                w_SBr[2] = a + 1e3 - Math.floor((n_B[14] + n_B[15] + n_B_MDEF2 + n_B_DEF2[2]) / 2),
-                w_SBr[1] = a + 750 - Math.floor((n_B[14] + n_B[15] + n_B_MDEF2 + n_B_DEF2[1]) / 2),
-                w_SBr[0] = a + 500 - Math.floor((n_B[14] + n_B[15] + n_B_MDEF2 + n_B_DEF2[0]) / 2);
+            n_rangedAtk = 1,
+            wCast = .5 * n_A_CAST,
+            n_Delay[2] = .8 + .2 * n_A_ActiveSkillLV,
+            w_SBr = new Array,
+            a = 5 * n_A_INT * n_A_ActiveSkillLV,
+            w_SBr[2] = a + 1e3 - Math.floor((n_B[14] + n_B[15] + n_B_MDEF2 + n_B_DEF2[2]) / 2),
+            w_SBr[1] = a + 750 - Math.floor((n_B[14] + n_B[15] + n_B_MDEF2 + n_B_DEF2[1]) / 2),
+            w_SBr[0] = a + 500 - Math.floor((n_B[14] + n_B[15] + n_B_MDEF2 + n_B_DEF2[0]) / 2);
             for (e = 0; e <= 2; e++)
                 w_SBr[e] = tPlusDamCut(w_SBr[e]);
             for (e = 0; e <= 2; e++)
                 w_DMG[e] = BattleCalc(n_A_DMG[e], e),
-                    w_DMG[e] *= n_A_ActiveSkillLV,
-                    Last_DMG_A[e] = Last_DMG_B[e] = w_DMG[e] + w_SBr[e],
-                    InnStr[e] += Last_DMG_A[e] + " (" + w_DMG[e] + " + " + w_SBr[e] + ")",
-                    w_DMG[e] = Last_DMG_A[e];
+                w_DMG[e] *= n_A_ActiveSkillLV,
+                Last_DMG_A[e] = Last_DMG_B[e] = w_DMG[e] + w_SBr[e],
+                InnStr[e] += Last_DMG_A[e] + " (" + w_DMG[e] + " + " + w_SBr[e] + ")",
+                w_DMG[e] = Last_DMG_A[e];
             _ = BattleCalc2(0) * n_A_ActiveSkillLV;
             if (n_PerHIT_DMG = _ + w_SBr[1],
                 str_PerHIT_DMG = _ + w_SBr[0] + "~" + (_ + w_SBr[2]),
                 5 == n_B[19])
                 for (e = 0; e <= 2; e++)
                     Last_DMG_A[e] = Last_DMG_B[e] = w_DMG[e] = 1,
-                        InnStr[e] += Last_DMG_A[e];
+                    InnStr[e] += Last_DMG_A[e];
             w_DMG[1] = (w_DMG[1] * w_HIT + n_PerHIT_DMG * (100 - w_HIT)) / 100,
-                CastAndDelay(),
-                BattleCalc998()
-        } else if (162 == n_A_ActiveSkill) {
+            CastAndDelay(),
+            BattleCalc998()
+        } else if (162 == n_A_ActiveSkill || 474 == n_A_ActiveSkill) {
+            n_A_Weapon_element = 162 == n_A_ActiveSkill ? 6 : 7,
             n_PerHIT_DMG = 0,
-                myInnerHtml("CRIATKname", '<Font color="#FF0000">Health drain</Font>', 0),
-                myInnerHtml("CRIATK", '<Font color="#FF0000">' + Math.floor(n_A_MaxHP / 5) + "</Font>", 0),
-                myInnerHtml("bSUB3name", '<Font color="#FF0000">Damage backlash</Font>', 0),
-                work_A_VITDEF = [0, 0, 0],
-                work_A_VITDEF[0] = n_A_VITDEF[2],
-                work_A_VITDEF[1] = n_A_VITDEF[1],
-                work_A_VITDEF[2] = n_A_VITDEF[0],
-                n_A_softMDEF = n_A_INT + Math.floor(n_A_VIT / 2);
+            myInnerHtml("CRIATKname", '<Font color="#FF0000">Health drain</Font>', 0),
+            myInnerHtml("CRIATK", '<Font color="#FF0000">' + Math.floor(n_A_MaxHP / 5) + "</Font>", 0),
+            myInnerHtml("bSUB3name", '<Font color="#FF0000">Damage backlash</Font>', 0),
+            work_A_VITDEF = [0, 0, 0],
+            work_A_VITDEF[0] = n_A_VITDEF[2],
+            work_A_VITDEF[1] = n_A_VITDEF[1],
+            work_A_VITDEF[2] = n_A_VITDEF[0],
+            n_A_softMDEF = n_A_INT + Math.floor(n_A_VIT / 2);
             for (e = 0; e <= 2; e++)
                 w_DMG[e] = BK_n_A_DMG[e] * defReduction(n_A_DEF) - work_A_VITDEF[e] + n_A_WeaponLV_refineATK,
-                    w_DMG[e] = Math.floor(w_DMG[e] * (wMod + .4 * n_A_ActiveSkillLV)),
-                    a = BK_n_A_MATK[e] * mdefReduction(n_A_MDEF) - n_A_softMDEF,
-                    a = Math.floor(a * (.4 * n_A_ActiveSkillLV + 1)),
-                    w_DMG[e] += a,
-                    w_DMG[e] = Math.floor(w_DMG[e] * (100 - n_tok[57]) / 100),
-                    w_DMG[e] = Math.floor(w_DMG[e] * (100 - n_tok[66]) / 100),
-                    w_DMG[e] = Math.floor(w_DMG[e] * (100 - n_tok[78]) / 100),
-                    1 * c.A_adopted.checked ? w_DMG[e] = Math.floor(w_DMG[e] * (100 - n_tok[190]) / 100) : w_DMG[e] = Math.floor(w_DMG[e] * (100 - n_tok[191]) / 100),
-                    w_DMG[e] = Math.floor(w_DMG[e] * Math.max(0, element[10 * n_A_Bodyelement + 1][6])),
-                    w_DMG[e] = Math.floor(w_DMG[e] / 2),
-                    EquipNumSearch(1433) && (w_DMG[e] = Math.floor(1.172 * w_DMG[e]));
+                w_DMG[e] = Math.floor(w_DMG[e] * (wMod + .4 * n_A_ActiveSkillLV)),
+                a = BK_n_A_MATK[e] * mdefReduction(n_A_MDEF) - n_A_softMDEF,
+                a = Math.floor(a * (.4 * n_A_ActiveSkillLV + 1)),
+                w_DMG[e] += a,
+                w_DMG[e] = Math.floor(w_DMG[e] * (100 - n_tok[57]) / 100),
+                w_DMG[e] = Math.floor(w_DMG[e] * (100 - n_tok[66]) / 100),
+                w_DMG[e] = Math.floor(w_DMG[e] * (100 - n_tok[78]) / 100),
+                1 * c.A_adopted.checked ? w_DMG[e] = Math.floor(w_DMG[e] * (100 - n_tok[190]) / 100) : w_DMG[e] = Math.floor(w_DMG[e] * (100 - n_tok[191]) / 100),
+                w_DMG[e] = Math.floor(w_DMG[e] * Math.max(0, element[10 * n_A_Bodyelement + 1][n_A_Weapon_element])),
+                w_DMG[e] = Math.floor(w_DMG[e] / 2),
+                EquipNumSearch(1433) && (w_DMG[e] = Math.floor(1.172 * w_DMG[e]));
             myInnerHtml("bSUB3", '<Font color="#FF0000">3(hits) x ' + w_DMG[0] + "~" + w_DMG[2] + " damage</Font>", 0),
-                n_rangedAtk = 2,
-                n_A_Weapon_element = 6,
-                wCast = 3 * n_A_CAST,
-                n_Delay[2] = 1.5,
-                wLAch = 1;
+            n_rangedAtk = 2,
+            wCast = 3 * n_A_CAST,
+            n_Delay[2] = 1.5,
+            wLAch = 1;
             for (e = 0; e <= 2; e++)
                 w_DMG[e] = BK_n_A_DMG[e] * defReduction(n_B[14]) - n_B_DEF2[e] + n_A_WeaponLV_refineATK,
-                    w_DMG[e] *= wMod + .4 * n_A_ActiveSkillLV,
-                    w_DMG[e] = Math.floor(w_DMG[e] * Math.max(0, element[n_B[3]][6])),
-                    a = BK_n_A_MATK[e] * mdefReduction(n_B[15]) - n_B_MDEF2,
-                    a *= .4 * n_A_ActiveSkillLV + 1,
-                    a = Math.floor(a * Math.max(0, element[n_B[3]][6])),
-                    w_DMG[e] = tPlusDamCut(Math.floor((a + w_DMG[e]) * Math.max(0, element[n_B[3]][6]))),
-                    EquipNumSearch(1433) && (w_DMG[e] = Math.floor(1.1 * w_DMG[e])),
-                    w_DMG[e] < 1 && (w_DMG[e] = 1),
-                    60 <= n_B[3] && n_B[3] <= 69 && (w_DMG[e] = 0);
+                w_DMG[e] *= wMod + .4 * n_A_ActiveSkillLV,
+                w_DMG[e] = Math.floor(w_DMG[e] * Math.max(0, element[n_B[3]][n_A_Weapon_element])),
+                a = BK_n_A_MATK[e] * mdefReduction(n_B[15]) - n_B_MDEF2,
+                a *= .4 * n_A_ActiveSkillLV + 1,
+                a = Math.floor(a * Math.max(0, element[n_B[3]][n_A_Weapon_element])),
+                w_DMG[e] = tPlusDamCut(Math.floor((a + w_DMG[e]) * Math.max(0, element[n_B[3]][n_A_Weapon_element]))),
+                EquipNumSearch(1433) && (w_DMG[e] = Math.floor(1.1 * w_DMG[e])),
+                w_DMG[e] < 1 && (w_DMG[e] = 1),
+                n_A_Weapon_element == 6 && 60 <= n_B[3] && n_B[3] <= 69 && (w_DMG[e] = 0),
+                n_A_Weapon_element == 7 && 70 <= n_B[3] && n_B[3] <= 79 && (w_DMG[e] = 0);
             if (0 == n_B_debuf[6])
                 for (var s = 0; s <= 2; s++)
                     Last_DMG_A[s] = Last_DMG_B[s] = 3 * w_DMG[s],
-                        InnStr[s] += Last_DMG_A[s] + " (" + w_DMG[s] + SubName[8] + "3 hits)",
-                        w_DMG[s] = Last_DMG_A[s];
+                    InnStr[s] += Last_DMG_A[s] + " (" + w_DMG[s] + SubName[8] + "3 hits)",
+                    w_DMG[s] = Last_DMG_A[s];
             else
                 for (s = 0; s <= 2; s++)
                     Last_DMG_A[s] = Last_DMG_B[s] = 4 * w_DMG[s],
-                        InnStr[s] += Last_DMG_A[s] + " (" + 2 * w_DMG[s] + " + " + w_DMG[s] + SubName[8] + "2 hits)",
-                        w_DMG[s] = Last_DMG_A[s];
+                    InnStr[s] += Last_DMG_A[s] + " (" + 2 * w_DMG[s] + " + " + w_DMG[s] + SubName[8] + "2 hits)",
+                    w_DMG[s] = Last_DMG_A[s];
             w_HIT_HYOUJI = 100,
-                CastAndDelay(),
-                BattleCalc998()
+            CastAndDelay(),
+            BattleCalc998()
         } else if (66 == n_A_ActiveSkill) {
             for (wCR = 100,
                 n_PerHIT_DMG = Math.floor(2 * BattleCalc2(0) * element[n_B[3]][0]),
-                SkillSearch(327) ? wCR += 20 * SkillSearch(327) : (SkillSearch(154) && (wCR += 5 * SkillSearch(154)),
-                    0 == SkillSearch(154) && n_A_Buf2[8] && (wCR += 5 * n_A_Buf2[8])),
+                SkillSearch(327) ? wCR += 20 * SkillSearch(327) : 
+                (SkillSearch(154) && (wCR += 5 * SkillSearch(154)), 0 == SkillSearch(154) && n_A_Buf2[8] && (wCR += 5 * n_A_Buf2[8])),
                 CR_n_A_DMG = [0, 0, 0],
                 CRmod = 1 * c.SkillSubNum.value / 8e3,
                 s = 0; s <= 2; s++)
                 CR_n_A_DMG[s] = Math.floor(n_A_DMG[s] * wCR / 100);
             wMod += .5,
-                ATKmod02(wMod, 0);
+            ATKmod02(wMod, 0);
             for (s = 0; s <= 2; s++)
                 w_DMG[s] = BattleCalc(n_A_DMG[s], s),
-                    w_DMG[s] += Math.floor(BattleCalc(CR_n_A_DMG[s], s) * CRmod),
-                    w_DMG[s] = Math.floor(w_DMG[s] * element[n_B[3]][0]),
-                    SRV && (!CardNumSearch(523) || 6 != n_A_JOB && 12 != n_A_JOB && 19 != n_A_JOB && 26 != n_A_JOB && 33 != n_A_JOB && 40 != n_A_JOB || (w_DMG[0] *= 1.5,
-                        w_DMG[1] *= 1.5,
-                        w_DMG[2] *= 1.5)),
-                    Last_DMG_A[s] = Last_DMG_B[s] = w_DMG[s] + EDP_DMG(s),
-                    InnStr[s] += Last_DMG_A[s];
+                w_DMG[s] += Math.floor(BattleCalc(CR_n_A_DMG[s], s) * CRmod),
+                w_DMG[s] = Math.floor(w_DMG[s] * element[n_B[3]][0]),
+                SRV && (!CardNumSearch(523) || 6 != n_A_JOB && 12 != n_A_JOB && 19 != n_A_JOB && 26 != n_A_JOB && 33 != n_A_JOB && 40 != n_A_JOB || (w_DMG[0] *= 1.5,
+                    w_DMG[1] *= 1.5,
+                    w_DMG[2] *= 1.5)),
+                Last_DMG_A[s] = Last_DMG_B[s] = w_DMG[s] + EDP_DMG(s),
+                InnStr[s] += Last_DMG_A[s];
             w_DMG[1] = (w_DMG[1] * w_HIT + 2 * BattleCalc2(0) * (100 - w_HIT)) / 100,
-                w_DMG[1] = Math.floor(w_DMG[1] * element[n_B[3]][0]),
-                EDPplus(1),
-                CastAndDelay(),
-                BattleCalc998()
+            w_DMG[1] = Math.floor(w_DMG[1] * element[n_B[3]][0]),
+            EDPplus(1),
+            CastAndDelay(),
+            BattleCalc998()
         } else if (283 == n_A_ActiveSkill) {
             n_PerHIT_DMG = 0,
-                w_DMG[2] = 500 + 300 * n_A_ActiveSkillLV,
-                5 == n_B[19] && (w_DMG[2] = 1),
-                w_DMG[0] = w_DMG[1] = w_DMG[2];
+            w_DMG[2] = 500 + 300 * n_A_ActiveSkillLV,
+            5 == n_B[19] && (w_DMG[2] = 1),
+            w_DMG[0] = w_DMG[1] = w_DMG[2];
             for (e = 0; e <= 2; e++)
                 Last_DMG_A[e] = Last_DMG_B[e] = w_DMG[e],
-                    InnStr[e] += Last_DMG_A[e];
+                InnStr[e] += Last_DMG_A[e];
             wCast = (1.5 + .5 * n_A_ActiveSkillLV) * n_A_CAST,
-                n_Delay[2] = 1.5 + .5 * n_A_ActiveSkillLV,
-                SRV && (n_Delay[2] = (1.5 + .5 * n_A_ActiveSkillLV) / 2),
-                w_HIT_HYOUJI = 100,
-                CastAndDelay(),
-                BattleCalc998()
+            n_Delay[2] = 1.5 + .5 * n_A_ActiveSkillLV,
+            SRV && (n_Delay[2] = (1.5 + .5 * n_A_ActiveSkillLV) / 2),
+            w_HIT_HYOUJI = 100,
+            CastAndDelay(),
+            BattleCalc998()
         } else if (284 == n_A_ActiveSkill) {
             n_PerHIT_DMG = 0,
-                n_A_Weapon_element = 0,
-                w_DMG[2] = Math.floor(.09 * n_A_MaxHP * (.9 + .1 * n_A_ActiveSkillLV)),
-                w_DMG[2] = ApplyModifiers(w_DMG[2]),
-                w_DMG[2] = Math.floor(w_DMG[2] * element[n_B[3]][0]),
-                w_DMG[0] = w_DMG[1] = w_DMG[2];
+            n_A_Weapon_element = 0,
+            w_DMG[2] = Math.floor(.09 * n_A_MaxHP * (.9 + .1 * n_A_ActiveSkillLV)),
+            w_DMG[2] = ApplyModifiers(w_DMG[2]),
+            w_DMG[2] = Math.floor(w_DMG[2] * element[n_B[3]][0]),
+            w_DMG[0] = w_DMG[1] = w_DMG[2];
             for (e = 0; e <= 2; e++)
                 Last_DMG_A[e] = Last_DMG_B[e] = w_DMG[e],
-                    InnStr[e] += Last_DMG_A[e];
+                InnStr[e] += Last_DMG_A[e];
             w_HIT_HYOUJI = 100,
-                CastAndDelay(),
-                BattleCalc998()
+            CastAndDelay(),
+            BattleCalc998()
         } else if (193 == n_A_ActiveSkill) {
             n_PerHIT_DMG = 0,
-                w_HIT_HYOUJI = 100,
-                n_A_Weapon_element = 0,
-                ATKmod02(wMod, 0),
-                wMod += .75 * n_A_ActiveSkillLV,
-                work_B_DEF2 = [0, 0, 0],
-                work_B_DEF2[0] = n_B_DEF2[2],
-                work_B_DEF2[1] = n_B_DEF2[1],
-                work_B_DEF2[2] = n_B_DEF2[0];
+            w_HIT_HYOUJI = 100,
+            n_A_Weapon_element = 0,
+            ATKmod02(wMod, 0),
+            wMod += .75 * n_A_ActiveSkillLV,
+            work_B_DEF2 = [0, 0, 0],
+            work_B_DEF2[0] = n_B_DEF2[2],
+            work_B_DEF2[1] = n_B_DEF2[1],
+            work_B_DEF2[2] = n_B_DEF2[0];
             for (s = 0; s <= 2; s++)
                 w_DMG[s] = Math.floor(Math.floor(BK_n_A_DMG[s] * wMod) * (work_B_DEF2[s] + n_B[14]) / 50),
-                    w_DMG[s] = ApplyModifiers(w_DMG[s]),
-                    w_DMG[s] = Math.floor(w_DMG[s] * element[n_B[3]][0]),
-                    Last_DMG_A[s] = Last_DMG_B[s] = w_DMG[s] + EDP_DMG(s),
-                    InnStr[s] += Last_DMG_A[s];
+                w_DMG[s] = ApplyModifiers(w_DMG[s]),
+                w_DMG[s] = Math.floor(w_DMG[s] * element[n_B[3]][0]),
+                Last_DMG_A[s] = Last_DMG_B[s] = w_DMG[s] + EDP_DMG(s),
+                InnStr[s] += Last_DMG_A[s];
             EDPplus(1),
-                wCast = 1 * n_A_CAST,
-                n_Delay[2] = .5,
-                CastAndDelay(),
-                BattleCalc998()
+            wCast = 1 * n_A_CAST,
+            n_Delay[2] = .5,
+            CastAndDelay(),
+            BattleCalc998()
         } else if (197 == n_A_ActiveSkill || 321 == n_A_ActiveSkill) {
             n_PerHIT_DMG = 0,
-                w_HIT_HYOUJI = 100,
-                n_A_Weapon_element = 0,
-                ATKmod02(wMod, 0),
-                SRV ? 197 == n_A_ActiveSkill ? wMod += 8 + 1 * c.SkillSubNum.value / 10 : wMod += 8 + (n_A_MaxSP - 1) / 10 : 197 == n_A_ActiveSkill ? wMod += 6 + 1 * c.SkillSubNum.value / 10 : wMod += 6 + (n_A_MaxSP - 1) / 10,
-                wASYU = 250 + 150 * n_A_ActiveSkillLV;
+            w_HIT_HYOUJI = 100,
+            n_A_Weapon_element = 0,
+            ATKmod02(wMod, 0),
+            SRV ? 197 == n_A_ActiveSkill ? wMod += 8 + 1 * c.SkillSubNum.value / 10 : wMod += 8 + (n_A_MaxSP - 1) / 10 : 197 == n_A_ActiveSkill ? wMod += 6 + 1 * c.SkillSubNum.value / 10 : wMod += 6 + (n_A_MaxSP - 1) / 10,
+            wASYU = 250 + 150 * n_A_ActiveSkillLV;
             for (s = 0; s <= 2; s++)
                 w_DMG[s] = BK_n_A_DMG[s],
                 1 == n_A_Buf2[19] && (w_DMG[s] *= 2),
                 w_DMG[s] = Math.floor(w_DMG[s] * wMod) + wASYU,
-                    w_DMG[s] = ApplyModifiers(w_DMG[s]),
-                    w_DMG[s] = Math.floor(w_DMG[s] * element[n_B[3]][0]),
-                    (n_A_Buf6[5] ? w_DMG[s] += Math.floor((.02 + .03 * n_A_Buf6[5]) * w_DMG[s]) : n_A_Buf7[31] && (w_DMG[s] += Math.floor(.05 * w_DMG[s]))),
-                        //1 == n_A_Buf2[19] && (w_DMG[s] = 2 * w_DMG[s])), - Removed 2x damage from 100% ATK Gospel buff
-                    Last_DMG_A[s] = Last_DMG_B[s] = w_DMG[s] + EDP_DMG(s),
-                    InnStr[s] += Last_DMG_A[s];
+                w_DMG[s] = ApplyModifiers(w_DMG[s]),
+                w_DMG[s] = Math.floor(w_DMG[s] * element[n_B[3]][0]),
+                (n_A_Buf6[5] ? w_DMG[s] += Math.floor((.02 + .03 * n_A_Buf6[5]) * w_DMG[s]) : n_A_Buf7[31] && (w_DMG[s] += Math.floor(.05 * w_DMG[s]))),
+                    //1 == n_A_Buf2[19] && (w_DMG[s] = 2 * w_DMG[s])), - Removed 2x damage from 100% ATK Gospel buff
+                Last_DMG_A[s] = Last_DMG_B[s] = w_DMG[s] + EDP_DMG(s),
+                InnStr[s] += Last_DMG_A[s];
             EDPplus(1),
-                wCast = (4.5 - .5 * n_A_ActiveSkillLV) * n_A_CAST,
-                n_Delay[2] = 3.5 - .5 * n_A_ActiveSkillLV,
-                CastAndDelay(),
-                BattleCalc998()
+            wCast = (4.5 - .5 * n_A_ActiveSkillLV) * n_A_CAST,
+            n_Delay[2] = 3.5 - .5 * n_A_ActiveSkillLV,
+            CastAndDelay(),
+            BattleCalc998()
         } else if (394 == n_A_ActiveSkill) {
             n_rangedAtk = 1,
-                not_use_card = 1,
-                ATKmod02(wMod, 0);
+            not_use_card = 1,
+            ATKmod02(wMod, 0);
             for (s = 0; s <= 2; s++)
                 w_DMG[s] = BattleCalc(n_A_DMG[s], s),
-                    w_DMG[s] = Math.floor(w_DMG[s] * element[n_B[3]][0]),
-                    Last_DMG_A[s] = Last_DMG_B[s] = w_DMG[s],
-                    InnStr[s] += Last_DMG_A[s];
+                w_DMG[s] = Math.floor(w_DMG[s] * element[n_B[3]][0]),
+                Last_DMG_A[s] = Last_DMG_B[s] = w_DMG[s],
+                InnStr[s] += Last_DMG_A[s];
             w_DMG[1] = (w_DMG[1] * w_HIT + BattleCalc2(0) * element[n_B[3]][0] * (100 - w_HIT)) / 100,
-                n_PerHIT_DMG = BattleCalc2(0) * element[n_B[3]][0],
-                CastAndDelay(),
-                BattleCalc998()
+            n_PerHIT_DMG = BattleCalc2(0) * element[n_B[3]][0],
+            CastAndDelay(),
+            BattleCalc998()
         } else if (395 == n_A_ActiveSkill) {
             n_rangedAtk = 1,
-                n_Delay[2] = 1,
-                not_use_card = 1,
-                ATKmod02(wMod, 0),
-                n_A_Weapon_element = m_Kunai[1 * c.SkillSubNum.value][1];
+            n_Delay[2] = 1,
+            not_use_card = 1,
+            ATKmod02(wMod, 0),
+            n_A_Weapon_element = m_Kunai[1 * c.SkillSubNum.value][1];
             for (s = 0; s <= 2; s++)
                 w_DMG[s] = BattleCalc(n_A_DMG[s], s),
-                    w_DMG[s] = Math.floor(w_DMG[s] * element[n_B[3]][0]),
-                    Last_DMG_B[s] = w_DMG[s],
-                    Last_DMG_A[s] = 3 * w_DMG[s],
-                    InnStr[s] += Last_DMG_A[s] + " (" + Last_DMG_B[s] + SubName[8] + "3 hits)",
-                    w_DMG[s] = Last_DMG_A[s];
+                w_DMG[s] = Math.floor(w_DMG[s] * element[n_B[3]][0]),
+                Last_DMG_B[s] = w_DMG[s],
+                Last_DMG_A[s] = 3 * w_DMG[s],
+                InnStr[s] += Last_DMG_A[s] + " (" + Last_DMG_B[s] + SubName[8] + "3 hits)",
+                w_DMG[s] = Last_DMG_A[s];
             _ = Math.floor(BattleCalc2(0) * element[n_B[3]][0]);
             w_DMG[1] = (w_DMG[1] * w_HIT + 3 * _ * (100 - w_HIT)) / 100,
-                n_PerHIT_DMG = 3 * _,
-                str_PerHIT_DMG = 3 * _ + " (3" + SubName[8] + _ + " damage)",
-                CastAndDelay(),
-                BattleCalc998()
+            n_PerHIT_DMG = 3 * _,
+            str_PerHIT_DMG = 3 * _ + " (3" + SubName[8] + _ + " damage)",
+            CastAndDelay(),
+            BattleCalc998()
         } else if (396 == n_A_ActiveSkill) {
             wMod += 1.5 * n_A_ActiveSkillLV + .5,
-                n_rangedAtk = 1,
-                ATKmod02(wMod, 0),
-                wCast = 3 * n_A_CAST,
-                n_Delay[2] = 3,
-                wActiveHitNum = 2 + Math.round(n_A_ActiveSkillLV / 2);
+            n_rangedAtk = 1,
+            ATKmod02(wMod, 0),
+            wCast = 3 * n_A_CAST,
+            n_Delay[2] = 3,
+            wActiveHitNum = 2 + Math.round(n_A_ActiveSkillLV / 2);
             for (s = 0; s <= 2; s++)
                 w_DMG[s] = BattleCalc(n_A_DMG[s], s),
-                    w_DMG[s] = Math.floor(w_DMG[s] * element[n_B[3]][0]),
-                    wActiveHitNum > 1 && (w_DMG[s] = Math.floor(w_DMG[s] / wActiveHitNum) * wActiveHitNum),
-                    Last_DMG_A[s] = Last_DMG_B[s] = w_DMG[s],
-                    InnStr[s] += Last_DMG_A[s],
-                    InnStr[s] += " (" + Last_DMG_A[s] / wActiveHitNum + " x " + wActiveHitNum + " hits)";
+                w_DMG[s] = Math.floor(w_DMG[s] * element[n_B[3]][0]),
+                wActiveHitNum > 1 && (w_DMG[s] = Math.floor(w_DMG[s] / wActiveHitNum) * wActiveHitNum),
+                Last_DMG_A[s] = Last_DMG_B[s] = w_DMG[s],
+                InnStr[s] += Last_DMG_A[s],
+                InnStr[s] += " (" + Last_DMG_A[s] / wActiveHitNum + " x " + wActiveHitNum + " hits)";
             w_DMG[1] = (w_DMG[1] * w_HIT + BattleCalc2(0) * element[n_B[3]][0] * (100 - w_HIT)) / 100,
-                n_PerHIT_DMG = BattleCalc2(0) * element[n_B[3]][0],
-                CastAndDelay(),
-                BattleCalc998()
+            n_PerHIT_DMG = BattleCalc2(0) * element[n_B[3]][0],
+            CastAndDelay(),
+            BattleCalc998()
         } else if (397 == n_A_ActiveSkill) {
             for (n_rangedAtk = 1,
                 n_A_Weapon_element = 0,
@@ -1097,389 +1133,514 @@ function BattleCalc999() {
                 w_HIT_HYOUJI = 100,
                 1 == n_B[19] || 586 == n_B[0] ? (w_DMG[0] = 250 * n_A_ActiveSkillLV,
                     w_DMG[1] = 250 * n_A_ActiveSkillLV + 125 * n_A_ActiveSkillLV,
-                    w_DMG[2] = 250 * n_A_ActiveSkillLV + 250 * n_A_ActiveSkillLV) : (w_DMG[0] = 500 * n_A_ActiveSkillLV,
+                    w_DMG[2] = 250 * n_A_ActiveSkillLV + 250 * n_A_ActiveSkillLV) : 
+                    (w_DMG[0] = 500 * n_A_ActiveSkillLV,
                         w_DMG[1] = 500 * n_A_ActiveSkillLV + 250 * n_A_ActiveSkillLV,
                         w_DMG[2] = 500 * n_A_ActiveSkillLV + 500 * n_A_ActiveSkillLV),
                 e = 0; e <= 2; e++)
                 w_DMG[e] = w_DMG[e] * Math.max(0, element[n_B[3]][n_A_Weapon_element]),
-                    w_DMG[e] = tPlusDamCut(w_DMG[e]);
+                w_DMG[e] = tPlusDamCut(w_DMG[e]);
             for (5 == n_B[19] && (w_DMG[0] = w_DMG[1] = w_DMG[2] = 1),
                 e = 0; e <= 2; e++)
                 InnStr[e] += w_DMG[e];
             EDPplus(5),
-                CastAndDelay(),
-                BattleCalc998()
+            CastAndDelay(),
+            BattleCalc998()
         } else if (405 == n_A_ActiveSkill || 438 == n_A_ActiveSkill) {
             n_PerHIT_DMG = 0,
-                n_A_Weapon_element = 0,
-                n_rangedAtk = 1,
-                ATKmod02(wMod, 0),
-                405 == n_A_ActiveSkill ? w_1senHP = 1 * c.SkillSubNum.value : w_1senHP = n_A_MaxHP - 1,
-                w_DMG[0] = SRV ? 40 * (n_A_STR - SkillSearch(404)) + n_A_ActiveSkillLV * (w_1senHP / 10 + 35) : 40 * (n_A_STR + n_A_ActiveSkillLV) + w_1senHP * (n_A_BaseLV / 100) * n_A_ActiveSkillLV / 10,
-                w_DMG[0] = w_DMG[0] * defReduction(n_B[14]),
-                w_DMG[0] = ApplyModifiers(w_DMG[0]),
-                w_DMG[0] = Math.floor(w_DMG[0] * element[n_B[3]][0]),
-                w_DMG[2] = w_DMG[1] = w_DMG[0];
+            n_A_Weapon_element = 0,
+            n_rangedAtk = 1,
+            ATKmod02(wMod, 0),
+            405 == n_A_ActiveSkill ? w_1senHP = 1 * c.SkillSubNum.value : w_1senHP = n_A_MaxHP - 1,
+            w_DMG[0] = SRV ? 40 * (n_A_STR - SkillSearch(404)) + n_A_ActiveSkillLV * (w_1senHP / 10 + 35) : 40 * (n_A_STR + n_A_ActiveSkillLV) + w_1senHP * (n_A_BaseLV / 100) * n_A_ActiveSkillLV / 10,
+            w_DMG[0] = w_DMG[0] * defReduction(n_B[14]),
+            w_DMG[0] = ApplyModifiers(w_DMG[0]),
+            w_DMG[0] = Math.floor(w_DMG[0] * element[n_B[3]][0]),
+            w_DMG[2] = w_DMG[1] = w_DMG[0];
             for (e = 0; e <= 2; e++)
                 Last_DMG_A[e] = Last_DMG_B[e] = w_DMG[e],
-                    InnStr[e] += Last_DMG_A[e];
+                InnStr[e] += Last_DMG_A[e];
             CastAndDelay(),
-                w_HIT_HYOUJI = 100,
-                BattleCalc998()
+            w_HIT_HYOUJI = 100,
+            BattleCalc998()
         } else if (244 == n_A_ActiveSkill) { // acid terror
             n_PerHIT_DMG = 0,
-                n_rangedAtk = 1,
-                wMod = (100 + 130 * n_A_ActiveSkillLV) / 100;
-                wMod2 = (100 + 40 * n_A_ActiveSkillLV) / 100;
+            n_rangedAtk = 1,
+            wMod = (100 + 130 * n_A_ActiveSkillLV) / 100,
+            wMod2 = (100 + 40 * n_A_ActiveSkillLV) / 100;
             for (s = 0; s <= 2; s++)
                 w_DMG[s] = BK_n_A_DMG[s] * wMod,
-                    w_DMG[s] = BattleCalc(w_DMG[s], s),
-                    a = BK_n_A_MATK[s] * wMod2,
-                    a = BattleCalc(a, s),
-                    Last_DMG_B[s] = w_DMG[s] + a,
-                    Last_DMG_A[s] = Last_DMG_B[s],
-                    InnStr[s] += Last_DMG_A[s] + " (" + w_DMG[s] + " + " + a + ")", 
-                    w_DMG[s] = w_DMG[s] + a;
+                w_DMG[s] = w_DMG[s] != 0 ? BattleCalc(w_DMG[s], s) : 0,
+                a = BK_n_A_MATK[s] * wMod2,
+                a = a != 0 ? BattleCalc(a, s) : 0,
+                Last_DMG_B[s] = w_DMG[s] + a,
+                Last_DMG_A[s] = Last_DMG_B[s],
+                InnStr[s] += Last_DMG_A[s] + " (" + w_DMG[s] + " + " + a + ")", 
+                w_DMG[s] = w_DMG[s] + a;
             wCast = 1 * n_A_CAST,
-                CastAndDelay(),
-                BattleCalc998()
+            CastAndDelay(),
+            BattleCalc998()
         } else if (328 == n_A_ActiveSkill) { // acid demo
             n_PerHIT_DMG = 0,
-                n_rangedAtk = 1,
-                n_A_Weapon_element = 0,
-                wHITsuu = n_A_ActiveSkillLV,
-                wAD = .7 * n_A_INT * n_A_INT * n_B[7] / (n_A_INT + n_B[7]),
-                w_DMG[2] = Math.floor(wAD),
-                w_DMG[2] = tPlusDamCut(Math.floor(w_DMG[2] * element[n_B[3]][0])),
-                1 == PvP && (w_DMG[2] = Math.floor(w_DMG[2] / 2)),
-                w_DMG[0] = w_DMG[1] = w_DMG[2];
+            n_rangedAtk = 1,
+            n_A_Weapon_element = 0,
+            wHITsuu = n_A_ActiveSkillLV,
+            wAD = .7 * n_A_INT * n_A_INT * n_B[7] / (n_A_INT + n_B[7]),
+            w_DMG[2] = Math.floor(wAD),
+            w_DMG[2] = tPlusDamCut(Math.floor(w_DMG[2] * element[n_B[3]][0])),
+            1 == PvP && (w_DMG[2] = Math.floor(w_DMG[2] / 2)),
+            w_DMG[0] = w_DMG[1] = w_DMG[2];
             for (e = 0; e <= 2; e++)
                 Last_DMG_B[e] = w_DMG[e],
-                    Last_DMG_A[e] = w_DMG[e] * wHITsuu,
-                    InnStr[e] += Last_DMG_A[e] + " (" + Last_DMG_B[e] + SubName[8] + wHITsuu + " hits)",
-                    w_DMG[e] = Last_DMG_A[e];
+                Last_DMG_A[e] = w_DMG[e] * wHITsuu,
+                InnStr[e] += Last_DMG_A[e] + " (" + Last_DMG_B[e] + SubName[8] + wHITsuu + " hits)",
+                w_DMG[e] = Last_DMG_A[e];
             wCast = 1 * n_A_CAST,
-                n_Delay[2] = 1,
-                w_HIT_HYOUJI = 100,
-                CastAndDelay(),
-                BattleCalc998()
+            n_Delay[2] = 1,
+            w_HIT_HYOUJI = 100,
+            CastAndDelay(),
+            BattleCalc998()
         } else if (106 == n_A_ActiveSkill || 111 == n_A_ActiveSkill || 112 == n_A_ActiveSkill || 113 == n_A_ActiveSkill) { // traps
             n_PerHIT_DMG = 0,
-                n_Delay[0] = 1,
-                106 == n_A_ActiveSkill ? (n_A_Weapon_element = 2,
-                    w_DMG[2] = Math.floor(n_A_ActiveSkillLV * (75 + n_A_DEX) * (n_A_INT + 100) / 35 * Math.max(0, element[n_B[3]][2]))) : 112 == n_A_ActiveSkill ? (n_A_Weapon_element = 4,
-                        w_DMG[2] = Math.floor(n_A_ActiveSkillLV * (75 + n_A_DEX) * (n_A_INT + 100) / 35 * Math.max(0, element[n_B[3]][4]))) : 113 == n_A_ActiveSkill ? (n_A_Weapon_element = 3,
-                            w_DMG[2] = Math.floor(n_A_ActiveSkillLV * (75 + n_A_DEX) * (n_A_INT + 100) / 35 * Math.max(0, element[n_B[3]][3]))) : 111 == n_A_ActiveSkill && (n_A_Weapon_element = 1,
-                                w_DMG[2] = Math.floor(n_A_ActiveSkillLV * (75 + n_A_DEX) * (n_A_INT + 100) / 35 * Math.max(0, element[n_B[3]][1]))),
-                w_DMG[2] = tPlusDamCut(w_DMG[2]),
-                _ = 0
-                n_A_Buf9[20] == n_A_ActiveSkill && (_ += n_A_Buf9[19]),
-                n_A_Buf9[22] == n_A_ActiveSkill && (_ += n_A_Buf9[21]),
-                w_DMG[2] = Math.floor(w_DMG[2] * (100 + StPlusCalc2(5e3 + n_A_ActiveSkill) + StPlusCard(5e3 + n_A_ActiveSkill) + _) / 100),
-                w_DMG[0] = w_DMG[1] = w_DMG[2];
+            n_Delay[0] = 1,
+            106 == n_A_ActiveSkill ? (n_A_Weapon_element = 2, w_DMG[2] = Math.floor(n_A_ActiveSkillLV * (75 + n_A_DEX) * (n_A_INT + 100) / 35 * Math.max(0, element[n_B[3]][2]))) : 
+            112 == n_A_ActiveSkill ? (n_A_Weapon_element = 4, w_DMG[2] = Math.floor(n_A_ActiveSkillLV * (75 + n_A_DEX) * (n_A_INT + 100) / 35 * Math.max(0, element[n_B[3]][4]))) : 
+            113 == n_A_ActiveSkill ? (n_A_Weapon_element = 3, w_DMG[2] = Math.floor(n_A_ActiveSkillLV * (75 + n_A_DEX) * (n_A_INT + 100) / 35 * Math.max(0, element[n_B[3]][3]))) : 
+            111 == n_A_ActiveSkill && (n_A_Weapon_element = 1, w_DMG[2] = Math.floor(n_A_ActiveSkillLV * (75 + n_A_DEX) * (n_A_INT + 100) / 35 * Math.max(0, element[n_B[3]][1]))),
+            w_DMG[2] = tPlusDamCut(w_DMG[2]),
+            _ = 0
+            n_A_Buf9[20] == n_A_ActiveSkill && (_ += n_A_Buf9[19]),
+            n_A_Buf9[22] == n_A_ActiveSkill && (_ += n_A_Buf9[21]),
+            w_DMG[2] = Math.floor(w_DMG[2] * (100 + StPlusCalc2(5e3 + n_A_ActiveSkill) + StPlusCard(5e3 + n_A_ActiveSkill) + _) / 100),
+            w_DMG[0] = w_DMG[1] = w_DMG[2];
             for (e = 0; e <= 2; e++)
                 Last_DMG_A[e] = Last_DMG_B[e] = w_DMG[e],
-                    InnStr[e] += Last_DMG_A[e];
+                InnStr[e] += Last_DMG_A[e];
             w_HIT_HYOUJI = 100,
-                CastAndDelay(),
-                BattleCalc998()
+            CastAndDelay(),
+            BattleCalc998()
         } else if (25 == n_A_ActiveSkill) { // heal
             n_PerHIT_DMG = 0,
-                n_A_Weapon_element = 6,
-                n_Delay[2] = 1,
-                n_rangedAtk = 2,
-                w_DMG[2] = HealCalc(n_A_ActiveSkillLV, 0),
-                w_DMG[2] = Math.floor(Math.floor(w_DMG[2] / 2) * Math.max(0, element[n_B[3]][6])),
-                n_B[3] < 90 && (w_DMG[2] = 0);
-            _ = n_tok[170 + n_B[2]];
-            nEle = n_tok[340 + Math.floor(n_B[3] / 10)];
-            nSize = n_tok[356 + n_B[4]];
-            nBoss = n_B[19] ? n_tok[353] : 0; 
-            nAll = n_tok[354];
+            n_A_Weapon_element = 6,
+            n_Delay[2] = 1,
+            n_rangedAtk = 2,
+            w_DMG[2] = HealCalc(n_A_ActiveSkillLV, 0),
+            w_DMG[2] = Math.floor(Math.floor(w_DMG[2] / 2) * Math.max(0, element[n_B[3]][6])),
+            n_B[3] < 90 && (w_DMG[2] = 0);
+            _ = n_tok[170 + n_B[2]],
+            nEle = n_tok[340 + Math.floor(n_B[3] / 10)],
+            nSize = n_tok[356 + n_B[4]],
+            nBoss = n_B[19] ? n_tok[353] : 0,
+            nAll = n_tok[354],
             w_DMG[2] = Math.floor(w_DMG[2] * (100 + _) / 100),
             w_DMG[2] = Math.floor(w_DMG[2] * (100 + nEle) / 100),
             w_DMG[2] = Math.floor(w_DMG[2] * (100 + nSize) / 100),
             w_DMG[2] = Math.floor(w_DMG[2] * (100 + nBoss) / 100),
             w_DMG[2] = Math.floor(w_DMG[2] * (100 + nAll) / 100),
-                wHealMOD = 100 + n_tok[93],
-                w_DMG[2] = Math.floor(w_DMG[2] * wHealMOD / 100),
-                w_DMG[2] = tPlusDamCut(w_DMG[2]),
-                w_DMG[0] = w_DMG[1] = w_DMG[2];
+            wHealMOD = 100 + n_tok[93],
+            w_DMG[2] = Math.floor(w_DMG[2] * wHealMOD / 100),
+            w_DMG[2] = tPlusDamCut(w_DMG[2]),
+            w_DMG[0] = w_DMG[1] = w_DMG[2];
             for (e = 0; e <= 2; e++)
                 Last_DMG_A[e] = Last_DMG_B[e] = w_DMG[e],
-                    InnStr[e] += Last_DMG_A[e];
+                InnStr[e] += Last_DMG_A[e];
             w_HIT_HYOUJI = 100,
-                CastAndDelay(),
-                BattleCalc998()
+            CastAndDelay(),
+            BattleCalc998()
         } else if (94 == n_A_ActiveSkill) { // sanc
             n_PerHIT_DMG = 0,
-                n_A_Weapon_element = 6,
-                wCast = 5 * n_A_CAST,
-                n_Delay[0] = 1,
-                n_rangedAtk = 2,
-                n_A_ActiveSkillLV <= 6 ? w_DMG[2] = 100 * n_A_ActiveSkillLV : w_DMG[2] = 777,
-                w_HEAL_MOD = 100 + n_tok[94],
-                w_DMG[2] = Math.floor(w_DMG[2] * w_HEAL_MOD / 100),
-                w_DMG[2] = Math.floor(Math.floor(w_DMG[2] / 2) * Math.max(0, element[n_B[3]][6])),
-                n_B[3] < 90 && 6 != n_B[2] && (w_DMG[2] = 0);
-            _ = n_tok[170 + n_B[2]];
-            nEle = n_tok[340 + Math.floor(n_B[3] / 10)];
-            nSize = n_tok[356 + n_B[4]];
-            nBoss = n_B[19] ? n_tok[353] : 0; 
-            nAll = n_tok[354];
+            n_A_Weapon_element = 6,
+            wCast = 5 * n_A_CAST,
+            n_Delay[0] = 1,
+            n_rangedAtk = 2,
+            n_A_ActiveSkillLV <= 6 ? w_DMG[2] = 100 * n_A_ActiveSkillLV : w_DMG[2] = 777,
+            w_HEAL_MOD = 100 + n_tok[94],
+            w_DMG[2] = Math.floor(w_DMG[2] * w_HEAL_MOD / 100),
+            w_DMG[2] = Math.floor(Math.floor(w_DMG[2] / 2) * Math.max(0, element[n_B[3]][6])),
+            n_B[3] < 90 && 6 != n_B[2] && (w_DMG[2] = 0),
+            _ = n_tok[170 + n_B[2]],
+            nEle = n_tok[340 + Math.floor(n_B[3] / 10)],
+            nSize = n_tok[356 + n_B[4]],
+            nBoss = n_B[19] ? n_tok[353] : 0,
+            nAll = n_tok[354],
             w_DMG[2] = Math.floor(w_DMG[2] * (100 + _) / 100),
             w_DMG[2] = Math.floor(w_DMG[2] * (100 + nEle) / 100),
             w_DMG[2] = Math.floor(w_DMG[2] * (100 + nSize) / 100),
             w_DMG[2] = Math.floor(w_DMG[2] * (100 + nBoss) / 100),
             w_DMG[2] = Math.floor(w_DMG[2] * (100 + nAll) / 100),
-                w_HEAL_MOD = 100 + n_tok[96],
-                w_DMG[2] = Math.floor(w_DMG[2] * w_HEAL_MOD / 100),
-                w_DMG[2] = tPlusDamCut(w_DMG[2]),
-                w_DMG[0] = w_DMG[1] = w_DMG[2];
+            w_HEAL_MOD = 100 + n_tok[96],
+            w_DMG[2] = Math.floor(w_DMG[2] * w_HEAL_MOD / 100),
+            w_DMG[2] = tPlusDamCut(w_DMG[2]),
+            w_DMG[0] = w_DMG[1] = w_DMG[2];
             for (e = 0; e <= 2; e++)
                 Last_DMG_A[e] = Last_DMG_B[e] = w_DMG[e],
-                    InnStr[e] += Last_DMG_A[e];
+                InnStr[e] += Last_DMG_A[e];
             w_HIT_HYOUJI = 100,
-                CastAndDelay(),
-                BattleCalc998()
+            CastAndDelay(),
+            BattleCalc998()
         } else if (102 == n_A_ActiveSkill || 97 == n_A_ActiveSkill) {
             n_PerHIT_DMG = 0,
-                102 == n_A_ActiveSkill ? (n_A_Weapon_element = 6,
-                    wCast = 1 * n_A_CAST) : (n_A_Weapon_element = 0,
-                        wCast = 8 - 2 * n_A_ActiveSkillLV,
-                        wCast *= n_A_CAST),
-                n_rangedAtk = 2,
-                n_B[3] < 90 ? (a = 0,
-                    w_DMG[2] = 0,
-                    w_DMG[0] = 0,
-                    w_DMG[1] = 0) : (1 != n_B[19] ? (a = (20 * n_A_ActiveSkillLV + n_A_BaseLV + n_A_INT + n_A_LUK) / 1e3,
-                        w_DMG[2] = n_B[6]) : (a = 0,
-                            w_DMG[2] = 0),
-                        w_DMG[0] = n_A_BaseLV + n_A_INT + 10 * n_A_ActiveSkillLV,
-                        w_DMG[0] = Math.floor(w_DMG[0] * Math.max(0, element[n_B[3]][n_A_Weapon_element])),
-                        w_DMG[1] = Math.round(n_B[6] * a + w_DMG[0] * (100 - a) / 100));
+            102 == n_A_ActiveSkill ? (n_A_Weapon_element = 6, wCast = 1 * n_A_CAST) : 
+                (n_A_Weapon_element = 0, wCast = 8 - 2 * n_A_ActiveSkillLV, wCast *= n_A_CAST),
+            n_rangedAtk = 2,
+            n_B[3] < 90 ? (a = 0, w_DMG[2] = 0, w_DMG[0] = 0, w_DMG[1] = 0) : 
+                (1 != n_B[19] ? (a = (20 * n_A_ActiveSkillLV + n_A_BaseLV + n_A_INT + n_A_LUK) / 1e3, w_DMG[2] = n_B[6]) : 
+                    (a = 0, w_DMG[2] = 0),
+                    w_DMG[0] = n_A_BaseLV + n_A_INT + 10 * n_A_ActiveSkillLV,
+                    w_DMG[0] = Math.floor(w_DMG[0] * Math.max(0, element[n_B[3]][n_A_Weapon_element])),
+                    w_DMG[1] = Math.round(n_B[6] * a + w_DMG[0] * (100 - a) / 100));
             for (e = 0; e <= 2; e++)
                 Last_DMG_A[e] = Last_DMG_B[e] = w_DMG[e];
             InnStr[0] += w_DMG[0] + " (damage on failure)",
-                InnStr[1] += w_DMG[1] + " (considering success chance)",
-                InnStr[2] += Math.floor(w_DMG[2] * Math.max(0, element[n_B[3]][n_A_Weapon_element])) + " (" + Math.floor(1e4 * a) / 100 + "% success chance)",
-                n_Delay[2] = 3,
-                w_HIT_HYOUJI = 100,
-                CastAndDelay(),
-                BattleCalc998()
+            InnStr[1] += w_DMG[1] + " (considering success chance)",
+            InnStr[2] += Math.floor(w_DMG[2] * Math.max(0, element[n_B[3]][n_A_Weapon_element])) + " (" + Math.floor(1e4 * a) / 100 + "% success chance)",
+            n_Delay[2] = 3,
+            w_HIT_HYOUJI = 100,
+            CastAndDelay(),
+            BattleCalc998()
         } else if (325 == n_A_ActiveSkill) {
             n_PerHIT_DMG = 0,
-                n_A_Weapon_element = 0,
-                n_Delay[6] = 9,
-                n_rangedAtk = 2,
-                wHITsuu = 4 + n_A_ActiveSkillLV,
-                w_DMG[2] = 200 + 200 * n_A_ActiveSkillLV,
-                w_DMG[2] = Math.floor(w_DMG[2]),
-                5 == n_B[19] && (w_DMG[2] = 1),
-                44 == n_B[0] && (w_DMG[2] = 400),
-                w_DMG[0] = w_DMG[1] = w_DMG[2];
+            n_A_Weapon_element = 0,
+            n_Delay[6] = 9,
+            n_rangedAtk = 2,
+            wHITsuu = 4 + n_A_ActiveSkillLV,
+            w_DMG[2] = 200 + 200 * n_A_ActiveSkillLV,
+            w_DMG[2] = Math.floor(w_DMG[2]),
+            5 == n_B[19] && (w_DMG[2] = 1),
+            44 == n_B[0] && (w_DMG[2] = 400),
+            w_DMG[0] = w_DMG[1] = w_DMG[2];
             for (e = 0; e <= 2; e++)
                 Last_DMG_A[e] = Last_DMG_B[e] = w_DMG[e] * wHITsuu,
-                    w_DMG[e] = Last_DMG_A[e];
+                w_DMG[e] = Last_DMG_A[e];
             var u = Last_DMG_A[0] + " (" + w_DMG[0] / wHITsuu + " x " + wHITsuu + " hits)";
             for (e = 0; e <= 2; e++)
                 InnStr[e] += u;
             wCast = 5 * n_A_CAST,
-                n_Delay[2] = 2,
-                w_HIT_HYOUJI = 100,
-                CastAndDelay(),
-                BattleCalc998()
+            n_Delay[2] = 2,
+            w_HIT_HYOUJI = 100,
+            CastAndDelay(),
+            BattleCalc998()
+        } else if (752 == n_A_ActiveSkill) { // reverberation
+            n_PerHIT_DMG = 0,
+            n_rangedAtk = 1,
+            n_A_Weapon_element = 0,
+            wCast = 1.5 * n_A_CAST,
+            n_Delay[2] = 2,
+            wMod = (200 + 65 * n_A_ActiveSkillLV) / 100,
+            wMod2 = 300 / 100;
+            for (s = 0; s <= 2; s++)
+                w_DMG[s] = BK_n_A_DMG[s] * wMod,
+                w_DMG[s] = BattleCalc(w_DMG[s], s),
+                a = BK_n_A_MATK[s] * wMod2,
+                a = BattleCalc(a, s),
+                w_DMG[s] = w_DMG[s] + a,
+                Last_DMG_B[s] = w_DMG[s],
+                Last_DMG_A[s] = Last_DMG_B[s],
+                InnStr[s] += Last_DMG_A[s];
+            CastAndDelay(),
+            BattleCalc998()
+        } else if (489 == n_A_ActiveSkill) { // self destruction
+            n_PerHIT_DMG = 0,
+            n_Delay[0] = 1,
+            n_A_Weapon_element = 3,
+            w_DMG[2] = Math.floor(1 * c.SkillSubNum.value * Math.max(0, element[n_B[3]][n_A_Weapon_element])),
+            w_DMG[2] = tPlusDamCut(w_DMG[2]),
+            w_DMG[0] = w_DMG[1] = w_DMG[2];
+            for (e = 0; e <= 2; e++)
+                Last_DMG_A[e] = Last_DMG_B[e] = w_DMG[e],
+                InnStr[e] += Last_DMG_A[e];
+            w_HIT_HYOUJI = 100,
+            CastAndDelay(),
+            BattleCalc998()
+        } else if (510 == n_A_ActiveSkill) { // dark blessing
+            n_Delay[2] = 5,
+            n_Delay[3] = 30,
+            n_A_Weapon_element = 7,
+            w_DMG[2] = n_B[6] - 1,
+            (Math.max(0, element[n_B[3]][n_A_Weapon_element]) == 0 || n_B[19] == 1) && (w_DMG[2] = 0),
+            w_DMG[0] = w_DMG[1] = w_DMG[2];
+            for (e = 0; e <= 2; e++)
+                Last_DMG_A[e] = Last_DMG_B[e] = w_DMG[e],
+                InnStr[e] += Last_DMG_A[e];
+            w_HIT_HYOUJI = 100,
+            CastAndDelay(),
+            BattleCalc998()
+        } else if (443 == n_A_ActiveSkill) { // earthquake
+            n_rangedAtk = 2,
+            n_Delay[3] = 2,
+            n_A_Weapon_element = 0,
+            wMod += 2 * n_A_ActiveSkillLV;
+            var eneRange = 1 * c.SkillSubNum.value;
+            for (e = 0; e <= 2; e++)
+                w_DMG[e] = BK_n_A_DMG[e] * wMod,
+                w_DMG[e] = BattleMagicCalc(w_DMG[e], e),
+                w_DMG[e] = Math.floor(w_DMG[e] / eneRange),
+                Last_DMG_A[e] = Last_DMG_B[e] = w_DMG[e],
+                InnStr[e] += Last_DMG_A[e];
+            w_HIT_HYOUJI = 100,
+            CastAndDelay(),
+            BattleCalc998()
         } else {
-            if (n_PerHIT_DMG = 0,
-                n_rangedAtk = 2,
+            n_PerHIT_DMG = 0,
+            n_rangedAtk = 2,
+            wMod = 1,
+            n_bunkatuHIT = 0,
+            w_HIT_HYOUJI = 100;
+            if (51 == n_A_ActiveSkill)
+                n_A_Weapon_element = 3,
+                wHITsuu = n_A_ActiveSkillLV,
+                wCast = .7 * n_A_ActiveSkillLV,
+                n_Delay[2] = .8 + .2 * n_A_ActiveSkillLV;
+            else if (54 == n_A_ActiveSkill)
+                n_A_Weapon_element = 1,
+                wHITsuu = n_A_ActiveSkillLV,
+                wCast = .7 * n_A_ActiveSkillLV,
+                n_Delay[2] = .8 + .2 * n_A_ActiveSkillLV;
+            else if (56 == n_A_ActiveSkill)
+                n_A_Weapon_element = 4,
+                wHITsuu = n_A_ActiveSkillLV,
+                wCast = .7 * n_A_ActiveSkillLV,
+                n_Delay[2] = .8 + .2 * n_A_ActiveSkillLV;
+            else if (540 == n_A_ActiveSkill)
+                n_A_Weapon_element = 3,
+                wHITsuu = n_A_ActiveSkillLV,
+                wCast = 0,
+                n_Delay[2] = 0,
+                w_HIT_HYOUJI = 100;
+            else if (541 == n_A_ActiveSkill)
+                n_A_Weapon_element = 1,
+                wHITsuu = n_A_ActiveSkillLV,
+                wCast = 0,
+                n_Delay[2] = 0,
+                w_HIT_HYOUJI = 100;
+            else if (542 == n_A_ActiveSkill)
+                n_A_Weapon_element = 4,
+                wHITsuu = n_A_ActiveSkillLV,
+                wCast = 0,
+                n_Delay[2] = 0,
+                w_HIT_HYOUJI = 100;
+            else if (52 == n_A_ActiveSkill)
+                n_A_Weapon_element = 3,
+                n_A_ActiveSkillLV <= 5 ? (wCast = 1.5, n_Delay[2] = 1.5) : (wCast = 1, n_Delay[2] = 1),
+                wMod = .7 + .1 * n_A_ActiveSkillLV;
+            else if (53 == n_A_ActiveSkill)
+                n_A_Weapon_element = 3,
+                wHITsuu = 4 + n_A_ActiveSkillLV,
+                wCast = 2.15 - .15 * n_A_ActiveSkillLV,
+                n_Delay[2] = .1,
+                wMod = .5;
+            else if (55 == n_A_ActiveSkill)
+                n_A_Weapon_element = 1,
+                wCast = .8,
+                n_Delay[2] = 1.5,
+                wMod = 1 + .1 * n_A_ActiveSkillLV;
+            else if (57 == n_A_ActiveSkill)
+                n_A_Weapon_element = 4,
+                wHITsuu = n_A_ActiveSkillLV,
+                wCast = 1 * n_A_ActiveSkillLV,
+                n_Delay[2] = 2,
+                wMod = .8;
+            else if (46 == n_A_ActiveSkill)
+                n_A_Weapon_element = 8,
+                wCast = .5,
+                10 == n_A_ActiveSkillLV ? n_Delay[2] = .5 : 9 == n_A_ActiveSkillLV ? n_Delay[2] = .6 : 8 == n_A_ActiveSkillLV ? n_Delay[2] = .7 : n_A_ActiveSkillLV >= 6 ? n_Delay[2] = .8 : n_A_ActiveSkillLV >= 4 ? n_Delay[2] = .9 : n_Delay[2] = 1,
+                wMod = .7 + .1 * n_A_ActiveSkillLV;
+            else if (47 == n_A_ActiveSkill)
+                n_A_Weapon_element = 8,
+                wHITsuu = Math.round(n_A_ActiveSkillLV / 2),
+                wCast = .5,
+                n_A_ActiveSkillLV % 2 == 0 ? n_Delay[2] = .8 + n_A_ActiveSkillLV / 2 * .2 : n_Delay[2] = 1 + (n_A_ActiveSkillLV + 1) / 2 * .2;
+            else if (122 == n_A_ActiveSkill)
+                n_A_Weapon_element = 3,
+                wHITsuu = n_A_ActiveSkillLV + 2,
+                wCast = 3.3 - .3 * n_A_ActiveSkillLV,
+                n_Delay[2] = 1,
+                wMod = .2;
+            else if (124 == n_A_ActiveSkill)
+                n_A_Weapon_element = 3,
+                wCast = .7,
+                n_Delay[2] = 2,
+                wMod = 1 + .2 * n_A_ActiveSkillLV;
+            else if (125 == n_A_ActiveSkill)
+                n_A_Weapon_element = 3,
+                wHITsuu = Math.round(n_A_ActiveSkillLV / 2) * (Math.floor(n_A_ActiveSkillLV / 2) + 2),
+                wCast = 15,
+                n_Delay[2] = 1 * Math.floor(n_A_ActiveSkillLV / 2) + 2;
+            else if (126 == n_A_ActiveSkill)
+                n_A_Weapon_element = 4,
+                wHITsuu = n_A_ActiveSkillLV + 2,
+                wCast = 2 + .5 * n_A_ActiveSkillLV;
+            else if (127 == n_A_ActiveSkill)
+                n_A_Weapon_element = 4,
+                wHITsuu = 4,
+                wCast = 15.5 - .5 * n_A_ActiveSkillLV,
+                n_Delay[2] = 5,
+                n_Delay[6] = 4,
+                wMod = .8 + .2 * n_A_ActiveSkillLV;
+            else if (128 == n_A_ActiveSkill || 320 == n_A_ActiveSkill)
+                n_A_Weapon_element = 1,
+                n_A_ActiveSkillLV >= 4 ? wHITsuu = 25 : n_A_ActiveSkillLV >= 2 && (wHITsuu = 9),
+                SG_Special_HITnum = wHITsuu,
+                wCast = n_A_ActiveSkillLV,
+                wMod = 1 + .3 * n_A_ActiveSkillLV,
+                n_Delay[3] = .1 * wHITsuu,
+                1965 == n_A_Equip[0] && (n_Delay[3] += 1.5);
+            else if (130 == n_A_ActiveSkill)
+                wMod = .66 + .066 * n_A_ActiveSkillLV,
+                n_A_Weapon_element = 1,
+                wCast = 6 - .5 * Math.floor((n_A_ActiveSkillLV - 1) / 2),
+                n_Delay[2] = 1;
+            else if (131 == n_A_ActiveSkill)
+                n_A_Weapon_element = 1,
+                wHITsuu = 1 * c.SkillSubNum.value,
+                SG_Special_HITnum = wHITsuu,
+                SGcast = 1,
+                10 == n_A_Weapon_refine && EquipNumSearch(1169) && (SGcast -= .08),
+                EquipNumSearch(1786) && (SGcast -= .04 * n_A_LEFT_REFINE),
+                wCast = (5 + n_A_ActiveSkillLV) * SGcast,
+                n_Delay[2] = 5,
+                n_Delay[6] = 4.5,
+                wMod = 1 + .4 * n_A_ActiveSkillLV;
+            else if (132 == n_A_ActiveSkill || 133 == n_A_ActiveSkill || 319 == n_A_ActiveSkill)
+                n_A_Weapon_element = 2,
+                wHITsuu = n_A_ActiveSkillLV,
+                132 == n_A_ActiveSkill ? (wCast = .7 * n_A_ActiveSkillLV, n_Delay[2] = .8 + .2 * n_A_ActiveSkillLV) : 
+                    (wCast = n_A_ActiveSkillLV, n_Delay[2] = 1);
+            else if (277 == n_A_ActiveSkill)
+                wHITsuu = n_A_ActiveSkillLV,
+                n_A_Weapon_element = 8,
+                wCast = 1,
+                n_Delay[2] = 1,
+                wMod = .7 + .1 * n_A_ActiveSkillLV;
+            else if (37 == n_A_ActiveSkill || 387 == n_A_ActiveSkill)
+                n_A_Weapon_element = 6,
+                wCast = 2,
+                wMod = 1.25,
+                387 == n_A_ActiveSkill && (wMod *= 5);
+            else if (104 == n_A_ActiveSkill)
+                n_Delay[0] = 1,
+                n_A_Weapon_element = 6,
+                wHITsuu = n_A_ActiveSkillLV,
+                wCast = 10,
+                n_Delay[2] = 2.5;/*, // make ME hit all
+                6 != n_B[2] && n_B[3] < 90 && (n_A_MATK[2] = 0, n_A_MATK[0] = 0, n_A_MATK[1] = 0)*/
+            else if (312 == n_A_ActiveSkill)
+                n_A_Weapon_element = 7,
+                wHITsuu = Math.round(n_A_ActiveSkillLV / 2),
+                wCast = .5,
+                n_A_ActiveSkillLV % 2 == 0 ? n_Delay[2] = .8 + n_A_ActiveSkillLV / 2 * .2 : n_Delay[2] = 1 + (n_A_ActiveSkillLV + 1) / 2 * .2;
+            else if (373 == n_A_ActiveSkill)
+                n_A_Weapon_element = 1 * c.A_Weapon_element.value,
+                wCast = .1,
+                n_Delay[2] = .5,
+                0 == n_B[4] ? wMod =  1 + .1 * n_A_ActiveSkillLV : wMod = .01,
+                1 == PvP && (wMod = 0);
+            else if (374 == n_A_ActiveSkill)
+                n_A_Weapon_element = 1 * c.A_Weapon_element.value,
+                wCast = .1,
+                n_Delay[2] = .5,
+                wMod = 1 + .05 * n_A_ActiveSkillLV,
+                1 == PvP && (wMod = 0);
+            else if (375 == n_A_ActiveSkill)
+                n_A_Weapon_element = 1 * c.A_Weapon_element.value,
+                n_Delay[0] = 1,
+                wHITsuu = n_A_ActiveSkillLV,
+                wCast = 2,
+                n_Delay[2] = .5,
+                wMod = .4 + n_A_BaseLV / 100,
+                1 == PvP && (wMod = 0);
+            else if (407 == n_A_ActiveSkill)
+                n_A_Weapon_element = 3,
+                wMod = .9,
+                wHITsuu = n_A_ActiveSkillLV,
+                wCast = .7 * n_A_ActiveSkillLV;
+            else if (408 == n_A_ActiveSkill)
+                n_A_Weapon_element = 3,
+                wMod = .5,
+                wHITsuu = Math.round(n_A_ActiveSkillLV / 2) + 4,
+                wCast = 6.5 - .5 * n_A_ActiveSkillLV,
+                n_Delay[2] = 1,
+                n_Delay[0] = 1;
+            else if (409 == n_A_ActiveSkill)
+                n_bunkatuHIT = 1,
+                n_A_Weapon_element = 3,
+                wMod = 1.5 + 1.5 * n_A_ActiveSkillLV,
+                wHITsuu = 3,
+                wCast = 3,
+                n_Delay[2] = 3;
+            else if (410 == n_A_ActiveSkill)
+                n_A_Weapon_element = 1,
                 wMod = 1,
-                n_bunkatuHIT = 0,
-                w_HIT_HYOUJI = 100,
-                51 == n_A_ActiveSkill ? (n_A_Weapon_element = 3,
-                    wHITsuu = n_A_ActiveSkillLV,
-                    wCast = .7 * n_A_ActiveSkillLV,
-                    n_Delay[2] = .8 + .2 * n_A_ActiveSkillLV) : 54 == n_A_ActiveSkill ? (n_A_Weapon_element = 1,
-                        wHITsuu = n_A_ActiveSkillLV,
-                        wCast = .7 * n_A_ActiveSkillLV,
-                        n_Delay[2] = .8 + .2 * n_A_ActiveSkillLV) : 56 == n_A_ActiveSkill && (n_A_Weapon_element = 4,
-                            wHITsuu = n_A_ActiveSkillLV,
-                            wCast = .7 * n_A_ActiveSkillLV,
-                            n_Delay[2] = .8 + .2 * n_A_ActiveSkillLV),
-                540 == n_A_ActiveSkill ? (n_A_Weapon_element = 3,
-                    wHITsuu = n_A_ActiveSkillLV,
-                    wCast = 0,
-                    n_Delay[2] = 0,
-                    w_HIT_HYOUJI = 100) : 541 == n_A_ActiveSkill ? (n_A_Weapon_element = 1,
-                        wHITsuu = n_A_ActiveSkillLV,
-                        wCast = 0,
-                        n_Delay[2] = 0,
-                        w_HIT_HYOUJI = 100) : 542 == n_A_ActiveSkill ? (n_A_Weapon_element = 4,
-                            wHITsuu = n_A_ActiveSkillLV,
-                            wCast = 0,
-                            n_Delay[2] = 0,
-                            w_HIT_HYOUJI = 100) : 52 == n_A_ActiveSkill ? (n_A_Weapon_element = 3,
-                                n_A_ActiveSkillLV <= 5 ? (wCast = 1.5,
-                                    n_Delay[2] = 1.5) : (wCast = 1,
-                                        n_Delay[2] = 1),
-                                wMod = .7 + .1 * n_A_ActiveSkillLV) : 53 == n_A_ActiveSkill ? (n_A_Weapon_element = 3,
-                                    wHITsuu = 4 + n_A_ActiveSkillLV,
-                                    wCast = 2.15 - .15 * n_A_ActiveSkillLV,
-                                    n_Delay[2] = .1,
-                                    wMod = .5) : 55 == n_A_ActiveSkill ? (n_A_Weapon_element = 1,
-                                        wCast = .8,
-                                        n_Delay[2] = 1.5,
-                                        wMod = 1 + .1 * n_A_ActiveSkillLV) : 57 == n_A_ActiveSkill ? (n_A_Weapon_element = 4,
-                                            wHITsuu = n_A_ActiveSkillLV,
-                                            wCast = 1 * n_A_ActiveSkillLV,
-                                            n_Delay[2] = 2,
-                                            wMod = .8) : 46 == n_A_ActiveSkill ? (n_A_Weapon_element = 8,
-                                                wCast = .5,
-                                                10 == n_A_ActiveSkillLV ? n_Delay[2] = .5 : 9 == n_A_ActiveSkillLV ? n_Delay[2] = .6 : 8 == n_A_ActiveSkillLV ? n_Delay[2] = .7 : n_A_ActiveSkillLV >= 6 ? n_Delay[2] = .8 : n_A_ActiveSkillLV >= 4 ? n_Delay[2] = .9 : n_Delay[2] = 1,
-                                                wMod = .7 + .1 * n_A_ActiveSkillLV) : 47 == n_A_ActiveSkill ? (n_A_Weapon_element = 8,
-                                                    wHITsuu = Math.round(n_A_ActiveSkillLV / 2),
-                                                    wCast = .5,
-                                                    n_A_ActiveSkillLV % 2 == 0 ? n_Delay[2] = .8 + n_A_ActiveSkillLV / 2 * .2 : n_Delay[2] = 1 + (n_A_ActiveSkillLV + 1) / 2 * .2) : 122 == n_A_ActiveSkill ? (n_A_Weapon_element = 3,
-                                                        wHITsuu = n_A_ActiveSkillLV + 2,
-                                                        wCast = 3.3 - .3 * n_A_ActiveSkillLV,
-                                                        n_Delay[2] = 1,
-                                                        wMod = .2) : 124 == n_A_ActiveSkill ? (n_A_Weapon_element = 3,
-                                                            wCast = .7,
-                                                            n_Delay[2] = 2,
-                                                            wMod = 1 + .2 * n_A_ActiveSkillLV) : 125 == n_A_ActiveSkill ? (n_A_Weapon_element = 3,
-                                                                wHITsuu = Math.round(n_A_ActiveSkillLV / 2) * (Math.floor(n_A_ActiveSkillLV / 2) + 2),
-                                                                wCast = 15,
-                                                                n_Delay[2] = 1 * Math.floor(n_A_ActiveSkillLV / 2) + 2) : 126 == n_A_ActiveSkill ? (n_A_Weapon_element = 4,
-                                                                    wHITsuu = n_A_ActiveSkillLV + 2,
-                                                                    wCast = 2 + .5 * n_A_ActiveSkillLV) : 127 == n_A_ActiveSkill ? (n_A_Weapon_element = 4,
-                                                                        wHITsuu = 4,
-                                                                        wCast = 15.5 - .5 * n_A_ActiveSkillLV,
-                                                                        n_Delay[2] = 5,
-                                                                        n_Delay[6] = 4,
-                                                                        wMod = .8 + .2 * n_A_ActiveSkillLV) : 128 == n_A_ActiveSkill || 320 == n_A_ActiveSkill ? (n_A_Weapon_element = 1,
-                                                                            n_A_ActiveSkillLV >= 4 ? wHITsuu = 25 : n_A_ActiveSkillLV >= 2 && (wHITsuu = 9),
-                                                                            SG_Special_HITnum = wHITsuu,
-                                                                            wCast = n_A_ActiveSkillLV,
-                                                                            wMod = 1 + .3 * n_A_ActiveSkillLV,
-                                                                            n_Delay[3] = .1 * wHITsuu,
-                                                                            1965 == n_A_Equip[0] && (n_Delay[3] += 1.5)) : 130 == n_A_ActiveSkill ? (wMod = .66 + .066 * n_A_ActiveSkillLV,
-                                                                                n_A_Weapon_element = 1,
-                                                                                wCast = 6 - .5 * Math.floor((n_A_ActiveSkillLV - 1) / 2),
-                                                                                n_Delay[2] = 1) : 131 == n_A_ActiveSkill ? (n_A_Weapon_element = 1,
-                                                                                    wHITsuu = 1 * c.SkillSubNum.value,
-                                                                                    SG_Special_HITnum = wHITsuu,
-                                                                                    SRV ? (SGcast = 1,
-                                                                                        10 == n_A_Weapon_refine && EquipNumSearch(1169) && (SGcast -= .08),
-                                                                                        EquipNumSearch(1786) && (SGcast -= .04 * n_A_LEFT_REFINE),
-                                                                                        wCast = (5 + n_A_ActiveSkillLV) * SGcast) : wCast = 5 + n_A_ActiveSkillLV,
-                                                                                    n_Delay[2] = 5,
-                                                                                    n_Delay[6] = 4.5,
-                                                                                    wMod = 1 + .4 * n_A_ActiveSkillLV) : 132 == n_A_ActiveSkill || 133 == n_A_ActiveSkill || 319 == n_A_ActiveSkill ? (n_A_Weapon_element = 2,
-                                                                                        wHITsuu = n_A_ActiveSkillLV,
-                                                                                        132 == n_A_ActiveSkill ? (wCast = .7 * n_A_ActiveSkillLV,
-                                                                                            n_Delay[2] = .8 + .2 * n_A_ActiveSkillLV) : (wCast = n_A_ActiveSkillLV,
-                                                                                                n_Delay[2] = 1)) : 277 == n_A_ActiveSkill ? (wHITsuu = n_A_ActiveSkillLV,
-                                                                                                    n_A_Weapon_element = 8,
-                                                                                                    wCast = 1,
-                                                                                                    n_Delay[2] = 1,
-                                                                                                    wMod = .7 + .1 * n_A_ActiveSkillLV) : 37 == n_A_ActiveSkill || 387 == n_A_ActiveSkill ? (n_A_Weapon_element = 6,
-                                                                                                        wCast = 2,
-                                                                                                        wMod = 1.25,
-                                                                                                        387 == n_A_ActiveSkill && (wMod *= 5)) : 104 == n_A_ActiveSkill ? (n_Delay[0] = 1,
-                                                                                                            n_A_Weapon_element = 6,
-                                                                                                            wHITsuu = n_A_ActiveSkillLV,
-                                                                                                            wCast = 10,
-                                                                                                            n_Delay[2] = 2.5/*, // make ME hit all
-                                                                                                            6 != n_B[2] && n_B[3] < 90 && (n_A_MATK[2] = 0, n_A_MATK[0] = 0, n_A_MATK[1] = 0)*/) : 312 == n_A_ActiveSkill ? (n_A_Weapon_element = 7,
-                                                                                                                    wHITsuu = Math.round(n_A_ActiveSkillLV / 2),
-                                                                                                                    wCast = .5,
-                                                                                                                    n_A_ActiveSkillLV % 2 == 0 ? n_Delay[2] = .8 + n_A_ActiveSkillLV / 2 * .2 : n_Delay[2] = 1 + (n_A_ActiveSkillLV + 1) / 2 * .2) : 373 == n_A_ActiveSkill ? (n_A_Weapon_element = 1 * c.A_Weapon_element.value,
-                                                                                                                        wCast = .1,
-                                                                                                                        n_Delay[2] = .5,
-                                                                                                                        0 == n_B[4] ? wMod =  1 + .1 * n_A_ActiveSkillLV : wMod = .01,
-                                                                                                                        1 == PvP && (wMod = 0)) : 374 == n_A_ActiveSkill ? (n_A_Weapon_element = 1 * c.A_Weapon_element.value,
-                                                                                                                            wCast = .1,
-                                                                                                                            n_Delay[2] = .5,
-                                                                                                                            wMod = 1 + .05 * n_A_ActiveSkillLV,
-                                                                                                                            1 == PvP && (wMod = 0)) : 375 == n_A_ActiveSkill ? (n_A_Weapon_element = 1 * c.A_Weapon_element.value,
-                                                                                                                                n_Delay[0] = 1,
-                                                                                                                                wHITsuu = n_A_ActiveSkillLV,
-                                                                                                                                wCast = 2,
-                                                                                                                                n_Delay[2] = .5,
-                                                                                                                                wMod = .4 + n_A_BaseLV / 100,
-                                                                                                                                1 == PvP && (wMod = 0)) : 407 == n_A_ActiveSkill ? (n_A_Weapon_element = 3,
-                                                                                                                                    wMod = .9,
-                                                                                                                                    wHITsuu = n_A_ActiveSkillLV,
-                                                                                                                                    wCast = .7 * n_A_ActiveSkillLV) : 408 == n_A_ActiveSkill ? (n_A_Weapon_element = 3,
-                                                                                                                                        wMod = .5,
-                                                                                                                                        wHITsuu = Math.round(n_A_ActiveSkillLV / 2) + 4,
-                                                                                                                                        wCast = 6.5 - .5 * n_A_ActiveSkillLV,
-                                                                                                                                        n_Delay[2] = 1,
-                                                                                                                                        n_Delay[0] = 1) : 409 == n_A_ActiveSkill ? (n_bunkatuHIT = 1,
-                                                                                                                                            n_A_Weapon_element = 3,
-                                                                                                                                            wMod = 1.5 + 1.5 * n_A_ActiveSkillLV,
-                                                                                                                                            wHITsuu = 3,
-                                                                                                                                            wCast = 3,
-                                                                                                                                            n_Delay[2] = 3) : 410 == n_A_ActiveSkill ? (n_A_Weapon_element = 1,
-                                                                                                                                                wMod = 1,
-                                                                                                                                                wHITsuu = n_A_ActiveSkillLV + 2,
-                                                                                                                                                wCast = .7 * n_A_ActiveSkillLV) : 412 == n_A_ActiveSkill ? (n_A_Weapon_element = 1,
-                                                                                                                                                    wMod = 1 + .5 * n_A_ActiveSkillLV,
-                                                                                                                                                    wHITsuu = 1,
-                                                                                                                                                    wCast = 3,
-                                                                                                                                                    n_Delay[2] = 3) : 413 == n_A_ActiveSkill ? (n_A_Weapon_element = 4,
-                                                                                                                                                        wMod = 1,
-                                                                                                                                                        wHITsuu = Math.floor(n_A_ActiveSkillLV / 2) + 1,
-                                                                                                                                                        wCast = Math.floor(n_A_ActiveSkillLV / 2) + 1,
-                                                                                                                                                        n_Delay[2] = 1) : 414 == n_A_ActiveSkill ? (n_A_Weapon_element = 4,
-                                                                                                                                                            wMod = 1.6 + .4 * n_A_ActiveSkillLV,
-                                                                                                                                                            wHITsuu = 1,
-                                                                                                                                                            wCast = 4) : 415 == n_A_ActiveSkill && (n_A_Weapon_element = 4,
-                                                                                                                                                                wMod = 1 + 1 * n_A_ActiveSkillLV,
-                                                                                                                                                                wHITsuu = 1,
-                                                                                                                                                                wCast = 4),
-                SRV < 50 ? wCast *= n_A_CAST : wCast = wCast * n_A_CAST * .8 + wCast * n_A_fCAST * .2,
-                0 == n_bunkatuHIT)
+                wHITsuu = n_A_ActiveSkillLV + 2,
+                wCast = .7 * n_A_ActiveSkillLV;
+            else if (412 == n_A_ActiveSkill)
+                n_A_Weapon_element = 1,
+                wMod = 1 + .5 * n_A_ActiveSkillLV,
+                wHITsuu = 1,
+                wCast = 3,
+                n_Delay[2] = 3;
+            else if (413 == n_A_ActiveSkill)
+                n_A_Weapon_element = 4,
+                wMod = 1,
+                wHITsuu = Math.floor(n_A_ActiveSkillLV / 2) + 1,
+                wCast = Math.floor(n_A_ActiveSkillLV / 2) + 1,
+                n_Delay[2] = 1;
+            else if (414 == n_A_ActiveSkill)
+                n_A_Weapon_element = 4,
+                wMod = 1.6 + .4 * n_A_ActiveSkillLV,
+                wHITsuu = 1,
+                wCast = 4;
+            else if (415 == n_A_ActiveSkill)
+                n_A_Weapon_element = 4,
+                wMod = 1 + 1 * n_A_ActiveSkillLV,
+                wHITsuu = 1,
+                wCast = 4;
+            wCast *= n_A_CAST;
+
+            if(0 == n_bunkatuHIT)
                 for (s = 0; s <= 2; s++)
                     w_DMG[s] = BattleMagicCalc(n_A_MATK[s] * wMod),
-                        0 != SG_Special_HITnum && (SG_Special_DMG[s] = w_DMG[s]),
-                        Last_DMG_B[s] = w_DMG[s],
-                        Last_DMG_A[s] = w_DMG[s] * wHITsuu,
-                        InnStr[s] += Last_DMG_A[s] + " (" + Last_DMG_B[s] + SubName[8] + wHITsuu + " hits)",
-                        w_DMG[s] = Last_DMG_A[s];
+                    0 != SG_Special_HITnum && (SG_Special_DMG[s] = w_DMG[s]),
+                    Last_DMG_B[s] = w_DMG[s],
+                    Last_DMG_A[s] = w_DMG[s] * wHITsuu,
+                    InnStr[s] += Last_DMG_A[s] + " (" + Last_DMG_B[s] + SubName[8] + wHITsuu + " hits)",
+                    w_DMG[s] = Last_DMG_A[s];
             else
                 for (s = 0; s <= 2; s++)
                     w_DMG[s] = Math.floor(BattleMagicCalc(n_A_MATK[s] * wMod) / wHITsuu),
-                        Last_DMG_A[s] = Last_DMG_B[s] = w_DMG[s] * wHITsuu,
-                        InnStr[s] += Last_DMG_A[s] + " (" + w_DMG[s] + SubName[8] + wHITsuu + " hits)",
-                        w_DMG[s] *= wHITsuu;
+                    Last_DMG_A[s] = Last_DMG_B[s] = w_DMG[s] * wHITsuu,
+                    InnStr[s] += Last_DMG_A[s] + " (" + w_DMG[s] + SubName[8] + wHITsuu + " hits)",
+                    w_DMG[s] *= wHITsuu;
+            
             CastAndDelay(),
-                BattleCalc998()
+            BattleCalc998()
         }
     }
 }
 function ATKmod01() {
     var e = 100;
     193 != n_A_ActiveSkill && 197 != n_A_ActiveSkill && 321 != n_A_ActiveSkill && (SkillSearch(12) ? e += 32 : n_A_Buf6[5] ? e += 2 + 3 * n_A_Buf6[5] : n_A_Buf7[31] && (e += 5),
-        SkillSearch(256) && (e += 5 * SkillSearch(256)),
-        SkillSearch(270) && (e += 2 * SkillSearch(270)),
-        n_A_Buf2[19] && (e += 100),
-        n_A_Buf6[2] && (e += 10),
-        StPlusCalc2(87) && (e += StPlusCalc2(87)),
-        n_A_Buf6[22] && (e -= 25));
+    SkillSearch(256) && (e += 5 * SkillSearch(256)),
+    SkillSearch(270) && (e += 2 * SkillSearch(270)),
+    n_A_Buf2[19] && (e += 100),
+    n_A_Buf6[2] && (e += 10),
+    0 == SkillSearch(154) && n_A_Buf2[8] && (e += 5),
+    StPlusCalc2(87) && (e += StPlusCalc2(87)),
+    n_A_Buf6[22] && (e -= 25));
     for (var _ = 0; _ <= 2; _++)
         n_A_CriATK[_] = n_A_CriATK[_] * e / 100,
             n_A_DMG[_] = n_A_DMG[_] * e / 100
 }
 function ATKmod02(e, _) {
     wA02 = 100 * e,
-        SkillSearch(327) ? wA02 += 20 * SkillSearch(327) : (SkillSearch(154) && (wA02 += 5 * SkillSearch(154)),
-            0 == SkillSearch(154) && n_A_Buf2[8] && (wA02 += 5 * n_A_Buf2[8])),
-        SkillSearch(342) && (wA02 += 2 * SkillSearch(342) * SkillSearch(380)),
-        0 == _ ? (n_A_DMG[2] = Math.floor(n_A_DMG[2] * wA02 / 100),
-            n_A_DMG[0] = Math.floor(n_A_DMG[0] * wA02 / 100),
-            n_A_DMG[1] = Math.floor(n_A_DMG[1] * wA02 / 100)) : (n_A_CriATK[1] = Math.floor(n_A_CriATK[1] * wA02 / 100),
-                n_A_CriATK[0] = Math.floor(n_A_CriATK[0] * wA02 / 100),
-                n_A_CriATK[2] = Math.floor(n_A_CriATK[2] * wA02 / 100))
+    SkillSearch(327) ? wA02 += 20 * SkillSearch(327) : (SkillSearch(154) && (wA02 += 5 * SkillSearch(154)),
+        0 == SkillSearch(154) && n_A_Buf2[8] && (wA02 += 5 * n_A_Buf2[8])),
+    SkillSearch(342) && (wA02 += 2 * SkillSearch(342) * SkillSearch(380)),
+    0 == _ ? (n_A_DMG[2] = Math.floor(n_A_DMG[2] * wA02 / 100),
+        n_A_DMG[0] = Math.floor(n_A_DMG[0] * wA02 / 100),
+        n_A_DMG[1] = Math.floor(n_A_DMG[1] * wA02 / 100)) : (n_A_CriATK[1] = Math.floor(n_A_CriATK[1] * wA02 / 100),
+            n_A_CriATK[0] = Math.floor(n_A_CriATK[0] * wA02 / 100),
+            n_A_CriATK[2] = Math.floor(n_A_CriATK[2] * wA02 / 100))
 }
 function BattleTAKA() {
     return 10 == n_A_WeaponType && SkillSearch(118) && 272 != n_A_ActiveSkill ? (wBTw1 = Math.floor((n_A_JobLV - 1) / 10 + 1),
@@ -1506,24 +1667,26 @@ function HealCalc(e, _) {
     var n = 100 + 2 * SkillSearch(269);
     wHeal = Math.floor(wHeal * n / 100);
     var l = 100 + n_tok[91] + n_tok[99];
-    return 1 == _ && (l += n_tok[92] + n_tok[100]),
-        EquipNumSearch(644) && (l += Math.floor(1.5 * n_A_Weapon_refine)),
-        EquipNumSearch(1791) && (l += Math.floor(6 * n_A_Weapon_refine)),
-        n_A_HEAD_REFINE >= 7 && (l += 1 * EquipNumSearch(565) + 3 * EquipNumSearch(1277)),
-        wHeal = Math.floor(wHeal * (l / 100) * (1 - 20 * n_A_Buf6[18] / 100)),
-        wHeal
+    var l2 = 100;
+    return 1 == _ && (l2 += n_tok[92] + n_tok[100]),
+    //EquipNumSearch(644) && (l += Math.floor(1.5 * n_A_Weapon_refine)),
+    EquipNumSearch(1791) && (l += Math.floor(6 * n_A_Weapon_refine)),
+    //n_A_HEAD_REFINE >= 7 && (l += 1 * EquipNumSearch(565) + 3 * EquipNumSearch(1277)),
+    wHeal = Math.floor(wHeal * (l / 100) * (l2 / 100) * (1 - 20 * n_A_Buf6[18] / 100)),
+    wHeal
 }
 function SanctuaryCalc(e, _) {
     wSanctuary = e < 7 ? 100 * e : 777;
     var n = 100 + 2 * SkillSearch(269);
     wSanctuary = Math.floor(wSanctuary * n / 100);
     var l = 100 + n_tok[94] + n_tok[99];
-    return 1 == _ && (l += n_tok[95] + n_tok[100]),
-        EquipNumSearch(644) && (l += Math.floor(1.5 * n_A_Weapon_refine)),
-        EquipNumSearch(1791) && (l += Math.floor(6 * n_A_Weapon_refine)),
-        n_A_HEAD_REFINE >= 7 && (l += 1 * EquipNumSearch(565) + 3 * EquipNumSearch(1277)),
-        wSanctuary = Math.floor(wSanctuary * (l / 100) * (1 - 20 * n_A_Buf6[18] / 100)),
-        wSanctuary
+    var l2 = 100;
+    return 1 == _ && (l2 += n_tok[95] + n_tok[100]),
+    //EquipNumSearch(644) && (l += Math.floor(1.5 * n_A_Weapon_refine)),
+    EquipNumSearch(1791) && (l += Math.floor(6 * n_A_Weapon_refine)),
+    //n_A_HEAD_REFINE >= 7 && (l += 1 * EquipNumSearch(565) + 3 * EquipNumSearch(1277)),
+    wSanctuary = Math.floor(wSanctuary * (l / 100) * (l2 / 100) * (1 - 20 * n_A_Buf6[18] / 100)),
+    wSanctuary
 }
 function BattleCalc998() {
     // melee = n_rangedAtk = 0
@@ -1559,6 +1722,18 @@ function BattleCalc998() {
             }
         }
     } */
+
+    if (n_A_ActiveSkill != 0 && n_A_ActiveSkill != 272 && n_A_ActiveSkill != 401 && n_A_ActiveSkill != 197 && n_A_ActiveSkill != 321 && n_A_Buf3[47]){
+        for (myInnerHtml("CRIATKname", "[SR] Critical damage (Critical rate)", 0),
+            myInnerHtml("bSUB3name", "", 0),
+            myInnerHtml("bSUB3", "", 0),
+            e = 0; e <= 2; e++)
+            n_A_CriATK[e] = Math.floor(w_DMG[e] * (1 + (15 / 100)));
+        w998G >= 100 && (w_DMG[0] = n_A_CriATK[0]),
+        w998G > 0 && (w_DMG[2] = n_A_CriATK[2]),
+        w_DMG[1] = w998G >= 100 ? n_A_CriATK[1] : (w998G * n_A_CriATK[1] + (100 - w998G) * w_DMG[1]) / 100,
+        myInnerHtml("CRIATK", n_A_CriATK[0] + "~" + n_A_CriATK[2], 0);
+    }
     
     // damage flag
     if(n_M_debuff[1] == 1){ // melee
@@ -1673,6 +1848,7 @@ function BattleCalc998() {
         n_A_Buf2[13] && (o = Math.round(o * w_AG[n_A_Buf2[13]]) / 100),
         3 == n_A_WeaponType && SkillSearch(255) && (o = Math.round(o * (80 - 3 * SkillSearch(255))) / 100),
         SkillSearch(287) && (o = Math.round(o * (100 - 7.5 * SkillSearch(287))) / 100),
+        n_A_Buf3[45] && (o = Math.round(o * (1 - (20/100))));
         myInnerHtml("B_Ave2Atk", Math.round(100 * o * BskillHitNum) / 100, 0)
 }
 function BattleHiDam() {
@@ -1895,6 +2071,10 @@ function BattleHiDam() {
         e += 40 * a,
             n_B_rangedMAtk = 1,
             l = 6;
+    else if (474 == n_B_AtkSkill)
+        e += 40 * a,
+            n_B_rangedMAtk = 1,
+            l = 7;
     else if (171 == n_B_AtkSkill)
         //e += 40 * a;
         e += 100 + 50*a; // changed to alfheim skill modifier
@@ -1956,7 +2136,7 @@ function BattleHiDam() {
             BskillHitNum = a;
     else if (169 == n_B_AtkSkill)
         //e += 40 * a + 200;
-        e += .25 + .15 * n_A_ActiveSkillLV; // change to alfheim skill modifier
+        e += .18 * n_A_ActiveSkillLV; // change to alfheim skill modifier
     else if (176 == n_B_AtkSkill)
         e += 30 * a;
     else if (188 == n_B_AtkSkill)
@@ -2174,6 +2354,9 @@ function BattleHiDam() {
     if (n_A_Buf2[21])
         for (i = 0; i <= 6; i++)
             w_HiDam[i] = Math.floor(w_HiDam[i] / 2);
+    if (n_tok[371])
+        for (i = 0; i <= 6; i++)
+            w_HiDam[i] = Math.floor(w_HiDam[i] * (1 - (n_tok[371] / 100)));
     if (w_HiDam[0] = Math.floor(w_HiDam[0]),
         w_HiDam[6] = Math.floor(w_HiDam[6]),
         444 == n_B_AtkSkill || 445 == n_B_AtkSkill) {
@@ -2270,12 +2453,15 @@ function BattleMagicCalc(e) {
     (373 == n_A_ActiveSkill || 374 == n_A_ActiveSkill || 375 == n_A_ActiveSkill) && 94 == n_A_Buf8[0] && (n_A_Weapon_element == 3 || n_A_Weapon_element == 8) && (n += 7),
     // mavka card
     (407 == n_A_ActiveSkill || 408 == n_A_ActiveSkill || 409 == n_A_ActiveSkill) && 44 == n_A_JOB && (n += 7*CardNumSearch(597)),
+    // arc elder card
+    (132 == n_A_ActiveSkill || 133 == n_A_ActiveSkill || 409 == n_A_ActiveSkill) && CardNumSearch(652) && (n += n_A_SHOULDER_REFINE),
+    (373 == n_A_ActiveSkill || 374 == n_A_ActiveSkill || 375 == n_A_ActiveSkill) && CardNumSearch(652) && (n_A_Weapon_element == 2) && (n += n_A_SHOULDER_REFINE),
     // royal clergy card
     (410 == n_A_ActiveSkill || 412 == n_A_ActiveSkill || 413 == n_A_ActiveSkill || 414 == n_A_ActiveSkill || 414 == n_A_ActiveSkill) && 44 == n_A_JOB && (n += 7*CardNumSearch(629)),
     // warden kades card - esma dmg increase
     n_A_WeaponLV >= 3 && (373 == n_A_ActiveSkill || 374 == n_A_ActiveSkill || 375 == n_A_ActiveSkill) && (n_A_Weapon_element == 0 || n_A_Weapon_element == 6 || n_A_Weapon_element == 7) && (n += 6*CardNumSearch(643)),
     // warden kades card
-    n_A_WeaponLV >= 3 && (37 == n_A_ActiveSkill || 387 == n_A_ActiveSkill || 102 == n_A_ActiveSkill || 104 == n_A_ActiveSkill || 162 == n_A_ActiveSkill || 312 == n_A_ActiveSkill) && (n += 6*CardNumSearch(643)),
+    n_A_WeaponLV >= 3 && (37 == n_A_ActiveSkill || 387 == n_A_ActiveSkill || 102 == n_A_ActiveSkill || 104 == n_A_ActiveSkill || 162 == n_A_ActiveSkill || 312 == n_A_ActiveSkill || 474 == n_A_ActiveSkill) && (n += 6*CardNumSearch(643)),
     // adventurers spirit
     375 == n_A_ActiveSkill && n_A_SHOULDER_REFINE >= 7 && 1835 == n_A_Equip[7] && (n += 5),
     // exquisite yellow foxtail
@@ -2295,7 +2481,7 @@ function BattleMagicCalc(e) {
     // alchemy glove - holy
     (37 == n_A_ActiveSkill || 387 == n_A_ActiveSkill || 102 == n_A_ActiveSkill || 104 == n_A_ActiveSkill || 162 == n_A_ActiveSkill) && (1982 == n_A_Equip[9] || 1982 == n_A_Equip[10]) && (n += 7),
     // alchemy glove - shadow
-    (312 == n_A_ActiveSkill) && (1982 == n_A_Equip[9] || 1982 == n_A_Equip[10]) && (n += 7),
+    (312 == n_A_ActiveSkill || 474 == n_A_ActiveSkill) && (1982 == n_A_Equip[9] || 1982 == n_A_Equip[10]) && (n += 7),
     // alchemy glove - esma
     (373 == n_A_ActiveSkill || 374 == n_A_ActiveSkill || 375 == n_A_ActiveSkill) && (n_A_Weapon_element == 1 || n_A_Weapon_element == 2 || n_A_Weapon_element == 3 || n_A_Weapon_element == 4 || n_A_Weapon_element == 6 || n_A_Weapon_element == 7 || n_A_Weapon_element == 8) && (1982 == n_A_Equip[9] || 1982 == n_A_Equip[10]) && (n += 7),
     // spectral manteau
@@ -3034,6 +3220,13 @@ function ClickActiveSkill2() {
     } else if (611 == n_A_ActiveSkill) {
         myInnerHtml("AASkill", 'Immobilized: <input type="checkbox" name="SkillSubNum" onclick="calc()">', 0);
         c.SkillSubNum.value = 0;
+    } else if (489 == n_A_ActiveSkill) {
+        myInnerHtml("AASkill", 'Remaining HP: <input type="text" inputmode="numeric" maxlength="5" name="SkillSubNum" size=3 onkeypress="return isNumeric(event)" onkeyup="calc()">', 0),
+            c.SkillSubNum.value = n_A_MaxHP;
+    } else if (443 == n_A_ActiveSkill) {
+        for (myInnerHtml("AASkill", 'Enemies in Range: <select name="SkillSubNum" onChange="calc()"></select>', 0),
+            i = 1; i <= 99; i++)
+            c.SkillSubNum.options[i - 1] = new Option(i, i);
     } else if (!SkillSearch(441) || 51 != n_A_ActiveSkill && 54 != n_A_ActiveSkill && 56 != n_A_ActiveSkill && 540 != n_A_ActiveSkill && 541 != n_A_ActiveSkill && 542 != n_A_ActiveSkill)
         if (308 == n_A_ActiveSkill) {
             myInnerHtml("AASkill", 'Enemy distance: <select name="SkillSubNum" onChange="calc()"></select>', 0);
@@ -3178,6 +3371,7 @@ function BufSW(e) {
             _ += '<TD></TD><TD class="data"></TD>',
             _ += '<TD id="AS12_1" class="center"># of Spirit Spheres</TD><TD id="AS12_2" class="data"></TD>',
             _ += '<TD id="AS11_1" class="center">' + skillName(164, SRV) + '</TD><TD id="AS11_2"></TD>',
+            _ += "</TR><TR>",
             myInnerHtml("SIENSKILL", _ += "</TR>", 0),
             myInnerHtml("AS0_2", '<select name="A2_Skill0" onChange="A2(1)"></select>', 0),
             myInnerHtml("AS1_2", '<select name="A2_Skill1" onChange="A2(1)"></select>', 0),
@@ -3277,15 +3471,22 @@ function Buf3SW(e) {
         n_Skill3SW) {
         n = '<TR><TD id="A3TD" ColSpan="6" class="subheader point" onclick="Buf3SW(0)" style="text-align:left;">Music and Dance Skills <span id="A3used"></span>',
             n += '<div class="right">(click to hide)</div></TD></TR>',
-            n += '<TR><TD id="EN0_1"></TD><TD id="EN0_2" class="data"></TD><TD id="EN0_3"></TD><TD id="EN0_4" class="data"></TD><TD id="EN0_5"></TD><TD id="EN0_6"></TD></TR>',
+            n += '<TR><TD colspan=12 style="text-align: center;"><b><u>Bard and Dancer Skills</u></b></TD></TR>',
+            n += '<TR><TD id="EN0_1"></TD><TD id="EN0_2" class="data"></TD><TD id="EN0_3" style="line-height:165%;"></TD><TD id="EN0_4" class="data"></TD><TD id="EN0_5"></TD><TD id="EN0_6"></TD></TR>',
             n += '<TR><TD id="EN1_1"></TD><TD id="EN1_2" class="data"></TD><TD id="EN1_3"></TD><TD id="EN1_4" class="data"></TD><TD id="EN1_5"></TD><TD id="EN1_6"></TD></TR>',
             n += '<TR><TD id="EN2_1"></TD><TD id="EN2_2" class="data"></TD><TD id="EN2_3" style="line-height:165%;"></TD><TD id="EN2_4" class="data"></TD><TD id="EN2_5"></TD><TD id="EN2_6"></TD></TR>',
             n += '<TR><TD id="EN3_1"></TD><TD id="EN3_2" class="data"></TD><TD id="EN3_3"></TD><TD id="EN3_4" class="data"></TD><TD id="EN3_5"></TD><TD id="EN3_6"></TD></TR>',
             n += '<TR><TD id="EN4_1"></TD><TD id="EN4_2" class="data"></TD><TD id="EN4_3"></TD><TD id="EN4_4" class="data"></TD><TD id="EN4_5"></TD><TD id="EN4_6"></TD></TR>',
             n += '<TR><TD id="EN5_1"></TD><TD id="EN5_2" class="data"></TD><TD id="EN5_3"></TD><TD id="EN5_4" class="data"></TD><TD id="EN5_5"></TD><TD id="EN5_6"></TD></TR>',
             n += '<TR><TD id="EN6_1" class="dotB"></TD><TD id="EN6_2" class="data dotB"></TD><TD id="EN6_3" class="dotB"></TD><TD id="EN6_4" class="data dotB"></TD><TD id="EN6_5" class="dotB"></TD><TD id="EN6_6" class="dotB"></TD></TR>',
+            n += '<TR><TD colspan=12 style="text-align: center;"><b><u>Ensemble Skills</u></b></TD></TR>',
             n += '<TR><TD id="EN7_1"></TD><TD id="EN7_2" class="data"></TD><TD id="EN8_1" ColSpan="3"></TD><TD id="EN8_2" class="left"></TD></TR>',
             n += '<TR><TD id="EN9_1" class="dotB"></TD><TD id="EN9_2" class="data dotB"></TD><TD id="EN10_1" class="dotB" ColSpan="3"></TD><TD id="EN10_2" class="dotB left"></TD></TR>',
+            n += '<TR><TD colspan=12 style="text-align: center;"><b><u>Severe Rainstorm Effects</u></b></TD></TR>',
+            n += '<TR><TD colspan=12 id="EN12_1" style="text-align: left;"></TR>',
+            n += '<TR><TD colspan=12 id="EN13_1" style="text-align: left;"></TR>',
+            n += '<TR><TD colspan=12 id="EN14_1" style="text-align: left;"></TR>',
+            n += '<TR><TD colspan=12 id="EN15_1" style="text-align: left;" class="dotB"></TR>',
             myInnerHtml("SP_SIEN01", n += '<TR style="text-align:left;"><TD colspan=6><span id="EN11_1"></span><span id="EN11_2"></span><span id="EN11_1a"></span></TD></TR>', 0);
         var _ = [202, 203, 204, 205, 210, 212, 213, 223, 217, 219, 220];
         for (i = 0; i <= 10; i++)
@@ -3302,6 +3503,10 @@ function Buf3SW(e) {
             myInnerHtml("EN9_2", '<select name="A3_Skill9" onChange="A3(1)"></select>', 0),
             myInnerHtml("EN10_2", '<select name="A3_Skill10" onChange="A3(1)"></select>', 0),
             myInnerHtml("EN11_1", '<input type="checkbox" name="A3_Skill11" onClick="Skill3SW_2()|calc()">Marionette Control', 0),
+            myInnerHtml("EN12_1", '<input type="checkbox" name="A3_Skill12" onClick="A3SR(this.name)|A3(1)">A Whistle (20% dodge chance)', 0),
+            myInnerHtml("EN13_1", '<input type="checkbox" name="A3_Skill13" onClick="A3SR(this.name)|A3(1)">Assassin Cross of Sunset (10% Critical Damage)', 0),
+            myInnerHtml("EN14_1", '<input type="checkbox" name="A3_Skill14" onClick="A3SR(this.name)|A3(1)">Fortune&#39s Kiss (15% increased damage based on CRIT)', 0),
+            myInnerHtml("EN15_1", '<input type="checkbox" name="A3_Skill15" onClick="A3SR(this.name)|A3(1)">Humming (100% damage to all sizes & Perfect Hit +20%)', 0),
             i = 0; i <= 10; i++)
             c.A3_Skill0_1.options[i] = new Option(i, i),
                 c.A3_Skill1_1.options[i] = new Option(i, i),
@@ -3327,6 +3532,10 @@ function Buf3SW(e) {
             c.A3_Skill9.value = n_A_Buf3[9],
             c.A3_Skill10.value = n_A_Buf3[10],
             c.A3_Skill11.checked = n_A_Buf3[11],
+            c.A3_Skill12.checked = n_A_Buf3[45],
+            c.A3_Skill13.checked = n_A_Buf3[46],
+            c.A3_Skill14.checked = n_A_Buf3[47],
+            c.A3_Skill15.checked = n_A_Buf3[48],
             Skill3SW_2()
     } else {
         var n;
@@ -3349,25 +3558,28 @@ function Skill3SW_2() {
         0 != n_A_Buf3[0]) {
         if (0 == SWs3sw[0]) {
             for (0 == n_A_Buf3[20] && (n_A_Buf3[20] = 100,
+                n_A_Buf3[37] = 60,
                 n_A_Buf3[30] = 10),
-                myInnerHtml("EN0_3", "Bard's AGI", 0),
-                myInnerHtml("EN0_4", '<select name="A3_Skill0_2" onChange="A3(1)"></select>', 0),
+                myInnerHtml("EN0_3", "Bard's AGI<br>Bard's LUK", 0),
+                myInnerHtml("EN0_4", '<select name="A3_Skill0_2" onChange="A3(1)"></select><br><select name="A3_Skill0_4" onChange="A3(1)"></select>', 0),
                 myInnerHtml("EN0_5", "Musical Lessons", 0),
                 myInnerHtml("EN0_6", '<select name="A3_Skill0_3" onChange="A3(1)"></select>', 0),
                 i = 1; i <= 200; i++)
-                c.A3_Skill0_2.options[i - 1] = new Option(i, i);
+                c.A3_Skill0_2.options[i - 1] = new Option(i, i),
+                c.A3_Skill0_4.options[i - 1] = new Option(i, i);
             for (i = 0; i <= 10; i++)
                 c.A3_Skill0_3.options[i] = new Option(i, i);
             SWs3sw[0] = 1,
-                c.A3_Skill0_2.value = n_A_Buf3[20],
-                c.A3_Skill0_3.value = n_A_Buf3[30]
+            c.A3_Skill0_2.value = n_A_Buf3[20],
+            c.A3_Skill0_4.value = n_A_Buf3[37],
+            c.A3_Skill0_3.value = n_A_Buf3[30]
         }
     } else
         SWs3sw[0] = 0,
-            myInnerHtml("EN0_3", "", 0),
-            myInnerHtml("EN0_4", "", 0),
-            myInnerHtml("EN0_5", "", 0),
-            myInnerHtml("EN0_6", "", 0);
+        myInnerHtml("EN0_3", "", 0),
+        myInnerHtml("EN0_4", "", 0),
+        myInnerHtml("EN0_5", "", 0),
+        myInnerHtml("EN0_6", "", 0);
     if (0 != n_A_Buf3[1]) {
         if (0 == SWs3sw[1]) {
             for (0 == n_A_Buf3[21] && (n_A_Buf3[21] = 100,
@@ -3540,10 +3752,38 @@ function A3(e) {
             _ = 1;
             break
         }
+    for (n = 45; n <= 48; n++)
+        if(0 != n_A_Buf3[n]){
+            _ = 1;
+            break
+        }
     var l = c.theme.value;
     0 == _ ? (document.getElementById("A3TD").style.backgroundColor = sBGC[l],
         myInnerHtml("A3used", "", 0)) : (document.getElementById("A3TD").style.backgroundColor = saBGC[l],
             myInnerHtml("A3used", " [active]", 0))
+}
+function A3SR(name){
+    switch(name.slice(-2)){
+        case "12":
+            if(c.A3_Skill13.checked)
+                c.A3_Skill13.checked = false;
+            break;
+        case "13":
+            if(c.A3_Skill12.checked)
+                c.A3_Skill12.checked = false;
+            break;
+        case "14":
+            if(c.A3_Skill15.checked)
+                c.A3_Skill15.checked = false;
+            break;
+        case "15":
+            if(c.A3_Skill14.checked)
+                c.A3_Skill14.checked = false;
+            break;
+        default:
+            console.log("Error!");
+            break;
+    }
 }
 function Buf4SW(e) {
     if (n_Skill4SW = e,
@@ -4149,6 +4389,13 @@ function reloadRandOpt(){
 function RandOptUpdate(e){
     1 == e && calc();
 }
+
+function reloadShadowEquip(){
+    c.A_weapon_shadow.value = n_A_Shadow[0];
+    c.A_left_shadow.value = n_A_Shadow[1];
+    c.A_shoes_shadow.value = n_A_Shadow[3];
+}
+
 function Buf10SW(e) {
     if (n_Skill10SW = e,
         n_Skill10SW) {
@@ -4167,11 +4414,13 @@ function Buf10SW(e) {
             _ += '<TR><TD id="EN1015" colspan="4"></TD></TR>',
             _ += '<TR><TD id="EN1016" colspan="4"></TD></TR>',
             _ += '<TR><TD id="EN1100" colspan="4"></TD></TR>',
+            _ += '<TR><TD id="EN1101" colspan="4"></TD></TR>',
             myInnerHtml("B_MANUAL", _, 0),
             myInnerHtml("EN1000", '+<input type="text" inputmode="numeric" maxlength="3" onkeypress="return isNumeric(event)" onkeyup="A10(1)" name="BRG_RC0" value="0" class="center">% Racial Resistance', 0),
             myInnerHtml("EN1001", '+<input type="text" inputmode="numeric" maxlength="3" onkeypress="return isNumeric(event)" onkeyup="A10(1)" name="BRG_RC1" value="0" class="center">vs<select name="Bman1" onChange="A10(1)"></select>', 0),
             myInnerHtml("EN1002", '+<input type="text" inputmode="numeric" maxlength="3" onkeypress="return isNumeric(event)" onkeyup="A10(1)" name="BRG_RC2" value="0" class="center">vs<select name="Bman2" onChange="A10(1)"></select>', 0),
             myInnerHtml("EN1100", 'Monster element <select name="Bman3" onChange="A10(1)"></select> <select name="Bman4" onChange="A10(1)"></select> <input type="checkbox" name="B_mEle" onclick="A10(1)">', 0),
+            myInnerHtml("EN1101", 'Monster size <select name="Bman5" onChange="A10(1)"></select> <input type="checkbox" name="B_mSize" onclick="A10(1)">', 0),
             myInnerHtml("EN1003", '+<input type="text" inputmode="numeric" maxlength="3" onkeypress="return isNumeric(event)" onkeyup="A10(1)" name="BRG_RC3" value="0" class="center">% Size Resistance', 0),
             myInnerHtml("EN1004", '+<input type="text" inputmode="numeric" maxlength="3" onkeypress="return isNumeric(event)" onkeyup="A10(1)" name="BRG_RC4" value="0" class="center">% Long-range Resistance', 0),
             myInnerHtml("EN1010", '+<input type="text" inputmode="numeric" onkeypress="return isNumeric(event)" maxlength="3" onkeyup="A10(1)" name="BRG_RC10" value="0" class="center">% Additional Reflect (equip/card)', 0),
@@ -4202,6 +4451,9 @@ function Buf10SW(e) {
             myInnerHtml("EN1075", '+<input type="text" inputmode="numeric" maxlength="3" onkeypress="return isNumeric(event)" onkeyup="A10(1)" name="BRG_RC37" value="0" class="center">LUK', 0);
             for(j = 1; j < 5; j++){
                 c.Bman4.options[j-1] = new Option(j, j-1);
+            }
+            for(j = 0; j < v_Size.length; j++){
+                c.Bman5.options[j] = new Option(v_Size[j], j);
             }
             
             c.BRG_RC0.value = n_B_manual[1],
@@ -4235,7 +4487,9 @@ function Buf10SW(e) {
             c.BRG_RC40.value = n_B_manual[55],
             c.Bman3.value = n_B_manual[56],
             c.Bman4.value = n_B_manual[57],
-            c.B_mEle.checked = n_B_manual[58]
+            c.B_mEle.checked = n_B_manual[58],
+            c.Bman5.value = n_B_manual[59],
+            c.B_mSize.checked = n_B_manual[60]
     } else {
         var _;
         _ = '<TR><TD id="A10TD" class="subheader point" onclick="Buf10SW(1)">Manual Edits on Enemy <SPAN id="A10used"></SPAN>',
@@ -4673,27 +4927,28 @@ function ClickB_Enemy() {
             l += n_tok[300 + n_B[2]],
             324 != n_A_ActiveSkill && 159 != n_A_ActiveSkill && 384 != n_A_ActiveSkill && 162 != n_A_ActiveSkill && 193 != n_A_ActiveSkill && 405 != n_A_ActiveSkill && 438 != n_A_ActiveSkill || (l = 0)) : (l += n_tok[300 + n_B[2]],
                 324 != n_A_ActiveSkill && 159 != n_A_ActiveSkill && 384 != n_A_ActiveSkill && 162 != n_A_ActiveSkill && 193 != n_A_ActiveSkill && 405 != n_A_ActiveSkill && 438 != n_A_ActiveSkill || (l = 0)), */
-        l && (l < 0 && (l = 0),
-            n_B[14] -= Math.floor(n_B[14] * l / 100)),
-        n_B_debuf[14] && 0 == PvP && (n_B[14] -= Math.floor(15 * n_B[14] / 100)),
-        0 == n_B[19] && n_B_debuf[4] && n_B[3] < 90 && (n_B[14] -= Math.floor(50 * n_B[14] / 100)),
-        0 == n_B[19] && n_B_debuf[9] && n_B[3] < 90 && (n_B[14] -= Math.floor(50 * n_B[14] / 100)),
-        n_B_buf[9] && (SRV ? n_B[14] = 90 : n_B[14] *= 2),
-        n_B_debuf[12] && (6 == n_B[2] || n_B[3] >= 90) && (n_B[14] -= Math.floor(n_B[14] * (10 + 4 * n_B_debuf[12]) / 100)),
-        n_B_debuf[20] && 0 == PvP && (n_B[14] = 0),
-        n_B[23] -= Math.floor(n_B[23] * n / 100),
-        n_B[24] -= Math.floor(n_B[24] * n / 100),
-        0 == n_B[19] && n_B_debuf[2] && (n_B[23] -= Math.floor(25 * n_B[23] / 100),
-            n_B[24] -= Math.floor(25 * n_B[24] / 100)),
-        0 == n_B[19] && n_B_debuf[4] && n_B[3] < 90 && (n_B[23] -= Math.floor(50 * n_B[23] / 100),
-            n_B[24] -= Math.floor(50 * n_B[24] / 100)),
-        0 == n_B[19] && n_B_debuf[9] && n_B[3] < 90 && (n_B[23] -= Math.floor(50 * n_B[23] / 100),
-            n_B[24] -= Math.floor(50 * n_B[24] / 100)),
-        0 == PvP && n_B_buf[8] && (n_B[23] -= Math.floor(20 * n_B[23] * n_B_buf[8] / 100),
-            n_B[24] -= Math.floor(20 * n_B[24] * n_B_buf[8] / 100)),
-        0 == PvP && n_B_debuf[21] && (n_B[24] += 90),
-        n_B_debuf[20] && (n_B[23] = 0,
-            n_B[24] = 0);
+    l && (l < 0 && (l = 0), n_B[14] -= Math.floor(n_B[14] * l / 100)),
+    l && (l < 0 && (l = 0), n_B[23] -= Math.floor(n_B[23] * l / 100)),
+    l && (l < 0 && (l = 0), n_B[24] -= Math.floor(n_B[24] * l / 100)),
+    n_B_debuf[14] && 0 == PvP && (n_B[14] -= Math.floor(15 * n_B[14] / 100)),
+    0 == n_B[19] && n_B_debuf[4] && n_B[3] < 90 && (n_B[14] -= Math.floor(50 * n_B[14] / 100)),
+    0 == n_B[19] && n_B_debuf[9] && n_B[3] < 90 && (n_B[14] -= Math.floor(50 * n_B[14] / 100)),
+    n_B_buf[9] && (SRV ? n_B[14] = 90 : n_B[14] *= 2),
+    n_B_debuf[12] && (6 == n_B[2] || n_B[3] >= 90) && (n_B[14] -= Math.floor(n_B[14] * (10 + 4 * n_B_debuf[12]) / 100)),
+    n_B_debuf[20] && 0 == PvP && (n_B[14] = 0),
+    n_B[23] -= Math.floor(n_B[23] * n / 100),
+    n_B[24] -= Math.floor(n_B[24] * n / 100),
+    0 == n_B[19] && n_B_debuf[2] && (n_B[23] -= Math.floor(25 * n_B[23] / 100),
+        n_B[24] -= Math.floor(25 * n_B[24] / 100)),
+    0 == n_B[19] && n_B_debuf[4] && n_B[3] < 90 && (n_B[23] -= Math.floor(50 * n_B[23] / 100),
+        n_B[24] -= Math.floor(50 * n_B[24] / 100)),
+    0 == n_B[19] && n_B_debuf[9] && n_B[3] < 90 && (n_B[23] -= Math.floor(50 * n_B[23] / 100),
+        n_B[24] -= Math.floor(50 * n_B[24] / 100)),
+    0 == PvP && n_B_buf[8] && (n_B[23] -= Math.floor(20 * n_B[23] * n_B_buf[8] / 100),
+        n_B[24] -= Math.floor(20 * n_B[24] * n_B_buf[8] / 100)),
+    0 == PvP && n_B_debuf[21] && (n_B[24] += 90),
+    n_B_debuf[20] && (n_B[23] = 0,
+        n_B[24] = 0);
     l = 0;
     if (l += n_tok[295],
         l += n_B[3] < 5 ? n_tok[360] : n_tok[360 + Math.floor(Math.abs(n_B[3]) / (10 ** (String(n_B[3]).length - 1)))], // pierce mdef on element
@@ -4772,6 +5027,9 @@ function ClickB_Enemy() {
             n_B[3] = manualElement;
             n_B2[3] = manualElement;
         }
+        if(n_B_manual[60]){
+            n_B[4] = n_B_manual[59];
+        }
         l = Math.floor(n_B[3] / 10),
         n_B[3] != n_B2[3] ? myInnerHtml("B_3", "<b>" + s + (v_Element[l] + n_B[3] % 10) + u + "</b>", 0) : myInnerHtml("B_3", "<b>" + (v_Element[l] + n_B[3] % 10) + "</b>", 0),
         myInnerHtml("B_4", v_Size[n_B[4]], 0),
@@ -4822,6 +5080,9 @@ function calc() {
             wCSize = 1,
             l = 1)),
         (SkillSearch(153) || n_A_Buf2[7]) && (n = "Weapon Perfection",
+            wCSize = 1,
+            l = 1),
+        n_A_Buf3[48] && (n = "Humming (SR)",
             wCSize = 1,
             l = 1),
         EquipNumSearch(1177) && (n = "Helm",
@@ -4898,7 +5159,7 @@ function calc() {
         0 == SRV && (w_HIT >= 100 && (w998K = 100),
             w_Cri >= 100 && (w998K = 100)),
         w998L = 100 - w998K,
-        (0 == n_A_ActiveSkill || 272 == n_A_ActiveSkill || 401 == n_A_ActiveSkill || 86 == n_A_ActiveSkill && 50 <= n_B[3] && n_B[3] < 60) && (w_HIT_HYOUJI = Math.floor(100 * w998K) / 100,
+        (0 == n_A_ActiveSkill || 272 == n_A_ActiveSkill || 401 == n_A_ActiveSkill || (86 == n_A_ActiveSkill && 50 <= n_B[3] && n_B[3] < 60) || (n_A_Buf3[47] && 197 != n_A_ActiveSkill && 321 != n_A_ActiveSkill)) && (w_HIT_HYOUJI = Math.floor(100 * w998K) / 100,
             myInnerHtml("CRInum", " (" + Math.round(100 * w998G) / 100 + "%)", 0));
     var i;
     if (i = m_Monster[n_B[0]][2 * c.B_AtkSkill.selectedIndex + 22],
@@ -4917,6 +5178,7 @@ function calc() {
         t = 0
     } else
         t = Math.floor(100 * (w_FLEE + (100 - w_FLEE) * n_A_LUCKY / 100));
+        n_A_Buf3[45] ? (myInnerHtml("BattleDODGE", "20", 0)) : (myInnerHtml("BattleDODGE", "0", 0));
     if (t > 1e4 && (t = 1e4),
         t <= 0 ? (t = 0,
             myInnerHtml("nm066", "", 0),
@@ -4966,12 +5228,14 @@ function calc() {
             10 == n_A_WeaponType))
         for (e = 0; e <= 2; e++)
             n_A_CriATK[e] += Math.floor(m_Arrow[n_A_Arrow][0] * wCSize);
-    BK_n_A_DMG = [0, 0, 0],
+        BK_n_A_DMG = [0, 0, 0],
+        ATKmod01(),
+        ATKmod02(1, 1),
         BK_n_A_DMG[2] = n_A_DMG[2],
         BK_n_A_DMG[0] = n_A_DMG[0],
         BK_n_A_DMG[1] = n_A_DMG[1],
-        ATKmod01(),
-        ATKmod02(1, 1),
+        /* ATKmod01(),
+        ATKmod02(1, 1), */
         n_PerHIT_DMG = BattleCalc2(0),
         wCriTyuu = 1,
         n_A_CriATK[1] = BattleCalc(n_A_CriATK[1], 10), // crit damage
@@ -5063,6 +5327,7 @@ function BattleCalc2(e) {
     if (w999_AB = 0,
         e > 0 && (w999_AB = 1),
         e += 2 * SkillSearch(148),
+        e += 4 * SkillSearch(146),
         0 == wBCEDPch && (e = Math.floor(e * Math.max(0, element[n_B[3]][n_A_Weapon_element]))),
         0 == n_A_WeaponType && SkillSearch(329) && (331 != n_A_ActiveSkill && 333 != n_A_ActiveSkill && 335 != n_A_ActiveSkill && 337 != n_A_ActiveSkill || (e += 10 * SkillSearch(329))),
         e += 3 * n_A_Buf2[12],
@@ -5084,7 +5349,7 @@ function BattleCalc2(e) {
         395 == n_A_ActiveSkill && (e += 3 * m_Kunai[1 * document.calcForm.SkillSubNum.value][0]),
         1 * c.server.value < 50 && (e = ApplyModifiers(e)),
         169 == n_A_ActiveSkill && 10 == n_A_WeaponType && (e = Math.floor(e / 2)),
-        169 == n_A_ActiveSkill && 1 == n_A_WeaponType && (e *= 2), // backstab double damage with dagger
+        //169 == n_A_ActiveSkill && 1 == n_A_WeaponType && (e *= 2), // backstab double damage with dagger
         n_Nitou && 0 == n_A_ActiveSkill && 0 != n_A_WeaponType && (e = Math.floor(e * (50 + 10 * SkillSearch(79)) / 100)),
         423 == n_A_ActiveSkill && (e *= Math.max(0, element[n_B[3]][8])),
         437 == n_A_ActiveSkill && (e *= element[n_B[3]][0]),
@@ -5159,12 +5424,12 @@ function ApplyModifiers(e) {
 
 function BattleCalc3(e) {
     return wBC3_3dan = w998B * TyouEnkakuSousa3dan,
-        wBC3_DA = w998E * e * 2,
-        wBC3_Cri = w998G * n_A_CriATK[1],
-        wBC3_Normal = w998I * e,
-        wBC3_Miss = w998L * BattleCalc2(0),
-        wBC3_X = (wBC3_3dan + wBC3_DA + wBC3_Cri + wBC3_Normal + wBC3_Miss) / 100,
-        tPlusLucky(wBC3_X)
+    wBC3_DA = w998E * e * 2,
+    wBC3_Cri = w998G * n_A_CriATK[1],
+    wBC3_Normal = w998I * e,
+    wBC3_Miss = w998L * BattleCalc2(0),
+    wBC3_X = (wBC3_3dan + wBC3_DA + wBC3_Cri + wBC3_Normal + wBC3_Miss) / 100,
+    tPlusLucky(wBC3_X)
 }
 function BattleCalc3left(e) {
     for (wBC3L2 = 0,
@@ -5266,7 +5531,7 @@ function CastAndDelay() {
         2 == n && (e += "Delay (fixed skills)<BR>",
             _ += n_Delay[2] + " seconds<BR>"),
         3 == n && (188 == n_A_ActiveSkill || 189 == n_A_ActiveSkill || 289 == n_A_ActiveSkill ? (e += "Delay (+delay reception combo)<BR>",
-            _ += 1.5 + " seconds<BR>") : (e += "Delay (forced motion)<BR>",
+            _ += 0.2 + " seconds<BR>") : (e += "Delay (forced motion)<BR>",
                 _ += n_Delay[3] + " seconds<BR>")),
         4 == n && (e += "Delay (input limit)<BR>",
             _ += n_Delay[4] + " seconds<BR>"),

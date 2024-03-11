@@ -422,7 +422,7 @@ m_Item = [
 	, [419, 7, 1, 215, 4, 0, 300, 44, "Guillotine", 0, "When performing an ATK based attack, 0.3% chance to cause [Coma] status effect on your target (only [" + v_Race[7] + "] race monsters, works even on [Boss] type monsters!).<br>Recover 2 SP when dealing ATK based damage on a [" + v_Race[7] + "] race monster.<br>Recover 20 SP when killing a [" + v_Race[7] + "] race monster with ATK based damage.", 0]
 	, [420, 8, 53, 85, 4, "0/2", 70, 40, "Spike", 0, "", 10, 40, 24, 3, 0]
 	, [421, 8, 53, 145, 4, 0, 100, 40, "Slash", 0, "When performing an ATK based attack, 0.1% chance to cause [Coma] status effect on your target (only [" + v_Race[1] + "] race monsters, works even on [Boss] type monsters!).", 31, 15, 121, 5, 0]
-	, [422, 8, 53, 165, 4, 0, 90, 40, "Quadrille", 0, "", 37, 10, 31, 10, 42, 10, 0]
+	, [422, 8, 53, 165, 4, "0/1", 90, 40, "Quadrille", 0, "", 37, 10, 31, 10, 42, 10, 0]
 	, [423, 999, 1, 110, 4, 0, 45, 36, "Kaiser Knuckle", 0, "", 20, 4, 31, 5, 41, 10, 42, 10, 43, 10, 44, 10, 0]
 	, [424, 13, 1, 120, 4, "0/1", 50, 36, "Berserk", 0, "", 12, 12, 0]
 	, [425, 15, 1, 100, 4, 0, 40, 44, "Lariat Whip", 0, "", 5, 5, 2, 1, 0]
@@ -684,7 +684,7 @@ m_Item = [
 	, [681, 999, 0, 1, 0, 0, 50, 30, "Ramen Hat", 0, "", 5, 4, 221, 117, 0]
 	, [682, 999, 0, 0, 0, 0, 10, 10, "Whisper Mask", 0, "", 200, 4, 2, 3, 68, -10, 193, 1, 0]
 	, [683, 60, 50, 4, 0, 1, 60, 40, "Angelic Protection", 0, "", 19, 20, 0]
-	, [684, 60, 1, 6, 0, 1, 250, 65, "Odin's Blessing", 0, "", 0]
+	, [684, 60, 151, 6, 0, 1, 250, 65, "Odin's Blessing", 0, "", 0]
 	, [685, 60, 1, 7, 0, 0, 350, 54, "Goibne's Armor", 0, "", 3, 2, 15, 10, 0]
 	, [686, 60, 3070, 10, 0, 1, 300, 55, "Meteo Plate Armor", 0, "", 151, 30, 152, 30, 0]
 	, [687, 60, 3001, 2, 0, 1, 30, 55, "Orlean's Gown", 0, "Skill casting cannot be interrupted (except in WoE).", 73, 15, 0]
@@ -840,7 +840,7 @@ m_Item = [
 	, [837, 64, 65, 0, 0, 1, 10, 80, "Librarian Glove", 0, "", 14, 20, 0]
 	, [838, 64, 55, 0, 0, 0, 20, 80, "Pocket Watch", 0, "", 0]
 	, [839, 64, 54, 0, 0, 1, 20, 65, "Lunatic Brooch", 0, "", 0]
-	, [840, 64, 70, 1, 0, 0, 70, 50, "Iron Wrist", 0, "", 5006, 6, 5065, 6, 0]
+	, [840, 64, 70, 1, 0, 0, 70, 25, "Iron Wrist", 0, "", 5006, 6, 5065, 6, 0]
 	, [841, 64, 124, 0, 0, 0, 10, 70, "Wing of Icarus", 0, "", 5, 3, 14, 50, 0]
 	, [842, 64, 124, 0, 0, 0, 20, 70, "Bowman's Scarf", 0, "", 5, 3, 14, 50, 0]
 	, [843, 64, 1, 0, 0, 1, 5, 80, "Cursed Hand", 0, "When performing an ATK based attack, 3% chance to cast [Critical Wound] Lvl 1.", 8, 10, 75, 20, 0]
@@ -855,7 +855,7 @@ m_Item = [
 	, [852, 999, 0, 2, 0, 0, 70, 10, "Gf Recruiter Cap", 0, "", 0]
 	, [853, 10, 124, 70, 3, 3, 90, 70, "Double Bound", 0, "When performing an ATK based attack, 1% chance to cast [Double Strafe] Lvl 1 on your target.<br>If the user has mastered [Double Strafe], it will cast [Double Strafe] Lvl 10", 0]
 	, [854, 100, 0, 0, 0, 0, 0, 0, 0, 0, "", 80, 3, 89, 3, 0]
-	, [855, 100, 0, 0, 0, 0, 0, 0, "Tournament Shield System Set", 0, "<b>[Lord Knight]</b><BR>ASPD -5%", 18, 2, 80, 4, 0]
+	, [855, 100, 0, 0, 0, 0, 0, 0, "Tournament Shield System Set", 0, "<b>[Lord Knight]</b><BR>ASPD -5%", 80, 4, 0]
 	, [856, 100, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5104, 20, 221, 50, 0]
 	, [857, 100, 0, 0, 0, 0, 0, 0, 0, 0, 0, 15, 6, 0]
 	, [858, 100, 0, 0, 0, 0, 0, 0, 0, 0, 0, 214, 5, 13, 700, 12, 5, 0]
@@ -1584,7 +1584,7 @@ m_Item = [
 	, [1580, 999, 0, 0, 0, 0, 0, 0, "Sakura Coronet + Romantic White Flower", 0, "<b>[Refine Rate 2~10]</b><br>All skill's SP cost -(Refine Rate)%", 0]
 	, [1581, 999, 0, 0, 0, 0, 0, 0, "Sakura Coronet + Romantic Flower", 0, "<b>[Refine Rate 6~10]</b><br>MaxSP +(Refine Rate)%", 0]
 	, [1582, 999, 0, 0, 0, 0, 0, 0, "Sakura Coronet + Romantic Leaf", 0, "<b>[Refine Rate 5~10]</b><br>All skill's After-cast Delay -(Refine Rate - 4)%", 5, 1, 0]
-	, [1583, 999, 0, 1, 0, 0, 1, 1, "Spare Card", 0, "Chance to obtain a [Blank Card] item when killing a monster.", 0]
+	, [1583, 52, 0, 1, 0, 0, 1, 1, "Spare Card", 0, "30% chance to obtain a [Blank Card] item when killing a monster.", 11, 1, 0]
 	, [1584, 999, 132, 40, 3, 1, 50, 102, "Mental Stick (aRO)", 0, "Reduces [Psychic Wave] variable cast time by 3 seconds, but increases the cost of [Psychic Wave] by 60 sp.<br>Each refine above +6 increases [Psychic Wave] attack power by 2%, but decreases MaxHP by 2%.<br>When unequipping the weapon, you lose 100 SP.", 88, 170, 0]
 	, [1585, 999, 0, 30, 3, 0, 50, 100, "Laphine Staff (aRO)", 0, "Each refine decreases fixed cast time by 1% (does not stack with other fixed cast time effects).", 88, 180, 0]
 	, [1586, 999, 117, 1, 0, 1, 30, 65, "Dance Shoes", 0, "Reduces the SP cost of [Swing Dance] by 32.", 2, 1, 12, 2, 0]
@@ -1770,7 +1770,7 @@ m_Item = [
 	, [1765, 999, 0, 1, 0, 1, 10, 30, "Skull Hood", 0, "", 200, 1, 0]
 	, [1766, 999, 0, 0, 0, 1, 50, 45, "Mother's Kindness", 0, "", 200, 1, 56, 5, 51, 5, 221, 159, 0]
 	, [1767, 999, 0, 5, 0, 0, 30, 1, "Triangle Rune Cap", 0, "<b>[Refine Rate 7~10]</b><BR>MATK +10<BR>15% chance to cast [Magic Mirror] Lvl 8 when receiving ATK based damage.<BR>15% chance to cast [Magic Mirror] Lvl 7 when receiving ATK based damage.", 99, 2, 0]
-	, [1768, 50, 0, 10, 0, 1, 50, 30, "Benevolent Guardian", 0, "Items recover 5% more HP.<BR><b>[Refine Rate 7~10]</b><BR>Your [Heal], [Sanctuary], and [Aid Potion] effectiveness +3%", 99, 2, 100, 5, 0]     //implementar efecto si está refinado
+	, [1768, 50, 0, 1, 0, 1, 50, 30, "Benevolent Guardian", 0, "Items recover 5% more HP.<BR><b>[Refine Rate 7~10]</b><BR>Your [Heal], [Sanctuary], and [Aid Potion] effectiveness +3%", 99, 2, 100, 5, 0]     //implementar efecto si está refinado
 	, [1769, 100, 0, 0, 0, 0, 0, 0, "Benevolent Healing Set", 0, "Your [Heal], [Sanctuary], and [Aid Potion] effectiveness +(weapon refine)%", 0]   //implementar efecto si está refinado
 	, [1770, 999, 0, 0, 0, 0, 0, 0, "Benevolent Holy Set", 0, "<b>*IS NOT IMPLEMENTED IN-GAME*</b><br>Increases the recovery power of the user's healing skills by an additional 3% per refine on the Holy Stick.", 0]     //implementar efecto si está refinado
 	, [1771, 999, 0, 0, 0, 0, 30, 80, "Paw of Cat", 0, "Enables use of [Cat Cry] Lvl 1.", 2, 1, 9, 5, 0]   //implementar la skill Cat Cry
@@ -1849,10 +1849,10 @@ m_Item = [
 	, [1843, 19, 59, 190, 4, 1, 200, 70, "Demon Slayer", 0, "<b>[Refine Rate 7~10]</b> After-cast delay -5%", 36, 10, 74, 10, 0]
 	, [1844, 10, 110, 130, 4, 1, 150, 60, "Bloody Bow", 0, "<b>[Refine Rate 7~10]</b><br>[Blitz Beat] DMG +30%", 6, 3, 0]
 	, [1845, 1, 58, 150, 4, 2, 60, 55, "Kagekiri", 0, "Removes the size penalties of the weapon.<BR>(Certain weapon types have reduced attack power against certain enemy sizes).<br><b>[Refine Rate 7~10]</b> HP +10%", 15, 15, 0]
-	, [1846, 14, 0, 180, 4, 2, 250, 70, "Purifying Trumpet", 0, "<b>For every 20 base VIT:</b> INT +1<br><b>If equipped together with [Silver or Holy Arrow]:</b><BR>Increases ranged damage by 15%", 20, 6, 153, 100, 0]
+	, [1846, 14, 0, 180, 4, 2, 250, 70, "Purifying Trumpet", 0, "<b>For every 20 base VIT:</b> INT +1<br><b>If equipped together with [Silver or Holy Arrow]:</b><BR>Deal +15% ranged ATK based damage.", 20, 6, 153, 100, 0]
 	, [1847, 15, 0, 180, 4, 2, 250, 70, "Hellfire Whip", 0, "When performing an ATK based attack, 3% chance to cause [Curse] status effect on your target.<br><b>For every 20 base VIT:</b> AGI +1<br><b>If equipped together with [Fire or Shadow Arrow]:</b><BR>Increases ranged damage by 15%", 20, 7, 0]
 	, [1848, 13, 115, 170, 4, 2, 100, 70, "Spirit Claw", 0, "10% chance to cast [Summon Spirit Sphere] Lvl 5 when performing an ATK based attack.", 5197, -25, 8, 10, 0]
-	, [1849, 10, 114, 130, 4, 1, 150, 70, "Undead Shot", 0, "Increases the proc chance of all AutoSpell effects by 25%.<br><b>[Refine Rate 7~10]</b> ASPD+5%", 40, 5, 89, 15, 0]
+	, [1849, 10, 114, 130, 4, 1, 150, 70, "Undead Shot (ranged)", 0, "Increases the proc chance of all AutoSpell effects by 25%.<br><b>[Refine Rate 7~10]</b> ASPD+5%", 40, 5, 89, 15, 0]
 	, [1850, 4, 1000, 180, 4, 2, 420, 70, "Spear of Lucifer", 0, "[Clashing Spiral] Range +4", 25, 15, 15, -5, 0]
 	, [1851, 1, 58, 90, 4, 1, 60, 70, "Dagger of Evil Spirits", 0, "<b>For each refine level past 4:</b> DEX +1", 89, 20, 0]
 	, [1852, 100, 0, 0, 0, 0, 0, 0, "", 0, 0, 4, 5, 0]
@@ -1901,7 +1901,7 @@ m_Item = [
 	, [1895, 64, 144, 0, 0, 0, 0, 1, "Ninja Figure", 0, "", 1, 2, 4, 2, 5, 2, 80, 3, 89, 3, 0]
 	, [1896, 50, 0, 1, 0, 0, 40, 10, "Magical Moon Cat Hat", 0, "", 89, 3, 4, 2, 5, 1, 0]
 	, [1897, 50, 109, 3, 0, 1, 20, 30, "Shrine Maiden Hat", 0, "", 4, 1, 74, 15, 7104, 15, 5104, 10, 0]
-	, [1898, 50, 120, 3, 0, 1, 20, 30, "Ascendant Crown", 0, "<b>[Refine Rate 5~10]</b><br>ASPD +1%<br>MATK +1%<br>CRIT +1<br><b>[Refine Rate 7~10]</b><br>ASPD +2%<br>MATK +1%<br>CRIT +2<br><b>[Refine Rate 9~10]</b><br>ASPD +2%<br>MATK +1%<br>CRIT +2", 7, 1, 13, 300, 14, 100, 19, 5, 89, 2, 17, 10, 10, 5, 8, 5, 9, 5, 0]
+	, [1898, 50, 50, 3, 0, 1, 20, 30, "Ascendant Crown", 0, "<b>[Refine Rate 5~10]</b><br>ASPD +1%<br>MATK +1%<br>CRIT +1<br><b>[Refine Rate 7~10]</b><br>ASPD +2%<br>MATK +1%<br>CRIT +2<br><b>[Refine Rate 9~10]</b><br>ASPD +2%<br>MATK +1%<br>CRIT +2", 7, 1, 13, 300, 14, 100, 19, 5, 89, 2, 17, 10, 10, 5, 8, 5, 9, 5, 0]
 	, [1899, 1, 62, 165, 1, 0, 200, 45, "Brute Damascus", 0, "", 30, 15, 31, 15, 32, 15, 33, 15, 34, 15, 35, 15, 36, 15, 37, 15, 38, 15, 39, 15, 14, 70, 12, 3, 0]
 	, [1900, 1, 58, 165, 1, 0, 200, 45, "Brute Damascus", 0, "", 30, 15, 31, 15, 32, 15, 33, 15, 34, 15, 35, 15, 36, 15, 37, 15, 38, 15, 39, 15, 14, 70, 12, 3, 0]
 	, [1901, 7, 66, 200, 1, 0, 270, 14, "Dofle Axe", 0, "", 30, 15, 31, 15, 32, 15, 33, 15, 34, 15, 35, 15, 36, 15, 37, 15, 38, 15, 39, 15, 10, 6, 12, 3, 0]
@@ -1950,7 +1950,7 @@ m_Item = [
 	, [1943, 63, 96, 3, 0, 1, 60, 80, "STR Temporal Boots", 0, "<b>[Base STR >= 90]</b><br>MDEF +3<br>On all monsters ignore 10% DEF<br>ATK +12", 0]
 	, [1944, 63, 96, 3, 0, 1, 60, 80, "AGI Temporal Boots", 0, "<b>[Base AGI >= 90]</b><br>ASPD +5%<br>Deal +10% auto attack damage", 0]
 	, [1945, 63, 96, 3, 0, 1, 60, 80, "VIT Temporal Boots", 0, "<b>[Base VIT >= 90]</b><br>MDEF +5<br>VIT +1<br>HP +12%<br>Received [Heal], [Sanctuary], and [Potion Pitcher] effectiveness +15%<br>Items recover 15% more HP", 0]
-	, [1946, 63, 96, 3, 0, 1, 60, 80, "INT Temporal Boots", 0, "<b>[Base INT >= 90]</b><br>Deal 5% MATK based damage against all monsters<br>On all monsters, ignore 10% MDEF", 0]
+	, [1946, 63, 96, 3, 0, 1, 60, 80, "INT Temporal Boots", 0, "<b>[Base INT >= 90]</b><br>Deal +5% MATK based damage against all monsters<br>On all monsters, ignore 10% MDEF", 0]
 	, [1947, 63, 96, 3, 0, 1, 60, 80, "DEX Temporal Boots", 0, "<b>[Base DEX >= 90]</b><br>MDEF +3<br>Deal +5% ranged ATK based damage<br>ATK +12", 0]
 	, [1948, 63, 96, 3, 0, 1, 60, 80, "LUK Temporal Boots", 0, "<b>For every 10 base LUK up to 90:</b><br>CRIT +1<br>Critial damage +1%", 19, 3, 10, 3, 70, 6, 0]
 	, [1949, 11, 122, 140, 4, 2, 200, 80, "Death's Dance", 0, "[Sonic Blow] Range +1<br><b>[Refine Rate 9~10]</b><br>ASPD +2%<br>ATK +10", 12, 3, 190, 15, 191, 15, 192, 15, 0]
@@ -1986,7 +1986,7 @@ m_Item = [
 	, [1979, 62, 99, 2, 0, 1, 60, 40, "Flame Rune Manteau", 0, "", 341, 5, 343, -5, 0]
 	, [1980, 60, 99, 2, 0, 1, 100, 40, "Glacial Robe", 0, "", 343, 5, 341, -5, 0]
 	, [1981, 100, 0, 0, 0, 0, 0, 0, "Glacial Robe + Flame Rune Manteau", 0, "Deal -12% MATK based damage against Players.", 340, 12, 0]
-	, [1982, 64, 0, 0, 0, 1, 10, 80, "Alchemy Glove", 0, "Auto Cast Rate -10%<br>[<b style='color:red'>Fire</b>] property magic damage +7%<br>[<b style='color:blue'>Water</b>] property magic damage +7%<br>[<b style='color:#00CC00'>Wind</b>] property magic damage +7%<br>[<b style='color:brown'>Earth</b>] property magic damage +7%<br>[<b style='color:#BFBEBB'>Ghost</b>] property magic damage +7%<br>[<b style='color:#CDCD00'>Holy</b>] property magic damage +7%<br>[<b style='color:#000000'>Shadow</b>] property magic damage +7%", 4, 1, 5, 1, 63, -5, 61, -5, 64, -5, 62, -5, 68, -5, 66, -5, 67, -5, 5125, -10, 0]
+	, [1982, 64, 0, 0, 0, 1, 10, 80, "Alchemy Glove", 0, "Auto Cast Rate -10%<br>[<b style='color:red'>Fire</b>] property magic damage +7%<br>[<b style='color:blue'>Water</b>] property magic damage +7%<br>[<b style='color:#00CC00'>Wind</b>] property magic damage +7%<br>[<b style='color:brown'>Earth</b>] property magic damage +7%<br>[<b style='color:#BFBEBB'>Ghost</b>] property magic damage +7%<br>[<b style='color:#CDCD00'>Holy</b>] property magic damage +7%<br>[<b style='color:#000000'>Shadow</b>] property magic damage +7%<br><b>Only Left Accessory</b>", 4, 1, 5, 1, 63, -5, 61, -5, 64, -5, 62, -5, 68, -5, 66, -5, 67, -5, 5125, -10, 0]
 	, [1983, 9, 132, 150, 4, 1, 100, 80, "Royal Alchemy Staff", 0, "", 5, 2, 4, 4, 89, 20, 0]
 	, [1984, 100, 0, 0, 0, 0, 0, 0, "Alchemy Glove + Royal Alchemy Staff", 0, "[Fire Bolt] skill damage +(2*refine)%<br>[Cold Bolt] skill damage +(2*refine)%<br>[Lightning Bolt] skill damage +(2*refine)%<br>[Earth Spike] skill damage +(2*refine)%", 0]
 	, [1985, 60, 0, 6, 0, 1, 200, 0, "Imperial Clergy Robe", 0, "When receiving ATK based damage, 2% chance to inflict [Curse] status on your attacker.", 13, 400, 159, 50, 153, 50, 0]
@@ -2015,7 +2015,7 @@ m_Item = [
 	, [2008, 62, 0, 3, 0, 1, 30, 0, "Ferlock's Cloak", 0, "<b>[Refine Rate 9~10]</b> VIT +1", 78, 5, 77, -5, 79, -5, 0]
 	, [2009, 63, 0, 3, 0, 1, 20, 0, "Ferlock's Boots", 0, "", 15, 5, 19, 4, 0]
 	, [2010, 100, 0, 0, 0, 0, 0, 0, "Ferlock Set", 0, 0, 13, 1000, 0]
-	, [2011, 1, 62, 150, 4, 2, 120, 50, "Poison Bayonet", 0, 0, 89, 15, 1, 2, 4, 2, 5006, 15, 5007, 15, 5025, 15, 5076, 15, 5308, 15, 5065, 15, 5161, 15, 5162, 15, 5158, 15, 5159, 15, 5046, 15, 5047, 15, 5051, 15, 5052, 15, 5053, 15, 5054, 15, 5055, 15, 5056, 15, 5057, 15, 5122, 15, 5124, 15, 5126, 15, 5127, 15, 5128, 15, 5130, 15, 5131, 15, 5132, 15, 5133, 15, 5037, 15, 5041, 15, 5044, 15, 5307, 15, 5102, 15, 5097, 15, 5104, 15, 5106, 15, 5111, 15, 5112, 15, 5113, 15, 5244, 15, 5248, 15, 5088, 15, 5306, 15, 5019, 15, 5193, 15, 5192, 15, 5197, 15, 5321, 15, 5339, 15, 5382, 15, 5398, 15, 5400, 15, 5401, 15, 5407, 15, 5408, 15, 5409, 15, 5410, 15, 5412, 15, 5413, 15, 5414, 15, 5415, 15, 5418, 15, 5419, 15, 5423, 15, 5302, 15, 0]
+	, [2011, 1, 62, 150, 4, 2, 120, 50, "Poison Bayonet", 0, 0, 89, 15, 1, 2, 4, 2, 5006, 15, 5007, 15, 5076, 15, 5161, 15, 5162, 15, 5474, 15, 5159, 15, 5158, 15, 5051, 15, 5052, 15, 5053, 15, 5054, 15, 5055, 15, 5056, 15, 5057, 15, 5046, 15, 5047, 15, 5132, 15, 5133, 15, 5122, 15, 5124, 15, 5126, 15, 5127, 15, 5128, 15, 5130, 15, 5131, 15, 5044, 15, 5041, 15, 5106, 15, 5112, 15, 5113, 15, 5065, 15, 5244, 15, 5248, 15, 5088, 15, 5306, 15, 5025, 15, 5037, 15, 5321, 15, 5197, 15, 5192, 15, 5193, 15, 5097, 15, 5102, 15, 5104, 15, 5339, 15, 5398, 15, 5400, 15, 5401, 15, 5407, 15, 5408, 15, 5409, 15, 5410, 15, 5412, 15, 5413, 15, 5414, 15, 5415, 15, 5302, 15, 5312, 15, 5489, 15, 5461, 15, 5463, 15, 5465, 15, 5466, 15, 5469, 15, 5510, 15, 5443, 15, 0]
 	, [2012, 62, 0, 3, 0, 1, 30, 0, "Manteau of Mystic Frozen", 0, 0, 61, 10, 64, -10, 0]
 	// forged weapons
 	, [2013, 1, 0, 17, 1, 0, 40, 1, "Knife [Forged]", 0, "", 0]
@@ -2087,6 +2087,29 @@ m_Item = [
 	, [2078, 2, 50, 75, 3, 0, 0, 1, "Paradise Town Sword", 0, "", 193, 1, 89, 15, 0]
 	, [2079, 64, 141, 0, 0, 0, 0, 1, "Paradise Taekwon Ring", 0, "<b>[BaseLv 1~19]</b> ATK +75<br><b>[BaseLv 20~39]</b> ATK +50<br><b>[BaseLv 40~59]</b> ATK +25<br><b>[BaseLv 60~99]</b> ATK +10", 193, 1, 0]
 	, [2080, 50, 0, 0, 0, 0, 120, 1, "Pink Poo Poo Hat", 0, "<hr><b>When worn with a [Steel Chonchon Card]:</b><br>Status effect [Freeze] resistance +100%", 57, 10, 0]
+	// patch a2
+	, [2081, 60, 0, 3, 0, 0, 0, 50, "Time Keeper Robe", 0, "", 19, 5, 17, 15, 88, 15, 87, 2, 89, 2, 13, 500, 14, 75, 2, 2, 0]
+	, [2082, 62, 0, 3, 0, 0, 0, 50, "Time Keeper Manteau", 0, "", 19, 3, 9, 8, 11, 3, 12, 1, 60, 18, 61, 5, 62, 5, 63, 5, 64, 5, 65, 5, 66, 5, 66, 5, 67, 5, 68, 5, 69, 5, 0]
+	, [2083, 63, 0, 4, 0, 0, 0, 50, "Time Keeper Boots", 0, "7% chance to obtain a [Can of Anchovies] item when killing a monster.", 19, 3, 15, 8, 16, 8, 7, 1, 8, 10, 0]
+	, [2084, 63, 55, 2, 0, 1, 0, 75, "Survivor's Shoes", 0, "<b>[Refine Rate 9~10]</b> MATK +5%", 3, 1, 0]
+	, [2085, 100, 0, 0, 0, 0, 0, 0, "", 0, "<b>For each refine level on [Survivor's Shoes]:</b> Max HP +50", 0]
+	, [2086, 50, 0, 3, 0, 1, 0, 40, "Hat of Fortune", 0, "<b>For each refine level past 4:</b> LUK +1", 6, 2, 19, 5, 0]
+	, [2087, 64, 0, 0, 0, 0, 0, 1, "Time Guardian Ring", 0, "<b>For every 2 Base Levels:</b> MaxHP +5", 13, 50, 0]
+	, [2088, 51, 0, 0, 0, 1, 0, 90, "Monocle", 0, "", 0]
+	, [2089, 61, 0, 3, 0, 1, 0, 80, "Time Keeper Shield", 0, "<b>For each refine level past 4:</b> Perfect Dodge +1", 3, 1, 0]
+	, [2090, 62, 0, 2, 0, 1, 50, 50, "Candy Bag Backpack", 0, "<b>For each refine level:</b> [Piece of Cake] Recovery Rate +10%", 87, 1, 89, 1, 74, 5, 370, -5, 0]
+	, [2091, 9, 53, 10, 3, 0, 40, 0, "Soul Stick", 0, "[Turn Undead] After-cast Delay -50%<br><b>For each refine level:</b><br>INT +1<br>LUK +1<br><b>[Refine Rate 9~10]</b><br>[Turn Undead] Range +2", 89, 5, 93, 100, 0]
+	, [2092, 21, 59, 220, 3, 2, 200, 10, "Southern Cross", 0, "[Basic Grenade] skill damage +5%<br>[Hasty Fire in the Hole] skill damage +5%<br><b>*NOT IMPLEMENTED*</b>", 0]
+	, [2093, 64, 0, 0, 0, 1, 10, 90, "Toy Ring", 0, "", 1, 1, 5, -1, 10, 4, 0]
+	, [2094, 50, 0, 0, 0, 0, 40, 1, "Antler Fedora", 0, "Consumes 100% SP when the headgear is unequipped.", 4, 3, 220, 54, 0]
+	, [2095, 8, 53, 95, 4, 2, 150, 40, "Bloody Cross", 0, "", 36, 10, 47, 10, 0]
+	, [2096, 63, 150, 3, 0, 1, 30, 30, "Bunny Slippers", 0, "", 6, 3, 19, 5, 11, 3, 0]
+	, [2097, 10, 54, 120, 4, 1, 170, 60, "Bolt Shooter", 0, "<b>For each refine level:</b> DEF Pierce +2%", 10, -15, 70, -15, 5040, 20, 0]
+	, [2098, 62, 0, 0, 0, 1, 50, 80, "Angry Bear Bag", 0, "<b>For each 2 refine levels:</b><br>Deal +1% ATK based damage against [Normal/Boss/Guardian] type monsters.<br><b>For each refine level:</b><br>Receive +1% damage from all monsters.", 0]
+	, [2099, 9, 0, 10, 3, 0, 40, 0, "Guardian Staff", 0, "<b>For each refine level:</b> MaxHP +80<br>Enables the use of [Barrier] Lvl 1<br>[Barrier] reduces incoming damage by 50% for 1.5 seconds when activated and has a 30 second cooldown. [Barrier] cannot be used in PVP, BGs, WOE, or RWC maps and modes.", 89, 5, 18, 5, 0]
+	, [2100, 60, 0, 5, 0, 1, 0, 50, "Celine's Dress", 0, "Enables the use of [Recognized Spell] Lvl 1<br>[Recognized Spell] removes variance from MATK and makes magic damage do their average damage.", 4, 1, 5, 1, 19, 5, 0]
+	, [2101, 64, 0, 0, 0, 1, 10, 90, "Evil Spirit Glove", 0, "", 5, 1, 25, 3, 0]
+	, [2102, 10, 114, 130, 4, 1, 150, 70, "Undead Shot (special)", 0, "Increases the proc chance of all AutoSpell effects by 25%.<br><b>[Refine Rate 7~10]</b> ASPD+5%", 40, 5, 89, 15, 0]
 ];
 
 //[ id, display location, job that can use, atk/def, level of weapon, slots, weight, level required to use, "name of item", ?, "description", effect1, effect2, ..., 0 =? ]
@@ -2465,6 +2488,8 @@ function Item_Setumei(nC1, nC2) {
 			CBIstr += "All skill's SP cost +" + nC2 + "%.<BR>";
 		else
 			CBIstr += "All skill's SP cost " + nC2 + "%.<BR>";
+	if (371 == nC1)
+		CBIstr += "Receive " + wISS + (-1 * nC2) + "% damage from all monsters.<BR>"
 	if (5000 <= nC1 && nC1 <= 6999)		//mejorar: bastaría con 5000~5999
 		//		CBIstr += "["+ m_Skill[nC1 -5000][2] +"] skill damage"+ wIS + nC2 +"%<BR>";		// original
 		CBIstr += "[" + skillName(m_Skill[nC1 - 5000][0], SRV) + "] skill damage" + wIS + nC2 + "%<BR>";
@@ -2518,15 +2543,16 @@ w_SE = [[737, 436, 475, "NULL"]
 	, [854, 829, 844, "NULL"]
 //	, [854, 829, 1753, "NULL"]
 	, [854, 830, 844, "NULL"]
-//	, [854, 830, 1753, "NULL"]
-//	, [855, 992, 616, "NULL"]
-//	, [855, 992, 617, "NULL"]
-//	, [855, 992, 618, "NULL"]
+	, [854, 830, 1753, "NULL"]
+	, [855, 992, 616, "NULL"]
+	, [855, 992, 617, "NULL"]
+	, [855, 992, 618, "NULL"]
 	, [856, 863, 831, "NULL"]
 	, [857, 835, 836, "NULL"]
 	, [858, 823, 838, 837, "NULL"]
 	, [858, 822, 838, 837, "NULL"]
 	, [860, 251, 307, 838, "NULL"]
+	, [860, 2088, 307, 838, "NULL"]
 	, [861, 521, 839, "NULL"]
 	, [862, 841, 842, "NULL"]
 //	, [971, 958, 965, 968, "NULL"]
@@ -2658,10 +2684,15 @@ w_SE = [[737, 436, 475, "NULL"]
 	, [1992, 1990, 60, "NULL"]
 	, [1995, 1994, 1993, "NULL"]
 	, [1999, 1998, 1849, "NULL"]
+	, [1999, 1998, 2102, "NULL"]
 	, [2000, 1998, 1848, "NULL"]
 	, [2002, 2001, 1839, "NULL"]
 	, [2006, 2003, 2004, 2005, "NULL"]
 	, [2010, 2007, 2008, 2009, "NULL"]
+	, [2085, 2084, 436, 474, "NULL"]
+	, [2085, 2084, 436, 475, "NULL"]
+	, [2085, 2084, 436, 476, "NULL"]
+	, [2085, 2084, 436, 477, "NULL"]
 ];
 SE_MAXnum = w_SE.length - 1;
 for (var i = 0; i <= SE_MAXnum; i++) {
@@ -2707,4 +2738,96 @@ function SetEquip() {
 			w_num++;
 		}
 	}
+}
+
+m_ShadowEquips = [
+	[0, 1, 0, 0, "(no shadow weapon)", "", 0]
+	, [1, 1, 0, 0, "Angel Shadow Weapon [Grade B]", "", 38, 1, 178, 1, 0]
+	, [2, 1, 0, 0, "Brute Shadow Weapon [Grade B]", "", 32, 1, 172, 1, 0]
+	, [3, 1, 0, 0, "Demi-Human Shadow Weapon [Grade B]", "", 37, 1, 177, 1, 0]
+	, [4, 1, 0, 0, "Demon Shadow Weapon [Grade B]", "", 36, 1, 176, 1, 0]
+	, [5, 1, 0, 0, "Dragon Shadow Weapon [Grade B]", "", 39, 1, 179, 1, 0]
+	, [6, 1, 0, 0, "Fish Shadow Weapon [Grade B]", "", 35, 1, 175, 1, 0]
+	, [7, 1, 0, 0, "Formless Shadow Weapon [Grade B]", "", 30, 1, 170, 1, 0]
+	, [8, 1, 0, 0, "Insect Shadow Weapon [Grade B]", "", 34, 1, 174, 1, 0]
+	, [9, 1, 0, 0, "Plant Shadow Weapon [Grade B]", "", 33, 1, 173, 1, 0]
+	, [10, 1, 0, 0, "Undead Race Shadow Weapon [Grade B]", "", 31, 1, 171, 1, 0]
+	, [11, 1, 0, 0, "Angel Shadow Weapon [Grade A]", "", 38, 2, 178, 2, 0]
+	, [12, 1, 0, 0, "Brute Shadow Weapon [Grade A]", "", 32, 2, 172, 2, 0]
+	, [13, 1, 0, 0, "Demi-Human Shadow Weapon [Grade A]", "", 37, 2, 177, 2, 0]
+	, [14, 1, 0, 0, "Demon Shadow Weapon [Grade A]", "", 36, 2, 176, 2, 0]
+	, [15, 1, 0, 0, "Dragon Shadow Weapon [Grade A]", "", 39, 2, 179, 2, 0]
+	, [16, 1, 0, 0, "Fish Shadow Weapon [Grade A]", "", 35, 2, 175, 2, 0]
+	, [17, 1, 0, 0, "Formless Shadow Weapon [Grade A]", "", 30, 2, 170, 2, 0]
+	, [18, 1, 0, 0, "Insect Shadow Weapon [Grade A]", "", 34, 2, 174, 2, 0]
+	, [19, 1, 0, 0, "Plant Shadow Weapon [Grade A]", "", 33, 2, 173, 2, 0]
+	, [20, 1, 0, 0, "Undead Race Shadow Weapon [Grade A]", "", 31, 2, 171, 2, 0]
+	, [21, 1, 0, 0, "All Race Shadow Weapon [Grade S]", "", 30, 1, 31, 1, 32, 1, 33, 1, 34, 1, 35, 1, 36, 1, 37, 1, 38, 1, 39, 1, 170, 1, 171, 1, 172, 1, 173, 1, 174, 1, 175, 1, 176, 1, 177, 1, 178, 1, 179, 1, 0]
+	, [22, 61, 0, 0, "(no shadow shield)", "", 0]
+	, [23, 61, 0, 0, "Angel Shadow Shield [Grade B]", "", 58, 1, 0]
+	, [24, 61, 0, 0, "Brute Shadow Shield [Grade B]", "", 52, 1, 0]
+	, [25, 61, 0, 0, "Demi-Human Shadow Shield [Grade B]", "", 57, 1, 0]
+	, [26, 61, 0, 0, "Demon Shadow Shield [Grade B]", "", 56, 1, 0]
+	, [27, 61, 0, 0, "Dragon Shadow Shield [Grade B]", "", 59, 1, 0]
+	, [28, 61, 0, 0, "Fish Shadow Shield [Grade B]", "", 55, 1, 0]
+	, [29, 61, 0, 0, "Formless Shadow Shield [Grade B]", "", 50, 1, 0]
+	, [30, 61, 0, 0, "Insect Shadow Shield [Grade B]", "", 54, 1, 0]
+	, [31, 61, 0, 0, "Plant Shadow Shield [Grade B]", "", 53, 1, 0]
+	, [32, 61, 0, 0, "Undead Race Shadow Shield [Grade B]", "", 51, 1, 0]
+	, [33, 61, 0, 0, "Angel Shadow Shield [Grade A]", "", 58, 2, 0]
+	, [34, 61, 0, 0, "Brute Shadow Shield [Grade A]", "", 52, 2, 0]
+	, [35, 61, 0, 0, "Demi-Human Shadow Shield [Grade A]", "", 57, 2, 0]
+	, [36, 61, 0, 0, "Demon Shadow Shield [Grade A]", "", 56, 2, 0]
+	, [37, 61, 0, 0, "Dragon Shadow Shield [Grade A]", "", 59, 2, 0]
+	, [38, 61, 0, 0, "Fish Shadow Shield [Grade A]", "", 55, 2, 0]
+	, [39, 61, 0, 0, "Formless Shadow Shield [Grade A]", "", 50, 2, 0]
+	, [40, 61, 0, 0, "Insect Shadow Shield [Grade A]", "", 54, 2, 0]
+	, [41, 61, 0, 0, "Plant Shadow Shield [Grade A]", "", 53, 2, 0]
+	, [42, 61, 0, 0, "Undead Race Shadow Shield [Grade A]", "", 51, 2, 0]
+	, [43, 61, 0, 0, "All Race Shadow Shield [Grade S]", "", 50, 1, 51, 1, 52, 1, 53, 1, 54, 1, 55, 1, 56, 1, 57, 1, 58, 1, 59, 1, 0]
+	, [44, 63, 0, 0, "(no shadow footgear)", "", 0]
+	, [45, 63, 0, 0, "CRIT Shadow Shoes", "", 10, 2, 0]
+	, [46, 63, 0, 0, "Critical Damage Shadow Shoes", "", 70, 1, 0]
+	, [47, 63, 0, 0, "HP Shadow Shoes", "", 13, 100, 0]
+	, [48, 63, 0, 0, "SP Shadow Shoes", "", 14, 30, 0]
+	, [49, 63, 0, 0, "Perfect Dodge Shadow Shoes", "", 11, 1, 0]
+	, [50, 63, 0, 0, "FLEE Shadow Shoes", "", 9, 3, 0]
+	, [51, 63, 0, 0, "HIT Shadow Shoes", "", 8, 3, 0]
+	, [52, 63, 0, 0, "Cast Time Shadow Shoes", "", 73, -2, 0]
+	, [53, 63, 0, 0, "Cast Delay Shadow Shoes", "", 74, 2, 0]
+	, [54, 63, 0, 0, "DEF Shadow Shoes", "", 18, 1, 0]
+	, [55, 63, 0, 0, "MDEF Shadow Shoes", "", 19, 1, 0]
+	, [56, 63, 0, 0, "Heal Power Shadow Shoes", "", 99, 2, 0]
+	, [57, 63, 0, 0, "LUK Shadow Shoes", "", 6, 1, 0]
+	, [58, 63, 0, 0, "AGI Shadow Shoes", "", 2, 1, 0]
+	, [59, 63, 0, 0, "VIT Shadow Shoes", "", 3, 1, 0]
+	, [60, 63, 0, 0, "DEF Pierce Shadow Shoes", "", 290, 2, 0]
+	, [61, 63, 0, 0, "MDEF Pierce Shadow Shoes", "", 295, 2, 0]
+	, [62, 63, 0, 0, "Heal Shadow Shoes", "", 220, 5, 0]
+	, [63, 63, 0, 0, "Teleport Shadow Shoes", "", 220, 17, 0]
+]
+
+// [ id, display location, job that can use, level required to use, "name of item", "description", effect1, effect1 val, effect2, effect2 val, 0]
+
+function ClickSh_Item(CBI){
+	Item_or_Card = "Item";
+	ItemCardNumberCheck = CBI;
+	ActiveSkillSetPlus();
+
+	myInnerHtml("ITEM_TITLE", m_ShadowEquips[CBI][4], 0);
+	myInnerHtml("ITEM3", "Req. Lvl:", 0);
+	myInnerHtml("ITEM4", "Weight:", 0);
+	myInnerHtml("ITEM1", "-", 0);
+	myInnerHtml("ITEM2", "-", 0);
+	myInnerHtml("ITEM_W_LV", "-", 0);
+	myInnerHtml("ITEM_DATA", "-", 0);
+	myInnerHtml("ITEM_LV", m_ShadowEquips[CBI][3], 0);
+	myInnerHtml("ITEM_WAIT", "-", 0);
+
+	CBIstr = "";
+	for (i = 6; m_ShadowEquips[CBI][i] > 0; i += 2)
+		Item_Setumei(m_ShadowEquips[CBI][i], m_ShadowEquips[CBI][i + 1]);
+	if (m_ShadowEquips[CBI][5] != 0)
+		CBIstr += m_ShadowEquips[CBI][10] + "<BR>";
+	myInnerHtml("B_SETUMEI", CBIstr, 0);
 }

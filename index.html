@@ -79,36 +79,39 @@ Calc's theme: <select id="theme" onChange="themes()"><option value="0">Original<
               [<a href="https://rocalc.com/faq-EN.html">Frequently asked questions</a>] [<a
                 href="https://rocalc.com/faq-ES.html">Preguntas frecuentes</a>]<br>
               <br>
-              <b>(A) Changelog 2024-01-28:</b>
-              <br>• Added an option to increase ASPD cap to 193 (in anticipation of Night Watch). Can be toggled under "OPTIONS" in the top right corner of the page.
-              <br>• Fixed Spirit Spheres not affecting Spiral Pierce.
-              <br><br>
-              <b>(A) Changelog 2024-01-25:</b>
-              <br>• Fixed Poison Bayonet having Melee random options instead of Special.
-              <br>• Fixed ATK +100% Gospel buff doubling Asura Strike damage.
-              <br>• Fixed DEF refine bonus to match in-game, which is +0.7 DEF per refine.
-              <br><br>
-              <b>(A) Changelog 2024-01-18:</b>
-              <br>• Fixed Strong Shield job requirement.
-              <br><br>
-              <b>(A) Changelog 2024-01-17:</b>
-              <br>• Added Pink Poo Poo Hat.
-              <br>• Added Black Feather Beret.
-              <br>• Added Lyria Doll Hat.
-              <br><br>
-              <b>(A) Changelog 2024-01-08:</b>
-              <br>• Fixed Black Rosary long range reduction 10% -> 5%.
-              <br><br>
-              <b>(A) Changelog 2024-01-06:</b>
-              <br>• Added Demon of Dexterity, Intelligence, and Vitality to list of Monsters (Death Witch balls). 
-              <br><br>
-              <b>(A) Changelog 2024-01-02:</b>
-              <br>• Incubus Pet MaxSP fixed from +5% -> 3%.
-              <br>• Fixed MaxSP being floored instead of rounded.
-              <br>• Fixed Arrow ATK not applying on Minimum ATK.
-              <br>• Fixed Spiral Pierce formula yet again.
-              <br>• Aimed Bolt fixed cast time reduced from 1 second -> 0.75 seconds.
-              <br>• Added EDP damage reduction in maps as mentioned in <a href="https://projectalfheim.net/wiki/index.php/Patch_A.1.5">patch A1.5</a>.
+              <b>(A) Changelog 2024-03-11:</b>
+              <br>• Read more on patch A2.0 <a href="https://projectalfheim.net/wiki/index.php/Episode_A_2_0_Card_Captor_Sakura">here</a>.
+              <br>• Fixed Healing Staff applying its Healing bonus twice.
+              <br>• Fixed Heal formula regarding received Healing bonus.
+              <br>• Added <a href="https://projectalfheim.net/wiki/index.php/Horror_Toy_Factory#Items">Horror Toy Factory</a> and <a href="https://projectalfheim.net/wiki/index.php/Nightmare_Clock_Tower#Craftable_Gear">Nightmare Clock Tower</a> monsters, items, and cards.
+              <br>• Added Shadow Weapon, Shield, and Footgear slot for Card Captor rewards.
+              <br>• Reduced EXP of mobs according to <a href="https://projectalfheim.net/wiki/index.php/Episode_A_2_0_Card_Captor_Sakura">patch A2.0</a>.
+              <br>• Reduced Combo delay from 1.5 seconds -> 0.2 seconds.
+              <br>• Reduced Iron Wrist level requirement from 50 -> 25.
+              <br>• Ascendant Crown made wearable by regular Novice class.
+              <br>• Changed Transcendant First Class Job EXP table to match non-transcendant.
+              <br>• Fixed Gospel's ATK +100% effect, and Over Thrust not affecting Acid Terror.
+              <br>• Fixed Mind Breaker (self) effect not affecting Acid Terror.
+              <br>• Added Reverberation to Clown and Gypsy.
+              <br>• Added Severe Rainstorm effects under "Music and Dance Skills".
+              <br>• Undead Shot (special) added.
+              <br>• Brain Sucker element changed from Shadow 3 -> Undead 3.
+              <br>• Odin's Blessing made wearable by Super Novice.
+              <br>• Pot Dofle DEF changed from 45 -> 35 and MDEF changed from 35 -> 90.
+              <br>• Adjusted Cart Termination formula. 
+              <br>• Added Dark Strike, Grand Cross of Darkness, Self Destruction, Stun Attack, Curse Attack, Sleep Attack, 
+              <br>&nbsp;&nbsp;&nbsp;Silence Attack, Petrify Attack, Dark Blessing, and Earthquake to Rogue and Stalker's Attack Skills list.
+              <br>• Removed a few skills that were previously on Rogue and Stalker's Attack Skills list, that is no longer copyable.
+              <br>• Added Endure, Improve Concentration, and Power Maximize to Rogue and Stalker's Passive & Self-casted Skills list.
+              <br>• Adjusted Back Stab skill ratio to match in-game.
+              <br>• Fixed DEF pierce not affecting soft DEF.
+              <br>• Increased number of save slots from 19 -> 50.
+              <br>• Fixed equipment being removed when changing base level.
+              <br>• Fixed small error in calculation of Improve Concentration.
+              <br>• Added item combos with Tournament Shield.
+              <br>• Fixed Perfect Tablature / Whistle missing LUK scaling.
+              <br>• Fixed Apple of Idun's Musical Lessons scaling.
+              <br>• There's a lot of changes so if something broke or is missing, please DM me on Discord.
               <br><br>
               [<a href="./EN-Changelog.html">Read all previous changelogs</a>] [<a
                 href="./ES-Changelog.html">Leer todos los cambios</a>]<br>
@@ -215,7 +218,7 @@ Calc's theme: <select id="theme" onChange="themes()"><option value="0">Original<
                 <tbody>
                   <tr class="thin">
                     <td class="right">Base Lvl</td>
-                    <td><select name="A_BaseLV" onchange="StCalc(1)|StAllCalc()|WeaponSet2(1)"
+                    <td><select name="A_BaseLV" onchange="StCalc(1)|StAllCalc()"
                         style="background-color: rgb(255, 204, 136);">
                         <option value="1">1</option>
                         <option value="2">2</option>
@@ -1104,8 +1107,7 @@ Calc's theme: <select id="theme" onChange="themes()"><option value="0">Original<
       </table>
 
 
-      <table class="tborder" onmouseover="FirstNovis()"
-        style="margin-right: 0px; background-color: rgb(255, 255, 255);">
+      <table class="tborder" onmouseover="FirstNovis()" style="margin-right: 0px; background-color: rgb(255, 255, 255);">
         <tbody>
           <tr>
             <td class="subheader" colspan="3" style="background-color: rgb(68, 102, 102);">
@@ -1939,6 +1941,40 @@ Calc's theme: <select id="theme" onChange="themes()"><option value="0">Original<
                         class="center">
                     </td>
                   </tr>
+                  <tr>
+                    <td>
+                      Shadow Weapon
+                    </td>
+                  </tr>
+                  <tr>
+                    <td id="nA_weapon_shadow">
+                      <select name="A_weapon_shadow" style="width: auto; background-color: rgb(255, 204, 136);"
+                        onchange="StAllCalc()|ClickSh_Item(this[this.selectedIndex].value)">
+                        <option value="0">(no shadow weapon)</option>
+                        <option value="1">Angel Shadow Weapon [Grade B]</option>
+                        <option value="2">Brute Shadow Weapon [Grade B]</option>
+                        <option value="3">Demi-Human Shadow Weapon [Grade B]</option>
+                        <option value="4">Demon Shadow Weapon [Grade B]</option>
+                        <option value="5">Dragon Shadow Weapon [Grade B]</option>
+                        <option value="6">Fish Shadow Weapon [Grade B]</option>
+                        <option value="7">Formless Shadow Weapon [Grade B]</option>
+                        <option value="8">Insect Shadow Weapon [Grade B]</option>
+                        <option value="9">Plant Shadow Weapon [Grade B]</option>
+                        <option value="10">Undead Race Shadow Weapon [Grade B]</option>
+                        <option value="11">Angel Shadow Weapon [Grade A]</option>
+                        <option value="12">Brute Shadow Weapon [Grade A]</option>
+                        <option value="13">Demi-Human Shadow Weapon [Grade A]</option>
+                        <option value="14">Demon Shadow Weapon [Grade A]</option>
+                        <option value="15">Dragon Shadow Weapon [Grade A]</option>
+                        <option value="16">Fish Shadow Weapon [Grade A]</option>
+                        <option value="17">Formless Shadow Weapon [Grade A]</option>
+                        <option value="18">Insect Shadow Weapon [Grade A]</option>
+                        <option value="19">Plant Shadow Weapon [Grade A]</option>
+                        <option value="20">Undead Race Shadow Weapon [Grade A]</option>
+                        <option value="21">All Race Shadow Weapon [Grade S]</option>
+                      </select>
+                    </td>
+                  </tr>
                 </tbody>
               </table>
             </td>
@@ -2255,6 +2291,33 @@ Calc's theme: <select id="theme" onChange="themes()"><option value="0">Original<
                         <option value="306">Zherlthsh/Zealotus</option>
                       </select>
                     </td>
+                    <td style="float: right; height: 10px;">
+                      <select name="A_left_shadow" style="width: 150px; background-color: rgb(255, 204, 136);"
+                        onchange="StAllCalc()|ClickSh_Item(this[this.selectedIndex].value)">
+                        <option value="22">(no shadow shield)</option>
+                        <option value="23">Angel Shadow Shield [Grade B]</option>
+                        <option value="24">Brute Shadow Shield [Grade B]</option>
+                        <option value="25">Demi-Human Shadow Shield [Grade B]</option>
+                        <option value="26">Demon Shadow Shield [Grade B]</option>
+                        <option value="27">Dragon Shadow Shield [Grade B]</option>
+                        <option value="28">Fish Shadow Shield [Grade B]</option>
+                        <option value="29">Formless Shadow Shield [Grade B]</option>
+                        <option value="30">Insect Shadow Shield [Grade B]</option>
+                        <option value="31">Plant Shadow Shield [Grade B]</option>
+                        <option value="32">Undead Race Shadow Shield [Grade B]</option>
+                        <option value="33">Angel Shadow Shield [Grade A]</option>
+                        <option value="34">Brute Shadow Shield [Grade A]</option>
+                        <option value="35">Demi-Human Shadow Shield [Grade A]</option>
+                        <option value="36">Demon Shadow Shield [Grade A]</option>
+                        <option value="37">Dragon Shadow Shield [Grade A]</option>
+                        <option value="38">Fish Shadow Shield [Grade A]</option>
+                        <option value="39">Formless Shadow Shield [Grade A]</option>
+                        <option value="40">Insect Shadow Shield [Grade A]</option>
+                        <option value="41">Plant Shadow Shield [Grade A]</option>
+                        <option value="42">Undead Race Shadow Shield [Grade A]</option>
+                        <option value="43">All Race Shadow Shield [Grade S]</option>
+                      </select>
+                    </td>
                   </tr>
                   <tr>
                     <td>
@@ -2564,6 +2627,31 @@ Calc's theme: <select id="theme" onChange="themes()"><option value="0">Original<
                       <input type="text" inputmode="numeric" style="width: 30px; height: 13px;" maxlength="3"
                         onkeypress="return isNumeric(event)" onkeyup="RandOptUpdate(1)" name="SHOES_ROPT1" value="0"
                         class="center">
+                    </td>
+                    <td style="float: right; height: 10px;">
+                      <select name="A_shoes_shadow" style="width: 150px; background-color: rgb(255, 204, 136);"
+                        onchange="StAllCalc()|ClickSh_Item(this[this.selectedIndex].value)">
+                        <option value="44">(no shadow footgear)</option>
+                        <option value="45">CRIT Shadow Shoes</option>
+                        <option value="46">Critical Damage Shadow Shoes</option>
+                        <option value="47">HP Shadow Shoes</option>
+                        <option value="48">SP Shadow Shoes</option>
+                        <option value="49">Perfect Dodge Shadow Shoes</option>
+                        <option value="50">FLEE Shadow Shoes</option>
+                        <option value="51">HIT Shadow Shoes</option>
+                        <option value="52">Cast Time Shadow Shoes</option>
+                        <option value="53">Cast Delay Shadow Shoes</option>
+                        <option value="54">DEF Shadow Shoes</option>
+                        <option value="55">MDEF Shadow Shoes</option>
+                        <option value="56">Heal Power Shadow Shoes</option>
+                        <option value="57">LUK Shadow Shoes</option>
+                        <option value="58">AGI Shadow Shoes</option>
+                        <option value="59">VIT Shadow Shoes</option>
+                        <option value="60">DEF Pierce Shadow Shoes</option>
+                        <option value="61">MDEF Pierce Shadow Shoes</option>
+                        <option value="62">Heal Shadow Shoes</option>
+                        <option value="63">Teleport Shadow Shoes</option>
+                      </select>
                     </td>
                   </tr>
                   <tr>
@@ -4137,6 +4225,10 @@ Calc's theme: <select id="theme" onChange="themes()"><option value="0">Original<
             <tr>
               <td id="nm054" class="right">Player's Dodge Ratio</td>
               <td id="A_DodgeRatio"><span id="BattleFLEE">21.86</span>%</td>
+            </tr>
+            <tr>
+              <td id="nm067" class="right">Additional Dodge Ratio</td>
+              <td id="A_AddDodgeRatio"><span id="BattleDODGE">0</span>%</td>
             </tr>
             <tr>
               <td id="nm075" class="right">Enemy Attack Element</td>
