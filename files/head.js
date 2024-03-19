@@ -1322,11 +1322,12 @@ function BattleCalc999() {
             BattleCalc998()
         } else if (752 == n_A_ActiveSkill) { // reverberation
             n_PerHIT_DMG = 0,
-            n_rangedAtk = 1,
-            n_A_Weapon_element = 0,
+            n_rangedAtk = 1;
+            n_A_Weapon_element = m_Arrow[n_A_Arrow][1],
+            1 * c.A_Weapon_element.value != 0 && (n_A_Weapon_element = 1 * c.A_Weapon_element.value),
             wCast = 1.5 * n_A_CAST,
             n_Delay[2] = 2,
-            wMod = (200 + 65 * n_A_ActiveSkillLV) / 100,
+            wMod = (200 + 85 * n_A_ActiveSkillLV) / 100,
             wMod2 = 300 / 100;
             for (s = 0; s <= 2; s++)
                 w_DMG[s] = BK_n_A_DMG[s] * wMod,

@@ -1280,9 +1280,7 @@ function StAllCalc() {
     SkillSearch(357) && (v += Math.floor((n_A_BaseLV + n_A_LUK + n_A_DEX) / 10));
     var p = 0;
     0 == n_A_Buf6[19] && 0 == n_A_Buf6[20] && 0 == b && (2 != n_A_Buf2[6] || 10 == n_A_WeaponType || 17 <= n_A_WeaponType && n_A_WeaponType <= 21 ? 6 <= n_A_WeaponType && n_A_WeaponType <= 8 && (1 == n_A_Buf2[6] ? (p = 25,
-        b = 1) : 3 == n_A_Buf2[6] && (p = 30,
-            b = 1)) : (p = 25,
-                b = 1));
+        b = 1) : 3 == n_A_Buf2[6] && (p = 30, b = 1)) : (p = 25, b = 1));
     var m = 0;
     if (n_A_Buf3[1] && (0 == b || p) && (10 == n_A_WeaponType || 17 <= n_A_WeaponType && n_A_WeaponType <= 21 || (m += 5 + n_A_Buf3[1] + Math.floor(n_A_Buf3[31] / 2) + Math.floor(n_A_Buf3[21] / 10))),
         SkillSearch(361) && n_A_JobLV >= 50 ? (10 == SRV ? M += Math.max(p, m) + 3 * SkillSearch(361) + v : M += Math.max(p, m, 3 * SkillSearch(361)) + v,
@@ -1291,7 +1289,7 @@ function StAllCalc() {
         EquipNumSearch(1003) & EquipNumSearch(442) && (M += n_A_Weapon_refine / 2),
         1 * c.server.value < 50)
         1 == n_Nitou ? 0 == n_A_WeaponType && 0 != n_A_Weapon2Type ? WD = 50 * m_JobASPD[n_A_JOB][n_A_Weapon2Type] : WD = 35 * (m_JobASPD[n_A_JOB][n_A_WeaponType] + m_JobASPD[n_A_JOB][n_A_Weapon2Type]) : WD = 50 * m_JobASPD[n_A_JOB][n_A_WeaponType],
-            n_A_ASPD = 200 - (WD - (Math.round(WD * n_A_AGI / 25) + Math.round(WD * n_A_DEX / 100)) / 10) * (1 - M / 100);
+            n_A_ASPD = (2000 - Math.floor(((WD - (Math.round(WD * n_A_AGI / 25) + Math.round(WD * n_A_DEX / 100)) / 10) * (1 - M / 100))*10))/10;
     else {
         if (n_A_ASPD = 0,
             jobASPD = m_JobASPD_R[n_A_JOB][n_A_WeaponType],
@@ -1706,6 +1704,31 @@ function StPlusCalc() {
     1078 != n_A_Equip[1] && 1079 != n_A_Equip[1] || (A += n_A_Weapon2_refine,
         1078 == n_A_Equip[1] && n_A_Weapon2_refine >= 9 && (A += 5),
         1079 == n_A_Equip[1] && n_A_Weapon2_refine >= 10 && (A += 3)),
+    n_A_Weapon_refine > 4 && 1851 == n_A_Equip[0] && (l += n_A_Weapon_refine - 4),
+    1905 == n_A_Equip[0] && SU_DEX < 50 && (l += Math.floor(SU_INT/2), l -= SU_DEX),
+    1905 == n_A_Equip[0] && SU_DEX >= 50 && (A += 4, l += 3),
+    1 != n_A_JobClass() && 2 != n_A_JobClass() && 6 != n_A_JobClass() && 41 != n_A_JOB && 42 != n_A_JOB || (a += 1 * EquipNumSearch(1670)),
+    3 != n_A_JobClass() && 5 != n_A_JobClass() && 43 != n_A_JOB && 44 != n_A_JOB || (A += 1 * EquipNumSearch(1670)),
+    4 != n_A_JobClass() && 45 != n_A_JOB || (l += 1 * EquipNumSearch(1670)),
+    1825 == n_A_Equip[6] && (4 == n_A_JobClass() || 45 == n_A_JOB) && (l += 2),
+    n_A_HEAD_REFINE >= 7 && 1291 == n_A_Equip[2] && (l += 1),
+    n_A_HEAD_REFINE >= 7 && 1292 == n_A_Equip[2] && (l += 1),
+    n_A_HEAD_REFINE >= 7 && 1293 == n_A_Equip[2] && (l += 1),
+    n_A_SHOES_REFINE >= 9 && 662 == n_A_card[13] && (l -= 3),
+    1956 == n_A_Equip[0] && 28 == n_A_JOB && (t += 3, l += 3),
+    1975 == n_A_Equip[7] && (5 == n_A_JobClass() || 9 == n_A_JOB || 23 == n_A_JOB || 43 == n_A_JOB) && (l -= 1),
+    n_A_HEAD_REFINE >= 8 && 1288 == n_A_Equip[2] && (e += 2),
+    1847 == n_A_Equip[0] && (e += Math.floor(SU_VIT / 20)),
+    r = 0
+    SkillSearch(42) && (r = SkillSearch(42)),
+    SkillSearch(511) && (r = SkillSearch(511)),
+    (r > 0) ? (r += 102,
+        l = Math.floor((n_A_DEX + l) * r / 100 - n_A_DEX),
+        e = Math.floor((n_A_AGI + e) * r / 100 - n_A_AGI)) : 
+    TimeItemNumSearch(31) ? (l = Math.floor(104 * (n_A_DEX + l) / 100) - n_A_DEX,
+        e = Math.floor(104 * (n_A_AGI + e) / 100) - n_A_AGI) : 
+    (n_A_Buf7[34] || TimeItemNumSearch(4)) && (l = Math.floor(103 * (n_A_DEX + l) / 100) - n_A_DEX,
+        e = Math.floor(103 * (n_A_AGI + e) / 100) - n_A_AGI),
     wSPCall = StPlusCard(7),
     a += StPlusCard(1) + wSPCall,
     e += StPlusCard(2) + wSPCall,
@@ -1715,7 +1738,6 @@ function StPlusCalc() {
     o += StPlusCard(6) + wSPCall,
     3 == n_A_JobClass() && (A += CardNumSearch(383)),
     4 == n_A_JobClass() && 540 == n_A_card[8] && (l += Math.floor(n_A_HEAD_REFINE / 3)),
-    1825 == n_A_Equip[6] && (4 == n_A_JobClass() || 45 == n_A_JOB) && (l += 2),
     1912 == n_A_Equip[0] && (a += n_A_Weapon_refine),
     180 == n_A_card[8] && (a += n_A_HEAD_REFINE),
     582 == n_A_card[8] && (a += Math.floor(n_A_HEAD_REFINE/3))
@@ -1723,12 +1745,6 @@ function StPlusCalc() {
     198 == n_A_card[11] && (t += n_A_BODY_REFINE),
     402 == n_A_card[12] && (o += n_A_SHOULDER_REFINE),
     406 == n_A_card[13] && (e += n_A_SHOES_REFINE),
-    n_A_Weapon_refine > 4 && 1851 == n_A_Equip[0] && (l += n_A_Weapon_refine - 4),
-    1905 == n_A_Equip[0] && SU_DEX < 50 && (l += Math.floor(SU_INT/2), l -= SU_DEX),
-    1905 == n_A_Equip[0] && SU_DEX >= 50 && (A += 4, l += 3),
-    1 != n_A_JobClass() && 2 != n_A_JobClass() && 6 != n_A_JobClass() && 41 != n_A_JOB && 42 != n_A_JOB || (a += 1 * EquipNumSearch(1670)),
-    3 != n_A_JobClass() && 5 != n_A_JobClass() && 43 != n_A_JOB && 44 != n_A_JOB || (A += 1 * EquipNumSearch(1670)),
-    4 != n_A_JobClass() && 45 != n_A_JOB || (l += 1 * EquipNumSearch(1670)),
     n_A_HEAD_REFINE >= 7 && 1272 == n_A_Equip[2] && (t += 1),
     n_A_HEAD_REFINE >= 7 && 1273 == n_A_Equip[2] && (t += 1),
     SU_VIT >= 90 && 1945 == n_A_Equip[8] && (t += 1),
@@ -1743,11 +1759,6 @@ function StPlusCalc() {
     n_A_HEAD_REFINE >= 7 && 1281 == n_A_Equip[2] && (n_tok[64] += 5),
     n_A_HEAD_REFINE >= 7 && 1477 == n_A_Equip[2] && (n_tok[64] += 5),
     n_A_HEAD_REFINE >= 7 && 1478 == n_A_Equip[2] && (n_tok[64] += 5),
-    n_A_HEAD_REFINE >= 8 && 1288 == n_A_Equip[2] && (e += 2),
-    n_A_HEAD_REFINE >= 7 && 1291 == n_A_Equip[2] && (l += 1),
-    n_A_HEAD_REFINE >= 7 && 1292 == n_A_Equip[2] && (l += 1),
-    n_A_HEAD_REFINE >= 7 && 1293 == n_A_Equip[2] && (l += 1),
-    n_A_SHOES_REFINE >= 9 && 662 == n_A_card[13] && (l -= 3),
     n_A_HEAD_REFINE >= 7 && 1486 == n_A_Equip[2] && (n_tok[63] += 7),
     n_A_HEAD_REFINE >= 7 && 1487 == n_A_Equip[2] && (t += 2),
     n_A_HEAD_REFINE >= 7 && 1294 == n_A_Equip[2] && (n_tok[62] += 5),
@@ -1761,12 +1772,9 @@ function StPlusCalc() {
     196 == n_A_card[11] && (A += Math.floor(SU_STR / 18)),
     197 == n_A_card[11] && (l += Math.floor(SU_VIT / 18)),
     1846 == n_A_Equip[0] && (A += Math.floor(SU_VIT / 20)),
-    1847 == n_A_Equip[0] && (e += Math.floor(SU_VIT / 20)),
     98 == n_A_card[14] && CardNumSearch(273) && (a += 3),
     98 == n_A_card[15] && CardNumSearch(273) && (a += 3),
     98 == n_A_card[14] && 98 == n_A_card[15] && 1 == CardNumSearch(273) && (a -= 3),
-    1956 == n_A_Equip[0] && 28 == n_A_JOB && (t += 3, l += 3),
-    1975 == n_A_Equip[7] && (5 == n_A_JobClass() || 9 == n_A_JOB || 23 == n_A_JOB || 43 == n_A_JOB) && (l -= 1),
     872 == n_A_Equip[2] && (n_tok[77] += n_A_HEAD_REFINE),
     2098 == n_A_Equip[7] && (n_tok[371] -= n_A_SHOULDER_REFINE),
     n_A_HEAD_REFINE >= 7 && 565 == n_A_Equip[2] && (n_tok[80] += 1, n_tok[99] += 1),
@@ -1777,16 +1785,6 @@ function StPlusCalc() {
     1825 == n_A_Equip[6] && (1 == n_A_JobClass() || 2 == n_A_JobClass() || 6 == n_A_JobClass() || 41 == n_A_JOB || 42 == n_A_JOB) && (a += 2),
     1687 == n_A_Equip[2] && (1 != n_A_JobClass() && 2 != n_A_JobClass() && 6 != n_A_JobClass() || (e += 2, t += 2, n_tok[60] += Math.floor(n_A_JobLV / 14), n_tok[61] += Math.floor(n_A_JobLV / 14)), 
     3 != n_A_JobClass() && 4 != n_A_JobClass() && 5 != n_A_JobClass() || (A += 2, l += 2, n_tok[60] += Math.floor(n_A_JobLV / 14), n_tok[61] += Math.floor(n_A_JobLV / 14))),
-    r = 0
-    SkillSearch(42) && (r = SkillSearch(42)),
-    SkillSearch(511) && (r = SkillSearch(511)),
-    (r > 0) ? (r += 102,
-        l = Math.floor((n_A_DEX + l) * r / 100) - n_A_DEX,
-        e = Math.floor((n_A_AGI + e) * r / 100) - n_A_AGI) : 
-    TimeItemNumSearch(31) ? (l = Math.floor(104 * (n_A_DEX + l) / 100) - n_A_DEX,
-        e = Math.floor(104 * (n_A_AGI + e) / 100) - n_A_AGI) : 
-    (n_A_Buf7[34] || TimeItemNumSearch(4)) && (l = Math.floor(103 * (n_A_DEX + l) / 100) - n_A_DEX,
-        e = Math.floor(103 * (n_A_AGI + e) / 100) - n_A_AGI),
     -a > n_A_STR && (a = -n_A_STR),
     -e > n_A_AGI && (e = -n_A_AGI),
     -t > n_A_VIT && (t = -n_A_VIT),
