@@ -2444,47 +2444,12 @@ function BattleMagicCalc(e) {
     46 != n_A_ActiveSkill && 47 != n_A_ActiveSkill && 277 != n_A_ActiveSkill || 5 == n_A_JobClass() && (n += 20 * CardNumSearch(474)),
     132 != n_A_ActiveSkill && 133 != n_A_ActiveSkill || EquipNumSearch(1146) && (n += 15 + n_A_HEAD_REFINE),
     131 == n_A_ActiveSkill && EquipNumSearch(1169) && (n += n_A_Weapon_refine),
-    // kraken card
-    (54 == n_A_ActiveSkill || 541 == n_A_ActiveSkill || 55 == n_A_ActiveSkill || 128 == n_A_ActiveSkill || 130 == n_A_ActiveSkill || 131 == n_A_ActiveSkill || 410 == n_A_ActiveSkill || 412 == n_A_ActiveSkill) && CardNumSearch(583) && (n += 10),
-    (373 == n_A_ActiveSkill || 374 == n_A_ActiveSkill || 375 == n_A_ActiveSkill) && CardNumSearch(583) && n_A_Weapon_element == 1 && (n += 10),
-    // sedora pet n_A_Buf8[0] = petID
-    (54 == n_A_ActiveSkill || 541 == n_A_ActiveSkill || 55 == n_A_ActiveSkill || 128 == n_A_ActiveSkill || 130 == n_A_ActiveSkill || 131 == n_A_ActiveSkill || 410 == n_A_ActiveSkill || 412 == n_A_ActiveSkill) && 92 == n_A_Buf8[0] && (n += 5),
-    (373 == n_A_ActiveSkill || 374 == n_A_ActiveSkill || 375 == n_A_ActiveSkill) && 92 == n_A_Buf8[0] && n_A_Weapon_element == 1 && (n += 5),
-    // gloom pet - esma dmg increase
-    (373 == n_A_ActiveSkill || 374 == n_A_ActiveSkill || 375 == n_A_ActiveSkill) && 94 == n_A_Buf8[0] && (n_A_Weapon_element == 3 || n_A_Weapon_element == 8) && (n += 7),
-    // mavka card
-    (407 == n_A_ActiveSkill || 408 == n_A_ActiveSkill || 409 == n_A_ActiveSkill) && 44 == n_A_JOB && (n += 7*CardNumSearch(597)),
-    // arc elder card
-    (132 == n_A_ActiveSkill || 133 == n_A_ActiveSkill || 409 == n_A_ActiveSkill) && CardNumSearch(652) && (n += n_A_SHOULDER_REFINE),
-    (373 == n_A_ActiveSkill || 374 == n_A_ActiveSkill || 375 == n_A_ActiveSkill) && CardNumSearch(652) && (n_A_Weapon_element == 2) && (n += n_A_SHOULDER_REFINE),
-    // royal clergy card
-    (410 == n_A_ActiveSkill || 412 == n_A_ActiveSkill || 413 == n_A_ActiveSkill || 414 == n_A_ActiveSkill || 414 == n_A_ActiveSkill) && 44 == n_A_JOB && (n += 7*CardNumSearch(629)),
-    // warden kades card - esma dmg increase
-    n_A_WeaponLV >= 3 && (373 == n_A_ActiveSkill || 374 == n_A_ActiveSkill || 375 == n_A_ActiveSkill) && (n_A_Weapon_element == 0 || n_A_Weapon_element == 6 || n_A_Weapon_element == 7) && (n += 6*CardNumSearch(643)),
-    // warden kades card
-    n_A_WeaponLV >= 3 && (37 == n_A_ActiveSkill || 387 == n_A_ActiveSkill || 102 == n_A_ActiveSkill || 104 == n_A_ActiveSkill || 162 == n_A_ActiveSkill || 312 == n_A_ActiveSkill || 474 == n_A_ActiveSkill) && (n += 6*CardNumSearch(643)),
     // adventurers spirit
     375 == n_A_ActiveSkill && n_A_SHOULDER_REFINE >= 7 && 1835 == n_A_Equip[7] && (n += 5),
     // exquisite yellow foxtail
     (126 == n_A_ActiveSkill || 127 == n_A_ActiveSkill) && (1873 == n_A_Equip[0] || 1874 == n_A_Equip[0]) && (n += n_A_Weapon_refine),
     // royal alchemy staff + alchemy glove
     (51 == n_A_ActiveSkill || 540 == n_A_ActiveSkill || 54 == n_A_ActiveSkill || 541 == n_A_ActiveSkill || 56 == n_A_ActiveSkill || 542 == n_A_ActiveSkill || 132 == n_A_ActiveSkill) && 1983 == n_A_Equip[0] && (1982 == n_A_Equip[9] || 1982 == n_A_Equip[10]) && (n += 2 * n_A_Weapon_refine),
-    // alchemy glove - fire
-    (51 == n_A_ActiveSkill || 540 == n_A_ActiveSkill || 52 == n_A_ActiveSkill || 53 == n_A_ActiveSkill || 122 == n_A_ActiveSkill || 124 == n_A_ActiveSkill || 125 == n_A_ActiveSkill || 407 == n_A_ActiveSkill || 408 == n_A_ActiveSkill || 409 == n_A_ActiveSkill) && (1982 == n_A_Equip[9] || 1982 == n_A_Equip[10]) && (n += 5),
-    // alchemy glove - water
-    (54 == n_A_ActiveSkill || 541 == n_A_ActiveSkill || 128 == n_A_ActiveSkill || 130 == n_A_ActiveSkill || 131 == n_A_ActiveSkill || 320 == n_A_ActiveSkill || 410 == n_A_ActiveSkill || 412 == n_A_ActiveSkill) && (1982 == n_A_Equip[9] || 1982 == n_A_Equip[10]) && (n += 7),
-    // alchemy glove - wind
-    (56 == n_A_ActiveSkill || 542 == n_A_ActiveSkill || 57 == n_A_ActiveSkill || 126 == n_A_ActiveSkill || 127 == n_A_ActiveSkill || 413 == n_A_ActiveSkill || 414 == n_A_ActiveSkill || 415 == n_A_ActiveSkill) && (1982 == n_A_Equip[9] || 1982 == n_A_Equip[10]) && (n += 7),
-    // alchemy glove - earth
-    (132 == n_A_ActiveSkill || 133 == n_A_ActiveSkill || 319 == n_A_ActiveSkill) && (1982 == n_A_Equip[9] || 1982 == n_A_Equip[10]) && (n += 7),
-    // alchemy glove - ghost
-    (46 == n_A_ActiveSkill || 47 == n_A_ActiveSkill || 277 == n_A_ActiveSkill || 307 == n_A_ActiveSkill || 423 == n_A_ActiveSkill) && (1982 == n_A_Equip[9] || 1982 == n_A_Equip[10]) && (n += 7),
-    // alchemy glove - holy
-    (37 == n_A_ActiveSkill || 387 == n_A_ActiveSkill || 102 == n_A_ActiveSkill || 104 == n_A_ActiveSkill || 162 == n_A_ActiveSkill) && (1982 == n_A_Equip[9] || 1982 == n_A_Equip[10]) && (n += 7),
-    // alchemy glove - shadow
-    (312 == n_A_ActiveSkill || 474 == n_A_ActiveSkill) && (1982 == n_A_Equip[9] || 1982 == n_A_Equip[10]) && (n += 7),
-    // alchemy glove - esma
-    (373 == n_A_ActiveSkill || 374 == n_A_ActiveSkill || 375 == n_A_ActiveSkill) && (n_A_Weapon_element == 1 || n_A_Weapon_element == 2 || n_A_Weapon_element == 3 || n_A_Weapon_element == 4 || n_A_Weapon_element == 6 || n_A_Weapon_element == 7 || n_A_Weapon_element == 8) && (1982 == n_A_Equip[9] || 1982 == n_A_Equip[10]) && (n += 7),
     // spectral manteau
     (47 == n_A_ActiveSkill || 312 == n_A_ActiveSkill) && 1987 == n_A_Equip[7] && (n += 5 * n_A_SHOULDER_REFINE),
     540 == n_A_ActiveSkill && (n += 25 * CardNumSearch(493)),
@@ -2509,13 +2474,51 @@ function BattleMagicCalc(e) {
         wBMC2 = SRV < 50 ? Math.floor(wBMC2 * Math.max(0, element[n_B[3]][n_A_Weapon_element])) : Math.floor(wBMC2 * Math.max(0, element_R[n_B[3]][n_A_Weapon_element])),
         SRV ? n_B[3] > 89 && n_B[3] < 95 && 47 == n_A_ActiveSkill && (wBMC2 = Math.floor(wBMC2 * (1 + .05 * n_A_ActiveSkillLV))) : 90 <= n_B[3] && 47 == n_A_ActiveSkill && (wBMC2 = Math.floor(wBMC2 * (1 + .05 * n_A_ActiveSkillLV)));
     // magic damage modifiers
-    var n = n_tok[170 + n_B[2]]; // MAGIC DAMAGE RACE MODIFIER
+    // magic damage element % modifier
+    var n = 0;
+    // kraken card
+    (54 == n_A_ActiveSkill || 541 == n_A_ActiveSkill || 55 == n_A_ActiveSkill || 128 == n_A_ActiveSkill || 130 == n_A_ActiveSkill || 131 == n_A_ActiveSkill || 410 == n_A_ActiveSkill || 412 == n_A_ActiveSkill) && CardNumSearch(583) && (n += 10),
+    (373 == n_A_ActiveSkill || 374 == n_A_ActiveSkill || 375 == n_A_ActiveSkill) && CardNumSearch(583) && n_A_Weapon_element == 1 && (n += 10),
+    // sedora pet n_A_Buf8[0] = petID
+    (54 == n_A_ActiveSkill || 541 == n_A_ActiveSkill || 55 == n_A_ActiveSkill || 128 == n_A_ActiveSkill || 130 == n_A_ActiveSkill || 131 == n_A_ActiveSkill || 410 == n_A_ActiveSkill || 412 == n_A_ActiveSkill) && 92 == n_A_Buf8[0] && (n += 5),
+    (373 == n_A_ActiveSkill || 374 == n_A_ActiveSkill || 375 == n_A_ActiveSkill) && 92 == n_A_Buf8[0] && n_A_Weapon_element == 1 && (n += 5),
+    // gloom pet - esma dmg increase
+    (373 == n_A_ActiveSkill || 374 == n_A_ActiveSkill || 375 == n_A_ActiveSkill) && 94 == n_A_Buf8[0] && (n_A_Weapon_element == 3 || n_A_Weapon_element == 8) && (n += 7),
+    // mavka card
+    (407 == n_A_ActiveSkill || 408 == n_A_ActiveSkill || 409 == n_A_ActiveSkill) && 44 == n_A_JOB && (n += 7*CardNumSearch(597)),
+    // arc elder card
+    (132 == n_A_ActiveSkill || 133 == n_A_ActiveSkill || 409 == n_A_ActiveSkill) && CardNumSearch(652) && (n += n_A_SHOULDER_REFINE),
+    (373 == n_A_ActiveSkill || 374 == n_A_ActiveSkill || 375 == n_A_ActiveSkill) && CardNumSearch(652) && (n_A_Weapon_element == 2) && (n += n_A_SHOULDER_REFINE),
+    // royal clergy card
+    (410 == n_A_ActiveSkill || 412 == n_A_ActiveSkill || 413 == n_A_ActiveSkill || 414 == n_A_ActiveSkill || 414 == n_A_ActiveSkill) && 44 == n_A_JOB && (n += 7*CardNumSearch(629)),
+    // warden kades card - esma dmg increase
+    n_A_WeaponLV >= 3 && (373 == n_A_ActiveSkill || 374 == n_A_ActiveSkill || 375 == n_A_ActiveSkill) && (n_A_Weapon_element == 0 || n_A_Weapon_element == 6 || n_A_Weapon_element == 7) && (n += 6*CardNumSearch(643)),
+    // warden kades card
+    n_A_WeaponLV >= 3 && (37 == n_A_ActiveSkill || 387 == n_A_ActiveSkill || 102 == n_A_ActiveSkill || 104 == n_A_ActiveSkill || 162 == n_A_ActiveSkill || 312 == n_A_ActiveSkill || 474 == n_A_ActiveSkill) && (n += 6*CardNumSearch(643)),
+    // alchemy glove - fire
+    (51 == n_A_ActiveSkill || 540 == n_A_ActiveSkill || 52 == n_A_ActiveSkill || 53 == n_A_ActiveSkill || 122 == n_A_ActiveSkill || 124 == n_A_ActiveSkill || 125 == n_A_ActiveSkill || 407 == n_A_ActiveSkill || 408 == n_A_ActiveSkill || 409 == n_A_ActiveSkill) && (1982 == n_A_Equip[9] || 1982 == n_A_Equip[10]) && (n += 5),
+    // alchemy glove - water
+    (54 == n_A_ActiveSkill || 541 == n_A_ActiveSkill || 128 == n_A_ActiveSkill || 130 == n_A_ActiveSkill || 131 == n_A_ActiveSkill || 320 == n_A_ActiveSkill || 410 == n_A_ActiveSkill || 412 == n_A_ActiveSkill) && (1982 == n_A_Equip[9] || 1982 == n_A_Equip[10]) && (n += 5),
+    // alchemy glove - wind
+    (56 == n_A_ActiveSkill || 542 == n_A_ActiveSkill || 57 == n_A_ActiveSkill || 126 == n_A_ActiveSkill || 127 == n_A_ActiveSkill || 413 == n_A_ActiveSkill || 414 == n_A_ActiveSkill || 415 == n_A_ActiveSkill) && (1982 == n_A_Equip[9] || 1982 == n_A_Equip[10]) && (n += 5),
+    // alchemy glove - earth
+    (132 == n_A_ActiveSkill || 133 == n_A_ActiveSkill || 319 == n_A_ActiveSkill) && (1982 == n_A_Equip[9] || 1982 == n_A_Equip[10]) && (n += 5),
+    // alchemy glove - ghost
+    (46 == n_A_ActiveSkill || 47 == n_A_ActiveSkill || 277 == n_A_ActiveSkill || 307 == n_A_ActiveSkill || 423 == n_A_ActiveSkill) && (1982 == n_A_Equip[9] || 1982 == n_A_Equip[10]) && (n += 5),
+    // alchemy glove - holy
+    (37 == n_A_ActiveSkill || 387 == n_A_ActiveSkill || 102 == n_A_ActiveSkill || 104 == n_A_ActiveSkill || 162 == n_A_ActiveSkill) && (1982 == n_A_Equip[9] || 1982 == n_A_Equip[10]) && (n += 5),
+    // alchemy glove - shadow
+    (312 == n_A_ActiveSkill || 474 == n_A_ActiveSkill) && (1982 == n_A_Equip[9] || 1982 == n_A_Equip[10]) && (n += 5),
+    // alchemy glove - esma
+    (373 == n_A_ActiveSkill || 374 == n_A_ActiveSkill || 375 == n_A_ActiveSkill) && (n_A_Weapon_element == 1 || n_A_Weapon_element == 2 || n_A_Weapon_element == 3 || n_A_Weapon_element == 4 || n_A_Weapon_element == 6 || n_A_Weapon_element == 7 || n_A_Weapon_element == 8) && (1982 == n_A_Equip[9] || 1982 == n_A_Equip[10]) && (n += 5);
+    var nRace = n_tok[170 + n_B[2]]; // MAGIC DAMAGE RACE MODIFIER
     var nEle = n_tok[340 + Math.floor(n_B[3] / 10)]; // MAGIC DAMAGE ELEMENT MODIFIER
     var nSize = n_tok[356 + n_B[4]];
     var nBoss = n_B[19] ? n_tok[353] : 0; // MAGIC DAMAGE BOSS MODIFIER
     var nAll = n_tok[354];
-    9 == n_B[2] && SkillSearch(234) && (n += 2 * SkillSearch(234)), // dragonology
+    9 == n_B[2] && SkillSearch(234) && (nRace += 2 * SkillSearch(234)), // dragonology
     wBMC2 = wBMC2 * (100 + n) / 100,
+    wBMC2 = wBMC2 * (100 + nRace) / 100,
     wBMC2 = wBMC2 * (100 + nEle) / 100,
     wBMC2 = wBMC2 * (100 + nSize) / 100,
     wBMC2 = wBMC2 * (100 + nBoss) / 100,
