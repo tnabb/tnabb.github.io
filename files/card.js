@@ -467,7 +467,7 @@ m_Card = [
 	, [463, 1, "Atroce", "When performing an ATK based attack, 0.5% chance you gain ASPD +100% for 10 seconds.", 17, 25, 0]
 	, [464, 1, "Sword Guardian", "When equipped with a [Sword] or [Two-Handed Sword] class weapon: CRIT +5, HIT +5, and [Bowling Bash] skill damage +25%", 0]
 	, [465, 1, "Bow Guardian", "When equipped with a [Bow] class weapon: CRIT +5, HIT +5, and [Arrow Shower] skill damage +50%", 0]
-	, [466, 1, "Necromancer", "When equipped with a [Rod] class weapon: INT +1 and 2% MDEF bypassing.", 0]
+	, [466, 1, "Necromancer", "When equipped with a [One-handed Rod] class weapon: INT +1 and 2% MDEF bypassing.", 0]
 	, [467, 3, "Hodremlin", "When receiving ATK based damage, 0.3% chance you gain Perfect Dodge +30 for 10 seconds.", 190, 15, 191, 15, 192, 15, 0]
 	, [468, 3, "Seeker", 0, 220, 30, 159, 30, 19, 10, 0]
 	, [469, 3, "Muscipular", 0, 221, 89, 221, 90, 0]
@@ -1344,7 +1344,7 @@ function Notes_Setumei(nC1, nC2){
 	if(nC1 == 3)
 		NotesStr += '<tr><td class="left">• Teleports when hit by any AOE skill</td></tr>'
 	if (nC1 == 4)
-		NotesStr += '<tr><td class="left">• Takes ' + nC2 + '% reduced damage <b>*NOT IMPLEMENTED*</b></td></tr>'
+		NotesStr += '<tr><td class="left">• Takes ' + nC2 + '% reduced damage</td></tr>'
 	if (5000 <= nC1 && nC1 <= 6999)
 		NotesStr += '<tr><td class="left">• Receives -' + nC2 + '% damage from [' + skillName(m_Skill[nC1 - 5000][0], SRV) + ']</td></tr>'
 	return NotesStr;

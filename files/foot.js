@@ -1615,7 +1615,7 @@ function StAllCalc() {
         n_A_HEAD_REFINE >= 7 && 1832 == n_A_Equip[2] && (n_tok[295] += 12), 
         n_A_HEAD_REFINE >= 9 && CardNumSearch(630) && (n_tok[295] += 5),
         SU_INT >= 90 && 1946 == n_A_Equip[8] && (n_tok[295] += 10),
-        9 == n_A_WeaponType && (n_tok[295] += 2 * CardNumSearch(466)),
+        9 == n_A_WeaponType && 195 != m_Item[n_A_Equip[0]][11] && (n_tok[295] += 2 * CardNumSearch(466)),
         1905 == n_A_Equip[0] && SU_DEX >= 50 && (n_tok[295] += 15),
         1 == n_B[19] && (n_tok[297] += 30 * CardNumSearch(425)),
         936 == n_A_Equip[0] && (n_tok[295] += 1 * n_A_Weapon_refine),
@@ -1678,7 +1678,7 @@ function StPlusCalc() {
     e += StPlusCalc2(212),
     l += StPlusCalc2(215),
     1636 != n_A_Equip[6] && 1650 != n_A_Equip[6] && 1657 != n_A_Equip[6] || SU_INT >= 99 && (A += 1),
-    9 == n_A_WeaponType && (A += CardNumSearch(466)),
+    9 == n_A_WeaponType && 195 != m_Item[n_A_Equip[0]][11] && (A += CardNumSearch(466)), 
     (9 == n_A_JOB || 23 == n_A_JOB) && 513 == n_A_card[10] && (A += 1),
     // witchs robe
     1825 == n_A_Equip[6] && (3 == n_A_JobClass() || 5 == n_A_JobClass() || 43 == n_A_JOB || 44 == n_A_JOB || 20 == n_A_JOB) && (A += 2),
@@ -3396,13 +3396,13 @@ function EnemySort() {
             -1 != a[n] && (c.B_Enemy.options[e] = new Option(ESwork2[a[n]] + m_Monster[a[n]][1], a[n]),
                 e++)
     } else {
-        for (var a = new Array, n = 0; n <= EnemyNum; n++)
+        for (var a = new Array, n = 0; n <= EnemyNumSort; n++)
             a[n] = v_MonsterSort[n];
         a = SZ(a);
         var e = 0;
-        for (n = 0; n <= EnemyNum; n++)
-            -1 != a[n] && (c.B_Enemy.options[e] = new Option(m_Monster[a[n]][1], a[n]),
-                e++)
+        for (n = 0; n <= EnemyNumSort; n++)
+            -1 != a[n] && (c.B_Enemy.options[e] = new Option(m_Monster[a[n]][1], a[n]), e++)
+        
     }
 }
 function SZ(_) {

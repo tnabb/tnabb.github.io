@@ -5576,8 +5576,8 @@ function tPlusDamCut(e) {
         n_B_buf[1] && 1 == PvP && (e = Math.floor(2 * e / 3)),
         n_B_buf[7] && 2 != n_rangedAtk && (e -= Math.floor(20 * e * n_B_buf[7] / 100)),
         n_B_buf[8] && 2 == n_rangedAtk && (e -= Math.floor(20 * e * n_B_buf[8] / 100)),
-        5 == n_B[19] && (e = 1,
-            122 == n_A_ActiveSkill && (e = 0)),
+        5 == n_B[19] && (e = 1, 122 == n_A_ActiveSkill && (e = 0)), // assump
+        e = Math.floor(e * (100 - NotesCalc(n_B[0], 4)) / 100),
         e
 }
 function tPlusEnemyClick() {
