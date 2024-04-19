@@ -563,6 +563,7 @@ function StAllCalc() {
         (1956 == n_A_Equip[0] || 1956 == n_A_Equip[1]) && 22 == n_A_JOB && (M += 60 * EquipNumSearch(1956)),
         !SkillSearch(433) || 20 != n_A_WeaponType && 0 != n_A_WeaponType || (M += 20 + 10 * SkillSearch(433)),
         0 == n_A_Buf6[0] && n_A_Buf6[1] >= 1 && 3 == n_A_Bodyelement && (M += 10 * n_A_Buf6[1]),
+        SkillSearch(845) && (M += SkillSearch(845) * 10 + SkillSearch(416) * 10),
         M < 0 && SRV > 0 && (M = 0),
         n_A_ATK += M,
         SRV < 50 ? V_ATK = Math.floor(n_A_Weapon_ATK + n_A_Weapon2_ATK + n_A_ATK) : V_ATK = Math.floor(n_A_Weapon_ATK + n_A_WeaponLV_refineATK + n_A_Weapon2_ATK + n_A_Weapon2LV_refineATK),
@@ -583,8 +584,8 @@ function StAllCalc() {
         myInnerHtml("A_ATK2", Math.floor(wImp + V_ATK) + "+" + (n_A_WeaponLV_refineATK + n_A_Weapon2LV_refineATK), 0),
         SRV,
         myInnerHtml("A_RealATK", wImp + V_ATK + n_A_WeaponLV_refineATK + n_A_Weapon2LV_refineATK + n_A_WeaponLV_Minplus + "~" + (wImp + V_ATK + n_A_WeaponLV_refineATK + n_A_Weapon2LV_refineATK + n_A_WeaponLV_Maxplus), 0),
-        JobHP_A = new Array(0, 70, 50, 40, 50, 30, 40, 150, 110, 75, 85, 55, 90, 110, 85, 90, 75, 75, 75, 90, 0, 150, 110, 75, 85, 55, 90, 110, 85, 90, 75, 75, 75, 90, 0, 0, 0, 0, 0, 0, 0, 70, 90, 75, 75, 84),
-        JobHP_B = new Array(5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 7, 5, 6.5, 3, 3, 5, 5, 5, 5, 5, 5, 5, 5, 5, 7, 5, 6.5, 3, 3, 5, 5, 0, 0, 0, 0, 0, 0, 0, 5, 6.5, 5, 3, 3.5),
+        JobHP_A = new Array(0, 70, 50, 40, 50, 30, 40, 150, 110, 75, 85, 55, 90, 110, 85, 90, 75, 75, 75, 90, 0, 150, 110, 75, 85, 55, 90, 110, 85, 90, 75, 75, 75, 90, 0, 0, 0, 0, 0, 0, 0, 70, 90, 75, 75, 84, 84),
+        JobHP_B = new Array(5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 7, 5, 6.5, 3, 3, 5, 5, 5, 5, 5, 5, 5, 5, 5, 7, 5, 6.5, 3, 3, 5, 5, 0, 0, 0, 0, 0, 0, 0, 5, 6.5, 5, 3, 3.5, 3.5),
         wHPSL = 0,
         43 == n_A_JOB && n_A_BaseLV >= 70 && (n_A_BaseLV <= 79 ? wHPSL = 40 * (n_A_BaseLV - 70) : n_A_BaseLV <= 84 ? wHPSL = 50 * (n_A_BaseLV - 80) : n_A_BaseLV <= 89 ? wHPSL = 50 * (n_A_BaseLV - 80) - 10 : n_A_BaseLV <= 92 ? wHPSL = 50 * (n_A_BaseLV - 90) : n_A_BaseLV <= 97 ? wHPSL = 50 * (n_A_BaseLV - 90) - 10 : 98 == n_A_BaseLV ? wHPSL = 375 : wHPSL = 4),
         M = 0,
@@ -593,7 +594,7 @@ function StAllCalc() {
     n_A_MaxHP = Math.floor(JobHP_B[n_A_JOB] * n_A_BaseLV + 35 + M),
         44 == n_A_JOB && (NinHP = new Array(131, 137, 144, 151, 159, 167, 175, 184, 193, 202, 212, 222, 232, 243, 254, 265, 277, 289, 301, 316, 331, 346, 364, 382, 400, 420, 440, 460, 482, 504, 526, 548, 572, 596, 620, 646, 672, 698, 726, 754, 784, 814, 844, 876, 908, 940, 975, 1010, 1100, 1140, 1180, 1220, 1260, 1300, 1340, 1385, 1430, 1475, 1520, 1565, 1615, 1665, 1715, 1765, 1815, 1880, 1935, 1990, 2045, 2100, 2160, 2200, 2280, 2340, 2400, 2460, 2520, 2580, 2640, 2705, 2770, 2835, 2900, 2965, 3030, 3100, 3170, 3240, 3310, 3380, 3455, 3530, 3605, 3680, 3760, 3840, 3920, 4e3, 4080),
             n_A_MaxHP = NinHP[n_A_BaseLV - 1]),
-        45 == n_A_JOB && n_A_BaseLV >= 10 && (GunHP = new Array(202, 212, 222, 232, 243, 254, 265, 277, 289, 301, 316, 331, 346, 364, 382, 400, 420, 440, 460, 490, 520, 550, 580, 610, 650, 680, 710, 740, 770, 800, 830, 860, 890, 920, 950, 990, 1020, 1050, 1080, 1110, 1140, 1180, 1230, 1280, 1330, 1395, 1455, 1515, 1575, 1635, 1695, 1760, 1820, 1885, 1950, 2015, 2080, 2145, 2210, 2275, 2340, 2410, 2480, 2550, 2620, 2690, 2760, 2830, 2900, 2970, 3040, 3115, 3190, 3265, 3340, 3415, 3490, 3565, 3640, 3715, 3790, 3870, 3950, 4030, 4110, 4190, 4270, 4350, 4430, 4510),
+        45 == n_A_JobClass() && n_A_BaseLV >= 10 && (GunHP = new Array(202, 212, 222, 232, 243, 254, 265, 277, 289, 301, 316, 331, 346, 364, 382, 400, 420, 440, 460, 490, 520, 550, 580, 610, 650, 680, 710, 740, 770, 800, 830, 860, 890, 920, 950, 990, 1020, 1050, 1080, 1110, 1140, 1180, 1230, 1280, 1330, 1395, 1455, 1515, 1575, 1635, 1695, 1760, 1820, 1885, 1950, 2015, 2080, 2145, 2210, 2275, 2340, 2410, 2480, 2550, 2620, 2690, 2760, 2830, 2900, 2970, 3040, 3115, 3190, 3265, 3340, 3415, 3490, 3565, 3640, 3715, 3790, 3870, 3950, 4030, 4110, 4190, 4270, 4350, 4430, 4510),
             n_A_MaxHP = GunHP[n_A_BaseLV - 10]),
         20 == n_A_JOB && 99 == n_A_BaseLV && (n_A_MaxHP += 2e3),
         n_Reborn && (n_A_MaxHP = Math.floor(125 * n_A_MaxHP / 100));
@@ -660,12 +661,12 @@ function StAllCalc() {
     for (SkillSearch(258) && (n_A_MaxHP *= 3),
         n_A_MaxHP = Math.floor(n_A_MaxHP),
         n_A_MaxHP >= 100 ? n_A_MaxHP >= 1e4 ? myInnerHtml("A_MaxHP", " " + n_A_MaxHP, 0) : myInnerHtml("A_MaxHP", n_A_MaxHP, 0) : myInnerHtml("A_MaxHP", " " + n_A_MaxHP, 0),
-        JobSP_A = new Array(1, 2, 2, 5, 2, 6, 3, 3, 4, 8, 4, 9, 4, 4.7, 5, 4.7, 6, 6, 7, 4, 1, 3, 4, 8, 4, 9, 4, 4.7, 5, 4.7, 6, 6, 7, 4, 0, 0, 0, 0, 0, 0, 0, 2, 4.7, 9, 3.75, 3.75),
+        JobSP_A = new Array(1, 2, 2, 5, 2, 6, 3, 3, 4, 8, 4, 9, 4, 4.7, 5, 4.7, 6, 6, 7, 4, 1, 3, 4, 8, 4, 9, 4, 4.7, 5, 4.7, 6, 6, 7, 4, 0, 0, 0, 0, 0, 0, 0, 2, 4.7, 9, 3.75, 3.75, 3.75),
         wSPSL = 0,
         43 == n_A_JOB && n_A_BaseLV >= 70 && (n_A_BaseLV < 80 ? wSPSL = 4 * (n_A_BaseLV - 70) + 5 : n_A_BaseLV < 90 ? wSPSL = 4 * (n_A_BaseLV - 80) : n_A_BaseLV < 93 ? wSPSL = 4 * (n_A_BaseLV - 90) : n_A_BaseLV < 99 ? wSPSL = 4 * (n_A_BaseLV - 90) - 10 : wSPSL = 1),
         n_A_MaxSP = 10 + n_A_BaseLV * JobSP_A[n_A_JOB] - wSPSL,
         44 == n_A_JOB && (n_A_BaseLV <= 20 ? n_A_MaxSP = 11 + 3 * n_A_BaseLV : n_A_BaseLV <= 40 ? n_A_MaxSP = 71 + 4 * (n_A_BaseLV - 20) : n_A_BaseLV <= 60 ? n_A_MaxSP = 151 + 5 * (n_A_BaseLV - 40) : n_A_BaseLV <= 80 ? n_A_MaxSP = 251 + 6 * (n_A_BaseLV - 60) : n_A_MaxSP = 370 + 8 * (n_A_BaseLV - 80)),
-        45 == n_A_JOB && (n_A_BaseLV <= 25 ? n_A_MaxSP = 10 + 3 * n_A_BaseLV : n_A_BaseLV <= 35 ? n_A_MaxSP = 85 + 4 * (n_A_BaseLV - 25) : n_A_BaseLV <= 40 ? n_A_MaxSP = 126 + 3 * (n_A_BaseLV - 35) : n_A_BaseLV <= 50 ? n_A_MaxSP = 141 + 4 * (n_A_BaseLV - 40) : n_A_BaseLV <= 75 ? n_A_MaxSP = 181 + 5 * (n_A_BaseLV - 50) : n_A_BaseLV <= 78 ? n_A_MaxSP = 306 + 6 * (n_A_BaseLV - 75) : n_A_MaxSP = 330 + 6 * (n_A_BaseLV - 78)),
+        45 == n_A_JobClass() && (n_A_BaseLV <= 25 ? n_A_MaxSP = 10 + 3 * n_A_BaseLV : n_A_BaseLV <= 35 ? n_A_MaxSP = 85 + 4 * (n_A_BaseLV - 25) : n_A_BaseLV <= 40 ? n_A_MaxSP = 126 + 3 * (n_A_BaseLV - 35) : n_A_BaseLV <= 50 ? n_A_MaxSP = 141 + 4 * (n_A_BaseLV - 40) : n_A_BaseLV <= 75 ? n_A_MaxSP = 181 + 5 * (n_A_BaseLV - 50) : n_A_BaseLV <= 78 ? n_A_MaxSP = 306 + 6 * (n_A_BaseLV - 75) : n_A_MaxSP = 330 + 6 * (n_A_BaseLV - 78)),
         n_Reborn && (n_A_MaxSP = Math.floor(125 * n_A_MaxSP / 100)),
         1 * c.A_adopted.checked && (n_A_MaxSP = Math.floor(70 * n_A_MaxSP / 100)),
         n_A_MaxSP = Math.floor(n_A_MaxSP * (100 + n_A_INT) / 100),
@@ -1070,6 +1071,7 @@ function StAllCalc() {
         n_A_Buf3[5] && (n_A_CRI += 10 + n_A_Buf3[5] + Math.floor(n_A_Buf3[35] / 2) + Math.floor(n_A_Buf3[25] / 10)),
         11 == n_A_WeaponType && (n_A_CRI *= 2),
         n_A_CRI = Math.floor(Math.round(10 * n_A_CRI) / 10),
+        SkillSearch(846) && 20 == n_A_WeaponType && (n_A_CRI = 0),
         n_A_Buf6[9] && (n_A_CRI = 0),
         myInnerHtml("A_CRI", n_A_CRI, 0),
         n_A_CRITshield = 1 + .2 * n_A_LUK,
@@ -1254,6 +1256,7 @@ function StAllCalc() {
         n_A_HEAD_REFINE >= 7 && 1898 == n_A_Equip[2] && (M += 2),
         n_A_HEAD_REFINE >= 9 && 1898 == n_A_Equip[2] && (M += 2),
         1966 == n_A_Equip[0] && (M += 1 * n_A_Weapon_refine),
+        SkillSearch(846) && 20 == n_A_WeaponType && (M += 10),
         n_A_SHOULDER_REFINE >= 7 && SU_AGI >= 90 && 1472 == n_A_Equip[7] && (M += 8);
     var B = M;
     b = 0,
@@ -1337,7 +1340,7 @@ function StAllCalc() {
         SkillSearch(560) && (M += SkillSearch(555) / 10 * 4),
         1 == SkillSearch(815) && SkillSearch(816) > 0 && 1 == SkillSearch(806) && (M += 5),
         n_A_ASPD += M;
-        if(c.increase_aspdcap.checked){
+        if(c.increase_aspdcap.checked || (SkillSearch(846) && 20 == n_A_WeaponType)){
             n_A_ASPD > 193 && (n_A_ASPD = 193);
         }else{
             n_A_ASPD > 190 && (n_A_ASPD = 190);
@@ -1367,7 +1370,6 @@ function StAllCalc() {
         5 == n_A_JobClass() && CardNumSearch(454) && (n_tok[73] -= 15),
         18 != n_A_JOB && 32 != n_A_JOB || !CardNumSearch(460) || (n_tok[73] -= 15),
         177 == n_A_card[8] && (n_tok[73] -= n_A_HEAD_REFINE),
-        1956 == n_A_Equip[0] && 21 == n_A_JOB && 76 == n_A_ActiveSkill && (n_tok[73] -= 10*n_A_Weapon_refine),
         M += n_tok[73],
         0 != n_A_Buf3[2] && (SRV ? (M -= M / 100 * ((3 * n_A_Buf3[2] + n_A_Buf3[32] + Math.floor(n_A_Buf3[22] / 10)) / 100) * 100,
             nb_tok += (3 * n_A_Buf3[2] + n_A_Buf3[32] + Math.floor(n_A_Buf3[22] / 10)) / 100 * 100) : (M -= 3 * n_A_Buf3[2] + n_A_Buf3[32] + Math.floor(n_A_Buf3[22] / 10),
@@ -1379,10 +1381,10 @@ function StAllCalc() {
         0 != StPlusCalc2(7e3 + n_A_ActiveSkill) && (M -= StPlusCalc2(7e3 + n_A_ActiveSkill)),
         0 != StPlusCard(7e3 + n_A_ActiveSkill) && (M -= StPlusCard(7e3 + n_A_ActiveSkill)),
         321 != n_A_ActiveSkill && 197 != n_A_ActiveSkill || SkillSearch(195) && n_A_Weapon_refine >= 9 && EquipNumSearch(1097) && (M -= 100),
-        430 == n_A_ActiveSkill && n_A_Weapon_refine >= 9 && 1100 == n_A_Equip[0] && 0 == SRV && (M -= 25),
-        131 == n_A_ActiveSkill && n_A_Weapon_refine >= 10 && 1169 == n_A_Equip[0] && 0 == SRV && (M -= 8),
-        // jester hat
-        263 == n_A_ActiveSkill && 1837 == n_A_Equip[2] && 272 == n_A_Equip[4] && (n_tok[74] += 25),
+        430 == n_A_ActiveSkill && n_A_Weapon_refine >= 9 && 1100 == n_A_Equip[0] && (M -= 25),
+        131 == n_A_ActiveSkill && n_A_Weapon_refine >= 10 && 1169 == n_A_Equip[0] && (M -= 8),
+        1956 == n_A_Equip[0] && 21 == n_A_JOB && 76 == n_A_ActiveSkill && (M -= 10 * n_A_Weapon_refine), // save the king bb cast time reduction
+        1 == SkillSearch(851) && (849 == n_A_ActiveSkill || 848 == n_A_ActiveSkill) && (M -= 50),
         M < 0 && (M = 0),
         n_A_CAST *= M / 100,
         n_A_Buf2[10] && (n_A_CAST *= (100 - 15 * n_A_Buf2[10]) / 100),
@@ -1398,7 +1400,13 @@ function StAllCalc() {
         1839 == n_A_Equip[0] && n_A_Weapon_refine >= 7 && (n_tok[74] += 10),
         1843 == n_A_Equip[0] && n_A_Weapon_refine >= 7 && (n_tok[74] += 5),
         5 == n_A_JobClass() && (n_tok[74] += 5 * EquipNumSearch(1119)),
-        2091 == n_A_Equip[0] && 102 == n_A_ActiveSkill && (n_tok[74] += 50),
+        // jester hat
+        AC_S = 0;
+        263 == n_A_ActiveSkill && 1837 == n_A_Equip[2] && 272 == n_A_Equip[4] && (AC_S += 25),
+        2091 == n_A_Equip[0] && 102 == n_A_ActiveSkill && (AC_S += 75),
+        1 == SkillSearch(851) && 435 == n_A_ActiveSkill && (AC_S += 50),
+        3 == SkillSearch(851) && (849 == n_A_ActiveSkill || 429 == n_A_ActiveSkill || 848 == n_A_ActiveSkill) && (AC_S += 50),
+        SkillSearch(852) && (429 == n_A_ActiveSkill || 428 == n_A_ActiveSkill || 435 == n_A_ActiveSkill || 847 == n_A_ActiveSkill) && (AC_S += 75),
         AC_I = n_tok[74];
     M = n_A_Buf3[2];
     n_tok[74] = M ? 10 == M ? 5 * M + 2 * n_A_Buf3[32] + Math.floor(n_A_Buf3[29] / 5) : 3 * M + 2 * n_A_Buf3[32] + Math.floor(n_A_Buf3[29] / 5) : 0,
@@ -1492,7 +1500,7 @@ function StAllCalc() {
         SU_INT >= 90 && 1953 == n_A_Equip[0] && (n_tok[25] += 20),
         SU_DEX >= 90 && 1947 == n_A_Equip[8] && (n_tok[25] += 5),
         n_A_SHOULDER_REFINE >= 7 && (796 == n_A_Equip[7] || 1836 == n_A_Equip[7]) && (n_tok[25] += 5),
-        1825 == n_A_Equip[6] && (4 == n_A_JobClass() || 45 == n_A_JOB) && (n_tok[25] += 3),
+        1825 == n_A_Equip[6] && (4 == n_A_JobClass() || 45 == n_A_JobClass()) && (n_tok[25] += 3),
         n_A_HEAD_REFINE >= 9 && 543 == n_A_card[8] && (n_tok[54] += 5),
         n_A_LEFT_REFINE >= 6 && 1622 == n_A_Equip[5] && (n_tok[60] += n_A_LEFT_REFINE - 5),
         n_A_LEFT_REFINE >= 9 && 1797 == n_A_Equip[5] && (n_tok[192] += 5),
@@ -1611,6 +1619,9 @@ function StAllCalc() {
         n_A_WeaponLV == 3 && (6 == n_A_WeaponType || 7 == n_A_WeaponType) && (n_tok[290] += 4 * CardNumSearch(617)),
         n_A_WeaponLV == 4 && (6 == n_A_WeaponType || 7 == n_A_WeaponType) && (n_tok[290] += 6 * CardNumSearch(617)),
         2097 == n_A_Equip[0] && (n_tok[290] += 2 * n_A_Weapon_refine),
+        SkillSearch(846) && 20 == n_A_WeaponType && 0 == n_A_ActiveSkill && (n_tok[290] += SkillSearch(852) ? 50 : 25),
+        4 == SkillSearch(851) && (428 == n_A_ActiveSkill || 435 == n_A_ActiveSkill) && (n_tok[290] += 25),
+        SkillSearch(852) && (849 == n_A_ActiveSkill || 850 == n_A_ActiveSkill) && (n_tok[290] += 50),
         645 == n_A_Equip[0] && (n_tok[295] += 10 + n_A_Weapon_refine),
         n_A_HEAD_REFINE >= 7 && 1832 == n_A_Equip[2] && (n_tok[295] += 12), 
         n_A_HEAD_REFINE >= 9 && CardNumSearch(630) && (n_tok[295] += 5),
@@ -1710,7 +1721,7 @@ function StPlusCalc() {
     1 != n_A_JobClass() && 2 != n_A_JobClass() && 6 != n_A_JobClass() && 41 != n_A_JOB && 42 != n_A_JOB || (a += 1 * EquipNumSearch(1670)),
     3 != n_A_JobClass() && 5 != n_A_JobClass() && 43 != n_A_JOB && 44 != n_A_JOB || (A += 1 * EquipNumSearch(1670)),
     4 != n_A_JobClass() && 45 != n_A_JOB || (l += 1 * EquipNumSearch(1670)),
-    1825 == n_A_Equip[6] && (4 == n_A_JobClass() || 45 == n_A_JOB) && (l += 2),
+    1825 == n_A_Equip[6] && (4 == n_A_JobClass() || 45 == n_A_JobClass()) && (l += 2),
     n_A_HEAD_REFINE >= 7 && 1291 == n_A_Equip[2] && (l += 1),
     n_A_HEAD_REFINE >= 7 && 1292 == n_A_Equip[2] && (l += 1),
     n_A_HEAD_REFINE >= 7 && 1293 == n_A_Equip[2] && (l += 1),
@@ -2142,11 +2153,11 @@ function JobEquipItemSearch(_) {
 }
 function n_A_JobSet() {
     n_A_JOB = 1 * document.calcForm.A_JOB.value,
-        21 <= n_A_JOB && n_A_JOB <= 40 ? (n_Reborn = 1,
-            34 <= n_A_JOB && n_A_JOB <= 40 && (n_A_JOB -= 34)) : n_Reborn = 0
+    (21 <= n_A_JOB && n_A_JOB <= 40) || n_A_JOB == 46 ? (n_Reborn = 1,
+    34 <= n_A_JOB && n_A_JOB <= 40 && (n_A_JOB -= 34)) : n_Reborn = 0
 }
 function n_A_JobClass() {
-    return n_A_JOB <= 6 ? n_A_JOB : 20 == n_A_JOB ? 0 : 7 == n_A_JOB || 13 == n_A_JOB || 21 == n_A_JOB || 27 == n_A_JOB ? 1 : 8 == n_A_JOB || 14 == n_A_JOB || 22 == n_A_JOB || 28 == n_A_JOB ? 2 : 9 == n_A_JOB || 15 == n_A_JOB || 23 == n_A_JOB || 29 == n_A_JOB ? 3 : 10 == n_A_JOB || 16 == n_A_JOB || 17 == n_A_JOB || 24 == n_A_JOB || 30 == n_A_JOB || 31 == n_A_JOB ? 4 : 11 == n_A_JOB || 18 == n_A_JOB || 25 == n_A_JOB || 32 == n_A_JOB ? 5 : 12 == n_A_JOB || 19 == n_A_JOB || 26 == n_A_JOB || 33 == n_A_JOB ? 6 : 41 == n_A_JOB || 42 == n_A_JOB || 43 == n_A_JOB ? 41 : 7
+    return n_A_JOB <= 6 ? n_A_JOB : 20 == n_A_JOB ? 0 : 7 == n_A_JOB || 13 == n_A_JOB || 21 == n_A_JOB || 27 == n_A_JOB ? 1 : 8 == n_A_JOB || 14 == n_A_JOB || 22 == n_A_JOB || 28 == n_A_JOB ? 2 : 9 == n_A_JOB || 15 == n_A_JOB || 23 == n_A_JOB || 29 == n_A_JOB ? 3 : 10 == n_A_JOB || 16 == n_A_JOB || 17 == n_A_JOB || 24 == n_A_JOB || 30 == n_A_JOB || 31 == n_A_JOB ? 4 : 11 == n_A_JOB || 18 == n_A_JOB || 25 == n_A_JOB || 32 == n_A_JOB ? 5 : 12 == n_A_JOB || 19 == n_A_JOB || 26 == n_A_JOB || 33 == n_A_JOB ? 6 : 41 == n_A_JOB || 42 == n_A_JOB || 43 == n_A_JOB ? 41 : 45 == n_A_JOB || 46 == n_A_JOB ? 45 : 7
 }
 function n_A_JobClass2() {
     return 7 == n_A_JOB || 21 == n_A_JOB ? 7 : 8 == n_A_JOB || 22 == n_A_JOB ? 8 : 9 == n_A_JOB || 23 == n_A_JOB ? 9 : 10 == n_A_JOB || 24 == n_A_JOB ? 10 : 11 == n_A_JOB || 25 == n_A_JOB ? 11 : 12 == n_A_JOB || 26 == n_A_JOB ? 12 : 13 == n_A_JOB || 27 == n_A_JOB ? 13 : 14 == n_A_JOB || 28 == n_A_JOB ? 14 : 15 == n_A_JOB || 29 == n_A_JOB ? 15 : 16 == n_A_JOB || 30 == n_A_JOB || 17 == n_A_JOB || 31 == n_A_JOB ? 16 : 18 == n_A_JOB || 32 == n_A_JOB ? 18 : 19 == n_A_JOB || 33 == n_A_JOB ? 19 : 0
@@ -2306,7 +2317,7 @@ function KakutyouKansuu() {
                 w2 = Math.floor((2 + n_A_MaxSP / 500) * SPRLV),
                 myInnerHtml("A_KakutyouData", "<br>HP regen: " + i + "<br>SP regen: " + w2, 0)) : myInnerHtml("A_KakutyouData", "", 0);
         else if (10 == wKK) {
-            for (wLimitJob = [0, 800, 400, 400, 600, 200, 800, 800, 400, 600, 700, 400, 1e3, 800, 400, 600, 700, 700, 400, 1e3, 0, 800, 400, 600, 700, 400, 1e3, 800, 400, 600, 700, 700, 400, 1e3, 0, 0, 0, 0, 0, 0, 0, 800, 800, 400, 600, 800],
+            for (wLimitJob = [0, 800, 400, 400, 600, 200, 800, 800, 400, 600, 700, 400, 1e3, 800, 400, 600, 700, 700, 400, 1e3, 0, 800, 400, 600, 700, 400, 1e3, 800, 400, 600, 700, 700, 400, 1e3, 0, 0, 0, 0, 0, 0, 0, 800, 800, 400, 600, 800, 2e3],
                 wLimit = 2e3 + wLimitJob[n_A_JOB],
                 wLimitR = 1 * c.A_KakutyouSelNum2.value * 200,
                 1 * c.A_adopted.checked && (wLimit = 2e3),
@@ -2581,7 +2592,9 @@ function KakutyouKansuu() {
             var a;
             SRV < 50 ? a = "<b>Cast Time: </b>" + Math.floor(1e4 * n_A_CAST) / 100 + "% (<b>" + skillName(204, SRV) + ":</b> " + Math.round(nb_tok) + " %| <b>Gear:</b> " + -n_tok[73] + "% | <b>DEX:</b> " + n_A_DEX + " )<BR>" : (a = "<b>Variable Cast Time: </b>" + Math.floor(1e4 * n_A_CAST) / 100 + " % (<b>" + skillName(204, SRV) + ":</b> " + nb_tok + " %| <b>Gear:</b> " + -n_tok[73] + " % | <b>INT+DEX*2:</b> " + (2 * n_A_DEX + n_A_INT) + " )<BR>",
                 a += "<b>Fixed Cast Time: </b>" + Math.floor(1e4 * n_A_fCAST) / 100 + "% (<b>Skills:</b> " + (100 * (1 - n_A_fCAST) - n_tok[72]) + " %| <b>Gear:</b> " + -n_tok[72] + "% )<BR>"),
-                a += "<b>Cast Delay: </b>" + Math.floor(100 - AC_I - n_tok[74]) + " % (<b>" + skillName(204, SRV) + ":</b> " + n_tok[74] + " % | <b>Gear:</b> " + AC_I + " %)<BR>",
+                calcedDelay = Math.floor(100 - AC_I - n_tok[74]),
+                calcedDelay > 0 && (calcedDelay = Math.floor(calcedDelay * (100 - AC_S) / 100)),
+                a += "<b>Cast Delay: </b>" + calcedDelay + " % (<b>" + skillName(204, SRV) + ":</b> " + n_tok[74] + " % | <b>Gear:</b> " + AC_I + " % | <b>Skill:</b> " + AC_S + " %)<BR>",
                 myInnerHtml("A_KakutyouData", a, 0)
         } else if (20 == wKK) {
             var e = 1 * c.A_KakutyouSelNum.value
@@ -2598,6 +2611,7 @@ function KakutyouKansuu() {
                 21 <= n_A_JOB && n_A_JOB <= 33 && (A = 5),
                 42 == n_A_JOB && (A = 7),
                 44 != n_A_JOB && 45 != n_A_JOB || (A = 6),
+                46 == n_A_JOB && (A = 8),
                 e = Math.floor(PC_BaseExp[n_Reborn][n_A_BaseLV] * e / 100);
             var l = "Required BaseExp for Base Up: <B>" + Kanma(PC_BaseExp[n_Reborn][n_A_BaseLV] - e) + " </B>exp<BR>"
                 , o = 0
@@ -3470,7 +3484,7 @@ function SaveLocal() {
                     SaveData[24] = 0,
                     SaveData[25] = 0,
                     SaveData[26] = 0),
-            (2 == n_A_JobClass() || 4 == n_A_JobClass() || 45 == n_A_JOB && 0 != n_A_WeaponType) && (SaveData[27] = 1 * c.A_Arrow.value),
+            (2 == n_A_JobClass() || 4 == n_A_JobClass() || 45 == n_A_JobClass() && 0 != n_A_WeaponType) && (SaveData[27] = 1 * c.A_Arrow.value),
             SaveData[28] = 1 * c.A_head1.value,
             SaveData[29] = 1 * c.A_head1_card.value,
             SaveData[30] = 1 * c.A_HEAD_REFINE.value,
@@ -3744,7 +3758,7 @@ function LoadLocal() {
                 n_A_Weapon2Type = SaveData[20],
                 ClickWeaponType2(SaveData[21])),
             n_A_JobSet(),
-            (2 == n_A_JobClass() || 4 == n_A_JobClass() || 45 == n_A_JOB && 0 != SaveData[13]) && (c.A_Arrow.value = SaveData[27]),
+            (2 == n_A_JobClass() || 4 == n_A_JobClass() || 45 == n_A_JobClass() && 0 != SaveData[13]) && (c.A_Arrow.value = SaveData[27]),
             ClickB_Item(SaveData[14]),
             c.A_Weapon_refine.value = SaveData[15],
             c.A_weapon1_card1.value = SaveData[16],
@@ -3877,7 +3891,7 @@ function LoadLocal3() {
             9 == k && (slotNum = "num0" + k),
             k >= 10 && (slotNum = "num" + k),
             void 0 === localStorage["Slot" + slotNum] ? c.A_SaveSlotLocal.options[k - 1] = new Option("Save" + k + ": No Data", slotNum) : (SaveData = JSON.parse(localStorage["Slot" + slotNum]),
-                1 <= SaveData[2] && SaveData[2] <= 45 ? 0 == SaveData[5] ? c.A_SaveSlotLocal.options[k - 1] = new Option("Save" + k + ": " + JobName[SaveData[2]], slotNum) : c.A_SaveSlotLocal.options[k - 1] = new Option("Save" + k + ": Baby " + JobName[SaveData[2]], slotNum) : 999 == SaveData[2] || 0 == SaveData[2] ? c.A_SaveSlotLocal.options[k - 1] = new Option("Save" + k + ": Novice", slotNum) : c.A_SaveSlotLocal.options[k - 1] = new Option("Save" + k + ": No Data", slotNum))
+                1 <= SaveData[2] && SaveData[2] <= 46 ? 0 == SaveData[5] ? c.A_SaveSlotLocal.options[k - 1] = new Option("Save" + k + ": " + JobName[SaveData[2]], slotNum) : c.A_SaveSlotLocal.options[k - 1] = new Option("Save" + k + ": Baby " + JobName[SaveData[2]], slotNum) : 999 == SaveData[2] || 0 == SaveData[2] ? c.A_SaveSlotLocal.options[k - 1] = new Option("Save" + k + ": Novice", slotNum) : c.A_SaveSlotLocal.options[k - 1] = new Option("Save" + k + ": No Data", slotNum))
 }
 function delLocal() {
     window.confirm("Do you really want to DELETE selected saved data?") && (slotNum = document.calcForm.A_SaveSlotLocal.value,
@@ -3926,7 +3940,7 @@ function URLOUT() {
         SaveData[10] = NtoS2(10 * n_A_Buf7[35] + 1 * c.A_Weapon_element.value, 1),
         SaveData[11] = NtoS2(m_Item[c.A_weapon1.value][1], 1),
         n_Nitou && (SaveData[12] = NtoS2(m_Item[c.A_weapon2.value][1], 1)),
-        (2 == n_A_JobClass() || 4 == n_A_JobClass() || 45 == n_A_JOB && 0 != n_A_WeaponType) && (SaveData[13] = NtoS2(1 * c.A_Arrow.value, 1)),
+        (2 == n_A_JobClass() || 4 == n_A_JobClass() || 45 == n_A_JobClass() && 0 != n_A_WeaponType) && (SaveData[13] = NtoS2(1 * c.A_Arrow.value, 1)),
         SaveData[14] = NtoS2(1 * c.A_weapon1.value, 2),
         SaveData[15] = NtoS2(1 * c.A_Weapon_refine.value, 1),
         SaveData[16] = NtoS2(1 * c.A_weapon1_card1.value, 2),
@@ -4350,7 +4364,7 @@ function URLIN() {
             8 != c.A_JOB.value && 22 != c.A_JOB.value || 11 == n_A_WeaponType || (n_A_Weapon2Type = StoN2(n.substr(21, 1)),
                 ClickWeaponType2(StoN2(n.substr(34, 2)))),
             n_A_JobSet(),
-            (2 == n_A_JobClass() || 4 == n_A_JobClass() || 45 == n_A_JOB && 0 != n_A_WeaponType) && (c.A_Arrow.value = StoN2(n.substr(22, 1))),
+            (2 == n_A_JobClass() || 4 == n_A_JobClass() || 45 == n_A_JobClass() && 0 != n_A_WeaponType) && (c.A_Arrow.value = StoN2(n.substr(22, 1))),
             ClickB_Item(StoN2(n.substr(23, 2))),
             c.A_Weapon_refine.value = StoN2(n.substr(25, 1)),
             c.A_weapon1_card1.value = StoN2(n.substr(26, 2)),

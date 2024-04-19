@@ -2099,7 +2099,7 @@ m_Item = [
 	, [2089, 61, 0, 3, 0, 1, 0, 80, "Time Keeper Shield", 0, "<b>For each refine level past 4:</b> Perfect Dodge +1", 3, 1, 0]
 	, [2090, 62, 0, 2, 0, 1, 50, 50, "Candy Bag Backpack", 0, "<b>For each refine level:</b> [Piece of Cake] Recovery Rate +10%", 80, 1, 89, 1, 74, 5, 370, -5, 0]
 	, [2091, 9, 53, 10, 3, 0, 40, 0, "Soul Stick", 0, "[Turn Undead] After-cast Delay -50%<br><b>For each refine level:</b><br>INT +1<br>LUK +1<br><b>[Refine Rate 9~10]</b><br>[Turn Undead] Range +2", 89, 5, 93, 100, 0]
-	, [2092, 21, 59, 220, 3, 2, 200, 10, "Southern Cross", 0, "[Basic Grenade] skill damage +5%<br>[Hasty Fire in the Hole] skill damage +5%<br><b>*NOT IMPLEMENTED*</b>", 0]
+	, [2092, 21, 59, 220, 3, 2, 200, 10, "Southern Cross", 0, "[Basic Grenade] skill damage +5%", 5849, 5, 0]
 	, [2093, 64, 0, 0, 0, 1, 10, 90, "Toy Ring", 0, "", 1, 1, 5, -1, 10, 4, 0]
 	, [2094, 50, 0, 0, 0, 0, 40, 1, "Antler Fedora", 0, "Consumes 100% SP when the headgear is unequipped.", 4, 3, 220, 54, 0]
 	, [2095, 8, 53, 95, 4, 2, 150, 40, "Bloody Cross", 0, "", 36, 10, 47, 10, 0]
@@ -2243,14 +2243,14 @@ function Item_Setumei(nC1, nC2) {
 		CBIstr += v_Element[nC2] + " Element Weapon<BR>";
 	if (22 == nC1) {
 		if (nC2 == 1)
-			CBIstr += "Bypass your target's defence [not on Boss type]<BR>";
+			CBIstr += "Bypass your target's defense [not on Boss type]<BR>";
 		else
-			CBIstr += "Bypass your target's defence [also works on Boss type]<BR>";
+			CBIstr += "Bypass your target's defense [also works on Boss type]<BR>";
 	}
 	if (23 == nC1)
 		CBIstr += "Your damage depends on your target's VIT and DEF<br><b><font color=red>NOTE:</font> [VIT+DEF]>100, +1% for each value above 100 | [VIT+DEF]<100, -1% for each value below 100</b><BR>";
 	if (24 == nC1)
-		CBIstr += "Reduces your defence to 1/" + nC2 + "<BR>";
+		CBIstr += "Reduces your defense to 1/" + nC2 + "<BR>";
 	if (25 == nC1)
 		//		CBIstr += "Increases ranged damage by "+ nC2 +"%<BR>";
 		CBIstr += "Deal" + wIS + nC2 + "% ranged ATK based damage.<BR>";	//bonus bLongAtkRate ¿aumenta el daño de ataques mágicos?
@@ -2332,7 +2332,7 @@ function Item_Setumei(nC1, nC2) {
 		//		CBIstr += "Increase ATK based damage against [Golem] race monsters by "+ wIS + nC2 +"%<BR>";
 		CBIstr += "Deal" + wIS + nC2 + "% ATK based damage against [Golem] race monsters.<BR>";
 	if (85 == nC1)
-		CBIstr += "Lowers your defence rate by " + nC2 + "%<BR>";
+		CBIstr += "Lowers your defense rate by " + nC2 + "%<BR>";
 	if (86 == nC1)
 		//		CBIstr += "Increases your chance to hit all targets by a fixed " + nC2 +"%<BR>";
 		CBIstr += "Perfect HIT +" + nC2 + "%<BR>";	//mejorar: funciona con skills ??
