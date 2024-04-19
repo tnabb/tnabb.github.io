@@ -1327,7 +1327,8 @@ function BattleCalc999() {
             1 * c.A_Weapon_element.value != 0 && (n_A_Weapon_element = 1 * c.A_Weapon_element.value),
             wCast = 1.5 * n_A_CAST,
             n_Delay[2] = 2,
-            wMod = (200 + 85 * n_A_ActiveSkillLV) / 100,
+            n_Delay[3] = 0.4,
+            wMod = (200 + 100 * n_A_ActiveSkillLV) / 100,
             wMod2 = 300 / 100;
             for (s = 0; s <= 2; s++)
                 w_DMG[s] = BK_n_A_DMG[s] * wMod,
