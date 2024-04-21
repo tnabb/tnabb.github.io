@@ -2491,7 +2491,7 @@ function BattleMagicCalc(e) {
     (132 == n_A_ActiveSkill || 133 == n_A_ActiveSkill || 409 == n_A_ActiveSkill) && CardNumSearch(652) && (n += n_A_SHOULDER_REFINE),
     (373 == n_A_ActiveSkill || 374 == n_A_ActiveSkill || 375 == n_A_ActiveSkill) && CardNumSearch(652) && (n_A_Weapon_element == 2) && (n += n_A_SHOULDER_REFINE),
     // royal clergy card
-    (410 == n_A_ActiveSkill || 412 == n_A_ActiveSkill || 413 == n_A_ActiveSkill || 414 == n_A_ActiveSkill || 414 == n_A_ActiveSkill) && 44 == n_A_JOB && (n += 7*CardNumSearch(629)),
+    (410 == n_A_ActiveSkill || 412 == n_A_ActiveSkill || 413 == n_A_ActiveSkill || 414 == n_A_ActiveSkill || 415 == n_A_ActiveSkill) && 44 == n_A_JOB && (n += 7*CardNumSearch(629)),
     // warden kades card - esma dmg increase
     n_A_WeaponLV >= 3 && (373 == n_A_ActiveSkill || 374 == n_A_ActiveSkill || 375 == n_A_ActiveSkill) && (n_A_Weapon_element == 0 || n_A_Weapon_element == 6 || n_A_Weapon_element == 7) && (n += 6*CardNumSearch(643)),
     // warden kades card
