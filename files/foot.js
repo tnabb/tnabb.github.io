@@ -133,7 +133,7 @@ function StAllCalc() {
                             n_A_Weapon_refine >= 6 && (n_A_WeaponLV_Minplus = 1,
                                 n_A_WeaponLV_Maxplus = 8 * (n_A_Weapon_refine - 5))) : 4 == n_A_WeaponLV && (n_A_WeaponLV_refineATK = 7 * n_A_Weapon_refine,
                                     n_A_Weapon_refine >= 5 && (n_A_WeaponLV_Minplus = 1,
-                                        n_A_WeaponLV_Maxplus = 14 * (n_A_Weapon_refine - 4))),
+                                        n_A_WeaponLV_Maxplus = 13 * (n_A_Weapon_refine - 4))),
         n_A_Weapon2LV = 0,
         n_A_Weapon2_ATK = 0,
         n_A_Weapon2_refine = 0,
@@ -565,7 +565,7 @@ function StAllCalc() {
         0 == n_A_Buf6[0] && n_A_Buf6[1] >= 1 && 3 == n_A_Bodyelement && (M += 10 * n_A_Buf6[1]),
         M < 0 && SRV > 0 && (M = 0),
         n_A_ATK += M,
-        SRV < 50 ? V_ATK = Math.floor(n_A_Weapon_ATK + n_A_Weapon2_ATK + n_A_ATK) : V_ATK = Math.floor(n_A_Weapon_ATK + n_A_WeaponLV_refineATK + n_A_Weapon2_ATK + n_A_Weapon2LV_refineATK),
+        V_ATK = Math.floor(n_A_Weapon_ATK + n_A_Weapon2_ATK + n_A_ATK),
         M = n_tok[87] + n_A_Buf9[53], // atk %
         0 != SRV && SkillSearch(342) && (SkillSearch(380) <= 1 ? M += 0 : M += 2 * SkillSearch(342) * SkillSearch(380)),
         1799 == n_A_Equip[2] && (wSPVS = n_A_JobClass(),
@@ -1381,8 +1381,6 @@ function StAllCalc() {
         321 != n_A_ActiveSkill && 197 != n_A_ActiveSkill || SkillSearch(195) && n_A_Weapon_refine >= 9 && EquipNumSearch(1097) && (M -= 100),
         430 == n_A_ActiveSkill && n_A_Weapon_refine >= 9 && 1100 == n_A_Equip[0] && 0 == SRV && (M -= 25),
         131 == n_A_ActiveSkill && n_A_Weapon_refine >= 10 && 1169 == n_A_Equip[0] && 0 == SRV && (M -= 8),
-        // jester hat
-        263 == n_A_ActiveSkill && 1837 == n_A_Equip[2] && 272 == n_A_Equip[4] && (n_tok[74] += 25),
         M < 0 && (M = 0),
         n_A_CAST *= M / 100,
         n_A_Buf2[10] && (n_A_CAST *= (100 - 15 * n_A_Buf2[10]) / 100),
@@ -1398,7 +1396,10 @@ function StAllCalc() {
         1839 == n_A_Equip[0] && n_A_Weapon_refine >= 7 && (n_tok[74] += 10),
         1843 == n_A_Equip[0] && n_A_Weapon_refine >= 7 && (n_tok[74] += 5),
         5 == n_A_JobClass() && (n_tok[74] += 5 * EquipNumSearch(1119)),
-        2091 == n_A_Equip[0] && 102 == n_A_ActiveSkill && (n_tok[74] += 50),
+        // jester hat
+        AC_S = 0;
+        263 == n_A_ActiveSkill && 1837 == n_A_Equip[2] && 272 == n_A_Equip[4] && (AC_S += 25),
+        2091 == n_A_Equip[0] && 102 == n_A_ActiveSkill && (AC_S += 50),
         AC_I = n_tok[74];
     M = n_A_Buf3[2];
     n_tok[74] = M ? 10 == M ? 5 * M + 2 * n_A_Buf3[32] + Math.floor(n_A_Buf3[29] / 5) : 3 * M + 2 * n_A_Buf3[32] + Math.floor(n_A_Buf3[29] / 5) : 0,
@@ -2581,7 +2582,9 @@ function KakutyouKansuu() {
             var a;
             SRV < 50 ? a = "<b>Cast Time: </b>" + Math.floor(1e4 * n_A_CAST) / 100 + "% (<b>" + skillName(204, SRV) + ":</b> " + Math.round(nb_tok) + " %| <b>Gear:</b> " + -n_tok[73] + "% | <b>DEX:</b> " + n_A_DEX + " )<BR>" : (a = "<b>Variable Cast Time: </b>" + Math.floor(1e4 * n_A_CAST) / 100 + " % (<b>" + skillName(204, SRV) + ":</b> " + nb_tok + " %| <b>Gear:</b> " + -n_tok[73] + " % | <b>INT+DEX*2:</b> " + (2 * n_A_DEX + n_A_INT) + " )<BR>",
                 a += "<b>Fixed Cast Time: </b>" + Math.floor(1e4 * n_A_fCAST) / 100 + "% (<b>Skills:</b> " + (100 * (1 - n_A_fCAST) - n_tok[72]) + " %| <b>Gear:</b> " + -n_tok[72] + "% )<BR>"),
-                a += "<b>Cast Delay: </b>" + Math.floor(100 - AC_I - n_tok[74]) + " % (<b>" + skillName(204, SRV) + ":</b> " + n_tok[74] + " % | <b>Gear:</b> " + AC_I + " %)<BR>",
+                calcedDelay = Math.floor(100 - AC_I - n_tok[74]),
+                calcedDelay > 0 && (calcedDelay = Math.floor(calcedDelay * (100 - AC_S) / 100)),
+                a += "<b>Cast Delay: </b>" + calcedDelay + " % (<b>" + skillName(204, SRV) + ":</b> " + n_tok[74] + " % | <b>Gear:</b> " + AC_I + " % | <b>Skill:</b> " + AC_S + " %)<BR>",
                 myInnerHtml("A_KakutyouData", a, 0)
         } else if (20 == wKK) {
             var e = 1 * c.A_KakutyouSelNum.value

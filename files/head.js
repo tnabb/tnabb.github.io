@@ -258,7 +258,7 @@ function BattleCalc999() {
                 ATKmod02(wMod, 0),
                 n_Min_DMG += w_left_Minatk,
                 n_Max_DMG += w_left_Maxatk,
-                w_DMG[0] = BattleCalc(n_A_DMG[0], 0); // auto attack mod
+                w_DMG[0] = BattleCalc(n_A_DMG[0], 0);
                 w_DMG[0] = Math.floor(w_DMG[0] * (100 + n_tok[355]) / 100); // auto attack damage mod
             var _ = w_DMG[0] + EDP_DMG(0);
             Last_DMG_A[0] = Last_DMG_B[0] = _ + w_left_Minatk,
@@ -280,11 +280,10 @@ function BattleCalc999() {
                 w_DMG[1] = Math.floor(w_DMG[1] * (100 + n_tok[355]) / 100); // auto attack damage mod
             _ = w_DMG[1] + EDP_DMG(1);
             Last_DMG_A[1] = Last_DMG_B[1] = _ + w_left_Aveatk,
-                InnStr[1] += Last_DMG_A[1] + " (" + _ + " + " + w_left_Aveatk + ")",
-                w_DMG[1] = BattleCalc3(w_DMG[1]),
-                w_DMG[1] += BattleCalc3left(w_left_Aveatk),
-                w_DMG[1] += EDP_DMG(1),
-                EDPhyouzi(1);
+            InnStr[1] += Last_DMG_A[1] + " (" + _ + " + " + w_left_Aveatk + ")",
+            w_DMG[1] = BattleCalc3(w_DMG[1]),
+            w_DMG[1] += BattleCalc3left(w_left_Aveatk),
+            w_DMG[1] += EDP_DMG(1);
             _ = BattleCalc2(0);
             var n = Math.floor(w_left_star * (.3 + SkillSearch(80) / 10));
             n_PerHIT_DMG = _ + n,
@@ -353,7 +352,6 @@ function BattleCalc999() {
                 w_DMG[1] = BattleCalc3(w_DMG[1]),
                 w_DMG[1] += wTAKA,
                 w_DMG[1] += EDP_DMG(1),
-                EDPhyouzi(1),
                 CastAndDelay(),
                 BattleCalc998()
         }
@@ -5317,16 +5315,18 @@ function calc() {
         myInnerHtml("strID_" + e, InnStr[e], 0)
 }
 function BattleCalc(e, _) {
-    return 10 == _ ? e += n_A_WeaponLV_refineATK : e = BattleCalc4(e, _, 0),
-        e < 1 && (e = 1),
-        1 == n_A_WeaponType || 2 == n_A_WeaponType ? e += 4 * SkillSearch(3) : 3 == n_A_WeaponType ? e += 4 * SkillSearch(4) : 4 == n_A_WeaponType || 5 == n_A_WeaponType ? 0 == SkillSearch(78) ? e += 4 * SkillSearch(69) : e += 5 * SkillSearch(69) : 8 == n_A_WeaponType ? e += 3 * SkillSearch(89) : 11 == n_A_WeaponType ? e += 3 * SkillSearch(81) : 14 == n_A_WeaponType ? e += 3 * SkillSearch(198) : 15 == n_A_WeaponType ? e += 3 * SkillSearch(206) : 12 == n_A_WeaponType ? e += 3 * SkillSearch(224) : 6 == n_A_WeaponType || 7 == n_A_WeaponType ? e += 3 * SkillSearch(241) : 13 != n_A_WeaponType && 0 != n_A_WeaponType || (e += 3 * SkillSearch(183)),
-        0 == n_A_WeaponType && SkillSearch(329) && (e += 10 * SkillSearch(329)),
-        !n_A_Buf3[10] || 4 != n_A_WeaponLV && 4 != n_A_Weapon2LV || (e += 50 + 25 * n_A_Buf3[10]),
-        (6 == n_B[2] || 90 <= n_B[3] && n_B[3] <= 99) && SkillSearch(24) && (e += Math.floor((3 + .05 * n_A_BaseLV) * SkillSearch(24))),
-        2 != n_B[2] && 4 != n_B[2] || (e += 4 * SkillSearch(116),
-            SkillSearch(390) && (e += n_A_STR)),       
-        e = BattleCalc2(e), 
-        Math.floor(e)
+    e < 1 && (e = 1),
+    1 == wCriTyuu && (e = Math.floor(e * (100 + n_tok[70]) / 100)),
+    SkillSearch(266) && (e = Math.floor(e * ((150 + 50 * SkillSearch(266)) * (1 - n_M_debuff[0] / 100)) / 100)), // added edp dmg reduction
+    10 == _ ? e += n_A_WeaponLV_refineATK : e = BattleCalc4(e, _, 0),
+    1 == n_A_WeaponType || 2 == n_A_WeaponType ? e += 4 * SkillSearch(3) : 3 == n_A_WeaponType ? e += 4 * SkillSearch(4) : 4 == n_A_WeaponType || 5 == n_A_WeaponType ? 0 == SkillSearch(78) ? e += 4 * SkillSearch(69) : e += 5 * SkillSearch(69) : 8 == n_A_WeaponType ? e += 3 * SkillSearch(89) : 11 == n_A_WeaponType ? e += 3 * SkillSearch(81) : 14 == n_A_WeaponType ? e += 3 * SkillSearch(198) : 15 == n_A_WeaponType ? e += 3 * SkillSearch(206) : 12 == n_A_WeaponType ? e += 3 * SkillSearch(224) : 6 == n_A_WeaponType || 7 == n_A_WeaponType ? e += 3 * SkillSearch(241) : 13 != n_A_WeaponType && 0 != n_A_WeaponType || (e += 3 * SkillSearch(183)),
+    0 == n_A_WeaponType && SkillSearch(329) && (e += 10 * SkillSearch(329)),
+    !n_A_Buf3[10] || 4 != n_A_WeaponLV && 4 != n_A_Weapon2LV || (e += 50 + 25 * n_A_Buf3[10]),
+    (6 == n_B[2] || 90 <= n_B[3] && n_B[3] <= 99) && SkillSearch(24) && (e += Math.floor((3 + .05 * n_A_BaseLV) * SkillSearch(24))),
+    2 != n_B[2] && 4 != n_B[2] || (e += 4 * SkillSearch(116),
+        SkillSearch(390) && (e += n_A_STR)),       
+    e = BattleCalc2(e);
+    return Math.floor(e)
 }
 function BattleCalc2(e) {
     if (w999_AB = 0,
@@ -5376,14 +5376,12 @@ function ApplyModifiers(e) {
             1 == n_B[19] && (_ += n_tok[26]),
             _ += n_tok[80],
             e = Math.floor(e * (100 + _) / 100),
-            1 == wCriTyuu && (e = Math.floor(e * (100 + n_tok[70]) / 100)),
             (108 <= n_B[0] && n_B[0] <= 115 || 319 == n_B[0]) && (e = Math.floor(e * (100 + n_tok[81]) / 100)),
             116 <= n_B[0] && n_B[0] <= 120 && (e = Math.floor(e * (100 + n_tok[82]) / 100)),
             (49 <= n_B[0] && n_B[0] <= 52 || 55 == n_B[0] || 221 == n_B[0]) && (e = Math.floor(e * (100 + n_tok[83]) / 100)),
             106 != n_B[0] && 152 != n_B[0] && 308 != n_B[0] && 32 != n_B[0] && 541 != n_B[0] || (e = Math.floor(e * (100 + n_tok[84]) / 100)),
             e = Math.floor(e * (100 + StPlusCalc2(1e3 + n_B[0]) + StPlusCard(1e3 + n_B[0])) / 100),
             SkillSearch(258) && (e *= 2),
-            SkillSearch(266) && (e = Math.floor(e * ((150 + 50 * SkillSearch(266)) * (1 - n_M_debuff[0] / 100)) / 100)), // added edp dmg reduction
             86 == n_A_ActiveSkill && 50 <= n_B[3] && n_B[3] < 60 && (e = Math.floor(e * (100 + 30 * n_A_ActiveSkillLV) / 100)),
             11 == n_A_WeaponType && SkillSearch(262) && (e = Math.floor(e * (110 + 2 * SkillSearch(262)) / 100)),
             _ = 0,
@@ -5478,12 +5476,11 @@ function BattleCalcEDP(e, _) {
 function EDPplus(e) {
     (SkillSearch(266) || n_A_Buf6[7]) && (w_DMG[2] += EDP_DMG(2) * e,
         w_DMG[1] += EDP_DMG(1) * e,
-        100 == w_HIT_EDP && (w_DMG[0] += EDP_DMG(0) * e),
-        EDPhyouzi(e))
+        100 == w_HIT_EDP && (w_DMG[0] += EDP_DMG(0) * e))
 }
-function EDPhyouzi(e) { }
 function EDP_DMG(e) {
-    if (SkillSearch(266) || n_A_Buf6[7]) {
+    //if (SkillSearch(266) || n_A_Buf6[7]) {
+    if (n_A_Buf6[7]) {
         if (17 == n_A_ActiveSkill && 52 <= n_B[3] && n_B[3] <= 59)
             return 0;
         if ((66 == n_A_ActiveSkill || 193 == n_A_ActiveSkill || 197 == n_A_ActiveSkill || 321 == n_A_ActiveSkill) && 83 <= n_B[3] && n_B[3] <= 89)
@@ -5516,6 +5513,7 @@ function CastAndDelay() {
         n = 1),
         eqDelay = (100 - AC_I - n_tok[74]) < 0 ? 0 : 100 - AC_I - n_tok[74],
         n_Delay[2] = Math.floor(n_Delay[2] * eqDelay) / 100,
+        n_Delay[2] = Math.floor(n_Delay[2] * (100 - AC_S)) / 100,
         n_Delay[2] > wDelay && (wDelay = n_Delay[2],
             n = 2),
         n_Delay[3] > wDelay && (wDelay = n_Delay[3],
