@@ -133,7 +133,7 @@ function StAllCalc() {
                             n_A_Weapon_refine >= 6 && (n_A_WeaponLV_Minplus = 1,
                                 n_A_WeaponLV_Maxplus = 8 * (n_A_Weapon_refine - 5))) : 4 == n_A_WeaponLV && (n_A_WeaponLV_refineATK = 7 * n_A_Weapon_refine,
                                     n_A_Weapon_refine >= 5 && (n_A_WeaponLV_Minplus = 1,
-                                        n_A_WeaponLV_Maxplus = 14 * (n_A_Weapon_refine - 4))),
+                                        n_A_WeaponLV_Maxplus = 13 * (n_A_Weapon_refine - 4))),
         n_A_Weapon2LV = 0,
         n_A_Weapon2_ATK = 0,
         n_A_Weapon2_refine = 0,
@@ -566,7 +566,7 @@ function StAllCalc() {
         SkillSearch(845) && (M += SkillSearch(845) * 10 + SkillSearch(416) * 10),
         M < 0 && SRV > 0 && (M = 0),
         n_A_ATK += M,
-        SRV < 50 ? V_ATK = Math.floor(n_A_Weapon_ATK + n_A_Weapon2_ATK + n_A_ATK) : V_ATK = Math.floor(n_A_Weapon_ATK + n_A_WeaponLV_refineATK + n_A_Weapon2_ATK + n_A_Weapon2LV_refineATK),
+        V_ATK = Math.floor(n_A_Weapon_ATK + n_A_Weapon2_ATK + n_A_ATK),
         M = n_tok[87] + n_A_Buf9[53], // atk %
         0 != SRV && SkillSearch(342) && (SkillSearch(380) <= 1 ? M += 0 : M += 2 * SkillSearch(342) * SkillSearch(380)),
         1799 == n_A_Equip[2] && (wSPVS = n_A_JobClass(),
@@ -1385,6 +1385,8 @@ function StAllCalc() {
         131 == n_A_ActiveSkill && n_A_Weapon_refine >= 10 && 1169 == n_A_Equip[0] && (M -= 8),
         1956 == n_A_Equip[0] && 21 == n_A_JOB && 76 == n_A_ActiveSkill && (M -= 10 * n_A_Weapon_refine), // save the king bb cast time reduction
         1 == SkillSearch(851) && (849 == n_A_ActiveSkill || 848 == n_A_ActiveSkill) && (M -= 50),
+        430 == n_A_ActiveSkill && n_A_Weapon_refine >= 9 && 1100 == n_A_Equip[0] && 0 == SRV && (M -= 25),
+        131 == n_A_ActiveSkill && n_A_Weapon_refine >= 10 && 1169 == n_A_Equip[0] && 0 == SRV && (M -= 8),
         M < 0 && (M = 0),
         n_A_CAST *= M / 100,
         n_A_Buf2[10] && (n_A_CAST *= (100 - 15 * n_A_Buf2[10]) / 100),
