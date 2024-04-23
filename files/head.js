@@ -1624,7 +1624,6 @@ function ATKmod01() {
     SkillSearch(270) && (e += 2 * SkillSearch(270)),
     n_A_Buf2[19] && (e += 100),
     n_A_Buf6[2] && (e += 10),
-    0 == SkillSearch(154) && n_A_Buf2[8] && (e += 5),
     StPlusCalc2(87) && (e += StPlusCalc2(87)),
     n_A_Buf6[22] && (e -= 25));
     for (var _ = 0; _ <= 2; _++)
@@ -1634,7 +1633,7 @@ function ATKmod01() {
 function ATKmod02(e, _) {
     wA02 = 100 * e,
     SkillSearch(327) ? wA02 += 20 * SkillSearch(327) : (SkillSearch(154) && (wA02 += 5 * SkillSearch(154)),
-        0 == SkillSearch(154) && n_A_Buf2[8] && (wA02 += 5 * n_A_Buf2[8])),
+    0 == SkillSearch(154) && n_A_Buf2[8] && (wA02 += 5 * n_A_Buf2[8])),
     SkillSearch(342) && (wA02 += 2 * SkillSearch(342) * SkillSearch(380)),
     0 == _ ? (n_A_DMG[2] = Math.floor(n_A_DMG[2] * wA02 / 100),
         n_A_DMG[0] = Math.floor(n_A_DMG[0] * wA02 / 100),
