@@ -1385,9 +1385,6 @@ function StAllCalc() {
         131 == n_A_ActiveSkill && n_A_Weapon_refine >= 10 && 1169 == n_A_Equip[0] && (M -= 8),
         1956 == n_A_Equip[0] && 21 == n_A_JOB && 76 == n_A_ActiveSkill && (M -= 10 * n_A_Weapon_refine), // save the king bb cast time reduction
         1 == SkillSearch(851) && (849 == n_A_ActiveSkill || 848 == n_A_ActiveSkill) && (M -= 50),
-        430 == n_A_ActiveSkill && n_A_Weapon_refine >= 9 && 1100 == n_A_Equip[0] && 0 == SRV && (M -= 25),
-        131 == n_A_ActiveSkill && n_A_Weapon_refine >= 10 && 1169 == n_A_Equip[0] && 0 == SRV && (M -= 8),
-        1956 == n_A_Equip[0] && 21 == n_A_JOB && 76 == n_A_ActiveSkill && (M -= 10*n_A_Weapon_refine),
         M < 0 && (M = 0),
         n_A_CAST *= M / 100,
         n_A_Buf2[10] && (n_A_CAST *= (100 - 15 * n_A_Buf2[10]) / 100),
@@ -1403,7 +1400,13 @@ function StAllCalc() {
         1839 == n_A_Equip[0] && n_A_Weapon_refine >= 7 && (n_tok[74] += 10),
         1843 == n_A_Equip[0] && n_A_Weapon_refine >= 7 && (n_tok[74] += 5),
         5 == n_A_JobClass() && (n_tok[74] += 5 * EquipNumSearch(1119)),
-        2091 == n_A_Equip[0] && 102 == n_A_ActiveSkill && (n_tok[74] += 50),
+        // jester hat
+        AC_S = 0;
+        263 == n_A_ActiveSkill && 1837 == n_A_Equip[2] && 272 == n_A_Equip[4] && (AC_S += 25),
+        2091 == n_A_Equip[0] && 102 == n_A_ActiveSkill && (AC_S += 50),
+        1 == SkillSearch(851) && 435 == n_A_ActiveSkill && (AC_S += 50),
+        3 == SkillSearch(851) && (849 == n_A_ActiveSkill || 429 == n_A_ActiveSkill || 848 == n_A_ActiveSkill) && (AC_S += 50),
+        SkillSearch(852) && (429 == n_A_ActiveSkill || 428 == n_A_ActiveSkill || 435 == n_A_ActiveSkill || 847 == n_A_ActiveSkill) && (AC_S += 75),
         AC_I = n_tok[74];
     M = n_A_Buf3[2];
     n_tok[74] = M ? 10 == M ? 5 * M + 2 * n_A_Buf3[32] + Math.floor(n_A_Buf3[29] / 5) : 3 * M + 2 * n_A_Buf3[32] + Math.floor(n_A_Buf3[29] / 5) : 0,
