@@ -2686,6 +2686,7 @@ function Askill() {
 }
 function Bskill() {
     var e = 0;
+    console.log(m_Monster);
     for (c.B_AtkSkill.options.length = 0,
         c.B_AtkSkill.options[0] = new Option("Basic Attack", 0),
         i = 23; 0 != m_Monster[c.B_Enemy.value][i]; i += 2)
