@@ -3813,7 +3813,8 @@ function LoadLocal() {
                 }
                 break
             }
-        for (n_B[0] = SaveData[246],
+        for (SaveData[246] == "" && (SaveData[246] = 586),
+            n_B[0] = SaveData[246],
             c.B_Enemy.value = SaveData[246],
             Bskill(),
             c.B_AtkSkill.value = SaveData[247],
