@@ -2478,7 +2478,7 @@ function KakutyouKansuu() {
                 l += "<td class='right'><b>" + n_tok[25] + "</b> %</td><td>vs <b>Long-range</b></td></tr>",
                 l += "<tr><td class='right'><b>" + n_tok[49] + "</b> %</td><td class='data'>vs " + v_Element[9] + "</td>",
                 l += "<td class='right'><b>" + n_tok[39] + "</b> %</td><td class='data'>vs " + v_Race[9] + "</td>",
-                l += "<td class='right'><b>+" + n_tok[70] + "</b> %</td><td><b>Critical damage</b></td></tr>",
+                l += "<td class='right'><b>" + n_tok[70] + "</b> %</td><td><b>Critical damage</b></td></tr>",
                 l += "<tr><td colspan='6' class='center'>- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -</td></tr></table>",
                 l += "<table>",
                 l += "<tr><td class='right'><b>" + n_tok[27] + "</b> % vs</td><td class='data'><b>Small</b></td>",
@@ -3813,7 +3813,8 @@ function LoadLocal() {
                 }
                 break
             }
-        for (n_B[0] = SaveData[246],
+        for (SaveData[246] == "" && (SaveData[246] = 586),
+            n_B[0] = SaveData[246],
             c.B_Enemy.value = SaveData[246],
             Bskill(),
             c.B_AtkSkill.value = SaveData[247],

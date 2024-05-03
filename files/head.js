@@ -75,7 +75,7 @@ v_Race = ["<b style='color:#9F9E9B'>Formless</b>", "<b style='color:purple'>Unde
     v_Type = ["Normal", "Boss"],
     SubName = ["%", " seconds", "Damage", "Critical Damage", "Critical Rate", "Over 10000 hits", "Too high to calculate", "Immesurable", " x ", "Cast Time", "Off", "On"],
     JobName = ["Novice", "Swordman", "Thief", "Acolyte", "Archer", "Magician", "Merchant", "Knight", "Assassin", "Priest", "Hunter", "Wizard", "Blacksmith", "Crusader", "Rogue", "Monk", "Bard", "Dancer", "Sage", "Alchemist", "Super Novice", "Lord Knight", "Assassin Cross", "High Priest", "Sniper", "High Wizard", "Whitesmith", "Paladin", "Stalker", "Champion", "Minstrel (alt. name: Clown)", "Gypsy", "Scholar (alt. name: Professor)", "Biochemist (alt. name: Creator)", "High Novice", "High Swordman", "High Thief", "High Acolyte", "High Archer", "High Magician", "High Merchant", "Taekwon Kid", "Taekwon Master (alt. name: Star Gladiator)", "Soul Linker", "Ninja", "Gunslinger", "Rune Knight (non-trans)", "Rune Knight (trans)", "Guillotine Cross (non-trans)", "Guillotine Cross (trans)", "Arch Bishop (non-trans)", "Arch Bishop (trans)", "Ranger (non-trans)", "Ranger (trans)", "Warlock (non-trans)", "Warlock (trans)", "Mechanic (non-trans)", "Mechanic (trans)", "Royal Guard (non-trans)", "Royal Guard (trans)", "Shadow Chaser (non-trans)", "Shadow Chaser (trans)", "Sura (non-trans)", "Sura (trans)", "Maestro (non-trans)", "Maestro (trans)", "Wanderer (non-trans)", "Wanderer (trans)", "Sorcerer (non-trans)", "Sorcerer (trans)", "Geneticist (non-trans)", "Geneticist (trans)", "Kagero/Oboro", "Expanded Super Novice"];
-var All_DMGskill = [0, 6, 7, 17, 19, 40, 41, 44, 46, 47, 51, 52, 53, 54, 55, 56, 57, 65, 66, 70, 71, 72, 73, 76, 83, 84, 88, 97, 102, 104, 106, 111, 112, 113, 118, 122, 124, 125, 126, 127, 128, 130, 131, 132, 133, 158, 159, 161, 162, 167, 169, 171, 188, 189, 192, 193, 197, 199, 207, 244, 248, 259, 260, 261, 263, 264, 271, 272, 275, 277, 324, 325, 391, 326, 328, 321, 382, 339, 331, 333, 335, 337, 317, 318, 373, 374, 375, 407, 408, 409, 410, 412, 413, 414, 415, 397, 398, 399, 400, 401, 405, 438, 417, 418, 419, 423, 424, 474, 489, 302, 611, 752, 461, 463, 465, 466, 469, 510, 443];
+var All_DMGskill = [0, 6, 7, 17, 19, 40, 41, 44, 46, 47, 51, 52, 53, 54, 55, 56, 57, 65, 66, 70, 71, 72, 73, 76, 83, 84, 88, 97, 102, 104, 106, 111, 112, 113, 118, 122, 124, 125, 126, 127, 128, 130, 131, 132, 133, 158, 159, 161, 162, 167, 169, 171, 188, 189, 192, 193, 197, 199, 207, 244, 248, 259, 260, 261, 263, 264, 271, 272, 275, 277, 324, 325, 391, 326, 328, 321, 382, 339, 331, 333, 335, 337, 317, 318, 373, 374, 375, 407, 408, 409, 410, 412, 413, 414, 415, 397, 398, 399, 400, 401, 405, 438, 417, 418, 419, 423, 424, 474, 489, 302, 611, 752, 461, 463, 465, 466, 469, 510, 443, 473];
 function servers() {
     if (SRV = 1 * c.server.value,
         0 == firstLoad)
@@ -390,7 +390,7 @@ function BattleCalc999() {
             CastAndDelay(),
             void BattleCalc998()
         }
-        for (w_ActS = [6, 7, 19, 41, 44, 65, 71, 72, 73, 83, 84, 158, 161, 169, 171, 176, 188, 189, 199, 207, 248, 260, 261, 264, 288, 289, 290, 292, 302, 303, 305, 306, 307, 308, 326, 317, 318, 331, 333, 335, 337, 339, 382, 388, 398, 400, 419, 423, 428, 430, 431, 432, 434, 435, 436, 437, 461, 463, 465, 466, 469, "NULL"],
+        for (w_ActS = [6, 7, 19, 41, 44, 65, 71, 72, 73, 83, 84, 158, 161, 169, 171, 176, 188, 189, 199, 207, 248, 260, 261, 264, 288, 289, 290, 292, 302, 303, 305, 306, 307, 308, 326, 317, 318, 331, 333, 335, 337, 339, 382, 388, 398, 400, 419, 423, 428, 430, 431, 432, 434, 435, 436, 437, 461, 463, 465, 466, 469, 473, "NULL"],
             iw = 0; w_ActS[iw] != n_A_ActiveSkill && "NULL" != w_ActS[iw]; iw++)
             ;
         if (n_A_ActiveSkill == w_ActS[iw]) {
@@ -424,9 +424,9 @@ function BattleCalc999() {
             else if (158 == n_A_ActiveSkill)
                 wMod += .2 * n_A_ActiveSkillLV,
                 305 == m_Item[n_A_Equip[5]][0] && (wMod = 0);
-            else if (161 == n_A_ActiveSkill)
+            else if (161 == n_A_ActiveSkill || 473 == n_A_ActiveSkill)
                 wMod += .35 * n_A_ActiveSkillLV,
-                n_A_Weapon_element = 6;
+                161 == n_A_ActiveSkill ? n_A_Weapon_element = 6 : n_A_Weapon_element = 7;
             else if (171 == n_A_ActiveSkill)
                 //wMod += .4 * n_A_ActiveSkillLV;
                 wMod += 1 + .5 * n_A_ActiveSkillLV; // changed to alfheim skill modifier
@@ -1327,6 +1327,7 @@ function BattleCalc999() {
             n_Delay[2] = 2,
             n_Delay[3] = 0.4,
             wMod = (200 + 100 * n_A_ActiveSkillLV) / 100,
+            n_A_Buf2[8] && (wMod += 0.05),
             wMod2 = 300 / 100;
             for (s = 0; s <= 2; s++)
                 w_DMG[s] = BK_n_A_DMG[s] * wMod,
