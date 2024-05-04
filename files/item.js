@@ -945,7 +945,7 @@ m_Item = [
 	, [942, 5, 121, 150, 4, 1, 560, 70, "Cardo", 0, "For each two refine levels: DEF +1", 12, -10, 0]
 	, [943, 5, 1001, 112, 2, 4, 70, 50, "Battle Fork", 0, "", 0]
 	, [944, 8, 1053, 110, 3, 3, 70, 50, "Lunakaligo", 0, "<b>[Base STR >= 77]</b><BR>ASPD +4%<BR>When performing an ATK based attack, 15% chance to cause [Stun] status effect on your target.<BR>5% chance to obtain a +4 STR Food when killing a [" + v_Race[2] + "] race monster.<BR>5% chance to obtain a +5 DEX Food when killing a [" + v_Race[3] + "] race monster.<BR>5% chance to obtain a +3 LUK Food when killing a [" + v_Race[5] + "] race monster.", 0]
-	, [945, 10, 124, 105, 4, 2, 100, 60, "Nepenthes Bow", 0, "When using [Double Strafe] skill, 2% chance to cast [" + skillName(44, SRV) + "] at the same time.", 0]
+	, [945, 10, 124, 125, 4, 1, 100, 60, "Nepenthes Bow", 0, "When using [Double Strafe] skill, 2% chance to cast [" + skillName(44, SRV) + "] at the same time.", 0]
 	, [946, 10, 1054, 125, 4, 1, 125, 80, "Cursed Lyre", 0, "When performing a Long Range ATK based attack, 4% chance to cause [Curse] status effect on your target.", 6, -2, 0]
 	, [947, 13, 129, 95, 3, 3, 60, 60, "Horn of Hilthrion", 0, "When performing an ATK based attack, 3% chance to cast [" + skillName(261, SRV) + "] Lvl 1 on your target.<br>1% chance to cast [Summon Spirit Sphere] Lvl 5 when performing an ATK based attack.<br>10% chance to cast [" + skillName(193, SRV) + "] Lvl 1 when [" + skillName(288, SRV) + "] is casted", 0]
 	, [948, 9, 1001, 80, 4, 0, 50, 70, "Eraser", 0, "When performing a MATK based attack, 0.5% chance to cast [Wide Soul Drain] Lvl 1.<br><b>[Refine Rate 10]</b><br>Cast [Wide Soul Drain] Lvl 2 instead.", 89, 20, 4, 3, 5, 2, 76, 8, 0]

@@ -680,7 +680,7 @@
 	, [677, "Sweet Drops", 3, 31, 0, 28, 3986, 15, 44, 30, 23, 15, 67, 102, 12, 19, 730, 1768, , 0, 0, , , 453, 2, 52, 3, 0]
 	, [678, "Hunter Wolf", 2, 31, 0, 30, 4437, 12, 47, 30, 19, 20, 95, 115, 10, 17, 814, 1967, , 0, 0, , , 453, 2, 0]
 	// patch a1.0
-	, [679, "Bloody Wraith", 1, 91, 2, 95, 80000, 90, 60, 110, 115, 91, 1355, 1700, 30, 30, 25000, 15500, , 0, 0, , , 0]
+	, [679, "Bloody Wraith", 1, 53, 2, 95, 80000, 90, 60, 110, 115, 91, 1355, 1700, 30, 30, 25000, 15500, , 0, 0, , , 0]
 	, [680, "Standing Soul", 6, 84, 0, 90, 75000, 90, 50, 120, 115, 40, 1300, 1700, 40, 25, 24000, 13500, , 0, 0, , , 0]
 	, [681, "Dark Priest", 7, 1, 1, 95, 70000, 90, 50, 220, 125, 10, 2000, 2400, 25, 25, 23000, 14000, , 0, 0, , , 0]
 	, [682, "Polluted Dark Lord [MVP]", 6, 94, 2, 99, 8000000, 130, 120, 130, 130, 80, 13000, 16000, 40, 40, 5333333, 5000000, , 1, 0, , , 0]
@@ -776,7 +776,7 @@ v_MonsterSort = [
 	237, 268, 129, 703, 353, 358, 26, 697, 143, 399, 733, 323, 27, 28, 65, 63, 64, 33, 486, 32, 30, 29, 322, 496, 312, 337, 76, 307, 516, 142, 706, 164, 165, 336, 182, 170, 701, 172, 171, 476, "N"];
 EnemyNumSort = v_MonsterSort.length - 2;
 
-var v_Place = ["All Regions", "Abyss Lake Dungeon", "Airship", "Amatsu", "Ant Hell", "Ayothaya", "Battlegrounds", "Byalan",
+var v_Place = ["All Regions", "Abyss Lake Dungeon", "Airship Assault", "Amatsu", "Ant Hell", "Ayothaya", "Battlegrounds", "Byalan",
 	"Bio Labs", /*"Bio Labs 4 (aRO)",*/ /*"Bifrost",*/ /*"Bossnia",*/ "Brasilis", "Clock Tower", "Coal Mine", "Comodo Caves", "Comodo Fields", "Culverts", /*"Dewata",*/ "Dimensional Crack", "Dragon's Nest", "Einbroch Dungeon",
 	"Einbroch Fields", /*"El Dicastes",*/ "Endless Tower Finale", "Geffenia", "Geffen Dungeon", "Geffen Fields", "Glast Heim", "Glast Heim Dungeons", "Gonryun",
 	"Guild Dungeon [Aldebaran]", "Guild Dungeon [Arunafeltz]", "Guild Dungeon [Geffen]", "Guild Dungeon [Payon]", "Guild Dungeon [Prontera]",
