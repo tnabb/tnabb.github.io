@@ -418,9 +418,9 @@ function BattleCalc999() {
             else if (158 == n_A_ActiveSkill)
                 wMod += .2 * n_A_ActiveSkillLV,
                 305 == m_Item[n_A_Equip[5]][0] && (wMod = 0);
-            else if (161 == n_A_ActiveSkill)
+            else if (161 == n_A_ActiveSkill || 473 == n_A_ActiveSkill)
                 wMod += .35 * n_A_ActiveSkillLV,
-                n_A_Weapon_element = 6;
+                161 == n_A_ActiveSkill ? n_A_Weapon_element = 6 : n_A_Weapon_element = 7;
             else if (171 == n_A_ActiveSkill)
                 //wMod += .4 * n_A_ActiveSkillLV;
                 wMod += 1 + .5 * n_A_ActiveSkillLV; // changed to alfheim skill modifier
@@ -1359,6 +1359,7 @@ function BattleCalc999() {
             n_Delay[2] = 2,
             n_Delay[3] = 0.4,
             wMod = (200 + 100 * n_A_ActiveSkillLV) / 100,
+            n_A_Buf2[8] && (wMod += 0.05),
             wMod2 = 300 / 100;
             for (s = 0; s <= 2; s++)
                 w_DMG[s] = BK_n_A_DMG[s] * wMod,

@@ -433,7 +433,7 @@ m_Item = [
 	, [430, 60, 70, 4, 0, 0, 220, 45, "Wind Spirit Armor", 0, "", 198, 4, 0]
 	, [431, 60, 65, 5, 0, "0/1", 110, 75, "Robe of Cast", 0, "", 19, 4, 73, -3, 0]
 	, [432, 60, 1, 7, 0, 1, 250, 60, "Glittering Jacket", 0, "", 19, 5, 134, 3, 0]
-	, [433, 61, 113, 5, 0, "0/1", 160, 83, "Sacred Mission", 0, "", 3, 3, 4, 2, 19, 3, 194, 1, 0]
+	, [433, 61, 113, 5, 0, "0/1", 160, 83, "Herald of God", 0, "", 3, 3, 4, 2, 19, 3, 194, 1, 0]
 	, [434, 61, 113, 5, 0, 0, 140, 68, "Holy Guard", 0, "", 3, 2, 19, 2, 0]
 	, [435, 63, 51, 6, 0, 0, 35, 30, "Safety Boots", 0, "", 193, 1, 0]
 	, [436, 62, 55, 0, 0, 0, 55, 75, "Survivor's Manteau", 0, "", 3, 10, 19, 5, 0]
@@ -945,7 +945,7 @@ m_Item = [
 	, [942, 5, 121, 150, 4, 1, 560, 70, "Cardo", 0, "For each two refine levels: DEF +1", 12, -10, 0]
 	, [943, 5, 1001, 112, 2, 4, 70, 50, "Battle Fork", 0, "", 0]
 	, [944, 8, 1053, 110, 3, 3, 70, 50, "Lunakaligo", 0, "<b>[Base STR >= 77]</b><BR>ASPD +4%<BR>When performing an ATK based attack, 15% chance to cause [Stun] status effect on your target.<BR>5% chance to obtain a +4 STR Food when killing a [" + v_Race[2] + "] race monster.<BR>5% chance to obtain a +5 DEX Food when killing a [" + v_Race[3] + "] race monster.<BR>5% chance to obtain a +3 LUK Food when killing a [" + v_Race[5] + "] race monster.", 0]
-	, [945, 10, 124, 105, 4, 2, 100, 60, "Nepenthes Bow", 0, "When using [Double Strafe] skill, 2% chance to cast [" + skillName(44, SRV) + "] at the same time.", 0]
+	, [945, 10, 124, 125, 4, 1, 100, 60, "Nepenthes Bow", 0, "When using [Double Strafe] skill, 2% chance to cast [" + skillName(44, SRV) + "] at the same time.", 0]
 	, [946, 10, 1054, 125, 4, 1, 125, 80, "Cursed Lyre", 0, "When performing a Long Range ATK based attack, 4% chance to cause [Curse] status effect on your target.", 6, -2, 0]
 	, [947, 13, 129, 95, 3, 3, 60, 60, "Horn of Hilthrion", 0, "When performing an ATK based attack, 3% chance to cast [" + skillName(261, SRV) + "] Lvl 1 on your target.<br>1% chance to cast [Summon Spirit Sphere] Lvl 5 when performing an ATK based attack.<br>10% chance to cast [" + skillName(193, SRV) + "] Lvl 1 when [" + skillName(288, SRV) + "] is casted", 0]
 	, [948, 9, 1001, 80, 4, 0, 50, 70, "Eraser", 0, "When performing a MATK based attack, 0.5% chance to cast [Wide Soul Drain] Lvl 1.<br><b>[Refine Rate 10]</b><br>Cast [Wide Soul Drain] Lvl 2 instead.", 89, 20, 4, 3, 5, 2, 76, 8, 0]
@@ -1001,7 +1001,7 @@ m_Item = [
 	, [998, 63, 3079, 2, 0, 1, 30, 1, "Sprint Shoes", 0, "", 2, 1, 76, 5, 0]
 	, [999, 100, 0, 0, 0, 0, 0, 0, "Sprint Set", 0, "", 15, 7, 16, 7, 73, -3, 74, 15, 0]
 	, [1000, 64, 3079, 0, 0, 0, 10, 70, "Angelic Ring", 0, "When using [Heal], [Sanctuary], and [" + skillName(245, SRV) + "] skills, 5% chance your [Heal], [Sanctuary], and [" + skillName(245, SRV) + "] effectiveness +20% for 3 seconds.", 4, 2, 5, 1, 19, 2, 0]
-	, [1001, 64, 3079, 0, 0, 0, 10, 1, "Sprint Ring", 0, "", 73, -10, 74, 5, 0]
+	, [1001, 64, 3079, 0, 0, 0, 10, 1, "Sprint Ring", 0, "", 73, -10, 74, -5, 0]
 	, [1002, 64, 3079, 0, 0, 1, 20, 1, "Pinguicula Corsage", 0, "", 19, 2, 14, 25, 0]
 	, [1003, 64, 122, 1, 0, 0, 10, 80, "Cold Heart", 0, "", 2, 3, 0]
 	, [1004, 100, 0, 0, 0, 0, 0, 0, "Cold Heart Set", 0, "<b>For each two refine levels of your weapon:</b> ASPD +1%", 28, 8, 0]
@@ -2015,7 +2015,7 @@ m_Item = [
 	, [2008, 62, 0, 3, 0, 1, 30, 0, "Ferlock's Cloak", 0, "<b>[Refine Rate 9~10]</b> VIT +1", 78, 5, 77, -5, 79, -5, 0]
 	, [2009, 63, 0, 3, 0, 1, 20, 0, "Ferlock's Boots", 0, "", 15, 5, 19, 4, 0]
 	, [2010, 100, 0, 0, 0, 0, 0, 0, "Ferlock Set", 0, 0, 13, 1000, 0]
-	, [2011, 1, 62, 150, 4, 2, 120, 50, "Poison Bayonet", 0, 0, 89, 15, 1, 2, 4, 2, 5006, 15, 5007, 15, 5076, 15, 5161, 15, 5162, 15, 5474, 15, 5159, 15, 5158, 15, 5051, 15, 5052, 15, 5053, 15, 5054, 15, 5055, 15, 5056, 15, 5057, 15, 5046, 15, 5047, 15, 5132, 15, 5133, 15, 5122, 15, 5124, 15, 5126, 15, 5127, 15, 5128, 15, 5130, 15, 5131, 15, 5044, 15, 5041, 15, 5106, 15, 5112, 15, 5113, 15, 5065, 15, 5244, 15, 5248, 15, 5088, 15, 5306, 15, 5025, 15, 5037, 15, 5187, 15, 5321, 15, 5197, 15, 5192, 15, 5193, 15, 5097, 15, 5102, 15, 5104, 15, 5339, 15, 5398, 15, 5400, 15, 5401, 15, 5407, 15, 5408, 15, 5409, 15, 5410, 15, 5412, 15, 5413, 15, 5414, 15, 5415, 15, 5302, 15, 5312, 15, 5489, 15, 5461, 15, 5463, 15, 5465, 15, 5466, 15, 5469, 15, 5510, 15, 5443, 15, 0]
+	, [2011, 1, 62, 150, 4, 2, 120, 50, "Poison Bayonet", 0, 0, 89, 15, 1, 2, 4, 2, 5006, 15, 5007, 15, 5076, 15, 5161, 15, 5473, 15, 5162, 15, 5474, 15, 5159, 15, 5158, 15, 5051, 15, 5052, 15, 5053, 15, 5054, 15, 5055, 15, 5056, 15, 5057, 15, 5046, 15, 5047, 15, 5132, 15, 5133, 15, 5122, 15, 5124, 15, 5126, 15, 5127, 15, 5128, 15, 5130, 15, 5131, 15, 5044, 15, 5041, 15, 5106, 15, 5112, 15, 5113, 15, 5065, 15, 5244, 15, 5248, 15, 5088, 15, 5306, 15, 5025, 15, 5037, 15, 5187, 15, 5321, 15, 5197, 15, 5192, 15, 5193, 15, 5097, 15, 5102, 15, 5104, 15, 5339, 15, 5398, 15, 5400, 15, 5401, 15, 5407, 15, 5408, 15, 5409, 15, 5410, 15, 5412, 15, 5413, 15, 5414, 15, 5415, 15, 5302, 15, 5312, 15, 5489, 15, 5461, 15, 5463, 15, 5465, 15, 5466, 15, 5469, 15, 5510, 15, 5443, 15, 0]
 	, [2012, 62, 0, 3, 0, 1, 30, 0, "Manteau of Mystic Frozen", 0, 0, 61, 10, 64, -10, 0]
 	// forged weapons
 	, [2013, 1, 0, 17, 1, 0, 40, 1, "Knife [Forged]", 0, "", 0]
@@ -2074,7 +2074,7 @@ m_Item = [
 	, [2065, 60, 0, 8, 0, 0, 0, 0, "Paradise Uniform", 0, "Recover 15 HP every 10 seconds.<br>Recover 2 SP every 10 seconds.", 193, 1, 0]
 	, [2066, 50, 0, 2, 0, 0, 0, 0, "Paradise Cap", 0, "", 193, 1, 14, 30, 0]
 	, [2067, 62, 0, 3, 0, 0, 0, 0, "Paradise Muffler", 0, "", 193, 1, 60, 5, 9, 3, 0]
-	, [2068, 63, 0, 3, 0, 0, 0, 0, "Paradise Boots", 0, "", 193, 1, 15, 60, 0]
+	, [2068, 63, 0, 3, 0, 0, 0, 0, "Paradise Boots", 0, "", 193, 1, 13, 60, 0]
 	, [2069, 61, 0, 3, 0, 0, 0, 1, "Paradise Shield", 0, "", 193, 1, 190, 5, 191, 5, 192, 5, 0]
 	, [2070, 1, 52, 100, 3, 0, 0, 1, "Paradise Gladius", 0, "", 193, 1, 0]
 	, [2071, 2, 51, 100, 3, 0, 0, 1, "Paradise Saber", 0, "", 193, 1, 0]
@@ -2285,17 +2285,13 @@ function Item_Setumei(nC1, nC2) {
 	}
 	//		CBIstr +="Receive "+ (-1 * nC2) +"% damage from [" + v_Element[nC1-60] + "] element attacks.<BR>";}
 	if (70 == nC1)
-		CBIstr += "Critical damage +" + nC2 + "%<BR>";	//mejorar
+		CBIstr += "Critical damage" + wIS + nC2 + "%<BR>";	//mejorar
 	if (71 == nC1)
 		CBIstr += "Reflect melee ATK based damage by " + nC2 + "%<BR>";
 	if (72 == nC1)
 		CBIstr += "Fixed Casting Time" + wIS + nC2 + "%<BR>";
 	if (73 == nC1) {
-		if (SRV < 50) {		// Classic Servers
-			CBIstr += "Casting Time" + wIS + nC2 + "%<BR>";
-		} else {		// Renewal Servers
-			CBIstr += "Variable Casting Time" + wIS + nC2 + "%<BR>";
-		}
+		CBIstr += "Casting Time" + wIS + nC2 + "%<BR>";
 	}
 	if (74 == nC1) {	//mejorar: hacerlo como "casting time" (los numeros negativos disminuyen Delay y los positivos aumentan Delay)
 		if (nC2 > 0)
