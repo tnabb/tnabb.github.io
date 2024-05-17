@@ -1289,7 +1289,6 @@ function StAllCalc() {
         SkillSearch(361) && n_A_JobLV >= 50 ? (10 == SRV ? M += Math.max(p, m) + 3 * SkillSearch(361) + v : M += Math.max(p, m, 3 * SkillSearch(361)) + v,
             b = 1) : M += Math.max(p, m, v),
         3 == n_A_Buf7[35] ? M += 20 : n_A_Buf7[44] || 2 == n_A_Buf7[35] ? M += 15 : (n_A_Buf7[26] || 1 == n_A_Buf7[35]) && (M += 10),
-        EquipNumSearch(1003) & EquipNumSearch(442) && (M += n_A_Weapon_refine / 2),
         1 * c.server.value < 50)
         1 == n_Nitou ? 0 == n_A_WeaponType && 0 != n_A_Weapon2Type ? WD = 50 * m_JobASPD[n_A_JOB][n_A_Weapon2Type] : WD = 35 * (m_JobASPD[n_A_JOB][n_A_WeaponType] + m_JobASPD[n_A_JOB][n_A_Weapon2Type]) : WD = 50 * m_JobASPD[n_A_JOB][n_A_WeaponType],
             n_A_ASPD = (2000 - Math.floor(((WD - (Math.round(WD * n_A_AGI / 25) + Math.round(WD * n_A_DEX / 100)) / 10) * (1 - M / 100))*10))/10;
