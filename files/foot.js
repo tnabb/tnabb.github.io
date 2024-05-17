@@ -634,7 +634,7 @@ function StAllCalc() {
         0 != n_A_JOB && 20 != n_A_JOB || 1670 != n_A_Equip[3] || (M += 80),
         EquipNumSearch(2085) && (M += 50 * n_A_SHOES_REFINE),
         EquipNumSearch(2087) && (M += 5 * Math.floor(n_A_BaseLV / 2)),
-        536 == n_A_Equip[8] && (3 != (u = n_A_JobClass()) && 4 != u && 5 != u || (M += 5 * n_A_BaseLV)),
+        536 == n_A_Equip[8] && (3 != (u = n_A_JobClass()) && 4 != u && 5 != u && 45 != u || (M += 5 * n_A_BaseLV)),
         n_A_MaxHP += M,
         n_A_MaxHP < 1 && (n_A_MaxHP = 1),
         M = 0,
@@ -890,7 +890,7 @@ function StAllCalc() {
         n_A_SHOULDER_REFINE <= 5 && 258 == n_A_card[12] && (n_A_MDEF += 8),
         n_A_SHOULDER_REFINE <= 5 && 258 == n_A_card[12] && 1865 == n_A_Equip[7] && (n_A_MDEF -= 7),
         1956 == n_A_Equip[0] && 26 == n_A_JOB && (n_A_MDEF += 5),
-        986 != n_A_Equip[6] || 3 != n_A_JobClass() && 4 != n_A_JobClass() && 5 != n_A_JobClass() || (n_A_MDEF += 5),
+        986 != n_A_Equip[6] || 3 != n_A_JobClass() && 4 != n_A_JobClass() && 5 != n_A_JobClass() && 45 != n_A_JobClass() || (n_A_MDEF += 5),
         SkillSearch(9) ? n_A_MDEF += SkillSearch(9) : SkillSearch(256) && (n_A_MDEF += 1),
         SkillSearch(512) && (n_A_MDEF += SkillSearch(512)),
         (TimeItemNumSearch(9) || TimeItemNumSearch(50)) && (n_A_MDEF -= 20),
@@ -1022,7 +1022,7 @@ function StAllCalc() {
         n_A_LEFT_REFINE >= 4 && (n_A_LUCKY += n_A_LEFT_REFINE - 4),
         535 == n_A_Equip[7]) {
         var u = n_A_JobClass();
-        3 != u && 4 != u && 5 != u || (n_A_LUCKY += 5,
+        3 != u && 4 != u && 5 != u && 45 != u || (n_A_LUCKY += 5,
             n_A_LUCKY += 2 * n_A_SHOULDER_REFINE)
     }
     41 == n_A_JobClass() && 678 == n_A_Equip[3] && (n_A_LUCKY += 2),
@@ -1596,7 +1596,7 @@ function StAllCalc() {
             n_tok[79] -= 5),
         534 == n_A_Equip[6] && (wSPVS = n_A_JobClass(),
             1 != wSPVS && 2 != wSPVS && 6 != wSPVS || (n_tok[151] += 50),
-            3 != wSPVS && 4 != wSPVS && 5 != wSPVS || (n_tok[156] += 50)),
+            3 != wSPVS && 4 != wSPVS && 5 != wSPVS && 45 != wSPVS || (n_tok[156] += 50)),
         828 == n_A_Equip[2] && (n_tok[151] += 2 * n_A_HEAD_REFINE, n_tok[152] += 2 * n_A_HEAD_REFINE, n_tok[159] += 2 * n_A_HEAD_REFINE),
         2080 == n_A_Equip[2] && CardNumSearch(74) && (n_tok[152] += 100),
         SU_AGI >= 90 && (n_tok[151] += 30 * CardNumSearch(176),
@@ -2140,8 +2140,9 @@ function FirstNovis() {
         WeaponSet2())
 }
 function JobEquipItemSearch(_) {
-    if (_ >= 2e3 && n_A_JOB <= 40 && (_ -= 2e3),
-        1e3 <= _ && _ <= 1999) {
+    console.log(_);
+    if (_ >= 2e3 && (n_A_JOB <= 40 || n_A_JOB == 46) && (_ -= 2e3), 1e3 <= _ && _ <= 1999) {
+        console.log("??????");
         if (1 != n_Reborn)
             return 0;
         _ -= 1e3
