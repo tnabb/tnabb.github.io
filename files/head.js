@@ -1512,7 +1512,7 @@ function BattleCalc999() {
                 n_A_Weapon_element = 8,
                 wCast = 1,
                 n_Delay[2] = 1,
-                wMod = .7 + .1 * n_A_ActiveSkillLV;
+                wMod = 1.25;
             else if (37 == n_A_ActiveSkill || 387 == n_A_ActiveSkill)
                 n_A_Weapon_element = 6,
                 wCast = 2,
@@ -5317,7 +5317,7 @@ function calc() {
 function BattleCalc(e, _) {
     e < 1 && (e = 1),
     1 == wCriTyuu && (e = Math.floor(e * (100 + n_tok[70]) / 100)),
-    SkillSearch(266) && (e = Math.floor(e * ((150 + 50 * SkillSearch(266)) * (1 - n_M_debuff[0] / 100)) / 100)), // added edp dmg reduction
+    SkillSearch(266) && 19 != n_A_ActiveSkill && 263 != n_A_ActiveSkill && 88 != n_A_ActiveSkill && 264 != n_A_ActiveSkill && (e = Math.floor(e * ((150 + 50 * SkillSearch(266)) * (1 - n_M_debuff[0] / 100)) / 100)), // added edp dmg reduction
     10 == _ ? e += n_A_WeaponLV_refineATK : e = BattleCalc4(e, _, 0),
     1 == n_A_WeaponType || 2 == n_A_WeaponType ? e += 4 * SkillSearch(3) : 3 == n_A_WeaponType ? e += 4 * SkillSearch(4) : 4 == n_A_WeaponType || 5 == n_A_WeaponType ? 0 == SkillSearch(78) ? e += 4 * SkillSearch(69) : e += 5 * SkillSearch(69) : 8 == n_A_WeaponType ? e += 3 * SkillSearch(89) : 11 == n_A_WeaponType ? e += 3 * SkillSearch(81) : 14 == n_A_WeaponType ? e += 3 * SkillSearch(198) : 15 == n_A_WeaponType ? e += 3 * SkillSearch(206) : 12 == n_A_WeaponType ? e += 3 * SkillSearch(224) : 6 == n_A_WeaponType || 7 == n_A_WeaponType ? e += 3 * SkillSearch(241) : 13 != n_A_WeaponType && 0 != n_A_WeaponType || (e += 3 * SkillSearch(183)),
     0 == n_A_WeaponType && SkillSearch(329) && (e += 10 * SkillSearch(329)),
