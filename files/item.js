@@ -2112,6 +2112,27 @@ m_Item = [
 	, [2102, 10, 114, 130, 4, 1, 150, 70, "Undead Shot (special)", 0, "Increases the proc chance of all AutoSpell effects by 25%.<br><b>[Refine Rate 7~10]</b> ASPD+5%", 40, 5, 89, 15, 0]
 	, [2103, 12, 109, 80, 3, 2, 100, 70, "Arc Bible", 0, "[Lex Aeterna] After-cast Delay -50%", 3, 3, 4, 3, 0]
 	, [2104, 60, 0, 5, 0, 1, 30, 70, "Lounge Suit", 0, "", 5, 2, 74, 5, 0]
+	// crimson weapons
+	, [2105, 1, 95, 60, 3, 0, 55, 50, "Crimson Dagger", 0, "ATK +(refine level^2)<br><b>For each refine:</b><br>Deal +6% ATK based damage against [Normal/Boss/Guardian] type monsters.", 0]
+	, [2106, 10, 76, 60, 3, 0, 150, 50, "Crimson Bow", 0, "ATK +(refine level^2)<br><b>For each refine:</b><br>Deal +6% ATK based damage against [Normal/Boss/Guardian] type monsters.", 0]
+	, [2107, 11, 0, 70, 3, 0, 150, 50, "Crimson Katar", 0, "ATK +(refine level^2)<br><b>For each refine:</b><br>Deal +6% ATK based damage against [Normal/Boss/Guardian] type monsters.", 0]
+	, [2108, 12, 142, 70, 3, 0, 55, 50, "Crimson Bible", 0, "ATK +(refine level^2)<br><b>For each refine:</b><br>Deal +7% ATK based damage against [Normal/Boss/Guardian] type monsters.", 0]
+	, [2109, 16, 0, 70, 3, 0, 100, 50, "Crimson Huuma Shuriken", 0, "ATK +(refine level^2)<br><b>For each refine:</b><br>Deal +6% ATK based damage against [Normal/Boss/Guardian] type monsters.", 0]
+	, [2110, 8, 152, 70, 3, 0, 80, 50, "Crimson Mace", 0, "ATK +(refine level^2)<br><b>For each refine:</b><br>Deal +6% ATK based damage against [Normal/Boss/Guardian] type monsters.", 0]
+	, [2111, 13, 115, 70, 3, 0, 55, 50, "Crimson Knuckle", 0, "ATK +(refine level^2)<br><b>For each refine:</b><br>Deal +6% ATK based damage against [Normal/Boss/Guardian] type monsters.", 0]
+	, [2112, 100, 0, 0, 0, 0, 0, 0, "Imperial Glove + Crimson Knuckle", 0, "", 12, 3, 5187, 10, 5188, 10, 5189, 10, 5290, 10, 0]
+	, [2113, 17, 0, 70, 3, 0, 180, 50, "Crimson Revolver", 0, "ATK +(refine level^2)<br><b>For each refine:</b><br>Deal +6% ATK based damage against [Normal/Boss/Guardian] type monsters.", 0]
+	, [2114, 19, 0, 150, 3, 0, 180, 50, "Crimson Shotgun", 0, "ATK +(refine level^2)<br><b>For each refine:</b><br>Deal +6% ATK based damage against [Normal/Boss/Guardian] type monsters.", 0]
+	, [2115, 21, 0, 180, 3, 0, 180, 50, "Crimson Launcher", 0, "ATK +(refine level^2)<br><b>For each refine:</b><br>Deal +5% ATK based damage against [Normal/Boss/Guardian] type monsters.", 0]
+	, [2116, 18, 0, 70, 3, 0, 150, 50, "Crimson Rifle", 0, "ATK +(refine level^2)<br><b>For each refine:</b><br>Deal +6% ATK based damage against [Normal/Boss/Guardian] type monsters.", 0]
+	, [2117, 20, 0, 40, 3, 0, 250, 50, "Crimson Gatling Gun", 0, "ATK +(refine level^2)<br><b>For each refine:</b><br>Deal +5% ATK based damage against [Normal/Boss/Guardian] type monsters.", 0]
+	, [2118, 15, 0, 80, 3, 0, 80, 50, "Crimson Wire", 0, "ATK +(refine level^2)<br><b>For each refine:</b><br>Deal +6% ATK based damage against [Normal/Boss/Guardian] type monsters.", 0]
+	, [2119, 14, 0, 80, 3, 0, 150, 50, "Crimson Violin", 0, "ATK +(refine level^2)<br><b>For each refine:</b><br>Deal +6% ATK based damage against [Normal/Boss/Guardian] type monsters.", 0]
+	, [2120, 9, 153, 80, 3, 0, 50, 50, "Crimson Staff", 0, "<b>For each refine:</b><br>Deal +1% MATK based damage against all monsters.<br>On all monsters, ignore 2% MDEF.", 89, 15, 4, 4, 5, 4, 0]
+	, [2121, 2, 154, 70, 3, 0, 100, 50, "Crimson Saber", 0, "ATK +(refine level^2)<br><b>For each refine:</b><br>Deal +6% ATK based damage against [Normal/Boss/Guardian] type monsters.", 0]
+	, [2122, 3, 0, 90, 3, 0, 100, 50, "Crimson Two-Handed Sword", 0, "ATK +(refine level^2)<br><b>For each refine:</b><br>Deal +7% ATK based damage against [Normal/Boss/Guardian] type monsters.", 0]
+	, [2123, 4, 0, 70, 3, 0, 100, 50, "Crimson Spear", 0, "ATK +(refine level^2)<br><b>For each refine:</b><br>Deal +6% ATK based damage against [Normal/Boss/Guardian] type monsters.", 0]
+	, [2124, 6, 155, 70, 3, 0, 100, 50, "Crimson Axe", 0, "ATK +(refine level^2)<br><b>For each refine:</b><br>Deal +5% ATK based damage against [Normal/Boss/Guardian] type monsters.<br>Deal +1% ranged ATK based damage.<br><b>For each 2 refine levels:</b><br>On all monsters ignore 1% DEF.", 0]
 ];
 
 //[ id, display location, job that can use, atk/def, level of weapon, slots, weight, level required to use, "name of item", ?, "description", effect1, effect2, ..., 0 =? ]
@@ -2691,6 +2712,7 @@ w_SE = [[737, 436, 475, "NULL"]
 	, [2085, 2084, 436, 475, "NULL"]
 	, [2085, 2084, 436, 476, "NULL"]
 	, [2085, 2084, 436, 477, "NULL"]
+	, [2112, 1998, 2111, "NULL"]
 ];
 SE_MAXnum = w_SE.length - 1;
 for (var i = 0; i <= SE_MAXnum; i++) {

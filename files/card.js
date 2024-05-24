@@ -1136,6 +1136,7 @@ m_RandomOpt = [
 	, [98, "Dragon MDEF Pierce [146]", 319, 0]
 	, [99, "Boss Magical Damage [152]", 353, 0] 
 	, [100, "* All Monster MDEF Pierce", 295, 0]
+	, [101, "Indestructible Weapon", 0, 0] // no actual effect
 ];
 
 m_RandomOptMelee = [
@@ -1170,12 +1171,18 @@ m_RandomOptForged = [
 	[0, 7, 5, 3, 8, 4, 6, "NULL"],
 ];
 
+m_RandomOptCrimson = [
+	[0, 17, 18, 24, 25, "NULL"],
+	[0, 49, 50, 51, 53, 9, 10, 15, 16, 101, "NULL"],
+];
+
 m_RandomOptMeleeType = [1, 2, 3, 4, 5, 6, 7, 8, 11, 13];
 m_RandomOptRangedType = [10, 14, 15, 16, 17, 18, 19, 20, 21];
 m_RandomOptMagicType = [9];
 m_RandomOptSpecialType = [12];
 m_RandomOptSpecialWeapons = [395, 939, 93, 539, 1869, 1870, 1871, 1851, 2011, 2102];
 m_RandomOptForgedWeapons = [2019, 2020, 2027, 2028, 2029, 2030, 2034, 2035, 2036, 2043, 2044, 2045, 2049, 2050, 2056, 2057, 2058, 2062, 2063, 2064];
+m_RandomOptCrimsonWeapons = [2105, 2106, 2107, 2108, 2109, 2110, 2111, 2113, 2114, 2115, 2116, 2117, 2118, 2119, 2120, 2121, 2122, 2123, 2124];
 
 function Click_RandOpt(){
 	n_A_randopt[0] = 1 * c.A_weapon1_ropt1.value;

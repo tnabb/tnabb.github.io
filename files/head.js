@@ -2812,7 +2812,7 @@ function ClickWeaponType(e) {
     // random options for weapons here
     if(parseInt(e) == 0 || (m_ForgedItems.includes(parseInt(n_A_Equip[0])) && !(m_RandomOptForgedWeapons.includes(parseInt(n_A_Equip[0]))))){
         RandOptWeapon1Reset();
-    }else if(m_RandomOptForgedWeapons.includes(parseInt(n_A_Equip[0]))){
+    }else if(m_RandomOptForgedWeapons.includes(parseInt(n_A_Equip[0]))){ // forged
         if(!(m_RandomOptForgedWeapons.includes(parseInt(oldWeapon))) || parseInt(oldWeapon) == 0){
             RandOptWeapon1Reset();
             for(i = 0; "NULL" != m_RandomOptForged[0][i]; i++){
@@ -2827,6 +2827,18 @@ function ClickWeaponType(e) {
             for(i = 0; "NULL" != m_RandomOptForged[3][i]; i++){
                 c.A_weapon1_ropt4.options[i] = new Option(m_RandomOpt[m_RandomOptForged[3][i]][1], m_RandomOpt[m_RandomOptForged[3][i]][0]);
             }
+        }
+    }else if(m_RandomOptCrimsonWeapons.includes(parseInt(n_A_Equip[0]))){ // crimson
+        if(!(m_RandomOptCrimsonWeapons.includes(parseInt(oldWeapon))) || parseInt(oldWeapon) == 0){
+            RandOptWeapon1Reset();
+            for(i = 0; "NULL" != m_RandomOptCrimson[0][i]; i++){
+                c.A_weapon1_ropt1.options[i] = new Option(m_RandomOpt[m_RandomOptCrimson[0][i]][1], m_RandomOpt[m_RandomOptCrimson[0][i]][0]);
+            }
+            for(i = 0; "NULL" != m_RandomOptCrimson[1][i]; i++){
+                c.A_weapon1_ropt2.options[i] = new Option(m_RandomOpt[m_RandomOptCrimson[1][i]][1], m_RandomOpt[m_RandomOptCrimson[1][i]][0]);
+            }
+            c.A_weapon1_ropt3.options[0] = new Option(m_RandomOpt[0][1], m_RandomOpt[0][0]);
+            c.A_weapon1_ropt4.options[0] = new Option(m_RandomOpt[0][1], m_RandomOpt[0][0]);
         }
     }else if(m_RandomOptSpecialType.includes(parseInt(e)) || m_RandomOptSpecialWeapons.includes(parseInt(n_A_Equip[0]))){ // special
         if(!(m_RandomOptSpecialType.includes(parseInt(n_A_WeaponType)) || m_RandomOptSpecialWeapons.includes(parseInt(oldWeapon))) || parseInt(oldWeapon) == 0){
@@ -2845,7 +2857,7 @@ function ClickWeaponType(e) {
             }
         }
     }else if(m_RandomOptMeleeType.includes(parseInt(e))){ // melee
-        if(!(m_RandomOptMeleeType.includes(parseInt(n_A_WeaponType))) || m_RandomOptSpecialWeapons.includes(parseInt(oldWeapon)) || m_ForgedItems.includes(parseInt(oldWeapon)) || parseInt(oldWeapon) == 0){
+        if(!(m_RandomOptMeleeType.includes(parseInt(n_A_WeaponType))) || m_RandomOptSpecialWeapons.includes(parseInt(oldWeapon)) || m_ForgedItems.includes(parseInt(oldWeapon)) || m_RandomOptCrimsonWeapons.includes(parseInt(oldWeapon)) || parseInt(oldWeapon) == 0){
             RandOptWeapon1Reset();
             for(i = 0; "NULL" != m_RandomOptMelee[0][i]; i++){
                 c.A_weapon1_ropt1.options[i] = new Option(m_RandomOpt[m_RandomOptMelee[0][i]][1], m_RandomOpt[m_RandomOptMelee[0][i]][0]);
@@ -2859,7 +2871,7 @@ function ClickWeaponType(e) {
             c.A_weapon1_ropt4.options[0] = new Option(m_RandomOpt[0][1], m_RandomOpt[0][0]);
         }
     }else if(m_RandomOptRangedType.includes(parseInt(e))){ // ranged
-        if(!(m_RandomOptRangedType.includes(parseInt(n_A_WeaponType))) || m_RandomOptSpecialWeapons.includes(parseInt(oldWeapon)) || parseInt(oldWeapon) == 0){
+        if(!(m_RandomOptRangedType.includes(parseInt(n_A_WeaponType))) || m_RandomOptSpecialWeapons.includes(parseInt(oldWeapon)) || m_RandomOptCrimsonWeapons.includes(parseInt(oldWeapon)) || parseInt(oldWeapon) == 0){
             RandOptWeapon1Reset();
             for(i = 0; "NULL" != m_RandomOptRanged[0][i]; i++){
                 c.A_weapon1_ropt1.options[i] = new Option(m_RandomOpt[m_RandomOptRanged[0][i]][1], m_RandomOpt[m_RandomOptRanged[0][i]][0]);
@@ -2873,7 +2885,7 @@ function ClickWeaponType(e) {
             c.A_weapon1_ropt4.options[0] = new Option(m_RandomOpt[0][1], m_RandomOpt[0][0]);
         }
     }else if(m_RandomOptMagicType.includes(parseInt(e))){ // magic
-        if(!(m_RandomOptMagicType.includes(parseInt(n_A_WeaponType))) || m_RandomOptSpecialWeapons.includes(parseInt(oldWeapon)) || parseInt(oldWeapon) == 0){
+        if(!(m_RandomOptMagicType.includes(parseInt(n_A_WeaponType))) || m_RandomOptSpecialWeapons.includes(parseInt(oldWeapon)) || m_RandomOptCrimsonWeapons.includes(parseInt(oldWeapon)) || parseInt(oldWeapon) == 0){
             RandOptWeapon1Reset();
             for(i = 0; "NULL" != m_RandomOptMagic[0][i]; i++){
                 c.A_weapon1_ropt1.options[i] = new Option(m_RandomOpt[m_RandomOptMagic[0][i]][1], m_RandomOpt[m_RandomOptMagic[0][i]][0]);
@@ -2956,6 +2968,17 @@ function ClickWeaponType2(e) {
                         c.A_weapon2_ropt4.options[i] = new Option(m_RandomOpt[m_RandomOptForged[3][i]][1], m_RandomOpt[m_RandomOptForged[3][i]][0]);
                     }
                 }
+            }else if(m_RandomOptCrimsonWeapons.includes(parseInt(n_A_Equip[1]))){ // crimson
+                if(!(m_RandomOptCrimsonWeapons.includes(parseInt(oldWeapon))) || parseInt(oldWeapon) == 0){
+                    for(i = 0; "NULL" != m_RandomOptCrimson[0][i]; i++){
+                        c.A_weapon1_ropt1.options[i] = new Option(m_RandomOpt[m_RandomOptForged[0][i]][1], m_RandomOpt[m_RandomOptForged[0][i]][0]);
+                    }
+                    for(i = 0; "NULL" != m_RandomOptCrimson[1][i]; i++){
+                        c.A_weapon1_ropt2.options[i] = new Option(m_RandomOpt[m_RandomOptForged[1][i]][1], m_RandomOpt[m_RandomOptForged[1][i]][0]);
+                    }
+                    c.A_weapon1_ropt3.options[0] = new Option(m_RandomOpt[0][1], m_RandomOpt[0][0]);
+                    c.A_weapon1_ropt4.options[0] = new Option(m_RandomOpt[0][1], m_RandomOpt[0][0]);
+                }
             }else if(m_RandomOptSpecialWeapons.includes(parseInt(e))){ // special weapons that assassins can use
                 if(!(m_RandomOptSpecialWeapons.includes(parseInt(n_A_Equip[1])))){
                     for(i = 0; "NULL" != m_RandomOptSpecial[0][i]; i++){
@@ -2972,7 +2995,7 @@ function ClickWeaponType2(e) {
                     }
                 }
             }else{ // melee weapons
-                if(m_RandomOptSpecialWeapons.includes(parseInt(n_A_Equip[1])) || m_RandomOptForgedWeapons.includes(parseInt(n_A_Equip[1])) || parseInt(n_A_Equip[1]) == 0){
+                if(m_RandomOptSpecialWeapons.includes(parseInt(n_A_Equip[1])) || m_RandomOptForgedWeapons.includes(parseInt(n_A_Equip[1])) || m_RandomOptCrimsonWeapons.includes(parseInt(n_A_Equip[1])) || parseInt(n_A_Equip[1]) == 0){
                     for(i = 0; "NULL" != m_RandomOptMelee[0][i]; i++){
                         c.A_weapon2_ropt1.options[i] = new Option(m_RandomOpt[m_RandomOptMelee[0][i]][1], m_RandomOpt[m_RandomOptMelee[0][i]][0]);
                     }
