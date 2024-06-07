@@ -2099,7 +2099,7 @@ m_Item = [
 	, [2089, 61, 0, 3, 0, 1, 0, 80, "Time Keeper Shield", 0, "<b>For each refine level past 4:</b> Perfect Dodge +1", 3, 1, 0]
 	, [2090, 62, 0, 2, 0, 1, 50, 50, "Candy Bag Backpack", 0, "<b>For each refine level:</b> [Piece of Cake] Recovery Rate +10%", 80, 1, 89, 1, 74, 5, 370, -5, 0]
 	, [2091, 9, 53, 10, 3, 0, 40, 0, "Soul Stick", 0, "[Turn Undead] After-cast Delay -50%<br><b>For each refine level:</b><br>INT +1<br>LUK +1<br><b>[Refine Rate 9~10]</b><br>[Turn Undead] Range +2", 89, 5, 93, 100, 0]
-	, [2092, 21, 59, 220, 3, 2, 200, 10, "Southern Cross", 0, "[Basic Grenade] skill damage +5%", 5849, 5, 0]
+	, [2092, 21, 59, 220, 3, 2, 200, 10, "Southern Cross", 0, "", 5849, 5, 5853, 5, 0]
 	, [2093, 64, 0, 0, 0, 1, 10, 90, "Toy Ring", 0, "", 1, 1, 5, -1, 10, 4, 0]
 	, [2094, 50, 0, 0, 0, 0, 40, 1, "Antler Fedora", 0, "Consumes 100% SP when the headgear is unequipped.", 4, 3, 220, 54, 0]
 	, [2095, 8, 53, 95, 4, 2, 150, 40, "Bloody Cross", 0, "", 36, 10, 47, 10, 0]

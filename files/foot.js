@@ -561,9 +561,8 @@ function StAllCalc() {
         SU_DEX >= 90 && 1947 == n_A_Equip[8] && (M += 12),
         n_A_Weapon_refine >= 9 && 1949 == n_A_Equip[0] && (M += 10),
         (1956 == n_A_Equip[0] || 1956 == n_A_Equip[1]) && 22 == n_A_JOB && (M += 60 * EquipNumSearch(1956)),
-        !SkillSearch(433) || 20 != n_A_WeaponType && 0 != n_A_WeaponType || (M += 20 + 10 * SkillSearch(433)),
+        SkillSearch(433) && 20 == n_A_WeaponType && (M += 70 + 10 * SkillSearch(433)),
         0 == n_A_Buf6[0] && n_A_Buf6[1] >= 1 && 3 == n_A_Bodyelement && (M += 10 * n_A_Buf6[1]),
-        SkillSearch(845) && (M += SkillSearch(845) * 10 + SkillSearch(416) * 10),
         2105 == n_A_Equip[0] && (M += n_A_Weapon_refine ** 2),
         2106 == n_A_Equip[0] && (M += n_A_Weapon_refine ** 2),
         2107 == n_A_Equip[0] && (M += n_A_Weapon_refine ** 2),
@@ -1012,7 +1011,7 @@ function StAllCalc() {
         595 == n_A_card[13] && (n_A_FLEE += 2*n_A_SHOES_REFINE),
         2 == n_A_Buf6[0] && n_A_Buf6[1] >= 1 && 4 == n_A_Bodyelement && (n_A_FLEE += 3 * n_A_Buf6[1]),
         8 == n_A_JOB || 14 == n_A_JOB || 22 == n_A_JOB || 28 == n_A_JOB ? n_A_FLEE += 4 * SkillSearch(14) : n_A_FLEE += 3 * SkillSearch(14),
-        SkillSearch(433) && (20 != n_A_WeaponType && 0 != n_A_WeaponType || (n_A_FLEE -= 5 * SkillSearch(433))),
+        SkillSearch(433) && 20 == n_A_WeaponType && (n_A_FLEE -= 25 + 5 * SkillSearch(433)),
         Mikiri = new Array(0, 1, 3, 4, 6, 7, 9, 10, 12, 13, 15),
         n_A_FLEE += Mikiri[SkillSearch(191)],
         SRV >= 50) {
@@ -1296,7 +1295,7 @@ function StAllCalc() {
         SkillSearch(196) && (M -= 25),
         SkillSearch(258) && (M += 30),
         SkillSearch(420) && (M += 20),
-        SkillSearch(433) && (20 != n_A_WeaponType && 0 != n_A_WeaponType || (M += 2 * SkillSearch(433)));
+        SkillSearch(433) && (20 == n_A_WeaponType) && (M += 10 + 2 * SkillSearch(433));
     var v = 0;
     SkillSearch(357) && (v += Math.floor((n_A_BaseLV + n_A_LUK + n_A_DEX) / 10));
     var p = 0;
@@ -1310,7 +1309,7 @@ function StAllCalc() {
         1 * c.server.value < 50)
         1 == n_Nitou ? 0 == n_A_WeaponType && 0 != n_A_Weapon2Type ? WD = 50 * m_JobASPD[n_A_JOB][n_A_Weapon2Type] : WD = 35 * (m_JobASPD[n_A_JOB][n_A_WeaponType] + m_JobASPD[n_A_JOB][n_A_Weapon2Type]) : WD = 50 * m_JobASPD[n_A_JOB][n_A_WeaponType],
             n_A_ASPD = (2000 - Math.floor(((WD - (Math.round(WD * n_A_AGI / 25) + Math.round(WD * n_A_DEX / 100)) / 10) * (1 - M / 100))*10))/10;
-    else {
+    else { // renewal aspd calculations perhaps ?
         if (n_A_ASPD = 0,
             jobASPD = m_JobASPD_R[n_A_JOB][n_A_WeaponType],
             50 !== n_A_JOB && 51 !== n_A_JOB || StPlusWeapon(bon_TWO_HANDED_STAFF) && (jobASPD += 5),
@@ -1324,20 +1323,20 @@ function StAllCalc() {
         305 !== n_A_Equip[5] && (N = m_JobASPD_R[n_A_JOB][22]);
         var k = 0
             , b = 0;
-        20 == n_A_WeaponType && (k += 2 * SkillSearch(433)),
-            13 === n_A_JobClass2() && SkillSearch(78) && (k -= 10 * (5 - SkillSearch(78))),
-            7 === n_A_JobClass2() && (SkillSearch(78) || SkillSearch(552)) && (SkillSearch(78) ? k -= 10 * (5 - SkillSearch(78)) : k -= 5 * (5 - SkillSearch(552))),
-            SkillSearch(196) && (k -= 25),
-            SkillSearch(165) && (k -= 25 - 5 * SkillSearch(165)),
-            3 == n_A_Buf7[35] ? k += 20 : n_A_Buf7[44] || 2 == n_A_Buf7[35] ? k += 15 : (n_A_Buf7[26] || 1 == n_A_Buf7[35]) && (k += 10),
-            k = (100 - k) / 100;
+        //20 == n_A_WeaponType && (k += 10 + 2 * SkillSearch(433)),
+        13 === n_A_JobClass2() && SkillSearch(78) && (k -= 10 * (5 - SkillSearch(78))),
+        7 === n_A_JobClass2() && (SkillSearch(78) || SkillSearch(552)) && (SkillSearch(78) ? k -= 10 * (5 - SkillSearch(78)) : k -= 5 * (5 - SkillSearch(552))),
+        SkillSearch(196) && (k -= 25),
+        SkillSearch(165) && (k -= 25 - 5 * SkillSearch(165)),
+        3 == n_A_Buf7[35] ? k += 20 : n_A_Buf7[44] || 2 == n_A_Buf7[35] ? k += 15 : (n_A_Buf7[26] || 1 == n_A_Buf7[35]) && (k += 10),
+        k = (100 - k) / 100;
         var D = 0;
         n_A_AGI < 205 && (D = (Math.sqrt(205) - Math.sqrt(n_A_AGI)) / 7.15);
         var I = .96;
         jobASPD > 145 && (I = 1 - (jobASPD - 144) / 50),
-            n_A_ASPD = 200 - (200 - (jobASPD + N - D + statASPD * I)) * k,
-            percentAspdEquipment = (195 - n_A_ASPD) * (B / 100),
-            n_A_ASPD += percentAspdEquipment
+        n_A_ASPD = 200 - (200 - (jobASPD + N - D + statASPD * I)) * k,
+        percentAspdEquipment = (195 - n_A_ASPD) * (B / 100),
+        n_A_ASPD += percentAspdEquipment
     }
     var M = 0;
     M += EquipNumSearch(1696),
@@ -1358,7 +1357,7 @@ function StAllCalc() {
         1 == SkillSearch(815) && SkillSearch(816) > 0 && 1 == SkillSearch(806) && (M += 5),
         n_A_ASPD += M;
         if(c.increase_aspdcap.checked || (SkillSearch(846) && 20 == n_A_WeaponType)){
-            n_A_ASPD > 193 && (n_A_ASPD = 193);
+            SkillSearch(852) == 2 ? n_A_ASPD > 195 && (n_A_ASPD = 195) : n_A_ASPD > 193 && (n_A_ASPD = 193);
         }else{
             n_A_ASPD > 190 && (n_A_ASPD = 190);
         }
@@ -1423,7 +1422,9 @@ function StAllCalc() {
         2091 == n_A_Equip[0] && 102 == n_A_ActiveSkill && (AC_S += 50),
         1 == SkillSearch(851) && 435 == n_A_ActiveSkill && (AC_S += 50),
         3 == SkillSearch(851) && (849 == n_A_ActiveSkill || 429 == n_A_ActiveSkill || 848 == n_A_ActiveSkill) && (AC_S += 50),
-        SkillSearch(852) && (429 == n_A_ActiveSkill || 428 == n_A_ActiveSkill || 435 == n_A_ActiveSkill || 847 == n_A_ActiveSkill) && (AC_S += 75),
+        SkillSearch(852) == 1 && (429 == n_A_ActiveSkill || 428 == n_A_ActiveSkill || 435 == n_A_ActiveSkill) && (AC_S += 40),
+        SkillSearch(852) == 2 && (429 == n_A_ActiveSkill || 428 == n_A_ActiveSkill || 435 == n_A_ActiveSkill) && (AC_S += 75),
+        SkillSearch(852) == 2 && 849 == n_A_ActiveSkill && (AC_S += 50),
         AC_I = n_tok[74];
     M = n_A_Buf3[2];
     n_tok[74] = M ? 10 == M ? 5 * M + 2 * n_A_Buf3[32] + Math.floor(n_A_Buf3[29] / 5) : 3 * M + 2 * n_A_Buf3[32] + Math.floor(n_A_Buf3[29] / 5) : 0,
@@ -1480,6 +1481,7 @@ function StAllCalc() {
         n_tok[25] += n_A_Buf9[56], // long range atk %
         n_tok[70] += n_A_Buf9[57], // crit dmg
         n_A_Buf3[46] && (n_tok[70] += 10),
+        5 == SkillSearch(851) && 430 == n_A_ActiveSkill && (n_tok[70] += 10),
         SkillSearch(156) && (n_tok[66] += 5 * SkillSearch(156)),
         SkillSearch(234) && (n_tok[59] += 4 * SkillSearch(234)),
         SkillSearch(234) && (n_tok[39] += 4 * SkillSearch(234)),
@@ -2179,9 +2181,7 @@ function FirstNovis() {
         WeaponSet2())
 }
 function JobEquipItemSearch(_) {
-    console.log(_);
     if (_ >= 2e3 && (n_A_JOB <= 40 || n_A_JOB == 46) && (_ -= 2e3), 1e3 <= _ && _ <= 1999) {
-        console.log("??????");
         if (1 != n_Reborn)
             return 0;
         _ -= 1e3
@@ -3262,7 +3262,7 @@ function KakutyouKansuu2() {
                         i = 0; i < v_Size.length; i++)
                         c.S_OBJ.options[i] = new Option(v_Size[i], i);
                     for (c.S_OBJ.value = 0,
-                        i = 0; i < v_Element_.length; i++)
+                        i = 0; i < v_Element_.length - 1; i++)
                         c.E_OBJ.options[i] = new Option(v_Element_[i], i);
                     for (c.E_OBJ.value = 0,
                         i = 0; i < v_Type.length; i++)
@@ -3280,7 +3280,7 @@ function KakutyouKansuu2() {
                     i = 0; i < v_Size.length; i++)
                     c.S_OBJ.options[i] = new Option(v_Size[i], i);
                 for (c.S_OBJ.value = 0,
-                    i = 0; i < v_Element_.length; i++)
+                    i = 0; i < v_Element_.length - 1; i++)
                     c.E_OBJ.options[i] = new Option(v_Element_[i], i);
                 for (c.E_OBJ.value = 0,
                     i = 0; i < v_Type.length; i++)
@@ -3607,13 +3607,10 @@ function SaveLocal() {
             SaveData[246] = c.B_Enemy.value,
             SaveData[247] = 1 * c.B_AtkSkill.value,
             444 != n_B_AtkSkill && 445 != n_B_AtkSkill && 125 != n_B_AtkSkill && 131 != n_B_AtkSkill || (SaveData[248] = 1 * c.BSkillSubNum.value),
-            n = 0; n <= 24; n++)
+            n = 0; n <= 27; n++)
             SaveData[253 + n] = n_B_debuf[n],
                 1 == SaveData[253 + n] ? SaveData[253 + n] = 1 : 0 == SaveData[253 + n] && (SaveData[253 + n] = 0);
-        for (SaveData[278] = 0,
-            SaveData[279] = 0,
-            SaveData[280] = 0,
-            n = 0; n <= 14; n++)
+        for (n = 0; n <= 14; n++)
             SaveData[281 + n] = n_B_buf[n],
                 1 == SaveData[281 + n] ? SaveData[281 + n] = 1 : 0 == SaveData[281 + n] && (SaveData[281 + n] = 0);
         for (SaveData[296] = 0,
@@ -3749,7 +3746,7 @@ function LoadLocal() {
             c.B_AtkRange.value = 0,
             Bskill(),
             c.B_AtkSkill.value = 0,
-            n = 0; n <= 24; n++)
+            n = 0; n <= 27; n++)
             n_B_debuf[n] = 0;
         for (n_debufSW = 0,
             n = 0; n <= 14; n++)
@@ -3884,7 +3881,7 @@ function LoadLocal() {
             n_A_Buf7[n] = SaveData[169 + n];
         for (n = 0; n <= 11; n++)
             n_A_Buf8[n] = SaveData[221 + n];
-        for (n = 0; n <= 24; n++)
+        for (n = 0; n <= 27; n++)
             n_B_debuf[n] = SaveData[253 + n];
         if (0 == SaveData[0]) {
             for (n = 0; n <= 9; n++)
@@ -4357,7 +4354,7 @@ function URLIN() {
             n_B_manual[r] = 0;
         for (r = 0; r <= 3; r++)
             n_A_debuf[r] = 0;
-        for (r = 0; r <= 24; r++)
+        for (r = 0; r <= 27; r++)
             n_B_debuf[r] = 0;
         for (r = 0; r <= 14; r++)
             n_B_buf[r] = 0;
@@ -5133,7 +5130,7 @@ for (n_A_debuf = new Array,
     i = 0; i <= 3; i++)
     n_A_debuf[i] = 0;
 for (n_B_debuf = new Array,
-    i = 0; i <= 24; i++)
+    i = 0; i <= 27; i++)
     n_B_debuf[i] = 0;
 for (n_B_buf = new Array,
     i = 0; i <= 14; i++)
