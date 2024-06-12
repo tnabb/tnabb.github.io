@@ -2841,7 +2841,7 @@ function ClickWeaponType(e) {
             c.A_weapon1_ropt4.options[0] = new Option(m_RandomOpt[0][1], m_RandomOpt[0][0]);
         }
     }else if(m_RandomOptSpecialType.includes(parseInt(e)) || m_RandomOptSpecialWeapons.includes(parseInt(n_A_Equip[0]))){ // special
-        if(!(m_RandomOptSpecialType.includes(parseInt(n_A_WeaponType)) || m_RandomOptSpecialWeapons.includes(parseInt(oldWeapon))) || parseInt(oldWeapon) == 0){
+        if(!(m_RandomOptSpecialType.includes(parseInt(n_A_WeaponType))) || m_RandomOptSpecialWeapons.includes(parseInt(oldWeapon)) || m_RandomOptCrimsonWeapons.includes(parseInt(oldWeapon)) || parseInt(oldWeapon) == 0){
             RandOptWeapon1Reset();
             for(i = 0; "NULL" != m_RandomOptSpecial[0][i]; i++){
                 c.A_weapon1_ropt1.options[i] = new Option(m_RandomOpt[m_RandomOptSpecial[0][i]][1], m_RandomOpt[m_RandomOptSpecial[0][i]][0]);
