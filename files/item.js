@@ -2133,6 +2133,14 @@ m_Item = [
 	, [2122, 3, 0, 90, 3, 0, 100, 50, "Crimson Two-Handed Sword", 0, "ATK +(refine level^2)<br><b>For each refine:</b><br>Deal +7% ATK based damage against [Normal/Boss/Guardian] type monsters.", 0]
 	, [2123, 4, 0, 70, 3, 0, 100, 50, "Crimson Spear", 0, "ATK +(refine level^2)<br><b>For each refine:</b><br>Deal +6% ATK based damage against [Normal/Boss/Guardian] type monsters.", 0]
 	, [2124, 6, 155, 70, 3, 0, 100, 50, "Crimson Axe", 0, "ATK +(refine level^2)<br><b>For each refine:</b><br>Deal +5% ATK based damage against [Normal/Boss/Guardian] type monsters.<br>Deal +1% ranged ATK based damage.<br><b>For each 2 refine levels:</b><br>On all monsters ignore 1% DEF.", 0]
+	, [2125, 50, 146, 1, 0, 0, 50, 10, "Rebel Cap", 0, "", 5, 2, 25, 3, 14, 100, 0]
+	, [2126, 51, 146, 1, 0, 0, 50, 10, "Rebel Sunglasses", 0, "", 5, 1, 25, 1, 370, -5, 0]
+	, [2127, 52, 146, 1, 0, 0, 50, 10, "Rebel Chewing Gum", 0, "Recover 1 SP every 10 seconds.", 25, 1, 0]
+	, [2128, 17, 146, 60, 3, 3, 100, 30, "Mythril Revolver", 0, "When dealing ATK based damage, 3% chance you gain 15% of the damage inflicted on your target as HP.<br>When receiving an ATK based attack, 5% chance to cast [Coin Flip] Lvl 1 on yourself.", 0]
+	, [2129, 17, 146, 50, 3, 1, 100, 30, "Spirit Guard Revolver", 0, "<b>One-Handed Pistol</b>", 0]
+	, [2130, 21, 146, 150, 3, 1, 200, 30, "Cyanide Launcher", 0, "When dealing long ranged ATK based damage, 5% chance of inflicting Stun, Curse, Silence, and Poison on the target.", 0]
+	, [2131, 18, 146, 150, 3, 2, 200, 30, "Winchester Rifle", 0, "", 48, 10, 10, 20, 0]
+	, [2132, 20, 146, 100, 3, 2, 250, 10, "Tempest", 0, "", 12, 3, 10, 25, 0]
 ];
 
 //[ id, display location, job that can use, atk/def, level of weapon, slots, weight, level required to use, "name of item", ?, "description", effect1, effect2, ..., 0 =? ]

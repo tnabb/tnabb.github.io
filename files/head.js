@@ -359,8 +359,8 @@ function BattleCalc999() {
                             wMod += -0.15 + 0.15 * n_A_ActiveSkillLV,
                             enemyIsMVP = n_B[1].includes("[MVP]"),
                             wMod *= SkillSearch(852) == 2 ? (enemyIsMVP ? 3 : 2) : SkillSearch(852) == 1 ? (enemyIsMVP ? 2 : 1.5) : 1,
-                            wHitsuu = [1, 2, 3, 4][1 * c.SkillSubNum.value],
-                            n_Delay[3] = SkillSearch(851) == 1 ? 1.5 : 2) : (n_rangedAtk = 1, wMod += -.05 + .05 * n_A_ActiveSkillLV, wCast = SkillSearch(852) == 2 ? 0.25 : SkillSearch(852) == 1 ? 0.5 : SkillSearch(851) ? 0.5 : 1, n_Delay[2] = 1, wHitsuu = 5),
+                            wHitsuu = [1, 2, 4][1 * c.SkillSubNum.value],
+                            n_Delay[3] = SkillSearch(851) == 1 ? 1.5 : 2) : (n_rangedAtk = 1, wMod += -.05 + .05 * n_A_ActiveSkillLV, wCast = SkillSearch(852) == 2 ? 0.0835 : SkillSearch(852) == 1 ? 0.167 : SkillSearch(851) ? 0.167 : 0.334, wHitsuu = 5),
                 e = 0; e <= 2; e++)
                 n_A_CriATK[e] = n_A_DMG[e];
             ATKmod02(wMod, 1),
@@ -389,7 +389,7 @@ function BattleCalc999() {
             CastAndDelay(),
             void BattleCalc998()
         }
-        for (w_ActS = [6, 7, 19, 41, 44, 65, 71, 72, 73, 83, 84, 158, 161, 169, 171, 176, 188, 189, 199, 207, 248, 260, 261, 264, 288, 289, 290, 292, 302, 303, 305, 306, 307, 308, 326, 317, 318, 331, 333, 335, 337, 339, 382, 388, 398, 400, 419, 423, 428, /* 430, */ 431, 432, 434, 435, 436, 437, 461, 463, 465, 466, 469, 849, 850, 853, 854, "NULL"],
+        for (w_ActS = [6, 7, 19, 41, 44, 65, 71, 72, 73, 83, 84, 158, 161, 169, 171, 176, 188, 189, 199, 207, 248, 260, 261, 264, 288, 289, 290, 292, 302, 303, 305, 306, 307, 308, 326, 317, 318, 331, 333, 335, 337, 339, 382, 388, 398, 400, 418, 419, 423, 428, /* 430, */ 431, 432, 434, 435, 436, 437, 461, 463, 465, 466, 469, 849, 850, 853, 854, "NULL"],
             iw = 0; w_ActS[iw] != n_A_ActiveSkill && "NULL" != w_ActS[iw]; iw++)
             ;
         if (n_A_ActiveSkill == w_ActS[iw]) {
@@ -572,6 +572,11 @@ function BattleCalc999() {
                 n_Delay[0] = 1,
                 wMod += .1 * n_A_ActiveSkillLV,
                 n_Delay[2] = 1;
+            else if (418 == n_A_ActiveSkill)
+                n_rangedAtk = 1,
+                n_Delay[2] = 1,
+                wMod += .5,
+                wActiveHitNum = 3;
             else if (419 == n_A_ActiveSkill) 
                 n_rangedAtk = 1,
                 wMod += 0.1;
@@ -687,7 +692,7 @@ function BattleCalc999() {
             EDPplus(1),
             CastAndDelay(),
             BattleCalc998()
-        } else if (40 == n_A_ActiveSkill || 70 == n_A_ActiveSkill || 192 == n_A_ActiveSkill || 76 == n_A_ActiveSkill || 418 == n_A_ActiveSkill || 391 == n_A_ActiveSkill || 429 == n_A_ActiveSkill || 611 == n_A_ActiveSkill) {
+        } else if (40 == n_A_ActiveSkill || 70 == n_A_ActiveSkill || 192 == n_A_ActiveSkill || 76 == n_A_ActiveSkill || 391 == n_A_ActiveSkill || 429 == n_A_ActiveSkill || 611 == n_A_ActiveSkill) {
             if (40 == n_A_ActiveSkill)
                 n_rangedAtk = 1,
                 wMod += .1 * n_A_ActiveSkillLV - .1,
@@ -709,11 +714,6 @@ function BattleCalc999() {
                 wCast = (1 + a) * n_A_CAST,
                 n_Delay[2] = .5,
                 n_rangedAtk = 1;
-            else if (418 == n_A_ActiveSkill)
-                n_rangedAtk = 1,
-                n_Delay[2] = 1,
-                wMod += .5,
-                wHITsuu = 3;
             else if (391 == n_A_ActiveSkill)
                 n_Delay[0] = 1,
                 n_rangedAtk = 1,
@@ -1081,7 +1081,8 @@ function BattleCalc999() {
             wCast = 1 * n_A_CAST,
             n_Delay[2] = 1,
             n_Delay[3] = 0.33,
-            eleUsed = m_Bullet[n_A_Arrow][1] == 0 ? n_A_Weapon_element : m_Bullet[n_A_Arrow][1],
+            n_A_Weapon_element = m_Bullet[n_A_Arrow][1],
+            1 * c.A_Weapon_element.value != 0 && (n_A_Weapon_element = 1 * c.A_Weapon_element.value),
             work_B_DEF2 = [0, 0, 0],
             work_B_DEF2[0] = n_B_DEF2[2],
             work_B_DEF2[1] = n_B_DEF2[1],
@@ -1089,7 +1090,7 @@ function BattleCalc999() {
             for (s = 0; s <= 2; s++)
                 w_DMG[s] = Math.floor(Math.floor(BK_n_A_DMG[s] * wMod) * (work_B_DEF2[s] + n_B[14]) / 50),
                 w_DMG[s] = ApplyModifiers(w_DMG[s]),
-                w_DMG[s] = Math.floor(w_DMG[s] * element[n_B[3]][eleUsed]),
+                w_DMG[s] = Math.floor(w_DMG[s] * element[n_B[3]][n_A_Weapon_element]),
                 Last_DMG_A[s] = Last_DMG_B[s] = w_DMG[s] + EDP_DMG(s),
                 InnStr[s] += Last_DMG_A[s];
             EDPplus(1),
@@ -3294,11 +3295,11 @@ function ClickActiveSkill2() {
             c.SkillSubNum.options[i] = new Option(e[i] + " hits", i);
         c.SkillSubNum.value = 2
     } else if (430 == n_A_ActiveSkill) {
-        var e = ["1", "2", "3", "4"];
+        var e = ["1", "2", "4"];
         for (myInnerHtml("AASkill", 'Hits (considering channel time): <select name="SkillSubNum" onChange="calc()"></select>', 0),
-            i = 0; i <= 3; i++)
+            i = 0; i <= 2; i++)
             c.SkillSubNum.options[i] = new Option(e[i] + " hits", i);
-        c.SkillSubNum.value = 3
+        c.SkillSubNum.value = 2
     } else if (611 == n_A_ActiveSkill) {
         myInnerHtml("AASkill", 'Immobilized: <input type="checkbox" name="SkillSubNum" onclick="calc()">', 0);
         c.SkillSubNum.value = 0;
@@ -4616,7 +4617,7 @@ function debufSW(e) {
             n += '<TR><TD id="BI1_1" class="center">Quagmire</TD><TD id="BI1_2" class="data"></TD><TD id="BI19_1" class="center">' + skillName(211, SRV) + '</TD><TD id="BI19_2"></TD></TR>',
             n += '<TR><TD id="BI24_1" class="center">Flying</TD><TD id="BI24_2" class="data"></TD><TD id="BI20_1" class="center">' + skillName(218, SRV) + '</TD><TD id="BI20_2"></TD></TR>',
             n += '<TR><TD id="BI25_1" class="center">Mass Spiral (IA)</TD><TD id="BI25_2" class="data"></TD><TD id="BI26_1" class="center">Disarm</TD><TD id="BI26_2"></TD></TR>',
-            n += '<TR><TD id="BI27_1" class="center dotB">Piercing Shot</TD><TD id="BI27_2" class="data dotB"></TD><TD id="BI28_1" class="center dotB"></TD><TD id="BI28_2" class="dotB"></TD></TR>',
+            n += '<TR><TD id="BI27_1" class="center dotB">Piercing Shot</TD><TD id="BI27_2" class="data dotB"></TD><TD id="BI28_1" class="center dotB">Fling</TD><TD id="BI28_2" class="dotB"></TD></TR>',
             n += '<TR><TD class="center" ColSpan="4"><b>Monster Exclusive Debuffs</b></TD></TR>',
             n += '<TR><TD id="BI13_1" class="center">' + skillName(172, SRV) + '</TD><TD id="BI13_2" class="data"></TD><TD id="BI14_1" class="center">' + skillName(173, SRV) + '</TD><TD id="BI14_2"></TD></TR>',
             n += '<TR><TD id="BI15_1" class="center">' + skillName(174, SRV) + '</TD><TD id="BI15_2" class="data"></TD><TD id="BI16_1" class="center">' + skillName(175, SRV) + '</TD><TD id="BI16_2"></TD></TR>',
@@ -4650,6 +4651,7 @@ function debufSW(e) {
             myInnerHtml("BI25_2", '<select name="B_debuf25" onChange="AI(1)"></select>', 0)
             myInnerHtml("BI26_2", '<input type="checkbox" name="B_debuf26" onClick="AI(1)">', 0)
             myInnerHtml("BI27_2", '<select name="B_debuf27" onChange="AI(1)"></select>', 0);
+            myInnerHtml("BI28_2", '<select name="B_debuf28" onChange="AI(1)"></select>', 0);
         var _ = ["(none)", "Water", "Earth", "Fire", "Wind"];
         for (i = 0; i <= 4; i++)
             c.B_debuf23.options[i] = new Option(_[i], i);
@@ -4746,7 +4748,8 @@ function debufSW(e) {
             c.B_debuf1.options[i] = new Option(i, i),
                 c.B_debuf18.options[i] = new Option(i, i),
                 c.B_debuf24.options[i] = new Option(i, i),
-                c.B_debuf27.options[i] = new Option(i, i);
+                c.B_debuf27.options[i] = new Option(i, i),
+                c.B_debuf28.options[i] = new Option(i, i);
         c.B_debuf25.options[0] = new Option("0", 0),
         c.B_debuf25.options[1] = new Option("50%", 1),
         c.B_debuf25.options[2] = new Option("75%", 2),
@@ -4777,7 +4780,8 @@ function debufSW(e) {
             c.B_debuf24.value = n_B_debuf[24],
             c.B_debuf25.value = n_B_debuf[25],
             c.B_debuf26.checked = n_B_debuf[26],
-            c.B_debuf27.value = n_B_debuf[27]
+            c.B_debuf27.value = n_B_debuf[27],
+            c.B_debuf28.value = n_B_debuf[28]
     } else {
         var n;
         n = '<TR><TD id="AITD" class="subheader point" onClick="debufSW(1)">Debuffs on Enemy <span id="AIused"></span>',
@@ -4787,7 +4791,7 @@ function debufSW(e) {
 }
 function AI(e) {
     1 == e && calc();
-    for (var _ = 0, n = 0; n <= 27; n++)
+    for (var _ = 0, n = 0; n <= 28; n++)
         if (0 != n_B_debuf[n]) {
             _ = 1;
             break
@@ -4944,6 +4948,7 @@ function ClickB_Enemy() {
             n_B_debuf[25] = 1 * c.B_debuf25.value,
             n_B_debuf[26] = c.B_debuf26.checked,
             n_B_debuf[27] = 1 * c.B_debuf27.value,
+            n_B_debuf[28] = 1 * c.B_debuf28.value,
             0 == PvP && (n_B_debuf[13] = c.B_debuf13.checked,
                 n_B_debuf[14] = c.B_debuf14.checked,
                 n_B_debuf[15] = c.B_debuf15.checked,
@@ -5019,6 +5024,10 @@ function ClickB_Enemy() {
     n_B_debuf[25] == 2 && (mSpiralDebuf = 75),
     mSpiralDebuf && (n_B[14] -= Math.floor(n_B[14] * mSpiralDebuf / 100));
     mSpiralDebuf && (n_B[23] -= Math.floor(n_B[23] * mSpiralDebuf / 100));
+    var flingDebuf = 5 * n_B_debuf[28];
+    console.log(flingDebuf),
+    flingDebuf && (n_B[14] -= Math.floor(n_B[14] * flingDebuf / 100));
+    flingDebuf && (n_B[23] -= Math.floor(n_B[23] * flingDebuf / 100));
     var l = 0;
     l += n_tok[290],
     0 == n_B[19] && (l += n_tok[291]),
