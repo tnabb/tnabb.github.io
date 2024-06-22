@@ -561,7 +561,7 @@ function StAllCalc() {
         SU_DEX >= 90 && 1947 == n_A_Equip[8] && (M += 12),
         n_A_Weapon_refine >= 9 && 1949 == n_A_Equip[0] && (M += 10),
         (1956 == n_A_Equip[0] || 1956 == n_A_Equip[1]) && 22 == n_A_JOB && (M += 60 * EquipNumSearch(1956)),
-        SkillSearch(433) && 20 == n_A_WeaponType && (M += 70 + 10 * SkillSearch(433)),
+        SkillSearch(433) && 20 == n_A_WeaponType && !(SkillSearch(846)) && (M += 70 + 10 * SkillSearch(433)),
         0 == n_A_Buf6[0] && n_A_Buf6[1] >= 1 && 3 == n_A_Bodyelement && (M += 10 * n_A_Buf6[1]),
         2105 == n_A_Equip[0] && (M += n_A_Weapon_refine ** 2),
         2106 == n_A_Equip[0] && (M += n_A_Weapon_refine ** 2),
@@ -1016,7 +1016,7 @@ function StAllCalc() {
         595 == n_A_card[13] && (n_A_FLEE += 2*n_A_SHOES_REFINE),
         2 == n_A_Buf6[0] && n_A_Buf6[1] >= 1 && 4 == n_A_Bodyelement && (n_A_FLEE += 3 * n_A_Buf6[1]),
         8 == n_A_JOB || 14 == n_A_JOB || 22 == n_A_JOB || 28 == n_A_JOB ? n_A_FLEE += 4 * SkillSearch(14) : n_A_FLEE += 3 * SkillSearch(14),
-        SkillSearch(433) && 20 == n_A_WeaponType && (n_A_FLEE -= 25 + 5 * SkillSearch(433)),
+        SkillSearch(433) && 20 == n_A_WeaponType && !(SkillSearch(846)) && (n_A_FLEE -= 25 + 5 * SkillSearch(433)),
         Mikiri = new Array(0, 1, 3, 4, 6, 7, 9, 10, 12, 13, 15),
         n_A_FLEE += Mikiri[SkillSearch(191)],
         SRV >= 50) {
@@ -1278,7 +1278,6 @@ function StAllCalc() {
         n_A_HEAD_REFINE >= 7 && 1898 == n_A_Equip[2] && (M += 2),
         n_A_HEAD_REFINE >= 9 && 1898 == n_A_Equip[2] && (M += 2),
         1966 == n_A_Equip[0] && (M += 1 * n_A_Weapon_refine),
-        SkillSearch(846) && 20 == n_A_WeaponType && (M += 10),
         n_A_SHOULDER_REFINE >= 7 && SU_AGI >= 90 && 1472 == n_A_Equip[7] && (M += 8);
     var B = M;
     b = 0,
@@ -1299,8 +1298,8 @@ function StAllCalc() {
         12 == n_A_WeaponType && SkillSearch(224) && (M += SkillSearch(224) / 2),
         SkillSearch(196) && (M -= 25),
         SkillSearch(258) && (M += 30),
-        SkillSearch(420) && (M += 20),
-        SkillSearch(433) && (20 == n_A_WeaponType) && (M += 10 + 2 * SkillSearch(433));
+        SkillSearch(420) ? M += 20 : SkillSearch(846) && 20 == n_A_WeaponType && (M += 10),
+        SkillSearch(433) && 20 == n_A_WeaponType && !(SkillSearch(846)) && (M += 10 + 2 * SkillSearch(433));
     var v = 0;
     SkillSearch(357) && (v += Math.floor((n_A_BaseLV + n_A_LUK + n_A_DEX) / 10));
     var p = 0;
@@ -1430,6 +1429,8 @@ function StAllCalc() {
         SkillSearch(852) == 1 && (429 == n_A_ActiveSkill || 428 == n_A_ActiveSkill || 435 == n_A_ActiveSkill) && (AC_S += 40),
         SkillSearch(852) == 2 && (429 == n_A_ActiveSkill || 428 == n_A_ActiveSkill || 435 == n_A_ActiveSkill) && (AC_S += 75),
         SkillSearch(852) == 2 && 849 == n_A_ActiveSkill && (AC_S += 50),
+        AC_IA = 0;
+        SkillSearch(851) && (AC_IA += 50),
         AC_I = n_tok[74];
     M = n_A_Buf3[2];
     n_tok[74] = M ? 10 == M ? 5 * M + 2 * n_A_Buf3[32] + Math.floor(n_A_Buf3[29] / 5) : 3 * M + 2 * n_A_Buf3[32] + Math.floor(n_A_Buf3[29] / 5) : 0,
@@ -2639,6 +2640,7 @@ function KakutyouKansuu() {
                 a += "<b>Fixed Cast Time: </b>" + Math.floor(1e4 * n_A_fCAST) / 100 + "% (<b>Skills:</b> " + (100 * (1 - n_A_fCAST) - n_tok[72]) + " %| <b>Gear:</b> " + -n_tok[72] + "% )<BR>"),
                 calcedDelay = Math.floor(100 - AC_I - n_tok[74]),
                 calcedDelay > 0 && (calcedDelay = Math.floor(calcedDelay * (100 - AC_S) / 100)),
+                calcedDelay > 0 && (calcedDelay = Math.floor(calcedDelay * (100 - AC_IA) / 100)),
                 a += "<b>Cast Delay: </b>" + calcedDelay + " % (<b>" + skillName(204, SRV) + ":</b> " + n_tok[74] + " % | <b>Gear:</b> " + AC_I + " % | <b>Skill:</b> " + AC_S + " %)<BR>",
                 myInnerHtml("A_KakutyouData", a, 0)
         } else if (20 == wKK) {
@@ -2790,7 +2792,7 @@ function KakutyouKansuu() {
                     selpot = 1 * c.A_KakutyouSelNum.value,
                     potrate = m_Potion[selpot][1],
                     adopted = 1 * c.A_adopted.checked,
-                    srate = Math.floor(100 * potionr + 300 * preparep + 20 * n_A_JobLV + 10 * (n_A_DEX + n_A_LUK) + 5 * n_A_INT + 100 * potrate + 100 * vani) / 100,
+                    srate = Math.floor(50 * potionr + 300 * preparep + 20 * n_A_JobLV + 10 * (n_A_DEX + n_A_LUK) + 5 * n_A_INT + 100 * potrate + 100 * vani) / 100,
                     (srate < 0 || 0 == potionr || 0 == preparep) && (srate = 0),
                     adopted && (srate = Math.floor(.7 * srate)),
                     brate = m_Potion[selpot][3],

@@ -658,7 +658,7 @@ function BattleCalc999() {
                 n_A_Weapon_element = 10,
                 wCast = 2,
                 n_Delay[2] = 2,
-                wMod += 70;
+                wMod += 80;
             ATKmod02(wMod, 0);
             0 == cast_kotei && 854 != n_A_ActiveSkill && (wCast *= n_A_CAST);
             for (e = 0; e <= 2; e++)
@@ -5025,7 +5025,6 @@ function ClickB_Enemy() {
     mSpiralDebuf && (n_B[14] -= Math.floor(n_B[14] * mSpiralDebuf / 100));
     mSpiralDebuf && (n_B[23] -= Math.floor(n_B[23] * mSpiralDebuf / 100));
     var flingDebuf = 5 * n_B_debuf[28];
-    console.log(flingDebuf),
     flingDebuf && (n_B[14] -= Math.floor(n_B[14] * flingDebuf / 100));
     flingDebuf && (n_B[23] -= Math.floor(n_B[23] * flingDebuf / 100));
     var l = 0;
@@ -5636,6 +5635,7 @@ function CastAndDelay() {
         eqDelay = (100 - AC_I - n_tok[74]) < 0 ? 0 : 100 - AC_I - n_tok[74],
         n_Delay[2] = Math.floor(n_Delay[2] * eqDelay) / 100,
         n_Delay[2] = Math.floor(n_Delay[2] * (100 - AC_S)) / 100,
+        n_Delay[2] = Math.floor(n_Delay[2] * (100 - AC_IA)) / 100,
         n_Delay[2] > wDelay && (wDelay = n_Delay[2],
             n = 2),
         n_Delay[3] > wDelay && (wDelay = n_Delay[3],
@@ -5700,6 +5700,7 @@ function tPlusDamCut(e) {
         5 == n_B[19] && (e = 1, 122 == n_A_ActiveSkill && (e = 0)), // assump
         e = Math.floor(e * (100 - NotesCalc(n_B[0], 4)) / 100),
         SkillSearch(855) && (e += e * (SkillSearch(855) * 2) / 100),
+        SkillSearch(851) && n_A_ActiveSkill != 0 && (e += e * 25 / 100),
         e
 }
 function tPlusEnemyClick() {
