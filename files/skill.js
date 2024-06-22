@@ -451,7 +451,7 @@ m_Skill = [		//ID, max level, iRO name, alternative name, 0=nodamage 1=melee/ran
 	[413, 10, "Wind Blade", 0, -3, 4],
 	[414, 5, "Lightning Jolt", "Lightning Crash", -3, 4],
 	[415, 5, "First Wind", "North Wind", -3, 4],
-	[416, 10, "Coin Flip", "Flip the Coin", 0, 0],
+	[416, 10, "# of Coins", 0, 0, 0],
 	[417, 1, "Coin Fling", "Fling", 3, 0],
 	[418, 1, "Triple Action", 0, 3, 11],
 	[419, 1, "Bull's Eye", 0, 3, 11],
@@ -462,15 +462,15 @@ m_Skill = [		//ID, max level, iRO name, alternative name, 0=nodamage 1=melee/ran
 	[424, 1, "Cracker", 0, 0, 0],
 	[425, 10, "Single Action", 0, 0, 0],
 	[426, 10, "Snake Eyes", 0, 0, 0],
-	[427, 10, "Chain Action", 0, 0, 0],
+	[427, 5, "Chain Action", 0, 0, 0],
 	[428, 10, "Trigger Happy Shot", "Rapid Shower", 3, 11],
-	[429, 10, "Desperado", 0, 2, 11],
+	[429, 5, "Desperado", 0, 2, 11],
 	[430, 10, "Tracking", 0, 3, 11],
 	[431, 5, "Disarm", 0, 0, 0],
 	[432, 5, "Wounding Shot", "Piercing Shot", 3, 11],
-	[433, 10, "Gatling Fever", 0, 0, 0],
-	[434, 10, "Crowd Control Shot", "Dust", 2, 11],
-	[435, 10, "Full Blast", "Full Buster", 3, 11],
+	[433, 5, "Gatling Fever", 0, 0, 0],
+	[434, 5, "Crowd Control Shot", "Dust", 3, 11],
+	[435, 5, "Full Blast", "Full Buster", 3, 11],
 	[436, 10, "Spread Shot", "Spread Attack", 3, 11],
 	[437, 10, "Gunslinger Mine", "Ground Drift", 4, 11],
 	[438, 10, "Final Strike (Max HP -1)", 0, 3, 0],
@@ -880,7 +880,19 @@ m_Skill = [		//ID, max level, iRO name, alternative name, 0=nodamage 1=melee/ran
 	[841, 5, "Frigg's Song", 0, 0, 0],
 	[842, 5, "Elemental Shield", 0, 0, 0],
 	[843, 5, "Hallucination Drug", 0, 0, 0],
-	[844, 5, "Full Throttle", 0, 0, 0]
+	[844, 5, "Full Throttle", 0, 0, 0],
+	// expanded rework skills
+	[845, 5, "Platinum Altar", 0, 0, 0],
+	[846, 1, "Gatling Berserk", 0, 0, 0],
+	[847, 5, "Rapid Fire", 0, 3, 11],
+	[848, 5, "Mass Spiral", 0, 3, 11],
+	[849, 5, "Hasty Fire in the Hole", 0, 3, 11],
+	[850, 4, "Mission Bombard", 0, 3, 11],
+	[851, 5, "Intensive Aim (Mastery)", 0, 0, 0],
+	[852, 1, "Intensive Aim (Stacks consumed)", 0, 0, 0],
+	[853, 5, "Basic Grenade", 0, 3, 11],
+	[854, 1, "Slug Shot", 0, 3, 10],
+	[855, 10, "Intensive Aim (# of Stacks)", 0, 0, 0]
 ];
 
 m_JobBuff = [
@@ -930,6 +942,7 @@ m_JobBuff = [
 	[329, 338, 342, 380, 372, 379, 999, 999, 999, 999, 999, 999, 999, 999, 999], // soul linker
 	[393, 404, 999, 999, 999, 999, 999, 999, 999, 999, 999, 999, 999, 999, 999], // ninja
 	[425, 426, 427, 416, 420, 421, 422, 433, 999, 999, 999, 999, 999, 999, 999], // gunslinger
+	[425, 426, 427, 416, 420, 421, 422, 433, 846, 851, 852, 855, 999, 999, 999], // night watch
 	//3rd job
 	[3, 4, 12, 69, 74, 452, 386, 9, 456, 457, 460, 445, 459, 455, 744, 999], // RK
 	[3, 4, 12, 69, 74, 452, 254, 256, 258, 255, 386, 9, 456, 457, 460, 445, 459, 455, 744, 999], // RKt
@@ -1007,7 +1020,8 @@ m_JobAtkSkill = [
 	[0, 331, 333, 335, 337, 339, 305, 317, 318, 999], // star gladiator
 	[0, 373, 374, 375, 999], // soul linker
 	[0, 407, 408, 409, 410, 412, 413, 414, 415, 394, 395, 396, 397, 398, 400, 401, 405, 438, 999], // ninja
-	[0, 418, 419, 423, 428, 429, 430, 431, 432, 434, 435, 436, 437, 999], // gunslinger
+	[0, 418, 419, 428, 429, 430, 431, 432, 434, 435, 436, 853, 847, 999], // gunslinger
+	[0, 418, 419, 428, 429, 430, 431, 432, 434, 435, 436, 853, 847, 848, 849, 850, 854, 999], // night watch
 	//3rd job
 	[562, 547, 553, 548, 550, 551, 546, 558, 549, 832], // Rune Knight
 	[],

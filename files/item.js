@@ -534,9 +534,9 @@ m_Item = [
 	, [531, 999, 0, 0, 0, 1, 20, 30, "Twin Ribbon", 0, "When receiving ATK based damage, 1% chance to cast [Stone Skin] Lvl 1 on yourself for 2 seconds.<br>When receiving MATK based damage, 12% chance to cast [Anti-Magic] Lvl 1 on yourself for 2 seconds.", 19, 3, 14, 30, 0]
 	, [532, 999, 0, 1, 0, 0, 50, 30, "Decorative Geographer", 0, "", 4, 1, 193, 1, 221, 12, 0]
 	, [533, 999, 0, 2, 0, 0, 50, 10, "Bird Nest Hat", 0, "", 2, 1, 5, 1, 151, 10, 0]
-	, [534, 60, 3001, 6, 0, 1, 280, 1, "Valkyrie Armor", 0, "<b>[Mage, Archer, Acolyte Class]</b><br>Status effect [Silence] resistance +50%<br><b>[Swordman, Merchant, Thief Class]</b><br>[Stun] status effect resistance +50%", 7, 1, 194, 1, 0]
-	, [535, 62, 3001, 3, 0, 1, 50, 1, "Valkyrie Manteau", 0, "<b>[Mage, Archer, Acolyte Class]</b><br>Perfect Dodge +(5 + Refine Rate * 2)<br><b>[Swordman, Merchant, Thief Class]</b><br>Reflect melee ATK based damage by (5 + Refine Rate * 2)%", 194, 1, 0]
-	, [536, 63, 3001, 4, 0, 1, 50, 1, "Valkyrie Shoes", 0, "<b>[Mage, Archer, Acolyte Class]</b><br>MaxHP +(5 * Base level)<br><b>[Swordman, Merchant, Thief Class]</b><br>MaxSP +(2 * Job level)", 194, 1, 0]
+	, [534, 60, 3001, 6, 0, 1, 280, 1, "Valkyrie Armor", 0, "<b>[Mage, Archer, Acolyte, Gunslinger Class]</b><br>Status effect [Silence] resistance +50%<br><b>[Swordman, Merchant, Thief Class]</b><br>[Stun] status effect resistance +50%", 7, 1, 194, 1, 0]
+	, [535, 62, 3001, 3, 0, 1, 50, 1, "Valkyrie Manteau", 0, "<b>[Mage, Archer, Acolyte, Gunslinger Class]</b><br>Perfect Dodge +(5 + Refine Rate * 2)<br><b>[Swordman, Merchant, Thief Class]</b><br>Reflect melee ATK based damage by (5 + Refine Rate * 2)%", 194, 1, 0]
+	, [536, 63, 3001, 4, 0, 1, 50, 1, "Valkyrie Shoes", 0, "<b>[Mage, Archer, Acolyte, Gunslinger Class]</b><br>MaxHP +(5 * Base level)<br><b>[Swordman, Merchant, Thief Class]</b><br>MaxSP +(2 * Job level)", 194, 1, 0]
 	, [537, 61, 58, 5, 0, "0/1", 15, 20, "Arm Guard", 0, "", 0]
 	, [538, 999, 58, 4, 0, "0/1", 15, 50, "Improved Arm Guard", 0, "", 19, 5, 0]
 	, [539, 1, 58, 50, 1, "2/3", 60, 12, "Asura", 0, "", 89, 10, 0]
@@ -715,7 +715,7 @@ m_Item = [
 	, [712, 63, 1, 3, 0, 0, 50, 65, "Fricco's Shoes", 0, "[Red, Orange, Yellow and White Potion] items recovery +20%", 2, 2, 0]
 	, [713, 63, 1, 4, 0, 0, 65, 65, "Vidar's Boots", 0, "", 15, 9, 16, 9, 0]
 	, [714, 63, 77, 2, 0, 1, 20, 40, "High Fashion Sandals", 0, "", 19, 10, 0]
-	, [715, 63, 3001, 3, 0, 0, 50, 85, "Variant Shoes", 0, "<b>For each refine level:</b> MaxHP -1% and MaxSP -1%<br><b>For each two refine levels:</b>DEF +1", 15, 20, 16, 20, 0]
+	, [715, 63, 3001, 3, 0, 0, 50, 85, "Variant Shoes", 0, "<b>For each refine level:</b> MaxHP -1% and MaxSP -1%<br><b>For each two refine levels:</b> DEF +1", 15, 20, 16, 20, 0]
 	, [716, 63, 3001, 3, 0, 1, 30, 55, "Tidal Shoes", 0, "", 61, 5, 0]
 	, [717, 63, 3001, 4, 0, "0/1", 50, 55, "Black Leather Boots", 0, "<b>[Refine Rate 9~10]</b><br>AGI + 2", 2, 1, 0]
 	, [718, 63, 3001, 0, 0, 0, 200, 75, "Shadow Walk", 0, "When receiving MATK based damage, 10% chance to cast [Cloaking] Lvl 2 on yourself.<br>If the user learned a higher level of [Cloaking], that level will be used instead.", 19, 10, 0]
@@ -985,8 +985,8 @@ m_Item = [
 	, [982, 999, 54, 1, 0, 0, 0, 70, "Medal of Honor (Archer) (ATK)", 0, "When performing an ATK based attack, 1% chance to cause [Blind] status effect on your target.", 87, 5, 89, 5, 10, 10, 13, 300, 14, 80, 0]
 	, [983, 999, 56, 1, 0, 0, 0, 70, "Medal of Honor (Merchant) (ATK)", 0, "When performing an ATK based attack, 1% chance to cause [Curse] status effect on your target.", 87, 5, 89, 5, 12, 10, 13, 500, 14, 50, 0]
 	, [984, 999, 145, 1, 0, 0, 0, 70, "Sheriff Badge (ATK)", 0, "When performing an ATK based attack, 1% chance to cause [Blind] status effect on your target.", 87, 5, 89, 5, 10, 10, 13, 300, 14, 80, 0]
-	, [985, 62, 3001, 4, 0, 1, 70, 70, "Naght Sieger Flame Manteau", 0, "", 15, 5, 89, 1, 19, 2, 43, 2, 0]
-	, [986, 60, 3079, 5, 0, 0, 170, 70, "Chameleon Armor", 0, "MaxHP +(BaseLv*7)<br>MaxSP +(BaseLv/2)<br>When receiving MATK based damage, 1% chance to become immune from all magic skills for 2 sec.<br><b>[Swordman, Merchant, Thief]</b><br>DEF +3<br><b>[Magician, Archer, Acolyte]</b><br>MDEF +5", 0]
+	, [985, 62, 3001, 4, 0, 1, 70, 70, "Flame Manteau of Naght Sieger", 0, "", 15, 5, 89, 1, 19, 2, 43, 2, 0]
+	, [986, 60, 3079, 5, 0, 0, 170, 70, "Chameleon Armor", 0, "MaxHP +(BaseLv*7)<br>MaxSP +(BaseLv/2)<br>When receiving MATK based damage, 1% chance to become immune from all magic skills for 2 sec.<br><b>[Swordman, Merchant, Thief]</b><br>DEF +3<br><b>[Magician, Archer, Acolyte, Gunslinger]</b><br>MDEF +5", 0]
 	, [987, 60, 3079, 3, 0, 1, 100, 1, "Sprint Mail", 0, "", 3, 1, 75, 5, 91, 3, 0]
 	, [988, 60, 122, 4, 0, 1, 30, 70, "Kandura", 0, "", 2, 1, 9, 5, 12, 2, 0]
 	, [989, 60, 3079, 5, 0, 1, 100, 70, "Armor of Naga", 0, "1% chance you gain ATK +20 for 10 seconds when dealing ATK based damage.", 19, 2, 0]
@@ -2099,7 +2099,7 @@ m_Item = [
 	, [2089, 61, 0, 3, 0, 1, 0, 80, "Time Keeper Shield", 0, "<b>For each refine level past 4:</b> Perfect Dodge +1", 3, 1, 0]
 	, [2090, 62, 0, 2, 0, 1, 50, 50, "Candy Bag Backpack", 0, "<b>For each refine level:</b> [Piece of Cake] Recovery Rate +10%", 80, 1, 89, 1, 74, 5, 370, -5, 0]
 	, [2091, 9, 53, 10, 3, 0, 40, 0, "Soul Stick", 0, "[Turn Undead] After-cast Delay -50%<br><b>For each refine level:</b><br>INT +1<br>LUK +1<br><b>[Refine Rate 9~10]</b><br>[Turn Undead] Range +2", 89, 5, 93, 100, 0]
-	, [2092, 21, 59, 220, 3, 2, 200, 10, "Southern Cross", 0, "[Basic Grenade] skill damage +5%<br>[Hasty Fire in the Hole] skill damage +5%<br><b>*NOT IMPLEMENTED*</b>", 0]
+	, [2092, 21, 59, 220, 3, 2, 200, 10, "Southern Cross", 0, "", 5849, 5, 5853, 5, 0]
 	, [2093, 64, 0, 0, 0, 1, 10, 90, "Toy Ring", 0, "", 1, 1, 5, -1, 10, 4, 0]
 	, [2094, 50, 0, 0, 0, 0, 40, 1, "Antler Fedora", 0, "Consumes 100% SP when the headgear is unequipped.", 4, 3, 220, 54, 0]
 	, [2095, 8, 53, 95, 4, 2, 150, 40, "Bloody Cross", 0, "", 36, 10, 47, 10, 0]
@@ -2133,6 +2133,14 @@ m_Item = [
 	, [2122, 3, 0, 90, 3, 0, 100, 50, "Crimson Two-Handed Sword", 0, "ATK +(refine level^2)<br><b>For each refine:</b><br>Deal +7% ATK based damage against [Normal/Boss/Guardian] type monsters.", 0]
 	, [2123, 4, 0, 70, 3, 0, 100, 50, "Crimson Spear", 0, "ATK +(refine level^2)<br><b>For each refine:</b><br>Deal +6% ATK based damage against [Normal/Boss/Guardian] type monsters.", 0]
 	, [2124, 6, 155, 70, 3, 0, 100, 50, "Crimson Axe", 0, "ATK +(refine level^2)<br><b>For each refine:</b><br>Deal +5% ATK based damage against [Normal/Boss/Guardian] type monsters.<br>Deal +1% ranged ATK based damage.<br><b>For each 2 refine levels:</b><br>On all monsters ignore 1% DEF.", 0]
+	, [2125, 50, 146, 1, 0, 0, 50, 10, "Rebel Cap", 0, "", 5, 2, 25, 3, 14, 100, 0]
+	, [2126, 51, 146, 1, 0, 0, 50, 10, "Rebel Sunglasses", 0, "", 5, 1, 25, 1, 370, -5, 0]
+	, [2127, 52, 146, 1, 0, 0, 50, 10, "Rebel Chewing Gum", 0, "Recover 1 SP every 10 seconds.", 25, 1, 0]
+	, [2128, 17, 146, 60, 3, 3, 100, 30, "Mythril Revolver", 0, "When dealing ATK based damage, 3% chance you gain 15% of the damage inflicted on your target as HP.<br>When receiving an ATK based attack, 5% chance to cast [Coin Flip] Lvl 1 on yourself.", 0]
+	, [2129, 17, 146, 50, 3, 1, 100, 30, "Spirit Guard Revolver", 0, "<b>One-Handed Pistol</b>", 0]
+	, [2130, 21, 146, 150, 3, 1, 200, 30, "Cyanide Launcher", 0, "When dealing long ranged ATK based damage, 5% chance of inflicting Stun, Curse, Silence, and Poison on the target.", 0]
+	, [2131, 18, 146, 150, 3, 2, 200, 30, "Winchester Rifle", 0, "", 48, 10, 10, 20, 0]
+	, [2132, 20, 146, 100, 3, 2, 250, 10, "Tempest", 0, "", 12, 3, 10, 25, 0]
 ];
 
 //[ id, display location, job that can use, atk/def, level of weapon, slots, weight, level required to use, "name of item", ?, "description", effect1, effect2, ..., 0 =? ]
@@ -2264,14 +2272,14 @@ function Item_Setumei(nC1, nC2) {
 		CBIstr += v_Element[nC2] + " Element Weapon<BR>";
 	if (22 == nC1) {
 		if (nC2 == 1)
-			CBIstr += "Bypass your target's defence [not on Boss type]<BR>";
+			CBIstr += "Bypass your target's defense [not on Boss type]<BR>";
 		else
-			CBIstr += "Bypass your target's defence [also works on Boss type]<BR>";
+			CBIstr += "Bypass your target's defense [also works on Boss type]<BR>";
 	}
 	if (23 == nC1)
 		CBIstr += "Your damage depends on your target's VIT and DEF<br><b><font color=red>NOTE:</font> [VIT+DEF]>100, +1% for each value above 100 | [VIT+DEF]<100, -1% for each value below 100</b><BR>";
 	if (24 == nC1)
-		CBIstr += "Reduces your defence to 1/" + nC2 + "<BR>";
+		CBIstr += "Reduces your defense to 1/" + nC2 + "<BR>";
 	if (25 == nC1)
 		//		CBIstr += "Increases ranged damage by "+ nC2 +"%<BR>";
 		CBIstr += "Deal" + wIS + nC2 + "% ranged ATK based damage.<BR>";	//bonus bLongAtkRate ¿aumenta el daño de ataques mágicos?
@@ -2349,7 +2357,7 @@ function Item_Setumei(nC1, nC2) {
 		//		CBIstr += "Increase ATK based damage against [Golem] race monsters by "+ wIS + nC2 +"%<BR>";
 		CBIstr += "Deal" + wIS + nC2 + "% ATK based damage against [Golem] race monsters.<BR>";
 	if (85 == nC1)
-		CBIstr += "Lowers your defence rate by " + nC2 + "%<BR>";
+		CBIstr += "Lowers your defense rate by " + nC2 + "%<BR>";
 	if (86 == nC1)
 		//		CBIstr += "Increases your chance to hit all targets by a fixed " + nC2 +"%<BR>";
 		CBIstr += "Perfect HIT +" + nC2 + "%<BR>";	//mejorar: funciona con skills ??
