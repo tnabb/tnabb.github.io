@@ -2953,7 +2953,9 @@ function ClickWeaponType2(e) {
 
             RandOptWeapon2Reset();
             // add random options to 2nd weapon for assassin
-            if(m_RandomOptForgedWeapons.includes(parseInt(e))){
+            if(m_ForgedItems.includes(parseInt(e)) && !(m_RandomOptForgedWeapons.includes(parseInt(e)))){
+                RandOptWeapon2Reset();
+            }else if(m_RandomOptForgedWeapons.includes(parseInt(e))){
                 if(!(m_RandomOptForgedWeapons.includes(parseInt(n_A_Equip[1])))){
                     for(i = 0; "NULL" != m_RandomOptForged[0][i]; i++){
                         c.A_weapon2_ropt1.options[i] = new Option(m_RandomOpt[m_RandomOptForged[0][i]][1], m_RandomOpt[m_RandomOptForged[0][i]][0]);
@@ -2968,16 +2970,16 @@ function ClickWeaponType2(e) {
                         c.A_weapon2_ropt4.options[i] = new Option(m_RandomOpt[m_RandomOptForged[3][i]][1], m_RandomOpt[m_RandomOptForged[3][i]][0]);
                     }
                 }
-            }else if(m_RandomOptCrimsonWeapons.includes(parseInt(n_A_Equip[1]))){ // crimson
-                if(!(m_RandomOptCrimsonWeapons.includes(parseInt(oldWeapon))) || parseInt(oldWeapon) == 0){
+            }else if(m_RandomOptCrimsonWeapons.includes(parseInt(e))){ // crimson
+                if(!(m_RandomOptCrimsonWeapons.includes(parseInt(n_A_Equip[1])))){
                     for(i = 0; "NULL" != m_RandomOptCrimson[0][i]; i++){
-                        c.A_weapon1_ropt1.options[i] = new Option(m_RandomOpt[m_RandomOptForged[0][i]][1], m_RandomOpt[m_RandomOptForged[0][i]][0]);
+                        c.A_weapon2_ropt1.options[i] = new Option(m_RandomOpt[m_RandomOptCrimson[0][i]][1], m_RandomOpt[m_RandomOptCrimson[0][i]][0]);
                     }
                     for(i = 0; "NULL" != m_RandomOptCrimson[1][i]; i++){
-                        c.A_weapon1_ropt2.options[i] = new Option(m_RandomOpt[m_RandomOptForged[1][i]][1], m_RandomOpt[m_RandomOptForged[1][i]][0]);
+                        c.A_weapon2_ropt2.options[i] = new Option(m_RandomOpt[m_RandomOptCrimson[1][i]][1], m_RandomOpt[m_RandomOptCrimson[1][i]][0]);
                     }
-                    c.A_weapon1_ropt3.options[0] = new Option(m_RandomOpt[0][1], m_RandomOpt[0][0]);
-                    c.A_weapon1_ropt4.options[0] = new Option(m_RandomOpt[0][1], m_RandomOpt[0][0]);
+                    c.A_weapon2_ropt3.options[0] = new Option(m_RandomOpt[0][1], m_RandomOpt[0][0]);
+                    c.A_weapon2_ropt4.options[0] = new Option(m_RandomOpt[0][1], m_RandomOpt[0][0]);
                 }
             }else if(m_RandomOptSpecialWeapons.includes(parseInt(e))){ // special weapons that assassins can use
                 if(!(m_RandomOptSpecialWeapons.includes(parseInt(n_A_Equip[1])))){
@@ -3066,6 +3068,18 @@ function ClickWeaponType2(e) {
                         c.A_weapon2_ropt4.options[i] = new Option(m_RandomOpt[m_RandomOptForged[3][i]][1], m_RandomOpt[m_RandomOptForged[3][i]][0]);
                     }
                 }
+            }else if(m_RandomOptCrimsonWeapons.includes(parseInt(e))){ // crimson
+                if(!(m_RandomOptCrimsonWeapons.includes(parseInt(n_A_Equip[0])))){
+                    RandOptWeapon2Reset();
+                    for(i = 0; "NULL" != m_RandomOptCrimson[0][i]; i++){
+                        c.A_weapon2_ropt1.options[i] = new Option(m_RandomOpt[m_RandomOptCrimson[0][i]][1], m_RandomOpt[m_RandomOptCrimson[0][i]][0]);
+                    }
+                    for(i = 0; "NULL" != m_RandomOptCrimson[1][i]; i++){
+                        c.A_weapon2_ropt2.options[i] = new Option(m_RandomOpt[m_RandomOptCrimson[1][i]][1], m_RandomOpt[m_RandomOptCrimson[1][i]][0]);
+                    }
+                    c.A_weapon2_ropt3.options[0] = new Option(m_RandomOpt[0][1], m_RandomOpt[0][0]);
+                    c.A_weapon2_ropt4.options[0] = new Option(m_RandomOpt[0][1], m_RandomOpt[0][0]);
+                }
             }else if(m_RandomOptSpecialWeapons.includes(parseInt(e))){ // special weapons that assassins can use
                 if(!(m_RandomOptSpecialWeapons.includes(parseInt(n_A_Equip[1])))){
                     RandOptWeapon2Reset();
@@ -3083,19 +3097,17 @@ function ClickWeaponType2(e) {
                     }
                 }
             }else{ // melee weapons
-                if(m_RandomOptSpecialWeapons.includes(parseInt(n_A_Equip[1])) || m_RandomOptForgedWeapons.includes(parseInt(n_A_Equip[1])) || parseInt(n_A_Equip[1]) == 0){
-                    RandOptWeapon2Reset();
-                    for(i = 0; "NULL" != m_RandomOptMelee[0][i]; i++){
-                        c.A_weapon2_ropt1.options[i] = new Option(m_RandomOpt[m_RandomOptMelee[0][i]][1], m_RandomOpt[m_RandomOptMelee[0][i]][0]);
-                    }
-                    for(i = 0; "NULL" != m_RandomOptMelee[1][i]; i++){
-                        c.A_weapon2_ropt2.options[i] = new Option(m_RandomOpt[m_RandomOptMelee[1][i]][1], m_RandomOpt[m_RandomOptMelee[1][i]][0]);
-                    }
-                    for(i = 0; "NULL" != m_RandomOptMelee[2][i]; i++){
-                        c.A_weapon2_ropt3.options[i] = new Option(m_RandomOpt[m_RandomOptMelee[2][i]][1], m_RandomOpt[m_RandomOptMelee[2][i]][0]);
-                    }
-                    c.A_weapon2_ropt4.options[0] = new Option(m_RandomOpt[0][1], m_RandomOpt[0][0]);
+                RandOptWeapon2Reset();
+                for(i = 0; "NULL" != m_RandomOptMelee[0][i]; i++){
+                    c.A_weapon2_ropt1.options[i] = new Option(m_RandomOpt[m_RandomOptMelee[0][i]][1], m_RandomOpt[m_RandomOptMelee[0][i]][0]);
                 }
+                for(i = 0; "NULL" != m_RandomOptMelee[1][i]; i++){
+                    c.A_weapon2_ropt2.options[i] = new Option(m_RandomOpt[m_RandomOptMelee[1][i]][1], m_RandomOpt[m_RandomOptMelee[1][i]][0]);
+                }
+                for(i = 0; "NULL" != m_RandomOptMelee[2][i]; i++){
+                    c.A_weapon2_ropt3.options[i] = new Option(m_RandomOpt[m_RandomOptMelee[2][i]][1], m_RandomOpt[m_RandomOptMelee[2][i]][0]);
+                }
+                c.A_weapon2_ropt4.options[0] = new Option(m_RandomOpt[0][1], m_RandomOpt[0][0]);
             }
         }
         var _ = Math.max(document.documentElement.clientWidth, document.body.scrollWidth, document.documentElement.scrollWidth, document.body.offsetWidth, document.documentElement.offsetWidth);
