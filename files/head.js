@@ -94,6 +94,14 @@ function servers() {
         c.A_BODY_REFINE.options[i] = new Option("+" + i, i),
         c.A_SHOULDER_REFINE.options[i] = new Option("+" + i, i),
         c.A_SHOES_REFINE.options[i] = new Option("+" + i, i)
+    firstLoad = 1,
+    1 * c.server.value == 10 ? (c.A_JOB.options[30].innerHTML = "Clown (iRO name: Minstrel)",
+        c.A_JOB.options[32].innerHTML = "Professor (iRO name: Scholar)",
+        c.A_JOB.options[33].innerHTML = "Creator (iRO name: Biochemist)",
+        c.A_JOB.options[42].innerHTML = "Star Gladiator (iRO name: Taekwon Master)") : (c.A_JOB.options[30].innerHTML = JobName[30],
+            c.A_JOB.options[32].innerHTML = JobName[32],
+            c.A_JOB.options[33].innerHTML = JobName[33],
+            c.A_JOB.options[42].innerHTML = JobName[42]),
     calc()
 }
 function restrictEquipslot() {
@@ -235,7 +243,6 @@ function BattleCalc999() {
                 n_Max_DMG += w_left_Maxatk,
                 w_DMG[0] = BattleCalc(n_A_DMG[0], 0);
                 w_DMG[0] = Math.floor(w_DMG[0] * (100 + n_tok[355]) / 100); // auto attack damage mod
-                SkillSearch(846) && 20 == n_A_WeaponType && (w_DMG[0] = Math.floor(w_DMG[0] * (80 / 100)));
             var _ = w_DMG[0] + EDP_DMG(0);
             Last_DMG_A[0] = Last_DMG_B[0] = _ + w_left_Minatk,
                 InnStr[0] += Last_DMG_A[0] + " (" + _ + " + " + w_left_Minatk + ")",
@@ -245,7 +252,6 @@ function BattleCalc999() {
                 w_DMG[0] = n_Min_DMG,
                 w_DMG[2] = BattleCalc(n_A_DMG[2], 2);
                 w_DMG[2] = Math.floor(w_DMG[2] * (100 + n_tok[355]) / 100); // auto attack damage mod
-                SkillSearch(846) && 20 == n_A_WeaponType && (w_DMG[2] = Math.floor(w_DMG[2] * (80 / 100)));
             _ = w_DMG[2] + EDP_DMG(2);
             Last_DMG_A[2] = Last_DMG_B[2] = _ + w_left_Maxatk,
                 InnStr[2] += Last_DMG_A[2] + " (" + _ + " + " + w_left_Maxatk + ")",
@@ -255,7 +261,6 @@ function BattleCalc999() {
                 w_DMG[2] = n_Max_DMG,
                 w_DMG[1] = BattleCalc(n_A_DMG[1], 1);
                 w_DMG[1] = Math.floor(w_DMG[1] * (100 + n_tok[355]) / 100); // auto attack damage mod
-                SkillSearch(846) && 20 == n_A_WeaponType && (w_DMG[1] = Math.floor(w_DMG[1] * (80 / 100)));
             _ = w_DMG[1] + EDP_DMG(1);
             Last_DMG_A[1] = Last_DMG_B[1] = _ + w_left_Aveatk,
             InnStr[1] += Last_DMG_A[1] + " (" + _ + " + " + w_left_Aveatk + ")",
@@ -289,8 +294,7 @@ function BattleCalc999() {
             ATKmod02(wMod, 0);
             for (e = 0; e <= 2; e++) // auto attack damage
                 w_DMG[e] = BattleCalc(n_A_DMG[e], e),
-                w_DMG[e] = Math.floor(w_DMG[e] * (100 + n_tok[355]) / 100), // auto attack damage mod
-                SkillSearch(846) && 20 == n_A_WeaponType && (w_DMG[e] = Math.floor(w_DMG[e] * (80 / 100)));
+                w_DMG[e] = Math.floor(w_DMG[e] * (100 + n_tok[355]) / 100); // auto attack damage mod
             var i = [0, 0, 0]
                 , t = 0;
             if (11 == n_A_WeaponType) {
