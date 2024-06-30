@@ -1041,7 +1041,7 @@ function StAllCalc() {
         n_A_SHOULDER_REFINE > 6 && 1724 == n_A_Equip[7] && (n_A_LUCKY += n_A_SHOULDER_REFINE - 6),
         n_A_SHOULDER_REFINE <= 4 && 401 == n_A_card[12] && (n_A_LUCKY += 1),
         1956 == n_A_Equip[0] && 28 == n_A_JOB && (n_A_LUCKY += 10),
-        n_A_LEFT_REFINE >= 4 && (n_A_LUCKY += n_A_LEFT_REFINE - 4),
+        2089 == n_A_Equip[5] && n_A_LEFT_REFINE >= 4 && (n_A_LUCKY += n_A_LEFT_REFINE - 4),
         535 == n_A_Equip[7]) {
         var u = n_A_JobClass();
         3 != u && 4 != u && 5 != u && 45 != u || (n_A_LUCKY += 5,
