@@ -585,7 +585,6 @@ function StAllCalc() {
         n_A_ATK += M,
         V_ATK = Math.floor(n_A_Weapon_ATK + n_A_Weapon2_ATK + n_A_ATK),
         M = n_tok[87] + n_A_Buf9[53], // atk %
-        0 != SRV && SkillSearch(342) && (SkillSearch(380) <= 1 ? M += 0 : M += 2 * SkillSearch(342) * SkillSearch(380)),
         1799 == n_A_Equip[2] && (wSPVS = n_A_JobClass(),
             1 != wSPVS && 2 != wSPVS && 6 != wSPVS || (M += 8)),
         V_ATK < 0 && 0 == SRV && (V_ATK = 0),
@@ -1307,8 +1306,7 @@ function StAllCalc() {
         b = 1) : 3 == n_A_Buf2[6] && (p = 30, b = 1)) : (p = 25, b = 1));
     var m = 0;
     if (n_A_Buf3[1] && (0 == b || p) && (10 == n_A_WeaponType || 17 <= n_A_WeaponType && n_A_WeaponType <= 21 || (m += 5 + n_A_Buf3[1] + Math.floor(n_A_Buf3[31] / 2) + Math.floor(n_A_Buf3[21] / 10))),
-        SkillSearch(361) && n_A_JobLV >= 50 ? (10 == SRV ? M += Math.max(p, m) + 3 * SkillSearch(361) + v : M += Math.max(p, m, 3 * SkillSearch(361)) + v,
-            b = 1) : M += Math.max(p, m, v),
+        SkillSearch(361) && n_A_JobLV >= 50 ? (M += Math.max(p, m) + 3 * SkillSearch(361) + v, b = 1) : M += Math.max(p, m, v),
         3 == n_A_Buf7[35] ? M += 20 : n_A_Buf7[44] || 2 == n_A_Buf7[35] ? M += 15 : (n_A_Buf7[26] || 1 == n_A_Buf7[35]) && (M += 10),
         1 * c.server.value < 50)
         1 == n_Nitou ? 0 == n_A_WeaponType && 0 != n_A_Weapon2Type ? WD = 50 * m_JobASPD[n_A_JOB][n_A_Weapon2Type] : WD = 35 * (m_JobASPD[n_A_JOB][n_A_WeaponType] + m_JobASPD[n_A_JOB][n_A_Weapon2Type]) : WD = 50 * m_JobASPD[n_A_JOB][n_A_WeaponType],
