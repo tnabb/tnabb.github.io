@@ -1894,7 +1894,7 @@ m_Item = [
 	, [1888, 64, 107, 0, 0, 0, 0, 1, "Lord Knight Figure", 0, "", 1, 2, 17, 10, 18, 2, 13, 100, 0]
 	, [1889, 64, 111, 0, 0, 0, 0, 1, "High Wizard Figure", 0, "", 4, 2, 73, -5, 74, 5, 0]
 	, [1890, 64, 120, 0, 0, 0, 0, 1, "Super Novice Figure", 0, "", 5, 2, 12, 2, 17, 10, 88, 10, 13, 200, 14, 100, 0]
-	, [1891, 64, 145, 0, 0, 0, 0, 1, "Gunslinger Figure", 0, "", 5, 2, 17, 10, 14, 50, 370, -10, 0]
+	, [1891, 64, 59, 0, 0, 0, 0, 1, "Gunslinger Figure", 0, "", 5, 2, 17, 10, 14, 50, 370, -10, 0]
 	, [1892, 64, 141, 0, 0, 0, 0, 1, "Star Gladiator Figure", 0, 0, 1, 2, 17, 10, 8, 5, 5331, 3, 5333, 3, 5335, 3, 5337, 3, 5339, 3, 0]
 	, [1893, 64, 142, 0, 0, 0, 0, 1, "Star Gladiator Figure", 0, 0, 1, 2, 17, 10, 8, 5, 5331, 3, 5333, 3, 5335, 3, 5337, 3, 5339, 3, 0]
 	, [1894, 64, 143, 0, 0, 0, 0, 1, "Soul Linker Figure", 0, "", 4, 2, 73, -5, 370, -10, 0]
@@ -2141,6 +2141,17 @@ m_Item = [
 	, [2130, 21, 146, 150, 3, 1, 200, 30, "Cyanide Launcher", 0, "When dealing long ranged ATK based damage, 5% chance of inflicting Stun, Curse, Silence, and Poison on the target.", 0]
 	, [2131, 18, 146, 150, 3, 2, 200, 30, "Winchester Rifle", 0, "", 48, 10, 10, 20, 0]
 	, [2132, 20, 146, 100, 3, 2, 250, 10, "Tempest", 0, "", 12, 3, 10, 25, 0]
+	, [2133, 50, 0, 4, 0, 1, 40, 1, "Lava Leather Hood", 0, "", 17, 5, 0]
+	, [2134, 60, 0, 5, 0, 1, 100, 1, "Lava Leather Suit", 0, "", 63, 5, 43, 5, 0]
+	, [2135, 62, 0, 3, 0, 1, 50, 1, "Lava Leather Manteau", 0, "", 50, 5, 0]
+	, [2136, 63, 0, 3, 0, 1, 50, 1, "Lava Leather Shoes", 0, "", 159, 5, 0]
+	, [2137, 100, 0, 0, 0, 0, 0, 0, "Lava Leather Manteau + Shoes", 0, "", 159, 30, 0]
+	, [2138, 100, 0, 0, 0, 0, 0, 0, "Lava Leather Armor Set", 0, "", 43, 10, 343, 10, 0]
+	, [2139, 100, 0, 0, 0, 0, 0, 0, "Lava Leather Hood + Binoculars", 0, "", 5, 2, 9, 5, 0]
+	, [2140, 100, 0, 0, 0, 0, 0, 0, "Lava Leather Hood + Evil Wing Ears", 0, "", 1, 2, 18, 3, 0]
+	, [2141, 62, 0, 3, 0, 1, 30, 1, "Manteau of Flame Heart", 0, "", 63, 10, 61, -10, 0]
+	, [2142, 9, 156, 60, 4, 1, 70, 70, "Flaming Wand", 0, "<b>For each refine:</b><br>Increases [<b style='color:red'>Fire</b>] property magic damage by 1%.<br>[Fire Ball] skill damage +1%", 89, 20, 4, 4, 5, 1, 13, 200, 14, 100, 0]
+	, [2143, 1, 95, 120, 4, 2, 120, 50, "Volcano Knife", 0, "", 89, 15, 4, 3, 5, 3, 42, 15, 342, 15, 0]
 ];
 
 //[ id, display location, job that can use, atk/def, level of weapon, slots, weight, level required to use, "name of item", ?, "description", effect1, effect2, ..., 0 =? ]
@@ -2721,6 +2732,10 @@ w_SE = [[737, 436, 475, "NULL"]
 	, [2085, 2084, 436, 476, "NULL"]
 	, [2085, 2084, 436, 477, "NULL"]
 	, [2112, 1998, 2111, "NULL"]
+	, [2137, 2135, 2136, "NULL"]
+	, [2138, 2133, 2134, 2135, 2136, "NULL"]
+	, [2139, 2133, 259, "NULL"]
+	, [2140, 2133, 381, "NULL"]
 ];
 SE_MAXnum = w_SE.length - 1;
 for (var i = 0; i <= SE_MAXnum; i++) {
