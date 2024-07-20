@@ -751,7 +751,7 @@
 	, [745, "Rigid Earth Deleter", 9, 34, 1, 99, 350000, 63, 63, 250, 160, 29, 3509, 5119, 45, 25, 50000, 45000, , 1, 0, , , 0]
 	, [746, "Rigid Explosion", 2, 34, 0, 99, 350000, 39, 67, 250, 180, 90, 3902, 5550, 25, 60, 50000, 45000, , 1, 0, , , 0]
 	, [747, "Rigid Kaho", 0, 34, 1, 99, 350000, 29, 62, 250, 200, 100, 3576, 5118, 40, 20, 50000, 45000, , 1, 0, , , 0]
-	, [748, "Rigid Lava Golem", 0, 84, 2, 99, 350000, 179, 69, 250, 210, 1, 8000, 9000, 75, 75, 400000, 375000, , 1, 0, , , 0]
+	, [748, "Rigid Lava Golem", 0, 84, 2, 99, 2500000, 179, 69, 250, 210, 1, 8000, 9000, 75, 75, 400000, 375000, , 1, 0, , , 0]
 	, [749, "[NOT IMPLEMENTED] Muspellskoll [MVP]", 2, 34, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 1, 1, 1, 1, , 1, 0, , , 0]
 ];
 // [id, name, race, element + ele lvl, size, monster lvl, hp, vit, agi, int, dex, luk, min atk, max atk, def, mdef, base exp, job exp, , type (0 = normal, 1 = boss), melee/ranged (0 = melee, 1 = ranged), , , skill id, skill lvl, skill id, skill lvl, ..., 0]

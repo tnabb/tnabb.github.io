@@ -1109,7 +1109,7 @@ function BattleCalc999() {
             wASYU = 250 + 150 * n_A_ActiveSkillLV;
             for (s = 0; s <= 2; s++)
                 w_DMG[s] = BK_n_A_DMG[s],
-                1 == n_A_Buf2[19] && (w_DMG[s] *= 2),
+                //1 == n_A_Buf2[19] && (w_DMG[s] *= 2), removed 2x damage from 100% ATK Gospel buff
                 w_DMG[s] = Math.floor(w_DMG[s] * wMod) + wASYU,
                 w_DMG[s] = ApplyModifiers(w_DMG[s]),
                 w_DMG[s] = Math.floor(w_DMG[s] * element[n_B[3]][0]),
