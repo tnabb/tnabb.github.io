@@ -2152,6 +2152,7 @@ m_Item = [
 	, [2141, 62, 0, 3, 0, 1, 30, 1, "Manteau of Flame Heart", 0, "", 63, 10, 61, -10, 0]
 	, [2142, 9, 156, 60, 4, 1, 70, 70, "Flaming Wand", 0, "<b>For each refine:</b><br>Increases [<b style='color:red'>Fire</b>] property magic damage by 1%.<br>[Fire Ball] skill damage +1%", 89, 20, 4, 4, 5, 1, 13, 200, 14, 100, 0]
 	, [2143, 1, 95, 120, 4, 2, 120, 50, "Volcano Knife", 0, "", 89, 15, 4, 3, 5, 3, 42, 15, 342, 15, 0]
+	, [2144, 52, 0, 0, 0, 0, 0, 1, "Show Me The Zeny", 0, "Enables the use of [Overcharge] Lvl 10<br>Enables the use of [Discount] Lvl 10<br><b>Note: This does not give the new passive effects of Overcharge and Discount, which are stricly limited to Merchant classes.</b>", 0]
 ];
 
 //[ id, display location, job that can use, atk/def, level of weapon, slots, weight, level required to use, "name of item", ?, "description", effect1, effect2, ..., 0 =? ]

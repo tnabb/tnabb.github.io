@@ -662,7 +662,7 @@ m_Card = [
 	, [655, 5, "Decorated Evil Tree", "", 17, 5, 46, 10, 0]
 	, [656, 7, "Vicious Cookie", "", 46, 5, 0]
 	, [657, 1, "Corrupt Cruiser", "", 25, 8, 221, 175, 0]
-	, [658, 3, "Evil Dwelling Box", "", 69, 25, 0]
+	, [658, 3, "Evil Dwelling Box", "", 339, 20, 0]
 	, [659, 1, "Creepy Demon", "<b>[Weapon Level 1~2]</b> Deal +3% MATK based damage against [<b style='color:#CDCD40'>Angel</b>] race monsters.<BR><b>[Weapon Level 3~4]</b> Deal +8% MATK based damage against [<b style='color:#CDCD40'>Angel</b>] race monsters.", 0]
 	, [660, 5, "Malicious Baby Ghost", "", 60, 15, 68, 10, 0]
 	, [661, 5, "Dancing Marionette Ghost", "", 60, 15, 67, 10, 0]

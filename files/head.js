@@ -393,7 +393,7 @@ function BattleCalc999() {
             CastAndDelay(),
             void BattleCalc998()
         }
-        for (w_ActS = [6, 7, 19, 41, 44, 65, 71, 72, 73, 83, 84, 158, 161, 169, 171, 176, 188, 189, 199, 207, 248, 260, 261, 264, 288, 289, 290, 292, 302, 303, 305, 306, 307, 308, 326, 317, 318, 331, 333, 335, 337, 339, 382, 388, 398, 400, 418, 419, 423, 428, /* 430, */ 431, 432, 434, 435, 436, 437, 461, 463, 465, 466, 469, 849, 850, 853, 854, "NULL"],
+        for (w_ActS = [6, 7, 19, 41, 44, 65, 71, 72, 73, 83, 84, 158, 161, 169, 171, 176, 188, 189, 199, 207, 248, 260, 261, 264, 288, 289, 290, 292, 302, 303, 305, 306, 307, 308, 326, 317, 318, 331, 333, 335, 337, 339, 382, 388, 398, 400, 418, 419, 423, 428, /* 430, */ 431, 432, 434, 435, 436, 437, 461, 463, 465, 466, 469, 849, 850, 853, "NULL"],
             iw = 0; w_ActS[iw] != n_A_ActiveSkill && "NULL" != w_ActS[iw]; iw++)
             ;
         if (n_A_ActiveSkill == w_ActS[iw]) {
@@ -655,16 +655,8 @@ function BattleCalc999() {
                 1 * c.A_Weapon_element.value != 0 && (n_A_Weapon_element = 1 * c.A_Weapon_element.value),
                 wActiveHitNum = 2,
                 wMod += 0.6 * n_A_ActiveSkillLV;
-            else if (854 == n_A_ActiveSkill)
-                n_rangedAtk = 1,
-                wActiveHitNum = 5,
-                w_HIT_HYOUJI = 100,
-                n_A_Weapon_element = 10,
-                wCast = 2,
-                n_Delay[2] = 2,
-                wMod += 80;
             ATKmod02(wMod, 0);
-            0 == cast_kotei && 854 != n_A_ActiveSkill && (wCast *= n_A_CAST);
+            0 == cast_kotei && (wCast *= n_A_CAST);
             for (e = 0; e <= 2; e++)
                 w_MagiclBulet = e,
                 w_DMG[e] = BattleCalc(n_A_DMG[e], e),
@@ -1010,7 +1002,8 @@ function BattleCalc999() {
                 SkillSearch(327) ? wCR += 20 * SkillSearch(327) : 
                 (SkillSearch(154) && (wCR += 5 * SkillSearch(154)), 0 == SkillSearch(154) && n_A_Buf2[8] && (wCR += 5 * n_A_Buf2[8])),
                 CR_n_A_DMG = [0, 0, 0],
-                CRmod = 1 * c.SkillSubNum.value / 8e3,
+                CRmod = 1,
+                CRmod += (n_A_DEX + n_A_LUK) * 0.01,
                 s = 0; s <= 2; s++)
                 CR_n_A_DMG[s] = Math.floor(n_A_DMG[s] * wCR / 100);
             wMod += .5,
@@ -1427,6 +1420,24 @@ function BattleCalc999() {
                 w_DMG[e] = Math.floor(w_DMG[e] / eneRange),
                 Last_DMG_A[e] = Last_DMG_B[e] = w_DMG[e],
                 InnStr[e] += Last_DMG_A[e];
+            w_HIT_HYOUJI = 100,
+            CastAndDelay(),
+            BattleCalc998()
+        } else if (854 == n_A_ActiveSkill) { // slug shot
+            n_PerHIT_DMG = 0,
+            n_rangedAtk = 1,
+            n_A_Weapon_element = 10,
+            wCast = 2,
+            n_Delay[2] = 2,
+            wMod = (8100) / 100,
+            n_A_Buf2[8] && (wMod += 0.05);
+            for (s = 0; s <= 2; s++)
+                w_DMG[s] = BK_n_A_DMG[s] * wMod,
+                w_DMG[s] = ApplyModifiers(w_DMG[s]),
+                w_DMG[s] = Math.floor(w_DMG[s] / 5),
+                Last_DMG_B[s] = w_DMG[s] * 5,
+                Last_DMG_A[s] = Last_DMG_B[s],
+                InnStr[s] += Last_DMG_A[s] + " (" + w_DMG[s] + " x 5 hits)";
             w_HIT_HYOUJI = 100,
             CastAndDelay(),
             BattleCalc998()
@@ -2410,6 +2421,9 @@ function BattleHiDam() {
     if (n_tok[371])
         for (i = 0; i <= 6; i++)
             w_HiDam[i] = Math.floor(w_HiDam[i] * (1 - (n_tok[371] / 100)));
+    if(SkillSearch(64))
+        for (i = 0; i <= 6; i++)
+            w_HiDam[i] = Math.floor(w_HiDam[i] * (1 - (SkillSearch(64) * 0.5 / 100)));
     if (SkillSearch(852) == 2 && n_A_ActiveSkill == 430)
         for (i = 0; i <= 6; i++)
             w_HiDam[i] = Math.floor(w_HiDam[i] * 0.25);
@@ -3279,7 +3293,7 @@ function BClickAtkSkill() {
         957 == n_A_Equip[7] && calc()
 }
 function ClickActiveSkill2() {
-    if (66 == n_A_ActiveSkill || 326 == n_A_ActiveSkill)
+    if (326 == n_A_ActiveSkill)
         myInnerHtml("AASkill", 'Cart weight: <input type="text" inputmode="numeric" maxlength="4" name="SkillSubNum" value="8000" size=2 onkeypress="return isNumeric(event)" onkeyup="calc()">', 0);
     else if (131 == n_A_ActiveSkill) {
         for (myInnerHtml("AASkill", 'Hits: <select name="SkillSubNum" onChange="calc()"></select>', 0),
