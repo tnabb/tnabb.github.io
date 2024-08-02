@@ -1003,7 +1003,7 @@ function BattleCalc999() {
                 (SkillSearch(154) && (wCR += 5 * SkillSearch(154)), 0 == SkillSearch(154) && n_A_Buf2[8] && (wCR += 5 * n_A_Buf2[8])),
                 CR_n_A_DMG = [0, 0, 0],
                 CRmod = 1,
-                CRmod += (n_A_DEX + n_A_LUK) * 0.01,
+                CRmod += (SU_DEX + SU_LUK) * 0.01,
                 s = 0; s <= 2; s++)
                 CR_n_A_DMG[s] = Math.floor(n_A_DMG[s] * wCR / 100);
             wMod += .5,
