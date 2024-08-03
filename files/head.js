@@ -871,10 +871,7 @@ function BattleCalc999() {
             n_PerHIT_DMG = 5 * wSPP2,
             5 == n_A_ActiveSkillLV ? wCast = 1 * n_A_CAST : wCast = (.1 + .2 * n_A_ActiveSkillLV) * n_A_CAST,
             n_Delay[2] = 1 + .2 * n_A_ActiveSkillLV,
-            wSPP = 0;
-            for(b = 1; b <= (n_A_STR / 10); b++){
-                wSPP += (b * 10) -  5;
-            }
+            wSPP = Math.floor(n_A_STR / 10) * Math.floor(n_A_STR / 10);
             spearMasteryDMG = 4 * SkillSearch(69);
             SkillSearch(78) > 0 && (spearMasteryDMG += SkillSearch(69)),
             Weaponw = 1 * c.SkillSubNum.value,
@@ -884,6 +881,7 @@ function BattleCalc999() {
             w_DMG[2] += spearMasteryDMG + n_A_WeaponLV_refineATK,
             w_DMG[2] = w_DMG[2] * Math.max(0, element[n_B[3]][n_A_Weapon_element]),
             w_DMG[2] += n_A_Buf2[12] * 15,
+            w_DMG[2] += Math.floor(w_DMG[2] * 3 / 100),
             w_DMG[2] = ApplyModifiers(w_DMG[2]),
             w_DMG[0] = w_DMG[1] = w_DMG[2];
             for (e = 0; e <= 2; e++)
