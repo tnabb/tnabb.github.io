@@ -2133,6 +2133,7 @@ m_Item = [
 	, [2122, 3, 0, 90, 3, 0, 100, 50, "Crimson Two-Handed Sword", 0, "ATK +(refine level^2)<br><b>For each refine:</b><br>Deal +7% ATK based damage against [Normal/Boss/Guardian] type monsters.", 0]
 	, [2123, 4, 0, 70, 3, 0, 100, 50, "Crimson Spear", 0, "ATK +(refine level^2)<br><b>For each refine:</b><br>Deal +6% ATK based damage against [Normal/Boss/Guardian] type monsters.", 0]
 	, [2124, 6, 155, 70, 3, 0, 100, 50, "Crimson Axe", 0, "ATK +(refine level^2)<br><b>For each refine:</b><br>Deal +5% ATK based damage against [Normal/Boss/Guardian] type monsters.<br>Deal +1% ranged ATK based damage.<br><b>For each 2 refine levels:</b><br>On all monsters ignore 1% DEF.", 0]
+	// patch a3
 	, [2125, 50, 146, 1, 0, 0, 50, 10, "Rebel Cap", 0, "", 5, 2, 25, 3, 14, 100, 0]
 	, [2126, 51, 146, 1, 0, 0, 50, 10, "Rebel Sunglasses", 0, "", 5, 1, 25, 1, 370, -5, 0]
 	, [2127, 52, 146, 1, 0, 0, 50, 10, "Rebel Chewing Gum", 0, "Recover 1 SP every 10 seconds.", 25, 1, 0]
@@ -2153,6 +2154,13 @@ m_Item = [
 	, [2142, 9, 156, 60, 4, 1, 70, 70, "Flaming Wand", 0, "<b>For each refine:</b><br>Increases [<b style='color:red'>Fire</b>] property magic damage by 1%.<br>[Fire Ball] skill damage +1%", 89, 20, 4, 4, 5, 1, 13, 200, 14, 100, 0]
 	, [2143, 1, 95, 120, 4, 2, 120, 50, "Volcano Knife", 0, "", 89, 15, 4, 3, 5, 3, 42, 15, 342, 15, 0]
 	, [2144, 52, 0, 0, 0, 0, 0, 1, "Show Me The Zeny", 0, "Enables the use of [Overcharge] Lvl 10<br>Enables the use of [Discount] Lvl 10<br><b>Note: This does not give the new passive effects of Overcharge and Discount, which are stricly limited to Merchant classes.</b>", 0]
+	// patch a3.7
+	, [2145, 64, 0, 0, 0, 0, 0, 50, "Ring of Archbishop", 0, "[Heal] After-cast Delay -50%<br><b>Only Left Accessory</b>", 4, 1, 99, 3, 93, 10, 0]
+	, [2146, 15, 0, 200, 4, 2, 140, 70, "Safety Whip", 0, "<b>[Refine Rate 7~10]</b><br>[Severe Rainstorm] Cast time -100%<br>Enables the use of [Barrier] Lvl 1<br>[Barrier] reduces incoming damage by 50% for 1.5 seconds when activated and has a 30 second cooldown. [Barrier] cannot be used in PVP, BGs, WOE, or RWC maps and modes.", 0]
+	, [2147, 3, 0, 220, 4, 1, 250, 70, "Claw Sword", 0, "<b>For each refine level:</b><br>CRIT +2<br><b>[Refine Rate 9~10]</b><br>Critical damage +5%", 12, 5, 10, 20, 0]
+	, [2148, 8, 53, 80, 3, 2, 80, 70, "Rubber Hammer", 0, "<b>For every 3 base VIT:</b><br>Your [Heal], [Sanctuary], and [Aid Potion] effectiveness +1%<br><b>[Refine Rate = 10]</b><br>Nullifies gemstone cost of all skills.", 13, 600, 60, 5, 61, 5, 62, 5, 63, 5, 64, 5, 65, 5, 66, 5, 67, 5, 68, 5, 69, 5, 0]
+	, [2149, 9, 111, 80, 3, 3, 100, 50, "Detecting Staff", 0, "<b>The following effects are not implemented in the calculator:</b><br>[Meteor Storm], [Storm Gust], [Lord of Vermillion] Cooldown +4 seconds<br><b>For each refine level:</b><br>[Meteor Storm] After-cast Delay -0.6 seconds<br>[Storm Gust] After-cast Delay -0.4 seconds<br>[Lord of Vermillion] After-cast Delay -0.4 seconds", 89, 20, 4, 2, 5, 2, 0]
+	, [2150, 64, 0, 0, 0, 1, 20, 70, "Safety Pendant", 0, "", 17, 10, 88, 10, 60, 1, 61, 3, 62, 3, 63, 3, 64, 3, 65, 3, 66, 3, 67, 3, 68, 3, 69, 3, 0]
 ];
 
 //[ id, display location, job that can use, atk/def, level of weapon, slots, weight, level required to use, "name of item", ?, "description", effect1, effect2, ..., 0 =? ]
@@ -2710,6 +2718,7 @@ w_SE = [[737, 436, 475, "NULL"]
 	, [1861, 1856, 1857, "NULL"]
 	, [1867, 1864, 1865, 1866, "NULL"]
 	, [1879, 1878, 727, "NULL"]
+	, [1879, 727, 2145, "NULL"]
 	, [1920, 1319, 368, "NULL"]
 	, [1957, 1956, 1837, "NULL"]
 	, [1967, 1966, 684, "NULL"]

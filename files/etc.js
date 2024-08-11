@@ -562,6 +562,7 @@ m_TempEffect = [
 	, [29, "Flare Whip", "ATK +33 [Windmill Rush]", 1, 1996, 17, 33, 0]
 	, [30, "Jackson Rhoads", "MATK +33 [Moonlight Serenade]", 1, 1997, 88, 33, 0]
 	, [31, "Guardian Staff", "50% damage reduction [Barrier]", 1, 2099, 371, 50, 0]
+	, [32, "Safety Whip", "50% damage reduction [Barrier]", 1, 2146, 371, 50, 0]
 ];
 //m_TempEffect = [ id, name, description, item/card, item/card ID, ... ]
 m_TempEffect_SORT = [0, 5, 9, 4, 15, 3, 17, 24, 11, 26, 29, 31, 18, 2, 1, 6, 30, 21, 19, 13, 10, 25, 27, 20, 23, 12, 28, 14, 8, 7, 16, 22]
