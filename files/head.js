@@ -1707,6 +1707,7 @@ function BattleTAKA() {
         wBTw2 < wBTw1 && (wBTw1 = wBTw2),
         wBT = 80 + 2 * Math.floor(n_A_DEX / 10) + 2 * Math.floor(n_A_INT / 2) + 6 * SkillSearch(119),
         wBT = Math.floor(wBT * element[n_B[3]][0]),
+        1844 == n_A_Equip[0] && n_A_Weapon_refine >= 7 && (wBT = (wBT * (100 + 30)) / 100),
         wBT = tPlusDamCut(wBT),
         wBTw3 = Math.round(100 * (1 + .3 * n_A_LUK)) / 100,
         44 == n_B[0] && (wBT = 0),
@@ -5571,8 +5572,10 @@ function ApplyModifiers(e) {
         264 == n_A_ActiveSkill && EquipNumSearch(1176) && 10 == SkillSearch(81) && (_ += 20),
         -1 == TyouEnkakuSousa3dan && EquipNumSearch(639) && (_ += 15),
         83 != n_A_ActiveSkill && 388 != n_A_ActiveSkill || !SkillSearch(381) || 0 != wBCEDPch || (_ += 10),
-        e = e * (100 + StPlusCalc2(5e3 + n_A_ActiveSkill) + StPlusCard(5e3 + n_A_ActiveSkill) + _) / 100,
-        e = e * (100 - NotesCalc(n_B[0], 5e3 + n_A_ActiveSkill)) / 100, // skill dmg reduction 
+        118 == n_A_ActiveSkill && (e = Math.floor(e / n_A_ActiveSkillLV)),
+        e = Math.floor(e * (100 + StPlusCalc2(5e3 + n_A_ActiveSkill) + StPlusCard(5e3 + n_A_ActiveSkill) + _) / 100),
+        e = Math.floor(e * (100 - NotesCalc(n_B[0], 5e3 + n_A_ActiveSkill)) / 100), // skill dmg reduction
+        118 == n_A_ActiveSkill && (e = Math.floor(e * n_A_ActiveSkillLV)),
         n_A_Buf7[20] && MANUKU_MONSTER() && (e = 110 * e / 100),
         n_A_Buf7[23] && SUPURE_MONSTER() && (e = 110 * e / 100),
         e
