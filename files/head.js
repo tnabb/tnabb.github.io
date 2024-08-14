@@ -3217,7 +3217,7 @@ function ClickActiveSkill() {
             n_A_ActiveSkill = m_EnableSkill[n_A_ActiveSkill - 5e3][2]) : n_A_ActiveSkill >= 3e3 ? (n_A_ActiveSkillLV = m_EnableSkill[n_A_ActiveSkill - 3e3][3],
                 n_A_ActiveSkill = m_EnableSkill[n_A_ActiveSkill - 3e3][2]) : n_A_ActiveSkill >= 2e3 ? (n_A_ActiveSkillLV = m_AutoSpellSkill[n_A_ActiveSkill - 2e3][3],
                     n_A_ActiveSkill = m_AutoSpellSkill[n_A_ActiveSkill - 2e3][2]) : (n_A_ActiveSkillLV = m_Skill[n_A_ActiveSkill][1],
-                        14 != n_A_JobClass2() || 128 != n_A_ActiveSkill && 133 != n_A_ActiveSkill || (n_A_ActiveSkillLV = 10));
+                        14 != n_A_JobClass2() || 128 != n_A_ActiveSkill && 133 != n_A_ActiveSkill || (n_A_ActiveSkillLV = 5));
     var e = c.A_ActiveSkillLV.length;
     for (i = 0; i < e; i++)
         c.A_ActiveSkillLV.options[0] = null;

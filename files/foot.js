@@ -1250,7 +1250,7 @@ function StAllCalc() {
         21 == n_A_JOB && EquipNumSearch(855) && (M -= 5),
         2 == n_A_JobClass() && (M += 3 * EquipNumSearch(1121)),
         EquipNumSearch(1004) && (M += Math.floor(n_A_Weapon_refine / 2)),
-        (10 == n_A_WeaponType || 14 == n_A_WeaponType || 15 == n_A_WeaponType || 16 == n_A_WeaponType) && (M += 5*CardNumSearch(528)),
+        (10 == n_A_WeaponType || (16 <= n_A_WeaponType && n_A_WeaponType <= 21)) && (M += 5*CardNumSearch(528)),
         1842 == n_A_Equip[0] && (M += Math.floor(SU_AGI/10)),
         1823 == n_A_Equip[2] && n_A_HEAD_REFINE >= 5 && (M += 1),
         1823 == n_A_Equip[2] && n_A_HEAD_REFINE >= 7 && (M += 1),
