@@ -417,7 +417,7 @@ m_Item = [
 	, [414, 5, 1, 200, 4, 0, 350, 48, "Hellfire", 0, "", 20, 3, 1, 3, 221, 8, 0]
 	, [415, 999, 70, 140, 4, 0, 120, 44, "Cleaver", 0, "30% chance to obtain a [Meat] item when killing a [" + v_Race[2] + "] race monster.", 37, 5, 0]
 	, [416, 7, 1, 120, 4, 0, 230, 44, "Sabbath", 0, "When performing an ATK based attack, 0.5% chance to cause [Coma] status effect on your target (only [" + v_Race[6] + "] race monsters, works even on [Boss] type monsters!).", 20, 7, 111, 50, 0]
-	, [417, 999, 1, 120, 4, 0, 250, 44, "Slaughter", 0, "When performing an ATK based attack, 0.4% chance to cause [Coma] status effect on your target (only [" + v_Race[2] + "] race monsters, works even on [Boss] type monsters!).", 20, 2, 182, 1, 0]
+	, [417, 7, 1, 120, 4, 0, 250, 44, "Slaughter", 0, "When performing an ATK based attack, 0.4% chance to cause [Coma] status effect on your target (only [" + v_Race[2] + "] race monsters, works even on [Boss] type monsters!).", 20, 2, 182, 1, 0]
 	, [418, 7, 1, 165, 4, 0, 250, 44, "Tomahawk", 0, "", 20, 4, 220, 8, 0]
 	, [419, 7, 1, 215, 4, 0, 300, 44, "Guillotine", 0, "When performing an ATK based attack, 0.3% chance to cause [Coma] status effect on your target (only [" + v_Race[7] + "] race monsters, works even on [Boss] type monsters!).<br>Recover 2 SP when dealing ATK based damage on a [" + v_Race[7] + "] race monster.<br>Recover 20 SP when killing a [" + v_Race[7] + "] race monster with ATK based damage.", 0]
 	, [420, 8, 53, 85, 4, "0/2", 70, 40, "Spike", 0, "", 10, 40, 24, 3, 0]
