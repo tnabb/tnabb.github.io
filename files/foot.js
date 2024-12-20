@@ -478,7 +478,7 @@ function StAllCalc() {
         n_tok[_] = 0,
         n_tok[_] += StPlusCalc2(_),
         n_tok[_] += StPlusCard(_);
-    for (_ = 290; _ <= 371; _++) // add more options
+    for (_ = 290; _ <= 373; _++) // add more options
         n_tok[_] = 0,
             n_tok[_] += StPlusCalc2(_),
             n_tok[_] += StPlusCard(_);
@@ -581,24 +581,23 @@ function StAllCalc() {
         2122 == n_A_Equip[0] && (M += n_A_Weapon_refine ** 2),
         2123 == n_A_Equip[0] && (M += n_A_Weapon_refine ** 2),
         2124 == n_A_Equip[0] && (M += n_A_Weapon_refine ** 2),
-        M < 0 && SRV > 0 && (M = 0),
+        2175 == n_A_Equip[0] && 22 == n_A_JOB && (M += 4 * n_A_Weapon_refine),
+        2175 == n_A_Equip[1] && 22 == n_A_JOB && (M += 4 * n_A_Weapon2_refine),
+        M < 0 && (M = 0),
         n_A_ATK += M,
         V_ATK = Math.floor(n_A_Weapon_ATK + n_A_Weapon2_ATK + n_A_ATK),
         M = n_tok[87] + n_A_Buf9[53], // atk %
         1799 == n_A_Equip[2] && (wSPVS = n_A_JobClass(),
             1 != wSPVS && 2 != wSPVS && 6 != wSPVS || (M += 8)),
-        V_ATK < 0 && 0 == SRV && (V_ATK = 0),
         V_ATK += Math.floor(V_ATK * (M / 100)),
-        SkillSearch(256) && (V_ATK = Math.floor(V_ATK * (1 + .05 * SkillSearch(256)))),
-        n_A_ATK < 0 && 0 == SRV && (n_A_ATK = 0),
+        // SkillSearch(256) && (V_ATK = Math.floor(V_ATK * (1 + .05 * SkillSearch(256)))), // concentration no longer increases atk in status window (V_ATK is purely for display)
         n_A_ATK = Math.floor(n_A_ATK * (100 + M) / 100),
         wImp = 5 * n_A_Buf2[2],
         n_A_Buf3[9] && (wImp += 25 + 25 * n_A_Buf3[9]),
         !n_A_Buf3[10] || 4 != n_A_WeaponLV && 4 != n_A_Weapon2LV || (V_ATK += 50 + 25 * n_A_Buf3[10]),
         0 == n_A_Buf6[0] && n_A_Buf6[1] >= 1 && 3 == n_A_Bodyelement && (V_ATK += 10 * n_A_Buf6[1]),
-        1 == n_A_Buf2[19] && (V_ATK *= 2),
+        // 1 == n_A_Buf2[19] && (V_ATK *= 2), // gospel no longer increases atk in status window
         myInnerHtml("A_ATK2", Math.floor(wImp + V_ATK) + "+" + (n_A_WeaponLV_refineATK + n_A_Weapon2LV_refineATK), 0),
-        SRV,
         myInnerHtml("A_RealATK", wImp + V_ATK + n_A_WeaponLV_refineATK + n_A_Weapon2LV_refineATK + n_A_WeaponLV_Minplus + "~" + (wImp + V_ATK + n_A_WeaponLV_refineATK + n_A_Weapon2LV_refineATK + n_A_WeaponLV_Maxplus), 0),
         JobHP_A = new Array(0, 70, 50, 40, 50, 30, 40, 150, 110, 75, 85, 55, 90, 110, 85, 90, 75, 75, 75, 90, 0, 150, 110, 75, 85, 55, 90, 110, 85, 90, 75, 75, 75, 90, 0, 0, 0, 0, 0, 0, 0, 70, 90, 75, 75, 89, 89),
         JobHP_B = new Array(5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 7, 5, 6.5, 3, 3, 5, 5, 5, 5, 5, 5, 5, 5, 5, 7, 5, 6.5, 3, 3, 5, 5, 0, 0, 0, 0, 0, 0, 0, 5, 6.5, 5, 3, 4, 4),
@@ -628,6 +627,7 @@ function StAllCalc() {
             n_A_BaseLV <= 79 ? n_A_MaxHP = Math.floor((2670 + 10 * (n_A_BaseLV - 70)) * (100 + n_A_VIT) / 100) : n_A_BaseLV <= 89 ? n_A_MaxHP = Math.floor((3e3 + 20 * (n_A_BaseLV - 80)) * (100 + n_A_VIT) / 100) : n_A_BaseLV <= 99 && (n_A_MaxHP = Math.floor(wKenseiHP[n_A_BaseLV - 90] * (100 + n_A_VIT) / 100))),
         1 == n_A_Buf7[39] ? n_A_MaxHP += Math.floor(500 + 10 * n_A_BaseLV / 3) : 2 == n_A_Buf7[39] ? n_A_MaxHP += Math.floor(1500 + 10 * n_A_BaseLV / 3) : 3 == n_A_Buf7[39] && (n_A_MaxHP += Math.floor(2500 + 10 * n_A_BaseLV / 3)),
         n_A_MaxHP += 200 * SkillSearch(156),
+        n_A_MaxHP += 100 * n_A_Buf2[4],
         M = 0,
         M += n_tok[13] + n_A_Buf9[30], // flat maxhp
         n_A_BaseLV <= 79 && (M += 400 * EquipNumSearch(883)),
@@ -653,6 +653,8 @@ function StAllCalc() {
         0 != n_A_JOB && 20 != n_A_JOB || 1670 != n_A_Equip[3] || (M += 80),
         EquipNumSearch(2085) && (M += 50 * n_A_SHOES_REFINE),
         EquipNumSearch(2087) && (M += 5 * Math.floor(n_A_BaseLV / 2)),
+        2099 == n_A_Equip[0] && (M += 80 * n_A_Weapon_refine),
+        2174 == n_A_Equip[0] && (M += 50 * n_A_Weapon_refine),
         536 == n_A_Equip[8] && (3 != (u = n_A_JobClass()) && 4 != u && 5 != u && 45 != u || (M += 5 * n_A_BaseLV)),
         n_A_MaxHP += M,
         n_A_MaxHP < 1 && (n_A_MaxHP = 1),
@@ -675,7 +677,7 @@ function StAllCalc() {
         405 != n_A_card[12] || 1 != n_A_JobClass() && 2 != n_A_JobClass() && 6 != n_A_JobClass() || (M += 5),
         n_A_MaxHP = n_A_MaxHP * (100 + M) / 100,
         1 == n_A_Buf6[0] && n_A_Buf6[1] >= 1 && 1 == n_A_Bodyelement) {
-        n_A_MaxHP = n_A_MaxHP * (100 + [5, 9, 12, 14, 15][n_A_Buf6[1] - 1]) / 100
+            n_A_MaxHP = n_A_MaxHP * (100 + [5, 9, 12, 14, 15][n_A_Buf6[1] - 1]) / 100
     }
     for (SkillSearch(258) && (n_A_MaxHP *= 3),
         n_A_MaxHP = Math.floor(n_A_MaxHP),
@@ -740,296 +742,219 @@ function StAllCalc() {
         n_A_SHOES_REFINE <= 4 && 407 == n_A_card[13] && (M += 4),
         405 != n_A_card[12] || 3 != n_A_JobClass() && 4 != n_A_JobClass() && 5 != n_A_JobClass() || (M += 5),
         662 == n_A_card[13] && (M += n_A_SHOES_REFINE),
-        n_A_Buf3[6] && (SRV ? M += 15 + n_A_Buf3[6] + n_A_Buf3[26] / 10 + n_A_Buf3[36] : M += 15 + n_A_Buf3[6] + Math.floor(n_A_Buf3[36] / 2) + Math.floor(n_A_Buf3[26] / 10)),
+        n_A_Buf3[6] && (M += 15 + n_A_Buf3[6] + Math.floor(n_A_Buf3[26] / 10) + Math.floor(n_A_Buf3[36] / 2)),
         n_A_MaxSP = Math.round(n_A_MaxSP * (1 + M / 100)),
         n_A_MaxSP >= 100 ? myInnerHtml("A_MaxSP", n_A_MaxSP, 0) : myInnerHtml("A_MaxSP", " " + n_A_MaxSP, 0),
         n_A_DEFplus = n_A_HEAD_REFINE + n_A_BODY_REFINE + n_A_LEFT_REFINE + n_A_SHOULDER_REFINE + n_A_SHOES_REFINE,
-        SRV >= 50 && (n_A_HEAD_REFINE >= 5 && (n_A_DEFplus += n_A_HEAD_REFINE - 4),
-            n_A_HEAD_REFINE >= 9 && (n_A_DEFplus += n_A_HEAD_REFINE - 8),
-            n_A_HEAD_REFINE >= 13 && (n_A_DEFplus += n_A_HEAD_REFINE - 12),
-            n_A_HEAD_REFINE >= 17 && (n_A_DEFplus += n_A_HEAD_REFINE - 16),
-            n_A_BODY_REFINE >= 5 && (n_A_DEFplus += n_A_BODY_REFINE - 16),
-            n_A_BODY_REFINE >= 9 && (n_A_DEFplus += n_A_BODY_REFINE - 16),
-            n_A_BODY_REFINE >= 13 && (n_A_DEFplus += n_A_BODY_REFINE - 16),
-            n_A_BODY_REFINE >= 17 && (n_A_DEFplus += n_A_BODY_REFINE - 16),
-            n_A_LEFT_REFINE >= 5 && (n_A_DEFplus += n_A_LEFT_REFINE - 16),
-            n_A_LEFT_REFINE >= 9 && (n_A_DEFplus += n_A_LEFT_REFINE - 16),
-            n_A_LEFT_REFINE >= 13 && (n_A_DEFplus += n_A_LEFT_REFINE - 16),
-            n_A_LEFT_REFINE >= 17 && (n_A_DEFplus += n_A_LEFT_REFINE - 16),
-            n_A_SHOULDER_REFINE >= 5 && (n_A_DEFplus += n_A_SHOULDER_REFINE - 16),
-            n_A_SHOULDER_REFINE >= 9 && (n_A_DEFplus += n_A_SHOULDER_REFINE - 16),
-            n_A_SHOULDER_REFINE >= 13 && (n_A_DEFplus += n_A_SHOULDER_REFINE - 16),
-            n_A_SHOULDER_REFINE >= 17 && (n_A_DEFplus += n_A_SHOULDER_REFINE - 16),
-            n_A_SHOES_REFINE >= 5 && (n_A_DEFplus += n_A_SHOES_REFINE - 16),
-            n_A_SHOES_REFINE >= 9 && (n_A_DEFplus += n_A_SHOES_REFINE - 16),
-            n_A_SHOES_REFINE >= 13 && (n_A_DEFplus += n_A_SHOES_REFINE - 16),
-            n_A_SHOES_REFINE >= 17 && (n_A_DEFplus += n_A_SHOES_REFINE - 16)),
         n_A_DEF = n_tok[18] + n_A_Buf9[34], // flat def
         _ = 2; _ <= 10; _++)
-        n_A_DEF += m_Item[n_A_Equip[_]][3];
-    if (521 == n_A_Equip[0] && (n_A_Weapon_refine <= 5 ? n_A_DEF += 2 : n_A_Weapon_refine >= 9 ? n_A_DEF += 7 : n_A_DEF += 5),
-        n_A_LEFT_REFINE <= 5 && 222 == n_A_card[10] && (n_A_DEF += 2),
-        n_A_BODY_REFINE <= 5 && 283 == n_A_card[11] && (n_A_DEF += 2),
-        n_A_BODY_REFINE >= 9 && 531 == n_A_card[11] && (n_A_DEF += 10),
-        n_A_HEAD_REFINE >= 7 && 1272 == n_A_Equip[2] && (n_A_DEF += 1),
-        n_A_HEAD_REFINE >= 7 && 1273 == n_A_Equip[2] && (n_A_DEF += 1),
-        n_A_HEAD_REFINE >= 7 && 1274 == n_A_Equip[2] && (n_A_DEF += 1),
-        n_A_HEAD_REFINE >= 7 && 1474 == n_A_Equip[2] && (n_A_DEF += 1),
-        n_A_HEAD_REFINE >= 7 && 1275 == n_A_Equip[2] && (n_A_DEF += 1),
-        n_A_HEAD_REFINE >= 7 && 1475 == n_A_Equip[2] && (n_A_DEF += 1),
-        n_A_HEAD_REFINE >= 7 && 1276 == n_A_Equip[2] && (n_A_DEF += 1),
-        n_A_HEAD_REFINE >= 7 && 1280 == n_A_Equip[2] && (n_A_DEF += 1),
-        n_A_HEAD_REFINE >= 7 && 1282 == n_A_Equip[2] && (n_A_DEF += 1),
-        n_A_HEAD_REFINE >= 7 && 1286 == n_A_Equip[2] && (n_A_DEF += 1),
-        n_A_HEAD_REFINE >= 7 && 1287 == n_A_Equip[2] && (n_A_DEF += 1),
-        n_A_HEAD_REFINE >= 7 && 1486 == n_A_Equip[2] && (n_A_DEF += 2),
-        n_A_HEAD_REFINE >= 7 && 1487 == n_A_Equip[2] && (n_A_DEF += 2),
-        n_A_HEAD_REFINE >= 7 && 1485 == n_A_Equip[2] && (n_A_DEF += 1),
-        n_A_HEAD_REFINE >= 7 && 1550 == n_A_Equip[2] && (n_A_DEF += 1),
-        1956 == n_A_Equip[0] && 26 == n_A_JOB && (n_A_DEF += 5),
-        n_A_Buf3[9] && (SRV < 50 ? n_A_DEF += 2 + 2 * n_A_Buf3[9] : n_A_DEF += 10 * n_A_Buf3[9]),
-        n_A_Buf7[32] && (n_A_DEF += 3),
-        1 == n_A_JobClass() && (n_A_DEF += 2 * EquipNumSearch(1117)),
-        658 == n_A_Equip[0] && (n_A_DEF += n_A_Weapon_refine),
-        715 == n_A_Equip[8] && (n_A_DEF += Math.floor(n_A_SHOES_REFINE / 2)),
-        942 == n_A_Equip[0] && (n_A_DEF += Math.floor(n_A_Weapon_refine / 2)),
-        1350 == n_A_Equip[2] && (n_A_DEF -= n_A_HEAD_REFINE),
-        EquipNumSearch(1026) && (n_A_DEF -= 5),
-        EquipNumSearch(764) && (SRV ? n_A_DEF -= n_A_HEAD_REFINE + n_A_LEFT_REFINE : n_A_DEFplus -= n_A_HEAD_REFINE + n_A_LEFT_REFINE),
-        EquipNumSearch(742) && 1 == n_A_JobClass() && (n_A_DEF += 6),
-        986 != n_A_Equip[6] || 1 != n_A_JobClass() && 2 != n_A_JobClass() && 6 != n_A_JobClass() || (n_A_DEF += 3),
-        //809 == n_A_Equip[2] && (n_A_DEFplus -= n_A_HEAD_REFINE), - Leaf Cat Hat giving negative DEF?
-        (TimeItemNumSearch(9) || TimeItemNumSearch(50)) && (n_A_DEF += 20),
-        (TimeItemNumSearch(33) || TimeItemNumSearch(51)) && (n_A_DEF -= 20),
-        //1 * c.server.value == 10 ? n_A_totalDEF = n_A_DEF + Math.round(66 * n_A_DEFplus / 100) : 1 * c.server.value < 50 ? n_A_totalDEF = n_A_DEF + Math.round(7 * n_A_DEFplus / 10) : n_A_totalDEF = n_A_DEF + n_A_DEFplus,
-        n_A_totalDEF = n_A_DEF + Math.round(n_A_DEFplus * 0.7), // +0.7 DEF per refine
-        n_tok[24] && (n_A_totalDEF = Math.floor(n_A_totalDEF / n_tok[24])),
-        n_tok[85] && (n_A_totalDEF -= Math.floor(n_A_totalDEF * n_tok[85] / 100)),
-        n_A_Buf6[21] && (n_A_totalDEF -= Math.floor(25 * n_A_totalDEF / 100)),
-        SkillSearch(256) && SRV < 50 && (n_A_totalDEF = Math.floor(n_A_totalDEF * (1 - .05 * SkillSearch(256)))),
-        (n_A_Buf6[13] || n_A_Buf6[15]) && (n_A_totalDEF -= Math.floor(.5 * n_A_totalDEF)),
-        n_A_Buf2[21] && (n_A_totalDEF += Math.floor(.25 * n_A_totalDEF)),
-        SRV < 50)
-        n_A_totalDEF >= 100 && (n_A_totalDEF = 99),
-            CardNumSearch(392) && (n_A_totalDEF -= 50),
-            c.B_num.value >= 2 && (n_A_totalDEF -= Math.floor(n_A_totalDEF * (1 * c.B_num.value - 1) * 5 / 100)),
-            SkillSearch(196) && (n_A_totalDEF = 90);
-    else {
-        var a = 0;
-        SkillSearch(256) && (a += -.05 * SkillSearch(256)),
-            n_A_Buf2[5] && (a += 1),
-            SkillSearch(689) && (a += .02 * SkillSearch(689)),
-            CardNumSearch(392) && (a -= .5),
-            n_A_totalDEF *= 1 + a,
-            c.B_num.value >= 2 && (n_A_totalDEF -= Math.floor(n_A_totalDEF * (1 * c.B_num.value - 1) * 5 / 100)),
-            SkillSearch(258) && (n_A_totalDEF = 0),
-            SkillSearch(610) && (n_A_totalDEF = 0)
-    }
-    if (SRV < 50) {
-        for (_ = 0; _ < 11; _++)
-            n_A_Buf2[4] == _ && (P_VIT1 = n_A_VIT * (.05 * _));
-        if (e = parseInt(n_A_VIT + P_VIT1),
-            n_A_Buf6[5] ? e -= Math.floor((.05 + .05 * n_A_Buf6[5]) * e) : n_A_Buf7[31] && (e -= Math.floor(.1 * e)),
-            SkillSearch(258) && (n_A_totalDEF = 0,
-                e = 0),
-            myInnerHtml("A_totalDEF", n_A_totalDEF + "+" + e, 0),
-            n_A_VITDEF = new Array,
-            n_A_VITDEF[0] = Math.floor(.5 * n_A_VIT) + Math.floor(.3 * n_A_VIT),
-            n_A_VITDEF[2] = Math.floor(.5 * n_A_VIT) + Math.floor(n_A_VIT * n_A_VIT / 150) - 1,
-            n_A_VITDEF[2] > n_A_VITDEF[0] ? n_A_VITDEF[1] = (n_A_VITDEF[0] + n_A_VITDEF[2]) / 2 : (n_A_VITDEF[1] = n_A_VITDEF[0],
-                n_A_VITDEF[2] = n_A_VITDEF[0]),
-            SkillSearch(12))
+            n_A_DEF += m_Item[n_A_Equip[_]][3];
+    521 == n_A_Equip[0] && (n_A_Weapon_refine <= 5 ? n_A_DEF += 2 : n_A_Weapon_refine >= 9 ? n_A_DEF += 7 : n_A_DEF += 5),
+    n_A_LEFT_REFINE <= 5 && 222 == n_A_card[10] && (n_A_DEF += 2),
+    n_A_BODY_REFINE <= 5 && 283 == n_A_card[11] && (n_A_DEF += 2),
+    n_A_BODY_REFINE >= 9 && 531 == n_A_card[11] && (n_A_DEF += 10),
+    n_A_HEAD_REFINE >= 7 && 1272 == n_A_Equip[2] && (n_A_DEF += 1),
+    n_A_HEAD_REFINE >= 7 && 1273 == n_A_Equip[2] && (n_A_DEF += 1),
+    n_A_HEAD_REFINE >= 7 && 1274 == n_A_Equip[2] && (n_A_DEF += 1),
+    n_A_HEAD_REFINE >= 7 && 1474 == n_A_Equip[2] && (n_A_DEF += 1),
+    n_A_HEAD_REFINE >= 7 && 1275 == n_A_Equip[2] && (n_A_DEF += 1),
+    n_A_HEAD_REFINE >= 7 && 1475 == n_A_Equip[2] && (n_A_DEF += 1),
+    n_A_HEAD_REFINE >= 7 && 1276 == n_A_Equip[2] && (n_A_DEF += 1),
+    n_A_HEAD_REFINE >= 7 && 1280 == n_A_Equip[2] && (n_A_DEF += 1),
+    n_A_HEAD_REFINE >= 7 && 1282 == n_A_Equip[2] && (n_A_DEF += 1),
+    n_A_HEAD_REFINE >= 7 && 1286 == n_A_Equip[2] && (n_A_DEF += 1),
+    n_A_HEAD_REFINE >= 7 && 1287 == n_A_Equip[2] && (n_A_DEF += 1),
+    n_A_HEAD_REFINE >= 7 && 1486 == n_A_Equip[2] && (n_A_DEF += 2),
+    n_A_HEAD_REFINE >= 7 && 1487 == n_A_Equip[2] && (n_A_DEF += 2),
+    n_A_HEAD_REFINE >= 7 && 1485 == n_A_Equip[2] && (n_A_DEF += 1),
+    n_A_HEAD_REFINE >= 7 && 1550 == n_A_Equip[2] && (n_A_DEF += 1),
+    1956 == n_A_Equip[0] && 26 == n_A_JOB && (n_A_DEF += 5),
+    n_A_Buf3[9] && (n_A_DEF += 2 * (n_A_Buf3[9] + 1)),
+    n_A_Buf7[32] && (n_A_DEF += 3),
+    1 == n_A_JobClass() && (n_A_DEF += 2 * EquipNumSearch(1117)),
+    658 == n_A_Equip[0] && (n_A_DEF += n_A_Weapon_refine),
+    715 == n_A_Equip[8] && (n_A_DEF += Math.floor(n_A_SHOES_REFINE / 2)),
+    942 == n_A_Equip[0] && (n_A_DEF += Math.floor(n_A_Weapon_refine / 2)),
+    1350 == n_A_Equip[2] && (n_A_DEF -= n_A_HEAD_REFINE),
+    EquipNumSearch(1026) && (n_A_DEF -= 5),
+    EquipNumSearch(764) && (n_A_DEF -= n_A_HEAD_REFINE + n_A_LEFT_REFINE),
+    EquipNumSearch(742) && 1 == n_A_JobClass() && (n_A_DEF += 6),
+    986 != n_A_Equip[6] || 1 != n_A_JobClass() && 2 != n_A_JobClass() && 6 != n_A_JobClass() || (n_A_DEF += 3),
+    //809 == n_A_Equip[2] && (n_A_DEFplus -= n_A_HEAD_REFINE), - Leaf Cat Hat giving negative DEF?
+    (TimeItemNumSearch(9) || TimeItemNumSearch(50)) && (n_A_DEF += 20),
+    (TimeItemNumSearch(33) || TimeItemNumSearch(51)) && (n_A_DEF -= 20),
+    //1 * c.server.value == 10 ? n_A_totalDEF = n_A_DEF + Math.round(66 * n_A_DEFplus / 100) : 1 * c.server.value < 50 ? n_A_totalDEF = n_A_DEF + Math.round(7 * n_A_DEFplus / 10) : n_A_totalDEF = n_A_DEF + n_A_DEFplus,
+    n_A_totalDEF = n_A_DEF + Math.round(n_A_DEFplus * 0.7), // +0.7 DEF per refine
+    n_tok[24] && (n_A_totalDEF = Math.floor(n_A_totalDEF / n_tok[24])),
+    n_tok[85] && (n_A_totalDEF -= Math.floor(n_A_totalDEF * n_tok[85] / 100)),
+    n_A_Buf6[21] && (n_A_totalDEF -= Math.floor(25 * n_A_totalDEF / 100)),
+    SkillSearch(256) && (n_A_totalDEF = Math.floor(n_A_totalDEF * (1 - .05 * SkillSearch(256)))),
+    (n_A_Buf6[13] || n_A_Buf6[15]) && (n_A_totalDEF -= Math.floor(.5 * n_A_totalDEF)),
+    n_A_Buf2[21] && (n_A_totalDEF += Math.floor(.25 * n_A_totalDEF)),
+    n_A_totalDEF >= 100 && (n_A_totalDEF = 99),
+    CardNumSearch(392) && (n_A_totalDEF -= 50),
+    c.B_num.value >= 2 && (n_A_totalDEF -= Math.floor(n_A_totalDEF * (1 * c.B_num.value - 1) * 5 / 100)),
+    SkillSearch(196) && (n_A_totalDEF = 90);
+    P_VIT1 = 0;
+    n_A_Buf2[4] && (P_VIT1 = n_A_VIT * (.1 * n_A_Buf2[4]));
+    if (e = parseInt(n_A_VIT + P_VIT1),
+        n_A_Buf6[5] ? e -= Math.floor((.05 + .05 * n_A_Buf6[5]) * e) : n_A_Buf7[31] && (e -= Math.floor(.1 * e)),
+        SkillSearch(258) && (n_A_totalDEF = 0,
+            e = 0),
+        myInnerHtml("A_totalDEF", n_A_totalDEF + "+" + e, 0),
+        n_A_VITDEF = new Array,
+        n_A_VITDEF[0] = Math.floor(.5 * n_A_VIT) + Math.floor(.3 * n_A_VIT),
+        n_A_VITDEF[2] = Math.floor(.5 * n_A_VIT) + Math.floor(n_A_VIT * n_A_VIT / 150) - 1,
+        n_A_VITDEF[2] > n_A_VITDEF[0] ? n_A_VITDEF[1] = (n_A_VITDEF[0] + n_A_VITDEF[2]) / 2 : (n_A_VITDEF[1] = n_A_VITDEF[0],
+            n_A_VITDEF[2] = n_A_VITDEF[0]),
+        SkillSearch(12))
             for (_ = 0; _ <= 2; _++)
                 n_A_VITDEF[_] = Math.floor(.45 * n_A_VITDEF[_]);
-        else if (n_A_Buf6[5])
-            for (_ = 0; _ <= 2; _++)
-                n_A_VITDEF[_] = Math.floor(n_A_VITDEF[_] * (.95 - .05 * n_A_Buf6[5]));
-        else if (n_A_Buf7[31])
-            for (_ = 0; _ <= 2; _++)
-                n_A_VITDEF[_] = Math.floor(.9 * n_A_VITDEF[_]);
-        if (n_tok[24])
-            for (_ = 0; _ <= 2; _++)
-                n_A_VITDEF[_] = Math.floor(n_A_VITDEF[_] / n_tok[24]);
-        if (SkillSearch(256))
-            for (_ = 0; _ <= 2; _++)
-                n_A_VITDEF[_] = Math.floor(n_A_VITDEF[_] * (1 - .05 * SkillSearch(256)));
-        if (n_A_Buf2[4])
-            for (_ = 0; _ <= 2; _++)
-                n_A_VITDEF[_] = Math.floor(n_A_VITDEF[_] * (1 + .05 * n_A_Buf2[4]));
-        if (n_A_Buf6[21])
-            for (_ = 0; _ <= 2; _++)
-                n_A_VITDEF[_] -= Math.floor(25 * n_A_VITDEF[_] / 100);
-        if (SkillSearch(258))
-            for (_ = 0; _ <= 2; _++)
-                n_A_VITDEF[_] = 0;
-        if (c.B_num.value >= 2)
-            for (_ = 0; _ <= 2; _++)
-                n_A_VITDEF[_] -= Math.floor(n_A_VITDEF[_] * (1 * c.B_num.value - 1) * 5 / 100)
-    } else {
-        var e = Math.floor(n_A_VIT / 2 + n_A_BaseLV / 2 + n_A_AGI / 5);
-        SkillSearch(12) ? e = Math.floor(.45 * e) : n_A_Buf6[5] ? e = Math.floor(e * (.95 - .05 * n_A_Buf6[5])) : n_A_Buf7[31] && (e = Math.floor(.9 * e)),
-            n_tok[24] && (e = Math.floor(e / n_tok[24])),
-            n_A_Buf2[4] && (e = Math.floor(e * (1 + .05 * n_A_Buf2[4]))),
-            c.B_num.value >= 2 && (e -= Math.floor(e * (1 * c.B_num.value - 1) * 5 / 100)),
-            TimeItemNumSearch(33) && (e -= Math.floor(20 * e / 100)),
-            n_A_Buf6[21] && (e -= Math.floor(25 * e / 100)),
-            SkillSearch(256) && (e = Math.floor(e * (1 - .05 * SkillSearch(256)))),
-            SkillSearch(258) && (e = 0);
-        var t = -Math.floor(1e3 - 1e3 * defReduction(n_A_totalDEF))
-            , A = "";
-        for (0 == t ? A = "-" : t > 0 && (A = "+"),
-            myInnerHtml("A_totalDEF", n_A_totalDEF + "+" + e + " (" + A + t / 10 + " % dmg)", 0),
-            n_A_VITDEF = new Array,
-            _ = 0; _ <= 2; _++)
-            n_A_VITDEF[_] = e
-    }
-    if (n_A_MDEF = n_tok[19] + n_A_Buf9[35], // flat mdef
-        3 == n_A_JobClass() && (n_A_MDEF += CardNumSearch(383)),
-        n_A_Buf7[33] && (n_A_MDEF += 3),
-        213 == n_A_card[9] && (n_A_MDEF += 5),
-        213 == n_A_card[16] && (n_A_MDEF += 5),
-        213 == n_A_card[17] && (n_A_MDEF += 5),
-        213 == n_A_card[18] && (n_A_MDEF += 5),
-        1865 == n_A_Equip[7] && (n_A_MDEF += Math.floor(n_A_JobLV / 9)),
-        SU_STR >= 90 && 1943 == n_A_Equip[8] && (n_A_MDEF += 3),
-        SU_VIT >= 90 && 1945 == n_A_Equip[8] && (n_A_MDEF += 5),
-        SU_DEX >= 90 && 1947 == n_A_Equip[8] && (n_A_MDEF += 3),
-        EquipNumSearch(764) && (n_A_MDEF += n_A_HEAD_REFINE + n_A_LEFT_REFINE),
-        1169 == n_A_Equip[0] && (n_A_MDEF += n_A_Weapon_refine),
-        199 == n_A_card[11] && 5 == n_A_JobClass() && (n_A_MDEF += 3),
-        (EquipNumSearch(809) || 1350 == n_A_Equip[2]) && (n_A_MDEF += n_A_HEAD_REFINE),
-        n_A_HEAD_REFINE <= 5 && 213 == n_A_card[8] && (n_A_MDEF += 5),
-        n_A_LEFT_REFINE <= 5 && 222 == n_A_card[10] && (n_A_MDEF += 3),
-        n_A_BODY_REFINE <= 5 && 283 == n_A_card[11] && (n_A_MDEF += 5),
-        n_A_LEFT_REFINE >= 9 && 310 == n_A_card[10] && (n_A_MDEF += 5),
-        n_A_SHOES_REFINE <= 5 && 381 == n_A_card[13] && (n_A_MDEF += 7),
-        n_A_HEAD_REFINE >= 6 && 1593 == n_A_Equip[2] && (n_A_MDEF += n_A_HEAD_REFINE - 5),
-        n_A_HEAD_REFINE >= 7 && 1277 == n_A_Equip[2] && (n_A_MDEF += 1),
-        n_A_HEAD_REFINE >= 7 && 1281 == n_A_Equip[2] && (n_A_MDEF += 7),
-        n_A_HEAD_REFINE >= 7 && 1478 == n_A_Equip[2] && (n_A_MDEF += 7),
-        n_A_HEAD_REFINE >= 7 && 1483 == n_A_Equip[2] && (n_A_MDEF += 5),
-        n_A_SHOULDER_REFINE <= 5 && 258 == n_A_card[12] && (n_A_MDEF += 8),
-        n_A_SHOULDER_REFINE <= 5 && 258 == n_A_card[12] && 1865 == n_A_Equip[7] && (n_A_MDEF -= 7),
-        1956 == n_A_Equip[0] && 26 == n_A_JOB && (n_A_MDEF += 5),
-        986 != n_A_Equip[6] || 3 != n_A_JobClass() && 4 != n_A_JobClass() && 5 != n_A_JobClass() && 45 != n_A_JobClass() || (n_A_MDEF += 5),
-        SkillSearch(9) ? n_A_MDEF += SkillSearch(9) : SkillSearch(256) && (n_A_MDEF += 1),
-        SkillSearch(512) && (n_A_MDEF += SkillSearch(512)),
-        (TimeItemNumSearch(9) || TimeItemNumSearch(50)) && (n_A_MDEF -= 20),
-        (TimeItemNumSearch(33) || TimeItemNumSearch(51)) && (n_A_MDEF += 20),
-        (n_A_Buf6[13] || n_A_Buf6[15]) && (n_A_MDEF += Math.floor(.25 * n_A_MDEF)),
-        SRV < 50)
-        SkillSearch(196) && (n_A_MDEF = 90),
-            CardNumSearch(392) && (n_A_MDEF -= 50),
-            n_A_MDEF >= 99 && (n_A_MDEF = 99);
-    else {
-        var l = 0;
-        n_A_Buf2[5] && (l += 1),
-            CardNumSearch(392) && (l -= .5),
-            n_A_MDEF *= 1 + l,
-            SkillSearch(258) && (n_A_MDEF = 0)
-    }
-    if (SRV < 50 ? (n_A_INTMDEF = n_A_INT,
-        n_A_softMDEF = n_A_INT + Math.floor(n_A_VIT / 2),
-        n_A_Buf6[4] && (n_A_softMDEF -= Math.floor(n_A_softMDEF * n_A_Buf6[4] * .12)),
-        SkillSearch(258) && (n_A_MDEF = 0,
-            n_A_INTMDEF = 0,
-            n_A_softMDEF = 0)) : (n_A_softMDEF = Math.floor(n_A_INT + n_A_VIT / 5 + n_A_DEX / 5 + n_A_BaseLV / 4),
-                TimeItemNumSearch(9) && (n_A_softMDEF -= Math.floor(20 * n_A_softMDEF / 100)),
-                n_A_INTMDEF = n_A_softMDEF),
-        SRV < 50)
-        myInnerHtml("A_MDEF", n_A_MDEF + "+" + n_A_INTMDEF, 0),
-            myInnerHtml("A_RealMDEF", n_A_MDEF + "+" + n_A_softMDEF, 0);
-    else {
-        var o = -Math.floor(1e3 - 1e3 * mdefReduction(n_A_MDEF));
-        A = "";
-        0 == o ? A = "-" : o > 0 && (A = "+"),
-            myInnerHtml("A_MDEF", n_A_MDEF + "+" + n_A_INTMDEF + " (" + A + o / 10 + " % dmg)", 0),
-            myInnerHtml("A_RealMDEF", n_A_MDEF + "+" + n_A_softMDEF + " (" + A + o / 10 + " % dmg)", 0)
-    }
-    if (SRV < 50 ? n_A_HIT = n_A_BaseLV + n_A_DEX : n_A_HIT = 175 + n_A_BaseLV + n_A_DEX + Math.floor(n_A_LUK / 3),
-        n_A_HIT += n_tok[8] + n_A_Buf9[36], // flat HIT
-        n_A_HIT += Math.floor(n_A_JobLV / 10) * CardNumSearch(492),
-        SRV && 324 == n_A_ActiveSkill && (n_A_HIT += 20),
-        n_A_Buf2[20] && (n_A_HIT += 50),
-        n_A_Buf3[4] && (n_A_HIT += 10 + 2 * n_A_Buf3[4] + n_A_Buf3[34] + Math.floor(n_A_Buf3[24] / 10)),
-        n_A_Buf7[0] && (n_A_HIT += 30),
-        n_A_Buf7[27] ? n_A_HIT += 33 : n_A_Buf7[46] ? n_A_HIT += 30 : n_A_Buf7[18] && (n_A_HIT += 10),
-        10 == n_A_WeaponType && (n_A_HIT += 5 * CardNumSearch(465)),
-        654 == n_A_Equip[0] && (n_A_HIT += Math.floor(SU_AGI / 10)),
-        656 == n_A_Equip[0] && (n_A_HIT -= Math.floor(SU_DEX / 3)),
-        1796 == n_A_Equip[0] && (n_A_HIT += Math.floor(SU_LUK / 2)),
-        SU_STR >= 90 && (n_A_HIT += 10 * EquipNumSearch(442)),
-        SU_STR >= 95 && 1167 == n_A_Equip[0] && (n_A_HIT += 10),
-        3 != n_A_WeaponType && 2 != n_A_WeaponType || (n_A_HIT += 5 * CardNumSearch(464)),
-        EquipNumSearch(1005) & EquipNumSearch(442) && (n_A_HIT += Math.floor(n_A_Weapon_refine / 2)),
-        1176 == n_A_Equip[0] && 10 == SkillSearch(81) && (n_A_HIT += 10),
-        n_A_HEAD_REFINE >= 7 && 1480 == n_A_Equip[2] && (n_A_HIT += 5),
-        n_A_HEAD_REFINE >= 7 && 1549 == n_A_Equip[2] && (n_A_HIT += 5),
-        n_A_HIT += 1 * SkillSearch(39),
-        n_A_HIT += 2 * SkillSearch(148),
-        n_A_HIT += 3 * SkillSearch(270),
-        n_A_HIT += 10 * SkillSearch(256),
-        n_A_HIT += 1 * SkillSearch(426),
-        n_A_HIT += 2 * SkillSearch(425),
-        SkillSearch(421) && (n_A_HIT -= 30),
-        SkillSearch(422) && (n_A_HIT += 20),
-        n_A_Buf7[16] && (n_A_HIT += Math.floor(.03 * n_A_HIT)),
-        n_A_Buf6[11] && (n_A_HIT = Math.round(.75 * n_A_HIT)),
-        n_A_HIT < 1 && SRV > 0 && (n_A_HIT = 1),
-        myInnerHtml("A_HIT", n_A_HIT, 0),
-        n_tok[86] += n_A_Buf9[55], // perfect hit
-        n_A_Buf3[48] && (n_tok[86] += 20),
-        myInnerHtml("A_PefHIT", n_tok[86], 0),
-        SRV < 50 ? n_A_FLEE = n_A_BaseLV + n_A_AGI : n_A_FLEE = 100 + n_A_BaseLV + n_A_AGI + Math.floor(n_A_LUK / 5),
-        n_A_FLEE += n_tok[9] + n_A_Buf9[37], // flee
-        24 == n_A_JOB && (n_A_FLEE += Math.round(SkillSearch(273) / 2)),
-        SkillSearch(383) && (n_A_FLEE += 10),
-        SkillSearch(356) && (n_A_FLEE += Math.floor((n_A_BaseLV + n_A_LUK + n_A_DEX) / 10)),
-        SkillSearch(421) && (n_A_FLEE += 30),
-        483 == n_A_Equip[0] && (n_A_FLEE -= n_A_BaseLV + SU_AGI),
-        1714 == n_A_Equip[7] && (n_A_FLEE += 2 * n_A_SHOULDER_REFINE),
-        1718 == n_A_Equip[6] && (n_A_FLEE += n_A_BODY_REFINE),
-        n_A_Buf2[20] && (n_A_FLEE += 50),
-        n_A_Buf3[0] && (n_A_FLEE += n_A_Buf3[0] + Math.floor(n_A_Buf3[30] / 2) + Math.floor(n_A_Buf3[20] / 10)),
-        n_A_Buf7[18] && (n_A_FLEE += 20),
-        n_A_Buf7[1] && (n_A_FLEE += 30),
-        n_A_Buf7[28] ? n_A_FLEE += 33 : n_A_Buf7[46] && (n_A_FLEE += 30),
-        TimeItemNumSearch(1) && (n_A_FLEE += 30 * TimeItemNumSearch(1)),
-        SU_STR >= 90 && (n_A_FLEE += 10 * EquipNumSearch(442)),
-        n_A_Buf2[9] && 0 == SkillSearch(273) && (n_A_FLEE += Math.round(n_A_Buf2[9] / 2)),
-        2 == n_A_JobClass() && 295 == n_A_card[12] && (n_A_FLEE += 20),
-        n_A_HEAD_REFINE >= 6 && 1555 == n_A_Equip[2] && (n_A_FLEE += 2),
-        n_A_HEAD_REFINE >= 5 && 1576 == n_A_Equip[2] && (n_A_FLEE += 5),
-        n_A_HEAD_REFINE >= 7 && 1576 == n_A_Equip[2] && (n_A_FLEE += 2),
-        n_A_HEAD_REFINE >= 7 && 1541 == n_A_Equip[2] && (n_A_FLEE += 2),
-        n_A_HEAD_REFINE >= 7 && 1276 == n_A_Equip[2] && (n_A_FLEE += 10),
-        n_A_HEAD_REFINE >= 7 && 1280 == n_A_Equip[2] && (n_A_FLEE += 10),
-        n_A_HEAD_REFINE >= 7 && 1282 == n_A_Equip[2] && (n_A_FLEE += 10),
-        n_A_HEAD_REFINE >= 7 && 1283 == n_A_Equip[2] && (n_A_FLEE += 10),
-        n_A_HEAD_REFINE >= 7 && 1481 == n_A_Equip[2] && (n_A_FLEE += 10),
-        n_A_HEAD_REFINE >= 7 && 1550 == n_A_Equip[2] && (n_A_FLEE += 10),
-        n_A_HEAD_REFINE >= 9 && 1285 == n_A_Equip[2] && (n_A_FLEE += 5),
-        n_A_SHOULDER_REFINE >= 9 && 271 == n_A_card[12] && (n_A_FLEE += 20),
-        n_A_SHOULDER_REFINE <= 4 && 401 == n_A_card[12] && (n_A_FLEE += 10),
-        n_A_SHOULDER_REFINE >= 9 && 403 == n_A_card[12] && (n_A_FLEE += 5),
-        595 == n_A_card[13] && (n_A_FLEE += 2*n_A_SHOES_REFINE),
-        2 == n_A_Buf6[0] && n_A_Buf6[1] >= 1 && 4 == n_A_Bodyelement && (n_A_FLEE += 3 * n_A_Buf6[1]),
-        8 == n_A_JOB || 14 == n_A_JOB || 22 == n_A_JOB || 28 == n_A_JOB ? n_A_FLEE += 4 * SkillSearch(14) : n_A_FLEE += 3 * SkillSearch(14),
-        SkillSearch(433) && 20 == n_A_WeaponType && !(SkillSearch(846)) && (n_A_FLEE -= 25 + 5 * SkillSearch(433)),
-        Mikiri = new Array(0, 1, 3, 4, 6, 7, 9, 10, 12, 13, 15),
-        n_A_FLEE += Mikiri[SkillSearch(191)],
-        SRV >= 50) {
-        n_A_FLEE = Math.floor(1 * n_A_FLEE)
-    }
-    c.B_num.value >= 2 && ((M = 1 * c.B_num.value - 1) > 10 && (M = 10),
-        n_A_FLEE -= Math.floor(n_A_FLEE * M * 10 / 100));
+    else if (n_A_Buf6[5])
+        for (_ = 0; _ <= 2; _++)
+            n_A_VITDEF[_] = Math.floor(n_A_VITDEF[_] * (.95 - .05 * n_A_Buf6[5]));
+    else if (n_A_Buf7[31])
+        for (_ = 0; _ <= 2; _++)
+            n_A_VITDEF[_] = Math.floor(.9 * n_A_VITDEF[_]);
+    if (n_tok[24])
+        for (_ = 0; _ <= 2; _++)
+            n_A_VITDEF[_] = Math.floor(n_A_VITDEF[_] / n_tok[24]);
+    if (SkillSearch(256))
+        for (_ = 0; _ <= 2; _++)
+            n_A_VITDEF[_] = Math.floor(n_A_VITDEF[_] * (1 - .05 * SkillSearch(256)));
+    if (n_A_Buf2[4])
+        for (_ = 0; _ <= 2; _++)
+            n_A_VITDEF[_] = Math.floor(n_A_VITDEF[_] * (1 + .1 * n_A_Buf2[4]));
+    if (n_A_Buf6[21])
+        for (_ = 0; _ <= 2; _++)
+            n_A_VITDEF[_] -= Math.floor(25 * n_A_VITDEF[_] / 100);
+    if (SkillSearch(258))
+        for (_ = 0; _ <= 2; _++)
+            n_A_VITDEF[_] = 0;
+    if (c.B_num.value >= 2)
+        for (_ = 0; _ <= 2; _++)
+            n_A_VITDEF[_] -= Math.floor(n_A_VITDEF[_] * (1 * c.B_num.value - 1) * 5 / 100);
+    n_A_MDEF = n_tok[19] + n_A_Buf9[35], // flat mdef
+    3 == n_A_JobClass() && (n_A_MDEF += CardNumSearch(383)),
+    n_A_Buf7[33] && (n_A_MDEF += 3),
+    213 == n_A_card[9] && (n_A_MDEF += 5),
+    213 == n_A_card[16] && (n_A_MDEF += 5),
+    213 == n_A_card[17] && (n_A_MDEF += 5),
+    213 == n_A_card[18] && (n_A_MDEF += 5),
+    1865 == n_A_Equip[7] && (n_A_MDEF += Math.floor(n_A_JobLV / 9)),
+    SU_STR >= 90 && 1943 == n_A_Equip[8] && (n_A_MDEF += 3),
+    SU_VIT >= 90 && 1945 == n_A_Equip[8] && (n_A_MDEF += 5),
+    SU_DEX >= 90 && 1947 == n_A_Equip[8] && (n_A_MDEF += 3),
+    EquipNumSearch(764) && (n_A_MDEF += n_A_HEAD_REFINE + n_A_LEFT_REFINE),
+    1169 == n_A_Equip[0] && (n_A_MDEF += n_A_Weapon_refine),
+    199 == n_A_card[11] && 5 == n_A_JobClass() && (n_A_MDEF += 3),
+    (EquipNumSearch(809) || 1350 == n_A_Equip[2]) && (n_A_MDEF += n_A_HEAD_REFINE),
+    n_A_HEAD_REFINE <= 5 && 213 == n_A_card[8] && (n_A_MDEF += 5),
+    n_A_LEFT_REFINE <= 5 && 222 == n_A_card[10] && (n_A_MDEF += 3),
+    n_A_BODY_REFINE <= 5 && 283 == n_A_card[11] && (n_A_MDEF += 5),
+    n_A_LEFT_REFINE >= 9 && 310 == n_A_card[10] && (n_A_MDEF += 5),
+    n_A_SHOES_REFINE <= 5 && 381 == n_A_card[13] && (n_A_MDEF += 7),
+    n_A_HEAD_REFINE >= 6 && 1593 == n_A_Equip[2] && (n_A_MDEF += n_A_HEAD_REFINE - 5),
+    n_A_HEAD_REFINE >= 7 && 1277 == n_A_Equip[2] && (n_A_MDEF += 1),
+    n_A_HEAD_REFINE >= 7 && 1281 == n_A_Equip[2] && (n_A_MDEF += 7),
+    n_A_HEAD_REFINE >= 7 && 1478 == n_A_Equip[2] && (n_A_MDEF += 7),
+    n_A_HEAD_REFINE >= 7 && 1483 == n_A_Equip[2] && (n_A_MDEF += 5),
+    n_A_SHOULDER_REFINE <= 5 && 258 == n_A_card[12] && (n_A_MDEF += 8),
+    n_A_SHOULDER_REFINE <= 5 && 258 == n_A_card[12] && 1865 == n_A_Equip[7] && (n_A_MDEF -= 7),
+    1956 == n_A_Equip[0] && 26 == n_A_JOB && (n_A_MDEF += 5),
+    986 != n_A_Equip[6] || 3 != n_A_JobClass() && 4 != n_A_JobClass() && 5 != n_A_JobClass() && 45 != n_A_JobClass() || (n_A_MDEF += 5),
+    SkillSearch(9) ? n_A_MDEF += SkillSearch(9) : SkillSearch(256) && (n_A_MDEF += 1),
+    SkillSearch(512) && (n_A_MDEF += SkillSearch(512)),
+    (TimeItemNumSearch(9) || TimeItemNumSearch(50)) && (n_A_MDEF -= 20),
+    (TimeItemNumSearch(33) || TimeItemNumSearch(51)) && (n_A_MDEF += 20),
+    (n_A_Buf6[13] || n_A_Buf6[15]) && (n_A_MDEF += Math.floor(.25 * n_A_MDEF)),
+    CardNumSearch(392) && (n_A_MDEF -= 50),
+    SkillSearch(196) && (n_A_MDEF = 90),
+    n_A_MDEF >= 99 && (n_A_MDEF = 99);
+    n_A_INTMDEF = n_A_INT,
+    n_A_softMDEF = n_A_INT + Math.floor(n_A_VIT / 2),
+    n_A_Buf6[4] && (n_A_softMDEF -= Math.floor(n_A_softMDEF * n_A_Buf6[4] * .12)),
+    SkillSearch(258) && (n_A_MDEF = 0, n_A_INTMDEF = 0, n_A_softMDEF = 0)
+    myInnerHtml("A_MDEF", n_A_MDEF + "+" + n_A_INTMDEF, 0),
+    myInnerHtml("A_RealMDEF", n_A_MDEF + "+" + n_A_softMDEF, 0);
+    n_A_HIT = n_A_BaseLV + n_A_DEX,
+    n_A_HIT += n_tok[8] + n_A_Buf9[36], // flat HIT
+    n_A_HIT += Math.floor(n_A_JobLV / 10) * CardNumSearch(492),
+    n_A_Buf2[20] && (n_A_HIT += 50),
+    n_A_Buf3[4] && (n_A_HIT += 10 + 2 * n_A_Buf3[4] + n_A_Buf3[34] + Math.floor(n_A_Buf3[24] / 10)),
+    n_A_Buf7[0] && (n_A_HIT += 30),
+    n_A_Buf7[27] ? n_A_HIT += 33 : n_A_Buf7[46] ? n_A_HIT += 30 : n_A_Buf7[18] && (n_A_HIT += 10),
+    10 == n_A_WeaponType && (n_A_HIT += 5 * CardNumSearch(465)),
+    654 == n_A_Equip[0] && (n_A_HIT += Math.floor(SU_AGI / 10)),
+    656 == n_A_Equip[0] && (n_A_HIT -= Math.floor(SU_DEX / 3)),
+    1796 == n_A_Equip[0] && (n_A_HIT += Math.floor(SU_LUK / 2)),
+    SU_STR >= 90 && (n_A_HIT += 10 * EquipNumSearch(442)),
+    SU_STR >= 95 && 1167 == n_A_Equip[0] && (n_A_HIT += 10),
+    3 != n_A_WeaponType && 2 != n_A_WeaponType || (n_A_HIT += 5 * CardNumSearch(464)),
+    EquipNumSearch(1005) & EquipNumSearch(442) && (n_A_HIT += Math.floor(n_A_Weapon_refine / 2)),
+    1176 == n_A_Equip[0] && 10 == SkillSearch(81) && (n_A_HIT += 10),
+    n_A_HEAD_REFINE >= 7 && 1480 == n_A_Equip[2] && (n_A_HIT += 5),
+    n_A_HEAD_REFINE >= 7 && 1549 == n_A_Equip[2] && (n_A_HIT += 5),
+    n_A_HIT += 1 * SkillSearch(39),
+    n_A_HIT += 2 * SkillSearch(148),
+    n_A_HIT += 3 * SkillSearch(270),
+    n_A_HIT += 10 * SkillSearch(256),
+    n_A_HIT += 1 * SkillSearch(426),
+    n_A_HIT += 2 * SkillSearch(425),
+    SkillSearch(421) && (n_A_HIT -= 30),
+    SkillSearch(422) && (n_A_HIT += 20),
+    n_A_Buf7[16] && (n_A_HIT += Math.floor(.03 * n_A_HIT)),
+    n_A_Buf6[11] && (n_A_HIT = Math.round(.75 * n_A_HIT)),
+    n_A_HIT < 1 && (n_A_HIT = 1),
+    myInnerHtml("A_HIT", n_A_HIT, 0),
+    n_tok[86] += n_A_Buf9[55], // perfect hit
+    n_A_Buf3[48] && (n_tok[86] += 20),
+    myInnerHtml("A_PefHIT", n_tok[86], 0),
+    n_A_FLEE = n_A_BaseLV + n_A_AGI,
+    n_A_FLEE += n_tok[9] + n_A_Buf9[37], // flee
+    24 == n_A_JOB && (n_A_FLEE += Math.round(SkillSearch(273) / 2)),
+    SkillSearch(383) && (n_A_FLEE += 10),
+    SkillSearch(356) && (n_A_FLEE += Math.floor((n_A_BaseLV + n_A_LUK + n_A_DEX) / 10)),
+    SkillSearch(421) && (n_A_FLEE += 30),
+    483 == n_A_Equip[0] && (n_A_FLEE -= n_A_BaseLV + SU_AGI),
+    1714 == n_A_Equip[7] && (n_A_FLEE += 2 * n_A_SHOULDER_REFINE),
+    1718 == n_A_Equip[6] && (n_A_FLEE += n_A_BODY_REFINE),
+    n_A_Buf2[20] && (n_A_FLEE += 50),
+    n_A_Buf3[0] && (n_A_FLEE += n_A_Buf3[0] + Math.floor(n_A_Buf3[30] / 2) + Math.floor(n_A_Buf3[20] / 10)),
+    n_A_Buf7[18] && (n_A_FLEE += 20),
+    n_A_Buf7[1] && (n_A_FLEE += 30),
+    n_A_Buf7[28] ? n_A_FLEE += 33 : n_A_Buf7[46] && (n_A_FLEE += 30),
+    TimeItemNumSearch(1) && (n_A_FLEE += 30 * TimeItemNumSearch(1)),
+    SU_STR >= 90 && (n_A_FLEE += 10 * EquipNumSearch(442)),
+    n_A_Buf2[9] && 0 == SkillSearch(273) && (n_A_FLEE += Math.round(n_A_Buf2[9] / 2)),
+    2 == n_A_JobClass() && 295 == n_A_card[12] && (n_A_FLEE += 20),
+    n_A_HEAD_REFINE >= 6 && 1555 == n_A_Equip[2] && (n_A_FLEE += 2),
+    n_A_HEAD_REFINE >= 5 && 1576 == n_A_Equip[2] && (n_A_FLEE += 5),
+    n_A_HEAD_REFINE >= 7 && 1576 == n_A_Equip[2] && (n_A_FLEE += 2),
+    n_A_HEAD_REFINE >= 7 && 1541 == n_A_Equip[2] && (n_A_FLEE += 2),
+    n_A_HEAD_REFINE >= 7 && 1276 == n_A_Equip[2] && (n_A_FLEE += 10),
+    n_A_HEAD_REFINE >= 7 && 1280 == n_A_Equip[2] && (n_A_FLEE += 10),
+    n_A_HEAD_REFINE >= 7 && 1282 == n_A_Equip[2] && (n_A_FLEE += 10),
+    n_A_HEAD_REFINE >= 7 && 1283 == n_A_Equip[2] && (n_A_FLEE += 10),
+    n_A_HEAD_REFINE >= 7 && 1481 == n_A_Equip[2] && (n_A_FLEE += 10),
+    n_A_HEAD_REFINE >= 7 && 1550 == n_A_Equip[2] && (n_A_FLEE += 10),
+    n_A_HEAD_REFINE >= 9 && 1285 == n_A_Equip[2] && (n_A_FLEE += 5),
+    n_A_SHOULDER_REFINE >= 9 && 271 == n_A_card[12] && (n_A_FLEE += 20),
+    n_A_SHOULDER_REFINE <= 4 && 401 == n_A_card[12] && (n_A_FLEE += 10),
+    n_A_SHOULDER_REFINE >= 9 && 403 == n_A_card[12] && (n_A_FLEE += 5),
+    595 == n_A_card[13] && (n_A_FLEE += 2*n_A_SHOES_REFINE),
+    2 == n_A_Buf6[0] && n_A_Buf6[1] >= 1 && 4 == n_A_Bodyelement && (n_A_FLEE += 3 * n_A_Buf6[1]),
+    8 == n_A_JOB || 14 == n_A_JOB || 22 == n_A_JOB || 28 == n_A_JOB ? n_A_FLEE += 4 * SkillSearch(14) : n_A_FLEE += 3 * SkillSearch(14),
+    SkillSearch(433) && 20 == n_A_WeaponType && !(SkillSearch(846)) && (n_A_FLEE -= 25 + 5 * SkillSearch(433)),
+    Mikiri = new Array(0, 1, 3, 4, 6, 7, 9, 10, 12, 13, 15),
+    n_A_FLEE += Mikiri[SkillSearch(191)],
+    c.B_num.value >= 2 && ((M = 1 * c.B_num.value - 1) > 10 && (M = 10), n_A_FLEE -= Math.floor(n_A_FLEE * M * 10 / 100));
     if (SkillSearch(258) && (n_A_FLEE = Math.round(n_A_FLEE / 2)),
         n_A_Buf6[11] && (n_A_FLEE = Math.round(.75 * n_A_FLEE)),
         n_A_Buf6[12] && (n_A_FLEE = 0),
         n_A_Buf6[14] && (n_A_FLEE = 0),
         n_A_Buf6[15] && (n_A_FLEE = 0),
-        n_A_FLEE < 0 && 0 == SRV && (n_A_FLEE = 0),
-        n_A_FLEE < 1 && SRV > 0 && (n_A_FLEE = 1),
+        n_A_FLEE < 1 && (n_A_FLEE = 1),
         myInnerHtml("A_FLEE", n_A_FLEE, 0),
         myInnerHtml("A_WoeFLEE", Math.floor(.8 * n_A_FLEE), 0),
         n_A_LUCKY = 1 + .1 * n_A_LUK,
@@ -1041,6 +966,7 @@ function StAllCalc() {
         n_A_SHOULDER_REFINE <= 4 && 401 == n_A_card[12] && (n_A_LUCKY += 1),
         1956 == n_A_Equip[0] && 28 == n_A_JOB && (n_A_LUCKY += 10),
         2089 == n_A_Equip[5] && n_A_LEFT_REFINE >= 4 && (n_A_LUCKY += n_A_LEFT_REFINE - 4),
+        2174 == n_A_Equip[0] && (n_A_LUCKY += 2 * n_A_Weapon_refine),
         535 == n_A_Equip[7]) {
         var u = n_A_JobClass();
         3 != u && 4 != u && 5 != u && 45 != u || (n_A_LUCKY += 5,
@@ -1090,7 +1016,7 @@ function StAllCalc() {
         n_A_HEAD_REFINE >= 7 && 1898 == n_A_Equip[2] && (M += 2),
         n_A_HEAD_REFINE >= 9 && 1898 == n_A_Equip[2] && (M += 2),
         2147 == n_A_Equip[0] && (M += 2 * n_A_Weapon_refine),
-        SRV >= 50 && (4 != n_A_WeaponType && 5 != n_A_WeaponType || !SkillSearch(166) || (n_A_CRI += 3 * SkillSearch(166))),
+        2152 == n_A_Equip[0] && (M += 4 * n_A_Weapon_refine + 4 * Math.floor(SU_LUK / 10)),
         n_A_CRI += M,
         n_A_Buf3[5] && (n_A_CRI += 10 + n_A_Buf3[5] + Math.floor(n_A_Buf3[35] / 2) + Math.floor(n_A_Buf3[25] / 10)),
         11 == n_A_WeaponType && (n_A_CRI *= 2),
@@ -1161,6 +1087,7 @@ function StAllCalc() {
         n_A_Weapon_refine >= 9 && 1084 == n_A_Equip[0] && (M += 5),
         n_A_Weapon_refine >= 9 && 1095 == n_A_Equip[0] && (M += 5),
         n_A_Weapon_refine >= 9 && 1950 == n_A_Equip[0] && (M += 10),
+        n_A_Weapon_refine >= 9 && 2163 == n_A_Equip[0] && (M += 5),
         n_A_HEAD_REFINE >= 9 && 1962 == n_A_Equip[2] && (M += 2),
         n_A_HEAD_REFINE >= 9 && 1972 == n_A_Equip[2] && (M += 2),
         n_A_HEAD_REFINE >= 5 && 1898 == n_A_Equip[2] && (M += 1),
@@ -1174,57 +1101,23 @@ function StAllCalc() {
                 n_tok[99] += 7),
             4 == wSPVS && (n_tok[25] += 10));
     var S = M;
-    if (SRV < 50)
-        n_A_MATK = [0, 0, 0],
-        M = Math.floor(n_A_INT / 7),
-        n_A_MATK[0] = n_A_INT + M * M,
-        M = Math.floor(n_A_INT / 5),
-        n_A_MATK[2] = n_A_INT + M * M,
-        n_A_MATK[0] += r,
-        n_A_MATK[2] += r,
-        n_A_MATK[0] = Math.floor(n_A_MATK[0] * S / 100),
-        n_A_MATK[2] = Math.floor(n_A_MATK[2] * S / 100),
-        849 == n_A_Equip[2] && (n_A_MATK[0] += Math.floor(n_A_MATK[0] * Math.floor(n_A_HEAD_REFINE / 2) / 100),
-            n_A_MATK[2] += Math.floor(n_A_MATK[2] * Math.floor(n_A_HEAD_REFINE / 2) / 100)),
-        n_A_Buf6[4] && (M = 100 + 20 * n_A_Buf6[4],
-            n_A_MATK[0] = Math.floor(n_A_MATK[0] * M / 100),
-            n_A_MATK[2] = Math.floor(n_A_MATK[2] * M / 100)),
-        SkillSearch(276) && (n_A_MATK[0] = Math.floor(n_A_MATK[0] * (1 + .05 * SkillSearch(276))),
-            n_A_MATK[2] = Math.floor(n_A_MATK[2] * (1 + .05 * SkillSearch(276)))),
-        BK_n_A_MATK = [0, 0, 0],
-        BK_n_A_MATK[0] = n_A_MATK[0],
-        BK_n_A_MATK[2] = n_A_MATK[2],
-        BK_n_A_MATK[0] != BK_n_A_MATK[2] && (BK_n_A_MATK[2] -= 1),
-        BK_n_A_MATK[1] = (BK_n_A_MATK[2] + BK_n_A_MATK[0]) / 2;
-    else {
-        n_A_StatMATK = n_A_INT + Math.floor(n_A_INT / 2) + Math.floor(n_A_DEX / 5) + Math.floor(n_A_LUK / 3) + Math.floor(n_A_BaseLV / 4);
-        var i = 0;
-        10 == n_A_WeaponType ? i = 0 : 1 === n_A_WeaponLV ? i = 2 * n_A_Weapon_refine : 2 === n_A_WeaponLV ? i = 3 * n_A_Weapon_refine : 3 === n_A_WeaponLV ? i = 5 * n_A_Weapon_refine : 4 === n_A_WeaponLV && (i = 7 * n_A_Weapon_refine),
-            overrefineMagicAttack = 0,
-            10 == n_A_WeaponType ? overrefineMagicAttack = 0 : 1 == n_A_WeaponLV && n_A_Weapon_refine >= 8 ? overrefineMagicAttack = 3 * (n_A_Weapon_refine - 7) : 2 == n_A_WeaponLV && n_A_Weapon_refine >= 7 ? overrefineMagicAttack = 5 * (n_A_Weapon_refine - 6) : 3 == n_A_WeaponLV && n_A_Weapon_refine >= 6 ? overrefineMagicAttack = 8 * (n_A_Weapon_refine - 5) : 4 == n_A_WeaponLV && n_A_Weapon_refine >= 5 && (overrefineMagicAttack = 14 * (n_A_Weapon_refine - 4)),
-            minOverrefineMagicAttack = 0,
-            overrefineMagicAttack > 0 && (minOverrefineMagicAttack = 1),
-            n_Nitou && (1 === n_A_Weapon2LV ? i += 2 * n_A_Weapon2_refine : 2 === n_A_Weapon2LV ? i += 3 * n_A_Weapon2_refine : 3 === n_A_Weapon2LV ? i += 5 * n_A_Weapon2_refine : 4 === n_A_Weapon2LV && (i += 7 * n_A_Weapon2_refine),
-                1 == n_A_Weapon2LV && n_A_Weapon2_refine >= 8 ? overrefineMagicAttack += 3 * (n_A_Weapon2_refine - 7) : 2 == n_A_Weapon2LV && n_A_Weapon2_refine >= 7 ? overrefineMagicAttack += 5 * (n_A_Weapon2_refine - 6) : 3 == n_A_Weapon2LV && n_A_Weapon2_refine >= 6 ? overrefineMagicAttack += 8 * (n_A_Weapon2_refine - 5) : 4 == n_A_Weapon2LV && n_A_Weapon2_refine >= 5 && (overrefineMagicAttack += 14 * (n_A_Weapon2_refine - 4)),
-                overrefineMagicAttack > 0 && (minOverrefineMagicAttack = 1));
-        for (var s = 0, f = 0; 0 != m_Item[n_A_Equip[0]][f + 0]; f += 2)
-            88 == m_Item[n_A_Equip[0]][f + 0] && (s = m_Item[n_A_Equip[0]][f + 0 + 1]);
-        var E = Math.floor((s + i) * n_A_WeaponLV * .1);
-        n_A_StatMATK = n_A_StatMATK * S / 100,
-            E = E * S / 100,
-            n_A_EquipMATK = (r + i) * S / 100,
-            n_A_StatMATK = Math.floor(n_A_StatMATK),
-            E = Math.floor(E),
-            n_A_EquipMATK = Math.floor(n_A_EquipMATK),
-            n_A_MATK = [0, 0, 0],
-            n_A_MATK[0] = n_A_StatMATK + n_A_EquipMATK - E + minOverrefineMagicAttack,
-            n_A_MATK[2] = n_A_StatMATK + n_A_EquipMATK + E + overrefineMagicAttack,
-            n_A_MATK[1] = Math.floor((n_A_MATK[0] + n_A_MATK[2]) / 2),
-            BK_n_A_MATK = [0, 0, 0],
-            BK_n_A_MATK[0] = n_A_MATK[0],
-            BK_n_A_MATK[1] = n_A_MATK[1],
-            BK_n_A_MATK[2] = n_A_MATK[2]
-    }
+    n_A_MATK = [0, 0, 0],
+    M = Math.floor(n_A_INT / 7),
+    n_A_MATK[0] = n_A_INT + M * M,
+    M = Math.floor(n_A_INT / 5),
+    n_A_MATK[2] = n_A_INT + M * M,
+    n_A_MATK[0] += r,
+    n_A_MATK[2] += r,
+    n_A_MATK[0] = Math.floor(n_A_MATK[0] * S / 100),
+    n_A_MATK[2] = Math.floor(n_A_MATK[2] * S / 100),
+    849 == n_A_Equip[2] && (n_A_MATK[0] += Math.floor(n_A_MATK[0] * Math.floor(n_A_HEAD_REFINE / 2) / 100), n_A_MATK[2] += Math.floor(n_A_MATK[2] * Math.floor(n_A_HEAD_REFINE / 2) / 100)),
+    n_A_Buf6[4] && (M = 100 + 20 * n_A_Buf6[4], n_A_MATK[0] = Math.floor(n_A_MATK[0] * M / 100), n_A_MATK[2] = Math.floor(n_A_MATK[2] * M / 100)),
+    SkillSearch(276) && (n_A_MATK[0] = Math.floor(n_A_MATK[0] * (1 + .05 * SkillSearch(276))), n_A_MATK[2] = Math.floor(n_A_MATK[2] * (1 + .05 * SkillSearch(276)))),
+    BK_n_A_MATK = [0, 0, 0],
+    BK_n_A_MATK[0] = n_A_MATK[0],
+    BK_n_A_MATK[2] = n_A_MATK[2],
+    BK_n_A_MATK[0] != BK_n_A_MATK[2] && (BK_n_A_MATK[2] -= 1),
+    BK_n_A_MATK[1] = (BK_n_A_MATK[2] + BK_n_A_MATK[0]) / 2;
     n_A_MATK[0] += wImp,
     n_A_MATK[2] += wImp,
     myInnerHtml("A_MATK", n_A_MATK[0] + "~" + n_A_MATK[2], 0),
@@ -1280,27 +1173,28 @@ function StAllCalc() {
         n_A_HEAD_REFINE >= 7 && 1898 == n_A_Equip[2] && (M += 2),
         n_A_HEAD_REFINE >= 9 && 1898 == n_A_Equip[2] && (M += 2),
         1966 == n_A_Equip[0] && (M += 1 * n_A_Weapon_refine),
+        2154 == n_A_Equip[0] && n_A_Weapon_refine >= 7 && (M += 5),
         n_A_SHOULDER_REFINE >= 7 && SU_AGI >= 90 && 1472 == n_A_Equip[7] && (M += 8);
     var B = M;
     b = 0,
-        0 == n_A_Buf6[19] && 0 == n_A_Buf6[20] && (3 == n_A_WeaponType && SkillSearch(74) && (M += 30,
+    0 == n_A_Buf6[19] && 0 == n_A_Buf6[20] && (3 == n_A_WeaponType && SkillSearch(74) && (M += 30,
+        b = 1),
+        2 == n_A_WeaponType && SkillSearch(386) && (M += 30, b = 1),
+        6 <= n_A_WeaponType && n_A_WeaponType <= 7 && SkillSearch(152) && (M += 40, b = 1),
+        8 == n_A_WeaponType && SkillSearch(152) && (M += 30, b = 1),
+        0 == b && 6 <= n_A_WeaponType && n_A_WeaponType <= 7 && SkillSearch(389) && (M += 40, b = 1),
+        0 == b && SkillSearch(389) && (M += 30, b = 1),
+        0 == b && TimeItemNumSearch(5) && 19 == n_A_JobClass2() && (n_A_WeaponType > 5 && n_A_WeaponType < 9) && (M += 30,
             b = 1),
-            2 == n_A_WeaponType && SkillSearch(386) && (M += 30, b = 1),
-            6 <= n_A_WeaponType && n_A_WeaponType <= 7 && SkillSearch(152) && (M += 40, b = 1),
-            8 == n_A_WeaponType && SkillSearch(152) && (M += 30, b = 1),
-            0 == b && 6 <= n_A_WeaponType && n_A_WeaponType <= 7 && SkillSearch(389) && (M += 40, b = 1),
-            0 == b && SkillSearch(389) && (M += 30, b = 1),
-            0 == b && (TimeItemNumSearch(5) || TimeItemNumSearch(28)) && (n_A_WeaponType > 5 && n_A_WeaponType < 9 || 0 == SRV) && (M += 30,
-                b = 1),
-            5 == n_A_WeaponType && SkillSearch(166) && (M += SkillSearch(166) + 20,
-                b = 1)),
-        SkillSearch(78) && (M -= 10 * (6 - SkillSearch(78))),
-        M += Math.round(SkillSearch(425) / 2),
-        12 == n_A_WeaponType && SkillSearch(224) && (M += SkillSearch(224) / 2),
-        SkillSearch(196) && (M -= 25),
-        SkillSearch(258) && (M += 30),
-        SkillSearch(420) ? M += 20 : SkillSearch(846) && 20 == n_A_WeaponType && (M += 10),
-        SkillSearch(433) && 20 == n_A_WeaponType && !(SkillSearch(846)) && (M += 10 + 2 * SkillSearch(433));
+        5 == n_A_WeaponType && SkillSearch(166) && (M += SkillSearch(166) + 20,
+            b = 1)),
+    SkillSearch(78) && (M -= 10 * (6 - SkillSearch(78))),
+    M += Math.round(SkillSearch(425) / 2),
+    12 == n_A_WeaponType && SkillSearch(224) && (M += SkillSearch(224) / 2),
+    SkillSearch(196) && (M -= 25),
+    SkillSearch(258) && (M += 30),
+    SkillSearch(420) ? M += 20 : SkillSearch(846) && 20 == n_A_WeaponType && (M += SkillSearch(852) == 2 ? 20 : 10),
+    SkillSearch(433) && 20 == n_A_WeaponType && !(SkillSearch(846)) && (M += 10 + 2 * SkillSearch(433));
     var v = 0;
     SkillSearch(357) && (v += Math.floor((n_A_BaseLV + n_A_LUK + n_A_DEX) / 10));
     var p = 0;
@@ -1344,95 +1238,100 @@ function StAllCalc() {
     }
     var M = 0;
     M += EquipNumSearch(1696),
-        n_A_Buf2[15] && (M -= 25 - 5 * n_A_Buf2[15]),
-        47 == n_A_Equip[0] && (M += 2),
-        1434 == n_A_Equip[0] && (M += Math.floor(n_A_Weapon_refine / 2)),
-        1632 == n_A_Equip[4] && (M += 1),
-        1560 == n_A_Equip[2] && 678 == n_A_Equip[3] && (M += 1),
-        // witch hahoe combo
-        EquipNumSearch(1722) && (M += 2),
-        EquipNumSearch(1727) && (M -= 7),
-        EquipNumSearch(1752) && (M += 1),
-        SU_AGI >= 120 && EquipNumSearch(1255) && (M += 1),
-        SU_AGI >= 120 && EquipNumSearch(1399) && (M += 1),
-        SU_STR >= 120 && EquipNumSearch(1259) && (M += 1),
-        n_A_SHOULDER_REFINE >= 9 && SU_AGI >= 90 && 1472 == n_A_Equip[7] && (M += 1),
-        SkillSearch(560) && (M += SkillSearch(555) / 10 * 4),
-        1 == SkillSearch(815) && SkillSearch(816) > 0 && 1 == SkillSearch(806) && (M += 5),
-        n_A_ASPD += M;
-        if(c.increase_aspdcap.checked || (SkillSearch(846) && 20 == n_A_WeaponType)){
-            SkillSearch(852) == 2 ? n_A_ASPD > 195 && (n_A_ASPD = 195) : n_A_ASPD > 193 && (n_A_ASPD = 193);
-        }else{
-            n_A_ASPD > 190 && (n_A_ASPD = 190);
-        }
-        n_A_ASPD = Math.floor(10 * n_A_ASPD) / 10,
-        myInnerHtml("A_ASPD", n_A_ASPD, 0),
-        n_A_ASPD = (200 - n_A_ASPD) / 50,
-        n_Delay[1] = Math.floor(1e3 * n_A_ASPD) / 1e3,
-        17 == n_A_ActiveSkill && (n_Delay[1] = Math.floor(75 * n_A_ASPD) / 100),
-        sandanDelay = 0,
-        SkillSearch(187) && 0 == n_A_ActiveSkill && (sandanDelay = (1e3 - 4 * n_A_AGI - 2 * n_A_DEX) / 1e3,
-            SkillSearch(301) && (sandanDelay += .3)),
-        SRV < 50 ? n_A_CAST = 1 - n_A_DEX / 150 : n_A_CAST = 1 - Math.sqrt((2 * n_A_DEX + n_A_INT) / 530),
-        n_A_CAST < 0 && (n_A_CAST = 0);
+    n_A_Buf2[15] && (M -= 25 - 5 * n_A_Buf2[15]),
+    47 == n_A_Equip[0] && (M += 2),
+    1434 == n_A_Equip[0] && (M += Math.floor(n_A_Weapon_refine / 2)),
+    1632 == n_A_Equip[4] && (M += 1),
+    1560 == n_A_Equip[2] && 678 == n_A_Equip[3] && (M += 1),
+    // witch hahoe combo
+    EquipNumSearch(1722) && (M += 2),
+    EquipNumSearch(1727) && (M -= 7),
+    EquipNumSearch(1752) && (M += 1),
+    SU_AGI >= 120 && EquipNumSearch(1255) && (M += 1),
+    SU_AGI >= 120 && EquipNumSearch(1399) && (M += 1),
+    SU_STR >= 120 && EquipNumSearch(1259) && (M += 1),
+    n_A_SHOULDER_REFINE >= 9 && SU_AGI >= 90 && 1472 == n_A_Equip[7] && (M += 1),
+    SkillSearch(560) && (M += SkillSearch(555) / 10 * 4),
+    1 == SkillSearch(815) && SkillSearch(816) > 0 && 1 == SkillSearch(806) && (M += 5),
+    n_A_ASPD += M;
+    if(c.increase_aspdcap.checked || (SkillSearch(846) && 20 == n_A_WeaponType)){
+        SkillSearch(852) == 2 ? n_A_ASPD > 195 && (n_A_ASPD = 195) : n_A_ASPD > 193 && (n_A_ASPD = 193);
+    }else{
+        n_A_ASPD > 190 && (n_A_ASPD = 190);
+    }
+    n_A_ASPD = Math.floor(10 * n_A_ASPD) / 10,
+    myInnerHtml("A_ASPD", n_A_ASPD, 0),
+    n_A_ASPD = (200 - n_A_ASPD) / 50,
+    n_Delay[1] = Math.floor(1e3 * n_A_ASPD) / 1e3,
+    17 == n_A_ActiveSkill && (n_Delay[1] = Math.floor(75 * n_A_ASPD) / 100),
+    sandanDelay = 0,
+    SkillSearch(187) && 0 == n_A_ActiveSkill && (sandanDelay = (1e3 - 4 * n_A_AGI - 2 * n_A_DEX) / 1e3,
+        SkillSearch(301) && (sandanDelay += .3)),
+    n_A_CAST = 1 - n_A_DEX / 150,
+    n_A_CAST < 0 && (n_A_CAST = 0);
     M = 100;
     nb_tok = 0,
-        25 == n_A_JOB && (n_tok[73] -= 50 * CardNumSearch(533)),
-        EquipNumSearch(750) && (n_tok[73] -= n_A_Weapon_refine),
-        EquipNumSearch(1005) & EquipNumSearch(442) && (n_tok[73] -= n_A_Weapon_refine / 2),
-        n_A_Weapon_refine >= 9 && 1084 == n_A_Equip[0] && (n_tok[73] -= 5),
-        n_A_Weapon_refine >= 9 && 1095 == n_A_Equip[0] && (n_tok[73] -= 5),
-        10 == n_A_Weapon_refine && EquipNumSearch(1493) && (n_tok[73] -= 10),
-        n_A_HEAD_REFINE >= 8 && 1279 == n_A_Equip[2] && (n_tok[73] -= 3),
-        n_A_HEAD_REFINE >= 8 && 1476 == n_A_Equip[2] && (n_tok[73] -= 3),
-        n_A_HEAD_REFINE >= 7 && 1289 == n_A_Equip[2] && (n_tok[73] -= 3),
-        n_A_HEAD_REFINE >= 9 && 1289 == n_A_Equip[2] && (n_tok[73] -= 2),
-        5 == n_A_JobClass() && CardNumSearch(454) && (n_tok[73] -= 15),
-        18 != n_A_JOB && 32 != n_A_JOB || !CardNumSearch(460) || (n_tok[73] -= 15),
-        177 == n_A_card[8] && (n_tok[73] -= n_A_HEAD_REFINE),
-        M += n_tok[73],
-        0 != n_A_Buf3[2] && (SRV ? (M -= M / 100 * ((3 * n_A_Buf3[2] + n_A_Buf3[32] + Math.floor(n_A_Buf3[22] / 10)) / 100) * 100,
-            nb_tok += (3 * n_A_Buf3[2] + n_A_Buf3[32] + Math.floor(n_A_Buf3[22] / 10)) / 100 * 100) : (M -= 3 * n_A_Buf3[2] + n_A_Buf3[32] + Math.floor(n_A_Buf3[22] / 10),
-                nb_tok += (3 * n_A_Buf3[2] + n_A_Buf3[32] + Math.floor(n_A_Buf3[22] / 10)) / 100 * 100)),
-        (M -= 50 * TimeItemNumSearch(1)) < 0 && (M = 0),
-        n_B_Cast = M,
-        n_A_CAST *= M / 100,
-        M = 100,
-        0 != StPlusCalc2(7e3 + n_A_ActiveSkill) && (M -= StPlusCalc2(7e3 + n_A_ActiveSkill)),
-        0 != StPlusCard(7e3 + n_A_ActiveSkill) && (M -= StPlusCard(7e3 + n_A_ActiveSkill)),
-        321 != n_A_ActiveSkill && 197 != n_A_ActiveSkill || SkillSearch(195) && n_A_Weapon_refine >= 9 && EquipNumSearch(1097) && (M -= 100),
-        430 == n_A_ActiveSkill && n_A_Weapon_refine >= 9 && 1100 == n_A_Equip[0] && (M -= 25),
-        131 == n_A_ActiveSkill && n_A_Weapon_refine >= 10 && 1169 == n_A_Equip[0] && (M -= 8),
-        1956 == n_A_Equip[0] && 21 == n_A_JOB && 76 == n_A_ActiveSkill && (M -= 10 * n_A_Weapon_refine), // save the king bb cast time reduction
-        1 == SkillSearch(851) && (849 == n_A_ActiveSkill || 848 == n_A_ActiveSkill) && (M -= 50),
-        M < 0 && (M = 0),
-        n_A_CAST *= M / 100,
-        n_A_Buf2[10] && (n_A_CAST *= (100 - 15 * n_A_Buf2[10]) / 100),
-        SkillSearch(322) && (n_A_CAST /= 2),
-        (M = 100 + n_tok[72]) < 50 && (M = 50),
-        n_A_fCAST = M / 100,
-        936 == n_A_Equip[0] && (n_tok[74] += 3 * Math.floor(n_A_Weapon_refine / 2)),
-        934 == n_A_Equip[0] && n_A_Weapon_refine >= 9 && (n_tok[74] += 20),
-        1036 == n_A_Equip[2] && n_A_HEAD_REFINE >= 6 && (n_tok[74] += n_A_HEAD_REFINE - 5),
-        EquipNumSearch(1582) && n_A_HEAD_REFINE >= 5 && (n_tok[74] += n_A_HEAD_REFINE - 4),
-        1084 == n_A_Equip[0] && n_A_Weapon_refine >= 9 && (n_tok[74] += 5),
-        1095 == n_A_Equip[0] && n_A_Weapon_refine >= 9 && (n_tok[74] += 5),
-        1839 == n_A_Equip[0] && n_A_Weapon_refine >= 7 && (n_tok[74] += 10),
-        1843 == n_A_Equip[0] && n_A_Weapon_refine >= 7 && (n_tok[74] += 5),
-        5 == n_A_JobClass() && (n_tok[74] += 5 * EquipNumSearch(1119)),
-        // jester hat
-        AC_S = 0;
-        263 == n_A_ActiveSkill && 1837 == n_A_Equip[2] && 272 == n_A_Equip[4] && (AC_S += 25),
-        2091 == n_A_Equip[0] && 102 == n_A_ActiveSkill && (AC_S += 50),
-        (2145 == n_A_Equip[9] || 2145 == n_A_Equip[10]) && 25 == n_A_ActiveSkill && (AC_S += 50),
-        1 == SkillSearch(851) && 435 == n_A_ActiveSkill && (AC_S += 50),
-        3 == SkillSearch(851) && (849 == n_A_ActiveSkill || 429 == n_A_ActiveSkill || 848 == n_A_ActiveSkill) && (AC_S += 50),
-        SkillSearch(852) == 1 && (429 == n_A_ActiveSkill || 428 == n_A_ActiveSkill || 435 == n_A_ActiveSkill) && (AC_S += 40),
-        SkillSearch(852) == 2 && (429 == n_A_ActiveSkill || 428 == n_A_ActiveSkill || 435 == n_A_ActiveSkill) && (AC_S += 75),
-        SkillSearch(852) == 2 && 849 == n_A_ActiveSkill && (AC_S += 50),
-        AC_IA = 0;
-        SkillSearch(851) && (AC_IA += 50),
-        AC_I = n_tok[74];
+    25 == n_A_JOB && (n_tok[73] -= 50 * CardNumSearch(533)),
+    EquipNumSearch(750) && (n_tok[73] -= n_A_Weapon_refine),
+    EquipNumSearch(1005) & EquipNumSearch(442) && (n_tok[73] -= n_A_Weapon_refine / 2),
+    n_A_Weapon_refine >= 9 && 1084 == n_A_Equip[0] && (n_tok[73] -= 5),
+    n_A_Weapon_refine >= 9 && 1095 == n_A_Equip[0] && (n_tok[73] -= 5),
+    10 == n_A_Weapon_refine && EquipNumSearch(1493) && (n_tok[73] -= 10),
+    n_A_HEAD_REFINE >= 8 && 1279 == n_A_Equip[2] && (n_tok[73] -= 3),
+    n_A_HEAD_REFINE >= 8 && 1476 == n_A_Equip[2] && (n_tok[73] -= 3),
+    n_A_HEAD_REFINE >= 7 && 1289 == n_A_Equip[2] && (n_tok[73] -= 3),
+    n_A_HEAD_REFINE >= 9 && 1289 == n_A_Equip[2] && (n_tok[73] -= 2),
+    5 == n_A_JobClass() && CardNumSearch(454) && (n_tok[73] -= 15),
+    18 != n_A_JOB && 32 != n_A_JOB || !CardNumSearch(460) || (n_tok[73] -= 15),
+    177 == n_A_card[8] && (n_tok[73] -= n_A_HEAD_REFINE),
+    M += n_tok[73],
+    0 != n_A_Buf3[2] && (M -= 3 * n_A_Buf3[2] + n_A_Buf3[32] + Math.floor(n_A_Buf3[22] / 10),
+            nb_tok += (3 * n_A_Buf3[2] + n_A_Buf3[32] + Math.floor(n_A_Buf3[22] / 10)) / 100 * 100),
+    (M -= 50 * TimeItemNumSearch(1)) < 0 && (M = 0),
+    n_B_Cast = M,
+    n_A_CAST *= M / 100,
+    M = 100,
+    0 != StPlusCalc2(7e3 + n_A_ActiveSkill) && (M -= StPlusCalc2(7e3 + n_A_ActiveSkill)),
+    0 != StPlusCard(7e3 + n_A_ActiveSkill) && (M -= StPlusCard(7e3 + n_A_ActiveSkill)),
+    321 != n_A_ActiveSkill && 197 != n_A_ActiveSkill || SkillSearch(195) && n_A_Weapon_refine >= 9 && EquipNumSearch(1097) && (M -= 100),
+    430 == n_A_ActiveSkill && n_A_Weapon_refine >= 9 && 1100 == n_A_Equip[0] && (M -= 25),
+    131 == n_A_ActiveSkill && n_A_Weapon_refine >= 10 && 1169 == n_A_Equip[0] && (M -= 8),
+    1956 == n_A_Equip[0] && 21 == n_A_JOB && 76 == n_A_ActiveSkill && (M -= 10 * n_A_Weapon_refine), // save the king bb cast time reduction
+    1 == SkillSearch(851) && (849 == n_A_ActiveSkill || 848 == n_A_ActiveSkill) && (M -= 50),
+    M < 0 && (M = 0),
+    n_A_CAST *= M / 100;
+    if(SkillSearch(91)){
+        n_A_CAST *= (100 - 7.5 * SkillSearch(91)) / 100;
+    }else if(n_A_Buf2[10]){
+        n_A_CAST *= (100 - 15 * n_A_Buf2[10]) / 100;
+    }
+    SkillSearch(322) && (n_A_CAST /= 2),
+    (M = 100 + n_tok[72]) < 50 && (M = 50),
+    n_A_fCAST = M / 100,
+    936 == n_A_Equip[0] && (n_tok[74] += 3 * Math.floor(n_A_Weapon_refine / 2)),
+    934 == n_A_Equip[0] && n_A_Weapon_refine >= 9 && (n_tok[74] += 20),
+    1036 == n_A_Equip[2] && n_A_HEAD_REFINE >= 6 && (n_tok[74] += n_A_HEAD_REFINE - 5),
+    EquipNumSearch(1582) && n_A_HEAD_REFINE >= 5 && (n_tok[74] += n_A_HEAD_REFINE - 4),
+    1084 == n_A_Equip[0] && n_A_Weapon_refine >= 9 && (n_tok[74] += 5),
+    1095 == n_A_Equip[0] && n_A_Weapon_refine >= 9 && (n_tok[74] += 5),
+    1839 == n_A_Equip[0] && n_A_Weapon_refine >= 7 && (n_tok[74] += 10),
+    1843 == n_A_Equip[0] && n_A_Weapon_refine >= 7 && (n_tok[74] += 5),
+    5 == n_A_JobClass() && (n_tok[74] += 5 * EquipNumSearch(1119)),
+    2155 == n_A_Equip[0] && n_A_Weapon_refine >= 7 && (n_tok[74] += 5),
+    // jester hat
+    AC_S = 0;
+    263 == n_A_ActiveSkill && 1837 == n_A_Equip[2] && 272 == n_A_Equip[4] && (AC_S += 25),
+    2091 == n_A_Equip[0] && 102 == n_A_ActiveSkill && (AC_S += 50),
+    (2145 == n_A_Equip[9] || 2145 == n_A_Equip[10]) && 25 == n_A_ActiveSkill && (AC_S += 50),
+    1 == SkillSearch(851) && 435 == n_A_ActiveSkill && (AC_S += 50),
+    3 == SkillSearch(851) && (849 == n_A_ActiveSkill || 429 == n_A_ActiveSkill || 848 == n_A_ActiveSkill) && (AC_S += 50),
+    SkillSearch(852) == 1 && (429 == n_A_ActiveSkill || 428 == n_A_ActiveSkill || 435 == n_A_ActiveSkill) && (AC_S += 40),
+    SkillSearch(852) == 2 && (429 == n_A_ActiveSkill || 435 == n_A_ActiveSkill) && (AC_S += 75),
+    SkillSearch(852) == 2 && 428 == n_A_ActiveSkill && (AC_S += 90),
+    SkillSearch(852) == 2 && 849 == n_A_ActiveSkill && (AC_S += 50),
+    AC_IA = 0;
+    SkillSearch(851) && (AC_IA += 50),
+    AC_I = n_tok[74];
     M = n_A_Buf3[2];
     n_tok[74] = M ? 10 == M ? 5 * M + 2 * n_A_Buf3[32] + Math.floor(n_A_Buf3[29] / 5) : 3 * M + 2 * n_A_Buf3[32] + Math.floor(n_A_Buf3[29] / 5) : 0,
         AC_I > 100 && (AC_I = 100),
@@ -1492,6 +1391,7 @@ function StAllCalc() {
         SkillSearch(156) && (n_tok[66] += 5 * SkillSearch(156)),
         SkillSearch(234) && (n_tok[59] += 4 * SkillSearch(234)),
         SkillSearch(234) && (n_tok[39] += 4 * SkillSearch(234)),
+        SkillSearch(24) && (n_tok[36] += 0.5 * SkillSearch(24), n_tok[31] += 0.5 * SkillSearch(24)),
         n_A_Buf7[45] && (n_tok[100] += 20),
         SU_VIT >= 90 && 1945 == n_A_Equip[8] && (n_tok[100] += 15),
         1956 == n_A_Equip[0] && 26 == n_A_JOB && (n_tok[100] += 20),
@@ -1505,6 +1405,7 @@ function StAllCalc() {
         n_A_Weapon_refine >= 9 && 2147 == n_A_Equip[0] && (n_tok[70] += 5),
         624 == n_A_Equip[0] && (n_tok[191] += n_A_Weapon_refine),
         1089 == n_A_Equip[0] && (n_tok[70] += 2 * n_A_Weapon_refine),
+        2152 == n_A_Equip[0] && n_A_Weapon_refine >= 9 && (n_tok[70] += 5),
         1718 == n_A_Equip[6] && (n_tok[25] += 2 * n_A_BODY_REFINE),
         1161 == n_A_Equip[0] && (n_tok[99] += SkillSearch(23)),
         1792 == n_A_Equip[0] && (n_tok[5054] += 3 * n_A_Weapon_refine),
@@ -1523,6 +1424,15 @@ function StAllCalc() {
         1846 == n_A_Equip[0] && (1 == n_A_Arrow || 16 == n_A_Arrow) && (n_tok[25] += 15),
         1847 == n_A_Equip[0] && (2 == n_A_Arrow || 7 == n_A_Arrow) && (n_tok[25] += 15),
         n_A_HEAD_REFINE >= 9 && 578 == n_A_card[8] && (n_tok[25] += 5),
+        2151 == n_A_Equip[0] && (n_tok[25] += Math.floor(n_A_Weapon_refine / 2)),
+        2151 == n_A_Equip[0] && n_A_Weapon_refine >= 9 && (n_tok[25] += 5),
+        2153 == n_A_Equip[0] && (n_tok[25] += n_A_Weapon_refine),
+        2153 == n_A_Equip[0] && n_A_Weapon_refine >= 9 && (n_tok[25] += 5),
+        2154 == n_A_Equip[0] && (n_tok[25] += n_A_Weapon_refine),
+        2154 == n_A_Equip[0] && n_A_Weapon_refine >= 9 && (n_tok[25] += 5),
+        2155 == n_A_Equip[0] && (n_tok[25] += n_A_Weapon_refine),
+        2155 == n_A_Equip[0] && n_A_Weapon_refine >= 9 && (n_tok[25] += 5),
+        2162 == n_A_Equip[0] && (n_tok[25] += 2 * n_A_Weapon_refine),
         2124 == n_A_Equip[0] && (n_tok[25] += n_A_Weapon_refine),
         1956 == n_A_Equip[0] && 33 == n_A_JOB && (n_tok[25] += 10),
         SU_INT >= 90 && 1953 == n_A_Equip[0] && (n_tok[25] += 20),
@@ -1539,6 +1449,7 @@ function StAllCalc() {
         n_A_HEAD_REFINE >= 9 && 1407 == n_A_Equip[2] && (n_tok[80] += 2),
         n_A_HEAD_REFINE >= 7 && 1812 == n_A_Equip[2] && (n_tok[70] += 10),
         SU_LUK >= 40 && 1966 == n_A_Equip[0] && (n_tok[70] += 10),
+        SU_LUK >= 40 && 680 == n_A_card[11] && (n_tok[70] += 5),
         n_A_HEAD_REFINE >= 9 && 1812 == n_A_Equip[2] && (n_tok[80] += 5), 
         1825 == n_A_Equip[6] && (1 == n_A_JobClass() || 2 == n_A_JobClass() || 6 == n_A_JobClass() || 41 == n_A_JOB || 42 == n_A_JOB) && (n_tok[80] += 3),
         n_A_HEAD_REFINE >= 9 && 1973 == n_A_Equip[2] && (n_tok[80] += 2),
@@ -1572,6 +1483,7 @@ function StAllCalc() {
         2123 == n_A_Equip[0] && (n_tok[80] += n_A_Weapon_refine * 6),
         2124 == n_A_Equip[0] && (n_tok[80] += n_A_Weapon_refine * 5),
         (1956 == n_A_Equip[0] || 1956 == n_A_Equip[1]) && 22 == n_A_JOB && (263 != n_A_ActiveSkill && 264 != n_A_ActiveSkill) && (n_tok[80] -= 30 * EquipNumSearch(1956)),
+        (2175 == n_A_Equip[0] || 2175 == n_A_Equip[1]) && 22 == n_A_JOB && (263 != n_A_ActiveSkill && 264 != n_A_ActiveSkill) && (n_tok[80] -= 30 * EquipNumSearch(2175)),
         n_A_Weapon_refine >= 6 && 1083 == n_A_Equip[0] && (n_tok[177] += 2 * (n_A_Weapon_refine - 5)),
         // magic damage race shoe cards
         n_A_SHOES_REFINE >= 9 && 606 == n_A_card[13] && (n_tok[175] += 5),
@@ -1582,8 +1494,8 @@ function StAllCalc() {
         n_A_HEAD_REFINE >= 9 && 605 == n_A_card[8] && (n_tok[344] += 5),
         n_A_HEAD_REFINE >= 9 && 607 == n_A_card[8] && (n_tok[345] += 5),
         // magic damage element cards
-        n_A_WeaponLV <= 2 && (n_tok[340] += 3*CardNumSearch(626), n_tok[341] += 3*CardNumSearch(579), n_tok[342] += 3*CardNumSearch(636), n_tok[343] += 3*CardNumSearch(588), n_tok[344] += 3*CardNumSearch(589), n_tok[347] += 3*CardNumSearch(668), n_tok[348] += 3*CardNumSearch(576), n_tok[349] += 3*CardNumSearch(645)),
-        n_A_WeaponLV >= 3 && (n_tok[340] += 8*CardNumSearch(626), n_tok[341] += 8*CardNumSearch(579), n_tok[342] += 8*CardNumSearch(636), n_tok[343] += 8*CardNumSearch(588), n_tok[344] += 8*CardNumSearch(589), n_tok[347] += 8*CardNumSearch(668), n_tok[348] += 8*CardNumSearch(576), n_tok[349] += 8*CardNumSearch(645)),
+        n_A_WeaponLV <= 2 && (n_tok[340] += 3*CardNumSearch(626), n_tok[341] += 3*CardNumSearch(579), n_tok[342] += 3*CardNumSearch(636), n_tok[343] += 3*CardNumSearch(588), n_tok[344] += 3*CardNumSearch(589), n_tok[345] += 3*CardNumSearch(675), n_tok[347] += 3*CardNumSearch(668), n_tok[348] += 3*CardNumSearch(576), n_tok[349] += 3*CardNumSearch(645)),
+        n_A_WeaponLV >= 3 && (n_tok[340] += 8*CardNumSearch(626), n_tok[341] += 8*CardNumSearch(579), n_tok[342] += 8*CardNumSearch(636), n_tok[343] += 8*CardNumSearch(588), n_tok[344] += 8*CardNumSearch(589), n_tok[345] += 8*CardNumSearch(675), n_tok[347] += 8*CardNumSearch(668), n_tok[348] += 8*CardNumSearch(576), n_tok[349] += 8*CardNumSearch(645)),
         // magic damage race cards
         n_A_WeaponLV <= 2 && (n_tok[170] += 3*CardNumSearch(520), n_tok[171] += 3*CardNumSearch(522), n_tok[172] += 3*CardNumSearch(521), n_tok[173] += 3*CardNumSearch(516), n_tok[174] += 3*CardNumSearch(515), n_tok[175] += 3*CardNumSearch(517), n_tok[176] += 3*CardNumSearch(518), n_tok[177] += 3*CardNumSearch(514), n_tok[178] += 3*CardNumSearch(659), n_tok[179] += 3*CardNumSearch(519)),
         n_A_WeaponLV >= 3 && (n_tok[170] += 8*CardNumSearch(520), n_tok[171] += 8*CardNumSearch(522), n_tok[172] += 8*CardNumSearch(521), n_tok[173] += 8*CardNumSearch(516), n_tok[174] += 8*CardNumSearch(515), n_tok[175] += 8*CardNumSearch(517), n_tok[176] += 8*CardNumSearch(518), n_tok[177] += 8*CardNumSearch(514), n_tok[178] += 8*CardNumSearch(659), n_tok[179] += 8*CardNumSearch(519)),
@@ -1601,8 +1513,8 @@ function StAllCalc() {
         n_A_SHOULDER_REFINE >= 9 && 1472 == n_A_Equip[7] && (SU_DEX >= 90 && (n_tok[25] += 5),
             SU_VIT >= 90 && (n_tok[60] += 5),
             SU_LUK >= 90 && (n_tok[70] += 5)),
-        CardNumSearch(452) && 3 == n_A_JobClass() && (n_tok[51] += 30,
-            n_tok[56] += 30),
+        CardNumSearch(452) && 3 == n_A_JobClass() && (n_tok[51] += 30, n_tok[56] += 30),
+        2177 == n_A_Equip[0] && (n_tok[26] += 3 * n_A_Weapon_refine),
         n_A_HEAD_REFINE >= 5 && (1507 == n_A_Equip[2] || 1508 == n_A_Equip[2] || 1703 == n_A_Equip[2]) && (n_tok[57] += n_A_HEAD_REFINE - 4,
             n_tok[37] += n_A_HEAD_REFINE - 4);
     for (_ = 971; _ <= 977; _++)
@@ -1615,9 +1527,9 @@ function StAllCalc() {
             n_tok[56] -= 200,
             n_tok[58] -= 200,
             n_tok[59] -= 200);
-    if ((0 == n_B[20] && 0 == n_B_rangedAtk && 0 == n_B_rangedMAtk && 2 != c.B_AtkRange.value || 1 == c.B_AtkRange.value) && 957 == n_A_Equip[7])
+    /* if ((0 == n_B[20] && 0 == n_B_rangedAtk && 0 == n_B_rangedMAtk && 2 != c.B_AtkRange.value || 1 == c.B_AtkRange.value) && 957 == n_A_Equip[7]) // old asprika behavior
         for (_ = 0; _ <= 9; _++)
-            n_tok[60 + _] += 30;
+            n_tok[60 + _] += 30; */
     if (n_A_HEAD_REFINE >= 7 && 1498 == n_A_Equip[2])
         for (_ = 0; _ <= 9; _++)
             n_tok[60 + _] += 5;
@@ -1639,8 +1551,6 @@ function StAllCalc() {
             n_tok[62] -= 15),
         1085 == n_A_Equip[0] && (n_A_Weapon_refine >= 6 && (n_tok[99] += 5 + 2 * (n_A_Weapon_refine - 5)),
             n_A_Weapon_refine >= 10 && (n_tok[99] += 10)),
-        0 == SRV && EquipNumSearch(1030) && (n_tok[77] -= 5,
-            n_tok[79] -= 5),
         534 == n_A_Equip[6] && (wSPVS = n_A_JobClass(),
             1 != wSPVS && 2 != wSPVS && 6 != wSPVS || (n_tok[151] += 50),
             3 != wSPVS && 4 != wSPVS && 5 != wSPVS && 45 != wSPVS || (n_tok[156] += 50)),
@@ -1667,9 +1577,10 @@ function StAllCalc() {
         n_A_WeaponLV == 4 && (6 == n_A_WeaponType || 7 == n_A_WeaponType) && (n_tok[290] += 6 * CardNumSearch(617)),
         2097 == n_A_Equip[0] && (n_tok[290] += 2 * n_A_Weapon_refine),
         SkillSearch(846) && 20 == n_A_WeaponType && 0 == n_A_ActiveSkill && (n_tok[290] += SkillSearch(852) ? 50 : 25),
-        4 == SkillSearch(851) && (428 == n_A_ActiveSkill || 435 == n_A_ActiveSkill) && (n_tok[290] += 25),
+        4 == SkillSearch(851) && (428 == n_A_ActiveSkill || 435 == n_A_ActiveSkill) && (n_tok[290] += 50),
         SkillSearch(852) && (849 == n_A_ActiveSkill || 850 == n_A_ActiveSkill) && (n_tok[290] += 50),
         2124 == n_A_Equip[0] && (n_tok[290] += Math.floor(n_A_Weapon_refine / 2)),
+        SU_STR >= 70 && 681 == n_A_card[11] && (n_tok[290] += 10),
         645 == n_A_Equip[0] && (n_tok[295] += 10 + n_A_Weapon_refine),
         n_A_HEAD_REFINE >= 7 && 1832 == n_A_Equip[2] && (n_tok[295] += 12), 
         n_A_HEAD_REFINE >= 9 && CardNumSearch(630) && (n_tok[295] += 5),
@@ -1685,6 +1596,7 @@ function StAllCalc() {
         1085 == n_A_Equip[0] && n_A_Weapon_refine >= 6 && (n_tok[317] += 5),
         1083 == n_A_Equip[0] && n_A_Weapon_refine >= 6 && (n_tok[317] += 5 + 2 * (n_A_Weapon_refine - 5)),
         SU_AGI >= 90 && 1944 == n_A_Equip[8] && (n_tok[355] += 10),
+        2158 == n_A_Equip[0] && (n_tok[355] += 200),
         SU_INT >= 90 && 1946 == n_A_Equip[8] && (n_tok[354] += 5),
         2120 == n_A_Equip[0] && (n_tok[354] += n_A_Weapon_refine),
         n_tok[70] += n_tok[320 + n_B[2]],
@@ -1694,7 +1606,7 @@ function StAllCalc() {
             n_tok[71] += 2 * n_A_SHOULDER_REFINE)
     }
     TimeItemNumSearch(52) && (n_tok[71] += 3 * n_A_LEFT_REFINE),
-        ClickB_Enemy(),
+        ClickB_Enemy(c.B_Enemy.value),
         KakutyouKansuu()
 }
 function StPlusCalc() {
@@ -1770,7 +1682,7 @@ function StPlusCalc() {
     1905 == n_A_Equip[0] && SU_DEX >= 50 && (A += 4, l += 3),
     1 != n_A_JobClass() && 2 != n_A_JobClass() && 6 != n_A_JobClass() && 41 != n_A_JOB && 42 != n_A_JOB || (a += 1 * EquipNumSearch(1670)),
     3 != n_A_JobClass() && 5 != n_A_JobClass() && 43 != n_A_JOB && 44 != n_A_JOB || (A += 1 * EquipNumSearch(1670)),
-    4 != n_A_JobClass() && 45 != n_A_JOB || (l += 1 * EquipNumSearch(1670)),
+    4 != n_A_JobClass() && 45 != n_A_JobClass() || (l += 1 * EquipNumSearch(1670)),
     1825 == n_A_Equip[6] && (4 == n_A_JobClass() || 45 == n_A_JobClass()) && (l += 2),
     n_A_HEAD_REFINE >= 7 && 1291 == n_A_Equip[2] && (l += 1),
     n_A_HEAD_REFINE >= 7 && 1292 == n_A_Equip[2] && (l += 1),
@@ -1778,6 +1690,7 @@ function StPlusCalc() {
     n_A_SHOES_REFINE >= 9 && 662 == n_A_card[13] && (l -= 3),
     1956 == n_A_Equip[0] && 28 == n_A_JOB && (t += 3, l += 3),
     1975 == n_A_Equip[7] && (5 == n_A_JobClass() || 9 == n_A_JOB || 23 == n_A_JOB || 43 == n_A_JOB) && (l -= 1),
+    2175 == n_A_Equip[0] && 19 == n_A_JobClass2() && (l += 2),
     n_A_HEAD_REFINE >= 8 && 1288 == n_A_Equip[2] && (e += 2),
     1847 == n_A_Equip[0] && (e += Math.floor(SU_VIT / 20)),
     r = 0
@@ -1838,6 +1751,8 @@ function StPlusCalc() {
     98 == n_A_card[14] && 98 == n_A_card[15] && 1 == CardNumSearch(273) && (a -= 3),
     872 == n_A_Equip[2] && (n_tok[77] += n_A_HEAD_REFINE),
     2098 == n_A_Equip[7] && (n_tok[371] -= n_A_SHOULDER_REFINE),
+    2167 == n_A_Equip[7] && (o += Math.floor(n_A_SHOULDER_REFINE / 3)),
+    676 == n_A_card[8] && (o += Math.floor(n_A_HEAD_REFINE / 2)),
     n_A_HEAD_REFINE >= 7 && 565 == n_A_Equip[2] && (n_tok[80] += 1, n_tok[99] += 1),
     n_A_HEAD_REFINE >= 6 && 1629 == n_A_Equip[2] && (n_tok[177] += n_A_HEAD_REFINE - 5,
         n_tok[57] += n_A_HEAD_REFINE - 5),
@@ -1852,10 +1767,10 @@ function StPlusCalc() {
     -A > n_A_INT && (A = -n_A_INT),
     -l > n_A_DEX && (l = -n_A_DEX),
     -o > n_A_LUK && (o = -n_A_LUK),
-    a += n_A_Buf2[0],
-    A += n_A_Buf2[0],
-    l += n_A_Buf2[0],
-    0 == n_A_Buf6[19] && 0 == n_A_Buf6[20] && (n_A_Buf7[26] && n_A_Buf2[1] < 6 ? e += 7 : n_A_Buf2[1] > 0 && (e += n_A_Buf2[1] + 2)),
+    a += n_A_Buf2[0] * 2,
+    A += n_A_Buf2[0] * 2,
+    l += n_A_Buf2[0] * 2,
+    0 == n_A_Buf6[19] && 0 == n_A_Buf6[20] && (n_A_Buf7[26] && n_A_Buf2[1] < 6 ? e += 7 : n_A_Buf2[1] > 0 && (e += (n_A_Buf2[1] + 1) * 2)),
     o += 30 * n_A_Buf2[3],
     24 == n_A_JOB && SkillSearch(270) && (a += 5, e += 5, t += 5, l += 5, A += 5, o += 5),
     SkillSearch(379) && 0 == n_A_WeaponType && (a += 10),
@@ -2302,19 +2217,14 @@ function KakutyouKansuu() {
             Heal2 = new Array,
             2 == wKK) {
             for (l = "<table><tr><td></td><td class=title>Heal on yourself</td><td class=title>Heal on other player</td></tr>",
-                n = 0; n <= 10; n++)
-                Heal[n] = HealCalc(n, 1),
-                    Heal2[n] = HealCalc(n, 0);
+                n = 0; n <= 5; n++)
+                Heal[n] = HealCalc(n * 2, 1),
+                    Heal2[n] = HealCalc(n * 2, 0);
             3 == n_A_JobClass() || 13 == n_A_JOB || 14 == n_A_JOB || 20 == n_A_JOB || 27 == n_A_JOB || 28 == n_A_JOB ? (l += "<tr><td><b>Heal Level 1</b></td><td class=center>" + Heal[1] + "</td><td class=center>" + Heal2[1] + "</td></tr>",
                 l += "<tr><td><b>Heal Level 2</b></td><td class=center>" + Heal[2] + "</td><td class=center>" + Heal2[2] + "</td></tr>",
                 l += "<tr><td><b>Heal Level 3</b></td><td class=center>" + Heal[3] + "</td><td class=center>" + Heal2[3] + "</td></tr>",
                 l += "<tr><td><b>Heal Level 4</b></td><td class=center>" + Heal[4] + "</td><td class=center>" + Heal2[4] + "</td></tr>",
-                l += "<tr><td><b>Heal Level 5</b></td><td class=center>" + Heal[5] + "</td><td class=center>" + Heal2[5] + "</td></tr>",
-                l += "<tr><td><b>Heal Level 6</b></td><td class=center>" + Heal[6] + "</td><td class=center>" + Heal2[6] + "</td></tr>",
-                l += "<tr><td><b>Heal Level 7</b></td><td class=center>" + Heal[7] + "</td><td class=center>" + Heal2[7] + "</td></tr>",
-                l += "<tr><td><b>Heal Level 8</b></td><td class=center>" + Heal[8] + "</td><td class=center>" + Heal2[8] + "</td></tr>",
-                l += "<tr><td><b>Heal Level 9</b></td><td class=center>" + Heal[9] + "</td><td class=center>" + Heal2[9] + "</td></tr>",
-                l += "<tr><td><b>Heal Level 10</b></td><td class=center>" + Heal[10] + "</td><td class=center>" + Heal2[10] + "</td></tr></table>") : (l += "<tr><td><b>Heal Level 1 [Vitata Card]</b></td><td class=center>" + Heal[1] + "</td><td class=center>" + Heal2[1] + "</td></tr>",
+                l += "<tr><td><b>Heal Level 5</b></td><td class=center>" + Heal[5] + "</td><td class=center>" + Heal2[5] + "</td></tr></table>") : (l += "<tr><td><b>Heal Level 1 [Vitata Card]</b></td><td class=center>" + Heal[1] + "</td><td class=center>" + Heal2[1] + "</td></tr>",
                     l += "<tr><td><b>Heal Level 2</b></td><td class=center>" + Heal[2] + "</td><td class=center>" + Heal2[2] + "</td></tr>",
                     l += "<tr><td><b>Heal Level 3</b></td><td class=center>" + Heal[3] + "</td><td class=center>" + Heal2[3] + "</td></tr>",
                     l += "<tr><td><b>Heal Level 4</b></td><td class=center>" + Heal[4] + "</td><td class=center>" + Heal2[4] + "</td></tr>",
@@ -2385,32 +2295,20 @@ function KakutyouKansuu() {
                 myInnerHtml("A_KakutyouData", l, 0)
         } else if (12 == wKK) {
             var _ = new Array;
-            SRV ? (_[0] = Math.floor(100 * (3 + n_A_VIT) / 100),
-                _[1] = _[0],
-                _[2] = Math.floor(100 * (3 + n_A_MDEF) / 100),
-                _[3] = Math.floor(100 * (3 + n_A_LUK) / 100),
-                _[4] = Math.floor(100 * (3 + (n_A_INT + n_A_VIT) / 2) / 100),
-                _[5] = Math.floor(100 * (3 + n_A_INT) / 100),
-                _[6] = _[0],
-                _[7] = Math.floor(100 * (3 + (n_A_STR + n_A_INT) / 2) / 100),
-                _[8] = _[0],
-                _[9] = _[2],
-                n_A_LUK < 1 && (_[3] = 100),
-                n_A_VIT > 99 && (_[3] = 100),
-                n_A_LUK > n_A_BaseLV && (_[3] = 100)) : (_[0] = Math.floor(100 * n_A_VIT) / 100 + Math.floor(100 * (n_A_LUK / 10)) / 100,
-                    _[1] = _[0],
-                    _[2] = Math.floor(100 * n_A_MDEF) / 100 + Math.floor(100 * (n_A_LUK / 10)) / 100,
-                    _[3] = Math.floor(100 * n_A_LUK) / 100,
-                    _[4] = Math.floor(50 * (n_A_INT + n_A_VIT)) / 100 + Math.floor(100 * (n_A_LUK / 10)) / 100,
-                    _[5] = Math.floor(100 * n_A_INT) / 100 + Math.floor(100 * (n_A_LUK / 10)) / 100,
-                    _[6] = _[0],
-                    _[7] = Math.floor(50 * (n_A_STR + n_A_VIT)) / 100 + Math.floor(100 * (n_A_LUK / 10)) / 100,
-                    _[8] = _[0],
-                    _[9] = _[2],
-                    0 == n_A_LUK && (_[3] = 100)),
-                9 == n_A_Bodyelement && (_[2] = 100,
-                    _[8] = 100,
-                    _[9] = 100);
+            _[0] = Math.floor(100 * n_A_VIT) / 100 + Math.floor(100 * (n_A_LUK / 10)) / 100,
+            _[1] = _[0],
+            _[2] = Math.floor(100 * n_A_MDEF) / 100 + Math.floor(100 * (n_A_LUK / 10)) / 100,
+            _[3] = Math.floor(100 * n_A_LUK) / 100,
+            _[4] = Math.floor(50 * (n_A_INT + n_A_VIT)) / 100 + Math.floor(100 * (n_A_LUK / 10)) / 100,
+            _[5] = Math.floor(100 * n_A_INT) / 100 + Math.floor(100 * (n_A_LUK / 10)) / 100,
+            _[6] = _[0],
+            _[7] = Math.floor(50 * (n_A_STR + n_A_VIT)) / 100 + Math.floor(100 * (n_A_LUK / 10)) / 100,
+            _[8] = _[0],
+            _[9] = _[2],
+            0 == n_A_LUK && (_[3] = 100),
+            9 == n_A_Bodyelement && (_[2] = 100,
+                _[8] = 100,
+                _[9] = 100);
             for (var n = 0; n <= 9; n++)
                 _[n] += Math.floor((100 - _[n]) * n_tok[150 + n]) / 100,
                     _[n] = Math.floor(100 * _[n]) / 100,
@@ -2639,13 +2537,12 @@ function KakutyouKansuu() {
                 myInnerHtml("A_KakutyouSel", l, 0)
         } else if (18 == wKK) {
             var a;
-            SRV < 50 ? a = "<b>Cast Time: </b>" + Math.floor(1e4 * n_A_CAST) / 100 + "% (<b>" + skillName(204, SRV) + ":</b> " + Math.round(nb_tok) + " %| <b>Gear:</b> " + -n_tok[73] + "% | <b>DEX:</b> " + n_A_DEX + " )<BR>" : (a = "<b>Variable Cast Time: </b>" + Math.floor(1e4 * n_A_CAST) / 100 + " % (<b>" + skillName(204, SRV) + ":</b> " + nb_tok + " %| <b>Gear:</b> " + -n_tok[73] + " % | <b>INT+DEX*2:</b> " + (2 * n_A_DEX + n_A_INT) + " )<BR>",
-                a += "<b>Fixed Cast Time: </b>" + Math.floor(1e4 * n_A_fCAST) / 100 + "% (<b>Skills:</b> " + (100 * (1 - n_A_fCAST) - n_tok[72]) + " %| <b>Gear:</b> " + -n_tok[72] + "% )<BR>"),
-                calcedDelay = Math.floor(100 - AC_I - n_tok[74]),
-                calcedDelay > 0 && (calcedDelay = Math.floor(calcedDelay * (100 - AC_S) / 100)),
-                calcedDelay > 0 && (calcedDelay = Math.floor(calcedDelay * (100 - AC_IA) / 100)),
-                a += "<b>Cast Delay: </b>" + calcedDelay + " % (<b>" + skillName(204, SRV) + ":</b> " + n_tok[74] + " % | <b>Gear:</b> " + AC_I + " % | <b>Skill:</b> " + AC_S + " %)<BR>",
-                myInnerHtml("A_KakutyouData", a, 0)
+            a = "<b>Cast Time: </b>" + Math.floor(1e4 * n_A_CAST) / 100 + "% (<b>" + skillName(204, SRV) + ":</b> " + Math.round(nb_tok) + " %| <b>Gear:</b> " + -n_tok[73] + "% | <b>DEX:</b> " + n_A_DEX + " )<BR>",
+            calcedDelay = Math.floor(100 - AC_I - n_tok[74]),
+            calcedDelay > 0 && (calcedDelay = Math.floor(calcedDelay * (100 - AC_S) / 100)),
+            calcedDelay > 0 && (calcedDelay = Math.floor(calcedDelay * (100 - AC_IA) / 100)),
+            a += "<b>Cast Delay: </b>" + calcedDelay + " % (<b>" + skillName(204, SRV) + ":</b> " + n_tok[74] + " % | <b>Gear:</b> " + AC_I + " % | <b>Skill:</b> " + AC_S + " %)<BR>",
+            myInnerHtml("A_KakutyouData", a, 0)
         } else if (20 == wKK) {
             var e = 1 * c.A_KakutyouSelNum.value
                 , t = 1 * c.A_KakutyouSelNum2.value;
@@ -2978,10 +2875,14 @@ function KakutyouKansuu() {
                 l += "<tr><td>Chance to get Lif: </td><td>" + Math.floor(10 * Lif) / 10 + " %</td></tr></table>") : l = '<p class="center">Not available for this class.</p>',
                 myInnerHtml("A_KakutyouData", l, 0)
         } else if (42 == wKK) {
-            var e = 1 * c.A_KakutyouSelNum.value
-            var modCost = Math.floor(e * ((100 + n_tok[370]) / 100))
+            var e = 1 * c.A_KakutyouSelNum.value;
+            var totalMod = 0;
+            n_A_Buf3[6] && (totalMod += -(20 + 3 * n_A_Buf3[6] + Math.floor(n_A_Buf3[26] / 10) + Math.floor(n_A_Buf3[36] / 2)))
+            totalMod += n_tok[370];
+            totalMod < -100 && (totalMod = -100)
+            var modCost = Math.floor(e * ((100 + totalMod) / 100))
             l = " -> " + modCost + "<BR>"
-            l += "SP cost modifier: " + n_tok[370] + "%<BR>"
+            l += "SP cost modifier: " + totalMod + "%<BR>"
             myInnerHtml("A_KakutyouData", l, 0)
         }
     } else
@@ -3402,62 +3303,111 @@ for (wESx = new Array,
     i = 0; i <= EnemyNum; i++)
     wESx[i] = new Array;
 function EnemySort() {
+    let hitsByMonsterID = {};
     for (var _ = c.B_Enemy.length, n = 0; n < _; n++)
         c.B_Enemy.options[0] = null;
-    if (ESNum = [1, 3, 2, 4, 21, 22, 16, 17, 13, 100],
+    if (ESNum = [1, 3, 2, 4, 21, 22, 16, 17, 13, 14, 15, 30, 60, 100],
         0 != 1 * c.ENEMY_SORT.value) {
-        for (wES = ESNum[1 * c.ENEMY_SORT.value],
-            wESx[0][0] = "S",
-            wESx[0][1] = "E",
-            STERTw = 0,
-            ENDw = 0,
-            n = 1; n <= EnemyNum; n++)
-            if (e = ENDw,
-                m_Monster[n][wES] >= m_Monster[e][wES])
-                wESx[e][1] = n,
-                    wESx[n][0] = e,
-                    wESx[n][1] = "E",
-                    ENDw = n;
-            else if (e = STERTw,
-                m_Monster[n][wES] <= m_Monster[e][wES])
-                wESx[e][0] = n,
-                    wESx[n][0] = "S",
-                    wESx[n][1] = e,
-                    STERTw = n;
-            else {
-                for (e = STERTw,
-                    jbk = STERTw; m_Monster[n][wES] > m_Monster[e][wES];)
-                    jbk = e,
-                        e = wESx[e][1];
-                wESx[jbk][1] = n,
-                    wESx[n][0] = jbk,
-                    wESx[n][1] = e,
-                    wESx[e][0] = n
+        if(60 != ESNum[1 * c.ENEMY_SORT.value]){
+            for (wES = ESNum[1 * c.ENEMY_SORT.value],
+                wESx[0][0] = "S",
+                wESx[0][1] = "E",
+                STERTw = 0,
+                ENDw = 0,
+                n = 1; n <= EnemyNum; n++)
+                if (e = ENDw,
+                    wES != 30 ? m_Monster[n][wES] >= m_Monster[e][wES] : m_Monster[n][7] + m_Monster[n][14] >= m_Monster[e][7] + m_Monster[e][14])
+                    wESx[e][1] = n,
+                        wESx[n][0] = e,
+                        wESx[n][1] = "E",
+                        ENDw = n;
+                else if (e = STERTw,
+                    wES != 30 ? m_Monster[n][wES] <= m_Monster[e][wES] : m_Monster[n][7] + m_Monster[n][14] <= m_Monster[e][7] + m_Monster[e][14])
+                    wESx[e][0] = n,
+                        wESx[n][0] = "S",
+                        wESx[n][1] = e,
+                        STERTw = n;
+                else {
+                    for (e = STERTw,
+                        jbk = STERTw; wES != 30 ? m_Monster[n][wES] > m_Monster[e][wES] : m_Monster[n][7] + m_Monster[n][14] > m_Monster[e][7] + m_Monster[e][14];)
+                        jbk = e,
+                            e = wESx[e][1];
+                    wESx[jbk][1] = n,
+                        wESx[n][0] = jbk,
+                        wESx[n][1] = e,
+                        wESx[e][0] = n
+                }
+        } else {
+            for(var _ = 0; _ <= EnemyNum; _++){
+                ClickB_Enemy(_);
+                calc(true);
+                let averageAtkNum = document.getElementById("AveATKnum").innerText;
+                if(averageAtkNum.includes("10000")){
+                    hitsByMonsterID[_] = 10000;
+                }else{
+                    hitsByMonsterID[_] = parseInt(averageAtkNum);
+                }
             }
+
+            for (wES = ESNum[1 * c.ENEMY_SORT.value],
+                wESx[0][0] = "S",
+                wESx[0][1] = "E",
+                STERTw = 0,
+                ENDw = 0,
+                n = 1; n <= EnemyNum; n++)
+                if (e = ENDw,
+                    hitsByMonsterID[n] >= hitsByMonsterID[e])
+                    wESx[e][1] = n,
+                        wESx[n][0] = e,
+                        wESx[n][1] = "E",
+                        ENDw = n;
+                else if (e = STERTw,
+                    hitsByMonsterID[n] <= hitsByMonsterID[e])
+                    wESx[e][0] = n,
+                        wESx[n][0] = "S",
+                        wESx[n][1] = e,
+                        STERTw = n;
+                else {
+                    for (e = STERTw,
+                        jbk = STERTw; hitsByMonsterID[n] > hitsByMonsterID[e];)
+                        jbk = e,
+                            e = wESx[e][1];
+                    wESx[jbk][1] = n,
+                        wESx[n][0] = jbk,
+                        wESx[n][1] = e,
+                        wESx[e][0] = n
+                }
+        }
         (a = new Array)[0] = n = STERTw;
         for (e = 1; "E" != wESx[n][1]; e++)
             a[e] = wESx[n][1],
                 n = wESx[n][1];
         if (a = SZ(a),
             ESwork2 = new Array,
-            21 == wES || 22 == wES)
+            21 == wES || 22 == wES || 16 == wES || 17 == wES || 13 == wES || 14 == wES || 15 == wES)
             for (n = 0; n <= EnemyNum; n++)
-                ESwork2[n] = "[" + m_Monster[n][wES] + "] ";
+                ESwork2[n] = " [" + m_Monster[n][wES] + "]";
         else if (2 == wES)
             for (n = 0; n <= EnemyNum; n++)
-                ESwork2[n] = "[" + v_Race_[m_Monster[n][2]] + "] ";
+                ESwork2[n] = " [" + v_Race_[m_Monster[n][2]] + "]";
         else if (3 == wES)
             for (n = 0; n <= EnemyNum; n++)
-                ESwork2[n] = "[" + v_Element_[Math.floor(m_Monster[n][3] / 10)] + m_Monster[n][3] % 10 + "] ";
+                ESwork2[n] = " [" + v_Element_[Math.floor(m_Monster[n][3] / 10)] + m_Monster[n][3] % 10 + "]";
         else if(4 == wES)
             for (n = 0; n <= EnemyNum; n++)
-                ESwork2[n] = "[" + v_Size[m_Monster[n][4]] + "] ";
+                ESwork2[n] = " [" + v_Size[m_Monster[n][4]] + "]";
+        else if(30 == wES)
+            for (n = 0; n <= EnemyNum; n++)
+                ESwork2[n] = " [" + parseInt(m_Monster[n][7] + m_Monster[n][14]) + "]";
+        else if(60 == wES)
+            for (n = 0; n <= EnemyNum; n++)
+                ESwork2[n] = " [" + hitsByMonsterID[n] + "]";
         else
             for (n = 0; n <= EnemyNum; n++)
                 ESwork2[n] = "";
         e = 0;
         for (n = 0; n <= EnemyNum; n++)
-            -1 != a[n] && (c.B_Enemy.options[e] = new Option(ESwork2[a[n]] + m_Monster[a[n]][1], a[n]),
+            -1 != a[n] && !v_MonsterExclude.includes(m_Monster[a[n]][0]) && (c.B_Enemy.options[e] = new Option(m_Monster[a[n]][1] + ESwork2[a[n]], a[n]),
                 e++)
     } else {
         for (var a = new Array, n = 0; n <= EnemyNumSort; n++)
@@ -3658,6 +3608,7 @@ function SaveLocal() {
             SaveData[464 + n] = n_A_Shadow[n];
         for(n = 0; n <= 3; n++)
             SaveData[470 + n] = n_A_Buf3[45 + n]; 
+        SaveData[500] = c.saveDataName.value,
         slotNum = c.A_SaveSlotLocal.value,
             localStorage["Slot" + slotNum] = JSON.stringify(SaveData),
             bkcN = slotNum,
@@ -3756,7 +3707,7 @@ function LoadLocal() {
             c.B_AtkRange.value = 0,
             Bskill(),
             c.B_AtkSkill.value = 0,
-            n = 0; n <= 28; n++)
+            n = 0; n <= 29; n++)
             n_B_debuf[n] = 0;
         for (n_debufSW = 0,
             n = 0; n <= 14; n++)
@@ -3878,7 +3829,9 @@ function LoadLocal() {
             c.B_AtkSkill.value = SaveData[247],
             BClickAtkSkill(),
             444 != SaveData[247] && 445 != SaveData[247] && 125 != SaveData[247] && 131 != SaveData[247] || (c.BSkillSubNum.value = SaveData[248]),
-            n = 0; n <= 21; n++)
+            n_A_Buf2[0] = SaveData[73] > 5 ? SaveData[73] / 2 : SaveData[73],
+            n_A_Buf2[1] = SaveData[74] > 5 ? SaveData[74] / 2 : SaveData[74],
+            n = 2; n <= 21; n++)
             n_A_Buf2[n] = SaveData[73 + n];
         for (n = 0; n <= 37; n++)
             n_A_Buf3[n] = SaveData[96 + n];
@@ -3924,6 +3877,7 @@ function LoadLocal() {
         for(n = 0; n <= 3; n++)
             n_A_Buf3[45 + n] = SaveData[470 + n] == null ? 0 : SaveData[470 + n];
     }
+    c.saveDataName.value = SaveData[500],
     refreshFields(),
     SRV = 1 * c.server.value,
     StCalc(1),
@@ -3934,12 +3888,13 @@ function LoadLocal() {
 }
 function LoadLocal3() {
     for (SaveData = new Array,
-        k = 1; k <= 50; k++)
+        k = 1; k <= 200; k++)
         slotNum = "num0" + (k - 1),
-            9 == k && (slotNum = "num0" + k),
-            k >= 10 && (slotNum = "num" + k),
-            void 0 === localStorage["Slot" + slotNum] ? c.A_SaveSlotLocal.options[k - 1] = new Option("Save" + k + ": No Data", slotNum) : (SaveData = JSON.parse(localStorage["Slot" + slotNum]),
-                1 <= SaveData[2] && SaveData[2] <= 46 ? 0 == SaveData[5] ? c.A_SaveSlotLocal.options[k - 1] = new Option("Save" + k + ": " + JobName[SaveData[2]], slotNum) : c.A_SaveSlotLocal.options[k - 1] = new Option("Save" + k + ": Baby " + JobName[SaveData[2]], slotNum) : 999 == SaveData[2] || 0 == SaveData[2] ? c.A_SaveSlotLocal.options[k - 1] = new Option("Save" + k + ": Novice", slotNum) : c.A_SaveSlotLocal.options[k - 1] = new Option("Save" + k + ": No Data", slotNum))
+        9 == k && (slotNum = "num0" + k),
+        k >= 10 && (slotNum = "num" + k),
+        saveName = "",
+        void 0 === localStorage["Slot" + slotNum] ? c.A_SaveSlotLocal.options[k - 1] = new Option("Save" + k + ": No Data", slotNum) : (SaveData = JSON.parse(localStorage["Slot" + slotNum]), (SaveData[500] != undefined && SaveData[500] != "") && (saveName = " (" + SaveData[500] + ") "),
+            1 <= SaveData[2] && SaveData[2] <= 46 ? 0 == SaveData[5] ? c.A_SaveSlotLocal.options[k - 1] = new Option("Save" + k + ": " + JobName[SaveData[2]] + saveName, slotNum) : c.A_SaveSlotLocal.options[k - 1] = new Option("Save" + k + ": Baby " + JobName[SaveData[2]] + saveName, slotNum) : 999 == SaveData[2] || 0 == SaveData[2] ? c.A_SaveSlotLocal.options[k - 1] = new Option("Save" + k + ": Novice" + saveName, slotNum) : c.A_SaveSlotLocal.options[k - 1] = new Option("Save" + k + ": No Data", slotNum))
 }
 function delLocal() {
     window.confirm("Do you really want to DELETE selected saved data?") && (slotNum = document.calcForm.A_SaveSlotLocal.value,
@@ -4364,7 +4319,7 @@ function URLIN() {
             n_B_manual[r] = 0;
         for (r = 0; r <= 3; r++)
             n_A_debuf[r] = 0;
-        for (r = 0; r <= 28; r++)
+        for (r = 0; r <= 29; r++)
             n_B_debuf[r] = 0;
         for (r = 0; r <= 14; r++)
             n_B_buf[r] = 0;
@@ -4499,8 +4454,8 @@ function URLIN() {
                 }
             var S = 81 + u;
             if (1 == StoN2(n.substr(S, 1))) {
-                n_A_Buf2[0] = StoN2(n.substr(S + 1, 1)),
-                    n_A_Buf2[1] = StoN2(n.substr(S + 2, 1)),
+                n_A_Buf2[0] = StoN2(n.substr(S + 1, 1)) > 5 ? StoN2(n.substr(S + 1, 1)) / 2 : StoN2(n.substr(S + 1, 1)),
+                    n_A_Buf2[1] = StoN2(n.substr(S + 2, 1)) > 5 ? StoN2(n.substr(S + 2, 1)) / 2 : StoN2(n.substr(S + 2, 1)),
                     n_A_Buf2[4] = StoN2(n.substr(S + 3, 1)),
                     n_A_Buf2[9] = StoN2(n.substr(S + 4, 1)),
                     n_A_Buf2[2] = Math.floor(StoN2(n.substr(S + 5, 1)) / 6),
@@ -4692,8 +4647,8 @@ function URLIN() {
             BufSW(0);
             S = 89 + r;
             if (1 == StoN2(n.substr(S, 1))) {
-                n_A_Buf2[0] = StoN2(n.substr(S + 1, 1)),
-                    n_A_Buf2[1] = StoN2(n.substr(S + 2, 1)),
+                n_A_Buf2[0] = StoN2(n.substr(S + 1, 1)) > 5 ? StoN2(n.substr(S + 1, 1)) / 2 : StoN2(n.substr(S + 1, 1)),
+                    n_A_Buf2[1] = StoN2(n.substr(S + 2, 1)) > 5 ? StoN2(n.substr(S + 2, 1)) / 2 : StoN2(n.substr(S + 2, 1)),
                     n_A_Buf2[4] = StoN2(n.substr(S + 3, 1)),
                     n_A_Buf2[9] = StoN2(n.substr(S + 4, 1)),
                     n_A_Buf2[13] = StoN2(n.substr(S + 5, 1)),
@@ -5085,9 +5040,9 @@ function URLIN() {
             n_A_Buf3[37] = StoN2(n.substr(-2, 2))
         }
         refreshFields(),
-            SRV = 1 * c.server.value,
-            calc(),
-            themes()
+        SRV = 1 * c.server.value,
+        calc(),
+        themes()
     }
 }
 for (n_NtoS = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"],
@@ -5140,7 +5095,7 @@ for (n_A_debuf = new Array,
     i = 0; i <= 3; i++)
     n_A_debuf[i] = 0;
 for (n_B_debuf = new Array,
-    i = 0; i <= 28; i++)
+    i = 0; i <= 29; i++)
     n_B_debuf[i] = 0;
 for (n_B_buf = new Array,
     i = 0; i <= 14; i++)

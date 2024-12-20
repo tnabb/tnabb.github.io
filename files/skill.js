@@ -60,18 +60,18 @@ m_Skill = [		//ID, max level, iRO name, alternative name, 0=nodamage 1=melee/ran
 	[22, 1, "Stone Fling", "Throw Stone", 3, 0],
 	[23, 10, "Divine Protection", 0, 0, 0],
 	[24, 10, "Demon Bane", 0, 0, 0],
-	[25, 10, "Heal", 0, 0, 0],
+	[25, 5, "Heal", 0, 0, 0],
 	[26, 1, "Cure", 0, 0, 0],
-	[27, 10, "Increase AGI", 0, 0, 0],
+	[27, 5, "Increase AGI", 0, 0, 0],
 	[28, 10, "Decrease AGI", 0, 0, 0],
 	[29, 10, "Signum Crusis", 0, 0, 0],
-	[30, 10, "Angelus", 0, 0, 0],
-	[31, 10, "Blessing", 0, 0, 0],
+	[30, 5, "Angelus", 0, 0, 0],
+	[31, 5, "Blessing", 0, 0, 0],
 	[32, 1, "Pneuma", 0, 0, 0],
 	[33, 1, "Aqua Benedicta", 0, 0, 0],
 	[34, 1, "Ruwach", 0, 0, 0],
 	[35, 2, "Teleport", 0, 0, 0],
-	[36, 4, "Warp Portal", 0, 0, 0],
+	[36, 2, "Warp Portal", 0, 0, 0],
 	[37, 1, "Holy Light", 0, -3, 6],
 	[38, 10, "Owl's Eye", 0, 0, 0],
 	[39, 10, "Vulture's Eye", 0, 0, 0],
@@ -80,7 +80,7 @@ m_Skill = [		//ID, max level, iRO name, alternative name, 0=nodamage 1=melee/ran
 	[42, 10, "Improve Concentration", "Attention Concentrate", 0, 0],
 	[43, 1, "Arrow Crafting", 0, 0, 0],
 	[44, 1, "Arrow Repel", "Charge Arrow", 3, 11],
-	[45, 10, "Increased SP Recovery", 0, 0, 0],
+	[45, 5, "Increase SP Recovery", 0, 0, 0],
 	[46, 10, "Napalm Beat", 0, -3, 8],
 	[47, 10, "Soul Strike", 0, -3, 8],
 	[48, 10, "Safety Wall", 0, 0, 8],
@@ -133,7 +133,7 @@ m_Skill = [		//ID, max level, iRO name, alternative name, 0=nodamage 1=melee/ran
 	[95, 1, "Status Recovery", "Recovery", 0, 0],
 	[96, 4, "Slow Poison", 0, 0, 0],
 	[97, 4, "Resurrection", 0, 0, 0],
-	[98, 10, "Kyrie Eleison", 0, 0, 0],
+	[98, 5, "Kyrie Eleison", 0, 0, 0],
 	[99, 5, "Magnificat", 0, 0, 0],
 	[100, 5, "Gloria", 0, 0, 0],
 	[101, 10, "Lex Divina", 0, 0, 0],
@@ -204,7 +204,7 @@ m_Skill = [		//ID, max level, iRO name, alternative name, 0=nodamage 1=melee/ran
 	[166, 10, "Spear Quicken", 0, 0, 0],
 	[167, 10, "Snatch", "Intimidate", 2, 11],
 	[168, 10, "Mug", "Steal Coin", 0, 0],
-	[169, 10, "Back Stab", 0, 0, 0],
+	[169, 10, "Back Stab", 0, 2, 11],
 	[170, 5, "Stalk", "Tunnel Drive", 0, 0],
 	[171, 5, "Sightless Mind", "Raid", 2, 11],
 	[172, 5, "Divest Weapon", "Strip Weapon", 0, 0],
@@ -234,7 +234,7 @@ m_Skill = [		//ID, max level, iRO name, alternative name, 0=nodamage 1=melee/ran
 	[196, 5, "Mental Strength", "Steel Body", 0, 0],
 	[197, 5, "Guillotine Fist", "Asura Strike", 2, 0],
 	[198, 10, "Music Lessons", "Musical Lesson", 0, 0],
-	[199, 5, "Melody Strike", "Musical Strike", 3, 0],	// elemento?
+	[199, 5, "Melody Strike", "Musical Strike", 3, 11],	
 	[200, 5, "Unchained Serenade", "Dissonance", 0, 0],
 	[201, 5, "Unbarring Octave", "Frost Joker", 0, 0],
 	[202, 10, "Perfect Tablature", "A Whistle", 0, 0],
@@ -242,7 +242,7 @@ m_Skill = [		//ID, max level, iRO name, alternative name, 0=nodamage 1=melee/ran
 	[204, 10, "Magic Strings", "A Poem of Bragi", 0, 0],
 	[205, 10, "Song of Lutie", "The Apple of Idun", 0, 0],
 	[206, 10, "Dance Lessons", "Dancing Lesson", 0, 0],
-	[207, 5, "Slinging Arrow", "Throw Arrow", 3, 0],
+	[207, 5, "Slinging Arrow", "Throw Arrow", 3, 11],
 	[208, 5, "Hip Shaker", "Ugly Dance", 0, 0],
 	[209, 5, "Dazzler", "Scream", 0, 0],
 	[210, 10, "Focus Ballet", "Humming", 0, 0],
@@ -347,13 +347,13 @@ m_Skill = [		//ID, max level, iRO name, alternative name, 0=nodamage 1=melee/ran
 	[309, 1, "No-Death Bonus", 0, 0, 0],
 	[310, 1, "Undying Love (All Stats -1)", 0, 0, 0],
 	[311, 7, "# of mastered Smith Skills<br>(for Veteran Axe Bonus)", 0, 0, 0],
-	[312, 10, "Dark Soul Strike", 0, 0, 0],
+	[312, 10, "Dark Soul Strike", 0, -3, 7], // not for monsters (use 471)
 	[313, 1, "", 0, 0, 0],
 	[314, 1, "", 0, 0, 0],
 	[315, 1, "", 0, 0, 0],
 	[316, 1, "", 0, 0, 0],
-	[317, 1, "Heat", 0, 0, 0],
-	[318, 1, "Heat (no pushback)", 0, 0, 0],
+	[317, 1, "Heat", 0, 2, 11],
+	[318, 1, "Heat (no pushback)", 0, 2, 11],
 	[319, 10, "Heaven's Drive", 0, -4, 2],		// desuso ?
 	[320, 10, "Water Ball", 0, -3, 1],		// desuso ?
 	[321, 5, "Guillotine Fist (MaxSP -1)", "Asura Strike (Max SP -1)", 2, 0],
@@ -408,8 +408,8 @@ m_Skill = [		//ID, max level, iRO name, alternative name, 0=nodamage 1=melee/ran
 	[370, 3, "Kaupe", 0, 0, 0],
 	[371, 7, "Kaite", 0, 0, 0],
 	[372, 7, "Kaina", 0, 0, 0],
-	[373, 7, "Estin", 0, 0, 0],
-	[374, 7, "Estun", 0, 0, 0],
+	[373, 7, "Estin", 0, -3, 11],
+	[374, 7, "Estun", 0, -3, 11],
 	[375, 10, "Esma", 0, -3, 11],
 	[376, 7, "Eswoo", 0, 0, 0],
 	[377, 3, "Eska", 0, 0, 0],
@@ -436,11 +436,11 @@ m_Skill = [		//ID, max level, iRO name, alternative name, 0=nodamage 1=melee/ran
 	[398, 5, "Flip Tatami", "Reverse Tatami", 0, 0],
 	[399, 5, "Shadow Leap", "Shadow Jump", 0, 0],
 	[400, 10, "Haze Slasher", "Mist Slash", 2, 11],
-	[401, 5, "Shadow Slash", 0, 3, 11],
+	[401, 5, "Shadow Slash", 0, 2, 11],
 	[402, 5, "Cicada Skin Shed", "Cast-off Ciceda Shell", 0, 0],
 	[403, 10, "Mirror Image", "Illusionary Shadow", 0, 0],
 	[404, 5, "Ninja Aura", "Soul", 0, 0],
-	[405, 10, "Killing Stroke", "Final Strike", 3, 0],
+	[405, 10, "Killing Stroke", "Final Strike", 2, 0],
 	[406, 10, "Ninja Mastery", "Ninpou Training", 0, 0],
 	[407, 10, "Flaming Petals", "Crimson Fire Blossom", -3, 3],
 	[408, 10, "Blaze Shield", "Crimson Fire Formation", -4, 3],
@@ -473,7 +473,7 @@ m_Skill = [		//ID, max level, iRO name, alternative name, 0=nodamage 1=melee/ran
 	[435, 5, "Full Blast", "Full Buster", 3, 11],
 	[436, 10, "Spread Shot", "Spread Attack", 3, 11],
 	[437, 10, "Gunslinger Mine", "Ground Drift", 4, 11],
-	[438, 10, "Final Strike (Max HP -1)", 0, 3, 0],
+	[438, 10, "Final Strike (Max HP -1)", 0, 2, 0],
 	[439, 5, "Tarot Card of Fate", 0, 0, 0],
 	[440, 5, "Full Divestment", "Full Strip", 0, 0],
 	[441, 5, "Double Bolt", "Double Casting", 0, 0],
@@ -548,14 +548,14 @@ m_Skill = [		//ID, max level, iRO name, alternative name, 0=nodamage 1=melee/ran
 	[510, 1, "Dark Blessing", 0, 5, 10],	//reduces target's HP to 1 
 	[511, 5, "Improve Concentration (copied)", 0, 0, 0],
 	[512, 5, "Endure (copied)", 0, 0, 0],
-	[513, 1, "", 0, 0, 0],
-	[514, 1, "", 0, 0, 0],
-	[515, 1, "", 0, 0, 0],
+	[513, 10, "Beast Strafing + Double Strafe", 0, 3, 11],
+	[514, 10, "Estin + Esma", 0, -3, 11],
+	[515, 10, "Estun + Esma", 0, -3, 11],
 	[516, 1, "", 0, 0, 0],
 	[517, 1, "", 0, 0, 0],
 	[518, 1, "", 0, 0, 0],
 	[519, 1, "", 0, 0, 0],
-	[520, 1, "", 0, 0, 0],
+	[520, 5, "Soul Vulcan Strike", 0, -3, 8],
 	[521, 1, "", 0, 0, 0],
 	[522, 1, "", 0, 0, 0],
 	[523, 1, "", 0, 0, 0],
@@ -626,7 +626,7 @@ m_Skill = [		//ID, max level, iRO name, alternative name, 0=nodamage 1=melee/ran
 	[587, 1, "Poison Magic Mushroom", 0, 0, 0],
 	[588, 1, "Poison Toxin", 0, 0, 0],
 	[589, 1, "Poison Oblivion Curse", 0, 0, 0],
-	[590, 5, "Judex", 0, 0, 0],
+	[590, 5, "Judex", 0, -3, 6],
 	[591, 1, "Ancilla", 0, 0, 0],
 	[592, 10, "Adoramus", 0, 0, 0],
 	[593, 3, "Clementia", 0, 0, 0],
@@ -642,7 +642,7 @@ m_Skill = [		//ID, max level, iRO name, alternative name, 0=nodamage 1=melee/ran
 	[603, 5, "Highness Heal", 0, 0, 0],
 	[604, 5, "Clearance", 0, 0, 0],
 	[605, 5, "Expiatio", 0, 0, 0],
-	[606, 10, "Duple Light", 0, 0, 0],
+	[606, 10, "Duple Light", 0, 5, 11],
 	[607, 5, "Silentium", 0, 0, 0],
 	[608, 5, "Sacrament", 0, 0, 0],
 	[609, 10, "Ranger Main", 0, 0, 0],
@@ -905,7 +905,7 @@ m_JobBuff = [
 	[60, 61, 64, 68, 152, 392, 999, 999, 999, 999, 999, 999, 999, 999, 999, 999,], // merchant
 	[3, 4, 12, 69, 74, 78, 386, 9, 999, 999, 999, 999, 999, 999, 999], // knight
 	[13, 14, 79, 80, 81, 381, 999, 999, 999, 999, 999, 999, 999, 999, 999], // assassin
-	[23, 24, 89, 999, 999, 999, 999, 999, 999, 999, 999, 999, 999, 999, 999], // priest
+	[23, 24, 89, 91, 999, 999, 999, 999, 999, 999, 999, 999, 999, 999, 999], // priest
 	[38, 39, 42, 116, 118, 119, 390, 999, 999, 999, 999, 999, 999, 999, 999], // hunter
 	[58, 999, 999, 999, 999, 999, 999, 999, 999, 999, 999, 999, 999, 999, 999], // wizard
 	[60, 61, 64, 68, 152, 146, 148, 150, 154, 155, 389, 311, 999, 999, 999], // blacksmith
@@ -919,7 +919,7 @@ m_JobBuff = [
 	[3, 13, 14, 23, 24, 38, 39, 42, 253, 385, 9, 309, 196, 310, 999],		//sn
 	[3, 4, 12, 69, 74, 78, 254, 256, 258, 255, 386, 9, 999, 999, 999], // lord knight
 	[13, 14, 79, 80, 81, 262, 266, 381, 999, 999, 999, 999, 999, 999, 999], // assassin cross
-	[23, 24, 89, 269, 999, 999, 999, 999, 999, 999, 999, 999, 999, 999, 999], // high priest
+	[23, 24, 89, 269, 91, 999, 999, 999, 999, 999, 999, 999, 999, 999, 999], // high priest
 	[38, 39, 42, 116, 118, 119, 270, 273, 390, 999, 999, 999, 999, 999, 999], // sniper	//[ 38, 42, 39,116,118,119,270,390,999,999,999,999,999,999,999],	//mejorar: quitar Wind Walk (Buf) en futuro save v8
 	[58, 274, 276, 999, 999, 999, 999, 999, 999, 999, 999, 999, 999, 999, 999], // high wizard
 	[60, 61, 64, 68, 152, 146, 148, 150, 154, 155, 327, 389, 311, 999, 999], // whitesmith
@@ -978,33 +978,33 @@ m_JobAtkSkill = [
 	[0, 999], // novice
 	[0, 6, 7, 999], // swordsman
 	[0, 17, 19, 999], // thief
-	[0, 25, 37, 999], // acolyte
+	[0, 25, 37, 97, 999], // acolyte
 	[0, 40, 41, 44, 999], // archer
 	[0, 51, 54, 56, 52, 53, 55, 57, 46, 47, 999], // magician
 	[0, 65, 66, 999], // merchant
 	[0, 6, 7, 70, 71, 72, 73, 76, 308, 999], // knight
 	[0, 17, 83, 84, 88, 86, 19, 306, 388, 999], // assassin
-	[0, 25, 37, 102, 97, 104, 94, 387, 999], // priest
-	[0, 40, 41, 44, 307, 118, 106, 111, 112, 113, 391, 999], // hunter
+	[0, 25, 37, 97, 102, 104, 94, 999], // priest
+	[0, 40, 41, 44, 307, 118, 106, 111, 112, 113, 391, 513, 999], // hunter
 	[0, 51, 54, 56, 52, 53, 55, 57, 46, 47, 122, 124, 125, 126, 127, 128, 130, 131, 132, 133, 999], // wizard
 	[0, 65, 66, 999], // blacksmith
 	[0, 6, 7, 158, 159, 161, 162, 25, 384, 999], // crusader
 	[0, 169, 171, 40, 17, 19, 22, 176, 6, 7, 76, 161, 473, 162, 474, 159, 158, 51, 52, 53, 54, 55, 56, 57, 46, 47, 132, 133, 122, 124, 125, 126, 127, 128, 130, 131, 44, 41, 106, 112, 113, 65, 244, 248, 88, 306, 25, 37, 321, 197, 192, 193, 97, 102, 104, 339, 398, 400, 401, 407, 408, 409, 410, 412, 413, 414, 415, 302, 312, 489, 461, 463, 465, 466, 469, 510, 443, 999], // rogue
-	[0, 188, 189, 192, 193, 321, 197, 25, 37, 382, 999], // monk
+	[0, 188, 189, 192, 193, 321, 197, 25, 37, 97, 382, 999], // monk
 	[0, 40, 199, 41, 44, 999], // bard
 	[0, 40, 207, 41, 44, 999], // dancer
 	[0, 51, 54, 56, 52, 53, 55, 57, 46, 47, 132, 133, 540, 541, 542, 999], // sage
 	[0, 65, 66, 244, 248, 999], // alchemist
-	[0, 6, 7, 17, 65, 25, 51, 54, 56, 52, 53, 55, 57, 46, 47, 999], // super novice
+	[0, 6, 7, 17, 65, 25, 97, 51, 54, 56, 52, 53, 55, 57, 46, 47, 999], // super novice
 	[0, 6, 7, 70, 71, 72, 73, 76, 308, 259, 260, 261, 999], // lord knight
 	[0, 17, 83, 84, 88, 263, 264, 86, 19, 306, 388, 999], // assassin cross
-	[0, 25, 37, 102, 97, 104, 94, 387, 999], // high priest
-	[0, 40, 41, 44, 307, 118, 106, 111, 112, 113, 271, 272, 391, 999], // sniper
+	[0, 25, 37, 97, 102, 104, 94, 590, 606, 999], // high priest
+	[0, 40, 41, 44, 307, 118, 106, 111, 112, 113, 271, 272, 391, 513, 999], // sniper
 	[0, 51, 54, 56, 52, 53, 55, 57, 46, 47, 122, 124, 125, 126, 127, 128, 130, 131, 132, 133, 275, 277, 325, 999], // high wizard
 	[0, 65, 66, 326, 999], // whitesmith
 	[0, 6, 7, 158, 159, 161, 162, 283, 284, 324, 25, 384, 999], // paladin
 	[0, 169, 171, 40, 17, 19, 22, 176, 6, 7, 76, 161, 473, 162, 474, 159, 158, 51, 52, 53, 54, 55, 56, 57, 46, 47, 132, 133, 122, 124, 125, 126, 127, 128, 130, 131, 44, 41, 106, 112, 113, 65, 244, 248, 88, 306, 25, 37, 321, 197, 192, 193, 97, 102, 104, 339, 398, 400, 401, 407, 408, 409, 410, 412, 413, 414, 415, 302, 312, 489, 461, 463, 465, 466, 469, 510, 443, 999], // stalker
-	[0, 188, 189, 192, 193, 321, 197, 25, 37, 288, 289, 290, 382, 999], // champion
+	[0, 188, 189, 192, 193, 321, 197, 25, 37, 97, 288, 289, 290, 382, 999], // champion
 	[0, 40, 199, 41, 44, 292, 752, 999], // clown
 	[0, 40, 207, 41, 44, 292, 752, 999], // gypsy
 	[0, 51, 54, 56, 52, 53, 55, 57, 46, 47, 132, 133, 540, 541, 542, 999], // professor
@@ -1018,7 +1018,7 @@ m_JobAtkSkill = [
 	[0],
 	[0, 331, 333, 335, 337, 339, 305, 999], // taekwon kid
 	[0, 331, 333, 335, 337, 339, 305, 317, 318, 999], // star gladiator
-	[0, 373, 374, 375, 999], // soul linker
+	[0, 373, 374, 375, 514, 515, 999], // soul linker
 	[0, 407, 408, 409, 410, 412, 413, 414, 415, 394, 395, 396, 397, 398, 400, 401, 405, 438, 999], // ninja
 	[0, 418, 419, 428, 429, 430, 431, 432, 434, 435, 436, 853, 847, 999], // gunslinger
 	[0, 418, 419, 428, 429, 430, 431, 432, 434, 435, 436, 853, 847, 848, 849, 850, 854, 999], // night watch
@@ -1287,6 +1287,11 @@ m_AutoSpellSkill = [		// id, add to skill list, skill id, lvl, chance, when rece
 	[172, 0, 25, 1, 2, 1], //enchanted peach tree card
 	[173, 0, 127, 4, 2, 1],
 	[174, 1, 312, 5, 6, 1],
-	[175, 0, 100, 1, 1, 1],
+	[175, 0, 100, 3, 3.5, 1],
+	[176, 1, 412, 5, 4, 1],
+	[177, 1, 409, 5, 4, 1],
+	[178, 1, 57, 5, 4, 1],
+	[179, 1, 133, 5, 4, 1],
+	[180, 1, 850, 3, 5, 6],
 ];
 //ID, selectable in "Attack Skills", skill ID, skill Lvl, chance, trigger

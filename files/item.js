@@ -211,7 +211,7 @@ m_Item = [
 	, [208, 50, 1, 2, 0, "0/1", 10, 1, "Boy's Cap", 0, "", 0]
 	, [209, 50, 0, 3, 0, 0, 30, 1, "Sakkat", 0, "", 2, 1, 0]
 	, [210, 50, 1, 3, 0, "0/1", 30, 1, "Turban", 0, "", 0]
-	, [211, 50, 1, 3, 0, 0, 50, 1, "Safety Helmet", 0, "", 19, 3, 194, 1, 0]
+	, [211, 50, 1, 3, 0, 0, 50, 1, "Safety Helmet", 0, "", 3, 1, 13, 200, 100, 10, 0]
 	, [212, 50, 0, 3, 0, 0, 20, 1, "Ear Muffs", 0, "", 153, 10, 0]
 	, [213, 50, 0, 3, 0, 0, 20, 1, "Egg Shell", 0, "", 193, 1, 0]
 	, [214, 50, 55, 4, 0, 0, 30, 1, "Wizard Hat", 0, "", 14, 100, 0]
@@ -261,7 +261,7 @@ m_Item = [
 	, [258, 51, 0, 1, 0, 0, 10, 1, "Purple Glasses", 0, "", 154, 10, 0]
 	, [259, 51, 54, 1, 0, 0, 10, 50, "Binoculars", 0, "", 5, 1, 0]
 	, [260, 51, 0, 1, 0, 0, 10, 1, "Angled Glasses", 0, "", 0]
-	, [261, 51, 1, 1, 0, 0, 10, 1, "Gas Mask", 0, "", 200, 3, 150, 30, 0]
+	, [261, 51, 1, 1, 0, 0, 10, 1, "Gas Mask", 0, "", 200, 3, 150, 100, 0]
 	, [262, 51, 1, 1, 0, 0, 10, 1, "Goblin Mask", 0, "", 200, 3, 0]
 	, [263, 51, 1, 1, 0, 0, 10, 1, "Mr. Scream", 0, "", 200, 3, 0]
 	, [264, 51, 0, 1, 0, 0, 10, 1, "Mr. Smile", 0, "", 200, 3, 0]
@@ -399,7 +399,7 @@ m_Item = [
 	, [396, 1, 119, 110, 4, 0, 70, 36, "Azoth", 0, "When performing an ATK based attack, 3% chance to transform a monster.", 0]
 	, [397, 1, 55, 55, 4, 0, 40, 85, "Cursed Dagger", 0, "When performing an ATK based attack, 50% chance to cause [Curse] status effect on your target.", 0]
 	, [398, 1, 55, 140, 4, 0, 55, 55, "Dagger of Counter", 0, "", 10, 90, 0]
-	, [399, 2, 1, 120, 4, 0, 50, 40, "Nagan", 0, "Enables use of [Double Attack] Lvl 5", 37, 5, 0]
+	, [399, 2, 1, 120, 4, 0, 50, 40, "Nagan", 0, "Enables use of [Double Attack] Lvl 5", 37, 5, 372, 25, 0]
 	, [400, 2, 1, 115, 4, 0, 70, 40, "Edge", 0, "When performing an ATK based attack, 0.1% chance to cause [Coma] status effect on your target.", 133, 3, 0]
 	, [401, 2, 1, 140, 4, 0, 70, 40, "Scissor Sword", 0, "", 33, 25, 183, 1, 0]
 	, [402, 2, 1, 150, 4, 0, 120, 40, "Excalibur", 0, "", 20, 6, 4, 5, 6, 10, 5, -1, 0]
@@ -417,7 +417,7 @@ m_Item = [
 	, [414, 5, 1, 200, 4, 0, 350, 48, "Hellfire", 0, "", 20, 3, 1, 3, 221, 8, 0]
 	, [415, 999, 70, 140, 4, 0, 120, 44, "Cleaver", 0, "30% chance to obtain a [Meat] item when killing a [" + v_Race[2] + "] race monster.", 37, 5, 0]
 	, [416, 7, 1, 120, 4, 0, 230, 44, "Sabbath", 0, "When performing an ATK based attack, 0.5% chance to cause [Coma] status effect on your target (only [" + v_Race[6] + "] race monsters, works even on [Boss] type monsters!).", 20, 7, 111, 50, 0]
-	, [417, 999, 1, 120, 4, 0, 250, 44, "Slaughter", 0, "When performing an ATK based attack, 0.4% chance to cause [Coma] status effect on your target (only [" + v_Race[2] + "] race monsters, works even on [Boss] type monsters!).", 20, 2, 182, 1, 0]
+	, [417, 7, 1, 120, 4, 0, 250, 44, "Slaughter", 0, "When performing an ATK based attack, 0.4% chance to cause [Coma] status effect on your target (only [" + v_Race[2] + "] race monsters, works even on [Boss] type monsters!).", 20, 2, 182, 1, 0]
 	, [418, 7, 1, 165, 4, 0, 250, 44, "Tomahawk", 0, "", 20, 4, 220, 8, 0]
 	, [419, 7, 1, 215, 4, 0, 300, 44, "Guillotine", 0, "When performing an ATK based attack, 0.3% chance to cause [Coma] status effect on your target (only [" + v_Race[7] + "] race monsters, works even on [Boss] type monsters!).<br>Recover 2 SP when dealing ATK based damage on a [" + v_Race[7] + "] race monster.<br>Recover 20 SP when killing a [" + v_Race[7] + "] race monster with ATK based damage.", 0]
 	, [420, 8, 53, 85, 4, "0/2", 70, 40, "Spike", 0, "", 10, 40, 24, 3, 0]
@@ -438,7 +438,7 @@ m_Item = [
 	, [435, 63, 51, 6, 0, 0, 35, 30, "Safety Boots", 0, "", 193, 1, 0]
 	, [436, 62, 55, 0, 0, 0, 55, 75, "Survivor's Manteau", 0, "", 3, 10, 19, 5, 0]
 	, [437, 64, 0, 0, 0, 0, 10, 1, "Flower Ring", 0, "", 0]
-	, [438, 64, 0, 0, 0, 0, 10, 1, "Skull Ring", 0, "", 0]
+	, [438, 64, 0, 0, 0, 0, 10, 1, "Skull Ring", 0, "", 51, 1, 93, 10, 0]
 	, [439, 64, 0, 0, 0, 0, 10, 1, "Silver Ring", 0, "", 0]
 	, [440, 64, 0, 0, 0, 0, 10, 1, "Gold Ring", 0, "", 0]
 	, [441, 64, 0, 0, 0, 0, 10, 1, "Diamond Ring", 0, "", 0]
@@ -570,7 +570,7 @@ m_Item = [
 	, [567, 50, 0, 3, 0, 0, 20, 1, "Moonlight Flower Hat", 0, "", 200, 1, 5, 2, 221, 15, 0]
 	, [568, 999, 0, 2, 0, 0, 20, 1, "Sheila Hairnet", 0, "", 19, 3, 2, 2, 0]
 	, [569, 999, 0, 1, 0, 0, 30, 10, "Flying Angel Wing", 0, "", 2, 1, 4, 1, 12, 3, 73, -3, 0]
-	, [570, 50, 0, 1, 0, 0, 10, 10, "Chick Hat", 0, "Enables the use of [Double Attack] Lvl 2.<br>If you already learned a level higher than [Double Attack] Lvl 2, that level will be used instead.", 6, 2, 13, 50, 14, 50, 57, 3, 52, 3, 193, 1, 0]
+	, [570, 50, 0, 1, 0, 0, 10, 10, "Chick Hat", 0, "Enables the use of [Double Attack] Lvl 2.<br>If you already learned a level higher than [Double Attack] Lvl 2, that level will be used instead.", 6, 2, 13, 50, 14, 50, 57, 3, 52, 3, 193, 1, 372, 10, 0]
 	, [571, 999, 0, 1, 0, 0, 10, 10, "Red Glasses (iRO)", 0, "", 19, 5, 0]
 	, [572, 50, 0, 3, 0, 0, 10, 70, "Pecopeco Hairband", 0, "", 12, -10, 73, 25, 209, 25, 0]
 	, [573, 999, 0, 2, 0, 1, 30, 30, "Vane Hairpin", 0, "", 2, 2, 193, 1, 0]
@@ -686,7 +686,7 @@ m_Item = [
 	, [683, 60, 50, 4, 0, 1, 60, 40, "Angelic Protection", 0, "", 19, 20, 0]
 	, [684, 60, 151, 6, 0, 1, 250, 65, "Odin's Blessing", 0, "", 0]
 	, [685, 60, 1, 7, 0, 0, 350, 54, "Goibne's Armor", 0, "", 3, 2, 15, 10, 0]
-	, [686, 60, 3070, 10, 0, 1, 300, 55, "Meteo Plate Armor", 0, "", 151, 30, 152, 30, 0]
+	, [686, 60, 3070, 10, 0, 1, 300, 55, "Meteo Plate Armor", 0, "", 151, 30, 152, 35, 0]
 	, [687, 60, 3001, 2, 0, 1, 30, 55, "Orlean's Gown", 0, "Skill casting cannot be interrupted (except in WoE).", 73, 15, 0]
 	, [688, 60, 3001, 6, 0, 1, 150, 55, "Divine Cloth", 0, "", 153, 5, 156, 5, 151, 5, 155, 5, 159, 5, 0]
 	, [689, 60, 124, 5, 0, 1, 75, 50, "Sniping Suit", 0, "Bonus CRIT +(Base LUK / 10)", 19, 5, 10, 6, 74, 23, 0]
@@ -957,7 +957,7 @@ m_Item = [
 	, [954, 50, 3070, 5, 0, 1, 120, 85, "Bone Head", 0, "", 1, 2, 19, 5, 151, 5, 158, 5, 0]
 	, [955, 50, 0, 3, 0, 1, 30, 85, "Mandragora Cap", 0, "MaxHP +(50*refine)", 0]
 	, [956, 999, 0, 3, 0, 1, 10, 1, "Shining Bulb Hairband", 0, "", 67, 10, 220, 16, 0]
-	, [957, 62, 0, 5, 0, 0, 40, 94, "Asprika", 0, "Reduces damage from melee attacks of all elements by 30%", 9, 30, 19, 5, 193, 1, 194, 1, 220, 17, 0]
+	, [957, 62, 0, 5, 0, 0, 40, 94, "Asprika", 0, "", 9, 30, 19, 5, 193, 1, 194, 1, 220, 17, 60, 30, 61, 30, 62, 30, 63, 30, 64, 30, 65, 30, 66, 30, 67, 30, 68, 30, 69, 30, 0]
 	, [958, 999, 86, 7, 0, 1, 0, 80, "Assaulter Plate", 0, "", 13, 150, 19, 2, 57, 2, 0]
 	, [959, 999, 56, 7, 0, 1, 0, 80, "Elite Engineer's Armor", 0, "", 13, 150, 19, 2, 57, 2, 0]
 	, [960, 999, 52, 7, 0, 1, 0, 80, "Assassin's Robe", 0, "", 13, 150, 19, 2, 57, 2, 0]
@@ -1199,7 +1199,7 @@ m_Item = [
 	, [1196, 64, 1, 0, 0, 1, 10, 70, "Eyeball Ring", 0, "", 10, 2, 14, 25, 0]
 	, [1197, 999, 3001, 0, 0, 1, 20, 75, "Waterdrop Brooch", 0, "", 61, 5, 13, 80, 19, 2, 0]
 	, [1198, 999, 3001, 0, 0, 1, 20, 60, "Bradium Earring (old)", 0, "", 4, 1, 5, 1, 89, 2, 0]
-	, [1199, 64, 3001, 0, 0, 1, 20, 60, "Bradium Ring", 0, "", 1, 1, 3, 1, 80, 2, 0]
+	, [1199, 999, 3001, 0, 0, 1, 20, 60, "Bradium Ring", 0, "", 1, 1, 3, 1, 80, 2, 0]
 	, [1200, 999, 3001, 0, 0, 1, 20, 60, "Bradium Brooch (old)", 0, "", 2, 1, 9, 4, 12, 2, 0]
 	, [1201, 999, 0, 0, 0, 0, 25, 1, "Small Fishing Rod", 0, "", 0]
 	, [1202, 100, 0, 0, 0, 0, 0, 0, "Blush & Necktie", 0, "", 12, 3, 73, 3, 0]
@@ -1259,7 +1259,7 @@ m_Item = [
 	, [1256, 999, 0, 1, 0, 0, 10, 1, "4 Leaf Clover In Mouth (old)", 0, "", 37, 3, 5, 1, 73, -1, 0]
 	, [1257, 999, 51, 5, 0, 0, 0, 1, "Sphinx Helm J", 0, "", 200, 2, 1, 5, 193, 1, 0]
 	, [1258, 999, 0, 3, 0, 0, 80, 70, "Anubis Hat", 0, "", 77, 10, 100, 10, 0]
-	, [1259, 64, 0, 0, 0, 1, 10, 1, "Skull Ring", 0, "", 51, 1, 0]
+	, [1259, 64, 0, 0, 0, 1, 10, 1, "Skull Ring", 0, "", 51, 1, 93, 10, 0]
 	, [1260, 999, 0, 0, 0, 1, 50, 20, "Wild Rose Hat", 0, "", 2, 3, 0]
 	, [1261, 999, 0, 5, 0, 0, 80, 50, "Large Baphomet Horns (DEF)", 0, "ATK +(JobLevel*2)/7", 57, 12, 0]	//{ bonus2 bSubRace,RC_DemiHuman,12; bonus bBaseAtk,(JobLevel*2)/7; }
 	, [1262, 999, 0, 0, 0, 0, 0, 1, "Gentleman's Pipe", 0, "", 57, 2, 0]
@@ -1321,7 +1321,7 @@ m_Item = [
 	, [1318, 999, 0, 5, 0, 0, 25, 1, "I Love China", 0, "", 5, 3, 57, 10, 0]
 	, [1319, 52, 0, 0, 0, 0, 10, 10, "Well-Chewed Pencil", 0, "", 8, 3, 0]
 	, [1320, 52, 0, 1, 0, 0, 10, 90, "Rainbow Scarf", 0, "", 19, 2, 4, 1, 89, 1, 0]
-	, [1321, 50, 0, 1, 0, 1, 20, 30, "Snake Head Hat", 0, "Allows usage of [Double Attack] Lvl 5", 0]
+	, [1321, 50, 0, 1, 0, 1, 20, 30, "Snake Head Hat", 0, "Allows usage of [Double Attack] Lvl 5", 372, 25, 0]
 	, [1322, 999, 0, 2, 0, 1, 10, 1, "Bogy Cap", 0, "", 75, 5, 76, 5, 0]
 	, [1323, 999, 0, 1, 0, 0, 10, 1, "Book File Hat", 0, "", 4, 1, 0]
 	, [1324, 999, 0, 3, 0, 1, 30, 1, "Brazil National Flag Hat", 0, "", 210, 25, 0]
@@ -1645,7 +1645,7 @@ m_Item = [
 	, [1641, 999, 111, 30, 4, 2, 90, 60, "Forest Staff", 0, "", 195, 1, 196, 4, 20, 2, 194, 1, 4, 3, 88, 230, 5132, 10, 5133, 10, 0]
 	, [1642, 999, 111, 30, 4, 1, 90, 60, "Empowered Forest Staff", 0, "", 195, 1, 4, 5, 88, 270, 5132, 30, 5133, 30, 0]
 	, [1643, 60, 55, 2, 0, 1, 50, 0, "Forest Robe", 0, "", 19, 3, 4, 1, 7133, 25, 7132, 25, 0]
-	, [1644, 63, 55, 2, 0, 1, 50, 0, "Forest Shoes", 0, "", 13, 500, 159, 20, 0]
+	, [1644, 63, 0, 2, 0, 1, 50, 0, "Forest Shoes", 0, "", 13, 500, 159, 20, 0]
 	, [1645, 64, 55, 2, 0, 0, 50, 0, "Forest Orb", 0, "", 19, 2, 4, 1, 62, 10, 221, 149, 0]
 	, [1646, 100, 0, 0, 0, 0, 0, 0, "", 0, "", 344, 15, 0]
 	, [1647, 100, 0, 0, 0, 0, 0, 0, "", 0, "", 344, 15, 0]
@@ -1758,9 +1758,9 @@ m_Item = [
 	, [1753, 999, 3079, 0, 0, 1, 5, 1, "Diabolus Ring (iRO)", 0, "Increases ATK based Damage when facing Satan Morroc by 10%", 13, 100, 14, 100, 152, 15, 99, 5, 1495, 10, 1496, 10, 0]
 	, [1754, 999, 3001, 0, 0, 1, 20, 60, "Bradium Ring (old)", 0, "", 1, 1, 3, 1, 17, 5, 0]
 	, [1755, 999, 3001, 0, 0, 1, 20, 60, "Bradium Earring (iRO)", 0, "", 4, 1, 5, 1, 88, 5, 89, 2, 0]
-	, [1756, 64, 3001, 0, 0, 1, 20, 60, "Bradium Earring", 0, "", 4, 1, 5, 1, 88, 5, 0]
+	, [1756, 999, 3001, 0, 0, 1, 20, 60, "Bradium Earring", 0, "", 4, 1, 5, 1, 88, 5, 0]
 	, [1757, 999, 3001, 0, 0, 1, 20, 60, "Bradium Brooch (iRO)", 0, "<b>[Base AGI >= 120]</b> CRIT +4", 2, 1, 9, 4, 12, 2, 0]
-	, [1758, 64, 3001, 0, 0, 1, 20, 60, "Bradium Brooch", 0, "<b>[Base AGI >= 120]</b> CRIT +4", 2, 1, 9, 4, 0]
+	, [1758, 999, 3001, 0, 0, 1, 20, 60, "Bradium Brooch", 0, "<b>[Base AGI >= 120]</b> CRIT +4", 2, 1, 9, 4, 0]
 	, [1759, 999, 0, 2, 0, 0, 0, 1, "Bubble Gum In Mouth (aRO)", 0, "When used with a gold netcafe account, Item drop rate +5%.", 19, 2, 7, 1, 17, 5, 88, 5, 0]
 	, [1760, 999, 0, 2, 0, 0, 0, 1, "4 Leaf Clover In Mouth (aRO)", 0, "", 19, 2, 17, 5, 88, 5, 0]
 	, [1761, 999, 0, 2, 0, 0, 0, 1, "4 Leaf Clover In Mouth", 0, "", 19, 2, 0]
@@ -1948,7 +1948,7 @@ m_Item = [
 	, [1942, 16, 0, 60, 0, 0, 100, 50, "Valorant Huuma Shuriken", 0, "Can only be used on PvP, WoE, and Battlegrounds maps.", 193, 1, 37, 60, 0]
 	// ogh patch
 	, [1943, 63, 96, 3, 0, 1, 60, 80, "STR Temporal Boots", 0, "<b>[Base STR >= 90]</b><br>MDEF +3<br>On all monsters ignore 10% DEF<br>ATK +12", 0]
-	, [1944, 63, 96, 3, 0, 1, 60, 80, "AGI Temporal Boots", 0, "<b>[Base AGI >= 90]</b><br>ASPD +5%<br>Deal +10% auto attack damage", 0]
+	, [1944, 63, 96, 3, 0, 1, 60, 80, "AGI Temporal Boots", 0, "<b>[Base AGI >= 90]</b><br>ASPD +5%<br>[Basic Attack] damage +10%", 0]
 	, [1945, 63, 96, 3, 0, 1, 60, 80, "VIT Temporal Boots", 0, "<b>[Base VIT >= 90]</b><br>MDEF +5<br>VIT +1<br>HP +12%<br>Received [Heal], [Sanctuary], and [Potion Pitcher] effectiveness +15%<br>Items recover 15% more HP", 0]
 	, [1946, 63, 96, 3, 0, 1, 60, 80, "INT Temporal Boots", 0, "<b>[Base INT >= 90]</b><br>Deal +5% MATK based damage against all monsters<br>On all monsters, ignore 10% MDEF", 0]
 	, [1947, 63, 96, 3, 0, 1, 60, 80, "DEX Temporal Boots", 0, "<b>[Base DEX >= 90]</b><br>MDEF +3<br>Deal +5% ranged ATK based damage<br>ATK +12", 0]
@@ -1971,7 +1971,7 @@ m_Item = [
 	, [1964, 1, 95, 120, 4, 2, 80, 50, "Blessed Knife", 0, "", 20, 6, 0]
 	, [1965, 9, 65, 60, 4, 2, 40, 50, "Holy Water Staff", 0, "[Waterball] cooldown +1.5 seconds<br>Consumes 100% SP when the weapon is unequipped.", 4, 3, 89, 15, 220, 52, 0]
 	, [1966, 8, 63, 120, 4, 2, 70, 40, "Repentance", 0, "<b>[Base LUK >= 40]</b> Critical damage +10%<br>ASPD +(1*refine)%", 10, 30, 0]
-	, [1967, 100, 0, 0, 0, 0, 0, 0, "Repentance + Odin's Blessing", 0, "When performing an ATK based attack, 1.5% chance to cast [Adrenaline Rush] Lvl 1", 0]
+	, [1967, 100, 0, 0, 0, 0, 0, 0, "Repentance + Odin's Blessing", 0, "When performing an ATK based attack, 4.5% chance to cast [Adrenaline Rush] Lvl 1", 0]
 	, [1968, 17, 0, 90, 3, 3, 180, 60, "Dark Rose", 0, "", 5428, 15, 0]
 	, [1969, 100, 0, 0, 0, 0, 0, 0, "Dark Rose + Skin of Ventus", 0, "", 190, 10, 191, 10, 192, 10, 0]
 	, [1970, 64, 0, 0, 0, 1, 10, 90, "Bishop Necklace", 0, "<b>[Base STR >= 90]</b> MATK +50", 10, 3, 70, 1, 0]
@@ -1990,7 +1990,7 @@ m_Item = [
 	, [1983, 9, 132, 150, 4, 1, 100, 80, "Royal Alchemy Staff", 0, "", 5, 2, 4, 4, 89, 20, 0]
 	, [1984, 100, 0, 0, 0, 0, 0, 0, "Alchemy Glove + Royal Alchemy Staff", 0, "[Fire Bolt] skill damage +(2*refine)%<br>[Cold Bolt] skill damage +(2*refine)%<br>[Lightning Bolt] skill damage +(2*refine)%<br>[Earth Spike] skill damage +(2*refine)%", 0]
 	, [1985, 60, 0, 6, 0, 1, 200, 0, "Imperial Clergy Robe", 0, "When receiving ATK based damage, 2% chance to inflict [Curse] status on your attacker.", 13, 400, 159, 50, 153, 50, 0]
-	, [1986, 62, 53, 2, 0, 1, 50, 1, "Bloody Muffler", 0, "", 89, 1, 5037, 15, 5387, 15, 0]
+	, [1986, 62, 53, 2, 0, 1, 50, 1, "Bloody Muffler", 0, "", 89, 1, 5037, 15, 0]
 	, [1987, 62, 0, 2, 0, 1, 50, 1, "Spectral Manteau", 0, "[Soul Strike] skill damage +(5*refine)%<br>[Dark Soul Strike] skill damage +(5*refine)%", 89, 1, 0]
 	, [1988, 60, 0, 4, 0, 1, 150, 0, "Prisoner's Uniform", 0, "<b>[Taekwon Kid]</b><br>[Tornado Kick] skill damage +15%<br>[Heel Drop] skill damage +15%<br>[Roundhouse Kick] skill damage +15%<br>[Counter Kick] skill damage +15%<br>[Flying Kick] skill damage +15%", 1, 1, 0]
 	, [1989, 100, 0, 0, 0, 0, 0, 0, "Prison Set", 0, 0, 1, 1, 17, 10, 0]
@@ -2106,7 +2106,7 @@ m_Item = [
 	, [2096, 63, 150, 3, 0, 1, 30, 30, "Bunny Slippers", 0, "", 6, 3, 19, 5, 11, 3, 0]
 	, [2097, 10, 54, 120, 4, 1, 170, 60, "Bolt Shooter", 0, "<b>For each refine level:</b> DEF Pierce +2%", 10, -15, 70, -15, 5040, 20, 0]
 	, [2098, 62, 0, 0, 0, 1, 50, 80, "Angry Bear Bag", 0, "<b>For each 2 refine levels:</b><br>Deal +1% ATK based damage against [Normal/Boss/Guardian] type monsters.<br><b>For each refine level:</b><br>Receive +1% damage from all monsters.", 0]
-	, [2099, 9, 0, 10, 3, 0, 40, 0, "Guardian Staff", 0, "<b>For each refine level:</b> MaxHP +80<br>Enables the use of [Barrier] Lvl 1<br>[Barrier] reduces incoming damage by 50% for 1.5 seconds when activated and has a 30 second cooldown. [Barrier] cannot be used in PVP, BGs, WOE, or RWC maps and modes.", 89, 5, 18, 5, 0]
+	, [2099, 9, 0, 10, 3, 1, 40, 0, "Guardian Staff", 0, "<b>For each refine level:</b> MaxHP +80<br>Enables the use of [Barrier] Lvl 1<br>[Barrier] reduces incoming damage by 50% for 1.5 seconds when activated and has a 30 second cooldown. [Barrier] cannot be used in PVP, BGs, WOE, or RWC maps and modes.", 89, 5, 18, 5, 0]
 	, [2100, 60, 0, 5, 0, 1, 0, 50, "Celine's Dress", 0, "Enables the use of [Recognized Spell] Lvl 1<br>[Recognized Spell] removes variance from MATK and makes magic damage do their average damage.", 4, 1, 5, 1, 19, 10, 0]
 	, [2101, 64, 0, 0, 0, 1, 10, 90, "Evil Spirit Glove", 0, "", 5, 1, 25, 3, 0]
 	, [2102, 10, 114, 130, 4, 1, 150, 70, "Undead Shot (special)", 0, "Increases the proc chance of all AutoSpell effects by 25%.<br><b>[Refine Rate 7~10]</b> ASPD+5%", 40, 5, 89, 15, 0]
@@ -2151,7 +2151,7 @@ m_Item = [
 	, [2139, 100, 0, 0, 0, 0, 0, 0, "Lava Leather Hood + Binoculars", 0, "", 5, 2, 9, 5, 0]
 	, [2140, 100, 0, 0, 0, 0, 0, 0, "Lava Leather Hood + Evil Wing Ears", 0, "", 1, 2, 18, 3, 0]
 	, [2141, 62, 0, 3, 0, 1, 30, 1, "Manteau of Flame Heart", 0, "", 63, 10, 61, -10, 0]
-	, [2142, 9, 156, 60, 4, 1, 70, 70, "Flaming Wand", 0, "<b>For each refine:</b><br>Increases [<b style='color:red'>Fire</b>] property magic damage by 1%.<br>[Fire Ball] skill damage +1%", 89, 20, 4, 4, 5, 1, 13, 200, 14, 100, 0]
+	, [2142, 9, 156, 60, 4, 2, 70, 70, "Flaming Wand", 0, "<b>For each refine:</b><br>Increases [<b style='color:red'>Fire</b>] property magic damage by 2%.<br>[Fire Ball] skill damage +1%", 89, 20, 4, 4, 5, 1, 13, 200, 14, 100, 0]
 	, [2143, 1, 95, 120, 4, 2, 120, 50, "Volcano Knife", 0, "", 89, 15, 4, 3, 5, 3, 42, 15, 342, 15, 0]
 	, [2144, 52, 0, 0, 0, 0, 0, 1, "Show Me The Zeny", 0, "Enables the use of [Overcharge] Lvl 10<br>Enables the use of [Discount] Lvl 10<br><b>Note: This does not give the new passive effects of Overcharge and Discount, which are stricly limited to Merchant classes.</b>", 0]
 	// patch a3.7
@@ -2161,11 +2161,42 @@ m_Item = [
 	, [2148, 8, 53, 80, 3, 2, 80, 70, "Rubber Hammer", 0, "<b>For every 3 base VIT:</b><br>Your [Heal], [Sanctuary], and [Aid Potion] effectiveness +1%<br><b>[Refine Rate = 10]</b><br>Nullifies gemstone cost of all skills.", 13, 600, 60, 5, 61, 5, 62, 5, 63, 5, 64, 5, 65, 5, 66, 5, 67, 5, 68, 5, 69, 5, 0]
 	, [2149, 9, 111, 80, 3, 3, 100, 50, "Detecting Staff", 0, "<b>The following effects are not implemented in the calculator:</b><br>[Meteor Storm], [Storm Gust], [Lord of Vermillion] Cooldown +4 seconds<br><b>For each refine level:</b><br>[Meteor Storm] After-cast Delay -0.6 seconds<br>[Storm Gust] After-cast Delay -0.4 seconds<br>[Lord of Vermillion] After-cast Delay -0.4 seconds", 89, 20, 4, 2, 5, 2, 0]
 	, [2150, 64, 0, 0, 0, 1, 20, 70, "Safety Pendant", 0, "", 17, 10, 88, 10, 60, 1, 61, 3, 62, 3, 63, 3, 64, 3, 65, 3, 66, 3, 67, 3, 68, 3, 69, 3, 0]
+	// patch a4
+	, [2151, 17, 146, 125, 4, 1, 140, 70, "Calf Deathadder", 0, "<b>For every 2 refine levels:</b><br>Deal +1% ranged ATK based damage.<br><b>[Refine Rate 9~10]</b><br>Deal +5% ranged ATK based damage.", 16, 5, 0]
+	, [2152, 18, 146, 160, 4, 1, 300, 70, "Calf Kingcobra", 0, "<b>For each refine level:</b><br>CRIT +4<br><b>For every 10 base LUK:</b><br>CRIT +4<br><b>[Refine Rate 9~10]</b><br>Critical damage +5%", 16, 5, 0]
+	, [2153, 19, 146, 215, 4, 1, 140, 70, "Calf Anaconda", 0, "<b>For each refine level:</b><br>Deal +1% ranged ATK based damage.<br><b>[Refine Rate 9~10]</b><br>Deal +5% ranged ATK based damage.", 16, 5, 0]
+	, [2154, 20, 146, 125, 4, 1, 300, 70, "Calf Diamondback", 0, "<b>For each refine level:</b><br>Deal +1% ranged ATK based damage.<br><b>[Refine Rate 7~10]</b><br>ASPD +5%<br><b>[Refine Rate 9~10]</b><br>Deal +5% ranged ATK based damage.", 16, 5, 0]
+	, [2155, 21, 146, 250, 4, 1, 200, 70, "Calf Python", 0, "<b>For each refine level:</b><br>Deal +1% ranged ATK based damage.<br><b>[Refine Rate 7~10]</b><br>All skill's After-cast Delay -5%<br><b>[Refine Rate 9~10]</b><br>Deal +5% ranged ATK based damage.", 16, 5, 0]
+	, [2156, 17, 0, 75, 3, 0, 100, 20, "Altair & Ares", 0, "", 8, 30, 0]
+	, [2157, 18, 0, 130, 3, 2, 130, 20, "R.A.G.203", 0, "[Tracking] Fixed Cast Time -0.5 seconds", 10, 30, 0]
+	, [2158, 19, 0, 200, 4, 0, 200, 50, "Death Fire", 0, "[Basic Attack] Splash Range increased to 7x7<br>[Basic Attack] damage +200%<br>[Basic Attack] Range -5<br>[Basic Attack] Knockback +5 cells", 12, -50, 190, 10, 191, 10, 192, 10, 0]
+	, [2159, 20, 0, 120, 3, 2, 50, 30, "Mini-Mei", 0, "When performing an ATK based attack, 5% chance to cause [Stun] status effect on your target.", 0]
+	, [2160, 21, 0, 200, 3, 2, 200, 50, "Revenger", 0, "", 12, 10, 0]
+	, [2161, 50, 0, 1, 0, 0, 50, 30, "Super Cute Doggo", 0, "[Meat] item recover +100%", 200, 1, 0]
+	, [2162, 5, 107, 230, 4, 2, 200, 70, "Metal Stick", 0, "<b>For each refine level:</b><br>Deal +2% ranged ATK based damage.", 25, 10, 0]
+	, [2163, 9, 53, 80, 4, 2, 100, 80, "Iron Staff", 0, "Auto Cast Rate -100%<br><b>[Refine Rate 9~10]</b><br>MATK +5%", 89, 20, 12, 10, 4, 3, 5, 2, 0]
+	, [2164, 51, 0, 0, 0, 0, 10, 1, "Bandit's Disguise", 0, "", 9, 10, 0]
+	, [2165, 61, 0, 2, 0, 1, 200, 30, "Flame Thrower", 0, "If the user has learned level 10, that level is used instead.<br>Auto Cast Rate +10%", 12, 3, 221, 79, 0]
+	, [2166, 63, 0, 3, 0, 1, 50, 65, "Frontier Boots", 0, "", 2, 2, 9, 5, 11, 1, 0]
+	, [2167, 62, 1, 1, 0, 1, 70, 70, "Vigilante Stole", 0, "<b>For every 3 refine levels:</b><br>LUK +1", 2, 1, 6, 3, 0]
+	, [2168, 60, 1, 2, 0, 1, 70, 70, "Vigilante Suit", 0, "", 2, 3, 10, 3, 70, 3, 0]
+	, [2169, 100, 0, 0, 0, 0, 0, 0, "Vigilante Stole + Suit", 0, "", 2, 2, 6, 5, 70, 5, 0]
+	, [2170, 63, 0, 0, 0, 1, 50, 90, "Vigilante Shoes", 0, "", 5, 1, 9, -10, 18, -5, 0]
+	, [2171, 64, 157, 0, 0, 1, 1, 50, "Metal Guitar Pick", 0, "", 5, 1, 25, 2, 5199, 25, 5207, 25, 0]
+	, [2172, 61, 0, 3, 0, 1, 50, 30, "Rubber Shield", 0, "", 19, 5, 64, 20, 0]
+	, [2173, 10, 114, 150, 3, 3, 100, 50, "Vigilante Bow", 0, "Enable the use of [Double Attack] Lvl 1 with any weapons.<BR>If you learned a level higher than 1, you will use that level instead.<br>When performing an ATK based attack, 10% chance to cast [Steal] Lvl 10<br><b>For each refine level:</b><br>Increases [Double Attack] success rate by 5%.", 0]
+	, [2174, 12, 118, 120, 3, 3, 80, 60, "Elemental Origin", 0, "Physical Attack Range +2<br>100% chance to absorb 100 HP when performing an ATK based attack.<br><b>For each refine level:</b><br>Perfect Dodge +2<br>Max HP +50", 89, 15, 221, 176, 221, 177, 221, 178, 221, 179, 0]
+	, [2175, 2, 158, 160, 4, 2, 150, 60, "Bandit's Saber", 0, "<b>[Alchemist/Creator]</b><br>DEX +2<br><b>For every 2 refine levels:</b> [Acid Demonstration] skill damage +1%<b><br><br>[Assassin Cross]</b><br><b>For each refine level:</b> ATK +4<br>Reduces physical damage by 30%<br>Damage reduction does not affect [Soul Destroyer] or [Meteor Assault]", 4, 10, 0]
+	, [2176, 100, 0, 0, 0, 0, 0, 0, "Bandit's Saber + Save the King", 0, "", 12, 5, 5263, 20, 0]
+	, [2177, 1, 114, 200, 4, 2, 150, 80, "Platinum Dagger", 0, "<b>For each refine level:</b><br>Deal +3% ATK based damage against [Boss] type monsters.<br><b>[Refine Rate 9~10]</b><br>Remove the size penalties of the weapon.", 8, -300, 0]
+	, [2178, 7, 1056, 400, 4, 1, 400, 80, "Mine Worker Pickaxe", 0, "", 5326, 10, 0]
+	, [2179, 52, 0, 0, 0, 0, 80, 1, "Flame Muffler", 0, "", 5, 1, 13, 200, 63, 5, 0]
+	, [2180, 60, 1, 2, 0, 1, 70, 70, "Flame Rune Armor", 0, "", 1, 1, 4, 1, 5, 1, 42, 5, 373, 5, 5429, -5, 0] // fix weight/level req/def
+	, [2181, 100, 0, 0, 0, 0, 0, 0, "Flame Rune Armor + Flame Rune Manteau", 0, "", 341, 7, 0]
 ];
 
 //[ id, display location, job that can use, atk/def, level of weapon, slots, weight, level required to use, "name of item", ?, "description", effect1, effect2, ..., 0 =? ]
 // locations (11 = weapon, 50 = upper headgear, 60 = armor, 61 = shield, 62 = garment , 63 = shoes, 64 = accessory, 100 = combo)
-// job that can use (70 = swordman + merchant, 72 = swordman + thiefs + merchants, 73 = acolyte + merchant, 74 = swordsman + thief + merchant + acolyte + bard/dancer, 75 = swordsman + archer + merchant + thief, 76 = archer + rogue, 77 = mage + acolyte + soul linker, 78 = swordsman + merchant + acolyte + thief, 79 = all 2nd classes, 80 = thief 84 = swordsman + thief + merchant + taekwon kid + star glad, 89 = mage + acolyte + archer)
 // 3001 = every rebirth job except novice, 
 ItemMax = m_Item.length - 1;
 
@@ -2537,6 +2568,13 @@ function Item_Setumei(nC1, nC2) {
 			CBIstr += "All skill's SP cost " + nC2 + "%.<BR>";
 	if (371 == nC1)
 		CBIstr += "Receive " + wISS + (-1 * nC2) + "% damage from all monsters.<BR>"
+	if (372 == nC1)
+		if (nC2 > 0)
+			CBIstr += "Increase [Double Attack] success rate by " + nC2 + "%.<BR>";
+		else
+			CBIstr += "Decrease [Double Attack] success rate by " + (-1 * nC2) + "%.<BR>";
+	if(373 == nC1)
+		CBIstr += "Deal" + wIS + nC2 + "% melee ATK based damage.<BR>";
 	if (5000 <= nC1 && nC1 <= 6999)		//mejorar: bastaría con 5000~5999
 		//		CBIstr += "["+ m_Skill[nC1 -5000][2] +"] skill damage"+ wIS + nC2 +"%<BR>";		// original
 		CBIstr += "[" + skillName(m_Skill[nC1 - 5000][0], SRV) + "] skill damage" + wIS + nC2 + "%<BR>";
@@ -2746,6 +2784,9 @@ w_SE = [[737, 436, 475, "NULL"]
 	, [2138, 2133, 2134, 2135, 2136, "NULL"]
 	, [2139, 2133, 259, "NULL"]
 	, [2140, 2133, 381, "NULL"]
+	, [2169, 2168, 2167, "NULL"]
+	, [2176, 2175, 1956, "NULL"]
+	, [2181, 2180, 1979, "NULL"]
 ];
 SE_MAXnum = w_SE.length - 1;
 for (var i = 0; i <= SE_MAXnum; i++) {
