@@ -764,9 +764,9 @@
 	, [756, "Shotgun Buffalo Bandit", 7, 32, 1, 83, 110000, 49, 58, 80, 76, 49, 709, 888, 15, 12, 35150, 34150, , 0, 1, , , 0]
 	, [757, "Revolver Buffalo Bandit", 7, 32, 1, 83, 110000, 49, 88, 70, 92, 50, 676, 758, 12, 15, 34150, 35150, , 0, 1, , , 0]
 	, [758, "Scimitar Buffalo Bandit", 7, 32, 2, 87, 125000, 65, 20, 60, 68, 36, 667, 754, 18, 15, 40330, 39240, , 0, 0, , , 0]
-	, [759, "Elite Shotgun Buffalo Bandit", 7, 32, 2, 98, 3000000, 61, 55, 22, 250, 20, 8000, 9000, 40, 35, 436000, 381500, , 1, 1, , , 0]
-	, [760, "Elite Revolver Buffalo Bandit", 7, 32, 2, 98, 3000000, 45, 75, 35, 255, 15, 6500, 7500, 38, 45, 436000, 381500, , 1, 1, , , 0]
-	, [761, "Elite Scimitar Buffalo Bandit", 7, 32, 2, 98, 3200000, 95, 24, 180, 180, 10, 3000, 4500, 32, 50, 463250, 414200, , 1, 0, , , 0]
+	, [759, "Elite Shotgun Buffalo Bandit", 7, 34, 2, 98, 3000000, 61, 55, 22, 250, 20, 8000, 9000, 40, 35, 436000, 381500, , 1, 1, , , 0]
+	, [760, "Elite Revolver Buffalo Bandit", 7, 34, 2, 98, 3000000, 45, 75, 35, 255, 15, 6500, 7500, 38, 45, 436000, 381500, , 1, 1, , , 0]
+	, [761, "Elite Scimitar Buffalo Bandit", 7, 34, 2, 98, 3200000, 95, 24, 180, 180, 10, 3000, 4500, 32, 50, 463250, 414200, , 1, 0, , , 0]
 	, [762, "Spider Chariot [MVP]", 4, 2, 2, 108, 9799123, 154, 34, 140, 217, 98, 11000, 14000, 44, 33, 2340000, 1755000, , 1, 0, , , 0]
 ];
 // [id, name, race, element + ele lvl, size, monster lvl, hp, vit, agi, int, dex, luk, min atk, max atk, def, mdef, base exp, job exp, , type (0 = normal, 1 = boss), melee/ranged (0 = melee, 1 = ranged), , , skill id, skill lvl, skill id, skill lvl, ..., 0]
