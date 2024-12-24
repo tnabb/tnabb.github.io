@@ -2195,7 +2195,7 @@ m_Item = [
 	, [2181, 100, 0, 0, 0, 0, 0, 0, "Flame Rune Armor + Flame Rune Manteau", 0, "", 341, 7, 0]
 	, [2182, 64, 0, 0, 0, 0, 20, 30, "Sheriff's Right Badge", 0, "", 17, 10, 88, 10, 14, 50, 73, -3, 8, 5, 9, 5, 0]
 	, [2183, 64, 0, 0, 0, 0, 20, 30, "Sheriff's Left Badge", 0, "", 17, 8, 88, 8, 14, 30, 73, -2, 8, 3, 9, 3, 0]
-	, [2184, 50, 122, 0, 0, 0, 10, 80, "License to Clown", 0, "", 4, 5, 17, 10, 74, 5, 5263, 5, 0]
+	, [2184, 64, 122, 0, 0, 0, 10, 80, "License to Clown", 0, "", 4, 5, 17, 10, 74, 5, 5263, 5, 0]
 	, [2185, 100, 0, 0, 0, 0, 0, 0, "Metal Stick + Falcon Muffler", 0, "<b>For each refine level on [Falcon Muffler]:</b><br>Decrease damage from all size monsters by 1%<br>[<b style='color:#A89682'>Neutral</b>] element resistance +2%", 190, 10, 191, 10, 192, 10, 0]
 	, [2186, 100, 0, 0, 0, 0, 0, 0, "Mine Worker's Pickaxe + King's Manteau", 0, "<b>For each refine level on [King's Manteau]:</b><br>Decrease damage from all size monsters by 1%", 190, 10, 191, 10, 192, 10, 0]
 ];
