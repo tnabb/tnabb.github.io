@@ -563,9 +563,10 @@ m_TempEffect = [
 	, [30, "Jackson Rhoads", "MATK +33 [Moonlight Serenade]", 1, 1997, 88, 33, 0]
 	, [31, "Guardian Staff", "50% damage reduction [Barrier]", 1, 2099, 371, 50, 0]
 	, [32, "Safety Whip", "50% damage reduction [Barrier]", 1, 2146, 371, 50, 0]
+	, [33, "Rata Card", "Cast Delay -20%", 2, 509, 0]
 ];
 //m_TempEffect = [ id, name, description, item/card, item/card ID, ... ]
-m_TempEffect_SORT = [0, 5, 9, 4, 15, 3, 17, 24, 11, 26, 29, 31, 18, 2, 1, 6, 30, 21, 19, 13, 10, 25, 27, 20, 23, 12, 28, 14, 8, 7, 16, 22]
+m_TempEffect_SORT = [0, 5, 9, 4, 15, 3, 17, 24, 11, 26, 29, 31, 18, 2, 1, 6, 30, 21, 19, 13, 10, 25, 27, 33, 20, 23, 12, 28, 14, 8, 7, 16, 22]
 //m_TempEffect_SORT = [0, 5, 10, 4, 27, 3, 43, 62, 63, 29, 30, 26, 38, 44, 45, 18, 58, 47, 54, 60, 15, 11, 12, 14, 13, 17, 31, 2, 1, 7, 46, 55, 34, 59, 32, 21, 16, 40, 48, 52, 53, 33, 37, 41, 19, 51, 22, 23, 24, 35, 40, 25, 49, 50, 9, 6, 20, 8, 28, 42, 36, 57, 61, 56]
 
 //WeaponName = ["(Unarmed)","Dagger","Sword","Two-handed Sword","Spear","Two-handed Spear","Axe","Two-handed Axe","Mace","Rod / Staff","Bow","Katar","Book","Knuckle","Instrument","Whip","Huuma Shuriken","Handgun","Rifle","Shotgun","Gatling Gun","Grenade Launcher"];

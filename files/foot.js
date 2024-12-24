@@ -583,6 +583,7 @@ function StAllCalc() {
         2124 == n_A_Equip[0] && (M += n_A_Weapon_refine ** 2),
         2175 == n_A_Equip[0] && 22 == n_A_JOB && (M += 4 * n_A_Weapon_refine),
         2175 == n_A_Equip[1] && 22 == n_A_JOB && (M += 4 * n_A_Weapon2_refine),
+        2178 == n_A_Equip[0] && 26 == n_A_JOB && (M += 50),
         M < 0 && (M = 0),
         n_A_ATK += M,
         V_ATK = Math.floor(n_A_Weapon_ATK + n_A_Weapon2_ATK + n_A_ATK),
@@ -1096,6 +1097,7 @@ function StAllCalc() {
         3 == n_A_JobClass() && 1950 == n_A_Equip[0] && (M -= 5),
         14 != n_A_JobClass2() && 44 != n_A_JOB || (M += 15 * EquipNumSearch(897)),
         14 != n_A_JobClass2() && 44 != n_A_JOB || (M += 15 * EquipNumSearch(898)),
+        EquipNumSearch(2085) && n_A_SHOES_REFINE >= 9 && (M += 5),
         1799 == n_A_Equip[2] && (wSPVS = n_A_JobClass(),
             3 != wSPVS && 5 != wSPVS || (M += 8,
                 n_tok[99] += 7),
@@ -1285,8 +1287,12 @@ function StAllCalc() {
     18 != n_A_JOB && 32 != n_A_JOB || !CardNumSearch(460) || (n_tok[73] -= 15),
     177 == n_A_card[8] && (n_tok[73] -= n_A_HEAD_REFINE),
     M += n_tok[73],
+    // extra cast reduction
+    extraCastTimeReduction = 0;
+    763 == n_B[0] && (extraCastTimeReduction -= 50),
     0 != n_A_Buf3[2] && (M -= 3 * n_A_Buf3[2] + n_A_Buf3[32] + Math.floor(n_A_Buf3[22] / 10),
             nb_tok += (3 * n_A_Buf3[2] + n_A_Buf3[32] + Math.floor(n_A_Buf3[22] / 10)) / 100 * 100),
+    M += extraCastTimeReduction,
     (M -= 50 * TimeItemNumSearch(1)) < 0 && (M = 0),
     n_B_Cast = M,
     n_A_CAST *= M / 100,
@@ -1317,7 +1323,7 @@ function StAllCalc() {
     1839 == n_A_Equip[0] && n_A_Weapon_refine >= 7 && (n_tok[74] += 10),
     1843 == n_A_Equip[0] && n_A_Weapon_refine >= 7 && (n_tok[74] += 5),
     5 == n_A_JobClass() && (n_tok[74] += 5 * EquipNumSearch(1119)),
-    2155 == n_A_Equip[0] && n_A_Weapon_refine >= 7 && (n_tok[74] += 5),
+    2155 == n_A_Equip[0] && n_A_Weapon_refine >= 7 && (n_tok[74] += 10),
     // jester hat
     AC_S = 0;
     263 == n_A_ActiveSkill && 1837 == n_A_Equip[2] && 272 == n_A_Equip[4] && (AC_S += 25),
@@ -1332,6 +1338,9 @@ function StAllCalc() {
     AC_IA = 0;
     SkillSearch(851) && (AC_IA += 50),
     AC_I = n_tok[74];
+    AC_I += TimeItemNumSearch(33) * 20,
+    AC_ETC = 0;
+    763 == n_B[0] && (AC_ETC += 50),
     M = n_A_Buf3[2];
     n_tok[74] = M ? 10 == M ? 5 * M + 2 * n_A_Buf3[32] + Math.floor(n_A_Buf3[29] / 5) : 3 * M + 2 * n_A_Buf3[32] + Math.floor(n_A_Buf3[29] / 5) : 0,
         AC_I > 100 && (AC_I = 100),
@@ -1403,6 +1412,8 @@ function StAllCalc() {
         1948 == n_A_Equip[8] && (n_tok[70] += Math.floor(SU_LUK / 10)),
         n_A_Weapon_refine >= 9 && 1951 == n_A_Equip[0] && (n_tok[70] += 10),
         n_A_Weapon_refine >= 9 && 2147 == n_A_Equip[0] && (n_tok[70] += 5),
+        EquipNumSearch(2185) && (n_tok[190] += n_A_SHOULDER_REFINE, n_tok[191] += n_A_SHOULDER_REFINE, n_tok[192] += n_A_SHOULDER_REFINE, n_tok[60] += 2 * n_A_SHOULDER_REFINE),
+        EquipNumSearch(2186) && (n_tok[190] += n_A_SHOULDER_REFINE, n_tok[191] += n_A_SHOULDER_REFINE, n_tok[192] += n_A_SHOULDER_REFINE),
         624 == n_A_Equip[0] && (n_tok[191] += n_A_Weapon_refine),
         1089 == n_A_Equip[0] && (n_tok[70] += 2 * n_A_Weapon_refine),
         2152 == n_A_Equip[0] && n_A_Weapon_refine >= 9 && (n_tok[70] += 5),
@@ -2537,11 +2548,11 @@ function KakutyouKansuu() {
                 myInnerHtml("A_KakutyouSel", l, 0)
         } else if (18 == wKK) {
             var a;
-            a = "<b>Cast Time: </b>" + Math.floor(1e4 * n_A_CAST) / 100 + "% (<b>" + skillName(204, SRV) + ":</b> " + Math.round(nb_tok) + " %| <b>Gear:</b> " + -n_tok[73] + "% | <b>DEX:</b> " + n_A_DEX + " )<BR>",
-            calcedDelay = Math.floor(100 - AC_I - n_tok[74]),
+            a = "<b>Cast Time: </b>" + Math.floor(1e4 * n_A_CAST) / 100 + "% (<b>" + skillName(204, SRV) + ":</b> " + Math.round(nb_tok) + "% | <b>Gear:</b> " + -n_tok[73] + "% | <b>DEX:</b> " + n_A_DEX + " | <b>ETC:</b> " + -extraCastTimeReduction +  "% )<BR>",
+            calcedDelay = Math.floor(100 - AC_I - n_tok[74] - AC_ETC),
             calcedDelay > 0 && (calcedDelay = Math.floor(calcedDelay * (100 - AC_S) / 100)),
             calcedDelay > 0 && (calcedDelay = Math.floor(calcedDelay * (100 - AC_IA) / 100)),
-            a += "<b>Cast Delay: </b>" + calcedDelay + " % (<b>" + skillName(204, SRV) + ":</b> " + n_tok[74] + " % | <b>Gear:</b> " + AC_I + " % | <b>Skill:</b> " + AC_S + " %)<BR>",
+            a += "<b>Cast Delay: </b>" + calcedDelay + " % (<b>" + skillName(204, SRV) + ":</b> " + n_tok[74] + "% | <b>Gear:</b> " + AC_I + "% | <b>Skill:</b> " + AC_S + "% | <b>ETC:</b> " + AC_ETC + "% )<BR>",
             myInnerHtml("A_KakutyouData", a, 0)
         } else if (20 == wKK) {
             var e = 1 * c.A_KakutyouSelNum.value

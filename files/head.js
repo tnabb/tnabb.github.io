@@ -5674,6 +5674,8 @@ function ApplyModifiers(e) {
         66 == n_A_ActiveSkill && 1956 == n_A_Equip[0] && 26 == n_A_JOB && (_ += 25),
         // prisoners uniform
         (331 == n_A_ActiveSkill || 333 == n_A_ActiveSkill || 335 == n_A_ActiveSkill || 337 == n_A_ActiveSkill || 339 == n_A_ActiveSkill || 305 == n_A_ActiveSkill) && 1988 == n_A_Equip[6] && 41 == n_A_JOB && (_ += 15),
+        // mine workers pickaxe
+        326 == n_A_ActiveSkill && 2178 == n_A_Equip[0] && (_ += 10),
         3 == SkillSearch(851) && (428 == n_A_ActiveSkill || 435 == n_A_ActiveSkill) && (_ += 10),
         5 == SkillSearch(851) && (429 == n_A_ActiveSkill || 848 == n_A_ActiveSkill) && (_ += 10),
         6 != n_A_ActiveSkill && 76 != n_A_ActiveSkill || 10 == n_A_ActiveSkillLV && EquipNumSearch(1159) && (_ += 50),
@@ -5778,7 +5780,7 @@ function CastAndDelay() {
     c.Conf02.value > 0 && (pingDelay = (c.Conf02.value) / 1000),
     n_Delay[1] > wDelay && (wDelay = n_Delay[1], n = 1),
     (513 == n_A_ActiveSkill || 514 == n_A_ActiveSkill || 515 == n_A_ActiveSkill) &&  (wDelay = n_Delay[1] * 2),
-    eqDelay = (100 - AC_I - n_tok[74]) < 0 ? 0 : 100 - AC_I - n_tok[74],
+    eqDelay = (100 - AC_I - n_tok[74] - AC_ETC) < 0 ? 0 : 100 - AC_I - n_tok[74] - AC_ETC,
     n_Delay[2] = Math.floor(n_Delay[2] * eqDelay) / 100,
     n_Delay[2] = Math.floor(n_Delay[2] * (100 - AC_S)) / 100,
     n_Delay[2] = Math.floor(n_Delay[2] * (100 - AC_IA)) / 100,
