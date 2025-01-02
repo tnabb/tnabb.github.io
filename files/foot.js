@@ -1757,6 +1757,7 @@ function StPlusCalc() {
     196 == n_A_card[11] && (A += Math.floor(SU_STR / 18)),
     197 == n_A_card[11] && (l += Math.floor(SU_VIT / 18)),
     1846 == n_A_Equip[0] && (A += Math.floor(SU_VIT / 20)),
+    2170 == n_A_Equip[8] && n_A_SHOES_REFINE >= 9 && (l += 1),
     98 == n_A_card[14] && CardNumSearch(273) && (a += 3),
     98 == n_A_card[15] && CardNumSearch(273) && (a += 3),
     98 == n_A_card[14] && 98 == n_A_card[15] && 1 == CardNumSearch(273) && (a -= 3),

@@ -568,9 +568,11 @@ function BattleCalc999() {
                 337 == n_A_ActiveSkill && (wActiveHitNum = 3);
             else if (339 == n_A_ActiveSkill)
                 n_Delay[0] = 1,
+                wActiveHitNum = 3,
                 wMod += .1 * n_A_ActiveSkillLV - .7;
             else if (305 == n_A_ActiveSkill)
                 n_Delay[0] = 1,
+                wActiveHitNum = 3,
                 SkillSearch(379) && 0 == n_A_WeaponType ? wMod += .08 * n_A_BaseLV - 1 : wMod += .04 * n_A_BaseLV - 1;
             else if (398 == n_A_ActiveSkill)
                 wMod += .1 * n_A_ActiveSkillLV,
@@ -1774,7 +1776,6 @@ function ATKmod02(e, _) {
     wA02 = 100 * e,
     SkillSearch(327) ? wA02 += 20 * SkillSearch(327) : (SkillSearch(154) && (wA02 += 5 * SkillSearch(154)),
     0 == SkillSearch(154) && n_A_Buf2[8] && (wA02 += 5 * n_A_Buf2[8])),
-    SkillSearch(342) && (wA02 += 2 * SkillSearch(342) * SkillSearch(380)),
     0 == _ ? (n_A_DMG[2] = Math.floor(n_A_DMG[2] * wA02 / 100),
         n_A_DMG[0] = Math.floor(n_A_DMG[0] * wA02 / 100),
         n_A_DMG[1] = Math.floor(n_A_DMG[1] * wA02 / 100)) : (n_A_CriATK[1] = Math.floor(n_A_CriATK[1] * wA02 / 100),
@@ -5576,7 +5577,8 @@ function calc(sortingParameter = false) {
 }
 function BattleCalc(e, _) {
     e < 1 && (e = 1),
-    1 == wCriTyuu && (e = Math.floor(e * (100 + n_tok[70]) / 100)),
+    (1 == wCriTyuu || SkillSearch(364)) && (e = Math.floor(e * (100 + n_tok[70]) / 100)), // add crit damage modifier 
+    SkillSearch(342) && (e = Math.floor(e * (100 + 2 * SkillSearch(342) * SkillSearch(380)) / 100)), // add kihop modifier
     SkillSearch(266) && 19 != n_A_ActiveSkill && 263 != n_A_ActiveSkill && 88 != n_A_ActiveSkill && 264 != n_A_ActiveSkill && (e = Math.floor(e * ((150 + 50 * SkillSearch(266)) * (1 - n_M_debuff[0] / 100)) / 100)), // added edp dmg reduction
     10 == _ ? e += n_A_WeaponLV_refineATK : e = BattleCalc4(e, _, 0),
     1 == n_A_WeaponType || 2 == n_A_WeaponType ? e += 4 * SkillSearch(3) : 3 == n_A_WeaponType ? e += 4 * SkillSearch(4) : 4 == n_A_WeaponType || 5 == n_A_WeaponType ? 0 == SkillSearch(78) ? e += 4 * SkillSearch(69) : e += 5 * SkillSearch(69) : 8 == n_A_WeaponType ? e += 3 * SkillSearch(89) : 11 == n_A_WeaponType ? e += 3 * SkillSearch(81) : 14 == n_A_WeaponType ? e += 3 * SkillSearch(198) : 15 == n_A_WeaponType ? e += 3 * SkillSearch(206) : 12 == n_A_WeaponType ? e += 3 * SkillSearch(224) : 6 == n_A_WeaponType || 7 == n_A_WeaponType ? e += 3 * SkillSearch(241) : 13 != n_A_WeaponType && 0 != n_A_WeaponType || (e += 3 * SkillSearch(183)),
@@ -5646,7 +5648,7 @@ function ApplyModifiers(e) {
             86 == n_A_ActiveSkill && 50 <= n_B[3] && n_B[3] < 60 && (e = Math.floor(e * (100 + 30 * n_A_ActiveSkillLV) / 100)),
             11 == n_A_WeaponType && SkillSearch(262) && (e = Math.floor(e * (110 + 2 * SkillSearch(262)) / 100)),
             _ = 0,
-            0 == PvP ? SkillSearch(354) && SkillSearch(365) || SkillSearch(354) && 2 == n_B[4] && n_B[6] >= 17392 ? _ += (n_A_BaseLV + n_A_STR + n_A_LUK + n_A_DEX) / (12 - 3 * SkillSearch(354)) : SkillSearch(352) && 0 == n_B[4] ? _ += (n_A_BaseLV + n_A_LUK + n_A_DEX) / (12 - 3 * SkillSearch(352)) : SkillSearch(353) && 1 == n_B[4] && n_B[6] >= 5218 && (_ += (n_A_BaseLV + n_A_LUK + n_A_DEX) / (12 - 3 * SkillSearch(353))) : SkillSearch(354) ? _ += (n_A_BaseLV + n_A_STR + n_A_LUK + n_A_DEX) / (12 - 3 * SkillSearch(354)) : SkillSearch(352) ? _ += (n_A_BaseLV + n_A_LUK + n_A_DEX) / (12 - 3 * SkillSearch(352)) : SkillSearch(353) && (_ += (n_A_BaseLV + n_A_LUK + n_A_DEX) / (12 - 3 * SkillSearch(353))),
+            0 == PvP ? SkillSearch(354) && SkillSearch(365) || SkillSearch(354) && 2 == n_B[4] && n_B[6] >= 20000 ? _ += (n_A_BaseLV + n_A_STR + n_A_LUK + n_A_DEX) / (12 - 3 * SkillSearch(354)) : SkillSearch(352) && 0 == n_B[4] ? _ += (n_A_BaseLV + n_A_LUK + n_A_DEX) / (12 - 3 * SkillSearch(352)) : SkillSearch(353) && 1 == n_B[4] && n_B[6] >= 6000 && (_ += (n_A_BaseLV + n_A_LUK + n_A_DEX) / (12 - 3 * SkillSearch(353))) : SkillSearch(354) ? _ += (n_A_BaseLV + n_A_STR + n_A_LUK + n_A_DEX) / (12 - 3 * SkillSearch(354)) : SkillSearch(352) ? _ += (n_A_BaseLV + n_A_LUK + n_A_DEX) / (12 - 3 * SkillSearch(352)) : SkillSearch(353) && (_ += (n_A_BaseLV + n_A_LUK + n_A_DEX) / (12 - 3 * SkillSearch(353))),
             e = Math.floor(e * (100 + _) / 100)
     }
     return e = Math.floor(tPlusDamCut(e)),

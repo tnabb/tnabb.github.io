@@ -2181,7 +2181,7 @@ m_Item = [
 	, [2167, 62, 1, 1, 0, 1, 70, 70, "Vigilante Stole", 0, "<b>For every 3 refine levels:</b><br>LUK +1", 2, 1, 6, 3, 0]
 	, [2168, 60, 1, 2, 0, 1, 70, 70, "Vigilante Suit", 0, "", 2, 3, 10, 3, 70, 3, 0]
 	, [2169, 100, 0, 0, 0, 0, 0, 0, "Vigilante Stole + Suit", 0, "", 2, 2, 6, 5, 70, 5, 0]
-	, [2170, 63, 0, 0, 0, 1, 50, 90, "Vigilante Shoes", 0, "", 5, 1, 9, -10, 18, -5, 0]
+	, [2170, 63, 0, 0, 0, 1, 50, 90, "Vigilante Shoes", 0, "<b>[Refine Rate 9~10]</b> DEX +1", 5, 1, 9, -10, 18, -5, 0]
 	, [2171, 64, 157, 0, 0, 1, 1, 50, "Metal Guitar Pick", 0, "", 5, 1, 25, 2, 5199, 25, 5207, 25, 0]
 	, [2172, 61, 0, 3, 0, 1, 50, 30, "Rubber Shield", 0, "", 19, 5, 64, 20, 0]
 	, [2173, 10, 114, 150, 3, 3, 100, 50, "Vigilante Bow", 0, "Enable the use of [Double Attack] Lvl 1 with any weapons.<BR>If you learned a level higher than 1, you will use that level instead.<br>When performing an ATK based attack, 10% chance to cast [Steal] Lvl 10<br><b>For each refine level:</b><br>Increases [Double Attack] success rate by 5%.", 0]
