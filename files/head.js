@@ -627,8 +627,8 @@ function BattleCalc999() {
                 n_Delay[2] = 1.125 + .375 * n_A_ActiveSkillLV;
             else if (436 == n_A_ActiveSkill)
                 n_rangedAtk = 1,
-                wMod += .1 * n_A_ActiveSkillLV,
-                wMod += (Math.min(n_A_CRI, 100) / 2) / 100,
+                wMod += .32 * n_A_ActiveSkillLV,
+                wMod += (Math.min(n_A_CRI, 100) * 3) / 100,
                 n_Delay[2] = 2;
             else if (437 == n_A_ActiveSkill)
                 n_rangedAtk = 1,
@@ -5686,8 +5686,7 @@ function ApplyModifiers(e) {
         118 == n_A_ActiveSkill && (e = Math.floor(e / n_A_ActiveSkillLV)),
         e = Math.floor(e * (100 + StPlusCalc2(5e3 + n_A_ActiveSkill) + StPlusCard(5e3 + n_A_ActiveSkill) + _) / 100),
         e = Math.floor(e * (100 - NotesCalc(n_B[0], 5e3 + n_A_ActiveSkill)) / 100), // skill dmg reduction
-        429 == n_A_ActiveSkill && n_A_Buf3[2] && (e = Math.floor(e * 0.35)), // 65% dmg reduction on desperado under bragi
-        //436 == n_A_ActiveSkill && (e = Math.floor(e * (1 + (Math.min(n_A_CRI, 100) / 2) / 100))), // spread shot crit scaling (0.5% dmg per crit)
+        429 == n_A_ActiveSkill && n_A_Buf3[2] && !SkillSearch(852) && (e = Math.floor(e * 0.35)), // 65% dmg reduction on desperado under bragi
         118 == n_A_ActiveSkill && (e = Math.floor(e * n_A_ActiveSkillLV)),
         n_A_Buf7[20] && MANUKU_MONSTER() && (e = 110 * e / 100),
         n_A_Buf7[23] && SUPURE_MONSTER() && (e = 110 * e / 100),

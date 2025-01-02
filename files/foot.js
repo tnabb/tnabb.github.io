@@ -2270,17 +2270,11 @@ function KakutyouKansuu() {
         else if (6 == wKK)
             1 == n_A_JobClass() || 20 == n_A_JOB ? (HPRLV = 1 * c.A_KakutyouSelNum.value,
                 l = "<br>HP regen: " + Math.floor((5 + n_A_MaxHP / 500) * HPRLV),
-                (EquipNumSearch(1240) || 20 == n_A_JOB) && (SPRLV = 1 * c.A_KakutyouSelNumSP.value,
-                    l += "<br>SP regen: " + Math.floor((3 + n_A_MaxSP / 500) * SPRLV)),
-                myInnerHtml("A_KakutyouData", l, 0)) : 5 == n_A_JobClass() || 9 == n_A_JOB || 23 == n_A_JOB || 44 == n_A_JOB ? (SPRLV = 1 * c.A_KakutyouSelNum.value,
-                    l = "<br>SP regen: " + Math.floor((3 + n_A_MaxSP / 500) * SPRLV),
-                    EquipNumSearch(1240) && (HPRLV = 1 * c.A_KakutyouSelNumHP.value,
-                        l += "<br>HP regen: " + Math.floor((5 + n_A_MaxHP / 500) * HPRLV)),
-                    myInnerHtml("A_KakutyouData", l, 0)) : EquipNumSearch(1240) ? (HPRLV = 1 * c.A_KakutyouSelNumHP.value,
-                        SPRLV = 1 * c.A_KakutyouSelNumSP.value,
-                        i = Math.floor((5 + n_A_MaxHP / 500) * HPRLV),
-                        w2 = Math.floor((3 + n_A_MaxSP / 500) * SPRLV),
-                        myInnerHtml("A_KakutyouData", "<br>HP regen: " + i + "<br>SP regen: " + w2, 0)) : myInnerHtml("A_KakutyouData", "", 0);
+                20 == n_A_JOB && (SPRLV = 1 * c.A_KakutyouSelNumSP.value,
+                    l += "<br>SP regen: " + Math.floor(SPRLV * 6 + 2 * SPRLV * n_A_MaxSP / 500)),
+                myInnerHtml("A_KakutyouData", l, 0)) : 5 == n_A_JobClass() || 3 == n_A_JobClass() || 44 == n_A_JOB ? (SPRLV = 1 * c.A_KakutyouSelNum.value,
+                    l = "<br>SP regen: " + Math.floor(SPRLV * 6 + 2 * SPRLV * n_A_MaxSP / 500),
+                    myInnerHtml("A_KakutyouData", l, 0)) : myInnerHtml("A_KakutyouData", "", 0);
         else if (8 == wKK)
             15 == n_A_JOB || 29 == n_A_JOB ? (SPRLV = 1 * c.A_KakutyouSelNum.value,
                 i = Math.floor((4 + n_A_MaxHP / 500) * SPRLV),
@@ -2925,25 +2919,22 @@ function KakutyouKansuu2() {
                 c.A_KakutyouSelNum.options[i] = new Option(i, i);
             if (c.A_KakutyouSelNum.value = 10,
                 20 == n_A_JOB) {
-                for (i = 0; i <= 10; i++)
+                for (i = 0; i <= 5; i++)
                     c.A_KakutyouSelNumSP.options[i] = new Option(i, i);
-                c.A_KakutyouSelNumSP.value = 10
+                c.A_KakutyouSelNumSP.value = 5
             }
             return
         }
-        if (5 == n_A_JobClass() || 9 == n_A_JOB || 23 == n_A_JOB || 44 == n_A_JOB) {
+        if (5 == n_A_JobClass() || 3 == n_A_JobClass() || 44 == n_A_JOB) {
             for (SPRname = "Increase SP Recovery Lvl: ",
                 44 == n_A_JOB && (SPRname = "Ninja Mastery Lvl: "),
                 SPRname += '<select name="A_KakutyouSelNum" onChange="StAllCalc()"></select>',
-                EquipNumSearch(1240) && (SPRname += '<br>Increase HP Recovery Lvl: <select name="A_KakutyouSelNumHP" onChange="StAllCalc()"><option value="3">3</option></select>'),
                 myInnerHtml("A_KakutyouSel", SPRname, 0),
-                i = 0; i <= 10; i++)
+                i = 0; i <= 5; i++)
                 c.A_KakutyouSelNum.options[i] = new Option(i, i);
-            return void (c.A_KakutyouSelNum.value = 10)
+            return void (c.A_KakutyouSelNum.value = 5)
         }
-        return EquipNumSearch(1240) ? (_ = 'Increase HP Recovery Lvl: <select name="A_KakutyouSelNumHP" onChange="StAllCalc()"><option value="3">3</option></select><br>',
-            _ += 'Increase SP Recovery Lvl: <select name="A_KakutyouSelNumSP" onChange="StAllCalc()"><option value="3">3</option></select><br>',
-            void myInnerHtml("A_KakutyouSel", _, 0)) : void myInnerHtml("A_KakutyouSel", '<p class="center">Not available for this class.</p>', 0)
+        return void myInnerHtml("A_KakutyouSel", '<p class="center">Not available for this class.</p>', 0)
     }
     if (8 != wKK)
         if (10 != wKK)
