@@ -1970,7 +1970,7 @@ m_Item = [
 	, [1963, 50, 0, 2, 0, 1, 30, 40, "Cursed Spell Book", 0, "When dealing ATK based damage, 5% chance you gain 12% of the damage inflicted on your target as HP.<br>Consumes 20 HP every 5 seconds.", 0]
 	, [1964, 1, 95, 120, 4, 2, 80, 50, "Blessed Knife", 0, "", 20, 6, 0]
 	, [1965, 9, 65, 60, 4, 2, 40, 50, "Holy Water Staff", 0, "[Waterball] cooldown +1.5 seconds<br>Consumes 100% SP when the weapon is unequipped.", 4, 3, 89, 15, 220, 52, 0]
-	, [1966, 8, 63, 120, 4, 2, 70, 40, "Repentance", 0, "<b>[Base LUK >= 40]</b> Critical damage +10%<br>ASPD +(1*refine)%", 10, 30, 0]
+	, [1966, 8, 109, 120, 4, 2, 70, 40, "Repentance", 0, "<b>[Base LUK >= 40]</b> Critical damage +10%<br>ASPD +(1*refine)%", 10, 30, 0]
 	, [1967, 100, 0, 0, 0, 0, 0, 0, "Repentance + Odin's Blessing", 0, "When performing an ATK based attack, 4.5% chance to cast [Adrenaline Rush] Lvl 1", 0]
 	, [1968, 17, 0, 90, 3, 3, 180, 60, "Dark Rose", 0, "", 5428, 15, 0]
 	, [1969, 100, 0, 0, 0, 0, 0, 0, "Dark Rose + Skin of Ventus", 0, "", 190, 10, 191, 10, 192, 10, 0]
@@ -2151,7 +2151,7 @@ m_Item = [
 	, [2139, 100, 0, 0, 0, 0, 0, 0, "Lava Leather Hood + Binoculars", 0, "", 5, 2, 9, 5, 0]
 	, [2140, 100, 0, 0, 0, 0, 0, 0, "Lava Leather Hood + Evil Wing Ears", 0, "", 1, 2, 18, 3, 0]
 	, [2141, 62, 0, 3, 0, 1, 30, 1, "Manteau of Flame Heart", 0, "", 63, 10, 61, -10, 0]
-	, [2142, 9, 156, 60, 4, 2, 70, 70, "Flaming Wand", 0, "<b>For each refine:</b><br>Increases [<b style='color:red'>Fire</b>] property magic damage by 2%.<br>[Fire Ball] skill damage +1%", 89, 20, 4, 4, 5, 1, 13, 200, 14, 100, 0]
+	, [2142, 9, 156, 60, 4, 2, 70, 70, "Flaming Wand", 0, "<b>For each refine:</b><br>Increases [<b style='color:red'>Fire</b>] property magic damage by 2%.<br>[Fire Ball] skill damage +5%", 89, 20, 4, 4, 5, 1, 13, 200, 14, 100, 0]
 	, [2143, 1, 95, 120, 4, 2, 120, 50, "Volcano Knife", 0, "", 89, 15, 4, 3, 5, 3, 42, 15, 342, 15, 0]
 	, [2144, 52, 0, 0, 0, 0, 0, 1, "Show Me The Zeny", 0, "Enables the use of [Overcharge] Lvl 10<br>Enables the use of [Discount] Lvl 10<br><b>Note: This does not give the new passive effects of Overcharge and Discount, which are stricly limited to Merchant classes.</b>", 0]
 	// patch a3.7

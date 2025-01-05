@@ -2652,7 +2652,7 @@ function BattleMagicCalc(e) {
     // flaming wand
     (46 == n_A_ActiveSkill || 47 == n_A_ActiveSkill || 51 == n_A_ActiveSkill || 540 == n_A_ActiveSkill || 52 == n_A_ActiveSkill || 53 == n_A_ActiveSkill || 122 == n_A_ActiveSkill || 124 == n_A_ActiveSkill || 125 == n_A_ActiveSkill || 277 == n_A_ActiveSkill || 407 == n_A_ActiveSkill || 408 == n_A_ActiveSkill || 409 == n_A_ActiveSkill) && 2142 == n_A_Equip[0] && (n += 2 * n_A_Weapon_refine),
     (373 == n_A_ActiveSkill || 374 == n_A_ActiveSkill || 375 == n_A_ActiveSkill) && 2142 == n_A_Equip[0] && n_A_Weapon_element == 3 && (n += 2 * n_A_Weapon_refine),
-    52 == n_A_ActiveSkill && 2142 == n_A_Equip[0] && (n += n_A_Weapon_refine),
+    52 == n_A_ActiveSkill && 2142 == n_A_Equip[0] && (n += 5 * n_A_Weapon_refine),
     // mavka card
     (407 == n_A_ActiveSkill || 408 == n_A_ActiveSkill || 409 == n_A_ActiveSkill) && 44 == n_A_JOB && (n += 7*CardNumSearch(597)),
     // arc elder card
