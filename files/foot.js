@@ -1124,7 +1124,7 @@ function StAllCalc() {
     n_A_MATK[2] += wImp,
     myInnerHtml("A_MATK", n_A_MATK[0] + "~" + n_A_MATK[2], 0),
         n_A_MATK[0] != n_A_MATK[2] && (n_A_MATK[2] -= 1),
-        n_A_MATK[1] = (n_A_MATK[2] + n_A_MATK[0]) / 2;
+        n_A_MATK[1] = Math.ceil((n_A_MATK[2] + n_A_MATK[0]) / 2);
     var d = 0;
     78 == m_JobBuff[n_A_JOB][5] ? c.A_skill5.value > 0 && (d = 1) : 78 == m_JobBuff[n_A_JOB][8] && c.A_skill8.value > 0 && (d = 1),
         M = 100,
@@ -3896,8 +3896,8 @@ function LoadLocal3() {
         9 == k && (slotNum = "num0" + k),
         k >= 10 && (slotNum = "num" + k),
         saveName = "",
-        void 0 === localStorage["Slot" + slotNum] ? c.A_SaveSlotLocal.options[k - 1] = new Option("Save" + k + ": No Data", slotNum) : (SaveData = JSON.parse(localStorage["Slot" + slotNum]), (SaveData[500] != undefined && SaveData[500] != "") && (saveName = " (" + SaveData[500] + ") "),
-            1 <= SaveData[2] && SaveData[2] <= 46 ? 0 == SaveData[5] ? c.A_SaveSlotLocal.options[k - 1] = new Option("Save" + k + ": " + JobName[SaveData[2]] + saveName, slotNum) : c.A_SaveSlotLocal.options[k - 1] = new Option("Save" + k + ": Baby " + JobName[SaveData[2]] + saveName, slotNum) : 999 == SaveData[2] || 0 == SaveData[2] ? c.A_SaveSlotLocal.options[k - 1] = new Option("Save" + k + ": Novice" + saveName, slotNum) : c.A_SaveSlotLocal.options[k - 1] = new Option("Save" + k + ": No Data", slotNum))
+        void 0 === localStorage["Slot" + slotNum] ? c.A_SaveSlotLocal.options[k - 1] = new Option(k + ": No Data", slotNum) : (SaveData = JSON.parse(localStorage["Slot" + slotNum]), (SaveData[500] != undefined && SaveData[500] != "") && (saveName = " (" + SaveData[500] + ") "),
+            1 <= SaveData[2] && SaveData[2] <= 46 ? 0 == SaveData[5] ? c.A_SaveSlotLocal.options[k - 1] = new Option(k + ": " + JobName[SaveData[2]] + saveName, slotNum) : c.A_SaveSlotLocal.options[k - 1] = new Option(k + ": Baby " + JobName[SaveData[2]] + saveName, slotNum) : 999 == SaveData[2] || 0 == SaveData[2] ? c.A_SaveSlotLocal.options[k - 1] = new Option(k + ": Novice" + saveName, slotNum) : c.A_SaveSlotLocal.options[k - 1] = new Option(k + ": No Data", slotNum))
 }
 function delLocal() {
     window.confirm("Do you really want to DELETE selected saved data?") && (slotNum = document.calcForm.A_SaveSlotLocal.value,

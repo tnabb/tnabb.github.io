@@ -1608,12 +1608,13 @@ function BattleCalc999() {
                 wHITsuu = n_A_ActiveSkillLV + 2,
                 wCast = 2 + .5 * n_A_ActiveSkillLV;
             else if (127 == n_A_ActiveSkill)
+                n_bunkatuHIT = 1,
                 n_A_Weapon_element = 4,
-                wHITsuu = 4,
+                wHITsuu = 20,
                 wCast = 15.5 - .5 * n_A_ActiveSkillLV,
                 n_Delay[2] = 5,
                 n_Delay[6] = 4,
-                wMod = .8 + .2 * n_A_ActiveSkillLV;
+                wMod = 3.2 + .8 * n_A_ActiveSkillLV;
             else if (128 == n_A_ActiveSkill || 320 == n_A_ActiveSkill)
                 n_A_Weapon_element = 1,
                 n_A_ActiveSkillLV >= 4 ? wHITsuu = 25 : n_A_ActiveSkillLV >= 2 && (wHITsuu = 9),
@@ -1741,7 +1742,7 @@ function BattleCalc999() {
 
             if(0 == n_bunkatuHIT)
                 for (s = 0; s <= 2; s++)
-                    w_DMG[s] = BattleMagicCalc(n_A_MATK[s] * wMod),
+                    w_DMG[s] = BattleMagicCalc(Math.floor(n_A_MATK[s] * wMod)),
                     0 != SG_Special_HITnum && (SG_Special_DMG[s] = w_DMG[s]),
                     Last_DMG_B[s] = w_DMG[s],
                     Last_DMG_A[s] = w_DMG[s] * wHITsuu,
@@ -1749,7 +1750,7 @@ function BattleCalc999() {
                     w_DMG[s] = Last_DMG_A[s];
             else
                 for (s = 0; s <= 2; s++)
-                    w_DMG[s] = Math.floor(BattleMagicCalc(n_A_MATK[s] * wMod) / wHITsuu),
+                    w_DMG[s] = Math.floor(BattleMagicCalc(Math.floor(n_A_MATK[s] * wMod)) / wHITsuu),
                     Last_DMG_A[s] = Last_DMG_B[s] = w_DMG[s] * wHITsuu,
                     InnStr[s] += Last_DMG_A[s] + " (" + w_DMG[s] + SubName[8] + wHITsuu + " hits)",
                     w_DMG[s] *= wHITsuu;
@@ -2604,8 +2605,8 @@ function BattleHiDam() {
 function BattleMagicCalc(e) {
     wBMC2 = e;
     n = StPlusCalc2(5e3 + n_A_ActiveSkill) + StPlusCard(5e3 + n_A_ActiveSkill); // moved skill dmg % modifiers to before mdef reductionf
-    n_A_Buf9[20] == n_A_ActiveSkill && (n += n_A_Buf9[19]), // skill dmg % on top
-    n_A_Buf9[22] == n_A_ActiveSkill && (n += n_A_Buf9[21]), // skill dmg % on bottom
+    n_A_Buf9[20] == n_A_ActiveSkill && (n += n_A_Buf9[19]), // skill dmg % on manual top
+    n_A_Buf9[22] == n_A_ActiveSkill && (n += n_A_Buf9[21]), // skill dmg % on manual bottom
     46 != n_A_ActiveSkill && 47 != n_A_ActiveSkill && 277 != n_A_ActiveSkill || 5 == n_A_JobClass() && (n += 20 * CardNumSearch(474)),
     132 != n_A_ActiveSkill && 133 != n_A_ActiveSkill || EquipNumSearch(1146) && (n += 15 + n_A_HEAD_REFINE),
     131 == n_A_ActiveSkill && EquipNumSearch(1169) && (n += n_A_Weapon_refine),
@@ -2620,7 +2621,7 @@ function BattleMagicCalc(e) {
     540 == n_A_ActiveSkill && (n += 25 * CardNumSearch(493)),
     541 == n_A_ActiveSkill && (n += 25 * CardNumSearch(488)),
     542 == n_A_ActiveSkill && (n += 25 * CardNumSearch(591)),
-    wBMC2 = wBMC2 * (100 + n) / 100, // applying skill modifiers
+    wBMC2 = Math.floor(wBMC2 * (100 + n) / 100), // applying skill modifiers
     n_A_Buf7[21] && MANUKU_MONSTER() && (wBMC2 = 110 * wBMC2 / 100),
     n_A_Buf7[24] && SUPURE_MONSTER() && (wBMC2 = 110 * wBMC2 / 100),
     131 == n_A_ActiveSkill && n_B_debuf[4] && 0 == n_B[19] && n_B[3] < 90 && (wBMC2 = 0),
@@ -2630,9 +2631,8 @@ function BattleMagicCalc(e) {
     var _ = 0;
     0 == n_B[19] && CardNumSearch(424) && (_ = 1),
     590 == n_A_ActiveSkill && 6 == n_B[2] && (_ = 1),
-        0 != _ && (wBMC_MDEF = 0,
-            n_B_MDEF2 = 0),
-        122 == n_A_ActiveSkill ? wBMC2 = Math.floor(wBMC2 + 50) : wBMC2 = Math.floor(wBMC2 * mdefReduction(wBMC_MDEF) - n_B_MDEF2),
+        0 != _ && (wBMC_MDEF = 0, n_B_MDEF2 = 0),
+        122 == n_A_ActiveSkill ? wBMC2 = Math.floor(wBMC2 + 50) : wBMC2 = Math.floor(wBMC2 * mdefReduction(wBMC_MDEF) - n_B_MDEF2), // mdef calc
         wBMC2 < 1 && (wBMC2 = 1),
         //console.log("post reduction magic dmg : " + wBMC2)
         //104 == n_A_ActiveSkill && 6 != n_B[2] && n_B[3] < 90 && (wBMC2 = 0), // make magnus exorcismus hit all
@@ -2685,14 +2685,16 @@ function BattleMagicCalc(e) {
     var nSize = n_tok[356 + n_B[4]];
     var nBoss = n_B[19] ? n_tok[353] : 0; // MAGIC DAMAGE BOSS MODIFIER
     var nAll = n_tok[354];
+    var cardfix = 1000;
     9 == n_B[2] && SkillSearch(234) && (nRace += 2 * SkillSearch(234)), // dragonology
-    wBMC2 = wBMC2 * (100 + n) / 100,
-    wBMC2 = wBMC2 * (100 + nRace) / 100,
-    wBMC2 = wBMC2 * (100 + nEle) / 100,
-    wBMC2 = wBMC2 * (100 + nSize) / 100,
-    wBMC2 = wBMC2 * (100 + nBoss) / 100,
-    wBMC2 = wBMC2 * (100 + nAll) / 100,
-    n_B_debuf[29] && (37 == n_A_ActiveSkill || 104 == n_A_ActiveSkill || 590 == n_A_ActiveSkill) && (wBMC2 = wBMC2 * (100 + 10) / 100),
+
+    cardfix = Math.floor(cardfix * (100 + nRace) / 100),
+    cardfix = Math.floor(cardfix * (100 + nEle) / 100),
+    cardfix = Math.floor(cardfix * (100 + n) / 100),
+    cardfix = Math.floor(cardfix * (100 + nSize) / 100),
+    cardfix = Math.floor(cardfix * (100 + nBoss + nAll) / 100),
+    wBMC2 = Math.floor(wBMC2 - (((wBMC2) * (1000 - Math.max(0, cardfix))) / 1000)),
+    n_B_debuf[29] && (37 == n_A_ActiveSkill || 104 == n_A_ActiveSkill || 590 == n_A_ActiveSkill) && (wBMC2 = Math.floor(wBMC2 * (100 + 10) / 100)),
     wBMC2 = tPlusDamCut(wBMC2);
     return Math.floor(wBMC2);
     /* n = StPlusCalc2(5e3 + n_A_ActiveSkill) + StPlusCard(5e3 + n_A_ActiveSkill);
@@ -5916,9 +5918,9 @@ function tPlusAG() {
         w_DMG[2] *= wPAG / 100)
 }
 function defReduction(e) {
-    return 1 * c.server.value < 50 ? (100 - e) / 100 : (4e3 + e) / (4e3 + 10 * e)
+    return (100 - e) / 100
 }
 function mdefReduction(e) {
-    return 1 * c.server.value < 50 ? (100 - e) / 100 : (1e3 + e) / (1e3 + 10 * e)
+    return (100 - e) / 100
 }
 SWs3sw = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
