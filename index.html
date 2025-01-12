@@ -77,6 +77,20 @@ Calc's theme: <select id="theme" onChange="themes()"><option value="0">Original<
               <br>This was not made in collaboration with any GM's from Alfheim, so don't bug them if there's any errors.
               <br><br>
               <details open>
+                <summary style="cursor: pointer; font-weight: bold;">(A) Changelog 2025-01-12</summary>
+                <div>
+                  • Removed "headgear Hidden Slot Enchant" as it does not exist on Alfheim.
+                  <br>• Added Mine Worker's Vest, Mine Worker's Backpack, Spurred Boots, Bull Hat, and all new Adventurer weapons.
+                  <br>• Added a new enchant option to headgear, selectable only for the current enchantable headgears (Ribbon, Bull Hat, Safety Helmet, and Unicorn Horn).
+                  <br>• Added enchants to Mine Worker's Vest, Mine Worker's Backpack, and Spurred Boots. 
+                  <br>• Added 'enchants' to Mine Worker's Pickaxe. These enchants are added in the same place as random options, as they have different levels.
+                  <br>• The Vigilante Stole, Suit, Shoes, and Frontier Boots can apply their enchants in the random options field, as they are the same.
+                  <br>• Added enchants to Adventurer's Weapons.
+                  <br>• Added 4 Soft DEF to each Paradise Gear.
+                </div>
+              </details>
+              <br>
+              <details>
                 <summary style="cursor: pointer; font-weight: bold;">(A) Changelog 2025-01-09</summary>
                 <div>
                   • Slightly adjusted magic damage calculation, so it should be more accurate to in-game (around 0-1% difference). 
@@ -1417,584 +1431,24 @@ Calc's theme: <select id="theme" onChange="themes()"><option value="0">Original<
                     <td><select name="A_weapon1_card1" onchange="Click_Card(this[this.selectedIndex].value)"
                         style="width: 208px; background-color: rgb(255, 204, 136);">
                         <option value="0">(no card)</option>
-                        <option value="201">* Element Stone (Water)</option>
-                        <option value="202">* Element Stone (Earth)</option>
-                        <option value="203">* Element Stone (Fire)</option>
-                        <option value="204">* Element Stone (Wind)</option>
-                        <option value="106">* Star Crumb</option>
-                        <option value="1">* All Race +20%</option>
-                        <option value="2">* All Element +20%</option>
-                        <option value="3">* All Size +15%, ATK +5</option>
-                        <option value="156">* CRIT Dmg +10%, CRIT +7</option>
-                        <option value="31">Abysmal Knight</option>
-                        <option value="25">Anacondaq</option>
-                        <option value="522">Ancient Tree</option>
-                        <option value="11">Andre</option>
-                        <option value="112">Andre Larva</option>
-                        <option value="107">Archer Skeleton</option>
-                        <option value="223">Assaulter</option>
-                        <option value="356">Aster</option>
-                        <option value="463">Atroce</option>
-                        <option value="524">Aunoe</option>
-                        <option value="305">Baby Garm/Hatii</option>
-                        <option value="45">Baphomet</option>
-                        <option value="355">Beetle King</option>
-                        <option value="528">Beholder Master</option>
-                        <option value="544">Beholder Master (aRO)</option>
-                        <option value="361">Bloody Knight</option>
-                        <option value="217">Bloody Murderer</option>
-                        <option value="465">Bow Guardian</option>
-                        <option value="521">Bradium Golem</option>
-                        <option value="163">Breeze</option>
-                        <option value="15">Caramel</option>
-                        <option value="265">Caterpillar</option>
-                        <option value="160">Cecil Damon</option>
-                        <option value="499">Centipede Larva</option>
-                        <option value="325">Chepet</option>
-                        <option value="520">Cobalt Mineral</option>
-                        <option value="259">Crab</option>
-                        <option value="279">Cruiser</option>
-                        <option value="311">Dark Priest</option>
-                        <option value="169">Death Word</option>
-                        <option value="28">Desert Wolf</option>
-                        <option value="20">Deviace</option>
-                        <option value="329">Diabolic</option>
-                        <option value="427">Dolor of Thanatos</option>
-                        <option value="42">Doppelganger</option>
-                        <option value="519">Draco Egg</option>
-                        <option value="47">Dracula</option>
-                        <option value="21">Drainliar</option>
-                        <option value="32">Drake</option>
-                        <option value="343">Driller</option>
-                        <option value="5">Drops</option>
-                        <option value="462">Drosera</option>
-                        <option value="215">Dullahan</option>
-                        <option value="19">Earth Petite</option>
-                        <option value="244">Elder</option>
-                        <option value="158">Eremes Guile</option>
-                        <option value="4">Fabre</option>
-                        <option value="359">Fake Angel</option>
-                        <option value="525">Fanat</option>
-                        <option value="110">Familiar</option>
-                        <option value="8">Female Thief Bug</option>
-                        <option value="17">Flora</option>
-                        <option value="253">Fur Seal</option>
-                        <option value="263">Gig</option>
-                        <option value="14">Goblin</option>
-                        <option value="286">Goblin Archer</option>
-                        <option value="288">Goblin Leader</option>
-                        <option value="287">Goblin Steamrider</option>
-                        <option value="39">Golem</option>
-                        <option value="277">Gryphon</option>
-                        <option value="518">Hell Apocalypse</option>
-                        <option value="167">Hill Wind</option>
-                        <option value="498">Hillsrion</option>
-                        <option value="6">Hornet</option>
-                        <option value="159">Howard Alt-Eisen</option>
-                        <option value="46">Hunter Fly</option>
-                        <option value="13">Hydra</option>
-                        <option value="255">Incantation Samurai</option>
-                        <option value="235">Injustice</option>
-                        <option value="26">Kaho</option>
-                        <option value="289">Kobold Archer</option>
-                        <option value="290">Kobold Leader</option>
-                        <option value="164">Lady Solace</option>
-                        <option value="168">Laurell Weinder</option>
-                        <option value="382">Lava Golem</option>
-                        <option value="219">Lord of the Dead</option>
-                        <option value="7">Lunatic</option>
-                        <option value="165">Maero of Thanatos</option>
-                        <option value="37">Magnolia</option>
-                        <option value="23">Mandragora</option>
-                        <option value="398">Mao Guai / Civil Servant</option>
-                        <option value="35">Marina</option>
-                        <option value="161">MasterSmith</option>
-                        <option value="166">Memory of Thanatos</option>
-                        <option value="157">Metaling</option>
-                        <option value="36">Metaller</option>
-                        <option value="30">Minorous</option>
-                        <option value="328">Mobster</option>
-                        <option value="40">Mummy</option>
-                        <option value="380">Mutant Dragonoid</option>
-                        <option value="517">Naga</option>
-                        <option value="466">Necromancer</option>
-                        <option value="516">Nepenthes</option>
-                        <option value="345">Nereid</option>
-                        <option value="252">Orc Lady</option>
-                        <option value="27">Orc Skeleton</option>
-                        <option value="353">Panzer Goblin</option>
-                        <option value="12">Peco Peco Egg</option>
-                        <option value="360">Phendark</option>
-                        <option value="44">Phreeoni</option>
-                        <option value="515">Pinguicula</option>
-                        <option value="171">Pitman</option>
-                        <option value="33">Plankton</option>
-                        <option value="170">Red Ferus</option>
-                        <option value="111">Requiem</option>
-                        <option value="390">Rotar Zairo</option>
-                        <option value="22">Santa Poring</option>
-                        <option value="109">Savage Babe</option>
-                        <option value="16">Scorpion</option>
-                        <option value="108">Scorpion King</option>
-                        <option value="254">Shellfish</option>
-                        <option value="43">Sidewinder</option>
-                        <option value="428">Skeggiold</option>
-                        <option value="29">Skeleton Worker</option>
-                        <option value="9">Skeleton</option>
-                        <option value="34">Snake/Boa</option>
-                        <option value="162">Sniper</option>
-                        <option value="41">Soldier Skeleton</option>
-                        <option value="366">Stone Shooter</option>
-                        <option value="313">Stormy Knight</option>
-                        <option value="18">Strouf</option>
-                        <option value="464">Sword Guardian</option>
-                        <option value="526">Tendrillion</option>
-                        <option value="532">Tendrillion (aRO)</option>
-                        <option value="233">The Paper</option>
-                        <option value="296">Tri Joint</option>
-                        <option value="323">Turtle General</option>
-                        <option value="24">Vadon</option>
-                        <option value="363">Valkyrie Randgris</option>
-                        <option value="10">Wolf</option>
-                        <option value="514">Zakudam</option>
-                        <option value="38">Zenorc</option>
-                        <option value="326">Zipper Bear</option>
-                        <option value="319">Zombie Master</option>
                       </select></td>
                   </tr>
                   <tr>
                     <td><select name="A_weapon1_card2" onchange="Click_Card(this[this.selectedIndex].value)"
                         style="width: 208px; background-color: rgb(255, 204, 136);">
                         <option value="0">(no card)</option>
-                        <option value="106">* Star Crumb</option>
-                        <option value="1">* All Race +20%</option>
-                        <option value="2">* All Element +20%</option>
-                        <option value="3">* All Size +15%, ATK +5</option>
-                        <option value="156">* CRIT Dmg +10%, CRIT +7</option>
-                        <option value="31">Abysmal Knight</option>
-                        <option value="25">Anacondaq</option>
-                        <option value="522">Ancient Tree</option>
-                        <option value="11">Andre</option>
-                        <option value="112">Andre Larva</option>
-                        <option value="107">Archer Skeleton</option>
-                        <option value="223">Assaulter</option>
-                        <option value="356">Aster</option>
-                        <option value="463">Atroce</option>
-                        <option value="524">Aunoe</option>
-                        <option value="305">Baby Garm/Hatii</option>
-                        <option value="45">Baphomet</option>
-                        <option value="355">Beetle King</option>
-                        <option value="528">Beholder Master</option>
-                        <option value="544">Beholder Master (aRO)</option>
-                        <option value="361">Bloody Knight</option>
-                        <option value="217">Bloody Murderer</option>
-                        <option value="465">Bow Guardian</option>
-                        <option value="521">Bradium Golem</option>
-                        <option value="163">Breeze</option>
-                        <option value="15">Caramel</option>
-                        <option value="265">Caterpillar</option>
-                        <option value="160">Cecil Damon</option>
-                        <option value="499">Centipede Larva</option>
-                        <option value="325">Chepet</option>
-                        <option value="520">Cobalt Mineral</option>
-                        <option value="259">Crab</option>
-                        <option value="279">Cruiser</option>
-                        <option value="311">Dark Priest</option>
-                        <option value="169">Death Word</option>
-                        <option value="28">Desert Wolf</option>
-                        <option value="20">Deviace</option>
-                        <option value="329">Diabolic</option>
-                        <option value="427">Dolor of Thanatos</option>
-                        <option value="42">Doppelganger</option>
-                        <option value="519">Draco Egg</option>
-                        <option value="47">Dracula</option>
-                        <option value="21">Drainliar</option>
-                        <option value="32">Drake</option>
-                        <option value="343">Driller</option>
-                        <option value="5">Drops</option>
-                        <option value="462">Drosera</option>
-                        <option value="215">Dullahan</option>
-                        <option value="19">Earth Petite</option>
-                        <option value="244">Elder</option>
-                        <option value="158">Eremes Guile</option>
-                        <option value="4">Fabre</option>
-                        <option value="359">Fake Angel</option>
-                        <option value="525">Fanat</option>
-                        <option value="110">Familiar</option>
-                        <option value="8">Female Thief Bug</option>
-                        <option value="17">Flora</option>
-                        <option value="253">Fur Seal</option>
-                        <option value="263">Gig</option>
-                        <option value="14">Goblin</option>
-                        <option value="286">Goblin Archer</option>
-                        <option value="288">Goblin Leader</option>
-                        <option value="287">Goblin Steamrider</option>
-                        <option value="39">Golem</option>
-                        <option value="277">Gryphon</option>
-                        <option value="518">Hell Apocalypse</option>
-                        <option value="167">Hill Wind</option>
-                        <option value="498">Hillsrion</option>
-                        <option value="6">Hornet</option>
-                        <option value="159">Howard Alt-Eisen</option>
-                        <option value="46">Hunter Fly</option>
-                        <option value="13">Hydra</option>
-                        <option value="255">Incantation Samurai</option>
-                        <option value="235">Injustice</option>
-                        <option value="26">Kaho</option>
-                        <option value="289">Kobold Archer</option>
-                        <option value="290">Kobold Leader</option>
-                        <option value="164">Lady Solace</option>
-                        <option value="168">Laurell Weinder</option>
-                        <option value="382">Lava Golem</option>
-                        <option value="219">Lord of the Dead</option>
-                        <option value="7">Lunatic</option>
-                        <option value="165">Maero of Thanatos</option>
-                        <option value="37">Magnolia</option>
-                        <option value="23">Mandragora</option>
-                        <option value="398">Mao Guai / Civil Servant</option>
-                        <option value="35">Marina</option>
-                        <option value="161">MasterSmith</option>
-                        <option value="166">Memory of Thanatos</option>
-                        <option value="157">Metaling</option>
-                        <option value="36">Metaller</option>
-                        <option value="30">Minorous</option>
-                        <option value="328">Mobster</option>
-                        <option value="40">Mummy</option>
-                        <option value="380">Mutant Dragonoid</option>
-                        <option value="517">Naga</option>
-                        <option value="466">Necromancer</option>
-                        <option value="516">Nepenthes</option>
-                        <option value="345">Nereid</option>
-                        <option value="252">Orc Lady</option>
-                        <option value="27">Orc Skeleton</option>
-                        <option value="353">Panzer Goblin</option>
-                        <option value="12">Peco Peco Egg</option>
-                        <option value="360">Phendark</option>
-                        <option value="44">Phreeoni</option>
-                        <option value="515">Pinguicula</option>
-                        <option value="171">Pitman</option>
-                        <option value="33">Plankton</option>
-                        <option value="170">Red Ferus</option>
-                        <option value="111">Requiem</option>
-                        <option value="390">Rotar Zairo</option>
-                        <option value="22">Santa Poring</option>
-                        <option value="109">Savage Babe</option>
-                        <option value="16">Scorpion</option>
-                        <option value="108">Scorpion King</option>
-                        <option value="254">Shellfish</option>
-                        <option value="43">Sidewinder</option>
-                        <option value="428">Skeggiold</option>
-                        <option value="29">Skeleton Worker</option>
-                        <option value="9">Skeleton</option>
-                        <option value="34">Snake/Boa</option>
-                        <option value="162">Sniper</option>
-                        <option value="41">Soldier Skeleton</option>
-                        <option value="366">Stone Shooter</option>
-                        <option value="313">Stormy Knight</option>
-                        <option value="18">Strouf</option>
-                        <option value="464">Sword Guardian</option>
-                        <option value="526">Tendrillion</option>
-                        <option value="532">Tendrillion (aRO)</option>
-                        <option value="233">The Paper</option>
-                        <option value="296">Tri Joint</option>
-                        <option value="323">Turtle General</option>
-                        <option value="24">Vadon</option>
-                        <option value="363">Valkyrie Randgris</option>
-                        <option value="10">Wolf</option>
-                        <option value="514">Zakudam</option>
-                        <option value="38">Zenorc</option>
-                        <option value="326">Zipper Bear</option>
-                        <option value="319">Zombie Master</option>
                       </select></td>
                   </tr>
                   <tr>
                     <td><select name="A_weapon1_card3" onchange="Click_Card(this[this.selectedIndex].value)"
                         style="width: 208px; background-color: rgb(255, 204, 136);">
                         <option value="0">(no card)</option>
-                        <option value="106">* Star Crumb</option>
-                        <option value="1">* All Race +20%</option>
-                        <option value="2">* All Element +20%</option>
-                        <option value="3">* All Size +15%, ATK +5</option>
-                        <option value="156">* CRIT Dmg +10%, CRIT +7</option>
-                        <option value="31">Abysmal Knight</option>
-                        <option value="25">Anacondaq</option>
-                        <option value="522">Ancient Tree</option>
-                        <option value="11">Andre</option>
-                        <option value="112">Andre Larva</option>
-                        <option value="107">Archer Skeleton</option>
-                        <option value="223">Assaulter</option>
-                        <option value="356">Aster</option>
-                        <option value="463">Atroce</option>
-                        <option value="524">Aunoe</option>
-                        <option value="305">Baby Garm/Hatii</option>
-                        <option value="45">Baphomet</option>
-                        <option value="355">Beetle King</option>
-                        <option value="528">Beholder Master</option>
-                        <option value="544">Beholder Master (aRO)</option>
-                        <option value="361">Bloody Knight</option>
-                        <option value="217">Bloody Murderer</option>
-                        <option value="465">Bow Guardian</option>
-                        <option value="521">Bradium Golem</option>
-                        <option value="163">Breeze</option>
-                        <option value="15">Caramel</option>
-                        <option value="265">Caterpillar</option>
-                        <option value="160">Cecil Damon</option>
-                        <option value="499">Centipede Larva</option>
-                        <option value="325">Chepet</option>
-                        <option value="520">Cobalt Mineral</option>
-                        <option value="259">Crab</option>
-                        <option value="279">Cruiser</option>
-                        <option value="311">Dark Priest</option>
-                        <option value="169">Death Word</option>
-                        <option value="28">Desert Wolf</option>
-                        <option value="20">Deviace</option>
-                        <option value="329">Diabolic</option>
-                        <option value="427">Dolor of Thanatos</option>
-                        <option value="42">Doppelganger</option>
-                        <option value="519">Draco Egg</option>
-                        <option value="47">Dracula</option>
-                        <option value="21">Drainliar</option>
-                        <option value="32">Drake</option>
-                        <option value="343">Driller</option>
-                        <option value="5">Drops</option>
-                        <option value="462">Drosera</option>
-                        <option value="215">Dullahan</option>
-                        <option value="19">Earth Petite</option>
-                        <option value="244">Elder</option>
-                        <option value="158">Eremes Guile</option>
-                        <option value="4">Fabre</option>
-                        <option value="359">Fake Angel</option>
-                        <option value="525">Fanat</option>
-                        <option value="110">Familiar</option>
-                        <option value="8">Female Thief Bug</option>
-                        <option value="17">Flora</option>
-                        <option value="253">Fur Seal</option>
-                        <option value="263">Gig</option>
-                        <option value="14">Goblin</option>
-                        <option value="286">Goblin Archer</option>
-                        <option value="288">Goblin Leader</option>
-                        <option value="287">Goblin Steamrider</option>
-                        <option value="39">Golem</option>
-                        <option value="277">Gryphon</option>
-                        <option value="518">Hell Apocalypse</option>
-                        <option value="167">Hill Wind</option>
-                        <option value="498">Hillsrion</option>
-                        <option value="6">Hornet</option>
-                        <option value="159">Howard Alt-Eisen</option>
-                        <option value="46">Hunter Fly</option>
-                        <option value="13">Hydra</option>
-                        <option value="255">Incantation Samurai</option>
-                        <option value="235">Injustice</option>
-                        <option value="26">Kaho</option>
-                        <option value="289">Kobold Archer</option>
-                        <option value="290">Kobold Leader</option>
-                        <option value="164">Lady Solace</option>
-                        <option value="168">Laurell Weinder</option>
-                        <option value="382">Lava Golem</option>
-                        <option value="219">Lord of the Dead</option>
-                        <option value="7">Lunatic</option>
-                        <option value="165">Maero of Thanatos</option>
-                        <option value="37">Magnolia</option>
-                        <option value="23">Mandragora</option>
-                        <option value="398">Mao Guai / Civil Servant</option>
-                        <option value="35">Marina</option>
-                        <option value="161">MasterSmith</option>
-                        <option value="166">Memory of Thanatos</option>
-                        <option value="157">Metaling</option>
-                        <option value="36">Metaller</option>
-                        <option value="30">Minorous</option>
-                        <option value="328">Mobster</option>
-                        <option value="40">Mummy</option>
-                        <option value="380">Mutant Dragonoid</option>
-                        <option value="517">Naga</option>
-                        <option value="466">Necromancer</option>
-                        <option value="516">Nepenthes</option>
-                        <option value="345">Nereid</option>
-                        <option value="252">Orc Lady</option>
-                        <option value="27">Orc Skeleton</option>
-                        <option value="353">Panzer Goblin</option>
-                        <option value="12">Peco Peco Egg</option>
-                        <option value="360">Phendark</option>
-                        <option value="44">Phreeoni</option>
-                        <option value="515">Pinguicula</option>
-                        <option value="171">Pitman</option>
-                        <option value="33">Plankton</option>
-                        <option value="170">Red Ferus</option>
-                        <option value="111">Requiem</option>
-                        <option value="390">Rotar Zairo</option>
-                        <option value="22">Santa Poring</option>
-                        <option value="109">Savage Babe</option>
-                        <option value="16">Scorpion</option>
-                        <option value="108">Scorpion King</option>
-                        <option value="254">Shellfish</option>
-                        <option value="43">Sidewinder</option>
-                        <option value="428">Skeggiold</option>
-                        <option value="29">Skeleton Worker</option>
-                        <option value="9">Skeleton</option>
-                        <option value="34">Snake/Boa</option>
-                        <option value="162">Sniper</option>
-                        <option value="41">Soldier Skeleton</option>
-                        <option value="366">Stone Shooter</option>
-                        <option value="313">Stormy Knight</option>
-                        <option value="18">Strouf</option>
-                        <option value="464">Sword Guardian</option>
-                        <option value="526">Tendrillion</option>
-                        <option value="532">Tendrillion (aRO)</option>
-                        <option value="233">The Paper</option>
-                        <option value="296">Tri Joint</option>
-                        <option value="323">Turtle General</option>
-                        <option value="24">Vadon</option>
-                        <option value="363">Valkyrie Randgris</option>
-                        <option value="10">Wolf</option>
-                        <option value="514">Zakudam</option>
-                        <option value="38">Zenorc</option>
-                        <option value="326">Zipper Bear</option>
-                        <option value="319">Zombie Master</option>
                       </select></td>
                   </tr>
                   <tr>
                     <td><select name="A_weapon1_card4" onchange="Click_Card(this[this.selectedIndex].value)"
                         style="width: 208px; background-color: rgb(255, 204, 136);">
                         <option value="0">(no card)</option>
-                        <option value="106">* Top10 ranked</option>
-                        <option value="1">* All Race +20%</option>
-                        <option value="2">* All Element +20%</option>
-                        <option value="3">* All Size +15%, ATK +5</option>
-                        <option value="156">* CRIT Dmg +10%, CRIT +7</option>
-                        <option value="31">Abysmal Knight</option>
-                        <option value="25">Anacondaq</option>
-                        <option value="522">Ancient Tree</option>
-                        <option value="11">Andre</option>
-                        <option value="112">Andre Larva</option>
-                        <option value="107">Archer Skeleton</option>
-                        <option value="223">Assaulter</option>
-                        <option value="356">Aster</option>
-                        <option value="463">Atroce</option>
-                        <option value="524">Aunoe</option>
-                        <option value="305">Baby Garm/Hatii</option>
-                        <option value="45">Baphomet</option>
-                        <option value="355">Beetle King</option>
-                        <option value="528">Beholder Master</option>
-                        <option value="544">Beholder Master (aRO)</option>
-                        <option value="361">Bloody Knight</option>
-                        <option value="217">Bloody Murderer</option>
-                        <option value="465">Bow Guardian</option>
-                        <option value="521">Bradium Golem</option>
-                        <option value="163">Breeze</option>
-                        <option value="15">Caramel</option>
-                        <option value="265">Caterpillar</option>
-                        <option value="160">Cecil Damon</option>
-                        <option value="499">Centipede Larva</option>
-                        <option value="325">Chepet</option>
-                        <option value="520">Cobalt Mineral</option>
-                        <option value="259">Crab</option>
-                        <option value="279">Cruiser</option>
-                        <option value="311">Dark Priest</option>
-                        <option value="169">Death Word</option>
-                        <option value="28">Desert Wolf</option>
-                        <option value="20">Deviace</option>
-                        <option value="329">Diabolic</option>
-                        <option value="427">Dolor of Thanatos</option>
-                        <option value="42">Doppelganger</option>
-                        <option value="519">Draco Egg</option>
-                        <option value="47">Dracula</option>
-                        <option value="21">Drainliar</option>
-                        <option value="32">Drake</option>
-                        <option value="343">Driller</option>
-                        <option value="5">Drops</option>
-                        <option value="462">Drosera</option>
-                        <option value="215">Dullahan</option>
-                        <option value="19">Earth Petite</option>
-                        <option value="244">Elder</option>
-                        <option value="158">Eremes Guile</option>
-                        <option value="4">Fabre</option>
-                        <option value="359">Fake Angel</option>
-                        <option value="525">Fanat</option>
-                        <option value="110">Familiar</option>
-                        <option value="8">Female Thief Bug</option>
-                        <option value="17">Flora</option>
-                        <option value="253">Fur Seal</option>
-                        <option value="263">Gig</option>
-                        <option value="14">Goblin</option>
-                        <option value="286">Goblin Archer</option>
-                        <option value="288">Goblin Leader</option>
-                        <option value="287">Goblin Steamrider</option>
-                        <option value="39">Golem</option>
-                        <option value="277">Gryphon</option>
-                        <option value="518">Hell Apocalypse</option>
-                        <option value="167">Hill Wind</option>
-                        <option value="498">Hillsrion</option>
-                        <option value="6">Hornet</option>
-                        <option value="159">Howard Alt-Eisen</option>
-                        <option value="46">Hunter Fly</option>
-                        <option value="13">Hydra</option>
-                        <option value="255">Incantation Samurai</option>
-                        <option value="235">Injustice</option>
-                        <option value="26">Kaho</option>
-                        <option value="289">Kobold Archer</option>
-                        <option value="290">Kobold Leader</option>
-                        <option value="164">Lady Solace</option>
-                        <option value="168">Laurell Weinder</option>
-                        <option value="382">Lava Golem</option>
-                        <option value="219">Lord of the Dead</option>
-                        <option value="7">Lunatic</option>
-                        <option value="165">Maero of Thanatos</option>
-                        <option value="37">Magnolia</option>
-                        <option value="23">Mandragora</option>
-                        <option value="398">Mao Guai / Civil Servant</option>
-                        <option value="35">Marina</option>
-                        <option value="161">MasterSmith</option>
-                        <option value="166">Memory of Thanatos</option>
-                        <option value="157">Metaling</option>
-                        <option value="36">Metaller</option>
-                        <option value="30">Minorous</option>
-                        <option value="328">Mobster</option>
-                        <option value="40">Mummy</option>
-                        <option value="380">Mutant Dragonoid</option>
-                        <option value="517">Naga</option>
-                        <option value="466">Necromancer</option>
-                        <option value="516">Nepenthes</option>
-                        <option value="345">Nereid</option>
-                        <option value="252">Orc Lady</option>
-                        <option value="27">Orc Skeleton</option>
-                        <option value="353">Panzer Goblin</option>
-                        <option value="12">Peco Peco Egg</option>
-                        <option value="360">Phendark</option>
-                        <option value="44">Phreeoni</option>
-                        <option value="515">Pinguicula</option>
-                        <option value="171">Pitman</option>
-                        <option value="33">Plankton</option>
-                        <option value="170">Red Ferus</option>
-                        <option value="111">Requiem</option>
-                        <option value="390">Rotar Zairo</option>
-                        <option value="22">Santa Poring</option>
-                        <option value="109">Savage Babe</option>
-                        <option value="16">Scorpion</option>
-                        <option value="108">Scorpion King</option>
-                        <option value="254">Shellfish</option>
-                        <option value="43">Sidewinder</option>
-                        <option value="428">Skeggiold</option>
-                        <option value="29">Skeleton Worker</option>
-                        <option value="9">Skeleton</option>
-                        <option value="34">Snake/Boa</option>
-                        <option value="162">Sniper</option>
-                        <option value="41">Soldier Skeleton</option>
-                        <option value="366">Stone Shooter</option>
-                        <option value="313">Stormy Knight</option>
-                        <option value="18">Strouf</option>
-                        <option value="464">Sword Guardian</option>
-                        <option value="526">Tendrillion</option>
-                        <option value="532">Tendrillion (aRO)</option>
-                        <option value="233">The Paper</option>
-                        <option value="296">Tri Joint</option>
-                        <option value="323">Turtle General</option>
-                        <option value="24">Vadon</option>
-                        <option value="363">Valkyrie Randgris</option>
-                        <option value="10">Wolf</option>
-                        <option value="514">Zakudam</option>
-                        <option value="38">Zenorc</option>
-                        <option value="326">Zipper Bear</option>
-                        <option value="319">Zombie Master</option>
                       </select></td>
                   </tr>
                   <tr> <!-- WEAPON RANDOM OPTIONS -->
@@ -2004,10 +1458,29 @@ Calc's theme: <select id="theme" onChange="themes()"><option value="0">Original<
                         style="width: 218px; background-color: rgb(255, 204, 136);">
                         <option value="0">(no option)</option>
                       </select>
-                      +
+                      
                       <input type="text" inputmode="numeric" style="width: 30px; height: 13px;" maxlength="3"
                         onkeypress="return isNumeric(event)" onkeyup="RandOptUpdate(1)" name="WEAP1_ROPT1" value="0"
                         class="center">
+                    </td>
+
+                    <td id="nA_weapon1_enchant1">
+                      <select name="A_weapon1_enchant1"
+                        onchange="Click_Enchant() | RandOptUpdate(1)"
+                        style="width: 200px; background-color: rgb(255, 204, 136);">
+                        <option value="0">(no enchant)</option>
+                        <option value="1">10 ATK</option>
+                        <option value="2">10 MATK</option>
+                        <option value="3">150 HP</option>
+                        <option value="4">30 SP</option>
+                        <option value="13">5% ASPD</option>
+                        <option value="11">10% Physical Damage to All Races</option>
+                        <option value="12">5% Magic Damage to All Races</option>
+                        <option value="16">5 CRIT & 5% Crit Damage</option>
+                        <option value="17">1 STR</option>
+                        <option value="18">1 DEX</option>
+                        <option value="19">1 INT</option>
+                      </select>
                     </td>
                   </tr>
                   <tr>
@@ -2017,10 +1490,29 @@ Calc's theme: <select id="theme" onChange="themes()"><option value="0">Original<
                         style="width: 218px; background-color: rgb(255, 204, 136);">
                         <option value="0">(no option)</option>
                       </select>
-                      +
+                      
                       <input type="text" inputmode="numeric" style="width: 30px; height: 13px;" maxlength="3"
                         onkeypress="return isNumeric(event)" onkeyup="RandOptUpdate(1)" name="WEAP1_ROPT2" value="0"
                         class="center">
+                    </td>
+
+                    <td id="nA_weapon1_enchant2" style="display: none;">
+                      <select name="A_weapon1_enchant2"
+                        onchange="Click_Enchant() | RandOptUpdate(1)"
+                        style="width: 200px; background-color: rgb(255, 204, 136);">
+                        <option value="0">(no enchant)</option>
+                        <option value="1">10 ATK</option>
+                        <option value="2">10 MATK</option>
+                        <option value="3">150 HP</option>
+                        <option value="4">30 SP</option>
+                        <option value="13">5% ASPD</option>
+                        <option value="11">10% Physical Damage to All Races</option>
+                        <option value="12">5% Magic Damage to All Races</option>
+                        <option value="16">5 CRIT & 5% Crit Damage</option>
+                        <option value="17">1 STR</option>
+                        <option value="18">1 DEX</option>
+                        <option value="19">1 INT</option>
+                      </select>
                     </td>
                   </tr>
                   <tr>
@@ -2030,7 +1522,7 @@ Calc's theme: <select id="theme" onChange="themes()"><option value="0">Original<
                         style="width: 218px; background-color: rgb(255, 204, 136);">
                         <option value="0">(no option)</option>
                       </select>
-                      +
+                      
                       <input type="text" inputmode="numeric" style="width: 30px; height: 13px;" maxlength="3"
                         onkeypress="return isNumeric(event)" onkeyup="RandOptUpdate(1)" name="WEAP1_ROPT3" value="0"
                         class="center">
@@ -2043,7 +1535,7 @@ Calc's theme: <select id="theme" onChange="themes()"><option value="0">Original<
                         style="width: 218px; background-color: rgb(255, 204, 136);">
                         <option value="0">(no option)</option>
                       </select>
-                      +
+                      
                       <input type="text" inputmode="numeric" style="width: 30px; height: 13px;" maxlength="3"
                         onkeypress="return isNumeric(event)" onkeyup="RandOptUpdate(1)" name="WEAP1_ROPT4" value="0"
                         class="center">
@@ -2119,9 +1611,47 @@ Calc's theme: <select id="theme" onChange="themes()"><option value="0">Original<
                   </tr>
                   <tr> <!-- weapon 2 random options -->
                     <td id="nA_weapon2_ropt1"></td>
+
+                    <td id="nA_weapon2_enchant1" style="display: none;">
+                      <select name="A_weapon2_enchant1"
+                        onchange="Click_Enchant() | RandOptUpdate(1)"
+                        style="width: 200px; background-color: rgb(255, 204, 136);">
+                        <option value="0">(no enchant)</option>
+                        <option value="1">10 ATK</option>
+                        <option value="2">10 MATK</option>
+                        <option value="3">150 HP</option>
+                        <option value="4">30 SP</option>
+                        <option value="13">5% ASPD</option>
+                        <option value="11">10% Physical Damage to All Races</option>
+                        <option value="12">5% Magic Damage to All Races</option>
+                        <option value="16">5 CRIT & 5% Crit Damage</option>
+                        <option value="17">1 STR</option>
+                        <option value="18">1 DEX</option>
+                        <option value="19">1 INT</option>
+                      </select>
+                    </td>
                   </tr>
                   <tr>
                     <td id="nA_weapon2_ropt2"></td>
+
+                    <td id="nA_weapon2_enchant2" style="display: none;">
+                      <select name="A_weapon2_enchant2"
+                        onchange="Click_Enchant() | RandOptUpdate(1)"
+                        style="width: 200px; background-color: rgb(255, 204, 136);">
+                        <option value="0">(no enchant)</option>
+                        <option value="1">10 ATK</option>
+                        <option value="2">10 MATK</option>
+                        <option value="3">150 HP</option>
+                        <option value="4">30 SP</option>
+                        <option value="13">5% ASPD</option>
+                        <option value="11">10% Physical Damage to All Races</option>
+                        <option value="12">5% Magic Damage to All Races</option>
+                        <option value="16">5 CRIT & 5% Crit Damage</option>
+                        <option value="17">1 STR</option>
+                        <option value="18">1 DEX</option>
+                        <option value="19">1 INT</option>
+                      </select>
+                    </td>
                   </tr>
                   <tr>
                     <td id="nA_weapon2_ropt3"></td>
@@ -2155,72 +1685,31 @@ Calc's theme: <select id="theme" onChange="themes()"><option value="0">Original<
                         onchange="StAllCalc()|ClickB_Item(this[this.selectedIndex].value)|restrictCardslot(2)">
                         <option value="142">(no upper headgear)</option>
                       </select>
+
                       <select name="A_head1_card" onchange="StAllCalc()|Card(this[this.selectedIndex].value)"
                         style="width: auto; background-color: rgb(255, 204, 136);">
                         <option value="0">(no card)</option>
-                        <option value="153">* All Element -10%</option>
-                        <option value="221">Arch Angeling</option>
-                        <option value="332">Bacsojin / White Lady</option>
-                        <option value="474">Banshee</option>
-                        <option value="179">Blue Acidus</option>
-                        <option value="298">Carat</option>
-                        <option value="339">Clock Tower Manager</option>
-                        <option value="114">Coco</option>
-                        <option value="273">Cramp</option>
-                        <option value="320">Dark Illusion</option>
-                        <option value="510">Dark Pinguicula</option>
-                        <option value="51">Deviruchi</option>
-                        <option value="342">Dryad</option>
-                        <option value="540">Dolomedes</option>
-                        <option value="511">Duneyrr</option>
-                        <option value="545">Duneyrr (old)</option>
-                        <option value="49">Elder Willow</option>
-                        <option value="337">Evil Nymph</option>
-                        <option value="284">Evil Snake Lord</option>
-                        <option value="176">Gemini-S58</option>
-                        <option value="116">Ghoul</option>
-                        <option value="303">Giant Hornet</option>
-                        <option value="213">Gibbet</option>
-                        <option value="117">Giearth</option>
-                        <option value="543">Gold Queen Scaraba</option>
-                        <option value="274">Grand Peco</option>
-                        <option value="424">High Wizard</option>
-                        <option value="175">Holden</option>
-                        <option value="234">Incubus</option>
-                        <option value="472">Isilla</option>
-                        <option value="177">Kathryne Keyron</option>
-                        <option value="357">Kiel D-01</option>
-                        <option value="473">Knocker</option>
-                        <option value="397">Leaf Cat</option>
-                        <option value="387">Leib Olmai</option>
-                        <option value="178">Lord Knight</option>
-                        <option value="118">Marduk</option>
-                        <option value="426">Margaretha Sorin</option>
-                        <option value="115">Martin</option>
-                        <option value="374">Maya Purple</option>
-                        <option value="119">Mistress</option>
-                        <option value="376">Myst Case</option>
-                        <option value="50">Nightmare</option>
-                        <option value="52">Orc Hero</option>
-                        <option value="347">Permeter</option>
-                        <option value="120">Pharaoh</option>
-                        <option value="512">Phylla</option>
-                        <option value="509">Rata</option>
-                        <option value="513">Rhyncho</option>
-                        <option value="383">Rideword</option>
-                        <option value="180">Seyren Windsor</option>
-                        <option value="113">Stainer</option>
-                        <option value="309">Stalactic Golem</option>
-                        <option value="174">Ungoliant</option>
-                        <option value="471">Vanberk</option>
-                        <option value="425">Vesper</option>
-                        <option value="48">Willow</option>
-                        <option value="239">Wootan Fighter</option>
-                        <option value="238">Wootan Shooter</option>
                       </select>
                     </td>
                     <td style="float: right; height: 10px;">
                       <input type="button" value="Reset Random Options" onclick="RandOptReset() | calc()">
+                    </td>
+                  </tr>
+                  <tr id="A_head_enchant_row" style="height: 20px; display: none;">
+                    <td style="padding-left:51px;">
+                      <!--headgear enchants-->
+                      <select name="A_head_enchant"
+                        onchange="Click_Enchant() | RandOptUpdate(1)"
+                        style="width: 200px; background-color: rgb(255, 204, 136);">
+                        <option value="0">(no enchant)</option>
+                        <option value="1">10 ATK</option>
+                        <option value="2">10 MATK</option>
+                        <option value="3">150 HP</option>
+                        <option value="4">30 SP</option>
+                        <option value="5">3% ASPD</option>
+                        <option value="6">3 CRIT & 3% Critical Damage</option>
+                        <option value="9">3 DEF & 3 MDEF</option>
+                      </select>
                     </td>
                   </tr>
                   <tr style=" height:10px;">
@@ -2232,95 +1721,14 @@ Calc's theme: <select id="theme" onChange="themes()"><option value="0">Original<
                       <select name="A_head2_card" onchange="StAllCalc()|Card(this[this.selectedIndex].value)"
                         style="width: auto; background-color: rgb(255, 204, 136);">
                         <option value="0">(no card)</option>
-                        <option value="153">* All Element -10%</option>
-                        <option value="221">Arch Angeling</option>
-                        <option value="332">Bacsojin / White Lady</option>
-                        <option value="474">Banshee</option>
-                        <option value="179">Blue Acidus</option>
-                        <option value="298">Carat</option>
-                        <option value="339">Clock Tower Manager</option>
-                        <option value="114">Coco</option>
-                        <option value="273">Cramp</option>
-                        <option value="320">Dark Illusion</option>
-                        <option value="510">Dark Pinguicula</option>
-                        <option value="51">Deviruchi</option>
-                        <option value="342">Dryad</option>
-                        <option value="540">Dolomedes</option>
-                        <option value="511">Duneyrr</option>
-                        <option value="545">Duneyrr (old)</option>
-                        <option value="49">Elder Willow</option>
-                        <option value="337">Evil Nymph</option>
-                        <option value="284">Evil Snake Lord</option>
-                        <option value="176">Gemini-S58</option>
-                        <option value="116">Ghoul</option>
-                        <option value="303">Giant Hornet</option>
-                        <option value="213">Gibbet</option>
-                        <option value="117">Giearth</option>
-                        <option value="543">Gold Queen Scaraba</option>
-                        <option value="274">Grand Peco</option>
-                        <option value="424">High Wizard</option>
-                        <option value="175">Holden</option>
-                        <option value="234">Incubus</option>
-                        <option value="472">Isilla</option>
-                        <option value="177">Kathryne Keyron</option>
-                        <option value="357">Kiel D-01</option>
-                        <option value="473">Knocker</option>
-                        <option value="397">Leaf Cat</option>
-                        <option value="387">Leib Olmai</option>
-                        <option value="178">Lord Knight</option>
-                        <option value="118">Marduk</option>
-                        <option value="426">Margaretha Sorin</option>
-                        <option value="115">Martin</option>
-                        <option value="374">Maya Purple</option>
-                        <option value="119">Mistress</option>
-                        <option value="376">Myst Case</option>
-                        <option value="50">Nightmare</option>
-                        <option value="52">Orc Hero</option>
-                        <option value="347">Permeter</option>
-                        <option value="120">Pharaoh</option>
-                        <option value="512">Phylla</option>
-                        <option value="509">Rata</option>
-                        <option value="513">Rhyncho</option>
-                        <option value="383">Rideword</option>
-                        <option value="180">Seyren Windsor</option>
-                        <option value="113">Stainer</option>
-                        <option value="309">Stalactic Golem</option>
-                        <option value="174">Ungoliant</option>
-                        <option value="471">Vanberk</option>
-                        <option value="425">Vesper</option>
-                        <option value="48">Willow</option>
-                        <option value="239">Wootan Fighter</option>
-                        <option value="238">Wootan Shooter</option>
                       </select>
                     </td>
-
                   </tr>
                   <tr>
                     <td style="padding-left:51px;">
                       <select name="A_head3" style="width: 200px; background-color: rgb(255, 204, 136);"
                         onchange="StAllCalc()|ClickB_Item(this[this.selectedIndex].value)|restrictCardslot(4)">
                         <option value="268">(no lower headgear)</option>
-                      </select>
-                      <select name="A_HSE_HEAD1" onchange="StAllCalc()" style="background-color: rgb(255, 204, 136);">
-                        <option value="0">(headgear Hidden Slot Enchant)</option>
-                        <option value="1">STR+1</option>
-                        <option value="2">STR+2</option>
-                        <option value="3">STR+3</option>
-                        <option value="11">AGI+1</option>
-                        <option value="12">AGI+2</option>
-                        <option value="13">AGI+3</option>
-                        <option value="21">VIT+1</option>
-                        <option value="22">VIT+2</option>
-                        <option value="23">VIT+3</option>
-                        <option value="31">INT+1</option>
-                        <option value="32">INT+2</option>
-                        <option value="33">INT+3</option>
-                        <option value="41">DEX+1</option>
-                        <option value="42">DEX+2</option>
-                        <option value="43">DEX+3</option>
-                        <option value="51">LUK+1</option>
-                        <option value="52">LUK+2</option>
-                        <option value="53">LUK+3</option>
                       </select>
                     </td>
 
@@ -2347,56 +1755,6 @@ Calc's theme: <select id="theme" onChange="themes()"><option value="0">Original<
                       <select name="A_left_card" onchange="StAllCalc()|Card(this[this.selectedIndex].value)"
                         style="width: auto; background-color: rgb(255, 204, 136);">
                         <option value="0">(no card)</option>
-                        <option value="154">* All Race -30%</option>
-                        <option value="155">* All Element -20% &amp; +5%</option>
-                        <option value="231">Alice</option>
-                        <option value="537">Alnoldi</option>
-                        <option value="55">Ambernite</option>
-                        <option value="245">Ancient Mummy</option>
-                        <option value="54">Andre Egg</option>
-                        <option value="122">Anubis</option>
-                        <option value="502">Aqua Elemental</option>
-                        <option value="222">Arclouze</option>
-                        <option value="124">Argos</option>
-                        <option value="58">Bigfoot</option>
-                        <option value="503">Centipede</option>
-                        <option value="504">Cornus</option>
-                        <option value="506">Dark Shadow</option>
-                        <option value="173">Despero of Thanatos</option>
-                        <option value="505">Draco (old)</option>
-                        <option value="538">Draco</option>
-                        <option value="307">Enchanted Peach Tree</option>
-                        <option value="241">Executioner</option>
-                        <option value="470">Flame Skull</option>
-                        <option value="126">Golden Thief Bug</option>
-                        <option value="348">High Orc</option>
-                        <option value="467">Hodremlin</option>
-                        <option value="62">Horn</option>
-                        <option value="61">Khalitzburg</option>
-                        <option value="507">Luciola Vespa</option>
-                        <option value="127">Maya</option>
-                        <option value="63">Medusa</option>
-                        <option value="123">Megalodon</option>
-                        <option value="272">Mi Gao</option>
-                        <option value="125">Munak</option>
-                        <option value="469">Muscipular</option>
-                        <option value="375">Mysteltainn</option>
-                        <option value="57">Orc Warrior</option>
-                        <option value="358">Parasite</option>
-                        <option value="368">Penomena</option>
-                        <option value="59">Rafflesia</option>
-                        <option value="468">Seeker</option>
-                        <option value="60">Sky Petite</option>
-                        <option value="121">Soldier Andre</option>
-                        <option value="310">Sting</option>
-                        <option value="396">Tamruan</option>
-                        <option value="508">Tatacho (old)</option>
-                        <option value="539">Tatacho</option>
-                        <option value="172">Teddy Bear</option>
-                        <option value="56">Thara Frog</option>
-                        <option value="53">Thief Bug Egg</option>
-                        <option value="249">Tirfing/Ogretooth</option>
-                        <option value="306">Zherlthsh/Zealotus</option>
                       </select>
                     </td>
                     <td style="float: right; height: 10px;">
@@ -2462,10 +1820,22 @@ Calc's theme: <select id="theme" onChange="themes()"><option value="0">Original<
                         <option value="27">Freeze Resist [255]</option>
                         <option value="28">Stone Curse Resist [256]</option>
                       </select>
-                      +
+                      
                       <input type="text" inputmode="numeric" style="width: 30px; height: 13px;" maxlength="3"
                         onkeypress="return isNumeric(event)" onkeyup="RandOptUpdate(1)" name="BODY_ROPT1" value="0"
                         class="center">
+                      <!--armor enchant 1-->
+                      <select name="A_body_enchant1"
+                        onchange="Click_Enchant() | RandOptUpdate(1)"
+                        style="width: auto; background-color: rgb(255, 204, 136);">
+                        <option value="0">(no enchant)</option>
+                        <option value="1">10 ATK</option>
+                        <option value="2">10 MATK</option>
+                        <option value="3">150 HP</option>
+                        <option value="4">30 SP</option>
+                        <option value="7">5 FLEE</option>
+                        <option value="9">3 DEF & 3 MDEF</option>
+                      </select>
                     </td>
                   </tr>
                   <tr>
@@ -2473,96 +1843,6 @@ Calc's theme: <select id="theme" onChange="themes()"><option value="0">Original<
                       <select name="A_body_card" onchange="StAllCalc()|Card(this[this.selectedIndex].value)"
                         style="width: 200px; background-color: rgb(255, 204, 136);">
                         <option value="0">(no card)</option>
-                        <option value="476">Agav</option>
-                        <option value="194">Alicel</option>
-                        <option value="282">Aliza</option>
-                        <option value="191">Ancient Mimic</option>
-                        <option value="136">Angeling</option>
-                        <option value="224">Anolian</option>
-                        <option value="232">Antonio</option>
-                        <option value="225">Apocalypse</option>
-                        <option value="190">Archdam</option>
-                        <option value="135">Argiope</option>
-                        <option value="69">Baby Desert Wolf</option>
-                        <option value="281">Baby Leopard</option>
-                        <option value="500">Banshee Master</option>
-                        <option value="137">Bathory</option>
-                        <option value="364">Brilight</option>
-                        <option value="479">Byorgue</option>
-                        <option value="264">Chimera</option>
-                        <option value="280">Clock</option>
-                        <option value="128">Cornutus</option>
-                        <option value="275">Creamy Fear</option>
-                        <option value="321">Dark Frame</option>
-                        <option value="330">Demon Fungus</option>
-                        <option value="422">Detardeurus</option>
-                        <option value="198">Dimik</option>
-                        <option value="214">Disguise</option>
-                        <option value="134">Dokebi</option>
-                        <option value="334">Earth Deleter</option>
-                        <option value="477">Echio</option>
-                        <option value="187">Egnigem Cenia</option>
-                        <option value="501">Entweihen Crothen</option>
-                        <option value="139">Evil Druid</option>
-                        <option value="199">Frus</option>
-                        <option value="349">Garm/Hatii</option>
-                        <option value="301">Geographer</option>
-                        <option value="138">Ghostring</option>
-                        <option value="302">Giant Spider</option>
-                        <option value="475">Gloom Under Night</option>
-                        <option value="283">Goat</option>
-                        <option value="276">Grizzly</option>
-                        <option value="530">Hardrock Mammoth</option>
-                        <option value="531">Hardrock Mammoth (aRO)</option>
-                        <option value="421">High Priest</option>
-                        <option value="261">Karakasa</option>
-                        <option value="268">Killer Mantis</option>
-                        <option value="299">Kraben</option>
-                        <option value="478">Ktullanux</option>
-                        <option value="220">Loli Ruri</option>
-                        <option value="285">Majoruros</option>
-                        <option value="75">Marc</option>
-                        <option value="184">Mineral</option>
-                        <option value="196">Mistress of Shelter</option>
-                        <option value="529">Naght Seiger</option>
-                        <option value="527">Nidhoggur Shadow</option>
-                        <option value="533">Nidhoggur Shadow (aRO)</option>
-                        <option value="344">Nightmare Terror</option>
-                        <option value="197">Observation</option>
-                        <option value="185">Obsidian</option>
-                        <option value="140">Orc Lord</option>
-                        <option value="133">Pasana</option>
-                        <option value="73">Peco Peco</option>
-                        <option value="367">Pest</option>
-                        <option value="65">Picky</option>
-                        <option value="183">Porcellio</option>
-                        <option value="64">Poring</option>
-                        <option value="71">Pupa</option>
-                        <option value="420">RSX-0806</option>
-                        <option value="192">Red Novus</option>
-                        <option value="186">Remover</option>
-                        <option value="68">Rocker</option>
-                        <option value="72">Roda Frog</option>
-                        <option value="384">Rybio</option>
-                        <option value="132">Sandman</option>
-                        <option value="293">Sasquatch</option>
-                        <option value="70">Savage</option>
-                        <option value="308">Skel. Prisoner</option>
-                        <option value="195">Skogul</option>
-                        <option value="333">Sky Deleter</option>
-                        <option value="317">Solider</option>
-                        <option value="74">Steel Chonhon</option>
-                        <option value="291">Succubus</option>
-                        <option value="66">Super Picky</option>
-                        <option value="131">Swordfish</option>
-                        <option value="392">Tao Gunka</option>
-                        <option value="67">Thief Bug</option>
-                        <option value="189">Venatu</option>
-                        <option value="182">Venomous</option>
-                        <option value="181">Waste Stove</option>
-                        <option value="240">Wooden Golem</option>
-                        <option value="331">Wraith Dead</option>
-                        <option value="193">Yellow Novus</option>
                       </select>
                       <select name="A_body_ropt2"
                         onchange="Click_RandOpt(this[this.selectedIndex].value)|RandOptUpdate(1)"
@@ -2579,10 +1859,23 @@ Calc's theme: <select id="theme" onChange="themes()"><option value="0">Original<
                         <option value="37">Ghost Element Resist [33]</option>
                         <option value="38">Undead Element Resist [34]</option>
                       </select>
-                      +
+                      
                       <input type="text" inputmode="numeric" style="width: 30px; height: 13px;" maxlength="3"
                         onkeypress="return isNumeric(event)" onkeyup="RandOptUpdate(1)" name="BODY_ROPT2" value="0"
                         class="center">
+                      
+                      <!--armor enchant 2-->
+                      <select name="A_body_enchant2"
+                        onchange="Click_Enchant() | RandOptUpdate(1)"
+                        style="width: auto; background-color: rgb(255, 204, 136);">
+                        <option value="0">(no enchant)</option>
+                        <option value="1">10 ATK</option>
+                        <option value="2">10 MATK</option>
+                        <option value="3">150 HP</option>
+                        <option value="4">30 SP</option>
+                        <option value="7">5 FLEE</option>
+                        <option value="9">3 DEF & 3 MDEF</option>
+                      </select>
                     </td>
                   </tr>
                   <tr>
@@ -2622,57 +1915,31 @@ Calc's theme: <select id="theme" onChange="themes()"><option value="0">Original<
                         <option value="27">Freeze Resist [255]</option>
                         <option value="28">Stone Curse Resist [256]</option>
                       </select>
-                      +
+                      
                       <input type="text" inputmode="numeric" style="width: 30px; height: 13px;" maxlength="3"
                         onkeypress="return isNumeric(event)" onkeyup="RandOptUpdate(1)" name="SHOULDER_ROPT1" value="0"
                         class="center">
+                      
+                      <!--garment enchants-->
+                      <select name="A_shoulder_enchant1"
+                        onchange="Click_Enchant() | RandOptUpdate(1)"
+                        style="width: auto; background-color: rgb(255, 204, 136);">
+                        <option value="0">(no enchant)</option>
+                        <option value="1">10 ATK</option>
+                        <option value="2">10 MATK</option>
+                        <option value="3">150 HP</option>
+                        <option value="4">30 SP</option>
+                        <option value="7">5 FLEE</option>
+                        <option value="8">5 HIT</option>
+                        <option value="9">3 DEF & 3 MDEF</option>
+                      </select>
                     </td>
-
                   </tr>
                   <tr>
                     <td style="padding-left: 51px;">
                       <select name="A_shoulder_card" onchange="StAllCalc()|Card(this[this.selectedIndex].value)"
                         style="width: 200px; background-color: rgb(255, 204, 136);">
                         <option value="0">(no card)</option>
-                        <option value="405">Aliot</option>
-                        <option value="404">Assassin Cross</option>
-                        <option value="78">Baphomet Jr.</option>
-                        <option value="327">Choco</option>
-                        <option value="402">Chung E</option>
-                        <option value="79">Condor</option>
-                        <option value="394">Deviling</option>
-                        <option value="341">Dragon Fly</option>
-                        <option value="340">Dragon Tail</option>
-                        <option value="80">Dustiness</option>
-                        <option value="243">Eclipse</option>
-                        <option value="141">Frilldora</option>
-                        <option value="267">Giant Whisper</option>
-                        <option value="346">Harpy</option>
-                        <option value="83">Hode</option>
-                        <option value="86">Isis</option>
-                        <option value="82">Jakk</option>
-                        <option value="258">Kapha</option>
-                        <option value="482">Kasa</option>
-                        <option value="401">Kavach Icarus</option>
-                        <option value="483">Magmaring</option>
-                        <option value="84">Marionette</option>
-                        <option value="81">Marse</option>
-                        <option value="372">Mastering</option>
-                        <option value="87">Myst</option>
-                        <option value="271">Ninetails</option>
-                        <option value="400">Noxious</option>
-                        <option value="403">Orc Baby</option>
-                        <option value="85">Orc Zombie</option>
-                        <option value="352">Punk</option>
-                        <option value="77">Raydric</option>
-                        <option value="480">Roween</option>
-                        <option value="481">Salamander</option>
-                        <option value="338">Toad</option>
-                        <option value="294">Vagabond Wolf</option>
-                        <option value="369">Vocal</option>
-                        <option value="295">Wanderer</option>
-                        <option value="76">Whisper</option>
-                        <option value="393">Yao Jun</option>
                       </select>
                       <select name="A_shoulder_ropt2"
                         onchange="Click_RandOpt(this[this.selectedIndex].value)|RandOptUpdate(1)"
@@ -2689,10 +1956,24 @@ Calc's theme: <select id="theme" onChange="themes()"><option value="0">Original<
                         <option value="47">Angel Race Resist [95]</option>
                         <option value="48">Dragon Race Resist [96]</option>
                       </select>
-                      +
+                      
                       <input type="text" inputmode="numeric" style="width: 30px; height: 13px;" maxlength="3"
                         onkeypress="return isNumeric(event)" onkeyup="RandOptUpdate(1)" name="SHOULDER_ROPT2" value="0"
                         class="center">
+                      
+                      <!--garment enchants-->
+                      <select name="A_shoulder_enchant2"
+                        onchange="Click_Enchant() | RandOptUpdate(1)"
+                        style="width: auto; background-color: rgb(255, 204, 136);">
+                        <option value="0">(no enchant)</option>
+                        <option value="1">10 ATK</option>
+                        <option value="2">10 MATK</option>
+                        <option value="3">150 HP</option>
+                        <option value="4">30 SP</option>
+                        <option value="7">5 FLEE</option>
+                        <option value="8">5 HIT</option>
+                        <option value="9">3 DEF & 3 MDEF</option>
+                      </select>
                     </td>
                   </tr>
                   <tr>
@@ -2731,10 +2012,24 @@ Calc's theme: <select id="theme" onChange="themes()"><option value="0">Original<
                         <option value="27">Freeze Resist [255]</option>
                         <option value="28">Stone Curse Resist [256]</option>
                       </select>
-                      +
+                      
                       <input type="text" inputmode="numeric" style="width: 30px; height: 13px;" maxlength="3"
                         onkeypress="return isNumeric(event)" onkeyup="RandOptUpdate(1)" name="SHOES_ROPT1" value="0"
                         class="center">
+                      
+                      <!--shoes enchants-->
+                      <select name="A_shoes_enchant1"
+                        onchange="Click_Enchant() | RandOptUpdate(1)"
+                        style="width: auto; background-color: rgb(255, 204, 136);">
+                        <option value="0">(no enchant)</option>
+                        <option value="1">10 ATK</option>
+                        <option value="2">10 MATK</option>
+                        <option value="3">150 HP</option>
+                        <option value="4">30 SP</option>
+                        <option value="8">5 HIT</option>
+                        <option value="10">5 CRIT</option>
+                        <option value="9">3 DEF & 3 MDEF</option>
+                      </select>
                     </td>
                     <td style="float: right; height: 10px;">
                       <select name="A_shoes_shadow" style="width: 150px; background-color: rgb(255, 204, 136);"
@@ -2768,45 +2063,6 @@ Calc's theme: <select id="theme" onChange="themes()"><option value="0">Original<
                       <select name="A_shoes_card" onchange="StAllCalc()|Card(this[this.selectedIndex].value)"
                         style="width: 200px; background-color: rgb(255, 204, 136);">
                         <option value="0">(no card)</option>
-                        <option value="229">Alarm</option>
-                        <option value="227">Am Mut</option>
-                        <option value="228">Amon Ra</option>
-                        <option value="246">Ancient Worm</option>
-                        <option value="266">Cat O' Nine Tails</option>
-                        <option value="88">Chonchon</option>
-                        <option value="269">Christmas Cookie</option>
-                        <option value="322">Dark Lord</option>
-                        <option value="95">Eddga</option>
-                        <option value="94">Eggyra</option>
-                        <option value="242">Explosion</option>
-                        <option value="486">Fallen Bishop</option>
-                        <option value="304">Firelock Soldier</option>
-                        <option value="362">Freezer</option>
-                        <option value="257">Gajomart</option>
-                        <option value="423">General Egnigem Cenia</option>
-                        <option value="407">Gold Acidus</option>
-                        <option value="408">Green Ferus</option>
-                        <option value="278">Gullinbursti</option>
-                        <option value="523">Heavy Metaling</option>
-                        <option value="484">Ice Titan</option>
-                        <option value="399">Iron Fist</option>
-                        <option value="409">Lady Tanee</option>
-                        <option value="89">Male Thief Bug</option>
-                        <option value="90">Matyr</option>
-                        <option value="381">Megalith</option>
-                        <option value="351">Merman</option>
-                        <option value="377">Mini Demon</option>
-                        <option value="379">Miyabi Doll</option>
-                        <option value="129">Moonlight Flower</option>
-                        <option value="406">Odium of Thanatos</option>
-                        <option value="388">Raggler</option>
-                        <option value="300">Skeleton General</option>
-                        <option value="91">Sohee</option>
-                        <option value="92">Verit</option>
-                        <option value="391">Wild Rose</option>
-                        <option value="93">Zombie</option>
-                        <option value="318">Zombie Prisoner</option>
-                        <option value="485">Zombie Slaughter</option>
                       </select>
                       <select name="A_shoes_ropt2" onchange="Click_RandOpt(this[this.selectedIndex].value)"
                         style="width: 189px; background-color: rgb(255, 204, 136);">
@@ -2821,10 +2077,24 @@ Calc's theme: <select id="theme" onChange="themes()"><option value="0">Original<
                         <option value="12">Crit damage [164]</option>
                         <option value="26">Healing Power [168]</option>
                       </select>
-                      +
+                      
                       <input type="text" inputmode="numeric" style="width: 30px; height: 13px;" maxlength="3"
                         onkeypress="return isNumeric(event)" onkeyup="RandOptUpdate(1)" name="SHOES_ROPT2" value="0"
                         class="center">
+                      
+                      <!--shoes enchants-->
+                      <select name="A_shoes_enchant2"
+                        onchange="Click_Enchant() | RandOptUpdate(1)"
+                        style="width: auto; background-color: rgb(255, 204, 136);">
+                        <option value="0">(no enchant)</option>
+                        <option value="1">10 ATK</option>
+                        <option value="2">10 MATK</option>
+                        <option value="3">150 HP</option>
+                        <option value="4">30 SP</option>
+                        <option value="8">5 HIT</option>
+                        <option value="10">5 CRIT</option>
+                        <option value="9">3 DEF & 3 MDEF</option>
+                      </select>
                     </td>
                   </tr>
                   <tr>
@@ -2836,85 +2106,6 @@ Calc's theme: <select id="theme" onChange="themes()"><option value="0">Original<
                       <select name="A_acces1_card" onchange="Click_Card(this[this.selectedIndex].value)"
                         style="width: auto; background-color: rgb(255, 204, 136);">
                         <option value="0">(no card)</option>
-                        <option value="230">Alligator</option>
-                        <option value="412">Anopheles</option>
-                        <option value="188">Armeyer Dinze</option>
-                        <option value="416">Baroness of Retribution</option>
-                        <option value="142">Beelzebub</option>
-                        <option value="411">Beholder</option>
-                        <option value="365">Blazzer</option>
-                        <option value="350">Bloody Butterfly</option>
-                        <option value="370">Bongun</option>
-                        <option value="270">Cookie</option>
-                        <option value="147">Creamy</option>
-                        <option value="395">Dancing Dragon</option>
-                        <option value="417">Dragon Egg</option>
-                        <option value="324">Dumpling Kid</option>
-                        <option value="414">Errende Ebeece</option>
-                        <option value="262">Galapago</option>
-                        <option value="490">Galion</option>
-                        <option value="256">Gargoyle</option>
-                        <option value="489">Gazeti</option>
-                        <option value="542">Gold Scaraba</option>
-                        <option value="335">Greatest General</option>
-                        <option value="410">Gremlin</option>
-                        <option value="418">Grove</option>
-                        <option value="354">Heater</option>
-                        <option value="495">Hellhound</option>
-                        <option value="389">Hermit Plant</option>
-                        <option value="151">Horong</option>
-                        <option value="419">Hydrolancer</option>
-                        <option value="216">Hylozoist</option>
-                        <option value="492">Ifrit</option>
-                        <option value="493">Imp</option>
-                        <option value="226">Jing Guai / Li Me Mang Ryang</option>
-                        <option value="152">Joker</option>
-                        <option value="546">Kafra Blossom</option>
-                        <option value="103">Kobold</option>
-                        <option value="97">Kukre</option>
-                        <option value="218">Lude</option>
-                        <option value="101">Mantis</option>
-                        <option value="371">Marin</option>
-                        <option value="144">Marine Sphere</option>
-                        <option value="378">Mimic</option>
-                        <option value="104">Muka</option>
-                        <option value="149">Obeaune</option>
-                        <option value="250">Orc Archer</option>
-                        <option value="130">Osiris</option>
-                        <option value="248">Owl Baron</option>
-                        <option value="247">Owl Duke</option>
-                        <option value="105">Phen</option>
-                        <option value="150">Pirate Skel</option>
-                        <option value="415">Plasma</option>
-                        <option value="143">Poison Spore</option>
-                        <option value="251">Poison Toad</option>
-                        <option value="148">Poporing</option>
-                        <option value="212">Quve</option>
-                        <option value="494">Ragged Zombie</option>
-                        <option value="386">Raydric Archer</option>
-                        <option value="316">Sage Worm</option>
-                        <option value="541">Scaraba</option>
-                        <option value="297">Sea-Otter</option>
-                        <option value="260">Shinobi</option>
-                        <option value="488">Siroma</option>
-                        <option value="315">Sleeper</option>
-                        <option value="146">Smokie</option>
-                        <option value="487">Snowier</option>
-                        <option value="96">Spore</option>
-                        <option value="314">Spring Rabbit</option>
-                        <option value="491">Stapo</option>
-                        <option value="312">Stem Worm</option>
-                        <option value="336">Taoist Hermit</option>
-                        <option value="98">Tarou</option>
-                        <option value="292">Tengu</option>
-                        <option value="236">Violy</option>
-                        <option value="145">Vitata</option>
-                        <option value="413">Whikebine Tres</option>
-                        <option value="237">Wind Ghost</option>
-                        <option value="99">Wormtail</option>
-                        <option value="385">Wraith</option>
-                        <option value="102">Yoyo</option>
-                        <option value="100">Zerom</option>
                       </select>
                     </td>
                   </tr>
@@ -2927,85 +2118,6 @@ Calc's theme: <select id="theme" onChange="themes()"><option value="0">Original<
                       <select name="A_acces2_card" onchange="Click_Card(this[this.selectedIndex].value)"
                         style="width: auto; background-color: rgb(255, 204, 136);">
                         <option value="0">(no card)</option>
-                        <option value="230">Alligator</option>
-                        <option value="412">Anopheles</option>
-                        <option value="188">Armeyer Dinze</option>
-                        <option value="416">Baroness of Retribution</option>
-                        <option value="142">Beelzebub</option>
-                        <option value="411">Beholder</option>
-                        <option value="365">Blazzer</option>
-                        <option value="350">Bloody Butterfly</option>
-                        <option value="370">Bongun</option>
-                        <option value="270">Cookie</option>
-                        <option value="147">Creamy</option>
-                        <option value="395">Dancing Dragon</option>
-                        <option value="417">Dragon Egg</option>
-                        <option value="324">Dumpling Kid</option>
-                        <option value="414">Errende Ebeece</option>
-                        <option value="262">Galapago</option>
-                        <option value="490">Galion</option>
-                        <option value="256">Gargoyle</option>
-                        <option value="489">Gazeti</option>
-                        <option value="542">Gold Scaraba</option>
-                        <option value="335">Greatest General</option>
-                        <option value="410">Gremlin</option>
-                        <option value="418">Grove</option>
-                        <option value="354">Heater</option>
-                        <option value="495">Hellhound</option>
-                        <option value="389">Hermit Plant</option>
-                        <option value="151">Horong</option>
-                        <option value="419">Hydrolancer</option>
-                        <option value="216">Hylozoist</option>
-                        <option value="492">Ifrit</option>
-                        <option value="493">Imp</option>
-                        <option value="226">Jing Guai / Li Me Mang Ryang</option>
-                        <option value="152">Joker</option>
-                        <option value="546">Kafra Blossom</option>
-                        <option value="103">Kobold</option>
-                        <option value="97">Kukre</option>
-                        <option value="218">Lude</option>
-                        <option value="101">Mantis</option>
-                        <option value="371">Marin</option>
-                        <option value="144">Marine Sphere</option>
-                        <option value="378">Mimic</option>
-                        <option value="104">Muka</option>
-                        <option value="149">Obeaune</option>
-                        <option value="250">Orc Archer</option>
-                        <option value="130">Osiris</option>
-                        <option value="248">Owl Baron</option>
-                        <option value="247">Owl Duke</option>
-                        <option value="105">Phen</option>
-                        <option value="150">Pirate Skel</option>
-                        <option value="415">Plasma</option>
-                        <option value="143">Poison Spore</option>
-                        <option value="251">Poison Toad</option>
-                        <option value="148">Poporing</option>
-                        <option value="212">Quve</option>
-                        <option value="494">Ragged Zombie</option>
-                        <option value="386">Raydric Archer</option>
-                        <option value="316">Sage Worm</option>
-                        <option value="541">Scaraba</option>
-                        <option value="297">Sea-Otter</option>
-                        <option value="260">Shinobi</option>
-                        <option value="488">Siroma</option>
-                        <option value="315">Sleeper</option>
-                        <option value="146">Smokie</option>
-                        <option value="487">Snowier</option>
-                        <option value="96">Spore</option>
-                        <option value="314">Spring Rabbit</option>
-                        <option value="491">Stapo</option>
-                        <option value="312">Stem Worm</option>
-                        <option value="336">Taoist Hermit</option>
-                        <option value="98">Tarou</option>
-                        <option value="292">Tengu</option>
-                        <option value="236">Violy</option>
-                        <option value="145">Vitata</option>
-                        <option value="413">Whikebine Tres</option>
-                        <option value="237">Wind Ghost</option>
-                        <option value="99">Wormtail</option>
-                        <option value="385">Wraith</option>
-                        <option value="102">Yoyo</option>
-                        <option value="100">Zerom</option>
                       </select>
                     </td>
                   </tr>

@@ -1487,7 +1487,7 @@ function BattleCalc999() {
                 w_DMG[s] = estinDMG + esmaDMG,
                 Last_DMG_B[s] = w_DMG[s],
                 Last_DMG_A[s] = Last_DMG_B[s],
-                InnStr[s] += Last_DMG_A[s] + " (" + estinDMG + " + [" + esmaDMG + " " + " x " + wHITsuu + " hits])";
+                InnStr[s] += Last_DMG_A[s] + " (" + estinDMG + " + [" + (esmaDMG / wHITsuu) + " " + " x " + wHITsuu + " hits])";
             w_HIT_HYOUJI = 100,
             CastAndDelay(),
             BattleCalc998()
@@ -1509,11 +1509,11 @@ function BattleCalc999() {
                 n_A_ActiveSkill = 375,
                 esmaDMG = BattleMagicCalc(esmaDMG, s),
                 esmaDMG *= wHITsuu,
-                n_A_ActiveSkill = 514,
+                n_A_ActiveSkill = 515,
                 w_DMG[s] = estunDMG + esmaDMG,
                 Last_DMG_B[s] = w_DMG[s],
                 Last_DMG_A[s] = Last_DMG_B[s],
-                InnStr[s] += Last_DMG_A[s] + " (" + estunDMG + " + [" + esmaDMG + " " + " x " + wHITsuu + " hits])";
+                InnStr[s] += Last_DMG_A[s] + " (" + estunDMG + " + [" + (esmaDMG / wHITsuu) + " " + " x " + wHITsuu + " hits])";
             w_HIT_HYOUJI = 100,
             CastAndDelay(),
             BattleCalc998()
@@ -2952,7 +2952,6 @@ function ClickWeaponType(e) {
             c.A_shoes.style.width = "47%",
             c.A_acces1.style.width = "53%",
             c.A_acces2.style.width = "53%",
-            c.A_HSE_HEAD1.style.width = "43%",
             c.A_left_card.style.width = "37%",
             c.A_body_card.style.width = "37%",
             c.A_shoes_card.style.width = "37%",
@@ -3012,6 +3011,20 @@ function ClickWeaponType(e) {
             c.A_weapon1_ropt3.options[0] = new Option(m_RandomOpt[0][1], m_RandomOpt[0][0]);
             c.A_weapon1_ropt4.options[0] = new Option(m_RandomOpt[0][1], m_RandomOpt[0][0]);
         }
+    }else if(m_RandomOptMineWorkerPickaxe.includes(parseInt(n_A_Equip[0]))){ // mineworker pickaxe
+        if(!(m_RandomOptMineWorkerPickaxe.includes(parseInt(oldWeapon))) || parseInt(oldWeapon) == 0){
+            RandOptWeapon1Reset();
+            for(i = 0; "NULL" != m_RandomOptPickaxe[0][i]; i++){
+                c.A_weapon1_ropt1.options[i] = new Option(m_RandomOpt[m_RandomOptPickaxe[0][i]][1], m_RandomOpt[m_RandomOptPickaxe[0][i]][0]);
+            }
+            for(i = 0; "NULL" != m_RandomOptPickaxe[1][i]; i++){
+                c.A_weapon1_ropt2.options[i] = new Option(m_RandomOpt[m_RandomOptPickaxe[1][i]][1], m_RandomOpt[m_RandomOptPickaxe[1][i]][0]);
+            }
+            for(i = 0; "NULL" != m_RandomOptPickaxe[2][i]; i++){
+                c.A_weapon1_ropt3.options[i] = new Option(m_RandomOpt[m_RandomOptPickaxe[2][i]][1], m_RandomOpt[m_RandomOptPickaxe[2][i]][0]);
+            }
+            c.A_weapon1_ropt4.options[0] = new Option(m_RandomOpt[0][1], m_RandomOpt[0][0]);
+        }
     }else if(m_RandomOptSpecialType.includes(parseInt(e)) || m_RandomOptSpecialWeapons.includes(parseInt(n_A_Equip[0]))){ // special
         if(!(m_RandomOptSpecialType.includes(parseInt(n_A_WeaponType))) || m_RandomOptSpecialWeapons.includes(parseInt(oldWeapon)) || m_RandomOptCrimsonWeapons.includes(parseInt(oldWeapon)) || parseInt(oldWeapon) == 0){
             RandOptWeapon1Reset();
@@ -3029,7 +3042,7 @@ function ClickWeaponType(e) {
             }
         }
     }else if(m_RandomOptMeleeType.includes(parseInt(e))){ // melee
-        if(!(m_RandomOptMeleeType.includes(parseInt(n_A_WeaponType))) || m_RandomOptSpecialWeapons.includes(parseInt(oldWeapon)) || m_ForgedItems.includes(parseInt(oldWeapon)) || m_RandomOptCrimsonWeapons.includes(parseInt(oldWeapon)) || parseInt(oldWeapon) == 0){
+        if(!(m_RandomOptMeleeType.includes(parseInt(n_A_WeaponType))) || m_RandomOptSpecialWeapons.includes(parseInt(oldWeapon)) || m_ForgedItems.includes(parseInt(oldWeapon)) || m_RandomOptCrimsonWeapons.includes(parseInt(oldWeapon)) || m_RandomOptMineWorkerPickaxe.includes(parseInt(oldWeapon)) || parseInt(oldWeapon) == 0){
             RandOptWeapon1Reset();
             for(i = 0; "NULL" != m_RandomOptMelee[0][i]; i++){
                 c.A_weapon1_ropt1.options[i] = new Option(m_RandomOpt[m_RandomOptMelee[0][i]][1], m_RandomOpt[m_RandomOptMelee[0][i]][0]);
@@ -3081,6 +3094,23 @@ function ClickWeaponType(e) {
             allCard();
         }
     }
+
+    m_WeaponEnchant.includes(n_A_Equip[0]) ? (
+        n_A_enchant[7] = 1 * c.A_weapon1_enchant1.value, document.getElementById("nA_weapon1_enchant1").style.display = 'table-cell',
+        n_A_enchant[8] = 1 * c.A_weapon1_enchant2.value, document.getElementById("nA_weapon1_enchant2").style.display = 'table-cell',
+        LoadWeaponEnchants(n_A_Equip[0], parseInt(oldWeapon)),
+        n_A_randopt[0] = 0, n_A_randopt[1] = 0, document.getElementById("nA_weapon1_ropt1").style.display = 'none',
+        n_A_randopt[2] = 0, n_A_randopt[3] = 0, document.getElementById("nA_weapon1_ropt2").style.display = 'none', 
+        n_A_randopt[4] = 0, n_A_randopt[5] = 0, document.getElementById("nA_weapon1_ropt3").style.display = 'none', 
+        n_A_randopt[6] = 0, n_A_randopt[7] = 0, document.getElementById("nA_weapon1_ropt4").style.display = 'none'
+    ) : (
+        n_A_enchant[7] = 0, document.getElementById("nA_weapon1_enchant1").style.display = 'none', c.A_weapon1_enchant1.value = 0,
+        n_A_enchant[8] = 0, document.getElementById("nA_weapon1_enchant2").style.display = 'none', c.A_weapon1_enchant2.value = 0,
+        document.getElementById("nA_weapon1_ropt1").style.display = 'table-cell',
+        document.getElementById("nA_weapon1_ropt2").style.display = 'table-cell',
+        document.getElementById("nA_weapon1_ropt3").style.display = 'table-cell',
+        document.getElementById("nA_weapon1_ropt4").style.display = 'table-cell'
+    ),
 
     ActiveSkillSetPlus(),
     ClickB_Item(n_A_Equip[0])
@@ -3241,7 +3271,7 @@ function ClickWeaponType2(e) {
                     }
                 }
             }else if(m_RandomOptCrimsonWeapons.includes(parseInt(e))){ // crimson
-                if(!(m_RandomOptCrimsonWeapons.includes(parseInt(n_A_Equip[0])))){
+                if(!(m_RandomOptCrimsonWeapons.includes(parseInt(n_A_Equip[1])))){
                     RandOptWeapon2Reset();
                     for(i = 0; "NULL" != m_RandomOptCrimson[0][i]; i++){
                         c.A_weapon2_ropt1.options[i] = new Option(m_RandomOpt[m_RandomOptCrimson[0][i]][1], m_RandomOpt[m_RandomOptCrimson[0][i]][0]);
@@ -3282,6 +3312,25 @@ function ClickWeaponType2(e) {
                 c.A_weapon2_ropt4.options[0] = new Option(m_RandomOpt[0][1], m_RandomOpt[0][0]);
             }
         }
+
+        m_WeaponEnchant.includes(parseInt(e)) ? (
+            n_A_enchant[9] = 1 * c.A_weapon2_enchant1.value, document.getElementById("nA_weapon2_enchant1").style.display = 'table-cell',
+            n_A_enchant[10] = 1 * c.A_weapon2_enchant2.value, document.getElementById("nA_weapon2_enchant2").style.display = 'table-cell',
+            LoadWeaponEnchants(parseInt(e), parseInt(n_A_Equip[1])),
+            n_A_randopt[8] = 0, n_A_randopt[9] = 0, document.getElementById("nA_weapon2_ropt1").style.display = 'none',
+            n_A_randopt[10] = 0, n_A_randopt[11] = 0, document.getElementById("nA_weapon2_ropt2").style.display = 'none', 
+            n_A_randopt[12] = 0, n_A_randopt[13] = 0, document.getElementById("nA_weapon2_ropt3").style.display = 'none', 
+            n_A_randopt[14] = 0, n_A_randopt[15] = 0, document.getElementById("nA_weapon2_ropt4").style.display = 'none'
+        ) : (
+            n_A_enchant[9] = 0, document.getElementById("nA_weapon2_enchant1").style.display = 'none', c.A_weapon2_enchant1.value = 0,
+            n_A_enchant[10] = 0, document.getElementById("nA_weapon2_enchant2").style.display = 'none', c.A_weapon2_enchant2.value = 0,
+            document.getElementById("nA_weapon2_ropt1").style.display = 'table-cell',
+            document.getElementById("nA_weapon2_ropt2").style.display = 'table-cell',
+            document.getElementById("nA_weapon2_ropt3").style.display = 'table-cell',
+            document.getElementById("nA_weapon2_ropt4").style.display = 'table-cell'
+        );
+
+
         var _ = Math.max(document.documentElement.clientWidth, document.body.scrollWidth, document.documentElement.scrollWidth, document.body.offsetWidth, document.documentElement.offsetWidth);
             1262 <= _ && _ < 1480 || _ < 1013 ? (c.A_weapon2.style.width = "95%",
                 c.A_cardshortLeft.style.width = "95%",
@@ -4610,6 +4659,20 @@ function reloadShadowEquip(){
     c.A_weapon_shadow.value = n_A_Shadow[0];
     c.A_left_shadow.value = n_A_Shadow[1];
     c.A_shoes_shadow.value = n_A_Shadow[3];
+}
+
+function reloadEnchant(){
+    c.A_head_enchant.value = n_A_enchant[0];
+    c.A_body_enchant1.value = n_A_enchant[1];
+    c.A_body_enchant2.value = n_A_enchant[2];
+    c.A_shoulder_enchant1.value = n_A_enchant[3];
+    c.A_shoulder_enchant2.value = n_A_enchant[4];
+    c.A_shoes_enchant1.value = n_A_enchant[5];
+    c.A_shoes_enchant2.value = n_A_enchant[6];
+    c.A_weapon1_enchant1.value = n_A_enchant[7];
+    c.A_weapon1_enchant2.value = n_A_enchant[8];
+    c.A_weapon2_enchant1.value = n_A_enchant[9];
+    c.A_weapon2_enchant2.value = n_A_enchant[10];
 }
 
 function Buf10SW(e) {

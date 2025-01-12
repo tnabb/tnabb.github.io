@@ -209,6 +209,41 @@ function StAllCalc() {
         n_A_randopt[25] = 1 * c.SHOES_ROPT1.value,
         n_A_randopt[26] = 1 * c.A_shoes_ropt2.value,
         n_A_randopt[27] = 1 * c.SHOES_ROPT2.value,
+        // headgear enchant
+        m_HeadgearEnchant.includes(n_A_Equip[2]) ? (n_A_enchant[0] = 1 * c.A_head_enchant.value, c.A_head_enchant.style.display = 'inline-block', document.getElementById("A_head_enchant_row").style.display = 'table-row') : (n_A_enchant[0] = 0, c.A_head_enchant.style.display = 'none', document.getElementById("A_head_enchant_row").style.display = 'none', c.A_head_enchant.value = 0),
+        m_ArmorEnchant.includes(n_A_Equip[6]) ? (
+            n_A_enchant[1] = 1 * c.A_body_enchant1.value, c.A_body_enchant1.style.display = 'inline-block', 
+            n_A_enchant[2] = 1 * c.A_body_enchant2.value, c.A_body_enchant2.style.display = 'inline-block',
+            n_A_randopt[16] = 0, n_A_randopt[17] = 0, c.A_body_ropt1.style.display = 'none', c.BODY_ROPT1.style.display = 'none', 
+            n_A_randopt[18] = 0, n_A_randopt[19] = 0, c.A_body_ropt2.style.display = 'none', c.BODY_ROPT2.style.display = 'none'
+        ) : (
+            n_A_enchant[1] = 0, c.A_body_enchant1.style.display = 'none', c.A_body_enchant1.value = 0, 
+            n_A_enchant[2] = 0, c.A_body_enchant2.style.display = 'none', c.A_body_enchant2.value = 0,
+            c.A_body_ropt1.style.display = 'inline-block', c.BODY_ROPT1.style.display = 'inline-block',
+            c.A_body_ropt2.style.display = 'inline-block', c.BODY_ROPT2.style.display = 'inline-block'
+        ),
+        m_GarmentEnchant.includes(n_A_Equip[7]) ? (
+            n_A_enchant[3] = 1 * c.A_shoulder_enchant1.value, c.A_shoulder_enchant1.style.display = 'inline-block', 
+            n_A_enchant[4] = 1 * c.A_shoulder_enchant2.value, c.A_shoulder_enchant2.style.display = 'inline-block',
+            n_A_randopt[20] = 0, n_A_randopt[21] = 0, c.A_shoulder_ropt1.style.display = 'none', c.SHOULDER_ROPT1.style.display = 'none', 
+            n_A_randopt[22] = 0, n_A_randopt[23] = 0, c.A_shoulder_ropt2.style.display = 'none', c.SHOULDER_ROPT2.style.display = 'none'
+        ) : (
+            n_A_enchant[3] = 0, c.A_shoulder_enchant1.style.display = 'none', c.A_shoulder_enchant1.value = 0, 
+            n_A_enchant[4] = 0, c.A_shoulder_enchant2.style.display = 'none', c.A_shoulder_enchant2.value = 0,
+            c.A_shoulder_ropt1.style.display = 'inline-block', c.SHOULDER_ROPT1.style.display = 'inline-block',
+            c.A_shoulder_ropt2.style.display = 'inline-block', c.SHOULDER_ROPT2.style.display = 'inline-block'
+        ),
+        m_ShoesEnchant.includes(n_A_Equip[8]) ? (
+            n_A_enchant[5] = 1 * c.A_shoes_enchant1.value, c.A_shoes_enchant1.style.display = 'inline-block', 
+            n_A_enchant[6] = 1 * c.A_shoes_enchant2.value, c.A_shoes_enchant2.style.display = 'inline-block',
+            n_A_randopt[24] = 0, n_A_randopt[25] = 0, c.A_shoes_ropt1.style.display = 'none', c.SHOES_ROPT1.style.display = 'none', 
+            n_A_randopt[26] = 0, n_A_randopt[27] = 0, c.A_shoes_ropt2.style.display = 'none', c.SHOES_ROPT2.style.display = 'none'
+        ) : (
+            n_A_enchant[5] = 0, c.A_shoes_enchant1.style.display = 'none', c.A_shoes_enchant1.value = 0, 
+            n_A_enchant[6] = 0, c.A_shoes_enchant2.style.display = 'none', c.A_shoes_enchant2.value = 0,
+            c.A_shoes_ropt1.style.display = 'inline-block', c.SHOES_ROPT1.style.display = 'inline-block',
+            c.A_shoes_ropt2.style.display = 'inline-block', c.SHOES_ROPT2.style.display = 'inline-block'
+        ),
         n_A_Weapon_element = 1 * c.A_Weapon_element.value,
         n_A_Weapon2_element = n_A_Weapon_element,
         0 == n_A_Weapon_element) {
@@ -478,7 +513,7 @@ function StAllCalc() {
         n_tok[_] = 0,
         n_tok[_] += StPlusCalc2(_),
         n_tok[_] += StPlusCard(_);
-    for (_ = 290; _ <= 373; _++) // add more options
+    for (_ = 290; _ <= 400; _++) // add more options
         n_tok[_] = 0,
             n_tok[_] += StPlusCalc2(_),
             n_tok[_] += StPlusCard(_);
@@ -797,11 +832,12 @@ function StAllCalc() {
     c.B_num.value >= 2 && (n_A_totalDEF -= Math.floor(n_A_totalDEF * (1 * c.B_num.value - 1) * 5 / 100)),
     SkillSearch(196) && (n_A_totalDEF = 90);
     P_VIT1 = 0;
-    n_A_Buf2[4] && (P_VIT1 = n_A_VIT * (.1 * n_A_Buf2[4]));
+    n_A_Buf2[4] && (P_VIT1 = n_A_VIT * (.1 * n_A_Buf2[4])),
+    n_tok[374] && (P_VIT1 += n_tok[374]);
     if (e = parseInt(n_A_VIT + P_VIT1),
         n_A_Buf6[5] ? e -= Math.floor((.05 + .05 * n_A_Buf6[5]) * e) : n_A_Buf7[31] && (e -= Math.floor(.1 * e)),
-        SkillSearch(258) && (n_A_totalDEF = 0,
-            e = 0),
+        SkillSearch(258) && (n_A_totalDEF = 0, e = 0),
+        
         myInnerHtml("A_totalDEF", n_A_totalDEF + "+" + e, 0),
         n_A_VITDEF = new Array,
         n_A_VITDEF[0] = Math.floor(.5 * n_A_VIT) + Math.floor(.3 * n_A_VIT),
@@ -1815,7 +1851,7 @@ function StPlusCalc() {
     n_A_Buf7[49] && (A += 20),
     n_A_Buf7[50] && (l += 20),
     n_A_Buf7[51] && (o += 20);
-    var S, i = 1 * c.A_HSE_HEAD1.value;
+    var S, i = 0;
     if (i) {
         r = i % 10;
         1 <= i && i <= 9 && (a += r),
@@ -1888,6 +1924,9 @@ function StPlusCalc2(_) {
     for (a = 0; a <= 5; a++)
         for(var e = 0; 0 != m_ShadowEquips[n_A_Shadow[a]][e + 6]; e += 2)
             _ == Math.abs(m_ShadowEquips[n_A_Shadow[a]][e + 6]) && (n += m_ShadowEquips[n_A_Shadow[a]][e + 7]);
+    for (a = 0; a <= 10; a++)
+        for(var e = 0; 0 != m_Enchant[n_A_enchant[a]][e + 2]; e += 2)
+            _ == Math.abs(m_Enchant[n_A_enchant[a]][e + 2]) && (n += m_Enchant[n_A_enchant[a]][e + 3]);
     return n
 }
 function StPlusCard(_) { // buffs / stats from cards perhaps
@@ -2449,7 +2488,9 @@ function KakutyouKansuu() {
                 l += "<td class='right'><b>" + n_tok[29] + "</b> % vs</td><td><b>Large</b></td></tr>",
                 l += "</table>",
                 l += "<hr><table>",
-                l += "<tr><td><b>DEF Pierce on all targets: </b>" + n_tok[290] + " %</td></tr>",
+                l += "<tr><td><b>DEF Pierce on normal targets: </b>" + n_tok[291] + " %</td></tr>",
+                l += "<tr><td><b>DEF Pierce on boss monsters: </b>" + n_tok[292] + " %</td></tr>",
+                l += "<tr><td><b>DEF Pierce on all monsters: </b>" + n_tok[290] + " %</td></tr>",
                 l += "</table>",
                 l += "<hr><table>",
                 l += "<tr><td><b>Final non-critical melee ATK based damage modifier: </b>" + F_MOD + " %</td></tr>",
@@ -3510,7 +3551,7 @@ function SaveLocal() {
             SaveData[47] = 1 * c.A_acces1_card.value,
             SaveData[48] = 1 * c.A_acces2.value,
             SaveData[49] = 1 * c.A_acces2_card.value,
-            SaveData[50] = 1 * c.A_HSE_HEAD1.value,
+            SaveData[50] = 0,
             SaveData[51] = 0 
             SaveData[52] = 0,
             SaveData[53] = 0,
@@ -3611,6 +3652,8 @@ function SaveLocal() {
             SaveData[464 + n] = n_A_Shadow[n];
         for(n = 0; n <= 3; n++)
             SaveData[470 + n] = n_A_Buf3[45 + n]; 
+        for(n = 0; n <= 10; n++)
+            SaveData[474 + n] = n_A_enchant[n];
         SaveData[500] = c.saveDataName.value,
         slotNum = c.A_SaveSlotLocal.value,
             localStorage["Slot" + slotNum] = JSON.stringify(SaveData),
@@ -3670,7 +3713,6 @@ function LoadLocal() {
             c.A_acces1_card.value = 0,
             c.A_acces2.value = 326,
             c.A_acces2_card.value = 0,
-            c.A_HSE_HEAD1.value = 0,
             n_itemSW = 0,
             ClickB_Item("SW"),
             w = n_A_JOB;
@@ -3733,6 +3775,8 @@ function LoadLocal() {
             n_A_Shadow[n] = 0;
         n_A_Shadow[1] = 22;
         n_A_Shadow[3] = 44;
+        for(n = 0; n <= 10; n++)
+            n_A_enchant[n] = 0;
         n_Skill10SW = 0
     } else {
         for (n = 0; n <= 336; n++)
@@ -3794,7 +3838,6 @@ function LoadLocal() {
             c.A_acces1_card.value = SaveData[47],
             c.A_acces2.value = SaveData[48],
             c.A_acces2_card.value = SaveData[49],
-            c.A_HSE_HEAD1.value = SaveData[50],
             w = n_A_JOB;
         for (_ = 0,
             n = 0; n <= 14 && 0 == _; n++) {
@@ -3879,6 +3922,8 @@ function LoadLocal() {
         n_A_Shadow[3] == 0 && (n_A_Shadow[3] = 44);
         for(n = 0; n <= 3; n++)
             n_A_Buf3[45 + n] = SaveData[470 + n] == null ? 0 : SaveData[470 + n];
+        for(n = 0; n <= 10; n++)
+            n_A_enchant[n] = SaveData[474 + n] == null ? 0 : SaveData[474 + n];
     }
     c.saveDataName.value = SaveData[500],
     refreshFields(),
@@ -3983,7 +4028,7 @@ function URLOUT() {
         SaveData[44] = NtoS2(1 * c.A_SHOES_REFINE.value, 1),
         SaveData[45] = NtoS01(c.A_adopted.checked, 0, 0, 0, 0),
         SaveData[46] = NtoS2(0, 2),
-        SaveData[47] = NtoS2(1 * c.A_HSE_HEAD1.value, 2),
+        SaveData[47] = NtoS2(0, 2),
         SaveData[48] = NtoS2(0, 2),
         SaveData[49] = NtoS2(0, 2),
         n_A_JobSet();
@@ -4273,6 +4318,19 @@ function URLOUT() {
         t += 1,
         SaveData[t + 1] = NtoS2(n_A_Buf3[37], 2),
         t += 1,
+        SaveData[t + 1]  = "-",
+        SaveData[t + 2] = NtoS2(n_A_enchant[0], 2),
+        SaveData[t + 3] = NtoS2(n_A_enchant[1], 2),
+        SaveData[t + 4] = NtoS2(n_A_enchant[2], 2),
+        SaveData[t + 5] = NtoS2(n_A_enchant[3], 2),
+        SaveData[t + 6] = NtoS2(n_A_enchant[4], 2),
+        SaveData[t + 7] = NtoS2(n_A_enchant[5], 2),
+        SaveData[t + 8] = NtoS2(n_A_enchant[6], 2),
+        SaveData[t + 9] = NtoS2(n_A_enchant[7], 2),
+        SaveData[t + 10] = NtoS2(n_A_enchant[8], 2),
+        SaveData[t + 11] = NtoS2(n_A_enchant[9], 2),
+        SaveData[t + 12] = NtoS2(n_A_enchant[10], 2),
+        t += 12,
         wStr = "" + SaveData[0],
         _ = 1; _ <= t; _++)
         wStr += "" + SaveData[_];
@@ -4330,6 +4388,8 @@ function URLIN() {
             n_A_randopt[r] = 0;
         for(r = 0; r <= 5; r++)
             n_A_Shadow[r] = 0;
+        for (r = 0; r <= 10; r++)
+            n_A_enchant[r] = 0;
         n_A_Shadow[1] = 22,
         n_A_Shadow[3] = 44,
         n_A_Buf9[2] = 10,
@@ -4631,8 +4691,7 @@ function URLIN() {
                 c.Conf01.value = StoN2(n.substr(S + 1, 2)),
                 S += 2,
                 A >= 1 && (S += 2),
-                A >= 2 && (c.A_HSE_HEAD1.value = StoN2(n.substr(S + 1, 2)),
-                    S += 2),
+                A >= 2 && (S += 2),
                 StCalc(1),
                 ActiveSkillSetPlus(),
                 S = i,
@@ -4642,7 +4701,6 @@ function URLIN() {
                 66 != n_A_ActiveSkill && 326 != n_A_ActiveSkill && 159 != n_A_ActiveSkill && 384 != n_A_ActiveSkill && 324 != n_A_ActiveSkill && 131 != n_A_ActiveSkill && 88 != n_A_ActiveSkill && 197 != n_A_ActiveSkill && 394 != n_A_ActiveSkill && 395 != n_A_ActiveSkill && 405 != n_A_ActiveSkill && 429 != n_A_ActiveSkill || (c.SkillSubNum.value = StoN2(n.substr(S + 4, 3))),
                 c.B_Enemy.value = StoN2(n.substr(S + 7, 2))
         } else if (A >= 4) {
-            c.A_HSE_HEAD1.value = StoN2(n.substr(82, 2));
             for (u = StoN2(n.substr(88, 1)),
                 r = 0; r < u; r++) {
                 document.getElementById("A_skill" + r).value = StoN2(n.substr(89 + r, 1))
@@ -5017,30 +5075,53 @@ function URLIN() {
                     c.theme.value = StoN2(n.substr(S + 23, 1)),
                     c.server.value = StoN2(n.substr(S + 24, 1)))
         }
-        if(n.substr(-16, 1) != "-"){
-            for(x = -56, g = 0; x < 0, g <= 27; x += 2, g++){ // load rand options from url
-                n_A_randopt[g] = StoN2(n.substr(x, 2));
+        if(n.substr(-23, 1) != "-"){
+            if(n.substr(-16, 1) != "-"){
+                for(x = -56, g = 0; x < 0, g <= 27; x += 2, g++){ // load rand options from url
+                    n_A_randopt[g] = StoN2(n.substr(x, 2));
+                }
+                for(g = 0; g <= 5; g++)
+                    n_A_Shadow[g] = 0;
+                n_A_Shadow[1] = 22;
+                n_A_Shadow[3] = 44;
+                for(g = 0; g <= 3; g++)
+                    n_A_Buf3[45 + g] = 0;
+                n_A_Buf3[37] = 0;
+                
+            }else{
+                for(x = -72, g = 0; x < 0, g <= 27; x += 2, g++){ // load rand options from url
+                    n_A_randopt[g] = StoN2(n.substr(x, 2));
+                }
+                for(x = -15, g = 0; x < 0, g <= 5; x += 2, g++){
+                    n_A_Shadow[g] = StoN2(n.substr(x, 2));
+                }
+                l = StoN2(n.substr(-3, 1));
+                n_A_Buf3[45] = Math.floor(l / 16),
+                n_A_Buf3[46] = Math.floor(l % 16 / 8),
+                n_A_Buf3[47] = Math.floor(l % 8 / 4),
+                n_A_Buf3[48] = Math.floor(l % 4 / 2),
+                n_A_Buf3[37] = StoN2(n.substr(-2, 2))
             }
-            for(g = 0; g <= 5; g++)
-                n_A_Shadow[g] = 0;
-            n_A_Shadow[1] = 22;
-            n_A_Shadow[3] = 44;
-            for(g = 0; g <= 3; g++)
-                n_A_Buf3[45 + g] = 0;
-            n_A_Buf3[37] = 0;
+
+            for(g = 0; g <= 10; g++)
+                n_A_enchant[g] = 0;
         }else{
-            for(x = -72, g = 0; x < 0, g <= 27; x += 2, g++){ // load rand options from url
+            for(x = -95, g = 0; x < 0, g <= 27; x += 2, g++){ // load rand options from url
                 n_A_randopt[g] = StoN2(n.substr(x, 2));
             }
-            for(x = -15, g = 0; x < 0, g <= 5; x += 2, g++){
+            for(x = -38, g = 0; x < 0, g <= 5; x += 2, g++){
                 n_A_Shadow[g] = StoN2(n.substr(x, 2));
             }
-            l = StoN2(n.substr(-3, 1));
+            l = StoN2(n.substr(-26, 1));
             n_A_Buf3[45] = Math.floor(l / 16),
             n_A_Buf3[46] = Math.floor(l % 16 / 8),
             n_A_Buf3[47] = Math.floor(l % 8 / 4),
             n_A_Buf3[48] = Math.floor(l % 4 / 2),
-            n_A_Buf3[37] = StoN2(n.substr(-2, 2))
+            n_A_Buf3[37] = StoN2(n.substr(-25, 2));
+
+            for(x = -22, g = 0; x < 0, g <= 10; x += 2, g++){
+                n_A_enchant[g] = StoN2(n.substr(x, 2));
+            }
         }
         refreshFields(),
         SRV = 1 * c.server.value,
@@ -5060,13 +5141,6 @@ for (document.calcForm.A_Weapon_element.options[0] = new Option("(unchanged)", 0
     m_CardShort = [["(card shortcuts)", 0, 0, 0, 0], ["Remove All Cards", 1e4, 0], ["Remove Weapon's Cards", 0, 0, 0, 0], ["+40% [2 Race Card]", 1, 1, 0, 0], ["+60% [3 Race Card]", 1, 1, 1, 0], ["+80% [4 Race Card]", 1, 1, 1, 1], ["+61% [2 Race + 1 Size Cards]", 1, 1, 3, 0], ["+68% [2 Race + 1 Element Cards]", 1, 1, 2, 0], ["+84% [3 Race + 1 Size Cards]", 1, 1, 1, 3], ["+96% [2 Race + 2 Element Cards]", 1, 1, 2, 2], ["+110% [2 AK + 2 Race Cards]", 31, 31, 1, 1], ["+110% [3 AK + 1 Race Cards]", 31, 31, 31, 1], ["+110% [3 AK + 1 Element Cards]", 31, 31, 31, 2], ["2 Size Cards", 3, 3, 0, 0], ["3 Size Cards", 3, 3, 3, 0], ["4 Size Cards", 3, 3, 3, 3], ["1 Elemental Stone + 1 Star Crumb", 0, 106, 0, 0], ["1 Elemental Stone + 2 Star Crumbs", 0, 106, 106, 0], ["3 Star Crumbs", 106, 106, 106, 0], ["+40 ATK [2 Andre Cards]", 11, 11, 0, 0], ["+60 ATK [3 Andre Cards]", 11, 11, 11, 0], ["+80 ATK [4 Andre Cards]", 11, 11, 11, 11], ["+60 ATK [2 Zipper Bear Cards]", 326, 326, 0, 0], ["+90 ATK [3 Zipper Bear Cards]", 326, 326, 326, 0], ["+120 ATK [4 Zipper Bear Cards]", 326, 326, 326, 326], ["+18 CRIT [2 Soldier Skeleton Cards]", 41, 41, 0, 0], ["+27 CRIT [3 Soldier Skeleton Cards]", 41, 41, 41, 0], ["+36 CRIT [4 Soldier Skeleton Cards]", 41, 41, 41, 41], ["+40 HIT [2 Mummy Cards]", 40, 40, 0, 0], ["+60 HIT [3 Mummy Cards]", 40, 40, 40, 0], ["+80 HIT [4 Mummy Cards]", 40, 40, 40, 40], ["+60% [2 Orc Lady Cards]", 252, 252, 0, 0], ["+92% [2 Orc Lady + 1 Hydra Cards]", 252, 252, 13, 0], ["+128% [3 Orc Lady + 1 Hydra Cards]", 252, 252, 252, 13], ["+20% [2 Archer Skeleton Cards]", 107, 107, 0, 0], ["+30% [3 Archer Skeleton Cards]", 107, 107, 107, 0], ["+40% [4 Archer Skeleton Cards]", 107, 107, 107, 107], ["2 Fabre Cards", 4, 4, 0, 0], ["3 Fabre Cards", 4, 4, 4, 0], ["4 Fabre Cards", 4, 4, 4, 4], ["2 Drops Cards", 5, 5, 0, 0], ["3 Drops Cards", 5, 5, 5, 0], ["4 Drops Cards", 5, 5, 5, 5], ["+50% [2 Abysmal Knight Cards]", 31, 31, 0, 0], ["+75% [3 Abysmal Knight Cards]", 31, 31, 31, 0], ["+100% [4 Abysmal Knight Cards]", 31, 31, 31, 31], ["2 Crit Dmg +10%, CRIT +7 Cards", 156, 156, 0, 0], ["3 Crit Dmg +10%, CRIT +7 Cards", 156, 156, 156, 0], ["4 Crit Dmg +10%, CRIT +7 Cards", 156, 156, 156, 156], ["2 Cecil Damon Cards", 160, 160, 0, 0], ["3 Cecil Damon Cards", 160, 160, 160, 0], ["4 Cecil Damon Cards", 160, 160, 160, 160], ["Swordman Set", 1e4, 223, 347, 0, 317, 0, 362, 354, 0], ["Thief Set", 1e4, 233, 0, 0, 0, 295, 391, 395, 260], ["Acolyte Set", 1e4, 253, 383, 307, 301, 0, 0, 270, 0], ["Archer Set", 1e4, 279, 0, 0, 224, 340, 351, 230, 0], ["Magician Set", 1e4, 0, 337, 358, 220, 346, 379, 350, 0], ["Merchant Set", 1e4, 326, 376, 0, 281, 0, 388, 216, 0], ["Crusader Set", 1e4, 0, 347, 0, 190, 0, 362, 354, 0], ["Rogue Set", 1e4, 0, 113, 0, 0, 295, 391, 260, 413], ["Monk Set", 1e4, 253, 383, 0, 181, 0, 0, 270, 0], ["Bard/Dancer Set", 1e4, 279, 0, 0, 224, 340, 408, 230, 0], ["Sage Set", 1e4, 0, 337, 0, 193, 346, 379, 350, 0], ["Alchemist Set", 1e4, 326, 175, 0, 281, 0, 388, 104, 0], ["Test (for now)", 0, 0, 0, 0]],
     i = 0; i <= 63; i++)
     document.calcForm.A_cardshort.options[i] = new Option(m_CardShort[i][0], i);
-var HSEname = ["STR", "AGI", "VIT", "INT", "DEX", "LUK"];
-document.calcForm.A_HSE_HEAD1.options[0] = new Option("(headgear Hidden Slot Enchant)", 0);
-var iHSE = 1;
-for (i = 0; i <= 5; i++)
-    for (j = 1; j <= 3; j++)
-        document.calcForm.A_HSE_HEAD1.options[iHSE] = new Option(HSEname[i] + "+" + j, 10 * i + j),
-            iHSE++;
 for (n_A_Buf2 = new Array,
     i = 0; i <= 21; i++)
     n_A_Buf2[i] = 0;
@@ -5117,6 +5191,9 @@ for (n_A_Shadow = new Array,
     n_A_Shadow[i] = 0;
 n_A_Shadow[1] = 22;
 n_A_Shadow[3] = 44;
+for(n_A_enchant = new Array,
+    i = 0; i <= 10; i++)
+    n_A_enchant[i] = 0;
     
 for (tPlusTaiseiSyokia(),
     i = 0; i < m_TempEffect.length; i++)
@@ -5143,6 +5220,7 @@ function refreshFields() {
         Buf10SW(n_Skill10SW),
         reloadRandOpt()
         reloadShadowEquip()
+        reloadEnchant()
 }
 
 document.calcForm.B_AtkRange.value = 0,

@@ -2071,11 +2071,11 @@ m_Item = [
 	, [2063, 13, 0, 97, 3, 0, 50, 24, "Finger [Forged]", 0, "", 0]
 	, [2064, 13, 0, 115, 3, 0, 65, 24, "Fist [Forged]", 0, "", 0]
 	// paradise set
-	, [2065, 60, 0, 8, 0, 0, 0, 0, "Paradise Uniform", 0, "Recover 15 HP every 10 seconds.<br>Recover 2 SP every 10 seconds.", 193, 1, 0]
-	, [2066, 50, 0, 2, 0, 0, 0, 0, "Paradise Cap", 0, "", 193, 1, 14, 30, 0]
-	, [2067, 62, 0, 3, 0, 0, 0, 0, "Paradise Muffler", 0, "", 193, 1, 60, 5, 9, 3, 0]
-	, [2068, 63, 0, 3, 0, 0, 0, 0, "Paradise Boots", 0, "", 193, 1, 13, 60, 0]
-	, [2069, 61, 0, 3, 0, 0, 0, 1, "Paradise Shield", 0, "", 193, 1, 190, 5, 191, 5, 192, 5, 0]
+	, [2065, 60, 0, 8, 0, 0, 0, 0, "Paradise Uniform", 0, "Recover 15 HP every 10 seconds.<br>Recover 2 SP every 10 seconds.", 193, 1, 374, 4, 0]
+	, [2066, 50, 0, 2, 0, 0, 0, 0, "Paradise Cap", 0, "", 193, 1, 14, 30, 374, 4, 0]
+	, [2067, 62, 0, 3, 0, 0, 0, 0, "Paradise Muffler", 0, "", 193, 1, 60, 5, 9, 3, 374, 4, 0]
+	, [2068, 63, 0, 3, 0, 0, 0, 0, "Paradise Boots", 0, "", 193, 1, 13, 60, 374, 4, 0]
+	, [2069, 61, 0, 3, 0, 0, 0, 1, "Paradise Shield", 0, "", 193, 1, 190, 5, 191, 5, 192, 5, 374, 4, 0]
 	, [2070, 1, 52, 100, 3, 0, 0, 1, "Paradise Gladius", 0, "", 193, 1, 0]
 	, [2071, 2, 51, 100, 3, 0, 0, 1, "Paradise Saber", 0, "", 193, 1, 0]
 	, [2072, 10, 54, 75, 3, 0, 0, 1, "Paradise Crossbow", 0, "", 193, 1, 0]
@@ -2198,6 +2198,18 @@ m_Item = [
 	, [2184, 64, 122, 0, 0, 0, 10, 80, "License to Clown", 0, "", 4, 5, 17, 10, 74, 5, 5263, 5, 0]
 	, [2185, 100, 0, 0, 0, 0, 0, 0, "Metal Stick + Falcon Muffler", 0, "<b>For each refine level on [Falcon Muffler]:</b><br>Decrease damage from all size monsters by 1%<br>[<b style='color:#A89682'>Neutral</b>] element resistance +2%", 190, 10, 191, 10, 192, 10, 0]
 	, [2186, 100, 0, 0, 0, 0, 0, 0, "Mine Worker's Pickaxe + King's Manteau", 0, "<b>For each refine level on [King's Manteau]:</b><br>Decrease damage from all size monsters by 1%", 190, 10, 191, 10, 192, 10, 0]
+	, [2187, 60, 0, 8, 0, 0, 0, 1, "Mine Worker's Vest", 0, "", 193, 1, 13, 200, 14, 50, 19, 4, 374, 10, 0]
+	, [2188, 62, 0, 3, 0, 0, 0, 1, "Mine Worker's Backpack", 0, "", 193, 1, 60, 10, 9, 5, 8, 3, 19, 2, 374, 10, 0]
+	, [2189, 63, 0, 3, 0, 0, 0, 1, "Spurred Boots", 0, "", 193, 1, 13, 100, 14, 25, 10, 3, 374, 10, 0]
+	, [2190, 50, 0, 3, 0, 0, 0, 1, "Bull Hat", 0, "", 193, 1, 13, 70, 14, 35, 374, 10, 0]
+	, [2191, 2, 90, 150, 3, 0, 50, 40, "Adventurer's Rapier", 0, "", 0]
+	, [2192, 9, 77, 40, 1, 0, 100, 40, "Adventurer's Arc Wand", 0, "", 89, 15, 4, 2, 5, 2, 73, -5, 74, 5, 295, 15, 0]
+	, [2193, 1, 95, 130, 3, 0, 50, 40, "Adventurer's Damascus", 0, "", 0]
+	, [2194, 10, 0, 115, 3, 0, 100, 40, "Adventurer's Great Bow", 0, "", 0]
+	, [2195, 6, 70, 150, 3, 0, 50, 40, "Adventurer's Buster", 0, "", 0]
+	, [2196, 8, 1, 130, 3, 0, 50, 40, "Adventurer's Flail", 0, "", 0]
+	, [2197, 9, 53, 40, 3, 0, 40, 40, "Adventurer's Cure Wand", 0, "", 99, 3, 14, 100, 13, 150, 93, 10, 0]
+	, [2198, 17, 95, 115, 3, 0, 50, 40, "Adventurer's Revolver", 0, "", 0]
 ];
 
 //[ id, display location, job that can use, atk/def, level of weapon, slots, weight, level required to use, "name of item", ?, "description", effect1, effect2, ..., 0 =? ]
@@ -2580,6 +2592,8 @@ function Item_Setumei(nC1, nC2) {
 			CBIstr += "Decrease [Double Attack] success rate by " + (-1 * nC2) + "%.<BR>";
 	if(373 == nC1)
 		CBIstr += "Deal" + wIS + nC2 + "% melee ATK based damage.<BR>";
+	if(374 == nC1)
+		CBIstr += "Soft DEF" + wIS + nC2;
 	if (5000 <= nC1 && nC1 <= 6999)		//mejorar: bastaría con 5000~5999
 		//		CBIstr += "["+ m_Skill[nC1 -5000][2] +"] skill damage"+ wIS + nC2 +"%<BR>";		// original
 		CBIstr += "[" + skillName(m_Skill[nC1 - 5000][0], SRV) + "] skill damage" + wIS + nC2 + "%<BR>";
