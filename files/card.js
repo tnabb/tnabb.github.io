@@ -44,7 +44,7 @@ m_Card = [
 	, [40, 1, "Mummy", 0, 8, 20, 0]
 	, [41, 1, "Soldier Skeleton", 0, 10, 9, 0]
 	, [42, 1, "Doppelganger", 0, 12, 10, 0]
-	, [43, 1, "Sidewinder", "Enable the use of [Double Attack] Lvl 1 with any weapons.<BR>If you learned a level higher than 1, you will use that level instead.", 372, 5, 0]
+	, [43, 1, "Sidewinder", "Enable the use of [Double Attack] Lvl 1 with any weapons.<BR>If you learned a level higher than 1, you will use that level instead.", 0]
 	, [44, 1, "Phreeoni", 0, 8, 100, 0]
 	, [45, 1, "Baphomet", "All regular attacks become 3x3 splash damage like a Bowling Bash Effect Permanently.", 8, -10, 0]
 	, [46, 1, "Hunter Fly", "When dealing ATK based damage, 3% chance you gain 15% of the damage inflicted on your target as HP.", 0]

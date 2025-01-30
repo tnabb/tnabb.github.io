@@ -5855,6 +5855,7 @@ function CastAndDelay() {
     0 != n_A_ActiveSkill && 284 != n_A_ActiveSkill && (n_Delay[4] = 1 * document.calcForm.Conf01.value / 100),
     n_Delay[4] > wDelay + wCast && (wDelay = n_Delay[4] - wCast, n = 4),
     0 != n_Delay[5] && (wDelay = n_Delay[5], n = 5),
+    SkillSearch(187) && sandanDelay < 0.2 && (sandanDelay = 0.2),
     n_Delay[6] > wDelay + wCast && (wDelay = n_Delay[6] - wCast, n = 6),
         1 == n && (0 == n_A_ActiveSkill ? SkillSearch(187) ? (e += "Attack interval (normal)<BR>Attack interval (" + skillName(187, c.server.value) + ")<BR>",
             _ += n_Delay[1] + " seconds<BR>" + sandanDelay + " seconds<BR>",
