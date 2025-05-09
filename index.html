@@ -77,6 +77,22 @@ Calc's theme: <select id="theme" onChange="themes()"><option value="0">Original<
               <br>This was not made in collaboration with any GM's from Alfheim, so don't bug them if there's any errors.
               <br><br>
               <details open>
+                <summary style="cursor: pointer; font-weight: bold;">(A) Changelog 2025-05-09</summary>
+                <div>
+                  • Fixed Spiral Pierce being affected by Spear Mastery.
+                  <br>• Fixed the STR bonus on Spiral Pierce being divided by 5.
+                  <br>• Adjusted the 3% damage increase on Spiral Pierce to a 6% damage increase, and moved the calculation to the correct place.
+                  <br>• Spiral Pierce's damage should now more accurately represent the damage in-game, with a 0~1% difference.
+                  <br>• Applied monster adjustments based on patch <a href="https://projectalfheim.net/wiki/index.php/Patch_A.4.4">A4.4</a>.
+                  <br>• Increased length caps on numbers in "Manual Edits on Player" and "Manual Edits on Enemy".
+                  <br>• Changed "Cast Time/Delay" under "Other Info" to "Cast Time/Cast Delay/ASPD%".
+                  <br>• "Cast Time/Cast Delay/ASPD%" now also displays total ASPD% and ASPD% from Impressive Rift, Gear, Skill, and ETC sources.
+                  <br>• Novice and Super Novice can now wear Vigilante Suit and Stole.
+                  <br>• Fixed Cart Revolution % modifier not being applied correctly on Heavy Metaling Card.
+                </div>
+              </details>
+              <br>
+              <details>
                 <summary style="cursor: pointer; font-weight: bold;">(A) Changelog 2025-02-01</summary>
                 <div>
                   • Changed Cursed Jackknife from having Melee random options to having Special random options.
@@ -2207,7 +2223,7 @@ Calc's theme: <select id="theme" onChange="themes()"><option value="0">Original<
                           </option>
                           <option value="16">+% MATK based Damage Modifiers
                           </option>
-                          <option value="18">Cast Time/Delay
+                          <option value="18">Cast Time/Cast Delay/ASPD%
                           </option>
                           <option value="20">Experience
                           </option>

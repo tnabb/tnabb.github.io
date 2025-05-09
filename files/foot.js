@@ -1163,69 +1163,68 @@ function StAllCalc() {
         n_A_MATK[1] = Math.ceil((n_A_MATK[2] + n_A_MATK[0]) / 2);
     var d = 0;
     78 == m_JobBuff[n_A_JOB][5] ? c.A_skill5.value > 0 && (d = 1) : 78 == m_JobBuff[n_A_JOB][8] && c.A_skill8.value > 0 && (d = 1),
-        M = 100,
-        1324 == n_A_Equip[2] && d ? M *= 1.96 : n_tok[209] || n_A_Buf2[1] || n_A_Buf7[26] ? M *= 1.4 : n_A_Buf2[9] ? M *= 1.24 : CardNumSearch(451) && (M *= 1.05),
-        1324 != n_A_Equip[2] && d && (M *= 1.4),
-        1324 != n_A_Equip[2] || d || (M *= 1.4),
-        M -= 10 * n_A_Buf6[19],
-        n_A_Buf6[22] ? M = 25 : 196 == m_JobBuff[n_A_JOB][6] && c.A_skill6.value > 0 && (M = 20),
-        myInnerHtml("A_MovSPEED", M + " %", 0),
-        M = n_tok[12] + n_A_Buf9[44], // aspd %
-        624 == n_A_Equip[0] && (M += n_A_Weapon_refine),
-        641 == n_A_Equip[0] && (M += n_A_Weapon_refine),
-        654 == n_A_Equip[0] && (M += Math.floor(SU_AGI / 14)),
-        484 == n_A_Equip[0] && SU_STR >= 50 && (M += 5),
-        SU_STR >= 77 && 944 == n_A_Equip[0] && (M += 4),
-        SU_STR >= 95 && 621 == n_A_Equip[0] && (M -= 40),
-        SU_STR >= 95 && 1167 == n_A_Equip[0] && (M += 3),
-        21 == n_A_JOB && EquipNumSearch(855) && (M -= 5),
-        2 == n_A_JobClass() && (M += 3 * EquipNumSearch(1121)),
-        EquipNumSearch(1004) && (M += Math.floor(n_A_Weapon_refine / 2)),
-        (10 == n_A_WeaponType || (16 <= n_A_WeaponType && n_A_WeaponType <= 21)) && (M += 5*CardNumSearch(528)),
-        1842 == n_A_Equip[0] && (M += Math.floor(SU_AGI/10)),
-        1823 == n_A_Equip[2] && n_A_HEAD_REFINE >= 5 && (M += 1),
-        1823 == n_A_Equip[2] && n_A_HEAD_REFINE >= 7 && (M += 1),
-        n_A_Weapon_refine >= 7 && (1849 == n_A_Equip[0] || 2102 == n_A_Equip[0]) && (M += 5),
-        SU_AGI >= 90 && 1944 == n_A_Equip[8] && (M += 5),
-        (1956 == n_A_Equip[0] || 1956 == n_A_Equip[1]) && 22 == n_A_JOB && (M += 7 * EquipNumSearch(1956)),
-        n_A_Weapon_refine >= 9 && 1949 == n_A_Equip[0] && (M += 2),
-        3 == n_A_WeaponType && (M += 5*CardNumSearch(525)),
-        903 == n_A_Equip[0] && 13 == n_A_JobClass2() && (M += 20),
-        n_A_HEAD_REFINE >= 7 && 1283 == n_A_Equip[2] && (M += 3),
-        n_A_HEAD_REFINE >= 7 && 1481 == n_A_Equip[2] && (M += 3),
-        n_A_HEAD_REFINE >= 7 && 1288 == n_A_Equip[2] && (M += 2),
-        n_A_HEAD_REFINE >= 8 && 1290 == n_A_Equip[2] && (M += 2),
-        n_A_HEAD_REFINE >= 8 && 1555 == n_A_Equip[2] && (M += 8),
-        10 == n_A_HEAD_REFINE && 1290 == n_A_Equip[2] && (M += 2),
-        n_A_Weapon_refine >= 6 && 1081 == n_A_Equip[0] && (M += 10),
-        n_A_Weapon_refine >= 6 && 1086 == n_A_Equip[0] && (M += 5),
-        n_A_Weapon_refine >= 9 && 1086 == n_A_Equip[0] && (M += 5),
-        n_A_Weapon_refine >= 6 && 1088 == n_A_Equip[0] && (M += 5),
-        n_A_Weapon_refine >= 9 && 1088 == n_A_Equip[0] && (M += 5),
-        n_A_Weapon_refine >= 7 && 1077 == n_A_Equip[0] && (M += 5),
-        n_A_Weapon_refine >= 9 && 1077 == n_A_Equip[0] && (M += 5),
-        n_A_Weapon2_refine >= 7 && 1077 == n_A_Equip[1] && (M += 5),
-        n_A_Weapon2_refine >= 9 && 1077 == n_A_Equip[1] && (M += 5),
-        n_A_HEAD_REFINE >= 9 && 1962 == n_A_Equip[2] && (M += 2),
-        n_A_HEAD_REFINE >= 5 && 1898 == n_A_Equip[2] && (M += 1),
-        n_A_HEAD_REFINE >= 7 && 1898 == n_A_Equip[2] && (M += 2),
-        n_A_HEAD_REFINE >= 9 && 1898 == n_A_Equip[2] && (M += 2),
-        1966 == n_A_Equip[0] && (M += 1 * n_A_Weapon_refine),
-        2154 == n_A_Equip[0] && n_A_Weapon_refine >= 7 && (M += 5),
-        n_A_SHOULDER_REFINE >= 7 && SU_AGI >= 90 && 1472 == n_A_Equip[7] && (M += 8);
+    M = 100,
+    1324 == n_A_Equip[2] && d ? M *= 1.96 : n_tok[209] || n_A_Buf2[1] || n_A_Buf7[26] ? M *= 1.4 : n_A_Buf2[9] ? M *= 1.24 : CardNumSearch(451) && (M *= 1.05),
+    1324 != n_A_Equip[2] && d && (M *= 1.4),
+    1324 != n_A_Equip[2] || d || (M *= 1.4),
+    M -= 10 * n_A_Buf6[19],
+    n_A_Buf6[22] ? M = 25 : 196 == m_JobBuff[n_A_JOB][6] && c.A_skill6.value > 0 && (M = 20),
+    myInnerHtml("A_MovSPEED", M + " %", 0),
+    M = n_tok[12] + n_A_Buf9[44], // aspd %
+    624 == n_A_Equip[0] && (M += n_A_Weapon_refine),
+    641 == n_A_Equip[0] && (M += n_A_Weapon_refine),
+    654 == n_A_Equip[0] && (M += Math.floor(SU_AGI / 14)),
+    484 == n_A_Equip[0] && SU_STR >= 50 && (M += 5),
+    SU_STR >= 77 && 944 == n_A_Equip[0] && (M += 4),
+    SU_STR >= 95 && 621 == n_A_Equip[0] && (M -= 40),
+    SU_STR >= 95 && 1167 == n_A_Equip[0] && (M += 3),
+    21 == n_A_JOB && EquipNumSearch(855) && (M -= 5),
+    2 == n_A_JobClass() && (M += 3 * EquipNumSearch(1121)),
+    EquipNumSearch(1004) && (M += Math.floor(n_A_Weapon_refine / 2)),
+    (10 == n_A_WeaponType || (16 <= n_A_WeaponType && n_A_WeaponType <= 21)) && (M += 5*CardNumSearch(528)),
+    1842 == n_A_Equip[0] && (M += Math.floor(SU_AGI/10)),
+    1823 == n_A_Equip[2] && n_A_HEAD_REFINE >= 5 && (M += 1),
+    1823 == n_A_Equip[2] && n_A_HEAD_REFINE >= 7 && (M += 1),
+    n_A_Weapon_refine >= 7 && (1849 == n_A_Equip[0] || 2102 == n_A_Equip[0]) && (M += 5),
+    SU_AGI >= 90 && 1944 == n_A_Equip[8] && (M += 5),
+    (1956 == n_A_Equip[0] || 1956 == n_A_Equip[1]) && 22 == n_A_JOB && (M += 7 * EquipNumSearch(1956)),
+    n_A_Weapon_refine >= 9 && 1949 == n_A_Equip[0] && (M += 2),
+    3 == n_A_WeaponType && (M += 5*CardNumSearch(525)),
+    903 == n_A_Equip[0] && 13 == n_A_JobClass2() && (M += 20),
+    n_A_HEAD_REFINE >= 7 && 1283 == n_A_Equip[2] && (M += 3),
+    n_A_HEAD_REFINE >= 7 && 1481 == n_A_Equip[2] && (M += 3),
+    n_A_HEAD_REFINE >= 7 && 1288 == n_A_Equip[2] && (M += 2),
+    n_A_HEAD_REFINE >= 8 && 1290 == n_A_Equip[2] && (M += 2),
+    n_A_HEAD_REFINE >= 8 && 1555 == n_A_Equip[2] && (M += 8),
+    10 == n_A_HEAD_REFINE && 1290 == n_A_Equip[2] && (M += 2),
+    n_A_Weapon_refine >= 6 && 1081 == n_A_Equip[0] && (M += 10),
+    n_A_Weapon_refine >= 6 && 1086 == n_A_Equip[0] && (M += 5),
+    n_A_Weapon_refine >= 9 && 1086 == n_A_Equip[0] && (M += 5),
+    n_A_Weapon_refine >= 6 && 1088 == n_A_Equip[0] && (M += 5),
+    n_A_Weapon_refine >= 9 && 1088 == n_A_Equip[0] && (M += 5),
+    n_A_Weapon_refine >= 7 && 1077 == n_A_Equip[0] && (M += 5),
+    n_A_Weapon_refine >= 9 && 1077 == n_A_Equip[0] && (M += 5),
+    n_A_Weapon2_refine >= 7 && 1077 == n_A_Equip[1] && (M += 5),
+    n_A_Weapon2_refine >= 9 && 1077 == n_A_Equip[1] && (M += 5),
+    n_A_HEAD_REFINE >= 9 && 1962 == n_A_Equip[2] && (M += 2),
+    n_A_HEAD_REFINE >= 5 && 1898 == n_A_Equip[2] && (M += 1),
+    n_A_HEAD_REFINE >= 7 && 1898 == n_A_Equip[2] && (M += 2),
+    n_A_HEAD_REFINE >= 9 && 1898 == n_A_Equip[2] && (M += 2),
+    1966 == n_A_Equip[0] && (M += 1 * n_A_Weapon_refine),
+    2154 == n_A_Equip[0] && n_A_Weapon_refine >= 7 && (M += 5),
+    n_A_SHOULDER_REFINE >= 7 && SU_AGI >= 90 && 1472 == n_A_Equip[7] && (M += 8);
+    totalASPDItems = M;
+    // total aspd % for gears end here
     var B = M;
     b = 0,
-    0 == n_A_Buf6[19] && 0 == n_A_Buf6[20] && (3 == n_A_WeaponType && SkillSearch(74) && (M += 30,
-        b = 1),
+    0 == n_A_Buf6[19] && 0 == n_A_Buf6[20] && (3 == n_A_WeaponType && SkillSearch(74) && (M += 30, b = 1),
         2 == n_A_WeaponType && SkillSearch(386) && (M += 30, b = 1),
         6 <= n_A_WeaponType && n_A_WeaponType <= 7 && SkillSearch(152) && (M += 40, b = 1),
         8 == n_A_WeaponType && SkillSearch(152) && (M += 30, b = 1),
         0 == b && 6 <= n_A_WeaponType && n_A_WeaponType <= 7 && SkillSearch(389) && (M += 40, b = 1),
         0 == b && SkillSearch(389) && (M += 30, b = 1),
-        0 == b && TimeItemNumSearch(5) && 19 == n_A_JobClass2() && (n_A_WeaponType > 5 && n_A_WeaponType < 9) && (M += 30,
-            b = 1),
-        5 == n_A_WeaponType && SkillSearch(166) && (M += SkillSearch(166) + 20,
-            b = 1)),
+        0 == b && TimeItemNumSearch(5) && 19 == n_A_JobClass2() && (n_A_WeaponType > 5 && n_A_WeaponType < 9) && (M += 30, b = 1),
+        5 == n_A_WeaponType && SkillSearch(166) && (M += SkillSearch(166) + 20, b = 1)),
     SkillSearch(78) && (M -= 10 * (6 - SkillSearch(78))),
     M += Math.round(SkillSearch(425) / 2),
     12 == n_A_WeaponType && SkillSearch(224) && (M += SkillSearch(224) / 2),
@@ -1236,44 +1235,23 @@ function StAllCalc() {
     var v = 0;
     SkillSearch(357) && (v += Math.floor((n_A_BaseLV + n_A_LUK + n_A_DEX) / 10));
     var p = 0;
-    0 == n_A_Buf6[19] && 0 == n_A_Buf6[20] && 0 == b && (2 != n_A_Buf2[6] || 10 == n_A_WeaponType || 17 <= n_A_WeaponType && n_A_WeaponType <= 21 ? 6 <= n_A_WeaponType && n_A_WeaponType <= 8 && (1 == n_A_Buf2[6] ? (p = 25,
-        b = 1) : 3 == n_A_Buf2[6] && (p = 30, b = 1)) : (p = 25, b = 1));
+    0 == n_A_Buf6[19] && 0 == n_A_Buf6[20] && 0 == b && (2 != n_A_Buf2[6] || 10 == n_A_WeaponType || 17 <= n_A_WeaponType && n_A_WeaponType <= 21 ? 6 <= n_A_WeaponType && n_A_WeaponType <= 8 && (1 == n_A_Buf2[6] ? (p = 25, b = 1) : 3 == n_A_Buf2[6] && (p = 30, b = 1)) : (p = 25, b = 1));
     var m = 0;
-    if (n_A_Buf3[1] && (0 == b || p) && (10 == n_A_WeaponType || 17 <= n_A_WeaponType && n_A_WeaponType <= 21 || (m += 5 + n_A_Buf3[1] + Math.floor(n_A_Buf3[31] / 2) + Math.floor(n_A_Buf3[21] / 10))),
-        SkillSearch(361) && n_A_JobLV >= 50 ? (M += Math.max(p, m) + 3 * SkillSearch(361) + v, b = 1) : M += Math.max(p, m, v),
-        3 == n_A_Buf7[35] ? M += 20 : n_A_Buf7[44] || 2 == n_A_Buf7[35] ? M += 15 : (n_A_Buf7[26] || 1 == n_A_Buf7[35]) && (M += 10),
-        1 * c.server.value < 50)
-        1 == n_Nitou ? 0 == n_A_WeaponType && 0 != n_A_Weapon2Type ? WD = 50 * m_JobASPD[n_A_JOB][n_A_Weapon2Type] : WD = 35 * (m_JobASPD[n_A_JOB][n_A_WeaponType] + m_JobASPD[n_A_JOB][n_A_Weapon2Type]) : WD = 50 * m_JobASPD[n_A_JOB][n_A_WeaponType],
-            n_A_ASPD = (2000 - Math.floor(((WD - (Math.round(WD * n_A_AGI / 25) + Math.round(WD * n_A_DEX / 100)) / 10) * (1 - M / 100))*10))/10;
-    else { // renewal aspd calculations perhaps ?
-        if (n_A_ASPD = 0,
-            jobASPD = m_JobASPD_R[n_A_JOB][n_A_WeaponType],
-            50 !== n_A_JOB && 51 !== n_A_JOB || StPlusWeapon(bon_TWO_HANDED_STAFF) && (jobASPD += 5),
-            15 === n_A_JobClass2() && StPlusWeapon(bon_TWO_HANDED_STAFF) && (62 === n_A_JOB || 63 === n_A_JOB ? jobASPD += 2 : jobASPD -= 2),
-            n_Nitou) {
-            var h = 1 * n_A_Weapon2Type + 1 * weapTyp_SHIELD + 1;
-            jobASPD += m_JobASPD_R[n_A_JOB][h]
-        }
-        statASPD = Math.sqrt(9.9987 * n_A_AGI + .1922 * n_A_DEX);
-        var N = 0;
-        305 !== n_A_Equip[5] && (N = m_JobASPD_R[n_A_JOB][22]);
-        var k = 0
-            , b = 0;
-        //20 == n_A_WeaponType && (k += 10 + 2 * SkillSearch(433)),
-        13 === n_A_JobClass2() && SkillSearch(78) && (k -= 10 * (5 - SkillSearch(78))),
-        7 === n_A_JobClass2() && (SkillSearch(78) || SkillSearch(552)) && (SkillSearch(78) ? k -= 10 * (5 - SkillSearch(78)) : k -= 5 * (5 - SkillSearch(552))),
-        SkillSearch(196) && (k -= 25),
-        SkillSearch(165) && (k -= 25 - 5 * SkillSearch(165)),
-        3 == n_A_Buf7[35] ? k += 20 : n_A_Buf7[44] || 2 == n_A_Buf7[35] ? k += 15 : (n_A_Buf7[26] || 1 == n_A_Buf7[35]) && (k += 10),
-        k = (100 - k) / 100;
-        var D = 0;
-        n_A_AGI < 205 && (D = (Math.sqrt(205) - Math.sqrt(n_A_AGI)) / 7.15);
-        var I = .96;
-        jobASPD > 145 && (I = 1 - (jobASPD - 144) / 50),
-        n_A_ASPD = 200 - (200 - (jobASPD + N - D + statASPD * I)) * k,
-        percentAspdEquipment = (195 - n_A_ASPD) * (B / 100),
-        n_A_ASPD += percentAspdEquipment
-    }
+    // sinx song
+    n_A_Buf3[1] && (0 == b || p) && (10 == n_A_WeaponType || 17 <= n_A_WeaponType && n_A_WeaponType <= 21 || (m += 5 + n_A_Buf3[1] + Math.floor(n_A_Buf3[31] / 2) + Math.floor(n_A_Buf3[21] / 10))),
+    totalASPDSinxSong = m;
+    SkillSearch(361) && n_A_JobLV >= 50 ? (M += Math.max(p, m) + 3 * SkillSearch(361) + v, b = 1) : M += Math.max(p, m, v),
+    // total aspd for skills end here
+    totalASPDSkills = M - totalASPDSinxSong - totalASPDItems;
+    3 == n_A_Buf7[35] ? M += 20 : n_A_Buf7[44] || 2 == n_A_Buf7[35] ? M += 15 : (n_A_Buf7[26] || 1 == n_A_Buf7[35]) && (M += 10),
+    totalASPDETC = M - totalASPDSkills - totalASPDSinxSong - totalASPDItems;
+    //total aspd for etc end here
+    // end of aspd % additions
+    // weapon delay
+    1 == n_Nitou ? 0 == n_A_WeaponType && 0 != n_A_Weapon2Type ? WD = 50 * m_JobASPD[n_A_JOB][n_A_Weapon2Type] : WD = 35 * (m_JobASPD[n_A_JOB][n_A_WeaponType] + m_JobASPD[n_A_JOB][n_A_Weapon2Type]) : WD = 50 * m_JobASPD[n_A_JOB][n_A_WeaponType],
+    // aspd calculation
+    n_A_ASPD = (2000 - Math.floor(((WD - (Math.round(WD * n_A_AGI / 25) + Math.round(WD * n_A_DEX / 100)) / 10) * (1 - M / 100))*10))/10;
+    totalASPDPercentage = M;
     var M = 0;
     M += EquipNumSearch(1696),
     n_A_Buf2[15] && (M -= 25 - 5 * n_A_Buf2[15]),
@@ -2589,6 +2567,7 @@ function KakutyouKansuu() {
             calcedDelay > 0 && (calcedDelay = Math.floor(calcedDelay * (100 - AC_S) / 100)),
             calcedDelay > 0 && (calcedDelay = Math.floor(calcedDelay * (100 - AC_IA) / 100)),
             a += "<b>Cast Delay: </b>" + calcedDelay + " % (<b>" + skillName(204, SRV) + ":</b> " + n_tok[74] + "% | <b>Gear:</b> " + AC_I + "% | <b>Skill:</b> " + AC_S + "% | <b>ETC:</b> " + AC_ETC + "% )<BR>",
+            a += "<b>ASPD%: </b>" + totalASPDPercentage + " % (<b>" + skillName(203, SRV) + ":</b> " + totalASPDSinxSong + "% | <b>Gear:</b> " + totalASPDItems + "% | <b>Skill:</b> " + totalASPDSkills + "% | <b>ETC:</b> " + totalASPDETC + "% )<BR>",
             myInnerHtml("A_KakutyouData", a, 0)
         } else if (20 == wKK) {
             var e = 1 * c.A_KakutyouSelNum.value
