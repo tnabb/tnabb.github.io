@@ -1521,18 +1521,18 @@ function BattleCalc999() {
             if (51 == n_A_ActiveSkill)
                 n_A_Weapon_element = 3,
                 wHITsuu = n_A_ActiveSkillLV,
-                wCast = .7 * n_A_ActiveSkillLV,
-                n_Delay[2] = .8 + .2 * n_A_ActiveSkillLV;
+                wCast = .35 * n_A_ActiveSkillLV,
+                n_Delay[2] = .4 + .1 * n_A_ActiveSkillLV;
             else if (54 == n_A_ActiveSkill)
                 n_A_Weapon_element = 1,
                 wHITsuu = n_A_ActiveSkillLV,
-                wCast = .7 * n_A_ActiveSkillLV,
-                n_Delay[2] = .8 + .2 * n_A_ActiveSkillLV;
+                wCast = .35 * n_A_ActiveSkillLV,
+                n_Delay[2] = .4 + .1 * n_A_ActiveSkillLV;
             else if (56 == n_A_ActiveSkill)
                 n_A_Weapon_element = 4,
                 wHITsuu = n_A_ActiveSkillLV,
-                wCast = .7 * n_A_ActiveSkillLV,
-                n_Delay[2] = .8 + .2 * n_A_ActiveSkillLV;
+                wCast = .35 * n_A_ActiveSkillLV,
+                n_Delay[2] = .4 + .1 * n_A_ActiveSkillLV;
             else if (540 == n_A_ActiveSkill)
                 n_A_Weapon_element = 3,
                 wHITsuu = n_A_ActiveSkillLV,
@@ -1569,7 +1569,7 @@ function BattleCalc999() {
             else if (57 == n_A_ActiveSkill)
                 n_A_Weapon_element = 4,
                 wHITsuu = n_A_ActiveSkillLV,
-                wCast = 1 * n_A_ActiveSkillLV,
+                wCast = 0.5 * n_A_ActiveSkillLV,
                 n_Delay[2] = 2,
                 wMod = .8;
             else if (46 == n_A_ActiveSkill)
@@ -1606,7 +1606,7 @@ function BattleCalc999() {
                 n_bunkatuHIT = 1,
                 n_A_Weapon_element = 4,
                 wHITsuu = 20,
-                wCast = 15.5 - .5 * n_A_ActiveSkillLV,
+                wCast = 10 - 0.3 * n_A_ActiveSkillLV, 
                 n_Delay[2] = 5,
                 n_Delay[6] = 4,
                 wMod = 3.2 + .8 * n_A_ActiveSkillLV;
@@ -1630,7 +1630,7 @@ function BattleCalc999() {
                 SGcast = 1,
                 10 == n_A_Weapon_refine && EquipNumSearch(1169) && (SGcast -= .08),
                 EquipNumSearch(1786) && (SGcast -= .04 * n_A_LEFT_REFINE),
-                wCast = (5 + n_A_ActiveSkillLV) * SGcast,
+                wCast = (2.5 + n_A_ActiveSkillLV * 0.5) * SGcast,
                 n_Delay[2] = 5,
                 n_Delay[6] = 4.5,
                 wMod = 1 + .4 * n_A_ActiveSkillLV;
@@ -1654,8 +1654,8 @@ function BattleCalc999() {
                 n_Delay[0] = 1,
                 n_A_Weapon_element = 6,
                 wHITsuu = n_A_ActiveSkillLV,
-                wCast = 10,
-                n_Delay[2] = 2.5;/*, // make ME hit all
+                wCast = 5,
+                n_Delay[2] = 1.5;/*, // make ME hit all
                 6 != n_B[2] && n_B[3] < 90 && (n_A_MATK[2] = 0, n_A_MATK[0] = 0, n_A_MATK[1] = 0)*/
             else if (590 == n_A_ActiveSkill)
                 n_A_Weapon_element = 6,
@@ -2625,7 +2625,7 @@ function BattleMagicCalc(e) {
     wBMC_MDEF = n_B[15];
     var _ = 0;
     0 == n_B[19] && CardNumSearch(424) && (_ = 1),
-    590 == n_A_ActiveSkill && 6 == n_B[2] && (_ = 1),
+    590 == n_A_ActiveSkill && (1 == n_B[2] || 6 == n_B[2]) && (_ = 2),
         0 != _ && (wBMC_MDEF = 0, n_B_MDEF2 = 0),
         122 == n_A_ActiveSkill ? wBMC2 = Math.floor(wBMC2 + 50) : wBMC2 = Math.floor(wBMC2 * mdefReduction(wBMC_MDEF) - n_B_MDEF2), // mdef calc
         wBMC2 < 1 && (wBMC2 = 1),
@@ -5908,7 +5908,7 @@ function tPlusDamCut(e) {
         5 == n_B[19] && (e = 1, 122 == n_A_ActiveSkill && (e = 0)), // assump
         e = Math.floor(e * (100 - NotesCalc(n_B[0], 4)) / 100),
         SkillSearch(855) && (e += e * (SkillSearch(855) * 2) / 100),
-        590 == n_A_ActiveSkill && 6 == n_B[2] && (n_B[1].includes("[MVP]") ? (e += e * 100 / 100) : e += e * 20 / 100),
+        590 == n_A_ActiveSkill && (1 == n_B[2] || 6 == n_B[2]) && (n_B[1].includes("[MVP]") ? (e += e * 100 / 100) : e += e * 20 / 100),
         SkillSearch(851) && n_A_ActiveSkill != 0 && (e += e * 50 / 100),
         e
 }
