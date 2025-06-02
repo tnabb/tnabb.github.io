@@ -77,6 +77,15 @@ Calc's theme: <select id="theme" onChange="themes()"><option value="0">Original<
               <br>This was not made in collaboration with any GM's from Alfheim, so don't bug them if there's any errors.
               <br><br>
               <details open>
+                <summary style="cursor: pointer; font-weight: bold;">(A) Changelog 2025-06-02</summary>
+                <div>
+                  • Fixed Arrow ATK unintentionally being applied to minimum damage. 
+                  <br>• In-game Arrow ATK is applied as rnd(0, Arrow ATK - 1), so for minimum damage 0 is considered.
+                  <br>• Except for CRITs where just Arrow ATK - 1 is applied.
+                </div>
+              </details>
+              <br>
+              <details>
                 <summary style="cursor: pointer; font-weight: bold;">(A) Changelog 2025-05-09</summary>
                 <div>
                   • Fixed Spiral Pierce being affected by Spear Mastery.
