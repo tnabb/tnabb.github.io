@@ -79,6 +79,16 @@ Calc's theme: <select id="theme" onChange="themes()"><option value="0">Original<
               <details open>
                 <summary style="cursor: pointer; font-weight: bold;">(A) Changelog 2025-06-02</summary>
                 <div>
+                  • Fixed minimum for soft DEF and soft MDEF being 0 instead of 1.
+                  <br>• Fixed Grand Cross/Dark Grand Cross formula:
+                  <br>  • Magic damage % cards now apply to the total damage, instead of just the MATK portion.
+                  <br>  • Elemental modifiers now apply twice, once before % modifiers, and once after.
+                </div>
+              </details>
+              <br>
+              <details open>
+                <summary style="cursor: pointer; font-weight: bold;">(A) Changelog 2025-06-02</summary>
+                <div>
                   • Fixed Arrow ATK unintentionally being applied to minimum damage. 
                   <br>• In-game Arrow ATK is applied as rnd(0, Arrow ATK - 1), so for minimum damage 0 is considered.
                   <br>• Except for CRITs where just Arrow ATK - 1 is applied.
