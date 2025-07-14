@@ -956,14 +956,11 @@ function BattleCalc999() {
             wLAch = 1;
             for (e = 0; e <= 2; e++) // enemy damage calcuation
                 w_DMG[e] = BK_n_A_DMG[e] * defReduction(n_B[14]) - n_B_DEF2[e] + n_A_WeaponLV_refineATK,
-                console.log(w_DMG[e]),
                 a = BK_n_A_MATK[e] * mdefReduction(n_B[15]) - n_B_MDEF2,
-                console.log(BK_n_A_MATK[e], n_B_MDEF2, a),
                 w_DMG[e] += a,
                 w_DMG[e] = Math.floor(w_DMG[e] * (1 + .4 * n_A_ActiveSkillLV)),
                 w_DMG[e] = BattleMagicCalc(w_DMG[e], e),
-                console.log(w_DMG[e]),
-                w_DMG[e] = tPlusDamCut(Math.floor(w_DMG[e] * Math.max(0, element[n_B[3]][n_A_Weapon_element]))),
+                w_DMG[e] = Math.floor(w_DMG[e] * Math.max(0, element[n_B[3]][n_A_Weapon_element])),
                 w_DMG[e] < 1 && (w_DMG[e] = 1),
                 n_A_Weapon_element == 6 && 60 <= n_B[3] && n_B[3] <= 69 && (w_DMG[e] = 0),
                 n_A_Weapon_element == 7 && 70 <= n_B[3] && n_B[3] <= 79 && (w_DMG[e] = 0);
@@ -2635,11 +2632,9 @@ function BattleMagicCalc(e) {
     wBMC_MDEF = n_B[15];
     var _ = 0;
     0 == n_B[19] && CardNumSearch(424) && (_ = 1),
-    590 == n_A_ActiveSkill && (1 == n_B[2] || 6 == n_B[2]) && (_ = 1),
+    590 == n_A_ActiveSkill && (6 == n_B[2]) && (_ = 1),
     (162 == n_A_ActiveSkill || 474 == n_A_ActiveSkill) && (_ = 1),
-    console.log("magic pre reduction magic dmg : " + wBMC2),
     _ == 0 && (122 == n_A_ActiveSkill ? wBMC2 = Math.floor(wBMC2 + 50) : wBMC2 = Math.floor(wBMC2 * mdefReduction(wBMC_MDEF) - n_B_MDEF2)), // mdef calc
-    console.log("magic post reduction magic dmg : " + wBMC2),
     wBMC2 < 1 && (wBMC2 = 1),
     //console.log("post reduction magic dmg : " + wBMC2)
     //104 == n_A_ActiveSkill && 6 != n_B[2] && n_B[3] < 90 && (wBMC2 = 0), // make magnus exorcismus hit all
@@ -5019,7 +5014,7 @@ function EnemyBufSW(e) {
             n += '<TR><TD class="center dotB">Energy Coat</TD><TD id="ID_Kb14" class="dotB" colspan="3"></TD></TR>',
             n += '<TR><TD class="center" colspan="4"><b>Monster Exclusive buffs</b></TD></TR>',
             n += '<TR><TD class="center">Attrib. Change</TD><TD id="ID_Kb6" class="data"></TD><TD class="center">Stone Skin</TD><TD id="ID_Kb7"></TD></TR>',
-            n += '<TR><TD class="center">Keeping</TD><TD id="ID_Kb9" class="data"></TD><TD class="center">Magic Mirror</TD><TD id="ID_Kb8"></TD></TR>',
+            n += '<TR><TD class="center">Keeping</TD><TD id="ID_Kb9" class="data"></TD><TD class="center">Anti Magic</TD><TD id="ID_Kb8"></TD></TR>',
             n += '<TR><TD class="center"></TD><TD id="ID_Kb15" class="data"></TD><TD class="center">Agi Up (Flee Up)</TD><TD id="ID_Kb5"></TD></TR>',
             myInnerHtml("EnemyBuf", n += '<TR><TD class="center" colspan="2">POWER UP (ATK x3, HIT x2)</TD><TD id="ID_Kb4" colspan="2"></TD></TR>', 0),
             myInnerHtml("ID_Kb0", '<select name="B_buf0" onChange="AK(1)"></select>', 0),
@@ -5262,8 +5257,6 @@ function ClickB_Enemy(enemyID) {
         n_B[24] -= Math.floor(50 * n_B[24] / 100)),
     0 == n_B[19] && n_B_debuf[9] && n_B[3] < 90 && (n_B[23] -= Math.floor(50 * n_B[23] / 100),
         n_B[24] -= Math.floor(50 * n_B[24] / 100)),
-    0 == PvP && n_B_buf[8] && (n_B[23] -= Math.floor(20 * n_B[23] * n_B_buf[8] / 100),
-        n_B[24] -= Math.floor(20 * n_B[24] * n_B_buf[8] / 100)),
     0 == PvP && n_B_debuf[21] && (n_B[24] += 90),
     n_B_debuf[20] && (n_B[23] = 0,
         n_B[24] = 0);
@@ -5275,7 +5268,6 @@ function ClickB_Enemy(enemyID) {
         0 == n_B[19] && n_B_debuf[4] && n_B[3] < 90 && (n_B[15] += Math.floor(25 * n_B[15] / 100)),
         0 == n_B[19] && n_B_debuf[9] && n_B[3] < 90 && (n_B[15] += Math.floor(25 * n_B[15] / 100)),
         0 == n_B[19] && n_B_debuf[18] && n_B[3] < 90 && (n_B[25] -= Math.floor(n_B[25] * (12 * n_B_debuf[18]) / 100)),
-        0 == PvP && n_B_buf[7] && (n_B[25] -= Math.floor(20 * n_B[25] * n_B_buf[7] / 100)),
         0 == PvP && n_B_debuf[21] && (n_B[25] = 90),
         n_B[26] += n_B_manual[36],
         0 == n_B[19] && n_B_debuf[3] && (n_B[26] -= 25,
@@ -5916,7 +5908,9 @@ function tPlusDamCut(e) {
         n_B_buf[1] && 0 == PvP && (e = Math.floor(e / 2)),
         n_B_buf[1] && 1 == PvP && (e = Math.floor(2 * e / 3)),
         n_B_buf[7] && 2 != n_rangedAtk && (e -= Math.floor(20 * e * n_B_buf[7] / 100)),
+        n_B_buf[7] && 2 == n_rangedAtk && (e += Math.floor(20 * e * n_B_buf[7] / 100)),
         n_B_buf[8] && 2 == n_rangedAtk && (e -= Math.floor(20 * e * n_B_buf[8] / 100)),
+        n_B_buf[8] && 2 != n_rangedAtk && (e += Math.floor(20 * e * n_B_buf[8] / 100)),
         5 == n_B[19] && (e = 1, 122 == n_A_ActiveSkill && (e = 0)), // assump
         e = Math.floor(e * (100 - NotesCalc(n_B[0], 4)) / 100),
         SkillSearch(855) && (e += e * (SkillSearch(855) * 2) / 100),

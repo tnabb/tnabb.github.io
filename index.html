@@ -77,6 +77,19 @@ Calc's theme: <select id="theme" onChange="themes()"><option value="0">Original<
               <br>This was not made in collaboration with any GM's from Alfheim, so don't bug them if there's any errors.
               <br><br>
               <details open>
+                <summary style="cursor: pointer; font-weight: bold;">(A) Changelog 2025-07-14</summary>
+                <div>
+                  • Fixed minimum for soft DEF and soft MDEF being 0 instead of 1.
+                  <br>• Fixed Grand Cross/Dark Grand Cross formula:
+                  <br>&nbsp;&nbsp;• Magic damage % cards now apply to the total damage, instead of just the MATK portion.
+                  <br>&nbsp;&nbsp;• Elemental modifiers now apply twice, once before % modifiers, and once after.
+                  <br>• Fixed Stone Skin reducing soft MDEF instead of directly increasing magic damage.
+                  <br>• Replaced "Magic Mirror" under "Buffs on Enemy" with "Anti Magic".
+                  <br>• Fixed Anti Magic reducing soft DEF instead of directly increasing physical damage.
+                </div>
+              </details>
+              <br>
+              <details>
                 <summary style="cursor: pointer; font-weight: bold;">(A) Changelog 2025-06-02</summary>
                 <div>
                   • Fixed Arrow ATK unintentionally being applied to minimum damage. 
@@ -111,181 +124,6 @@ Calc's theme: <select id="theme" onChange="themes()"><option value="0">Original<
                   <br>• "Cast Time/Cast Delay/ASPD%" now also displays total ASPD% and ASPD% from Impressive Rift, Gear, Skill, and ETC sources.
                   <br>• Novice and Super Novice can now wear Vigilante Suit and Stole.
                   <br>• Fixed Cart Revolution % modifier not being applied correctly on Heavy Metaling Card.
-                </div>
-              </details>
-              <br>
-              <details>
-                <summary style="cursor: pointer; font-weight: bold;">(A) Changelog 2025-02-01</summary>
-                <div>
-                  • Changed Cursed Jackknife from having Melee random options to having Special random options.
-                </div>
-              </details>
-              <br>
-              <details>
-                <summary style="cursor: pointer; font-weight: bold;">(A) Changelog 2025-01-30</summary>
-                <div>
-                  • Equipment/cards that use the bDoubleRate script no longer stacks additively with Double Attack (does not affect Vigilante Bow).
-                  <br>• Added Attack Skills to Mutating Prisoner, Zombie Guard, and Warden Kades.
-                  <br>• Fixed Demon of Vitality having DEF and MDEF swapped.
-                  <br>• Fixed Attack Interval of Triple Attack being able to go below 0.2 seconds.
-                </div>
-              </details>
-              <br>
-              <details>
-                <summary style="cursor: pointer; font-weight: bold;">(A) Changelog 2025-01-12</summary>
-                <div>
-                  • Removed "headgear Hidden Slot Enchant" as it does not exist on Alfheim.
-                  <br>• Added Mine Worker's Vest, Mine Worker's Backpack, Spurred Boots, Bull Hat, and all new Adventurer weapons.
-                  <br>• Added a new enchant option to headgear, selectable only for the current enchantable headgears (Ribbon, Bull Hat, Safety Helmet, and Unicorn Horn).
-                  <br>• Added enchants to Mine Worker's Vest, Mine Worker's Backpack, and Spurred Boots. 
-                  <br>• Added 'enchants' to Mine Worker's Pickaxe. These enchants are added in the same place as random options, as they have different levels.
-                  <br>• The Vigilante Stole, Suit, Shoes, and Frontier Boots can apply their enchants in the random options field, as they are the same.
-                  <br>• Added enchants to Adventurer's Weapons.
-                  <br>• Added 4 Soft DEF to each Paradise Gear.
-                </div>
-              </details>
-              <br>
-              <details>
-                <summary style="cursor: pointer; font-weight: bold;">(A) Changelog 2025-01-09</summary>
-                <div>
-                  • Slightly adjusted magic damage calculation, so it should be more accurate to in-game (around 0-1% difference). 
-                  <br>• Removed "Save" in the name of build saves.
-                  <br>• Fixed Lord of Vermillion being a bundle of 4 hits instead of a bundle of 20 hits.
-                </div>
-              </details>
-              <br>
-              <details>
-                <summary style="cursor: pointer; font-weight: bold;">(A) Changelog 2025-01-05</summary>
-                <div>
-                  • Fixed Monk and Champion being able to wear Repentance.
-                  <br>• Added skills to Polluted Spider Queen.
-                  <br>• Fixed Flaming Wand only increasing Fire Ball skill damage by 1% per refine instead of 5% per refine.
-                  <br>• Fixed Unicorn Horn not having new item effects applied.
-                </div>
-              </details>
-              <br>
-              <details>
-                <summary style="cursor: pointer; font-weight: bold;">(A) Changelog 2025-01-02</summary>
-                <div>
-                  • Fixed scaling of Increase SP Recovery and made it available to all Acolyte classes.
-                  <br>• Increased Spread Shot's skill ratio from 100 + 10 * Skill Level -> 100 + 32 * Skill Level.
-                  <br>• Increased Spread Shot's CRIT scaling on its skill ratio from 0.5% per CRIT to 3% per CRIT.
-                  <br>• Fixed Desperado damage decrease with Poem of Bragi not disappearing when using Intensive Aim (Stacks consumed).
-                  <br>• Added Muspellskoll (Nightmare).
-                  <br>• Added refine bonus to Vigilante Shoes.
-                  <br>• Fixed Kihop being additional to skill ratio instead of being multiplicative to base damage.
-                  <br>• Fixed Crit Damage not being applied to any damage while SLS Union is active.
-                  <br>• Fixed Wild Rose unintentionally giving 3 INT.
-                  <br>• Fixed HP thresholds being slightly incorrect for Hatred of the Sun, Moon, and Stars.
-                </div>
-              </details>
-              <br>
-              <details>
-                <summary style="cursor: pointer; font-weight: bold;">(A) Changelog 2024-12-23</summary>
-                <div>
-                  • Added Thunderproof Shadow Shoes.
-                  <br>• Added Kiel Hyre card.
-                  <br>• Added Sheriff's Left and Right Badge.
-                  <br>• Added License to Clown.
-                  <br>• Added Muspellskoll (Easy) and Muspellskoll (Hard).
-                  <br>• Character gains 50% Cast Time and Cast Delay reduction when choosing Muspellskoll (Easy), which functions the same as Poem of Bragi.
-                  <br>• Added Rata Card effect under "Temporary Card/Item active Effects".
-                  <br>• Fixed Survivor's Shoes MATK refine requirement not being tied to the combo.
-                  <br>• Fixed Calf Anaconda missing 5% ASPD.
-                  <br>• Fixed Calf Python's After-cast Delay reduction being 5% instead of 10%.
-                  <br>• Added Metal Stick + Falcon Muffler combo.
-                  <br>• Added Mine Worker's Pickaxe + King's Manteau combo.
-                </div>
-              </details>
-              <br>
-              <details>
-                <summary style="cursor: pointer; font-weight: bold;">(A) Changelog 2024-12-21</summary>
-                <div>
-                  • Changed Elite Buffalo Bandits from Fire 2 -> Fire 4.
-                  <br>• Made changelogs on main page collapsible.
-                </div>
-              </details>
-              <br>
-              <details>
-                <summary style="cursor: pointer; font-weight: bold;">(A) Changelog 2024-12-20</summary>
-                <div>
-                  • Implemented all monster changes in patch <a href="https://projectalfheim.net/wiki/index.php/Episode_A_4_0_Rock_Ridge">A4</a>.
-                  <br>• Added new weapons and equipment from the patch.
-                  <br>• Added new monsters and cards from the patch.
-                  <br>• Added Rock Ridge Fields and Mines as locations.
-                  <br>• Applied the following changes from the Acolyte and Priest rework:
-                  <br>&nbsp;&nbsp;• Reduced Increase AGI's max skill level from 10 -> 5.
-                  <br>&nbsp;&nbsp;• Reduced Blessing's max skill level from 10 -> 5.
-                  <br>&nbsp;&nbsp;• Reduced Heal's max skill level from 10 -> 5.
-                  <br>&nbsp;&nbsp;• Reduced Angelus' max skill level from 10 -> 5.
-                  <br>&nbsp;&nbsp;• Angelus now also grants 100 HP per skill level.
-                  <br>&nbsp;&nbsp;• Reduced Increase SP Recovery's max skill level from 10 -> 5. (not implemented yet)
-                  <br>&nbsp;&nbsp;• Added Resurrection as an attack skill to Acolyte, Monk, Champion, and Super Novice.
-                  <br>&nbsp;&nbsp;• Demon Bane no longer gives mastery attack, but instead gives 0.5% increased physical damage to Demon and Undead race monsters per skill level.
-                  <br>&nbsp;&nbsp;• Added Suffragium to list of Passive & Self-casted Skills to Priest and High Priest. This counts as the self-applied Suffragium and has higher priority over the Suffragium under "Supportive / Party Skills".
-                  <br>&nbsp;&nbsp;• Removed Holy Light (Soul Linked) from list of Attack Skills on Priest and High Priest.
-                  <br>&nbsp;&nbsp;• Changed Holy Light modifier from 125% -> 300% on Acolyte, Monk, Champion, Rogue, and Stalker.
-                  <br>&nbsp;&nbsp;• Changed Holy Light modifier from 125% -> 625% on Priest and High Priest.
-                  <br>&nbsp;&nbsp;• Added Holy Light under debuffs which makes the monster take 10% increased holy property magic damage from the caster.
-                  <br>&nbsp;&nbsp;• Added Judex to list of Attack Skills on High Priest.
-                  <br>&nbsp;&nbsp;• Added Duple Light to list of Attack Skills on High Priest.
-                  <br>&nbsp;&nbsp;• Increased LUK scaling on Turn Undead from 0.1% per LUK -> 0.3% per LUK.
-                  <br>&nbsp;&nbsp;• Capped success rate on Turn Undead at 70%. 
-                  <br>• Applied the following changes to Night Watch skills and Intensive Aim effects:
-                  <br>&nbsp;&nbsp;• Increased Hasty Fire in the Hole's skill ratio from 175 * Skill Level -> 200 * Skill Level.
-                  <br>&nbsp;&nbsp;• Increased Basic Grenade's skill ratio from 100 + 60 * Skill Level -> 100 + 80 * Skill Level.
-                  <br>&nbsp;&nbsp;• Desperado deals 65% less damage when Poem of Bragi is active.
-                  <br>&nbsp;&nbsp;• Added CRIT scaling to Spread Shot, it's skill ratio is increased by 1% per 2 CRIT, up to 100 CRIT (50% increase).
-                  <br>&nbsp;&nbsp;• Added 2 second after-cast delay to Spread Shot.
-                  <br>&nbsp;&nbsp;• Damage bonus when consuming a mastery increased from 25% -> 50%.
-                  <br>&nbsp;&nbsp;• Mission Bombard's cooldown reduction when using 10 stacks IA increased from 50% -> 80%.
-                  <br>&nbsp;&nbsp;• Tracking's damage bonus vs normal monsters when using 10 stacks IA increased from 100% -> 200%.
-                  <br>&nbsp;&nbsp;• Tracking's damage reduction when using 10 stacks IA increased from 75% -> 90%.
-                  <br>&nbsp;&nbsp;• Gatling Berserk's 10 stacks IA now grants an additional 10% ASPD.
-                  <br>&nbsp;&nbsp;• Rapid Shower's cast delay reduction when using 10 stacks IA increased from 75% -> 90%.
-                  <br>&nbsp;&nbsp;• Rapid Shower's DEF pierce when using Rifle Mastery increased from 25% -> 50%.
-                  <br>&nbsp;&nbsp;• Full Buster's DEF pierce when using Rifle Mastery increased from 25% -> 50%.
-                  <br>&nbsp;&nbsp;• Tracking's fixed cast time reduction when using Revolver Mastery increasde from 25% -> 50%.
-                  <br>• Applied the following bug fixes and additional changes:
-                  <br>&nbsp;&nbsp;• Fixed Aura Blade's mastery ATK not being affected by elemental modifiers.
-                  <br>&nbsp;&nbsp;• Fixed Grand Cross not being affected by magic damage % modifiers.
-                  <br>&nbsp;&nbsp;• Fixed Chain Action affecting CRIT chance and DPS of Rapid Fire and Tracking.
-                  <br>&nbsp;&nbsp;• Fixed all Alchemist brewing having a 5% lower success rate than intended.
-                  <br>&nbsp;&nbsp;• Fixed Service for You's SP Cost reduction not showing in the "SP Cost of skills" tab in "Other Info".
-                  <br>&nbsp;&nbsp;• Fixed Asprika only giving 30% resistance to all elements on melee attacks instead of all attacks.
-                  <br>&nbsp;&nbsp;• Fixed Contaminated Sting having 35 DEF and MDEF instead of 30 DEF and MDEF.
-                  <br>&nbsp;&nbsp;• Fixed Sigrun's Wings not giving Night Watch 1 DEX.
-                  <br>&nbsp;&nbsp;• Fixed certain locations having wrong notes associated with them.
-                  <br>&nbsp;&nbsp;• Fixed Magmaring Card not giving +15 CRIT against Plant race monsters.
-                  <br>&nbsp;&nbsp;• Fixed a slight error in Asura Strike's ATK ratio.
-                  <br>&nbsp;&nbsp;• Fixed Dark Cross not working.
-                  <br>&nbsp;&nbsp;• Fixed Guardian Staff missing a slot, and not properly giving HP on refine.
-                  <br>&nbsp;&nbsp;• Fixed Forest Shoes not being equipabble by every class.
-                  <br>&nbsp;&nbsp;• Fixed a bug with the Combat Simulator not properly working when selecting Emperium as an enemy, when using an attack that is not Basic Attack or Gravitation Field.
-                  <br>&nbsp;&nbsp;• Fixed Frozen Gargoyle being Large instead of Small, DEF being 35 instead of 30, and MDEF being 45 instead of 35.
-                  <br>&nbsp;&nbsp;• Fixed Slug Shot having an ATK ratio of 8100% instead of 8000%.
-                  <br>&nbsp;&nbsp;• Fixed Shield Boomerang and Shield Chain's damage formulas (still need to confirm in-game).
-                  <br>&nbsp;&nbsp;• Added sorting monsters by DEF, MDEF, Ice Pick value (DEF + VIT), and average number of hits required to kill.
-                  <br>&nbsp;&nbsp;• Increased number of save slots to 200.
-                  <br>&nbsp;&nbsp;• Added Slaughter to Two-Handed Axe weapon list.
-                  <br>&nbsp;&nbsp;• Added a text field next to Saved builds, where you can name your saved build.
-                  <br>&nbsp;&nbsp;• Added monster's level to the information displayed about the monster in the Combat Simulator.
-                  <br>&nbsp;&nbsp;• Added 1% Undead race resistance to Skull Ring.
-                  <br>&nbsp;&nbsp;• Added 10% Heal damage to Undead monsters to Skull Ring and Skull Ring [1].
-                  <br>&nbsp;&nbsp;• Added "Beast Strafing + Double Strafe" to Hunter and Sniper's Attack Skills list.
-                  <br>&nbsp;&nbsp;• Added "Estin + Esma" to Soul Linker's Attack Skills list.
-                  <br>&nbsp;&nbsp;• Added "Estun + Esma" to Soul Linker's Attack Skills list.
-                  <br>&nbsp;&nbsp;• Adjusted the items with the bDoubleRate script to be additional with Double Attack chance of the Double Attack skill.
-                  <br>&nbsp;&nbsp;• Removed Varetyr Spear from Charge Basilisk's Attack Skills list, due to not knowing the skill ratio.
-                  <br>&nbsp;&nbsp;• Removed Bradium Earring, Ring, and Brooch from the Accessory item list.
-                  <br>&nbsp;&nbsp;• Added Attack Skills (excluding renewal/custom skills) to the following monsters:
-                  <br>&nbsp;&nbsp;&nbsp;&nbsp;• Airship Assault monsters
-                  <br>&nbsp;&nbsp;&nbsp;&nbsp;• OGH Abbey monsters 
-                  <br>&nbsp;&nbsp;&nbsp;&nbsp;• OGH Step monsters
-                  <br>&nbsp;&nbsp;&nbsp;&nbsp;• OGH Churchyard monsters
-                  <br>&nbsp;&nbsp;&nbsp;&nbsp;• OGH Prison 2 monsters
-                  <br>&nbsp;&nbsp;&nbsp;&nbsp;• Celine Kimi 
-                  <br>&nbsp;&nbsp;&nbsp;&nbsp;• Muspellskoll
                 </div>
               </details>
               <!-- <br>• Made an item database based on the client's itemInfo.lub file. It can be found <a href="itemdb/index.html">here</a>. -->
