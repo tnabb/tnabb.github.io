@@ -2632,7 +2632,7 @@ function BattleMagicCalc(e) {
     wBMC_MDEF = n_B[15];
     var _ = 0;
     0 == n_B[19] && CardNumSearch(424) && (_ = 1),
-    590 == n_A_ActiveSkill && (6 == n_B[2]) && (_ = 1),
+    590 == n_A_ActiveSkill && (1 == n_B[2] || 6 == n_B[2]) && (_ = 1),
     (162 == n_A_ActiveSkill || 474 == n_A_ActiveSkill) && (_ = 1),
     _ == 0 && (122 == n_A_ActiveSkill ? wBMC2 = Math.floor(wBMC2 + 50) : wBMC2 = Math.floor(wBMC2 * mdefReduction(wBMC_MDEF) - n_B_MDEF2)), // mdef calc
     wBMC2 < 1 && (wBMC2 = 1),
