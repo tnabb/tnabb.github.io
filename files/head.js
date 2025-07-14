@@ -76,6 +76,11 @@ v_Type = ["Normal", "Boss"],
 SubName = ["%", " seconds", "Damage", "Critical Damage", "Critical Rate", "Over 10000 hits", "Too high to calculate", "Immesurable", " x ", "Cast Time", "Off", "On"],
 JobName = ["Novice", "Swordman", "Thief", "Acolyte", "Archer", "Magician", "Merchant", "Knight", "Assassin", "Priest", "Hunter", "Wizard", "Blacksmith", "Crusader", "Rogue", "Monk", "Bard", "Dancer", "Sage", "Alchemist", "Super Novice", "Lord Knight", "Assassin Cross", "High Priest", "Sniper", "High Wizard", "Whitesmith", "Paladin", "Stalker", "Champion", "Clown", "Gypsy", "Professor", "Creator", "High Novice", "High Swordman", "High Thief", "High Acolyte", "High Archer", "High Magician", "High Merchant", "Taekwon Kid", "Star Gladiator", "Soul Linker", "Ninja", "Gunslinger", "Night Watch"];
 var All_DMGskill = [0, 6, 7, 17, 19, 40, 41, 44, 46, 47, 51, 52, 53, 54, 55, 56, 57, 65, 66, 70, 71, 72, 73, 76, 83, 84, 88, 97, 102, 104, 106, 111, 112, 113, 118, 122, 124, 125, 126, 127, 128, 130, 131, 132, 133, 158, 159, 161, 162, 167, 169, 171, 188, 189, 192, 193, 197, 199, 207, 244, 248, 259, 260, 261, 263, 264, 271, 272, 275, 277, 324, 325, 391, 326, 328, 321, 382, 339, 331, 333, 335, 337, 317, 318, 373, 374, 375, 407, 408, 409, 410, 412, 413, 414, 415, 397, 398, 399, 400, 401, 405, 434, 438, 417, 418, 419, 423, 424, 474, 489, 302, 611, 752, 461, 463, 465, 466, 469, 510, 443, 473, 847, 848, 849, 850, 853, 854, 606, 513, 514, 515];
+
+function cap_value(a, min, max){
+    return a >= max ? max : a <= min ? min : a;
+}
+
 function servers() {
     for (c.A_JOB.length = new Option(JobName[i], i),
         i = 0; i <= 46; i++)
@@ -951,9 +956,11 @@ function BattleCalc999() {
             wLAch = 1;
             for (e = 0; e <= 2; e++) // enemy damage calcuation
                 w_DMG[e] = BK_n_A_DMG[e] * defReduction(n_B[14]) - n_B_DEF2[e] + n_A_WeaponLV_refineATK,
-                a = BattleMagicCalc(BK_n_A_MATK[e], e),
-                w_DMG[e] = tPlusDamCut(Math.floor((a + w_DMG[e]) * Math.max(0, element[n_B[3]][n_A_Weapon_element]))),
+                a = BK_n_A_MATK[e] * mdefReduction(n_B[15]) - n_B_MDEF2,
+                w_DMG[e] += a,
                 w_DMG[e] = Math.floor(w_DMG[e] * (1 + .4 * n_A_ActiveSkillLV)),
+                w_DMG[e] = BattleMagicCalc(w_DMG[e], e),
+                w_DMG[e] = tPlusDamCut(Math.floor(w_DMG[e] * Math.max(0, element[n_B[3]][n_A_Weapon_element]))),
                 w_DMG[e] < 1 && (w_DMG[e] = 1),
                 n_A_Weapon_element == 6 && 60 <= n_B[3] && n_B[3] <= 69 && (w_DMG[e] = 0),
                 n_A_Weapon_element == 7 && 70 <= n_B[3] && n_B[3] <= 79 && (w_DMG[e] = 0);
@@ -2620,19 +2627,19 @@ function BattleMagicCalc(e) {
     n_A_Buf7[21] && MANUKU_MONSTER() && (wBMC2 = 110 * wBMC2 / 100),
     n_A_Buf7[24] && SUPURE_MONSTER() && (wBMC2 = 110 * wBMC2 / 100),
     131 == n_A_ActiveSkill && n_B_debuf[4] && 0 == n_B[19] && n_B[3] < 90 && (wBMC2 = 0),
-    // mdef
+    // mdef reduction calc
     SRV = 1 * c.server.value,
     wBMC_MDEF = n_B[15];
     var _ = 0;
     0 == n_B[19] && CardNumSearch(424) && (_ = 1),
-    590 == n_A_ActiveSkill && 6 == n_B[2] && (_ = 1),
-        0 != _ && (wBMC_MDEF = 0, n_B_MDEF2 = 0),
-        122 == n_A_ActiveSkill ? wBMC2 = Math.floor(wBMC2 + 50) : wBMC2 = Math.floor(wBMC2 * mdefReduction(wBMC_MDEF) - n_B_MDEF2), // mdef calc
-        wBMC2 < 1 && (wBMC2 = 1),
-        //console.log("post reduction magic dmg : " + wBMC2)
-        //104 == n_A_ActiveSkill && 6 != n_B[2] && n_B[3] < 90 && (wBMC2 = 0), // make magnus exorcismus hit all
-        606 != n_A_ActiveSkill && (wBMC2 = Math.floor(wBMC2 * Math.max(0, element[n_B[3]][n_A_Weapon_element]))),
-        SRV ? n_B[3] > 89 && n_B[3] < 95 && 47 == n_A_ActiveSkill && (wBMC2 = Math.floor(wBMC2 * (1 + .05 * n_A_ActiveSkillLV))) : 90 <= n_B[3] && 47 == n_A_ActiveSkill && (wBMC2 = Math.floor(wBMC2 * (1 + .05 * n_A_ActiveSkillLV)));
+    590 == n_A_ActiveSkill && (6 == n_B[2]) && (_ = 1),
+    (162 == n_A_ActiveSkill || 474 == n_A_ActiveSkill) && (_ = 1),
+    _ == 0 && (122 == n_A_ActiveSkill ? wBMC2 = Math.floor(wBMC2 + 50) : wBMC2 = Math.floor(wBMC2 * mdefReduction(wBMC_MDEF) - n_B_MDEF2)), // mdef calc
+    wBMC2 < 1 && (wBMC2 = 1),
+    //console.log("post reduction magic dmg : " + wBMC2)
+    //104 == n_A_ActiveSkill && 6 != n_B[2] && n_B[3] < 90 && (wBMC2 = 0), // make magnus exorcismus hit all
+    606 != n_A_ActiveSkill && (wBMC2 = Math.floor(wBMC2 * Math.max(0, element[n_B[3]][n_A_Weapon_element]))),
+    SRV ? n_B[3] > 89 && n_B[3] < 95 && 47 == n_A_ActiveSkill && (wBMC2 = Math.floor(wBMC2 * (1 + .05 * n_A_ActiveSkillLV))) : 90 <= n_B[3] && 47 == n_A_ActiveSkill && (wBMC2 = Math.floor(wBMC2 * (1 + .05 * n_A_ActiveSkillLV)));
     // magic damage modifiers
     // magic damage element % modifier
     var n = 0;
@@ -5344,10 +5351,10 @@ function ClickB_Enemy(enemyID) {
         1 == c.A8_Skill14.value ? n_WoE = 1 : n_WoE = 0,
         n_WoE && (n_B[27] = Math.floor(.8 * n_B[27])),
         n_B_DEF2 = [0, 0, 0],
-        n_B_DEF2[2] = n_B[23],
-        n_B_DEF2[0] = n_B[24],
+        n_B_DEF2[2] = cap_value(n_B[23], 1, 32767),
+        n_B_DEF2[0] = cap_value(n_B[24], 1, 32767),
         n_B_DEF2[1] = Math.floor((n_B_DEF2[2] + n_B_DEF2[0]) / 2),
-        n_B_MDEF2 = n_B[25],
+        n_B_MDEF2 = cap_value(n_B[25], 1, 32767),
         n_B_HIT = n_B[26],
         n_B_FLEE = n_B[27]
 
