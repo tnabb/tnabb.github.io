@@ -2209,7 +2209,7 @@ m_Item = [
 	, [2195, 6, 70, 150, 3, 0, 50, 40, "Adventurer's Buster", 0, "", 0]
 	, [2196, 8, 1, 130, 3, 0, 50, 40, "Adventurer's Flail", 0, "", 0]
 	, [2197, 9, 53, 40, 3, 0, 40, 40, "Adventurer's Cure Wand", 0, "", 99, 3, 14, 100, 13, 150, 93, 10, 0]
-	, [2198, 17, 95, 115, 3, 0, 50, 40, "Adventurer's Revolver", 0, "", 0]
+	, [2198, 17, 0, 115, 3, 0, 50, 40, "Adventurer's Revolver", 0, "", 0]
 ];
 
 //[ id, display location, job that can use, atk/def, level of weapon, slots, weight, level required to use, "name of item", ?, "description", effect1, effect2, ..., 0 =? ]
