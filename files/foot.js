@@ -561,7 +561,7 @@ function StAllCalc() {
         4 == n_A_JobClass() && (M += 10 * EquipNumSearch(1120)),
         6 == n_A_JobClass() && (M += 5 * EquipNumSearch(1122)),
         676 == n_A_Equip[2] && (M += 2 * n_A_HEAD_REFINE),
-        1165 == n_A_Equip[0] && (M += 20 * SkillSearch(311) + Math.floor(SU_LUK / 2)),
+        1165 == n_A_Equip[0] && (M += 20 * SkillSearch(311) + Math.floor(SU_LUK / 2) + Math.floor(SU_DEX / 3)),
         1714 == n_A_Equip[7] && (M += 2 * n_A_SHOULDER_REFINE),
         1723 == n_A_Equip[6] && (M += 3 * n_A_BODY_REFINE),
         SU_AGI >= 90 && (M += 10 * EquipNumSearch(442)),
