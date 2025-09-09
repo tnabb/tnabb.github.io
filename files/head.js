@@ -866,7 +866,6 @@ function BattleCalc999() {
             w_DMG[2] += Math.floor(w_DMG[2] * 6 / 100), // 6% dmg increase
             w_DMG[2] += n_A_WeaponLV_refineATK,
             w_DMG[2] = w_DMG[2] * Math.max(0, element[n_B[3]][n_A_Weapon_element]),
-            w_DMG[2] += n_A_Buf2[12] * 15,
             w_DMG[2] = ApplyModifiers(w_DMG[2]),
             w_DMG[0] = w_DMG[1] = w_DMG[2];
             for (e = 0; e <= 2; e++)
