@@ -77,6 +77,39 @@ Calc's theme: <select id="theme" onChange="themes()"><option value="0">Original<
               <br>This was not made in collaboration with any GM's from Alfheim, so don't bug them if there's any errors.
               <br><br>
               <details open>
+                <summary style="cursor: pointer; font-weight: bold;">(A) Changelog 2025-09-13</summary>
+                <div>
+                  • Magnus Exorcismus Cast Time reduced from 10 secs -> 5 secs.
+                  <br>• Magnus Exorcismus Cast Delay reduced from 2.5 secs -> 1.5 secs.
+                  <br>• Judex now also applies its bonus effects to Undead race monsters.
+                  <br>• Storm Gust Cast Time reduced from 5 + Skill Level -> 2.5 + Skill Level * 0.5.
+                  <br>• Lord of Vermillion Cast Time reduced from 15.5 - 0.5 * Skill Level -> 10 - 0.3 * Skill Level.
+                  <br>• Fire Bolt, Cold Bolt, and Lightning Bolt Cast Time reduced from 0.7 * Skill Level -> 0.35 * Skill Level.
+                  <br>• Fire Bolt, Cold Bolt, and Lightning Bolt Cast Delay reduced from 0.8 + 0.2 * Skill Level -> 0.4 + 0.1 * Skill Level.
+                  <br>• Thunderstorm Cast Time reduced from 1 * Skill Level -> 0.5 * Skill Level.
+                  <br>• Intensive Aim Mastery Consumption Damage increased from 50% -> 65%.
+                  <br>• Intensive Aim (# of Stacks) damage bonus decreased from 2% per stack -> 1% per stack.
+                  <br>• Fling DEF reduction per coin reduced from 5% -> 2%.
+                  <br>• Madness Canceller's bonus ATK reduced from 100 -> 40.
+                  <br>• Gatling Berserk now also gives 40 ATK.
+                  <br>• Mass Spiral's skill ratio increased from 100 + 20 * Skill Level -> 100 + 30 * Skill Level.
+                  <br>• Mass Spiral cooldown reduced from 0.334 secs -> 0.2 secs.
+                  <br>• Tracking's skill ratio increased from 100 + 5 * Skill Level per hit -> 100 + 18 * Skill Level per hit.
+                  <br>• Rapid Fire's skill ratio increased from 95 + 5 * Skill Level per hit -> 100 + 12 * Skill Level per hit.
+                  <br>• Added Dead Aim buff to Night Watch.
+                  <br>• Implemented all monster changes in patch <a href="https://projectalfheim.net/wiki/index.php/Patch_A.4.4">A4.4</a>.
+                  <br>• Fixed description for Incubus and Yao Jun pets.
+                  <br>• Fixed DEF of Ferlock's Boots from 3 -> 1 and weight from 20 -> 25.
+                  <br>• Added following new items:
+                  <br>&nbsp;&nbsp;• Sapphire Ring, Black Wing, Gelerdria, Blade Katar, Illusion Doom Slayer, and Illusion Muffler.
+                  <br>• Added following new cards:
+                  <br>&nbsp;&nbsp;• Diligent Andre, Diligent Deniro, Diligent Piere, and Silent Maya.
+                  <br>• Added following new monsters:
+                  <br>&nbsp;&nbsp;• Diligent Andre, Diligent Deniro, Diligent Piere, and Silent Maya.
+                </div>
+              </details>
+              <br>
+              <details>
                 <summary style="cursor: pointer; font-weight: bold;">(A) Changelog 2025-09-02</summary>
                 <div>
                   • Fixed Veteran Axe missing its DEX scaling.
@@ -96,43 +129,6 @@ Calc's theme: <select id="theme" onChange="themes()"><option value="0">Original<
                   • Fixed Adventurer's Revolver not being usable by Gunslinger/Night Watch.
                   <br>• Fixed Lord of Vermillion autocast effect from Big Eggring Card not showing up under list of "Player Attack Skills".
                   <br>• Removed slot from Ifrit Mask and fixed it being equippable by Novice and Super Novice.
-                </div>
-              </details>
-              <br>
-              <details>
-                <summary style="cursor: pointer; font-weight: bold;">(A) Changelog 2025-07-14</summary>
-                <div>
-                  • Fixed minimum for soft DEF and soft MDEF being 0 instead of 1.
-                  <br>• Fixed Grand Cross/Dark Grand Cross formula:
-                  <br>&nbsp;&nbsp;• Magic damage % cards now apply to the total damage, instead of just the MATK portion.
-                  <br>&nbsp;&nbsp;• Elemental modifiers now apply twice, once before % modifiers, and once after.
-                  <br>• Fixed Stone Skin reducing soft MDEF instead of directly increasing magic damage.
-                  <br>• Replaced "Magic Mirror" under "Buffs on Enemy" with "Anti Magic".
-                  <br>• Fixed Anti Magic reducing soft DEF instead of directly increasing physical damage.
-                </div>
-              </details>
-              <br>
-              <details>
-                <summary style="cursor: pointer; font-weight: bold;">(A) Changelog 2025-06-02</summary>
-                <div>
-                  • Fixed Arrow ATK unintentionally being applied to minimum damage. 
-                  <br>• In-game Arrow ATK is applied as rnd(0, Arrow ATK - 1), so for minimum damage 0 is considered.
-                  <br>• Except for CRITs where just Arrow ATK - 1 is applied.
-                </div>
-              </details>
-              <br>
-              <details>
-                <summary style="cursor: pointer; font-weight: bold;">(A) Changelog 2025-05-09</summary>
-                <div>
-                  • Fixed Spiral Pierce being affected by Spear Mastery.
-                  <br>• Fixed the STR bonus on Spiral Pierce being divided by 5.
-                  <br>• Adjusted the 3% damage increase on Spiral Pierce to a 6% damage increase, and moved the calculation to the correct place.
-                  <br>• Spiral Pierce's damage should now more accurately represent the damage in-game, with a 0~1% difference.
-                  <br>• Increased length caps on numbers in "Manual Edits on Player" and "Manual Edits on Enemy".
-                  <br>• Changed "Cast Time/Delay" under "Other Info" to "Cast Time/Cast Delay/ASPD%".
-                  <br>• "Cast Time/Cast Delay/ASPD%" now also displays total ASPD% and ASPD% from Impressive Rift, Gear, Skill, and ETC sources.
-                  <br>• Novice and Super Novice can now wear Vigilante Suit and Stole.
-                  <br>• Fixed Cart Revolution % modifier not being applied correctly on Heavy Metaling Card.
                 </div>
               </details>
               <!-- <br>• Made an item database based on the client's itemInfo.lub file. It can be found <a href="itemdb/index.html">here</a>. -->

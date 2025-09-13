@@ -480,7 +480,7 @@ m_PET = [[0, "(no loyal pet)", 0, 0]
 	, [52, "Nightmare Terror [Sleep status resistance +10%]", 0, 155, 10, 0]
 	, [53, "Goblin Leader (iRO) [Demi-Human race resistance +3%]", 0, 57, 3, 0]
 	, [54, "Golem [MaxHP +100, FLEE +5]", 0, 13, 100, 9, 5, 0]
-	, [55, "Incubus [MaxSP +3%, 2% to get 5% of dealt damage as SP with each ATK based attack]", 0, 16, 3, 0]
+	, [55, "Incubus [MaxSP +3%, 2% to get 1% of dealt damage as SP with each ATK based attack]", 0, 16, 3, 0]
 	, [56, "Succubus [5% to get 2% of dealt damage as HP with each ATK based attack]", "", 0]
 	, [57, "Kathryne Keyron [Enables use of [Sight] Lvl 1]", 0, 0] 
 	, [58, "Fire Imp [Fire element resistance +2%, +1% ATK based damage against Fire element]", 0, 63, 2, 43, 1, 0]
@@ -498,7 +498,7 @@ m_PET = [[0, "(no loyal pet)", 0, 0]
 	, [70, "Nine Tail [CRIT +2, Crit Damage +5%]", 0, 10, 2, 70, 5, 0]
 	, [71, "Teddy Bear [MaxSP +50]", 0, 14, 50, 0]
 	, [72, "Gremlin [MATK +10]", 0, 88, 10, 0]
-	, [73, "Yao Jun [VIT +4, add 4% more tolerance against Stun, low chance of gaining 1% of the damage inflicted upon an enemy as SP with each attack]", 0, 3, 4, 151, 4, 0]
+	, [73, "Yao Jun [VIT +4, Stun Resistance +4%, 1% to get 1% of dealt damage as SP with each ATK based attack]", 0, 3, 4, 151, 4, 0]
 	, [74, "Leaf Lunatic [CRIT +4, ATK +4, increase physical and magical damage against formless race monster by 4%]", 0, 10, 4, 17, 4, 30, 4, 170, 4, 0]
 	, [75, "Cat o' Nine Tails [CRIT +3, Crit Damage +7%]", 0, 10, 3, 70, 7, 0]
 	, [76, "Diabolic [ATK +2%, MATK +2%, MaxHP +2%, MaxSP +2%, chance to autocast Fire Bolt lvl 3 when dealing melee physical damage]", 0, 80, 2, 89, 2, 15, 2, 16, 2, 0]
@@ -525,9 +525,10 @@ m_PET = [[0, "(no loyal pet)", 0, 0]
 	, [97, "Pupa [MaxHP +300]", 0, 13, 300, 0]
 	, [98, "Zealotus [Increases physical and magical damage against demi-human race monsters by 2%]", 0, 37, 2, 177, 2, 0]
 	, [99, "Toucan [Immunity to Confusion]", 0, 157, 100, 0]
+    , [100, "Diligent Andre [STR +1, DEX +1, Physical Damage to All +3%]", 0, 1, 1, 5, 1, 80, 3, 0]
 ];
 
-m_PET_SORT = [0, 1, 10, 3, 27, 4, 9, 36, 73, 20, 15 ,21, 76, 24, 66, 25, 69, 81, 22, 60, 23, 87, 12, 14, 54, 19, 72, 82, 94, 28, 58, 55, 2, 67, 44, 47, 26, 45, 74, 8, 57, 80, 39, 37, 41, 38, 78, 84, 40, 52, 88, 70, 75, 86, 6, 64, 93, 32, 63, 30, 77, 29, 34, 35, 61, 65, 97, 46, 83, 13, 62, 42, 51, 92, 7, 17, 18, 16, 33, 31, 56, 71, 85, 91, 90, 96, 99, 48, 89, 95, 5, 59, 79, 43, 68, 98];
+m_PET_SORT = [0, 1, 10, 3, 27, 4, 9, 36, 73, 20, 15 ,21, 76, 100, 24, 66, 25, 69, 81, 22, 60, 23, 87, 12, 14, 54, 19, 72, 82, 94, 28, 58, 55, 2, 67, 44, 47, 26, 45, 74, 8, 57, 80, 39, 37, 41, 38, 78, 84, 40, 52, 88, 70, 75, 86, 6, 64, 93, 32, 63, 30, 77, 29, 34, 35, 61, 65, 97, 46, 83, 13, 62, 42, 51, 92, 7, 17, 18, 16, 33, 31, 56, 71, 85, 91, 90, 96, 99, 48, 89, 95, 5, 59, 79, 43, 68, 98];
 
 m_TempEffect = [
 	[0, "Temporary Card/Item Effects", "none", 0, 0, 0]

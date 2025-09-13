@@ -33,7 +33,32 @@
 
 <body data-new-gr-c-s-check-loaded="14.1125.0" data-gr-ext-installed="">
    <h1>Full changeLog:</h1>
-   <div class="main" style="padding-left: 20px;"><strong>(A) Changelog 2025-02-01:</strong>
+   <div class="main" style="padding-left: 20px;"><strong>(A) Changelog 2025-07-14</strong>
+    • Fixed minimum for soft DEF and soft MDEF being 0 instead of 1.
+    • Fixed Grand Cross/Dark Grand Cross formula:
+    &nbsp;&nbsp;• Magic damage % cards now apply to the total damage, instead of just the MATK portion.
+    &nbsp;&nbsp;• Elemental modifiers now apply twice, once before % modifiers, and once after.
+    • Fixed Stone Skin reducing soft MDEF instead of directly increasing magic damage.
+    • Replaced "Magic Mirror" under "Buffs on Enemy" with "Anti Magic".
+    • Fixed Anti Magic reducing soft DEF instead of directly increasing physical damage.
+              
+<strong>(A) Changelog 2025-06-02</strong>
+    • Fixed Arrow ATK unintentionally being applied to minimum damage. 
+    • In-game Arrow ATK is applied as rnd(0, Arrow ATK - 1), so for minimum damage 0 is considered.
+    • Except for CRITs where just Arrow ATK - 1 is applied.
+
+<strong>(A) Changelog 2025-05-09</strong>
+    • Fixed Spiral Pierce being affected by Spear Mastery.
+    • Fixed the STR bonus on Spiral Pierce being divided by 5.
+    • Adjusted the 3% damage increase on Spiral Pierce to a 6% damage increase, and moved the calculation to the correct place.
+    • Spiral Pierce's damage should now more accurately represent the damage in-game, with a 0~1% difference.
+    • Increased length caps on numbers in "Manual Edits on Player" and "Manual Edits on Enemy".
+    • Changed "Cast Time/Delay" under "Other Info" to "Cast Time/Cast Delay/ASPD%".
+    • "Cast Time/Cast Delay/ASPD%" now also displays total ASPD% and ASPD% from Impressive Rift, Gear, Skill, and ETC sources.
+    • Novice and Super Novice can now wear Vigilante Suit and Stole.
+    • Fixed Cart Revolution % modifier not being applied correctly on Heavy Metaling Card.
+
+<strong>(A) Changelog 2025-02-01:</strong>
    • Changed Cursed Jackknife from having Melee random options to having Special random options.
 
 <strong>(A) Changelog 2025-01-30:</strong>

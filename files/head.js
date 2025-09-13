@@ -367,12 +367,12 @@ function BattleCalc999() {
                     n_Delay[2] = 1.5, wHITsuu = 1) : 401 == n_A_ActiveSkill ? (n_Delay[0] = 1,
                         n_rangedAtk = 0,
                         wMod += n_A_ActiveSkillLV - 1, wHITsuu = 1) : 430 == n_A_ActiveSkill ? (n_rangedAtk = 1,
-                            wMod += -0.15 + 0.15 * n_A_ActiveSkillLV,
+                            wMod += 0.18 * n_A_ActiveSkillLV,
                             enemyIsMVP = n_B[1].includes("[MVP]"),
                             wMod *= SkillSearch(852) == 2 ? 3 : SkillSearch(852) == 1 ? (enemyIsMVP ? 2 : 1.5) : 1,
                             wHITsuu = [1, 2, 4][1 * c.SkillSubNum.value],
                             n_Delay[3] = SkillSearch(851) == 1 ? 1 : 2, 
-                            2157 == n_A_Equip[0] && (n_Delay[3] -= 0.5)) : (n_rangedAtk = 1, wMod += -.05 + .05 * n_A_ActiveSkillLV, wCast = SkillSearch(852) == 2 ? 0.0835 : SkillSearch(852) == 1 ? 0.167 : SkillSearch(851) ? 0.167 : 0.334, wHITsuu = 5),
+                            2157 == n_A_Equip[0] && (n_Delay[3] -= 0.5)) : (n_rangedAtk = 1, wMod += .12 * n_A_ActiveSkillLV, wCast = SkillSearch(852) == 2 ? 0.0835 : SkillSearch(852) == 1 ? 0.167 : SkillSearch(851) ? 0.167 : 0.334, wHITsuu = 5),
                 e = 0; e <= 2; e++)
                 n_A_CriATK[e] = n_A_DMG[e];
             ATKmod02(wMod, 1),
@@ -1051,10 +1051,10 @@ function BattleCalc999() {
             n_PerHIT_DMG = 0,
             n_rangedAtk = 1,
             ATKmod02(wMod, 0),
-            wMod += .20 * n_A_ActiveSkillLV,
+            wMod += .30 * n_A_ActiveSkillLV,
             wCast = 1 * n_A_CAST,
             n_Delay[2] = 1,
-            n_Delay[3] = 0.33,
+            n_Delay[3] = 0.2,
             n_A_Weapon_element = m_Bullet[n_A_Arrow][1],
             1 * c.A_Weapon_element.value != 0 && (n_A_Weapon_element = 1 * c.A_Weapon_element.value),
             work_B_DEF2 = [0, 0, 0],
@@ -1527,18 +1527,18 @@ function BattleCalc999() {
             if (51 == n_A_ActiveSkill)
                 n_A_Weapon_element = 3,
                 wHITsuu = n_A_ActiveSkillLV,
-                wCast = .7 * n_A_ActiveSkillLV,
-                n_Delay[2] = .8 + .2 * n_A_ActiveSkillLV;
+                wCast = .35 * n_A_ActiveSkillLV,
+                n_Delay[2] = .4 + .1 * n_A_ActiveSkillLV;
             else if (54 == n_A_ActiveSkill)
                 n_A_Weapon_element = 1,
                 wHITsuu = n_A_ActiveSkillLV,
-                wCast = .7 * n_A_ActiveSkillLV,
-                n_Delay[2] = .8 + .2 * n_A_ActiveSkillLV;
+                wCast = .35 * n_A_ActiveSkillLV,
+                n_Delay[2] = .4 + .1 * n_A_ActiveSkillLV;
             else if (56 == n_A_ActiveSkill)
                 n_A_Weapon_element = 4,
                 wHITsuu = n_A_ActiveSkillLV,
-                wCast = .7 * n_A_ActiveSkillLV,
-                n_Delay[2] = .8 + .2 * n_A_ActiveSkillLV;
+                wCast = .35 * n_A_ActiveSkillLV,
+                n_Delay[2] = .4 + .1 * n_A_ActiveSkillLV;
             else if (540 == n_A_ActiveSkill)
                 n_A_Weapon_element = 3,
                 wHITsuu = n_A_ActiveSkillLV,
@@ -1575,7 +1575,7 @@ function BattleCalc999() {
             else if (57 == n_A_ActiveSkill)
                 n_A_Weapon_element = 4,
                 wHITsuu = n_A_ActiveSkillLV,
-                wCast = 1 * n_A_ActiveSkillLV,
+                wCast = 0.5 * n_A_ActiveSkillLV,
                 n_Delay[2] = 2,
                 wMod = .8;
             else if (46 == n_A_ActiveSkill)
@@ -1612,7 +1612,7 @@ function BattleCalc999() {
                 n_bunkatuHIT = 1,
                 n_A_Weapon_element = 4,
                 wHITsuu = 20,
-                wCast = 15.5 - .5 * n_A_ActiveSkillLV,
+                wCast = 10 - 0.3 * n_A_ActiveSkillLV, 
                 n_Delay[2] = 5,
                 n_Delay[6] = 4,
                 wMod = 3.2 + .8 * n_A_ActiveSkillLV;
@@ -1636,7 +1636,7 @@ function BattleCalc999() {
                 SGcast = 1,
                 10 == n_A_Weapon_refine && EquipNumSearch(1169) && (SGcast -= .08),
                 EquipNumSearch(1786) && (SGcast -= .04 * n_A_LEFT_REFINE),
-                wCast = (5 + n_A_ActiveSkillLV) * SGcast,
+                wCast = (2.5 + n_A_ActiveSkillLV * 0.5) * SGcast,
                 n_Delay[2] = 5,
                 n_Delay[6] = 4.5,
                 wMod = 1 + .4 * n_A_ActiveSkillLV;
@@ -1660,8 +1660,8 @@ function BattleCalc999() {
                 n_Delay[0] = 1,
                 n_A_Weapon_element = 6,
                 wHITsuu = n_A_ActiveSkillLV,
-                wCast = 10,
-                n_Delay[2] = 2.5;/*, // make ME hit all
+                wCast = 5,
+                n_Delay[2] = 1.5;/*, // make ME hit all
                 6 != n_B[2] && n_B[3] < 90 && (n_A_MATK[2] = 0, n_A_MATK[0] = 0, n_A_MATK[1] = 0)*/
             else if (590 == n_A_ActiveSkill)
                 n_A_Weapon_element = 6,
@@ -2631,7 +2631,7 @@ function BattleMagicCalc(e) {
     wBMC_MDEF = n_B[15];
     var _ = 0;
     0 == n_B[19] && CardNumSearch(424) && (_ = 1),
-    590 == n_A_ActiveSkill && (6 == n_B[2]) && (_ = 1),
+    590 == n_A_ActiveSkill && (1 == n_B[2] || 6 == n_B[2]) && (_ = 1),
     (162 == n_A_ActiveSkill || 474 == n_A_ActiveSkill) && (_ = 1),
     _ == 0 && (122 == n_A_ActiveSkill ? wBMC2 = Math.floor(wBMC2 + 50) : wBMC2 = Math.floor(wBMC2 * mdefReduction(wBMC_MDEF) - n_B_MDEF2)), // mdef calc
     wBMC2 < 1 && (wBMC2 = 1),
@@ -2698,37 +2698,6 @@ function BattleMagicCalc(e) {
     n_B_debuf[29] && (37 == n_A_ActiveSkill || 104 == n_A_ActiveSkill || 590 == n_A_ActiveSkill) && (wBMC2 = Math.floor(wBMC2 * (100 + 10) / 100)),
     wBMC2 = tPlusDamCut(wBMC2);
     return Math.floor(wBMC2);
-    /* n = StPlusCalc2(5e3 + n_A_ActiveSkill) + StPlusCard(5e3 + n_A_ActiveSkill);
-    return n_A_Buf9[20] == n_A_ActiveSkill && (n += n_A_Buf9[19]), // skill dmg % on top
-        n_A_Buf9[22] == n_A_ActiveSkill && (n += n_A_Buf9[21]), // skill dmg % on bottom
-        46 != n_A_ActiveSkill && 47 != n_A_ActiveSkill && 277 != n_A_ActiveSkill || 5 == n_A_JobClass() && (n += 20 * CardNumSearch(474)),
-        132 != n_A_ActiveSkill && 133 != n_A_ActiveSkill || EquipNumSearch(1146) && (n += 15 + n_A_HEAD_REFINE),
-        131 == n_A_ActiveSkill && EquipNumSearch(1169) && (n += n_A_Weapon_refine),
-        // kraken card
-        (54 == n_A_ActiveSkill || 541 == n_A_ActiveSkill || 55 == n_A_ActiveSkill || 128 == n_A_ActiveSkill || 130 == n_A_ActiveSkill || 131 == n_A_ActiveSkill || 410 == n_A_ActiveSkill || 412 == n_A_ActiveSkill) && CardNumSearch(583) && (n += 10),
-        (373 == n_A_ActiveSkill || 374 == n_A_ActiveSkill || 375 == n_A_ActiveSkill) && CardNumSearch(583) && n_A_Weapon_element == 1 && (n += 10),
-        // sedora pet n_A_Buf8[0] = petID
-        (54 == n_A_ActiveSkill || 541 == n_A_ActiveSkill || 55 == n_A_ActiveSkill || 128 == n_A_ActiveSkill || 130 == n_A_ActiveSkill || 131 == n_A_ActiveSkill || 410 == n_A_ActiveSkill || 412 == n_A_ActiveSkill) && 92 == n_A_Buf8[0] && (n += 5),
-        (373 == n_A_ActiveSkill || 374 == n_A_ActiveSkill || 375 == n_A_ActiveSkill) && 92 == n_A_Buf8[0] && n_A_Weapon_element == 1 && (n += 5),
-        // gloom pet - esma dmg increase
-        (373 == n_A_ActiveSkill || 374 == n_A_ActiveSkill || 375 == n_A_ActiveSkill) && 94 == n_A_Buf8[0] && (n_A_Weapon_element == 3 || n_A_Weapon_element == 8) && (n += 7),
-        // mavka card
-        (407 == n_A_ActiveSkill || 408 == n_A_ActiveSkill || 409 == n_A_ActiveSkill) && CardNumSearch(597) && 44 == n_A_JOB && (n += 7),
-        // adventurers spirit
-        375 == n_A_ActiveSkill && n_A_SHOULDER_REFINE >= 7 && 1835 == n_A_Equip[7] && (n += 5),
-        // exquisite yellow foxtail
-        (126 == n_A_ActiveSkill || 127 == n_A_ActiveSkill) && (1873 == n_A_Equip[0] || 1874 == n_A_Equip[0]) && (n += n_A_Weapon_refine),
-        540 == n_A_ActiveSkill && (n += 25 * CardNumSearch(493)),
-        541 == n_A_ActiveSkill && (n += 25 * CardNumSearch(488)),
-        542 == n_A_ActiveSkill && (n += 25 * CardNumSearch(591)),
-        37 != n_A_ActiveSkill && 387 != n_A_ActiveSkill || 3 == n_A_JobClass() && EquipNumSearch(1247) && (n += 5,
-            n_A_HEAD_REFINE >= 7 && (n += 5)),
-        wBMC2 = wBMC2 * (100 + n) / 100,
-        n_A_Buf7[21] && MANUKU_MONSTER() && (wBMC2 = 110 * wBMC2 / 100),
-        n_A_Buf7[24] && SUPURE_MONSTER() && (wBMC2 = 110 * wBMC2 / 100),
-        131 == n_A_ActiveSkill && n_B_debuf[4] && 0 == n_B[19] && n_B[3] < 90 && (wBMC2 = 0),
-        wBMC2 = Math.floor(wBMC2),
-        wBMC2 */
 }
 function ClickJob(e) {
     SRV = 1 * c.server.value,
@@ -5226,7 +5195,7 @@ function ClickB_Enemy(enemyID) {
     n_B_debuf[25] == 2 && (mSpiralDebuf = 75),
     mSpiralDebuf && (n_B[14] -= Math.floor(n_B[14] * mSpiralDebuf / 100));
     mSpiralDebuf && (n_B[23] -= Math.floor(n_B[23] * mSpiralDebuf / 100));
-    var flingDebuf = 5 * n_B_debuf[28];
+    var flingDebuf = 2 * n_B_debuf[28];
     flingDebuf && (n_B[14] -= Math.floor(n_B[14] * flingDebuf / 100));
     flingDebuf && (n_B[23] -= Math.floor(n_B[23] * flingDebuf / 100));
     var l = 0;
@@ -5912,9 +5881,9 @@ function tPlusDamCut(e) {
         n_B_buf[8] && 2 != n_rangedAtk && (e += Math.floor(20 * e * n_B_buf[8] / 100)),
         5 == n_B[19] && (e = 1, 122 == n_A_ActiveSkill && (e = 0)), // assump
         e = Math.floor(e * (100 - NotesCalc(n_B[0], 4)) / 100),
-        SkillSearch(855) && (e += e * (SkillSearch(855) * 2) / 100),
-        590 == n_A_ActiveSkill && 6 == n_B[2] && (n_B[1].includes("[MVP]") ? (e += e * 100 / 100) : e += e * 20 / 100),
-        SkillSearch(851) && n_A_ActiveSkill != 0 && (e += e * 50 / 100),
+        SkillSearch(855) && (e += e * SkillSearch(855) / 100),
+        590 == n_A_ActiveSkill && (1 == n_B[2] || 6 == n_B[2]) && (n_B[1].includes("[MVP]") ? (e += e * 100 / 100) : e += e * 20 / 100),
+        SkillSearch(851) && n_A_ActiveSkill != 0 && (e += e * 65 / 100),
         e
 }
 function tPlusEnemyClick() {

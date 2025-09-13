@@ -892,7 +892,8 @@ m_Skill = [		//ID, max level, iRO name, alternative name, 0=nodamage 1=melee/ran
 	[852, 1, "Intensive Aim (Stacks consumed)", 0, 0, 0],
 	[853, 5, "Basic Grenade", 0, 3, 11],
 	[854, 1, "Slug Shot", 0, 3, 10],
-	[855, 10, "Intensive Aim (# of Stacks)", 0, 0, 0]
+	[855, 10, "Intensive Aim (# of Stacks)", 0, 0, 0],
+	[856, 5, "Dead Aim", 0, 0, 0]
 ];
 
 m_JobBuff = [
@@ -942,7 +943,7 @@ m_JobBuff = [
 	[329, 338, 342, 380, 372, 379, 999, 999, 999, 999, 999, 999, 999, 999, 999], // soul linker
 	[393, 404, 999, 999, 999, 999, 999, 999, 999, 999, 999, 999, 999, 999, 999], // ninja
 	[425, 426, 427, 416, 420, 421, 422, 433, 999, 999, 999, 999, 999, 999, 999], // gunslinger
-	[425, 426, 427, 416, 420, 421, 422, 433, 846, 851, 852, 855, 999, 999, 999], // night watch
+	[425, 426, 427, 416, 420, 421, 422, 433, 846, 851, 852, 855, 856, 999, 999], // night watch
 	//3rd job
 	[3, 4, 12, 69, 74, 452, 386, 9, 456, 457, 460, 445, 459, 455, 744, 999], // RK
 	[3, 4, 12, 69, 74, 452, 254, 256, 258, 255, 386, 9, 456, 457, 460, 445, 459, 455, 744, 999], // RKt
@@ -1293,5 +1294,6 @@ m_AutoSpellSkill = [		// id, add to skill list, skill id, lvl, chance, when rece
 	[178, 1, 57, 5, 4, 1],
 	[179, 1, 133, 5, 4, 1],
 	[180, 1, 850, 3, 5, 6],
+    [181, 1, 132, 3, 3, 1],
 ];
 //ID, selectable in "Attack Skills", skill ID, skill Lvl, chance, trigger
