@@ -2218,6 +2218,7 @@ m_Item = [
     , [2203, 7, 70, 275, 4, 1, 300, 50, "Illusion Doom Slayer", 0, "", 12, 3, 290, 10, 190, 10, 191, 10, 192, 10, 0]
     , [2204, 62, 0, 3, 0, 0, 40, 1, "Illusion Muffler", 0, "Recover 2 SP when killing a [" + v_Race[4] + "] race monster with ATK based damage.", 60, 15, 54, 5, 370, -10, 0]
 	, [2205, 12, 118, 300, 3, 2, 70, 50, "Eldric's Tome", 0, "", 10, 50, 70, 50, 0]
+    , [2206, 50, 0, 1, 0, 1, 40, 1, "Shaman Hat", 0, "", 60, 3, 61, 3, 62, 3, 63, 3, 64, 3, 65, 3, 66, 3, 67, 3, 68, 3, 69, 3, 0]
 ];
 
 //[ id, display location, job that can use, atk/def, level of weapon, slots, weight, level required to use, "name of item", ?, "description", effect1, effect2, ..., 0 =? ]
