@@ -2183,46 +2183,28 @@ for (w_ASSP0bk = new Array,
     i = 0; i < 20; i++)
     w_ASSP0bk[i] = 999;
 function ActiveSkillSetPlus() {
-    for (w_ASSP0 = new Array,
-        w_ASSP9 = new Array,
-        a = 0; a < 20; a++)
+    for (w_ASSP0 = new Array, w_ASSP9 = new Array, a = 0; a < 100; a++)
         w_ASSP0[a] = 999,
-            w_ASSP9[a] = 0;
+        w_ASSP9[a] = 0;
     j = 0;
     var _ = 0;
     for (a = 0; a <= 20; a++)
         for (j2 = 0; 0 != m_Item[n_A_Equip[a]][11 + j2]; j2 += 2)
             _ = m_Item[n_A_Equip[a]][12 + j2],
-                220 == Math.abs(m_Item[n_A_Equip[a]][11 + j2]) ? 1 == m_EnableSkill[_][1] && (w_ASSP0[j] = m_EnableSkill[_][2],
-                    w_ASSP9[j] = m_EnableSkill[_][0] + 3e3,
-                    j++) : 221 == Math.abs(m_Item[n_A_Equip[a]][11 + j2]) && 1 == m_AutoSpellSkill[_][1] && (w_ASSP0[j] = m_AutoSpellSkill[_][2],
-                        w_ASSP9[j] = m_AutoSpellSkill[_][0] + 2e3,
-                        j++);
+            220 == Math.abs(m_Item[n_A_Equip[a]][11 + j2]) ? 1 == m_EnableSkill[_][1] && (w_ASSP0[j] = m_EnableSkill[_][2], w_ASSP9[j] = m_EnableSkill[_][0] + 3e3, j++) : 
+            221 == Math.abs(m_Item[n_A_Equip[a]][11 + j2]) && 1 == m_AutoSpellSkill[_][1] && (w_ASSP0[j] = m_AutoSpellSkill[_][2], w_ASSP9[j] = m_AutoSpellSkill[_][0] + 2e3, j++);
     for (a = 0; a <= 25; a++)
         for (j2 = 0; 0 != m_Card[n_A_card[a]][4 + j2]; j2 += 2)
-            220 == m_Card[n_A_card[a]][4 + j2] ? 1 == m_EnableSkill[m_Card[n_A_card[a]][5 + j2]][1] && (w_ASSP0[j] = m_EnableSkill[m_Card[n_A_card[a]][5 + j2]][2],
-                w_ASSP9[j] = m_Card[n_A_card[a]][5 + j2] + 3e3,
-                j++) : 221 == m_Card[n_A_card[a]][4 + j2] && 1 == m_AutoSpellSkill[m_Card[n_A_card[a]][5 + j2]][1] && (w_ASSP0[j] = m_AutoSpellSkill[m_Card[n_A_card[a]][5 + j2]][2],
-                    w_ASSP9[j] = m_Card[n_A_card[a]][5 + j2] + 2e3,
-                    j++);
-    !CardNumSearch(164) || 9 != n_A_JOB && 23 != n_A_JOB || (w_ASSP0[j] = 162,
-        w_ASSP9[j] = 2095,
-        j++),
-        CardNumSearch(277) && 1 == n_A_JobClass() && (w_ASSP0[j] = 76,
-            w_ASSP9[j] = 2096,
-            j++),
-        EquipNumSearch(1096) && 9 != n_A_JobClass2() && (w_ASSP0[j] = 193,
-            w_ASSP9[j] = 2108,
-            j++);
+            220 == m_Card[n_A_card[a]][4 + j2] ? 1 == m_EnableSkill[m_Card[n_A_card[a]][5 + j2]][1] && (w_ASSP0[j] = m_EnableSkill[m_Card[n_A_card[a]][5 + j2]][2], w_ASSP9[j] = m_Card[n_A_card[a]][5 + j2] + 3e3, j++) : 
+            221 == m_Card[n_A_card[a]][4 + j2] && 1 == m_AutoSpellSkill[m_Card[n_A_card[a]][5 + j2]][1] && (w_ASSP0[j] = m_AutoSpellSkill[m_Card[n_A_card[a]][5 + j2]][2], w_ASSP9[j] = m_Card[n_A_card[a]][5 + j2] + 2e3, j++);
+    !CardNumSearch(164) || 9 != n_A_JOB && 23 != n_A_JOB || (w_ASSP0[j] = 162, w_ASSP9[j] = 2095, j++),
+    CardNumSearch(277) && 1 == n_A_JobClass() && (w_ASSP0[j] = 76, w_ASSP9[j] = 2096, j++),
+    EquipNumSearch(1096) && 9 != n_A_JobClass2() && (w_ASSP0[j] = 193, w_ASSP9[j] = 2108, j++);
     for (var n = [33, 34, 35, 36, 13, 37, 38, 39, 7], a = 0; a <= 8; a++)
-        w_ASSP0[j] = m_EnableSkill[n[a]][2],
-            w_ASSP9[j] = n[a] + 5e3,
-            j++;
-    for (w_ASSP0[j] = m_EnableSkill[40][2],
-        w_ASSP9[j] = 5040,
-        j++,
-        w_ASSPch = 0,
-        a = 0; a < 20; a++)
+        w_ASSP0[j] = m_EnableSkill[n[a]][2], 
+        w_ASSP9[j] = n[a] + 5e3, 
+        j++;
+    for (w_ASSP0[j] = m_EnableSkill[40][2], w_ASSP9[j] = 5040, j++, w_ASSPch = 0, a = 0; a < 20; a++)
         w_ASSP0bk[a] != w_ASSP0[a] && (w_ASSPch = 1);
     if (w_ASSPch) {
         if (c.all_dmgSkills.checked)
@@ -2232,9 +2214,7 @@ function ActiveSkillSetPlus() {
                 ;
         for (a = k + 20; a >= k; a--)
             c.A_ActiveSkill.options[a] = null;
-        for (j = 0,
-            a = k; 999 != w_ASSP0[j]; a++,
-            j++)
+        for (j = 0, a = k; 999 != w_ASSP0[j]; a++, j++) 
             5040 == w_ASSP9[j] ? c.A_ActiveSkill.options[a] = new Option(m_Skill[w_ASSP0[j]][2] + " (Yggdrasil Leaf)", w_ASSP9[j]) : w_ASSP9[j] >= 5e3 ? c.A_ActiveSkill.options[a] = new Option(m_Skill[w_ASSP0[j]][2] + " (scroll skill)", w_ASSP9[j]) : w_ASSP9[j] >= 3e3 ? c.A_ActiveSkill.options[a] = new Option(m_Skill[w_ASSP0[j]][2] + " (adquired skill)", w_ASSP9[j]) : c.A_ActiveSkill.options[a] = new Option(m_Skill[w_ASSP0[j]][2] + " (auto-casted skill)", w_ASSP9[j])
     }
     for (a = 0; a < 20; a++)
