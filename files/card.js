@@ -614,7 +614,7 @@ m_Card = [
 	, [609, 2, "* All Element Magical +8%", "", 340, 8, 341, 8, 342, 8, 343, 8, 344, 8, 345, 8, 346, 8, 347, 8, 348, 8, 349, 8, 0]
 	// patch a1
 	, [610, 7, "Contaminated Raydric", "", 45, 5, 0]
-	, [611, 5, "Contaminated Raydric Archer", "", 61, 20, 62, 20, 63, 20, 64, 20, 65, 20, 66, 20, 67, 20, 68, 20, 69, 20, 60, -20, 0]
+	, [611, 5, "Contaminated Raydric Archer", "", 61, 20, 62, 20, 63, 20, 64, 20, 65, 20, 66, 20, 67, 20, 68, 20, 69, 20, 60, -10, 0]
 	, [612, 1, "Corrupted Wanderer", "<hr><b>When equipping [Corrupted Wanderer Card]+[Sigrun's Wings] at the same time:</b><br>When dealing ATK based damage, 2% chance you gain 1% of the damage inflicted on your target as SP.", 28, 5, 29, 5, 0]
 	, [613, 1, "Cursed Raydric", "", 88, 15, 0]
 	, [614, 6, "Cursed Raydric Archer", "", 5, 1, 15, 10, 0]
