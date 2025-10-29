@@ -2725,7 +2725,7 @@ function BattleMagicCalc(e) {
     cardfix = Math.floor(cardfix * (100 + nSize) / 100),
     cardfix = Math.floor(cardfix * (100 + nBoss + nAll) / 100),
     wBMC2 = Math.floor(wBMC2 - (((wBMC2) * (1000 - Math.max(0, cardfix))) / 1000)),
-    n_B_debuf[29] && (37 == n_A_ActiveSkill || 104 == n_A_ActiveSkill || 590 == n_A_ActiveSkill) && (wBMC2 = Math.floor(wBMC2 * (100 + 10) / 100)),
+    n_B_debuf[29] && (37 == n_A_ActiveSkill || 104 == n_A_ActiveSkill || 590 == n_A_ActiveSkill) && (wBMC2 = Math.floor(wBMC2 * (100 + (n_B_debuf[30] ? 20 : 10)) / 100)),
     wBMC2 = tPlusDamCut(wBMC2);
     return Math.floor(wBMC2);
 }
@@ -2766,9 +2766,7 @@ function ClickJob(e) {
         n_Skill7SW && (3 != n_A_JOB && 9 != n_A_JobClass2() && 16 != n_A_JobClass2() ? c.A_SpeedPOT.options[2] = new Option(SpeedPotName[2], 2) : c.A_SpeedPOT.options[2] = new Option("-", 0),
             1 == n_A_JobClass() || 6 == n_A_JobClass() || 41 == n_A_JobClass() || 14 == n_A_JobClass2() || 11 == n_A_JobClass2() || 5 == n_A_JOB || 45 == n_A_JobClass() ? c.A_SpeedPOT.options[3] = new Option(SpeedPotName[3] + " (Lvl 85)", 3) : 22 == n_A_JOB ? c.A_SpeedPOT.options[3] = new Option("* Special (" + m_Skill[304][2] + " Lvl 85) / Poison Bottle", 3) : c.A_SpeedPOT.options[3] = new Option("* Special (" + m_Skill[304][2] + ") (Lvl 85)", 3)),
         20 != n_A_JOB && (SuperNoviceFullWeaponCHECK = 0),
-        SuperNoviceFullWeaponCHECK ? (m_JobASPD[20][7] = 1.6,
-            m_JobASPD_R[20][7] = 146) : (m_JobASPD[20][7] = 0,
-                m_JobASPD_R[20][7] = 0),
+        SuperNoviceFullWeaponCHECK ? (m_JobASPD[20][7] = 1.6) : (m_JobASPD[20][7] = 0),
         0 == SRV && 8 == n_A_JobClass2() && 1 == n_Nitou && (n_Nitou = 0,
             ClickWeaponType2(0)),
         WeaponSet(e),
@@ -4814,7 +4812,7 @@ function debufSW(e) {
             n += '<TR><TD id="BI24_1" class="center">Flying</TD><TD id="BI24_2" class="data"></TD><TD id="BI20_1" class="center">' + skillName(218, SRV) + '</TD><TD id="BI20_2"></TD></TR>',
             n += '<TR><TD id="BI25_1" class="center">Mass Spiral (IA)</TD><TD id="BI25_2" class="data"></TD><TD id="BI26_1" class="center">Disarm</TD><TD id="BI26_2"></TD></TR>',
             n += '<TR><TD id="BI27_1" class="center">Piercing Shot</TD><TD id="BI27_2" class="data"></TD><TD id="BI28_1" class="center">Fling</TD><TD id="BI28_2"></TD></TR>',
-            n += '<TR><TD id="BI29_1" class="center dotB">Holy Light</TD><TD id="BI29_2" class="data dotB"></TD><TD id="BI30_1" class="center dotB"></TD><TD id="BI30_2" class="dotB"></TD></TR>',
+            n += '<TR><TD id="BI29_1" class="center dotB">Holy Light</TD><TD id="BI29_2" class="data dotB"></TD><TD id="BI30_1" class="center dotB">ME Combo</TD><TD id="BI30_2" class="dotB"></TD></TR>',
             n += '<TR><TD class="center" ColSpan="4"><b>Monster Exclusive Debuffs</b></TD></TR>',
             n += '<TR><TD id="BI13_1" class="center">' + skillName(172, SRV) + '</TD><TD id="BI13_2" class="data"></TD><TD id="BI14_1" class="center">' + skillName(173, SRV) + '</TD><TD id="BI14_2"></TD></TR>',
             n += '<TR><TD id="BI15_1" class="center">' + skillName(174, SRV) + '</TD><TD id="BI15_2" class="data"></TD><TD id="BI16_1" class="center">' + skillName(175, SRV) + '</TD><TD id="BI16_2"></TD></TR>',
@@ -4849,7 +4847,8 @@ function debufSW(e) {
             myInnerHtml("BI26_2", '<input type="checkbox" name="B_debuf26" onClick="AI(1)">', 0),
             myInnerHtml("BI27_2", '<select name="B_debuf27" onChange="AI(1)"></select>', 0),
             myInnerHtml("BI28_2", '<select name="B_debuf28" onChange="AI(1)"></select>', 0),
-            myInnerHtml("BI29_2", '<input type="checkbox" name="B_debuf29" onClick="AI(1)">', 0);
+            myInnerHtml("BI29_2", '<input type="checkbox" name="B_debuf29" onClick="AI(1)">', 0),
+            myInnerHtml("BI30_2", '<input type="checkbox" name="B_debuf30" onClick="AI(1)">', 0);
         var _ = ["(none)", "Water", "Earth", "Fire", "Wind"];
         for (i = 0; i <= 4; i++)
             c.B_debuf23.options[i] = new Option(_[i], i);
@@ -4980,7 +4979,8 @@ function debufSW(e) {
             c.B_debuf26.checked = n_B_debuf[26],
             c.B_debuf27.value = n_B_debuf[27],
             c.B_debuf28.value = n_B_debuf[28],
-            c.B_debuf29.checked = n_B_debuf[29]
+            c.B_debuf29.checked = n_B_debuf[29],
+            c.B_debuf30.checked = n_B_debuf[30]
     } else {
         var n;
         n = '<TR><TD id="AITD" class="subheader point" onClick="debufSW(1)">Debuffs on Enemy <span id="AIused"></span>',
@@ -4990,7 +4990,7 @@ function debufSW(e) {
 }
 function AI(e) {
     1 == e && calc();
-    for (var _ = 0, n = 0; n <= 29; n++)
+    for (var _ = 0, n = 0; n <= 30; n++)
         if (0 != n_B_debuf[n]) {
             _ = 1;
             break
@@ -5150,6 +5150,7 @@ function ClickB_Enemy(enemyID) {
             n_B_debuf[27] = 1 * c.B_debuf27.value,
             n_B_debuf[28] = 1 * c.B_debuf28.value,
             n_B_debuf[29] = 1 * c.B_debuf29.checked,
+            n_B_debuf[30] = 1 * c.B_debuf30.checked,
             0 == PvP && (n_B_debuf[13] = c.B_debuf13.checked,
                 n_B_debuf[14] = c.B_debuf14.checked,
                 n_B_debuf[15] = c.B_debuf15.checked,
@@ -5911,7 +5912,7 @@ function tPlusDamCut(e) {
         5 == n_B[19] && (e = 1, 122 == n_A_ActiveSkill && (e = 0)), // assump
         e = Math.floor(e * (100 - NotesCalc(n_B[0], 4)) / 100),
         SkillSearch(855) && (e += e * SkillSearch(855) / 100),
-        590 == n_A_ActiveSkill && (1 == n_B[2] || 6 == n_B[2]) && (n_B[1].includes("[MVP]") ? (e += e * 100 / 100) : e += e * 20 / 100),
+        590 == n_A_ActiveSkill && (1 == n_B[2] || 6 == n_B[2]) && (n_B[1].includes("[MVP]") ? (e += e * (n_B_debuf[30] ? 200 : 100) / 100) : e += e * 20 / 100),
         SkillSearch(851) && n_A_ActiveSkill != 0 && (e += e * 65 / 100),
         e
 }

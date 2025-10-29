@@ -40,10 +40,8 @@ function StCalc2(_) {
 }
 function SuperNoviceFullWeapon(_) {
     1 == _ ? (SuperNoviceFullWeaponCHECK = 1,
-        m_JobASPD[20][7] = 1.6,
-        m_JobASPD_R[20][7] = 146) : (SuperNoviceFullWeaponCHECK = 0,
-            m_JobASPD[20][7] = 0,
-            m_JobASPD_R[20][7] = 0);
+        m_JobASPD[20][7] = 1.6) : (SuperNoviceFullWeaponCHECK = 0,
+            m_JobASPD[20][7] = 0);
     var n = n_A_WeaponTypesArray.length;
     for (i = 0; i < n; i++)
         n_A_WeaponTypesArray[0] = null;
@@ -1252,7 +1250,7 @@ function StAllCalc() {
     // weapon delay
     1 == n_Nitou ? 0 == n_A_WeaponType && 0 != n_A_Weapon2Type ? WD = 50 * m_JobASPD[n_A_JOB][n_A_Weapon2Type] : WD = 35 * (m_JobASPD[n_A_JOB][n_A_WeaponType] + m_JobASPD[n_A_JOB][n_A_Weapon2Type]) : WD = 50 * m_JobASPD[n_A_JOB][n_A_WeaponType],
     // aspd calculation
-    n_A_ASPD = (2000 - Math.floor(((WD - (Math.round(WD * n_A_AGI / 25) + Math.round(WD * n_A_DEX / 100)) / 10) * (1 - M / 100))*10))/10;
+    n_A_ASPD = (2000 - Math.floor(((WD - (Math.floor(WD * n_A_AGI / 25) + Math.floor(WD * n_A_DEX / 100)) / 10) * (1 - M / 100))*10))/10;
     totalASPDPercentage = M;
     var M = 0;
     M += EquipNumSearch(1696),
@@ -1965,7 +1963,7 @@ function WeaponSet(_) {
     var n = 1 * c.restrict_lvlequip.checked
         , a = 0;
     for (k = 1; k <= 21; k++) {
-        if (0 != (renewal ? m_JobASPD_R[_][k] : m_JobASPD[_][k])) {
+        if (0 != m_JobASPD[_][k]) {
             var e = document.createElement("OPTGROUP");
             for (e.label = WeaponName[k],
                 c.A_weapon1.appendChild(e),
@@ -2011,7 +2009,7 @@ function WeaponSetLeft(_) {
         n_Nitou = 0;
     var a = 0;
     for (k = 1; k <= 6; k++) {
-        if (0 != (renewal ? m_JobASPD_R[_][k] : m_JobASPD[_][k])) {
+        if (0 != m_JobASPD[_][k]) {
             var e = document.createElement("OPTGROUP");
             for (e.label = WeaponName[k],
                 c.A_weapon2.appendChild(e),
@@ -3714,7 +3712,7 @@ function LoadLocal() {
             c.B_AtkRange.value = 0,
             Bskill(),
             c.B_AtkSkill.value = 0,
-            n = 0; n <= 29; n++)
+            n = 0; n <= 30; n++)
             n_B_debuf[n] = 0;
         for (n_debufSW = 0,
             n = 0; n <= 14; n++)
@@ -4342,7 +4340,7 @@ function URLIN() {
             n_B_manual[r] = 0;
         for (r = 0; r <= 3; r++)
             n_A_debuf[r] = 0;
-        for (r = 0; r <= 29; r++)
+        for (r = 0; r <= 30; r++)
             n_B_debuf[r] = 0;
         for (r = 0; r <= 14; r++)
             n_B_buf[r] = 0;
@@ -5134,7 +5132,7 @@ for (n_A_debuf = new Array,
     i = 0; i <= 3; i++)
     n_A_debuf[i] = 0;
 for (n_B_debuf = new Array,
-    i = 0; i <= 29; i++)
+    i = 0; i <= 30; i++)
     n_B_debuf[i] = 0;
 for (n_B_buf = new Array,
     i = 0; i <= 14; i++)
