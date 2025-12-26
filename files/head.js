@@ -44,7 +44,7 @@ str_bSUBname = "",
 for (var i = 0; i <= 450; i++)
     n_tok[i] = 0;
 n_M_debuff = new Array;
-for (var i = 0; i <= 4; i++)
+for (var i = 0; i <= 9999; i++)
     n_M_debuff[i] = 0;
 var first_check = 0;
 n_B = new Array,
@@ -864,6 +864,9 @@ function BattleCalc999() {
             weightModifier = 1.25 - .25 * n_B[4],
             w_DMG[2] = Math.floor(w_DMG[2] * weightModifier),
             w_DMG[2] += Math.floor(w_DMG[2] * 6 / 100), // 6% dmg increase
+            // defense reduction from "himmel"
+            n_M_debuff[5] == 1 && (w_DMG[2] = Math.floor(w_DMG[2] * defReduction(n_B[14])) - n_B_DEF2[2]),
+            w_DMG[2] < 0 && (w_DMG[2] = 0),
             w_DMG[2] += n_A_WeaponLV_refineATK,
             w_DMG[2] = w_DMG[2] * Math.max(0, element[n_B[3]][n_A_Weapon_element]),
             w_DMG[2] = ApplyModifiers(w_DMG[2]),
@@ -1017,6 +1020,8 @@ function BattleCalc999() {
             n_PerHIT_DMG = 0,
             n_A_Weapon_element = 0,
             w_DMG[2] = Math.floor(.09 * n_A_MaxHP * (.9 + .1 * n_A_ActiveSkillLV)),
+            // himmel ignore ignoredef
+            n_M_debuff[5] == 1 && (w_DMG[2] = Math.floor(w_DMG[2] * defReduction(n_B[14])) - n_B_DEF2[2]),
             w_DMG[2] = ApplyModifiers(w_DMG[2]),
             w_DMG[2] = Math.floor(w_DMG[2] * element[n_B[3]][0]),
             w_DMG[0] = w_DMG[1] = w_DMG[2];
@@ -1037,7 +1042,8 @@ function BattleCalc999() {
             work_B_DEF2[1] = n_B_DEF2[1],
             work_B_DEF2[2] = n_B_DEF2[0];
             for (s = 0; s <= 2; s++)
-                w_DMG[s] = Math.floor(Math.floor(BK_n_A_DMG[s] * wMod) * (work_B_DEF2[s] + n_B[14]) / 50),
+                w_DMG[s] = Math.floor(BK_n_A_DMG[s] * wMod),
+                n_M_debuff[7] == 1 ? (w_DMG[s] = Math.floor(w_DMG[s] * defReduction(n_B[14])) - n_B_DEF2[2 - s]) : (w_DMG[s] = w_DMG[s] * (work_B_DEF2[s] + n_B[14]) / 50),
                 w_DMG[s] = ApplyModifiers(w_DMG[s]),
                 w_DMG[s] = Math.floor(w_DMG[s] * element[n_B[3]][0]),
                 Last_DMG_A[s] = Last_DMG_B[s] = w_DMG[s] + EDP_DMG(s),
@@ -1062,7 +1068,8 @@ function BattleCalc999() {
             work_B_DEF2[1] = n_B_DEF2[1],
             work_B_DEF2[2] = n_B_DEF2[0];
             for (s = 0; s <= 2; s++)
-                w_DMG[s] = Math.floor(Math.floor(BK_n_A_DMG[s] * wMod) * (work_B_DEF2[s] + n_B[14]) / 50),
+                w_DMG[s] = Math.floor(BK_n_A_DMG[s] * wMod),
+                n_M_debuff[7] == 1 ? (w_DMG[s] = Math.floor(w_DMG[s] * defReduction(n_B[14])) - n_B_DEF2[2 - s]) : (w_DMG[s] = w_DMG[s] * (work_B_DEF2[s] + n_B[14]) / 50),
                 w_DMG[s] = ApplyModifiers(w_DMG[s]),
                 w_DMG[s] = Math.floor(w_DMG[s] * element[n_B[3]][n_A_Weapon_element]),
                 Last_DMG_A[s] = Last_DMG_B[s] = w_DMG[s] + EDP_DMG(s),
@@ -1079,12 +1086,12 @@ function BattleCalc999() {
             wASYU = 250 + 150 * n_A_ActiveSkillLV;
             for (s = 0; s <= 2; s++)
                 w_DMG[s] = BK_n_A_DMG[s],
-                //1 == n_A_Buf2[19] && (w_DMG[s] *= 2), removed 2x damage from 100% ATK Gospel buff
                 w_DMG[s] = Math.floor(w_DMG[s] * wMod) + wASYU,
+                // himmel ignore ignoredef
+                n_M_debuff[5] == 1 && (w_DMG[s] = Math.floor(w_DMG[s] * defReduction(n_B[14])) - n_B_DEF2[2 - s]),
                 w_DMG[s] = ApplyModifiers(w_DMG[s]),
                 w_DMG[s] = Math.floor(w_DMG[s] * element[n_B[3]][0]),
                 (n_A_Buf6[5] ? w_DMG[s] += Math.floor((.02 + .03 * n_A_Buf6[5]) * w_DMG[s]) : n_A_Buf7[31] && (w_DMG[s] += Math.floor(.05 * w_DMG[s]))),
-                    //1 == n_A_Buf2[19] && (w_DMG[s] = 2 * w_DMG[s])), - Removed 2x damage from 100% ATK Gospel buff
                 Last_DMG_A[s] = Last_DMG_B[s] = w_DMG[s] + EDP_DMG(s),
                 InnStr[s] += Last_DMG_A[s];
             EDPplus(1),
@@ -1346,8 +1353,7 @@ function BattleCalc999() {
             1 * c.A_Weapon_element.value != 0 && (n_A_Weapon_element = 1 * c.A_Weapon_element.value),
             wCast = 1.5 * n_A_CAST,
             n_Delay[2] = 2,
-            n_Delay[3] = 0.4,
-            wMod = (200 + 100 * n_A_ActiveSkillLV) / 100,
+            wMod = (100 + 65 * n_A_ActiveSkillLV) / 100,
             n_A_Buf2[8] && (wMod += 0.05),
             wMod2 = 300 / 100;
             for (s = 0; s <= 2; s++)
@@ -1412,6 +1418,7 @@ function BattleCalc999() {
             n_A_Buf2[8] && (wMod += 0.05);
             for (s = 0; s <= 2; s++)
                 w_DMG[s] = BK_n_A_DMG[s] * wMod,
+                n_M_debuff[5] == 1 && (w_DMG[s] = Math.floor(w_DMG[s] * defReduction(n_B[14])) - n_B_DEF2[2 - s]),
                 w_DMG[s] = ApplyModifiers(w_DMG[s]),
                 w_DMG[s] = Math.floor(w_DMG[s] / 5),
                 Last_DMG_B[s] = w_DMG[s] * 5,
@@ -1862,40 +1869,6 @@ function SanctuaryCalc(e, _) {
     wSanctuary
 }
 function BattleCalc998() {
-    // melee = n_rangedAtk = 0
-    // ranged = n_rangedAtk = 1
-    // magic = n_rangedAtk = 2
-
-    // schmidt / root dmg reduction
-    /* if(n_M_debuff[4] > 0){
-        for(var s = 0; s < 3; s++){
-            matchedNums = InnStr[s].match(/(?:[0-9.]+)+/g);
-            if(matchedNums[0] != 0){
-                if(InnStr[s].includes("hits")){
-                    w_DMG[s] = Math.floor(w_DMG[s] * (100 - n_M_debuff[4]) / 100);
-                    w_DMG[s] = w_DMG[s] < 1 ? 1 : w_DMG[s];
-                    InnStr[s] = Math.floor(matchedNums[0] * ((100 - n_M_debuff[4]) / 100));
-                    if(matchedNums.length > 1){
-                        dmgPerHit = Math.floor(matchedNums[1] * ((100 - n_M_debuff[4]) / 100));
-                        fullDmg = Math.floor(dmgPerHit * matchedNums[2]); 
-                        InnStr[s] = fullDmg + " (" + dmgPerHit + " x " + matchedNums[2] + " hits)";
-                    }
-                }else{
-                    // dual dagger / katar autoattack
-                    w_DMG[s] = Math.floor(w_DMG[s] * (100 - n_M_debuff[4]) / 100);
-                    w_DMG[s] = w_DMG[s] < 1 ? 1 : w_DMG[s];
-                    InnStr[s] = Math.floor(matchedNums[0] * ((100 - n_M_debuff[4]) / 100));
-                    if(matchedNums.length > 1){
-                        dmgHit1 = Math.floor(matchedNums[1] * ((100 - n_M_debuff[4]) / 100));
-                        dmgHit2 = Math.floor(matchedNums[2] * ((100 - n_M_debuff[4]) / 100));
-                        fullDmg = Math.floor(dmgHit1 + dmgHit2); 
-                        InnStr[s] = fullDmg + " (" + dmgHit1 + "+" + dmgHit2 + ")";
-                    }
-                }
-            }
-        }
-    } */
-
     if (n_A_ActiveSkill != 0 && n_A_ActiveSkill != 272 && n_A_ActiveSkill != 401 && n_A_ActiveSkill != 430 && n_A_ActiveSkill != 847 && n_A_ActiveSkill != 197 && n_A_ActiveSkill != 321 && n_A_Buf3[47]){
         for (myInnerHtml("CRIATKname", "[SR] Critical damage (Critical rate)", 0),
             myInnerHtml("bSUB3name", "", 0),
@@ -5234,11 +5207,7 @@ function ClickB_Enemy(enemyID) {
     0 == n_B[19] && (l += n_tok[291]),
     1 == n_B[19] && (l += n_tok[292]),
     l += n_tok[300 + n_B[2]],
-        /* SRV ? (0 == n_B[19] && (l += n_tok[291]),
-            1 == n_B[19] && (l += n_tok[292]),
-            l += n_tok[300 + n_B[2]],
-            324 != n_A_ActiveSkill && 159 != n_A_ActiveSkill && 384 != n_A_ActiveSkill && 162 != n_A_ActiveSkill && 193 != n_A_ActiveSkill && 405 != n_A_ActiveSkill && 438 != n_A_ActiveSkill || (l = 0)) : (l += n_tok[300 + n_B[2]],
-                324 != n_A_ActiveSkill && 159 != n_A_ActiveSkill && 384 != n_A_ActiveSkill && 162 != n_A_ActiveSkill && 193 != n_A_ActiveSkill && 405 != n_A_ActiveSkill && 438 != n_A_ActiveSkill || (l = 0)), */
+    n_M_debuff[5] == 1 && (l = 0),
     l && (l < 0 && (l = 0), n_B[14] -= Math.floor(n_B[14] * l / 100)),
     l && (l < 0 && (l = 0), n_B[23] -= Math.floor(n_B[23] * l / 100)),
     l && (l < 0 && (l = 0), n_B[24] -= Math.floor(n_B[24] * l / 100)),
@@ -5261,7 +5230,10 @@ function ClickB_Enemy(enemyID) {
     l = 0;
     if (l += n_tok[295],
         l += n_B[3] < 5 ? n_tok[360] : n_tok[360 + Math.floor(Math.abs(n_B[3]) / (10 ** (String(n_B[3]).length - 1)))], // pierce mdef on element
-        (l += n_tok[310 + n_B[2]]) && (l < 0 && (l = 0), n_B[15] -= Math.floor(n_B[15] * l / 100)), // pierce mdef on race
+        l += n_tok[310 + n_B[2]], // pierce mdef on race
+        n_M_debuff[6] == 1 && (l = 0),
+        l < 0 && (l = 0),
+        n_B[15] -= Math.floor(n_B[15] * l / 100),
         0 == n_B[19] && n_B_debuf[4] && n_B[3] < 90 && (n_B[15] += Math.floor(25 * n_B[15] / 100)),
         0 == n_B[19] && n_B_debuf[9] && n_B[3] < 90 && (n_B[15] += Math.floor(25 * n_B[15] / 100)),
         0 == n_B[19] && n_B_debuf[18] && n_B[3] < 90 && (n_B[25] -= Math.floor(n_B[25] * (12 * n_B_debuf[18]) / 100)),
@@ -5785,10 +5757,30 @@ function SkillSearch(e) {
     return 0
 }
 function BattleCalc4(e, _, n) {
-    return n = 0 == n ? n_A_WeaponLV_refineATK : n_A_Weapon2LV_refineATK,
-        275 == n_A_ActiveSkill ? Math.floor(e * defReduction(n_B[14])) - n_B_DEF2[_] + n : 432 == n_A_ActiveSkill || n_tok[180 + n_B[2]] >= 1 || n_tok[22] >= 1 && 0 == n_B[19] || n_tok[22] >= 10 || SkillSearch(364) ? e + n : (0 == n_tok[23] ? e = Math.floor(e * defReduction(n_B[14])) - n_B_DEF2[_] + n : 1 * c.server.value < 50 ? e = 0 == _ ? Math.floor(e * (n_B_DEF2[2] + n_B[14]) / 100) + n : 1 == _ ? Math.floor(e * (n_B_DEF2[1] + n_B[14]) / 100) + n : Math.floor(e * (n_B_DEF2[0] + n_B[14]) / 100) + n : e += n,
-            e < 1 && (e = 1),
-            e)
+    n = (n == 0) ? n_A_WeaponLV_refineATK : n_A_Weapon2LV_refineATK;
+
+    if(275 == n_A_ActiveSkill || n_M_debuff[5] == 1) {
+        e = Math.floor(e * defReduction(n_B[14])) - n_B_DEF2[_] + n;
+        e < 1 && (e = 1);
+        return e;
+    }
+
+    if(432 == n_A_ActiveSkill || n_tok[180 + n_B[2]] >= 1 ||
+        (n_tok[22] >= 1 && 0 == n_B[19]) ||
+        n_tok[22] >= 10 || SkillSearch(364)
+    ) {
+        return e + n;
+    }
+
+    if(0 == n_tok[23] || 1 == n_M_debuff[7]) { // ice pick effect
+        e = Math.floor(e * defReduction(n_B[14])) - n_B_DEF2[_] + n;
+    }else{
+        if(0 <= _ && _ <= 2)
+            e = Math.floor(e * (n_B_DEF2[2 - _] + n_B[14]) / 100) + n;
+    }
+
+    if(e < 1) e = 1;
+    return e;
 }
 function BattleCalcEDP(e, _) {
     if (e <= 0)

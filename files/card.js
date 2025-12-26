@@ -1472,6 +1472,12 @@ function Notes_Setumei(nC1, nC2){
 		NotesStr += '<tr><td class="left">• Teleports when hit by any AOE skill</td></tr>'
 	if (nC1 == 4)
 		NotesStr += '<tr><td class="left">• Takes ' + nC2 + '% reduced damage</td></tr>'
+	if(nC1 == 5)
+		NotesStr += '<tr><td class="left">• Ignores DEF ignore and pierce</td></tr>'
+	if(nC1 == 6)
+		NotesStr += '<tr><td class="left">• Ignores MDEF ignore and pierce</td></tr>'
+	if(nC1 == 7)
+		NotesStr += '<tr><td class="left">• Ignores Ice Pick effect</td></tr>'
 	if (5000 <= nC1 && nC1 <= 6999)
 		NotesStr += '<tr><td class="left">• Receives -' + nC2 + '% damage from [' + skillName(m_Skill[nC1 - 5000][0], SRV) + ']</td></tr>'
 	return NotesStr;
