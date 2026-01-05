@@ -871,7 +871,6 @@ function StAllCalc() {
             n_A_VITDEF[_] -= Math.floor(n_A_VITDEF[_] * (1 * c.B_num.value - 1) * 5 / 100);
     n_A_MDEF = n_tok[19] + n_A_Buf9[35], // flat mdef
     3 == n_A_JobClass() && (n_A_MDEF += CardNumSearch(383)),
-    n_A_Buf7[33] && (n_A_MDEF += 3),
     213 == n_A_card[9] && (n_A_MDEF += 5),
     213 == n_A_card[16] && (n_A_MDEF += 5),
     213 == n_A_card[17] && (n_A_MDEF += 5),

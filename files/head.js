@@ -2528,7 +2528,10 @@ function BattleHiDam() {
     if (SkillSearch(852) == 2 && n_A_ActiveSkill == 430)
         for (i = 0; i <= 6; i++)
             w_HiDam[i] = Math.floor(w_HiDam[i] * 0.1);
-    if (n_A_Buf7[32])
+    if (n_A_Buf7[32] && n_B_rangedMAtk == 0)
+        for(i = 0; i <= 6; i++)
+            w_HiDam[i] = Math.floor(w_HiDam[i] * 0.97);
+    if (n_A_Buf7[33] && n_B_rangedMAtk == 1)
         for(i = 0; i <= 6; i++)
             w_HiDam[i] = Math.floor(w_HiDam[i] * 0.97);
     if (w_HiDam[0] = Math.floor(w_HiDam[0]),
@@ -4208,8 +4211,8 @@ function Buf7SW(e) {
             myInnerHtml("EN715", '<input type="checkbox" name="A7_Skill26" onClick="A7(1)">Guarana Candy (Concentration Potion, AGI Lvl 5)', 0),
             myInnerHtml("EN716", '<input type="checkbox" name="A7_Skill16" onClick="A7(1)">Buche de Noel (HIT +3%, CRIT +7, MaxHP&SP +3%)', 0),
             myInnerHtml("EN717", '<input type="checkbox" name="A7_Skill31" onClick="A7(1)">Aloevera (Self Provoke Lvl 1)', 0),
-            myInnerHtml("EN718", '<input type="checkbox" name="A7_Skill32" onClick="A7(1)">Small/Big Defense Potion (DMG reduction +3%)', 0),
-            myInnerHtml("EN719", '<input type="checkbox" name="A7_Skill33" onClick="A7(1)">Small/Big Magic Defense Potion (MDEF +3)', 0),
+            myInnerHtml("EN718", '<input type="checkbox" name="A7_Skill32" onClick="A7(1)">Small/Big Defense Potion (Physical DMG reduction +3%)', 0),
+            myInnerHtml("EN719", '<input type="checkbox" name="A7_Skill33" onClick="A7(1)">Small/Big Magic Defense Potion (Magical DMG reduction +3%)', 0),
             myInnerHtml("EN720", '<input type="checkbox" name="A7_Skill34" onClick="A7(1)">Box of Gloom (' + skillName(42, c.server.value) + " Lvl 1)", 0),
             myInnerHtml("EN721", '<input type="checkbox" name="A7_Skill36" onClick="A7(1)">Abrasive (CRIT +20)', 0),
             myInnerHtml("EN722", '<select name="A_SpeedPOT" onChange="A7(1)"><option value="0">(no Speed Potion)</option></select>', 0),
