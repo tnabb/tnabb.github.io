@@ -2528,6 +2528,9 @@ function BattleHiDam() {
     if (SkillSearch(852) == 2 && n_A_ActiveSkill == 430)
         for (i = 0; i <= 6; i++)
             w_HiDam[i] = Math.floor(w_HiDam[i] * 0.1);
+    if (n_A_Buf7[32])
+        for(i = 0; i <= 6; i++)
+            w_HiDam[i] = Math.floor(w_HiDam[i] * 0.97);
     if (w_HiDam[0] = Math.floor(w_HiDam[0]),
         w_HiDam[6] = Math.floor(w_HiDam[6]),
         444 == n_B_AtkSkill || 445 == n_B_AtkSkill) {
@@ -4202,13 +4205,13 @@ function Buf7SW(e) {
             myInnerHtml("EN712", '<input type="checkbox" name="A7_Skill12" onClick="A7(1)">Earthproof Potion', 0),
             myInnerHtml("EN713", '<input type="checkbox" name="A7_Skill13" onClick="A7(1)">Fireproof Potion', 0),
             myInnerHtml("EN714", '<input type="checkbox" name="A7_Skill14" onClick="A7(1)">Thunderproof Potion', 0),
-            myInnerHtml("EN715", '<input type="checkbox" name="A7_Skill26" onClick="A7(1)">Guarana Candy (ASPD +10%, AGI Lvl 5)', 0),
+            myInnerHtml("EN715", '<input type="checkbox" name="A7_Skill26" onClick="A7(1)">Guarana Candy (Concentration Potion, AGI Lvl 5)', 0),
             myInnerHtml("EN716", '<input type="checkbox" name="A7_Skill16" onClick="A7(1)">Buche de Noel (HIT +3%, CRIT +7, MaxHP&SP +3%)', 0),
             myInnerHtml("EN717", '<input type="checkbox" name="A7_Skill31" onClick="A7(1)">Aloevera (Self Provoke Lvl 1)', 0),
-            myInnerHtml("EN718", '<input type="checkbox" name="A7_Skill32" onClick="A7(1)">Small/Big Defense Potion (DEF +3)', 0),
+            myInnerHtml("EN718", '<input type="checkbox" name="A7_Skill32" onClick="A7(1)">Small/Big Defense Potion (DMG reduction +3%)', 0),
             myInnerHtml("EN719", '<input type="checkbox" name="A7_Skill33" onClick="A7(1)">Small/Big Magic Defense Potion (MDEF +3)', 0),
             myInnerHtml("EN720", '<input type="checkbox" name="A7_Skill34" onClick="A7(1)">Box of Gloom (' + skillName(42, c.server.value) + " Lvl 1)", 0),
-            myInnerHtml("EN721", '<input type="checkbox" name="A7_Skill36" onClick="A7(1)">Halo-Halo (All Stats +3)', 0),
+            myInnerHtml("EN721", '<input type="checkbox" name="A7_Skill36" onClick="A7(1)">Abrasive (CRIT +20)', 0),
             myInnerHtml("EN722", '<select name="A_SpeedPOT" onChange="A7(1)"><option value="0">(no Speed Potion)</option></select>', 0),
             myInnerHtml("EN723", '<input type="checkbox" name="A7_Skill27" onClick="A7(1)">Military Ration B (HIT +33)', 0),
             myInnerHtml("EN724", '<input type="checkbox" name="A7_Skill28" onClick="A7(1)">Military Ration C (FLEE +33)', 0),
