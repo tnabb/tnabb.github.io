@@ -1242,7 +1242,7 @@ function StAllCalc() {
     SkillSearch(361) && n_A_JobLV >= 50 ? (M += Math.max(p, m) + 3 * SkillSearch(361) + v, b = 1) : M += Math.max(p, m, v),
     // total aspd for skills end here
     totalASPDSkills = M - totalASPDSinxSong - totalASPDItems;
-    3 == n_A_Buf7[35] ? M += 20 : n_A_Buf7[44] || 2 == n_A_Buf7[35] ? M += 15 : (n_A_Buf7[26] || 1 == n_A_Buf7[35]) && (M += 10),
+    4 == n_A_Buf7[35] ? M += 25 : 3 == n_A_Buf7[35] ? M += 20 : n_A_Buf7[44] || 2 == n_A_Buf7[35] ? M += 15 : (n_A_Buf7[26] || 1 == n_A_Buf7[35]) && (M += 10),
     totalASPDETC = M - totalASPDSkills - totalASPDSinxSong - totalASPDItems;
     //total aspd for etc end here
     // end of aspd % additions
