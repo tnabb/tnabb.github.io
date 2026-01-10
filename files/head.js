@@ -2007,22 +2007,22 @@ function BattleCalc998() {
         n_B_debuf[26] && n_B_AtkSkill == 0 && (extraDodge += 35),
         extraBattleDodge > 100 && (extraDodge = 100),
         extraDodge && (o = Math.round(o * (1 - (extraDodge/100))));
-        myInnerHtml("B_Ave2Atk", Math.round(100 * o * BskillHitNum) / 100, 0)
+        myInnerHtml("B_Ave2Atk", (BskillHitNum > 0 ? Math.round(100 * o * BskillHitNum) : Math.round(100 * o)) / 100, 0)
 }
 function BattleHiDam() {
     SRV = 1 * c.server.value;
-    var e = 100
-        , _ = [0, 0, 0]
-        , n = Math.floor(n_B[9] / 7);
+    var e = 100, 
+    _ = [0, 0, 0], 
+    n = Math.floor(n_B[9] / 7);
     _[0] = n_B[9] + n_B_manual[42] + n * n,
-        _[0] += n_B_manual[43] * _[0] / 100,
-        n = Math.floor(n_B[9] / 5),
-        _[2] = n_B[9] + n_B_manual[42] + n * n,
-        _[2] += n_B_manual[43] * _[2] / 100,
-        _[1] = (_[2] + _[0]) / 2;
+    _[0] += n_B_manual[43] * _[0] / 100,
+    n = Math.floor(n_B[9] / 5),
+    _[2] = n_B[9] + n_B_manual[42] + n * n,
+    _[2] += n_B_manual[43] * _[2] / 100,
+    _[1] = (_[2] + _[0]) / 2;
     var l = 0;
     n_B_rangedAtk = 0,
-        n_B_rangedMAtk = 0;
+    n_B_rangedMAtk = 0;
     var t = 0;
     n_B_AtkSkill = c.B_AtkSkill.value;
     var a;
@@ -2067,6 +2067,10 @@ function BattleHiDam() {
                 case 10:
                     e += 1700
             }
+    else if(415 == n_B_AtkSkill) // first wind
+        n_B_rangedMAtk = 1,
+        l = 4,
+        e += 100 * a;
     else if (446 == n_B_AtkSkill || 447 == n_B_AtkSkill)
         e += 100 * a,
             n_B_rangedAtk = n_B_AtkSkill - 446;
@@ -2128,7 +2132,7 @@ function BattleHiDam() {
         n_B_rangedAtk = 1;
     else if (487 == n_B_AtkSkill)
         t = 1,
-            n_B[12] = n_B[13];
+        n_B[12] = n_B[13];
     else if (n_B_AtkSkill >= 490 && n_B_AtkSkill <= 499)
         n_B_rangedAtk = 0,
             l = n_B_AtkSkill - 490,
@@ -2137,11 +2141,52 @@ function BattleHiDam() {
         n_B_rangedAtk = 1,
             l = n_B_AtkSkill - 500,
             e += 100 * a - 100;
-    else if (520 == n_B_AtkSkill)
+    else if (1000 == n_B_AtkSkill) // soul vulcan strike
         n_B_rangedMAtk = 1,
         e += -100 + 300 * a,
         l = 8,
         BskillHitNum = a + 2;
+    else if (1001 == n_B_AtkSkill) // effligo
+        e += -100 + 1650 * a,
+        BskillHitNum = -7;
+    else if(1002 == n_B_AtkSkill) // arbitrium
+        n_B_rangedMAtk = 1,
+        l = 6,
+        e += -100 + 1000 * a;
+    else if(1003 == n_B_AtkSkill) // arbitrium splash
+        n_B_rangedMAtk = 1,
+        l = 6,
+        e += -100 + 1750 * a;
+    else if(1004 == n_B_AtkSkill) // floral flare road
+        n_B_rangedMAtk = 1,
+        l = 3,
+        a == 6 ? e += -100 + 20 : e += -100 + 50 * 740 * A,
+        BskillHitNum = -2;
+    else if(1005 == n_B_AtkSkill) // venom swamp
+        n_B_rangedMAtk = 1,
+        l = 5,
+        e += -100 + 700 + 1100 * a;
+    else if(n_B_AtkSkill >= 525 && n_B_AtkSkill <= 527) // npc_thundercloud + npc_holyjudgement + npc_snowstorm (ground ticking aoes used in ogh church)
+        n_B_rangedMAtk = 1,
+        n_B_AtkSkill == 525 ? l = 4 : n_B_AtkSkill == 526 ? l = 6 : n_B_AtkSkill == 527 && (l = 1),
+        e += -100 + 240;
+    else if(n_B_AtkSkill == 528) // npc thunder storm (large thunder aoe used by root)
+        n_B_rangedMAtk = 1,
+        l = 4,
+        e += 300,
+        a > 10 ? BskillHitNum = a - 10 : BskillHitNum = a;
+    else if(n_B_AtkSkill == 529) // venom fog
+        n_B_rangedMAtk = 1,
+        l = 5;
+    else if(785 == n_B_AtkSkill) // varetyr spear
+        n_B_rangedMAtk = 1,
+        e += -100 + Math.floor((2 * n_B[9] + n_B[9] * a / 2) / 3),
+        l = 4,
+        BskillHitNum = 3;
+    else if(193 == n_B_AtkSkill) // occult impact
+        e += 75 * a;
+    else if(197 == n_B_AtkSkill) // asura strike
+        e += 710;
     else if (6 == n_B_AtkSkill)
         e += 30 * a,
             n_B_HIT *= 1 + .05 * a;
@@ -2318,26 +2363,27 @@ function BattleHiDam() {
     else if (159 != n_B_AtkSkill && 384 != n_B_AtkSkill || 0 != PvP)
         if (259 == n_B_AtkSkill && 0 == PvP)
             BskillHitNum = 5,
-                n_B_rangedAtk = 1,
-                t = 1,
-                e = 30 * a;
+            n_B_rangedAtk = 1,
+            t = 1,
+            e = 30 * a;
         else if (324 == n_B_AtkSkill && 0 == PvP)
             n_B_HIT += 20,
-                BskillHitNum = 5,
-                n_B_rangedAtk = 1,
-                e += 30 * a;
+            BskillHitNum = 5,
+            n_B_rangedAtk = 1,
+            t = 1,
+            e += 30 * a;
         else if (260 == n_B_AtkSkill)
             n_B_rangedAtk = 1,
-                e += 40 * a;
+            e += 40 * a;
         else if (261 == n_B_AtkSkill)
             n_B_rangedAtk = 1,
-                e += 10 * a - 50;
+            e += 10 * a - 50;
         else if (264 == n_B_AtkSkill)
             e += 40 * a - 60;
         else if (277 == n_B_AtkSkill)
             n_B_rangedMAtk = 1,
-                l = 8,
-                BskillHitNum = a;
+            l = 8,
+            BskillHitNum = a;
         else if (288 == n_B_AtkSkill)
             e += 100 * (1 + a);
         else if (289 == n_B_AtkSkill)
@@ -2403,13 +2449,30 @@ function BattleHiDam() {
                 w_HiDam[i] = Math.floor(Math.floor(5 * (n_B[13] * (1 + .3 * a) + bShieldw) * defReduction(n_A_totalDEF) - n_A_VITDEF[Math.floor(i / 2)]) * (1 + .3 * a)) + 5 * n_A_LEFT_REFINE * 2;
             w_HiDam[i] = Math.floor(Math.floor(n_B[13] + bShieldw) * (1 + .3 * n_A_ActiveSkillLV))
         }
-        0 == t && (w_HiDam[0] = w_HiDam[0] * defReduction(n_A_totalDEF) - n_A_VITDEF[2],
+
+        // damage added after ratio but before def reduction
+        if(0 == PvP && (197 == n_B_AtkSkill)){ // asura strike
+            for(i = 0; i <= 6; i++)
+                w_HiDam[i] += 250 + 150 * a;
+        }
+
+        (0 == t && 193 != n_B_AtkSkill) && (w_HiDam[0] = w_HiDam[0] * defReduction(n_A_totalDEF) - n_A_VITDEF[2],
             w_HiDam[1] = w_HiDam[1] * defReduction(n_A_totalDEF) - n_A_VITDEF[2],
             w_HiDam[2] = w_HiDam[2] * defReduction(n_A_totalDEF) - n_A_VITDEF[2],
             w_HiDam[3] = w_HiDam[3] * defReduction(n_A_totalDEF) - n_A_VITDEF[1],
             w_HiDam[4] = w_HiDam[4] * defReduction(n_A_totalDEF) - n_A_VITDEF[0],
             w_HiDam[5] = w_HiDam[5] * defReduction(n_A_totalDEF) - n_A_VITDEF[0],
-            w_HiDam[6] = w_HiDam[6] * defReduction(n_A_totalDEF) - n_A_VITDEF[0])
+            w_HiDam[6] = w_HiDam[6] * defReduction(n_A_totalDEF) - n_A_VITDEF[0]);
+
+        if(0 == PvP && 193 == n_B_AtkSkill){ // occult impact pierce effect
+            w_HiDam[0] = (w_HiDam[0] * (n_A_totalDEF + n_A_VITDEF[2])) / 100,
+            w_HiDam[1] = (w_HiDam[1] * (n_A_totalDEF + n_A_VITDEF[2])) / 100,
+            w_HiDam[2] = (w_HiDam[2] * (n_A_totalDEF + n_A_VITDEF[2])) / 100,
+            w_HiDam[3] = (w_HiDam[3] * (n_A_totalDEF + n_A_VITDEF[1])) / 100,
+            w_HiDam[4] = (w_HiDam[4] * (n_A_totalDEF + n_A_VITDEF[0])) / 100,
+            w_HiDam[5] = (w_HiDam[5] * (n_A_totalDEF + n_A_VITDEF[0])) / 100,
+            w_HiDam[6] = (w_HiDam[6] * (n_A_totalDEF + n_A_VITDEF[0])) / 100;
+        }
     } else
         wBHD = _[2],
             w_HiDam[0] = e / 100 * _[0],
@@ -2502,17 +2565,13 @@ function BattleHiDam() {
         10 == o || 10 != o || 1 == PvP || 158 == n_B_AtkSkill || 484 == n_B_AtkSkill || 10 == SRV) // removed ghostring exception in the beginning (8 != n_A_Bodyelement) &&
         for (i = 0; i <= 6; i++)
             w_HiDam[i] = Math.floor(w_HiDam[i] * wBHD / 100);
-    if (SRV < 50) {
-        if (n_A_Buf2[5])
-            if (c.A8_Skill14.value > 0 || n_A_Buf6[2])
-                for (i = 0; i <= 6; i++)
-                    w_HiDam[i] = Math.floor(2 * w_HiDam[i] / 3);
-            else
-                for (i = 0; i <= 6; i++)
-                    w_HiDam[i] = Math.floor(w_HiDam[i] / 2)
-    } else if (SkillSearch(196))
-        for (i = 0; i <= 6; i++)
-            w_HiDam[i] = Math.floor(10 * w_HiDam[i] / 100);
+    if (n_A_Buf2[5])
+        if (c.A8_Skill14.value > 0 || n_A_Buf6[2])
+            for (i = 0; i <= 6; i++)
+                w_HiDam[i] = Math.floor(2 * w_HiDam[i] / 3);
+        else
+            for (i = 0; i <= 6; i++)
+                w_HiDam[i] = Math.floor(w_HiDam[i] / 2)
     if (n_A_Buf6[16])
         for (i = 0; i <= 6; i++)
             w_HiDam[i] = Math.floor(2 * w_HiDam[i]);
@@ -2541,17 +2600,10 @@ function BattleHiDam() {
         for (i = 0; i <= 6; i++)
             w_HiDam[i] = Math.floor(w_HiDam[i] / A)
     }
-    /* if ((446 == n_B_AtkSkill || 447 == n_B_AtkSkill) && 7 == n_A_Bodyelement) // hells judgement doing 0 dmg to shadow ???
-        for (i = 0; i <= 6; i++)
-            w_HiDam[i] = 0; */
     if (488 == n_B_AtkSkill)
         for (i = 0; i <= 6; i++)
             w_HiDam[i] = Math.floor(a * n_A_MaxHP / 10);
     if (510 == n_B_AtkSkill)
-        /* if (7 == n_A_Bodyelement)
-            for (i = 0; i <= 6; i++)
-                w_HiDam[i] = 0;
-        else */
         for (i = 0; i <= 6; i++)
             w_HiDam[i] = n_A_MaxHP - 1;
     if (489 == n_B_AtkSkill)
@@ -2562,13 +2614,22 @@ function BattleHiDam() {
     if (CardNumSearch(126) && 1 == n_B_rangedMAtk)
         for (i = 0; i <= 6; i++)
             w_HiDam[i] = 0;
+    if(1004 == n_B_AtkSkill && a == 6) // floral flare road maxhp% dmg
+        for(i = 0; i <= 6; i++) 
+            w_HiDam[i] += Math.floor(n_A_MaxHP * 5 / 100);
+    if(529 == n_B_AtkSkill) // venom fog maxhp% dmg
+        for(i = 0; i <= 6; i++)
+            w_HiDam[i] = Math.floor(n_A_MaxHP * 10 / 100);
+    if(324 == n_B_AtkSkill && 0 == PvP) // make shield chain always deal max damage if monster used it
+        for(i = 0; i <= 6; i++)
+            w_HiDam[i] = w_HiDam[6];
     for (myInnerHtml("B_WeaponElement", v_Element[l] + " (" + 100 * element[10 * n_A_Bodyelement + 1][l] + "% vs " + v_Element[n_A_Bodyelement] + "1)", 0),
         wBHD = 0,
         i = 0; i <= 6; i++)
         w_HiDam[i] = Math.floor(w_HiDam[i]),
             w_HiDam[i] = Math.max(0, w_HiDam[i]),
             wBHD += w_HiDam[i];
-    wBHD = Math.round(wBHD / 7);
+    wBHD = Math.round(wBHD / 7); // averages the damage
     if (n_A_Buf2[14]) {
         if ((n_B[20] || n_B_rangedAtk || n_B_rangedMAtk || 2 == c.B_AtkRange.value) && 1 != c.B_AtkRange.value)
             myInnerHtml("aREFLECT1", '<B style="color:blue">(no melee dmg to reflect)</B>', 0);
@@ -2605,9 +2666,14 @@ function BattleHiDam() {
     } else
         myInnerHtml("aREFLECT2", "", 0),
             myInnerHtml("aREFLECT2name", "", 0);
-    return BskillHitNum > 1 ? (myInnerHtml("B_MinAtk", w_HiDam[0] * BskillHitNum + " (" + w_HiDam[0] + " x " + BskillHitNum + " hits)", 0),
+    return BskillHitNum > 1 ? (
+        myInnerHtml("B_MinAtk", w_HiDam[0] * BskillHitNum + " (" + w_HiDam[0] + " x " + BskillHitNum + " hits)", 0),
         myInnerHtml("B_AveAtk", wBHD * BskillHitNum + " (" + wBHD + " x " + BskillHitNum + " hits)", 0),
-        myInnerHtml("B_MaxAtk", w_HiDam[6] * BskillHitNum + " (" + w_HiDam[6] + " x " + BskillHitNum + " hits)", 0)) : (myInnerHtml("B_MinAtk", w_HiDam[0] + "", 0),
+        myInnerHtml("B_MaxAtk", w_HiDam[6] * BskillHitNum + " (" + w_HiDam[6] + " x " + BskillHitNum + " hits)", 0)) : BskillHitNum < 0 ? (
+        myInnerHtml("B_MinAtk", w_HiDam[0] + " (" + Math.floor(w_HiDam[0] / (BskillHitNum * -1)) + " x " + (BskillHitNum * -1) + " hits)", 0),
+        myInnerHtml("B_AveAtk", wBHD + " (" + Math.floor(wBHD / (BskillHitNum * -1)) + " x " + (BskillHitNum * -1) + " hits)", 0),
+        myInnerHtml("B_MaxAtk", w_HiDam[6] + " (" + Math.floor(w_HiDam[6] / (BskillHitNum * -1)) + " x " + (BskillHitNum * -1) + " hits)", 0)) : (
+            myInnerHtml("B_MinAtk", w_HiDam[0] + "", 0),
             myInnerHtml("B_AveAtk", wBHD + "", 0),
             myInnerHtml("B_MaxAtk", w_HiDam[6] + "", 0)),
         wBHD
