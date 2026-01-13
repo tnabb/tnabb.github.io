@@ -1052,6 +1052,7 @@ function StAllCalc() {
         n_A_HEAD_REFINE >= 9 && 1898 == n_A_Equip[2] && (M += 2),
         2147 == n_A_Equip[0] && (M += 2 * n_A_Weapon_refine),
         2152 == n_A_Equip[0] && (M += 4 * n_A_Weapon_refine + 4 * Math.floor(SU_LUK / 10)),
+        2207 == n_A_Equip[0] && (M += Math.floor((SU_LUK * 2) / 10)),
         n_A_CRI += M,
         n_A_Buf3[5] && (n_A_CRI += 10 + n_A_Buf3[5] + Math.floor(n_A_Buf3[35] / 2) + Math.floor(n_A_Buf3[25] / 10)),
         11 == n_A_WeaponType && (n_A_CRI *= 2),
