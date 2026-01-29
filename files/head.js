@@ -74,7 +74,7 @@ v_EnergyCoat = ["0", "6% Reduction", "12% Reduction", "18% Reduction", "24% Redu
 v_Race2 = ["(none)", "Goblin", "Golem", "Guardian", "Kobold", "Orc", "Satan Morroc"],
 v_Type = ["Normal", "Boss"],
 SubName = ["%", " seconds", "Damage", "Critical Damage", "Critical Rate", "Over 10000 hits", "Too high to calculate", "Immesurable", " x ", "Cast Time", "Off", "On"],
-JobName = ["Novice", "Swordman", "Thief", "Acolyte", "Archer", "Magician", "Merchant", "Knight", "Assassin", "Priest", "Hunter", "Wizard", "Blacksmith", "Crusader", "Rogue", "Monk", "Bard", "Dancer", "Sage", "Alchemist", "Super Novice", "Lord Knight", "Assassin Cross", "High Priest", "Sniper", "High Wizard", "Whitesmith", "Paladin", "Stalker", "Champion", "Clown", "Gypsy", "Professor", "Creator", "High Novice", "High Swordman", "High Thief", "High Acolyte", "High Archer", "High Magician", "High Merchant", "Taekwon Kid", "Star Gladiator", "Soul Linker", "Ninja", "Gunslinger", "Night Watch"];
+JobName = ["Novice", "Swordman", "Thief", "Acolyte", "Archer", "Magician", "Merchant", "Knight", "Assassin", "Priest", "Hunter", "Wizard", "Blacksmith", "Crusader", "Rogue", "Monk", "Bard", "Dancer", "Sage", "Alchemist", "Super Novice", "Lord Knight", "Assassin Cross", "High Priest", "Sniper", "High Wizard", "Whitesmith", "Paladin", "Stalker", "Champion", "Clown", "Gypsy", "Professor", "Creator", "High Novice", "High Swordman", "High Thief", "High Acolyte", "High Archer", "High Magician", "High Merchant", "Taekwon Kid", "Star Gladiator", "Soul Linker", "Ninja", "Gunslinger", "Night Watch", "High Taekwon Kid", "Soul Ascetic"];
 var All_DMGskill = [0, 6, 7, 17, 19, 40, 41, 44, 46, 47, 51, 52, 53, 54, 55, 56, 57, 65, 66, 70, 71, 72, 73, 76, 83, 84, 88, 97, 102, 104, 106, 111, 112, 113, 118, 122, 124, 125, 126, 127, 128, 130, 131, 132, 133, 158, 159, 161, 162, 167, 169, 171, 188, 189, 192, 193, 197, 199, 207, 244, 248, 259, 260, 261, 263, 264, 271, 272, 275, 277, 324, 325, 391, 326, 328, 321, 382, 339, 331, 333, 335, 337, 317, 318, 373, 374, 375, 407, 408, 409, 410, 412, 413, 414, 415, 397, 398, 399, 400, 401, 405, 434, 438, 417, 418, 419, 423, 424, 474, 489, 302, 611, 752, 461, 463, 465, 466, 469, 510, 443, 473, 847, 848, 849, 850, 853, 854, 606, 513, 514, 515, 516];
 
 function cap_value(a, min, max){
@@ -83,7 +83,7 @@ function cap_value(a, min, max){
 
 function servers() {
     for (c.A_JOB.length = new Option(JobName[i], i),
-        i = 0; i <= 46; i++)
+        i = 0; i <= 48; i++)
         c.A_JOB.options[i] = new Option(JobName[i], i);
     for (c.A_Weapon_refine.length = 0,
         n_Nitou && (c.A_Weapon2_refine.length = 0),
@@ -2774,131 +2774,235 @@ function BattleMagicCalc(e) {
     wBMC2 = tPlusDamCut(wBMC2);
     return Math.floor(wBMC2);
 }
-function ClickJob(e) {
-    SRV = 1 * c.server.value,
-    myInnerHtml("A_KakutyouSel", "", 0),
-    myInnerHtml("A_KakutyouData", "", 0),
-    c.A_Kakutyou.value = 0,
-    n_A_JobSet(),
-    e = n_A_JOB;
-    for (var _ = 1; _ <= 99; _++)
-        c.A_BaseLV.options[_ - 1] = new Option(_, _),
-        c.A_STR.options[_ - 1] = new Option(_, _),
-        c.A_AGI.options[_ - 1] = new Option(_, _),
-        c.A_VIT.options[_ - 1] = new Option(_, _),
-        c.A_INT.options[_ - 1] = new Option(_, _),
-        c.A_DEX.options[_ - 1] = new Option(_, _),
-        c.A_LUK.options[_ - 1] = new Option(_, _);
-    var n = c.A_JobLV.length;
-    for (_ = 0; _ < n; _++)
+
+function ClickJob(jobId) {
+    SRV = Number(c.server.value);
+    myInnerHtml("A_KakutyouSel", "", 0);
+    myInnerHtml("A_KakutyouData", "", 0);
+    c.A_Kakutyou.value = 0;
+    n_A_JobSet();
+    jobId = n_A_JOB;
+
+    for(let i = 1; i <= 99; i++) {
+        c.A_BaseLV.options[i - 1] = new Option(i, i);
+        c.A_STR.options[i - 1] = new Option(i, i);
+        c.A_AGI.options[i - 1] = new Option(i, i);
+        c.A_VIT.options[i - 1] = new Option(i, i);
+        c.A_INT.options[i - 1] = new Option(i, i);
+        c.A_DEX.options[i - 1] = new Option(i, i);
+        c.A_LUK.options[i - 1] = new Option(i, i);
+    }
+
+    const jobLvCount = c.A_JobLV.length;
+    for(let i = 0; i < jobLvCount; i++) {
         c.A_JobLV.options[0] = null;
-    var l = 0;
-    for (l = 0 == e ? 10 : e <= 19 || 41 <= e && e <= 43 ? 50 : 20 == e ? 99 : 46 == e ? 85 : e > 46 ? 60 : 70,
-        _ = 1; _ <= l; _++)
-        c.A_JobLV.options[_ - 1] = new Option(_, _);
-    for (n_SkillSW && (45 == n_A_JobClass() ? (myInnerHtml("AS12_1", "<S># of Spirit Spheres</S>", 0),
-        c.A2_Skill12.disabled = !0,
-        c.A2_Skill12.value = 0,
-        n_A_Buf2[12] = 0) : (myInnerHtml("AS12_1", "# of Spirit Spheres", 0),
-            c.A2_Skill12.disabled = !1),
-        13 == n_A_JOB || 27 == n_A_JOB ? (myInnerHtml("AS11_1", "<S>" + skillName(164, SRV) + "</S>", 0),
-            document.getElementById("AS11_1").style.textDecoration = "line-through",
-            c.A2_Skill11.disabled = !0,
-            c.A2_Skill11.value = 0,
-            n_A_Buf2[11] = 0) : (myInnerHtml("AS11_1", skillName(164, SRV), 0),
-                document.getElementById("AS11_1").style.textDecoration = "",
-                c.A2_Skill11.disabled = !1)),
-        n_Skill7SW && (3 != n_A_JOB && 9 != n_A_JobClass2() && 16 != n_A_JobClass2() ? c.A_SpeedPOT.options[2] = new Option(SpeedPotName[2], 2) : c.A_SpeedPOT.options[2] = new Option("-", 0),
-            1 == n_A_JobClass() || 6 == n_A_JobClass() || 41 == n_A_JobClass() || 14 == n_A_JobClass2() || 11 == n_A_JobClass2() || 5 == n_A_JOB || 45 == n_A_JobClass() ? (c.A_SpeedPOT.options[3] = new Option(SpeedPotName[3] + " (Lvl 85)", 3), c.A_SpeedPOT.options.length = 4) : 22 == n_A_JOB ? (c.A_SpeedPOT.options[3] = new Option("* Special (" + m_Skill[304][2] + " Lvl 85)", 3), c.A_SpeedPOT.options[4] = new Option("Poison Bottle", 4), c.A_SpeedPOT.options.length = 5) : (c.A_SpeedPOT.options[3] = new Option("* Special (" + m_Skill[304][2] + ") (Lvl 85)", 3), c.A_SpeedPOT.options.length = 4)),
-        20 != n_A_JOB && (SuperNoviceFullWeaponCHECK = 0),
-        SuperNoviceFullWeaponCHECK ? (m_JobASPD[20][7] = 1.6) : (m_JobASPD[20][7] = 0),
-        0 == SRV && 8 == n_A_JobClass2() && 1 == n_Nitou && (n_Nitou = 0,
-            ClickWeaponType2(0)),
-        WeaponSet(e),
-        _ = 0; _ <= 14; _++)
-        385 == m_JobBuff[e][_] ? (myInnerHtml("P_Skill" + _, m_Skill[m_JobBuff[e][_]][2], 0),
-            myInnerHtml("P_Skill" + _ + "s", "<select name=A_skill" + _ + " id=A_skill" + _ + ' onChange="StAllCalc() | WeaponSet(20) | restrictCardslot(1)"></select>', 0)) : 392 == m_JobBuff[e][_] ? (myInnerHtml("P_Skill" + _, skillName(m_Skill[m_JobBuff[e][_]][0], SRV), 0),
-                myInnerHtml("P_Skill" + _ + "s", "<select name=A_skill" + _ + " id=A_skill" + _ + ' onChange="StAllCalc()" style="width:70px;"></select>', 0),
-                0 == n_Reborn && myInnerHtml("P_Skill" + _, "", 0)) : 441 == m_JobBuff[e][_] ? (myInnerHtml("P_Skill" + _, m_Skill[m_JobBuff[e][_]][2], 0),
-                    myInnerHtml("P_Skill" + _ + "s", "<select name=A_skill" + _ + " id=A_skill" + _ + ' onChange="StAllCalc() | ClickActiveSkill2() | calc()"></select>', 0),
-                    0 == n_Reborn && myInnerHtml("P_Skill" + _, "", 0)) : 999 != m_JobBuff[e][_] ? (myInnerHtml("P_Skill" + _, skillName(m_Skill[m_JobBuff[e][_]][0], SRV), 0),
-                        myInnerHtml("P_Skill" + _ + "s", "<select name=A_skill" + _ + " id=A_skill" + _ + " onChange=StAllCalc()></select>", 0)) : (myInnerHtml("P_Skill" + _, "", 0),
-                            myInnerHtml("P_Skill" + _ + "s", "", 0));
-    for (var i = 0; i <= 14; i++) {
-        l = m_JobBuff[e][i];
-        if (NumSearch(l, [12, 68, 152, 253, 258, 301, 309, 310, 322, 345, 364, 365, 379, 383, 385, 386, 390, 420, 421, 422, 846]))
-            (t = document.getElementById("A_skill" + i)).options[0] = new Option("off", 0),
-                t.options[1] = new Option("on", 1);
-        else if (851 == l)
-            (t = document.getElementById("A_skill" + i)).options[0] = new Option("off", 0),
-                t.options[1] = new Option("Revolver", 1),
-                t.options[2] = new Option("Shotgun", 2),
-                t.options[3] = new Option("Gatling Gun", 3),
-                t.options[4] = new Option("Rifle", 4),
-                t.options[5] = new Option("Grenade Launcher", 5);
-        else if (852 == l)
-            (t = document.getElementById("A_skill" + i)).options[0] = new Option("off", 0),
-                t.options[1] = new Option("5-9 stacks", 1),
-                t.options[2] = new Option("10 stacks", 2);
-        else if (999 != l) {
-            var t = document.getElementById("A_skill" + i);
-            for (_ = 10; _ >= 0; _--)
-                t.options[_] = null;
-            for (_ = 0; _ <= m_Skill[m_JobBuff[e][i]][1]; _++)
-                t.options[_] = new Option(_, _);
-            if (392 == m_Skill[m_JobBuff[e][i]][0]) {
-                for (n_ECname = ["off", "eAthena (max stats)", "iRO", "Original"],
-                    _ = 0; _ <= 3; _++)
-                    t.options[_] = new Option(n_ECname[_], _);
-                0 == n_Reborn && (t.style.visibility = "hidden")
+    }
+
+    let maxJobLevel;
+    if(jobId === JOB.NOVICE) {
+        maxJobLevel = 10;
+    } else if (jobId <= JOB.ALCHEMIST || (jobId >= JOB.TAEKWON && jobId <= JOB.SOUL_LINKER)) {
+        maxJobLevel = 50;
+    } else if (jobId == JOB.SUPERNOVICE) {
+        maxJobLevel = 99;
+    } else if (jobId == JOB.NIGHT_WATCH) {
+        maxJobLevel = 85;
+    } else {
+        maxJobLevel = 70;
+    }
+
+    for(let i = 1; i <= maxJobLevel; i++) {
+        c.A_JobLV.options[i - 1] = new Option(i, i);
+    }
+
+    if(n_SkillSW) {
+        const jobClass = n_A_JobClass();
+
+        // spirit spheres
+        if (jobClass === JOB.GUNSLINGER) {
+            myInnerHtml("AS12_1", "<S># of Spirit Spheres</S>", 0);
+            c.A2_Skill12.disabled = true;
+            c.A2_Skill12.value = 0;
+            n_A_Buf2[12] = 0;
+        } else {
+            myInnerHtml("AS12_1", "# of Spirit Spheres", 0);
+            c.A2_Skill12.disabled = false;
+        }
+
+        // providence
+        if(jobId == JOB.CRUSADER || jobId == JOB.PALADIN) {
+            myInnerHtml("AS11_1", "<S>" + skillName(164, SRV) + "</S>", 0);
+            document.getElementById("AS11_1").style.textDecoration = "line-through";
+            c.A2_Skill11.disabled = true;
+            c.A2_Skill11.value = 0;
+            n_A_Buf2[11] = 0;
+        } else {
+            myInnerHtml("AS11_1", skillName(164, SRV), 0);
+            document.getElementById("AS11_1").style.textDecoration = "";
+            c.A2_Skill11.disabled = false;
+        }
+    }
+
+    // aspd pot
+    if(n_Skill7SW) {
+        const jobClass2 = n_A_JobClass2();
+
+        if(jobId != JOB.ACOLYTE && jobClass2 != JOB.PRIEST && jobClass2 != JOB.BARD) {
+            c.A_SpeedPOT.options[2] = new Option(SpeedPotName[2], 2);
+        } else {
+            c.A_SpeedPOT.options[2] = new Option("-", 0);
+        }
+
+        // berserk pots
+        const jobClass1 = n_A_JobClass();
+        if(jobClass1 == JOB.SWORDMAN || jobClass1 == JOB.MERCHANT || jobClass1 == JOB.TAEKWON || jobClass2 == JOB.ROGUE || jobClass2 == JOB.WIZARD || jobId == JOB.MAGICIAN || jobClass1 == JOB.GUNSLINGER) {
+            c.A_SpeedPOT.options[3] = new Option(SpeedPotName[3] + " (Lvl 85)", 3);
+            c.A_SpeedPOT.options.length = 4;
+        } else if (jobId == JOB.ASSASSIN_CROSS) {
+            c.A_SpeedPOT.options[3] = new Option("* Special (" + m_Skill[304][2] + " Lvl 85)", 3);
+            c.A_SpeedPOT.options[4] = new Option("Poison Bottle", 4);
+            c.A_SpeedPOT.options.length = 5;
+        } else {
+            c.A_SpeedPOT.options[3] = new Option("* Special (" + m_Skill[304][2] + ") (Lvl 85)", 3);
+            c.A_SpeedPOT.options.length = 4;
+        }
+    }
+
+    if(jobId != JOB.SUPERNOVICE)
+        SuperNoviceFullWeaponCHECK = 0;
+
+    if(SuperNoviceFullWeaponCHECK) {
+        JOB_BASE_ASPD[JOB.SUPERNOVICE][WEAPON.TWOHANDAXE] = 1.6;
+    } else {
+        delete JOB_BASE_ASPD[JOB.SUPERNOVICE][WEAPON.TWOHANDAXE];
+    }
+
+    if(SRV == 0 && n_A_JobClass2() == JOB.ASSASSIN && n_Nitou == 1) {
+        n_Nitou = 0;
+        ClickWeaponType2(0);
+    }
+
+    WeaponSet(jobId);
+
+    const availableBuffs = JOB_AVAILABLE_BUFFS[jobId] || [];
+
+    for (let i = 0; i <= 14; i++) {
+        const skillId = availableBuffs[i];
+
+        if(skillId === undefined) {
+            myInnerHtml("P_Skill" + i, "", 0);
+            myInnerHtml("P_Skill" + i + "s", "", 0);
+            continue;
+        }
+
+        if(skillId === 385) {
+            myInnerHtml("P_Skill" + i, m_Skill[skillId][2], 0);
+            myInnerHtml("P_Skill" + i + "s", '<select name=A_skill' + i + ' id=A_skill' + i + ' onChange="StAllCalc() | WeaponSet(20) | restrictCardslot(1)"></select>', 0);
+        } else if (skillId === 392) {
+            myInnerHtml("P_Skill" + i, skillName(m_Skill[skillId][0], SRV), 0);
+            myInnerHtml("P_Skill" + i + "s", "<select name=A_skill" + i + " id=A_skill" + i + ' onChange="StAllCalc()" style="width:70px;"></select>', 0);
+            if(n_Reborn == 0)
+                myInnerHtml("P_Skill" + i, "", 0);
+        } else if (skillId === 441) {
+            myInnerHtml("P_Skill" + i, m_Skill[skillId][2], 0);
+            myInnerHtml("P_Skill" + i + "s", "<select name=A_skill" + i + " id=A_skill" + i + ' onChange="StAllCalc() | ClickActiveSkill2() | calc()"></select>', 0);
+            if(n_Reborn == 0)
+                myInnerHtml("P_Skill" + i, "", 0);
+        } else {
+            myInnerHtml("P_Skill" + i, skillName(m_Skill[skillId][0], SRV), 0);
+            myInnerHtml("P_Skill" + i + "s", "<select name=A_skill" + i + " id=A_skill" + i + " onChange=StAllCalc()></select>", 0);
+        }
+    }
+
+    for(let i = 0; i <= 14; i++) {
+        const skillId = availableBuffs[i];
+
+        if(skillId === undefined) continue;
+
+        const skillElement = document.getElementById("A_skill" + i);
+        if(!skillElement) continue;
+
+        const toggleSkills = [12, 68, 152, 253, 258, 301, 309, 310, 322, 345, 364, 365, 379, 383, 385, 386, 390, 420, 421, 422, 846];
+
+        if(NumSearch(skillId, toggleSkills)) {
+            skillElement.options[0] = new Option("off", 0);
+            skillElement.options[1] = new Option("on", 1);
+        } else if (skillId === 851) {
+            skillElement.options[0] = new Option("off", 0);
+            skillElement.options[1] = new Option("Revolver", 1);
+            skillElement.options[2] = new Option("Shotgun", 2);
+            skillElement.options[3] = new Option("Gatling Gun", 3);
+            skillElement.options[4] = new Option("Rifle", 4);
+            skillElement.options[5] = new Option("Grenade Launcher", 5);
+        } else if (skillId === 852) {
+            skillElement.options[0] = new Option("off", 0);
+            skillElement.options[1] = new Option("5-9 stacks", 1);
+            skillElement.options[2] = new Option("10 stacks", 2);
+        } else if (skillId === 58) {
+            const damageReduction = ["0", "6% Reduction", "12% Reduction", "18% Reduction", "24% Reduction", "30% Reduction"];
+            for(let j = 0; j <= 5; j++) {
+                skillElement.options[j] = new Option(damageReduction[j], j);
+            }
+        } else if (skillId === 78) {
+            const pecoLevels = ["(no Peco)", "0", "1", "2", "3", "4", "5"];
+            for(let j = 0; j <= 6; j++) {
+                skillElement.options[j] = new Option(pecoLevels[j], j);
+            }
+        } else if (skillId === 367) {
+            const smsBlessing = [0, 1, 2, 3, 4, 5, 6, 8, 10];
+            for(let j = 0; j <= 8; j++) {
+                skillElement.options[j] = new Option(10 * smsBlessing[j] + "%", smsBlessing[j]);
+            }
+        } else {
+            for(let j = 0; j <= 10; j++) {
+                skillElement.options[j] = null;
+            }
+
+            const maxSkillLevel = m_Skill[skillId][1];
+            for(let j = 0; j <= maxSkillLevel; j++) {
+                skillElement.options[j] = new Option(j, j);
+            }
+
+            if(skillId === 392) {
+                const ecNames = ["off", "eAthena (max stats)", "iRO", "Original"];
+                for(let j = 0; j <= 3; j++) {
+                    skillElement.options[j] = new Option(ecNames[j], j);
+                }
+                if(n_Reborn == 0) 
+                    skillElement.style.visibility = "hidden";
             }
         }
     }
-    if (58 == m_JobBuff[e][0]) {
-        for (_ = 10; _ >= 0; _--)
-            c.A_skill0.options[_] = null;
-        for (n_ECname = ["0", "6% Reduction", "12% Reduction", "18% Reduction", "24% Reduction", "30% Reduction"],
-            _ = 0; _ <= 5; _++)
-            c.A_skill0.options[_] = new Option(n_ECname[_], _)
-    }
-    if (78 == m_JobBuff[e][5]) {
-        for (_ = 10; _ >= 0; _--)
-            c.A_skill5.options[_] = null;
-        for (n_ECname = ["(no Peco)", "0", "1", "2", "3", "4", "5"],
-            _ = 0; _ <= 6; _++)
-            c.A_skill5.options[_] = new Option(n_ECname[_], _)
-    }
-    if (78 == m_JobBuff[e][8]) {
-        for (_ = 10; _ >= 0; _--)
-            c.A_skill8.options[_] = null;
-        for (n_ECname = ["(no Peco)", "0", "1", "2", "3", "4", "5"],
-            _ = 0; _ <= 6; _++)
-            c.A_skill8.options[_] = new Option(n_ECname[_], _)
-    }
-    if (367 == m_JobBuff[e][11]) {
-        for (_ = 10; _ >= 0; _--)
-            c.A_skill11.options[_] = null;
-        for (n_ECname = [0, 1, 2, 3, 4, 5, 6, 8, 10],
-            _ = 0; _ <= 8; _++)
-            c.A_skill11.options[_] = new Option(10 * n_ECname[_] + "%", n_ECname[_])
-    }
-    Askill(),
-    WeaponSet2()
+
+    Askill();
+    WeaponSet2();
 }
+
 function Askill() {
     SRV = 1 * c.server.value;
-    for (var e = c.A_ActiveSkill.length, _ = 0; _ < e; _++)
-        c.A_ActiveSkill.options[0] = null;
-    if (c.all_dmgSkills.checked)
-        for (_ = 0; _ < All_DMGskill.length; _++)
-            c.A_ActiveSkill.options[_] = new Option(skillNameInSelect(m_Skill[All_DMGskill[_]][0], SRV), All_DMGskill[_]);
-    else
-        for (_ = 0; 999 != m_JobAtkSkill[n_A_JOB][_]; _++)
-            c.A_ActiveSkill.options[_] = new Option(skillNameInSelect(m_Skill[m_JobAtkSkill[n_A_JOB][_]][0], SRV), m_JobAtkSkill[n_A_JOB][_]);
-    for (_ = 0; _ < 20; _++)
-        w_ASSP0bk[_] = 999;
-    ActiveSkillSetPlus(),
-    ClickActiveSkill()
+    
+    for(let i = 0; i < c.A_ActiveSkill.length; i++) {
+        c.A_ActiveSkill.options[i] = null;
+    }
+
+    if(c.all_dmgSkills.checked) {
+        for(let i = 0; i < All_DMGskill.length; i++) {
+            c.A_ActiveSkill.options[i] = new Option(skillNameInSelect(m_Skill[All_DMGskill[i]][0], SRV), All_DMGskill[i]);
+        }
+    } else {
+        const jobSkills = JOB_ACTIVE_SKILLS[n_A_JOB] || [];
+        for(let i = 0; i < jobSkills.length; i++) {
+            const skillId = jobSkills[i];
+            const skillName = skillNameInSelect(m_Skill[skillId][0], SRV);
+            c.A_ActiveSkill.options[i] = new Option(skillName, skillId);
+        }
+    }
+
+    for(let i = 0; i < 20; i++) {
+        w_ASSP0bk[i] = 999;
+    }
+    ActiveSkillSetPlus();
+    ClickActiveSkill();
 }
 function Bskill() {
     var e = 0;
@@ -5820,13 +5924,20 @@ function BattleCalc3left(e) {
         wBC3_X = tPlusDamCut(wBC3_X),
         tPlusLucky(wBC3_X)
 }
-function SkillSearch(e) {
-    if (258 == e && TimeItemNumSearch(35))
+function SkillSearch(skillId) {
+    if(skillId == 258 && TimeItemNumSearch(35)) {
         return 1;
-    for (var _ = 0; _ <= 14; _++)
-        if (m_JobBuff[n_A_JOB][_] == e)
-            return n_A_Buf[_];
-    return 0
+    }
+
+    const availableBuffs = JOB_AVAILABLE_BUFFS[n_A_JOB] || [];
+
+    for(let i = 0; i < availableBuffs.length; i++) {
+        if(availableBuffs[i] === skillId) {
+            return n_A_Buf[i] || 0;
+        }
+    }
+
+    return 0;
 }
 function BattleCalc4(e, _, n) {
     n = (n == 0) ? n_A_WeaponLV_refineATK : n_A_Weapon2LV_refineATK;
