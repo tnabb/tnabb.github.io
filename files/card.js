@@ -96,7 +96,7 @@ m_Card = [
 	, [92, 6, "Verit", 0, 15, 8, 16, 8, 0]
 	, [93, 6, "Zombie", 0, 75, 20, 0]
 	, [94, 6, "Eggyra", 0, 76, 15, 0]
-	, [95, 6, "Eddga", "Infinite [Endure] Effect, no MDEF Bonus. Doesn't work in GvG Maps.", 15, -25, 0]
+	, [95, 6, "Eddga", "Infinite [Endure] Effect, +1 MDEF Bonus. Doesn't work in GvG Maps.", 15, -25, 0]
 	, [96, 7, "Spore", 0, 3, 2, 0]
 	, [97, 7, "Kukre", 0, 2, 2, 0]
 	, [98, 7, "Tarou", 0, 1, 2, 0]
@@ -402,7 +402,7 @@ m_Card = [
 	, [398, 1, "Mao Guai / Civil Servant", 0, 48, 20, 0]
 	, [399, 6, "Iron Fist", 0, 120, 10, 50, -20, 0]
 	, [400, 5, "Noxious", 0, 60, 10, 78, 10, 0]
-	, [401, 5, "Kavach Icarus", "<b>[Refine Rate 0~4]</b> FLEE +20 instead, Perfect Dodge +1", 9, 10, 0]
+	, [401, 5, "Kavach Icarus", "<b>[Refine Rate 0~4]</b> FLEE +20, Perfect Dodge +1<br><b>[Refine Rate 5~10]</b> Instead FLEE +10", 0]
 	, [402, 5, "Chung E", "<b>For each refine level:</b> LUK +1, CRIT +1", 6, -5, 0]
 	, [403, 5, "Orc Baby", "<b>[Refine Rate 9~10]</b> Additional FLEE +5 and -5% damage from [" + v_Element[0] + "] element.", 60, 10, 9, 10, 0]
 	, [404, 5, "Assassin Cross", 0, 220, 28, 0]
@@ -436,7 +436,7 @@ m_Card = [
 	, [432, 100, 0, 0, 18, 3, 19, 3, 0]
 	, [433, 100, 0, 0, 4, 4, 3, 4, 75, 30, 76, 30, 0]
 	, [434, 100, 0, 0, 73, -10, 15, 20, 16, 20, 0]
-	, [435, 100, 0, "<b>STR +3</b>", 0]	//no mejorar
+	, [435, 100, 0, 0, 1, 3, 0]	//no mejorar
 	, [436, 100, 0, 0, 18, 3, 3, 3, 0]
 	, [437, 100, 0, 0, 86, 20, 0]
 	, [438, 100, 0, "[Sleep] chance increases to 9%", 0]
@@ -489,12 +489,12 @@ m_Card = [
 	, [485, 6, "Zombie Slaughter", "Recover 50 HP when killing a monster with ATK based damage.", 37, 1, 177, 1, 0]
 	, [486, 6, "Fallen Bishop", 0, 89, 10, 16, -50, 177, 50, 178, 50, 0]
 	, [487, 7, "Snowier", "20% chance to obtain an [Ice Cream] item when killing a monster.<BR>[Ice Cream] item recover +100%", 0]
-	, [488, 7, "Siroma", 0, 5054, 25, 7054, 25, 0]
+	, [488, 7, "Siroma", 0, 5054, 25, 7054, -25, 0]
 	, [489, 7, "Gazeti", 0, 221, 94, 0]
 	, [490, 7, "Galion", 0, 8, 5, 41, 5, 0]
 	, [491, 7, "Stapo", 0, 220, 31, 220, 32, 0]
 	, [492, 7, "Ifrit", "Increases your ATK, HIT, and CRIT by 1 for every 10 job levels you have.<BR>When receiving ATK based damage, 0.1% chance to cast [Earthquake] Lvl 2", 0]
-	, [493, 7, "Imp", 0, 5051, 25, 7051, 25, 0]
+	, [493, 7, "Imp", 0, 5051, 25, 7051, -25, 0]
 	, [494, 7, "Ragged Zombie", "When dealing ATK based damage, 0.1% chance to cause [Bleeding] status effect on your target.", 117, 5, 37, 1, 177, 1, 0]
 	, [495, 7, "Hellhound", "[Meat] item recover +100%<BR>When dealing ATK based damage, 0.5% chance to cause [Bleeding] status effect on your target.", 8, 1, 0]
 	, [496, 100, 0, "Recover 2 SP when killing a [" + v_Race[7] + "] race enemy with ATK based damage.", 0]
@@ -585,7 +585,7 @@ m_Card = [
 	, [580, 1, "Sedora", 0, 17, 10, 70, 15, 0]
 	, [581, 5, "Pot Dofle", 0, 60, 15, 61, 10, 0]
 	, [582, 2, "King Dramoh", "<b>For every 3 refine levels:</b> STR+1", 0]
-	, [583, 4, "Kraken", "<b style='color:blue'>Water</b> property magic damage +10%<BR>Enables the use of [Deluge] Lvl 1", 0]
+	, [583, 4, "Kraken", "Enables the use of [Deluge] Lvl 1", 381, 10, 0]
 	, [584, 3, "Scout Basilisk", 0, 190, 20, 191, 15, 192, 10, 0]
 	, [585, 3, "Combat Basilisk", 0, 191, 20, 192, -15, 0]
 	, [586, 3, "Charge Basilisk", 0, 192, 20, 191, -15, 0]
@@ -593,7 +593,7 @@ m_Card = [
 	, [588, 1, "Fruit Pom Spider", "<b>[Weapon Level 1~2]</b> Deal +3% MATK based damage against [<b style='color:red'>Fire</b>] element monsters.<BR><b>[Weapon Level 3~4]</b> Deal +8% MATK based damage against [<b style='color:red'>Fire</b>] element monsters.", 0]
 	, [589, 1, "Jungle Mandragora", "<b>[Weapon Level 1~2]</b> Deal +3% MATK based damage against [<b style='color:#00CC00'>Wind</b>] element monsters.<BR><b>[Weapon Level 3~4]</b> Deal +8% MATK based damage against [<b style='color:#00CC00'>Wind</b>] element monsters.", 0]
 	, [590, 1, "Big Eggring", 0, 221, 173, 0]
-	, [591, 7, "Eggring", 0, 5056, 25, 7056, 25, 0]
+	, [591, 7, "Eggring", 0, 5056, 25, 7056, -25, 0]
 	, [592, 2, "Leaf Lunatic", 0, 13, 150, 0]
 	, [593, 1, "Sweet Drops", 0, 88, 10, 0]
 	, [594, 1, "Hunter Wolf", 0, 8, 10, 0]
@@ -631,7 +631,7 @@ m_Card = [
 	, [625, 6, "Corrupted Bishop", "", 4, 1, 15, 10, 0]
 	, [626, 1, "Corrupted Duke", "<b>[Weapon Level 1~2]</b> Deal +3% MATK based damage against [<b style='color:#A89682'>Neutral</b>] element monsters.<BR><b>[Weapon Level 3~4]</b> Deal +8% MATK based damage against [<b style='color:#A89682'>Neutral</b>] element monsters.", 0]
 	, [627, 6, "Dark Chimera", "", 15, 6, 11, 4, 0]
-	, [628, 7, "Mutating Prisoner", 0, 5132, 25, 7132, 25, 0]
+	, [628, 7, "Mutating Prisoner", 0, 5132, 25, 7132, -25, 0]
 	, [629, 7, "Royal Clergy", "<b>[Ninja Class]</b><BR>[<b style='color:blue'>Water</b>] property magic damage +7%<BR>[<b style='color:#00CC00'>Wind</b>] property magic damage +7%", 4, 1, 5, 1, 0]
 	, [630, 2, "Royal Druid", "<b>[Refine Rate 9~10]</b> On all monsters, ignore 5% MDEF", 4, 1, 0]
 	, [631, 3, "Standing Soul", "", 337, 25, 0]
@@ -1404,6 +1404,7 @@ function LoadWeaponEnchants(id, oldWeaponId){
 }
 
 function loadNotes(e){
+    resetNotesStats();
 	_ = '<tbody>',
 	_ += '<tr><td colspan="12" class="subheader" style="background-color: rgb(68, 102, 102);">Notes:</td></tr>';
 	for(i = 0; i < m_MonsterNotes.length; i++){
@@ -1459,24 +1460,28 @@ function Notes_Setumei(nC1, nC2){
 	NotesStr = ""
 	if(nC1 == 0)
 		NotesStr += '<tr><td class="left">• Enchant Deadly Poison effect reduced by ' + nC2 + '%</td></tr>'
-	if (nC1 == 1)
-		if(nC2 == 1) NotesStr += '<tr><td class="left">• Can only receive Melee Damage</td></tr>'
-		if(nC2 == 2) NotesStr += '<tr><td class="left">• Can only receive Ranged Damage</td></tr>'
-		if(nC2 == 3) NotesStr += '<tr><td class="left">• Can only receive Magic Damage</td></tr>'
-	if(nC1 == 2)
+    if(nC1 == 1)
+        NotesStr += '<tr><td class="left">• Cannot receive Melee Damage</td></tr>'
+    if(nC1 == 2)
+        NotesStr += '<tr><td class="left">• Cannot receive Ranged Damage</td></tr>'
+    if(nC1 == 3)
+        NotesStr += '<tr><td class="left">• Cannot receive Magic Damage</td></tr>'
+    if(nC1 == 4)
+        NotesStr += '<tr><td class="left">• Cannot receive Misc Damage</td></tr>'
+	if(nC1 == 5)
 		if(nC2 == 0)
 			NotesStr += '<tr><td class="left">• Can only receive damage from single targeted skills</td></tr>'
 		else
 			NotesStr += '<tr><td class="left">• Can only receive damage from AOE skills</td></tr>'
-	if(nC1 == 3)
-		NotesStr += '<tr><td class="left">• Teleports when hit by any AOE skill</td></tr>'
-	if (nC1 == 4)
-		NotesStr += '<tr><td class="left">• Takes ' + nC2 + '% reduced damage</td></tr>'
-	if(nC1 == 5)
-		NotesStr += '<tr><td class="left">• Ignores DEF ignore and pierce</td></tr>'
 	if(nC1 == 6)
+		NotesStr += '<tr><td class="left">• Teleports when hit by any AOE skill</td></tr>'
+	if (nC1 == 7)
+		NotesStr += '<tr><td class="left">• Takes ' + nC2 + '% reduced damage</td></tr>'
+	if(nC1 == 8)
+		NotesStr += '<tr><td class="left">• Ignores DEF ignore and pierce</td></tr>'
+	if(nC1 == 9)
 		NotesStr += '<tr><td class="left">• Ignores MDEF ignore and pierce</td></tr>'
-	if(nC1 == 7)
+	if(nC1 == 10)
 		NotesStr += '<tr><td class="left">• Ignores Ice Pick effect</td></tr>'
 	if (5000 <= nC1 && nC1 <= 6999)
 		NotesStr += '<tr><td class="left">• Receives -' + nC2 + '% damage from [' + skillName(m_Skill[nC1 - 5000][0], SRV) + ']</td></tr>'
