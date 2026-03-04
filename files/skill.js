@@ -1,5 +1,6 @@
-﻿function skillName(skillNum, server) {
+﻿function skillName(skillNum) {
 	//alert("skillNum = "+skillNum+"\n server = "+server);
+    var server = 10;
 	var shown = 2;
 	var hidden = 3;
 	var hidname = "Alt.";
@@ -15,8 +16,9 @@
 	}
 	return str;
 }
-function skillNameInSelect(skillNum, server) {
+function skillNameInSelect(skillNum) {
 	//alert("skillNum = "+skillNum+"\n server = "+server);
+    var server = 10;
 	var shown = 2;
 	var hidden = 3;
 	var hidname = "alt.";
@@ -348,9 +350,9 @@ m_Skill = [		//ID, max level, iRO name, alternative name, 0=nodamage 1=melee/ran
 	[310, 1, "Undying Love (All Stats -1)", 0, 0, 0],
 	[311, 7, "# of mastered Smith Skills<br>(for Veteran Axe Bonus)", 0, 0, 0],
 	[312, 10, "Dark Soul Strike", 0, -3, 7], // not for monsters (use 471)
-	[313, 1, "", 0, 0, 0],
-	[314, 1, "", 0, 0, 0],
-	[315, 1, "", 0, 0, 0],
+	[313, 10, "Slim Potion Pitcher", 0, 0, 0],
+	[314, 5, "Stone Skin", 0, 0, 0],
+	[315, 5, "Anti Magic", 0, 0, 0],
 	[316, 1, "", 0, 0, 0],
 	[317, 1, "Heat", 0, 2, 11],
 	[318, 1, "Heat (no pushback)", 0, 2, 11],
@@ -479,8 +481,8 @@ m_Skill = [		//ID, max level, iRO name, alternative name, 0=nodamage 1=melee/ran
 	[441, 5, "Double Bolt", "Double Casting", 0, 0],
 	[442, 1, "Blinding Mist", "Wall of Fog", 0, 0],
 	[443, 2, "Earthquake", 0, -3, 0],
-	[444, 10, "Earthquake (melee)", 0, 2, 0],
-	[445, 10, "Earthquake (ranged)", 0, 3, 0],
+	[444, 10, "Earthquake (melee)", 0, -3, 0],
+	[445, 10, "Earthquake (ranged)", 0, -3, 0],
 	[446, 10, "Hell's Judgement (melee)", 0, 2, 10],	//Damage and curse all players within the monster’s screen.
 	[447, 10, "Hell's Judgement (ranged)", 0, 3, 10],	//Damage and curse all players within the monster’s screen.
 	[448, 5, "Pulse Strike (melee)", 0, 2, 0],		//Damage all players in a 15 x 15 cell around the boss monster, and push them 7 cells away.

@@ -129,6 +129,8 @@ class StatusData {
         
         this.rhw = new WeaponATK();
         this.lhw = new WeaponATK();
+        this.base_exp = 0;
+        this.job_exp = 0;
     }
 }
 
@@ -162,6 +164,22 @@ class ItemBonus {
     }
 }
 
+class StatusChange {
+    constructor(type, val1 = 0, val2 = 0, val3 = 0, val4 = 0, val5 = 0, val6 = 0, val7 = 0, val8 = 0, val9 = 0, val10 = 0) {
+        this.type = type; // SC enum
+        this.val1 = val1; // usually skill level
+        this.val2 = val2; // other values
+        this.val3 = val3;
+        this.val4 = val4;
+        this.val5 = val5;
+        this.val6 = val6;
+        this.val7 = val7;
+        this.val8 = val8;
+        this.val9 = val9;
+        this.val10 = val10;
+    }
+}
+
 /**
  * Player character data structure
  * Consolidates all player-related data that was previously in global variables
@@ -172,6 +190,7 @@ class PlayerData {
         this.base_status = new StatusData(); // Base status data (without equipment, buffs, etc.)
         this.battle_status = new StatusData(); // Calculated battle status (with all bonuses applied)
         this.status = new CharStatus(); // Character status including job, levels, base stats, etc.
+        this.sc = []; // holds status changes
         
         // Weapon info
         this.weapontype1 = WEAPON.FIST;
@@ -370,6 +389,7 @@ class MonsterData {
         this.battle_status = new StatusData();
         this.type = BL.MOB;
         this.is_custom_player = false;
+        this.sc = []; // holds status changes
 
         // extra properties not in rA's status_data struct but stored elsewhere still needed for calcs
         this.ranged = false; // its default attack is ranged or not

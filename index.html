@@ -165,11 +165,9 @@ Calc's theme: <select id="theme" onChange="themes()"><option value="0">Original<
                 <option value="5">Dark</option>
                 <option value="4">Darker</option>
               </select><br>
-              RO server: <select id="server" onchange="servers() | SaveTheme()"
+              RO server: <select id="server" onchange="firstLoadFunction() | SaveTheme()"
                 style="background-color: rgb(255, 204, 136);">
-                <option value="0">iRO (classic)</option>
-                <option value="10">Private (classic)<!-- (eAthena)--></option>
-                <!--<option value="20">Private (rAthena)</option><option value="30">Private (hercules)</option><option value="50">iRO (renewal)</option><option value="60">jRO (renewal)</option><option value="70">kRO (renewal)</option>-->
+                <option value="0">Project Alfheim</option>
               </select><br>
               <!--<input type="checkbox" id="autocalc" onClick="auto()" checked disabled><S>Auto-Calculate</S><br>-->
               <input type="checkbox" id="restrict_jobequip" onclick="ClickJob() | StAllCalc() | StCalc()" checked=""
@@ -2077,7 +2075,9 @@ Calc's theme: <select id="theme" onChange="themes()"><option value="0">Original<
                           </option>
                           <option value="10">Weight Limit
                           </option>
-                          <option value="12">Player Resistance
+                          <option value="12">Damage Resistance
+                          </option>
+                          <option value="13">Status Resistance
                           </option>
                           <option value="14">+% ATK based Damage Modifiers
                           </option>
@@ -2088,6 +2088,8 @@ Calc's theme: <select id="theme" onChange="themes()"><option value="0">Original<
                           <option value="20">Experience
                           </option>
                           <option value="22">Potion Pitcher HP/SP power
+                          </option>
+                          <option value="23">Slim Potion Pitcher power
                           </option>
                           <option value="24">Forge/Potion/EDP Creation Success Rate
                           </option>
@@ -2101,13 +2103,7 @@ Calc's theme: <select id="theme" onChange="themes()"><option value="0">Original<
                           </option>
                           <option value="34">NPC Refinement Cost &amp; Success Rate
                           </option>
-                          <option value="36">NPC Socket Enchant Cost &amp; Success Rate
-                          </option>
-                          <!--<option value="38">NPC Hidden Slot Enchant Cost &amp; Success Rate
-                          </option>-->
-                          <option value="40">What Homunculus will I get?!
-                          </option>
-                          <option value="42">SP cost of skills
+                          <option value="36">SP cost of skills
                           </option>
                         </select>
                       </div>

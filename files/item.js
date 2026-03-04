@@ -551,7 +551,7 @@ m_Item = [
 	, [548, 17, 59, 30, 1, "1/2", 40, 10, "Six Shooter", 0, "", 8, -10, 0]
 	, [549, 17, 59, 45, 2, "1/2", 45, 35, "Crimson Bolt", 0, "", 8, -10, 0]
 	, [550, 17, 59, 70, 2, "1/2", 50, 55, "Garrison", 0, "", 8, -10, 0]
-	, [551, 17, 59, 20, 3, "0/3", 50, 12, "Gold Lux", 0, "Autocasted [" + skillName(416, SRV) + "] level is equal to the [" + skillName(416, SRV) + "] skill level that the user has learned.", 8, -10, 221, 128, 0]
+	, [551, 17, 59, 20, 3, "0/3", 50, 12, "Gold Lux", 0, "Autocasted [" + skillName(416) + "] level is equal to the [" + skillName(416) + "] skill level that the user has learned.", 8, -10, 221, 128, 0]
 	, [552, 18, 59, 50, 1, 3, 50, 1, "Branch", 0, "", 0]
 	, [553, 18, 59, 120, 2, "1/2", 70, 24, "Cyclone", 0, "", 8, 10, 10, 10, 0]
 	, [554, 18, 59, 150, 2, 1, 75, 56, "Dusk", 0, "", 8, 10, 10, 10, 0]
@@ -565,7 +565,7 @@ m_Item = [
 	, [562, 999, 0, 4, 0, 1, 20, 1, "Note Headphones", 0, "", 200, 1, 151, 10, 152, 10, 19, 3, 0]
 	, [563, 999, 0, 2, 0, 0, 50, 50, "Wandering Minstrel Hat", 0, "", 4, 1, 5, 1, 0]
 	, [564, 50, 0, 2, 0, 0, 20, 1, "Pumpkin-Head", 0, "", 56, 5, 0]
-	, [565, 50, 0, 2, 0, 1, 20, 20, "Dress Hat", 0, "<b>[Refine Rate 7~10]</b><br>MATK +1%<br>ATK based damage +1% (versus Normal/Boss/Guardian)<br>Your [Heal], [Sanctuary], and [" + skillName(245, SRV) + "] effectiveness +1%", 19, 7, 1, 1, 4, 1, 89, 2, 80, 2, 99, 5, 0]
+	, [565, 50, 0, 2, 0, 1, 20, 20, "Dress Hat", 0, "<b>[Refine Rate 7~10]</b><br>MATK +1%<br>ATK based damage +1% (versus Normal/Boss/Guardian)<br>Your [Heal], [Sanctuary], and [" + skillName(245) + "] effectiveness +1%", 19, 7, 1, 1, 4, 1, 89, 2, 80, 2, 99, 5, 0]
 	, [566, 999, 0, 3, 0, 1, 100, 30, "Satellite Hat", 0, "", 13, 50, 14, 10, 220, 10, 0]
 	, [567, 50, 0, 3, 0, 0, 20, 1, "Moonlight Flower Hat", 0, "", 200, 1, 5, 2, 221, 15, 0]
 	, [568, 999, 0, 2, 0, 0, 20, 1, "Sheila Hairnet", 0, "", 19, 3, 2, 2, 0]
@@ -619,7 +619,7 @@ m_Item = [
 	, [616, 4, 1001, 150, 4, 1, 100, 65, "Long Horn", 0, "When performing an ATK based attack, 5% chance to cause [Bleeding] status effect on your target.", 20, 6, 194, 1, 220, 24, 0]
 	, [617, 4, 1001, 140, 4, 1, 90, 65, "Battle Hook", 0, "", 37, 20, 131, 5, 220, 11, 0]
 	, [618, 4, 1001, 180, 4, 1, 420, 60, "Hunting Spear", 0, "10% chance to obtain a [Meat] item when killing a [" + v_Race[2] + "] race monster.", 182, 1, 221, 20, 0]
-	, [619, 5, 1, 170, 4, "0/1", 200, 75, "Spectral Spear", 0, "When performing an ATK based attack, 10% chance to cause [Chaos] status effect on yourself.<br>Recover 50 HP when killing a monster with ATK based damage.", 31, 20, 36, 20, 47, 20, 51, 10, 56, 10, 67, 10, 0]
+	, [619, 5, 1, 170, 4, "0/1", 200, 75, "Spectral Spear", 0, "When performing an ATK based attack, 10% chance to cause [Confusion] status effect on yourself.<br>Recover 50 HP when killing a monster with ATK based damage.", 31, 20, 36, 20, 47, 20, 51, 10, 56, 10, 67, 10, 0]
 	, [620, 5, 61, 120, 4, 0, 100, 65, "Ahlspiess", 0, "", 22, 10, 37, 10, 221, 21, 0]
 	, [621, 7, 1, 10, 4, "0/1", 600, 80, "Doom Slayer", 0, "ASPD -40%<br><b>[Base STR >= 95]</b><BR>ATK +340<BR>When performing an ATK based attack, 30% chance to cause [Stun] status effect on your target.<BR>When performing an ATK based attack, 5% chance to break your target's armor.", 370, 100, 0]
 	, [622, 7, 1001, 200, 3, 2, 250, 70, "Berdysz", 0, "", 191, 13, 192, 15, 0]
@@ -633,7 +633,7 @@ m_Item = [
 	, [630, 10, 76, 120, 2, 0, 160, 65, "Orc Archer Bow", 0, "<b>If equipped together with [Steel Arrow]:</b><BR>Increases ranged damage by 50%", 0]
 	, [631, 11, 122, 160, 4, 1, 145, 55, "Wild Beast Claw", 0, "When performing an ATK based attack, 10% chance to cast [Critical Wound] Lvl 1 on your target.<br><b>[Refine Rate 9~10]</b><br>[Critical Wound] autocasted is Lvl 2 instead.", 0]
 	, [632, 11, 122, 140, 4, 0, 150, 55, "Inverse Scale", 0, "When performing an ATK based attack, 3% chance to cast [Dragon Fear] Lvl 1<br><b>[Refine Rate 9~10]</b><br>Cast [Dragon Fear] Lvl 2 instead.", 20, 6, 0]
-	, [633, 11, 122, 110, 4, 1, 140, 55, "Drill Katar", 0, "<b>NOTE: " + skillName(440, SRV) + " available in <i>Other Info</i>.</b>", 8, 30, 221, 124, 0]
+	, [633, 11, 122, 110, 4, 1, 140, 55, "Drill Katar", 0, "<b>NOTE: " + skillName(440) + " available in <i>Other Info</i>.</b>", 8, 30, 221, 124, 0]
 	, [634, 11, 122, 120, 4, 2, 170, 55, "Blood Tears", 0, "When performing an ATK based attack, 3% chance to cause [Bleeding] status effect on all enemies in a 5x5 area around you.<br><b>[Refine Rate 9~10]</b><br>The area becomes 11x11.", 0]
 	, [635, 13, 0, 80, 3, 3, 65, 75, "Magma Fist", 0, "", 221, 24, 0]
 	, [636, 13, 0, 80, 3, 3, 65, 75, "Icicle Fist", 0, "", 221, 25, 0]
@@ -644,11 +644,11 @@ m_Item = [
 	, [641, 12, 0, 137, 4, 2, 100, 85, "Ledger of Death", 0, "ASPD +(refine)%<br>When performing an ATK based attack, 0.1% chance to cause [Coma] status effect on your target (only [" + v_Race[7] + "] race monsters, works even on [Boss] type monsters!).<br><b>[Sage, Scholar (alt. name: Professor)]</b><br>2% chance to cast [Hell's Judgment] Lvl 5 on your target when performing an ATK based attack.", 89, 15, 1, 3, 4, 3, 6, -20, 0]
 	, [642, 9, 1001, 60, 3, 2, 80, 70, "Lich's Bone Wand", 0, "When receiving ATK based damage, 10+(Refine)% chance to cause [Curse] status effect on all enemies in the screen.<br><b>[Refine Rate 9~10]</b> MATK +3%, MaxSP +300", 89, 20, 4, 1, 5, 1, 20, 9, 0]
 	, [643, 999, 1, 0, 0, 0, 10, 1, "Dark Blinder", 0, "", 154, 100, 151, 2, 0]
-	, [644, 9, 53, 10, 3, 0, 40, 55, "Healing Staff", 0, "Your [Heal], [Sanctuary], and [" + skillName(245, SRV) + "] effectiveness +(refine*3/2)", 20, 6, 89, 15, 0]
+	, [644, 9, 53, 10, 3, 0, 40, 55, "Healing Staff", 0, "Your [Heal], [Sanctuary], and [" + skillName(245) + "] effectiveness +(refine*3/2)", 20, 6, 89, 15, 0]
 	, [645, 9, 1001, 80, 3, 0, 50, 70, "Piercing Staff", 0, "Ignore 10+(refine)% of target's MDEF.", 89, 15, 4, 4, 0]
-	, [646, 9, 125, 130, 4, 1, 250, 80, "Staff of Destruction", 0, "[" + skillName(276, SRV) + "] skill Casting Time -50%<br><b>Each two refine levels:</b> MATK +1%<br>All skill's SP cost +(refine*2)%<br>When receiving ATK based damage, (Refine*2)% chance to cast [Jupitel Thunder] Lvl 5 on your attacker.", 195, 1, 89, 25, 4, 3, 2, 10, 0]
+	, [646, 9, 125, 130, 4, 1, 250, 80, "Staff of Destruction", 0, "[" + skillName(276) + "] skill Casting Time -50%<br><b>Each two refine levels:</b> MATK +1%<br>All skill's SP cost +(refine*2)%<br>When receiving ATK based damage, (Refine*2)% chance to cast [Jupitel Thunder] Lvl 5 on your attacker.", 195, 1, 89, 25, 4, 3, 2, 10, 0]
 	, [647, 9, 63, 120, 4, 0, 150, 70, "Divine Cross", 0, "", 195, 1, 89, 15, 20, 6, 5, 4, 51, 15, 56, 15, 0]
-	, [648, 14, 130, 130, 3, 1, 150, 70, "Base Guitar", 0, "Recover 3 SP when killing a monster with ATK based damage.<br>When performing an ATK based attack, 10% chance to cause [Chaos] status effect on all enemies in a 5x5 area around you.", 221, 125, 0]
+	, [648, 14, 130, 130, 3, 1, 150, 70, "Base Guitar", 0, "Recover 3 SP when killing a monster with ATK based damage.<br>When performing an ATK based attack, 10% chance to cause [Confusion] status effect on all enemies in a 5x5 area around you.", 221, 125, 0]
 	, [649, 14, 130, 10, 4, 0, 180, 70, "Berserk Guitar", 0, "When equipped, ASPD is fixed at 190.<br>Consumes 50 HP every 5 seconds.<br>DEX -(BaseDEX).", 75, -100, 12, 100, 0]		// mejorable description
 	, [650, 15, 0, 110, 3, 0, 70, 30, "Electric Wire", 0, "", 20, 4, 0]
 	, [651, 15, 131, 100, 4, 2, 200, 70, "Electric Eel", 0, "The level of [Arrow Vulcan] autocasted depends on the refine level of this weapon.", 20, 4, 2, 2, 4, 2, 221, 28, 221, 113, 0]
@@ -806,7 +806,7 @@ m_Item = [
 	, [803, 999, 0, 2, 0, 0, 20, 45, "Whikebine's Black Cat Ears", 0, "", 24, 2, 9, 10, 10, 3, 70, 10, 0]
 	, [804, 50, 0, 3, 0, 1, 30, 60, "Ship Captain's Hat", 0, "", 5, 1, 13, 100, 25, 5, 0]
 	, [805, 51, 0, 1, 0, 0, 10, 70, "Pecopeco Wing Ears", 0, "", 19, 2, 2, 1, 0]
-	, [806, 52, 0, 0, 0, 0, 10, 60, "Gangster Scarf", 0, "<b>[Rogue Class]</b><br>Enables the use of [" + skillName(180, SRV) + "] Lvl 1", 17, 5, 0]
+	, [806, 52, 0, 0, 0, 0, 10, 60, "Gangster Scarf", 0, "<b>[Rogue Class]</b><br>Enables the use of [" + skillName(180) + "] Lvl 1", 17, 5, 0]
 	, [807, 999, 0, 0, 0, 0, 20, 60, "Ninja Scroll", 0, "", 89, 1, 0]
 	, [808, 999, 0, 5, 0, 0, 100, 1, "Angel's Dress", 0, "", 6, 4, 193, 1, 0]
 	, [809, 50, 0, 3, 0, 0, 10, 1, "Leaf Cat Hat", 0, "", 2, 2, 221, 160, 0]
@@ -821,7 +821,7 @@ m_Item = [
 	, [818, 100, 0, 0, 0, 0, 0, 0, 0, 0, "When dealing ATK based damage, 0.1% chance you gain max ASPD for 7 seconds.", 14, 20, 8, 10, 15, 5, 29, 30, 0]
 	, [819, 3, 1001, 200, 4, 2, 120, 50, "Bloody Eater", 0, "Recover 100 HP when killing a monster with ATK based damage.<br>When dealing ATK based damage, 0.1% chance you gain ATK +50 and CRIT +100 for 5 seconds.", 20, 8, 0]
 	, [820, 8, 53, 120, 4, 0, 90, 60, "Nemesis", 0, "The level of [Signum Crusis] autocasted depends on the refine level of this weapon.<br>When performing an ATK based attack, 1% chance you gain ATK +50 for 20 seconds.", 20, 6, 31, 10, 36, 10, 221, 49, 0]
-	, [821, 10, 124, 135, 4, 1, 30, 70, "Ixion Wings", 0, "When performing an ATK based attack, 1% chance you gain ASPD +7% for 7 seconds. Every refine increases the chance by 0.2%<BR>[" + skillName(44, SRV) + "] skill pushes your target 3 cells back.", 0]
+	, [821, 10, 124, 135, 4, 1, 30, 70, "Ixion Wings", 0, "When performing an ATK based attack, 1% chance you gain ASPD +7% for 7 seconds. Every refine increases the chance by 0.2%<BR>[" + skillName(44) + "] skill pushes your target 3 cells back.", 0]
 	, [822, 12, 0, 60, 3, 2, 30, 60, "Principles of Magic", 0, "", 89, 20, 4, 3, 76, 5, 0]
 	, [823, 12, 0, 30, 3, 2, 70, 70, "Ancient Magic", 0, "", 89, 15, 0]
 	, [824, 100, 0, 0, 0, 0, 0, 0, 0, 0, 0, 214, 4, 19, 8, 16, 10, 0]
@@ -835,7 +835,7 @@ m_Item = [
 	, [832, 61, 113, 6, 0, 1, 200, 80, "Cross Shield", 0, "", 1, 1, 5324, 30, 5159, 30, 5384, 30, 370, 10, 0]
 	, [833, 61, 55, 2, 0, 1, 100, 70, "Magic Bible Vol.1", 0, "When receiving ATK based damage, 10% chance to cause [Stun] status effect on your attacker.", 4, 2, 19, 3, 0]
 	, [834, 62, 1, 2, 0, 1, 25, 60, "Skin of Ventus", 0, "", 9, 10, 13, 200, 19, 2, 0]
-	, [835, 62, 3079, 5, 0, 1, 25, 1, "Diabolus Manteau", 0, "Increases ATK based damage when facing Satan Morroc by 10%", 13, 100, 60, 5, 1495, 10, 1496, 10, 0]
+	, [835, 62, 3079, 5, 0, 1, 25, 1, "Diabolus Manteau", 0, "", 13, 100, 60, 5, 1495, 10, 1496, 10, 375, 10, 0]
 	, [836, 63, 3079, 4, 0, 1, 25, 1, "Diabolus Boots", 0, "MaxHP +(Base Level * 10)", 0]
 	, [837, 64, 65, 0, 0, 1, 10, 80, "Librarian Glove", 0, "", 14, 20, 0]
 	, [838, 64, 55, 0, 0, 0, 20, 80, "Pocket Watch", 0, "", 0]
@@ -844,7 +844,7 @@ m_Item = [
 	, [841, 64, 124, 0, 0, 0, 10, 70, "Wing of Icarus", 0, "", 5, 3, 14, 50, 0]
 	, [842, 64, 124, 0, 0, 0, 20, 70, "Bowman's Scarf", 0, "", 5, 3, 14, 50, 0]
 	, [843, 64, 1, 0, 0, 1, 5, 80, "Cursed Hand", 0, "When performing an ATK based attack, 3% chance to cast [Critical Wound] Lvl 1.", 8, 10, 75, 20, 0]
-	, [844, 64, 3079, 0, 0, 1, 5, 1, "Diabolus Ring", 0, "Increases ATK based Damage when facing Satan Morroc by 10%", 13, 100, 14, 100, 91, 5, 94, 5, 1495, 10, 1496, 10, 0]
+	, [844, 64, 3079, 0, 0, 1, 5, 1, "Diabolus Ring", 0, "", 13, 100, 14, 100, 91, 5, 94, 5, 1495, 10, 1496, 10, 375, 10, 0]
 	, [845, 64, 1, 0, 0, 1, 5, 80, "Seal of Continental Guard", 0, "", 12, 3, 13, 50, 0]
 	, [846, 64, 1, 0, 0, 1, 5, 80, "Rune Spellstone", 0, "", 73, -1, 14, 50, 0]
 	, [847, 64, 1, 0, 0, 1, 5, 80, "Death Loop", 0, "", 10, 5, 0]
@@ -916,7 +916,7 @@ m_Item = [
 	, [913, 999, 0, 100, 3, 0, 0, 80, "Valorous Battle Crossbow", 0, "", 194, 1, 5, 2, 37, 55, 307, 20, 0]
 	, [914, 999, 0, 100, 3, 0, 0, 80, "Brave Battle Crossbow", 0, "", 194, 1, 5, 2, 4, 10, 37, 55, 0]
 	, [915, 999, 0, 30, 3, 0, 0, 80, "Valorous Battle Fist", 0, "", 194, 1, 1, 2, 4, 1, 37, 95, 307, 20, 0]
-	, [916, 999, 0, 30, 3, 0, 0, 80, "Brave Battle Fist", 0, "When performing an ATK based attack, 5% chance to completely negate the Casting Time on [" + skillName(197, SRV) + "] for 6 seconds.", 194, 1, 1, 2, 4, 1, 37, 95, 7197, 25, 7321, 25, 0]
+	, [916, 999, 0, 30, 3, 0, 0, 80, "Brave Battle Fist", 0, "When performing an ATK based attack, 5% chance to completely negate the Casting Time on [" + skillName(197) + "] for 6 seconds.", 194, 1, 1, 2, 4, 1, 37, 95, 7197, 25, 7321, 25, 0]
 	, [917, 999, 1, 70, 3, 0, 0, 80, "Warlock's Magic Wand", 0, "When dealing MATK based damage, 5% chance to cause [Stun] status effect on your target.", 194, 1, 89, 15, 4, 4, 5, 3, 317, 25, 0]
 	, [918, 999, 1, 70, 3, 0, 0, 80, "Warlock's Battle Wand", 0, "When dealing MATK based damage, 5% chance to cause [Stun] status effect on your target.", 194, 1, 89, 15, 4, 3, 5, 3, 177, 15, 0]
 	, [919, 999, 1, 70, 3, 0, 0, 80, "Strong Recovery Wand", 0, "Recover 5 SP every 10 seconds.", 194, 1, 89, 15, 99, 14, 0]
@@ -931,7 +931,7 @@ m_Item = [
 	, [928, 999, 0, 100, 3, 0, 0, 80, "Soldier Shotgun", 0, "1% chance you gain ATK +80 for 6 seconds, but due to the recoil player will lose 100 HP every second.<br>Inflicts Splash damage [Baphomet MVP Card Effect]", 194, 1, 5, 2, 37, 55, 307, 20, 0]
 	, [929, 999, 0, 300, 3, 0, 0, 80, "Soldier Grenade Launcher", 0, "3% chance you gain ATK +300 for 9 seconds, but due to the recoil player will lose 120 HP every second.", 194, 1, 5, 2, 37, 35, 307, 20, 0]
 	, [930, 999, 0, 55, 3, 0, 0, 80, "Brave Huuma Front Shuriken", 0, "", 194, 1, 1, 2, 5, 1, 37, 95, 307, 20, 0]
-	, [931, 999, 0, 55, 3, 0, 0, 80, "Valorous Huuma Front Shuriken", 0, "5% chance to increase [Throw Huuma Shuriken] and [" + skillName(405, SRV) + "] skills damage +100% for 10 seconds.", 194, 1, 1, 2, 5, 1, 37, 95, 0]
+	, [931, 999, 0, 55, 3, 0, 0, 80, "Valorous Huuma Front Shuriken", 0, "5% chance to increase [Throw Huuma Shuriken] and [" + skillName(405) + "] skills damage +100% for 10 seconds.", 194, 1, 1, 2, 5, 1, 37, 95, 0]
 	, [932, 2, 1001, 140, 4, 3, 150, 75, "Naght Sieger Twin Blade [Blue]", 0, "When dealing ATK based damage, 5% chance all ATK based attacks will ignore the defense of normal monsters and players for 5 seconds.", 20, 1, 220, 13, 0]
 	, [933, 2, 1001, 140, 4, 3, 150, 75, "Naght Sieger Twin Blade [Red]", 0, "When dealing ATK based damage, 5% chance all ATK based attacks will ignore the defense of normal monsters and players for 5 seconds.", 20, 3, 220, 14, 0]
 	, [934, 3, 1000, 250, 4, 2, 200, 90, "Tae Goo Lyeon", 0, "<b>[Job level >= 70]</b><br>When dealing ATK based damage, 1% chance you gain ATK +50 for 10 seconds.<br><b>[Refine Rate 9~10]</b><br>All skill's After-cast Delay -20%", 11, 10, 0]
@@ -945,14 +945,14 @@ m_Item = [
 	, [942, 5, 121, 150, 4, 1, 560, 70, "Cardo", 0, "For each two refine levels: DEF +1", 12, -10, 0]
 	, [943, 5, 1001, 112, 2, 4, 70, 50, "Battle Fork", 0, "", 0]
 	, [944, 8, 1053, 110, 3, 3, 70, 50, "Lunakaligo", 0, "<b>[Base STR >= 77]</b><BR>ASPD +4%<BR>When performing an ATK based attack, 15% chance to cause [Stun] status effect on your target.<BR>5% chance to obtain a +4 STR Food when killing a [" + v_Race[2] + "] race monster.<BR>5% chance to obtain a +5 DEX Food when killing a [" + v_Race[3] + "] race monster.<BR>5% chance to obtain a +3 LUK Food when killing a [" + v_Race[5] + "] race monster.", 0]
-	, [945, 10, 124, 125, 4, 1, 100, 60, "Nepenthes Bow", 0, "When using [Double Strafe] skill, 2% chance to cast [" + skillName(44, SRV) + "] at the same time.", 0]
+	, [945, 10, 124, 125, 4, 1, 100, 60, "Nepenthes Bow", 0, "When using [Double Strafe] skill, 2% chance to cast [" + skillName(44) + "] at the same time.", 0]
 	, [946, 10, 1054, 125, 4, 1, 125, 80, "Cursed Lyre", 0, "When performing a Long Range ATK based attack, 4% chance to cause [Curse] status effect on your target.", 6, -2, 0]
-	, [947, 13, 129, 95, 3, 3, 60, 60, "Horn of Hilthrion", 0, "When performing an ATK based attack, 3% chance to cast [" + skillName(261, SRV) + "] Lvl 1 on your target.<br>1% chance to cast [Summon Spirit Sphere] Lvl 5 when performing an ATK based attack.<br>10% chance to cast [" + skillName(193, SRV) + "] Lvl 1 when [" + skillName(288, SRV) + "] is casted", 0]
+	, [947, 13, 129, 95, 3, 3, 60, 60, "Horn of Hilthrion", 0, "When performing an ATK based attack, 3% chance to cast [" + skillName(261) + "] Lvl 1 on your target.<br>1% chance to cast [Summon Spirit Sphere] Lvl 5 when performing an ATK based attack.<br>10% chance to cast [" + skillName(193) + "] Lvl 1 when [" + skillName(288) + "] is casted", 0]
 	, [948, 9, 1001, 80, 4, 0, 50, 70, "Eraser", 0, "When performing a MATK based attack, 0.5% chance to cast [Wide Soul Drain] Lvl 1.<br><b>[Refine Rate 10]</b><br>Cast [Wide Soul Drain] Lvl 2 instead.", 89, 20, 4, 3, 5, 2, 76, 8, 0]
-	, [949, 14, 130, 110, 3, 3, 70, 70, "Cello", 0, "The [" + skillName(199, SRV) + "] skill pushes your target 2 cells back.<br>The [Arrow Vulcan] skill pushes your target 3 cells back.", 2, 2, 5, 3, 0]
-	, [950, 14, 130, 120, 4, 2, 100, 60, "Harp of Nepenthes", 0, "When using [" + skillName(199, SRV) + "] skill, 10% chance to cause [Stun] status effect on your target.<br><b>[Refine Rate 9~10]</b>The chance to cause [Stun] increases to 20%", 4, 2, 0]
-	, [951, 15, 131, 120, 4, 2, 100, 60, "Stem of Nepenthes", 0, "When using [" + skillName(207, SRV) + "] skill, 10% chance to cause [Freeze] status effect on your target.<br><b>[Refine Rate 9~10]</b>The chance to cause [Freeze] increases to 20%", 4, 2, 0]
-	, [952, 15, 131, 110, 3, 3, 70, 70, "Rope of Balance", 0, "The [" + skillName(207, SRV) + "] skill pushes your target 2 cells back.<br>The [Arrow Vulcan] skill pushes your target 3 cells back.", 2, 2, 5, 3, 0]
+	, [949, 14, 130, 110, 3, 3, 70, 70, "Cello", 0, "The [" + skillName(199) + "] skill pushes your target 2 cells back.<br>The [Arrow Vulcan] skill pushes your target 3 cells back.", 2, 2, 5, 3, 0]
+	, [950, 14, 130, 120, 4, 2, 100, 60, "Harp of Nepenthes", 0, "When using [" + skillName(199) + "] skill, 10% chance to cause [Stun] status effect on your target.<br><b>[Refine Rate 9~10]</b>The chance to cause [Stun] increases to 20%", 4, 2, 0]
+	, [951, 15, 131, 120, 4, 2, 100, 60, "Stem of Nepenthes", 0, "When using [" + skillName(207) + "] skill, 10% chance to cause [Freeze] status effect on your target.<br><b>[Refine Rate 9~10]</b>The chance to cause [Freeze] increases to 20%", 4, 2, 0]
+	, [952, 15, 131, 110, 3, 3, 70, 70, "Rope of Balance", 0, "The [" + skillName(207) + "] skill pushes your target 2 cells back.<br>The [Arrow Vulcan] skill pushes your target 3 cells back.", 2, 2, 5, 3, 0]
 	, [953, 50, 0, 5, 0, 0, 80, 50, "Gigantic Majestic Goat", 0, "ATK +(JobLevel*2)/7", 37, 12, 0]	//{ bonus2 bAddRace,RC_DemiHuman,12; bonus bBaseAtk,(JobLevel*2)/7; }
 	, [954, 50, 3070, 5, 0, 1, 120, 85, "Bone Head", 0, "", 1, 2, 19, 5, 151, 5, 158, 5, 0]
 	, [955, 50, 0, 3, 0, 1, 30, 85, "Mandragora Cap", 0, "MaxHP +(50*refine)", 0]
@@ -1000,7 +1000,7 @@ m_Item = [
 	, [997, 62, 134, 2, 0, 1, 50, 70, "Musika", 0, "When receiving ATK based damage, 2% chance to cast [Heal] Lvl 1 on yourself.<br>If you learned a higher level of [Heal], that level will be casted instead.", 19, 3, 0]
 	, [998, 63, 3079, 2, 0, 1, 30, 1, "Sprint Shoes", 0, "", 2, 1, 76, 5, 0]
 	, [999, 100, 0, 0, 0, 0, 0, 0, "Sprint Set", 0, "", 15, 7, 16, 7, 73, -3, 74, 15, 0]
-	, [1000, 64, 3079, 0, 0, 0, 10, 70, "Angelic Ring", 0, "When using [Heal], [Sanctuary], and [" + skillName(245, SRV) + "] skills, 5% chance your [Heal], [Sanctuary], and [" + skillName(245, SRV) + "] effectiveness +20% for 3 seconds.", 4, 2, 5, 1, 19, 2, 0]
+	, [1000, 64, 3079, 0, 0, 0, 10, 70, "Angelic Ring", 0, "When using [Heal], [Sanctuary], and [" + skillName(245) + "] skills, 5% chance your [Heal], [Sanctuary], and [" + skillName(245) + "] effectiveness +20% for 3 seconds.", 4, 2, 5, 1, 19, 2, 0]
 	, [1001, 64, 3079, 0, 0, 0, 10, 1, "Sprint Ring", 0, "", 73, -10, 74, -5, 0]
 	, [1002, 64, 3079, 0, 0, 1, 20, 1, "Pinguicula Corsage", 0, "", 19, 2, 14, 25, 0]
 	, [1003, 64, 122, 1, 0, 0, 10, 80, "Cold Heart", 0, "", 2, 3, 0]
@@ -1012,7 +1012,7 @@ m_Item = [
 	, [1009, 64, 3079, 1, 0, 1, 12, 90, "Linen Glove", 0, "", 2, 2, 5, 1, 19, 1, 0]
 	, [1010, 100, 0, 0, 0, 0, 0, 0, "Improved Tights Set", 0, "", 11, 5, 0]
 	, [1011, 50, 0, 2, 0, 0, 150, 60, "Radio Antenna", 0, "", 19, 5, 10, 5, 9, 5, 220, 18, 221, 120, 0]
-	, [1012, 999, 0, 0, 0, 0, 100, 30, "Her National Treasury", 0, "Enables the use of [" + skillName(68, SRV) + "] Lvl 1", 12, -10, 193, 1, 0]
+	, [1012, 999, 0, 0, 0, 0, 100, 30, "Her National Treasury", 0, "Enables the use of [" + skillName(68) + "] Lvl 1", 12, -10, 193, 1, 0]
 	, [1013, 999, 0, 2, 0, 1, 10, 1, "Fanta Orange Can", 0, "", 0]
 	, [1014, 999, 0, 2, 0, 1, 10, 1, "Fanta Grape Can", 0, "", 0]
 	, [1015, 999, 0, 2, 0, 1, 10, 1, "Coca-Cola Can", 0, "", 0]
@@ -1032,7 +1032,7 @@ m_Item = [
 	, [1029, 999, 0, 1, 0, 1, 10, 1, "Pagdayaw", 0, "", 200, 4, 221, 107, 193, 1, 0]
 	, [1030, 999, 0, 1, 0, 1, 10, 1, "Aumdura's Benefit", 0, "", 7, 1, 19, 1, 0]
 	, [1031, 999, 0, 10, 0, 0, 20, 1, "Wings of Victory", 0, "", 200, 1, 193, 1, 19, 10, 194, 1, 0]
-	, [1032, 999, 0, 3, 0, 0, 40, 1, "Carmen Miranda Hat", 0, "When receiving ATK based damage, 5% chance to cast [" + skillName(539, SRV) + "] Lvl 1 on your attacker.", 19, 3, 0]
+	, [1032, 999, 0, 3, 0, 0, 40, 1, "Carmen Miranda Hat", 0, "When receiving ATK based damage, 5% chance to cast [" + skillName(539) + "] Lvl 1 on your attacker.", 19, 3, 0]
 	, [1033, 999, 0, 1, 0, 0, 10, 1, "Marvelous Wig", 0, "", 200, 1, 18, 4, 209, 25, 220, 22, 0]
 	, [1034, 999, 0, 5, 0, 0, 200, 50, "Helm Of Dragon", 0, "When performing an ATK based attack, 3% chance to cast [Dragon Fear] Lvl 1", 39, 20, 0]
 	, [1035, 999, 0, 2, 0, 1, 10, 30, "Wind Milestone", 0, "", 2, 2, 220, 17, 0]
@@ -1079,13 +1079,13 @@ m_Item = [
 	, [1076, 999, 0, 120, 4, 0, 0, 80, "Glorious Gladius", 0, "<b>[Refine Rate 6~10]</b><br>Pierces Defense of [" + v_Race[7] + "] race monster by 5%<br><font color=red>[Slaughter] Lvl 1:</font> Increases ATK based damage against [" + v_Race[7] + "] race targets by (refine level - 4) ^ 2<br><b>[Refine Rate 9~10]</b><br>25% chance to cause [Bleeding] status effect on all enemies in a 5x5 area around you when using [Raid] skill.", 37, 75, 307, 20, 221, 106, 194, 1, 0]
 	, [1077, 999, 0, 130, 4, 0, 0, 80, "Glorious Flamberge", 0, "<b>[Refine Rate 6~10]</b><br>Pierces Defense of [" + v_Race[7] + "] race monster by 5%<br><font color=red>[Slaughter] Lvl 1:</font> Increases ATK based damage against [" + v_Race[7] + "] race monsters by (refine level - 4) ^ 2<br><b>[Refine Rate 7~10]</b><br>ASPD +5%<br><b>[Refine Rate 9~10]</b><br>ASPD +5%<br>20% chance to cast [Critical Wound] Lvl 2 on your target when [Bash] is used", 37, 75, 307, 20, 194, 1, 0]
 	, [1078, 999, 0, 130, 4, 0, 0, 80, "Glorious Rapier", 0, "INT +(Refine Level)<br><b>[Refine Rate 6~10]</b><br>All skill's SP cost -10%<br><b>[Refine Rate 9~10]</b><br>INT +5", 4, 1, 89, 10, 194, 1, 0]
-	, [1079, 999, 0, 130, 4, 0, 0, 80, "Glorious Holy Avenger", 0, "INT +(Refine Level)<br><b>[Refine Rate 6~10]</b><br>All skill's SP cost -10%<br><b>[Refine Rate 9~10]</b><br>100% chance to cast [Lex Aeterna] Lvl 1 when using [" + skillName(283, SRV) + "] skill.<br><b>[Refine Rate 10]</b><br>INT +5", 4, 1, 89, 10, 194, 1, 0]
-	, [1080, 999, 0, 220, 4, 0, 0, 80, "Glorious Claymore", 0, "<b>[Refine Rate 6~10]</b><br>Pierces Defense of [" + v_Race[7] + "] race monster by 5%<br><font color=red>[Slaughter] Lvl 2:</font> Increases ATK based damage against [" + v_Race[7] + "] race monsters by (refine level - 3) ^ 2<br><b>[Refine Rate 9~10]</b><br>3% chance to cast [Aura Blade] Lvl 1 or the user's level if its higher, on yourself when performing an ATK based attack.<br>3% chance to cast [" + skillName(256, SRV) + "] Lvl 1 or the user's level if its higher, on yourself when performing an ATK based attack.", 37, 70, 307, 25, 194, 1, 0]
-	, [1081, 999, 0, 130, 4, 0, 0, 80, "Glorious Spear", 0, "<b>[Refine Rate 6~10]</b><br>Pierces Defense of [" + v_Race[7] + "] race monster by 5%<br><font color=red>[Slaughter] Lvl 1:</font> Increases ATK based damage against [" + v_Race[7] + "] race monsters by (refine level - 4) ^ 2<br>ASPD +10%<br><b>[Refine Rate 9~10]</b><br>If used by a [Knight] class job, 20% chance to cast [Critical Wound] Lvl 2 on your target when [Pierce] is used<br>If used by a [Crusader] class job, 10% chance to cast [" + skillName(283, SRV) + "] Lvl 5 on your target when performing an ATK based attack.", 37, 95, 307, 20, 194, 1, 0]
-	, [1082, 999, 0, 220, 4, 0, 0, 80, "Glorious Lance", 0, "<b>[Refine Rate 6~10]</b><br>Pierces Defense of [" + v_Race[7] + "] race monster by 5%<br><font color=red>[Slaughter] Lvl 1:</font> Increases ATK based damage against [" + v_Race[7] + "] race monsters by (refine level - 4) ^ 2<br><b>[Refine Rate 9~10]</b><br>If used by a [Knight] class job, 20% chance to cast [Critical Wound] Lvl 2 on your target when [Pierce] is used<br>If used by a [Crusader] class job, 20% chance to cast [" + skillName(283, SRV) + "] Lvl 5 on your target when performing an ATK based attack.", 37, 70, 307, 25, 194, 1, 0]
+	, [1079, 999, 0, 130, 4, 0, 0, 80, "Glorious Holy Avenger", 0, "INT +(Refine Level)<br><b>[Refine Rate 6~10]</b><br>All skill's SP cost -10%<br><b>[Refine Rate 9~10]</b><br>100% chance to cast [Lex Aeterna] Lvl 1 when using [" + skillName(283) + "] skill.<br><b>[Refine Rate 10]</b><br>INT +5", 4, 1, 89, 10, 194, 1, 0]
+	, [1080, 999, 0, 220, 4, 0, 0, 80, "Glorious Claymore", 0, "<b>[Refine Rate 6~10]</b><br>Pierces Defense of [" + v_Race[7] + "] race monster by 5%<br><font color=red>[Slaughter] Lvl 2:</font> Increases ATK based damage against [" + v_Race[7] + "] race monsters by (refine level - 3) ^ 2<br><b>[Refine Rate 9~10]</b><br>3% chance to cast [Aura Blade] Lvl 1 or the user's level if its higher, on yourself when performing an ATK based attack.<br>3% chance to cast [" + skillName(256) + "] Lvl 1 or the user's level if its higher, on yourself when performing an ATK based attack.", 37, 70, 307, 25, 194, 1, 0]
+	, [1081, 999, 0, 130, 4, 0, 0, 80, "Glorious Spear", 0, "<b>[Refine Rate 6~10]</b><br>Pierces Defense of [" + v_Race[7] + "] race monster by 5%<br><font color=red>[Slaughter] Lvl 1:</font> Increases ATK based damage against [" + v_Race[7] + "] race monsters by (refine level - 4) ^ 2<br>ASPD +10%<br><b>[Refine Rate 9~10]</b><br>If used by a [Knight] class job, 20% chance to cast [Critical Wound] Lvl 2 on your target when [Pierce] is used<br>If used by a [Crusader] class job, 10% chance to cast [" + skillName(283) + "] Lvl 5 on your target when performing an ATK based attack.", 37, 95, 307, 20, 194, 1, 0]
+	, [1082, 999, 0, 220, 4, 0, 0, 80, "Glorious Lance", 0, "<b>[Refine Rate 6~10]</b><br>Pierces Defense of [" + v_Race[7] + "] race monster by 5%<br><font color=red>[Slaughter] Lvl 1:</font> Increases ATK based damage against [" + v_Race[7] + "] race monsters by (refine level - 4) ^ 2<br><b>[Refine Rate 9~10]</b><br>If used by a [Knight] class job, 20% chance to cast [Critical Wound] Lvl 2 on your target when [Pierce] is used<br>If used by a [Crusader] class job, 20% chance to cast [" + skillName(283) + "] Lvl 5 on your target when performing an ATK based attack.", 37, 70, 307, 25, 194, 1, 0]
 	, [1083, 999, 57, 70, 4, 0, 0, 80, "Glorious Destruction Staff", 0, "MATK +(refine)%<br><b>[Refine Rate 6~10]</b><br><font color=red>[Destruction] Lvl 1</font>: Increases MATK based damage against [" + v_Race[7] + "] by (refine level - 5)*2<br>Increases MDEF ignoring by 5+(refine level - 5)*2<br><b>[Refine Rate 9~10]</b><br>20% chance to cast [Safety Wall] Lvl 10 on yourself when casting [Lord of Vermillion], [Meteor Storm] or [Storm Gust] Lvl 10", 195, 1, 89, 15, 177, 15, 317, 25, 194, 1, 0]
 	, [1084, 999, 1, 70, 4, 0, 0, 80, "Glorious Arc Wand", 0, "<b>[Refine Rate 6~10]</b><br>On [" + v_Race[7] + "] race monsters, increases MDEF ignoring by 5%<br><b>[Refine Rate 9~10]</b><br>MATK +5%<br>Casting Time -5%<br>All skill's After-cast Delay -5%", 89, 15, 177, 15, 317, 25, 194, 1, 0]
-	, [1085, 999, 1, 70, 4, 0, 0, 80, "Glorious Cure Wand", 0, "<b>[Refine Rate 6~10]</b><br>Your [Heal], [Sanctuary] and [" + skillName(245, SRV) + "] effectiveness + (5 + (refine level - 5) * 2)%<br>On [" + v_Race[7] + "] race targets, ignore 5% MDEF<br><b>[Refine Rate 9~10]</b><br>10% chance to cast [Heal] Lvl 10 when using [Heal] skill.<br><b>[Refine Rate 10]</b><br>Your [Heal], [Sanctuary] and [" + skillName(245, SRV) + "] effectiveness +10%", 89, 15, 99, 14, 74, 10, 194, 1, 0]
+	, [1085, 999, 1, 70, 4, 0, 0, 80, "Glorious Cure Wand", 0, "<b>[Refine Rate 6~10]</b><br>Your [Heal], [Sanctuary] and [" + skillName(245) + "] effectiveness + (5 + (refine level - 5) * 2)%<br>On [" + v_Race[7] + "] race targets, ignore 5% MDEF<br><b>[Refine Rate 9~10]</b><br>10% chance to cast [Heal] Lvl 10 when using [Heal] skill.<br><b>[Refine Rate 10]</b><br>Your [Heal], [Sanctuary] and [" + skillName(245) + "] effectiveness +10%", 89, 15, 99, 14, 74, 10, 194, 1, 0]
 	, [1086, 999, 0, 130, 4, 0, 0, 80, "Glorious Morning Star", 0, "<b>[Refine Rate 6~10]</b><br>Pierces Defense of [" + v_Race[7] + "] race monster by 5%<br>ASPD +5%<br><font color=red>[Slaughter] Lvl 1:</font> Increases ATK based damage against [" + v_Race[7] + "] race monsters by (refine level - 4) ^ 2<br><b>[Refine Rate 9~10]</b><br>ASPD +5%<br>20% chance to cause [Stun] status effect on your target when performing an ATK based attack.", 37, 75, 307, 20, 194, 1, 0]
 	, [1087, 999, 0, 220, 4, 0, 0, 80, "Glorious Two-handed Axe", 0, "<b>[Refine Rate 6~10]</b><br>Pierces Defense of [" + v_Race[7] + "] race monster by 5%<br><font color=red>[Slaughter] Lvl 2:</font> Increases ATK based damage against [" + v_Race[7] + "] race monsters by (refine level - 3) ^ 2<br>5% chance to cast [Critical Wound] Lvl 1 on your target when performing an ATK based attack.<br><b>[Refine Rate 9~10]</b><br>Increases the chance to cast [Critical Wound] Lvl 1 to 10%<br>20% chance to cast [Critical Wound] Lvl 2 when using [Mammonite] skill.", 37, 70, 307, 25, 194, 1, 0]
 	, [1088, 999, 70, 130, 4, 0, 0, 80, "Glorious Cleaver", 0, "<b>[Refine Rate 6~10]</b><br>ASPD +5%<br><font color=red>[Slaughter] Lvl 1:</font> Increases ATK based damage against [" + v_Race[7] + "] race monsters by (refine level - 4) ^ 2<br>Pierces Defense of [" + v_Race[7] + "] race monster by 5%<br><b>[Refine Rate 9~10]</b><br>ASPD +5%<br>5% chance to cast [Critical Wound] Lvl 1 when dealing ATK based damage.<br>20% chance to cast [Critical Wound] Lvl 2 when using [Mammonite] skill.", 37, 75, 307, 20, 194, 1, 0]
@@ -1096,14 +1096,14 @@ m_Item = [
 	, [1093, 999, 0, 50, 4, 0, 0, 80, "Glorious Lariat", 0, "<b>[Refine Rate 6~10]</b><br><font color=red>[Slaughter] Lvl 1:</font> Increases ATK based damage against [" + v_Race[7] + "] race monsters by (refine level - 4) ^ 2<br>Pierces Defense of [" + v_Race[7] + "] race monster by 5%<br><b>[Refine Rate 9~10]</b><br>10% chance to cast [Tarot Card of Fate] Lvl 5 on your target when [Arrow Vulcan] skill is used.", 37, 95, 307, 20, 194, 1, 0]
 	, [1094, 999, 0, 90, 4, 0, 0, 80, "Glorious Tablet", 0, "<b>[Refine 6~10]</b><br><font color=red>[Slaughter] Lvl 1:</font> Increases ATK based damage against [" + v_Race[7] + "] race monsters by (refine level - 4) ^ 2<br>Pierces Defense of [" + v_Race[7] + "] race monster by 5%<br><b>[Refine 9~10]</b><br>When dealing ATK based damage, 3% chance you gain ATK +200 for 3 seconds.", 89, 15, 37, 80, 307, 25, 194, 1, 0]
 	, [1095, 999, 0, 90, 4, 0, 0, 80, "Glorious Apocalypse", 0, "<b>[Refine 6~10]</b><br>Pierces Defense of [" + v_Race[7] + "] race monster by 5%<br><b>[Refine 9~10]</b><br>MATK +5%<br>Casting Time -5%<br>All skill's After-cast Delay -5%", 89, 15, 37, 80, 317, 25, 194, 1, 0]
-	, [1096, 999, 0, 30, 4, 0, 0, 80, "Glorious Claw", 0, "<b>[Refine Rate 6~10]</b><br><font color=red>[Slaughter] Lvl 1:</font> Increases ATK based damage against [" + v_Race[7] + "] race monsters by (refine level - 4) ^ 2<br>Pierces Defense of [" + v_Race[7] + "] race monster by 5%<br><b>[Refine Rate 9~10]</b><br>(refine level*10 - 50)% chance to cast [" + skillName(193, SRV) + "] Lvl 1 when dealing ATK based damage<br>(refine level * 10 - 50)% chance to cast [Decrease Agility] Lvl 1 when dealing ATK based damage", 37, 95, 307, 25, 194, 1, 0]
-	, [1097, 999, 0, 30, 4, 0, 0, 80, "Glorious Fist", 0, "<b>[Refine 6~10]</b><br><font color=red>[Slaughter] Lvl 1:</font> Increases ATK based damage against [" + v_Race[7] + "] race monsters by (refine level - 4) ^ 2<br>Pierces Defense of [" + v_Race[7] + "] race monster by 5%<br><b>[Refine Rate 9~10]</b><br>[" + skillName(197, SRV) + "] skill Casting Time -100%<br>100% chance to cast [" + skillName(291, SRV) + "] when [" + skillName(195, SRV) + "] skill is used.", 37, 95, 307, 20, 194, 1, 0]
+	, [1096, 999, 0, 30, 4, 0, 0, 80, "Glorious Claw", 0, "<b>[Refine Rate 6~10]</b><br><font color=red>[Slaughter] Lvl 1:</font> Increases ATK based damage against [" + v_Race[7] + "] race monsters by (refine level - 4) ^ 2<br>Pierces Defense of [" + v_Race[7] + "] race monster by 5%<br><b>[Refine Rate 9~10]</b><br>(refine level*10 - 50)% chance to cast [" + skillName(193) + "] Lvl 1 when dealing ATK based damage<br>(refine level * 10 - 50)% chance to cast [Decrease Agility] Lvl 1 when dealing ATK based damage", 37, 95, 307, 25, 194, 1, 0]
+	, [1097, 999, 0, 30, 4, 0, 0, 80, "Glorious Fist", 0, "<b>[Refine 6~10]</b><br><font color=red>[Slaughter] Lvl 1:</font> Increases ATK based damage against [" + v_Race[7] + "] race monsters by (refine level - 4) ^ 2<br>Pierces Defense of [" + v_Race[7] + "] race monster by 5%<br><b>[Refine Rate 9~10]</b><br>[" + skillName(197) + "] skill Casting Time -100%<br>100% chance to cast [" + skillName(291) + "] when [" + skillName(195) + "] skill is used.", 37, 95, 307, 20, 194, 1, 0]
 	, [1098, 999, 0, 55, 4, 0, 0, 80, "Glorious Shuriken", 0, "When performing an ATK based attack, 5% chance to deal doubled damage with [Throw Huuma Shuriken] and [Final Strike] for 10 seconds.<br><b>[Refine Rate 6~10]</b><br>Pierces Defense of [" + v_Race[7] + "] race monster by 5%<br><font color=red>[Slaughter] Lvl 2:</font> Increases ATK based damage against [" + v_Race[7] + "] race monsters by (refine level - 3) ^ 2<br><b>[Refine Rate 9~10]</b><br>20% chance to cast [Critical Wound] Lvl 2 on your target when [Throw Huuma Shuriken] is used<br>100% chance to cast [Heal] Lvl 10 on yourself after [Final Strike] is used.", 89, 15, 37, 95, 307, 20, 194, 1, 0]
-	, [1099, 999, 0, 80, 4, 0, 0, 80, "Glorious Pistol", 0, "<b>[Refine Rate 6~10]</b><br>Pierces Defense of [" + v_Race[7] + "] race monster by 5%<br><font color=red>[Slaughter] Lvl 1:</font> Increases ATK based damage against [" + v_Race[7] + "] race monsters by (refine level - 4) ^ 2<br><b>[Refine Rate 9~10]</b><br><b>For each refine level:</b> [" + skillName(428, SRV) + "] skill damage +2%<br>100% chance to cast [" + skillName(416, SRV) + "] Lvl 1 when [" + skillName(428, SRV) + "] skill is used.", 37, 55, 307, 20, 194, 1, 0]
+	, [1099, 999, 0, 80, 4, 0, 0, 80, "Glorious Pistol", 0, "<b>[Refine Rate 6~10]</b><br>Pierces Defense of [" + v_Race[7] + "] race monster by 5%<br><font color=red>[Slaughter] Lvl 1:</font> Increases ATK based damage against [" + v_Race[7] + "] race monsters by (refine level - 4) ^ 2<br><b>[Refine Rate 9~10]</b><br><b>For each refine level:</b> [" + skillName(428) + "] skill damage +2%<br>100% chance to cast [" + skillName(416) + "] Lvl 1 when [" + skillName(428) + "] skill is used.", 37, 55, 307, 20, 194, 1, 0]
 	, [1100, 999, 0, 90, 4, 0, 0, 80, "Glorious Rifle", 0, "<b>[Refine Rate 6~10]</b><br>Pierces Defense of [" + v_Race[7] + "] race monster by 5%<br><font color=red>[Slaughter] Lvl 1:</font> Increases ATK based damage against [" + v_Race[7] + "] race monsters by (refine level - 4) ^ 2<br><b>[Refine Rate 9~10]</b><br>[Tracking] skill Casting Time +25%<br><b>For each refine level:</b> [Tracking] skill damage +3%", 37, 75, 307, 20, 5418, 30, 194, 1, 0]
 	, [1101, 999, 0, 90, 4, 0, 0, 80, "Glorious Gatling Gun", 0, "<b>[Refine Rate 6~10]</b><br>Pierces Defense of [" + v_Race[7] + "] race monster by 5%<br><font color=red>[Slaughter] Lvl 1:</font> Increases ATK based damage against [" + v_Race[7] + "] race monsters by (refine level - 4) ^ 2<br><b>[Refine Rate 9~10]</b><br><b>For each refine level:</b> Increases ATK based damage by 1%", 37, 35, 307, 20, 5418, 30, 194, 1, 0]
-	, [1102, 999, 0, 110, 4, 0, 0, 80, "Glorious Shotgun", 0, "Inflicts Splash Damage [Baphomet MVP Card Effect]<br><b>[Refine Rate 6~10]</b><br>Pierces Defense of [" + v_Race[7] + "] race monster by 5%<br><font color=red>[Slaughter] Lvl 1:</font> Increases ATK based damage against [" + v_Race[7] + "] race monsters by (refine level - 4) ^ 2<br><b>[Refine Rate 9~10]</b><br><b>For each refine level:</b> [" + skillName(436, SRV) + "] skill damage +2%<br>20% chance to cause [Stun] status effect on your target when [" + skillName(436, SRV) + "] skill is used.", 37, 55, 307, 20, 5418, 30, 194, 1, 0]
-	, [1103, 999, 0, 330, 4, 0, 0, 80, "Glorious Grenade Launcher", 0, "<b>[Refine Rate 6~10]</b><br>Pierces Defense of [" + v_Race[7] + "] race monster by 5%<br><font color=red>[Slaughter] Lvl 1:</font> Increases ATK based damage against [" + v_Race[7] + "] race monsters by (refine level - 4) ^ 2<br><b>[Refine Rate 9~10]</b><br><b>For each refine level:</b> [" + skillName(437, SRV) + "] skill damage +2%<br>20% chance to cause [Stun] status effect on your target when [" + skillName(436, SRV) + "] skill is used.<br>When performing an ATK based attack, 20% chance you gain ASPD +20% for 20 seconds.", 37, 35, 307, 20, 5418, 30, 194, 1, 0]
+	, [1102, 999, 0, 110, 4, 0, 0, 80, "Glorious Shotgun", 0, "Inflicts Splash Damage [Baphomet MVP Card Effect]<br><b>[Refine Rate 6~10]</b><br>Pierces Defense of [" + v_Race[7] + "] race monster by 5%<br><font color=red>[Slaughter] Lvl 1:</font> Increases ATK based damage against [" + v_Race[7] + "] race monsters by (refine level - 4) ^ 2<br><b>[Refine Rate 9~10]</b><br><b>For each refine level:</b> [" + skillName(436) + "] skill damage +2%<br>20% chance to cause [Stun] status effect on your target when [" + skillName(436) + "] skill is used.", 37, 55, 307, 20, 5418, 30, 194, 1, 0]
+	, [1103, 999, 0, 330, 4, 0, 0, 80, "Glorious Grenade Launcher", 0, "<b>[Refine Rate 6~10]</b><br>Pierces Defense of [" + v_Race[7] + "] race monster by 5%<br><font color=red>[Slaughter] Lvl 1:</font> Increases ATK based damage against [" + v_Race[7] + "] race monsters by (refine level - 4) ^ 2<br><b>[Refine Rate 9~10]</b><br><b>For each refine level:</b> [" + skillName(437) + "] skill damage +2%<br>20% chance to cause [Stun] status effect on your target when [" + skillName(436) + "] skill is used.<br>When performing an ATK based attack, 20% chance you gain ASPD +20% for 20 seconds.", 37, 35, 307, 20, 5418, 30, 194, 1, 0]
 	, [1104, 999, 1, 0, 0, 0, 0, 81, "Glorious Suit", 0, "", 15, 20, 57, 7, 0]
 	, [1105, 999, 1, 0, 0, 0, 0, 61, "Glorious Popularized Suit", 0, "", 13, 600, 76, 10, 0]
 	, [1106, 999, 1, 0, 0, 0, 0, 1, "Glorious Mass-Production Suit", 0, "", 13, 500, 0]
@@ -1157,11 +1157,11 @@ m_Item = [
 	, [1154, 999, 0, 0, 0, 1, 10, 45, "(unused)", 0, "", 0]
 	, [1155, 999, 0, 1, 0, 0, 80, 1, "Magic Rabbit Hat", 0, "<b>NOTE: Auto-casted bolt level is a random level between 1~3.</b>", 4, 1, 14, 50, 221, 109, 221, 110, 221, 111, 221, 102, 0]
 	, [1156, 999, 1052, 110, 2, 3, 50, 50, "Krierg", 0, "When using [Back Stab] skill, 10% chance to cause [Bleeding] status effect on your target.", 5169, 15, 0]
-	, [1157, 1, 1052, 135, 3, 2, 5, 50, "Weihna", 0, "When using [" + skillName(171, SRV) + "] skill, 10% chance to cause [Poison] status effect on your target.<br>When dealing ATK based damage, 0.5% chance to increase ATK based damage by 10% for 5 seconds.", 0]
+	, [1157, 1, 1052, 135, 3, 2, 5, 50, "Weihna", 0, "When using [" + skillName(171) + "] skill, 10% chance to cause [Poison] status effect on your target.<br>When dealing ATK based damage, 0.5% chance to increase ATK based damage by 10% for 5 seconds.", 0]
 	, [1158, 2, 1070, 170, 3, 1, 150, 50, "Ruber", 0, "When dealing ATK based damage, 0.5% chance to increase [Bash] and [Bowling Bash] skills damage +20% for 15 seconds.", 0]
 	, [1159, 999, 51, 180, 4, 1, 200, 80, "Veteran Sword", 0, "If the user has mastered [Bash], increases it's damage by 50%<br>If the user has mastered [Bowling Bash], increases it's damage by 50%", 1, 1, 5, 1, 0]
 	, [1160, 3, 1051, 200, 2, 3, 380, 50, "Krasnaya", 0, "<b>[Base STR >= 95]</b> ATK +20", 0]
-	, [1161, 8, 53, 160, 3, 2, 180, 80, "Veteran Hammer", 0, "For each level of [Divine Protection] the user has learned, user's [Heal], [Sanctuary], and [" + skillName(245, SRV) + "] effectiveness +1%<br>For each level of [Mace Mastery] the user has learned, CRIT +2", 4, 1, 6, 1, 0]
+	, [1161, 8, 53, 160, 3, 2, 180, 80, "Veteran Hammer", 0, "For each level of [Divine Protection] the user has learned, user's [Heal], [Sanctuary], and [" + skillName(245) + "] effectiveness +1%<br>For each level of [Mace Mastery] the user has learned, CRIT +2", 4, 1, 6, 1, 0]
 	, [1162, 8, 1001, 130, 3, 2, 50, 50, "Erde", 0, "", 14, 50, 5244, 20, 5248, 20, 99, 10, 0]
 	, [1163, 8, 1001, 130, 3, 2, 50, 50, "Red Square Bag", 0, "5% chance to obtain a [Red Potion] item when killing a monster.<br>2% chance to obtain an [Orange Potion] item when killing a monster.<br>2% chance to obtain a [Yellow Potion] item when killing a monster.<br>2% chance to obtain a [White Potion] item when killing a monster.<br>1% chance to obtain a [Blue Potion] item when killing a monster.<br><b>[Base STR >= 90]</b> When performing an ATK based attack, 5% chance to cause [Stun] status effect on your target.", 13, 200, 5244, 20, 5248, 20, 0]
 	, [1164, 6, 1070, 140, 3, 2, 150, 50, "Vecer Axe", 0, "<b>[Base LUK >= 90]</b> ATK +20<br><b>[Base DEX >= 90]</b> CRIT +5<br><b>[Base LUK >= 90 and Base DEX >= 90]</b> [Mammonite] skill damage +15%", 0]
@@ -1183,7 +1183,7 @@ m_Item = [
 	, [1180, 50, 0, 1, 0, 0, 20, 1, "Bride's Corolla", 0, "", 6, 3, 19, 2, 0]
 	, [1181, 50, 0, 1, 0, 1, 20, 1, "Fairy Flower", 0, "", 4, 1, 19, 1, 54, 5, 0]
 	, [1182, 999, 0, 3, 0, 1, 10, 70, "Neck Tie", 0, "", 0, 3, 1, 8, -5, 370, 5, 0]
-	, [1183, 50, 0, 3, 0, 1, 60, 70, "Statue of Baby Angel", 0, "When receiving ATK based damage, 2% chance to cast [" + skillName(95, SRV) + "] Lvl 1 on yourself.", 19, 2, 0]
+	, [1183, 50, 0, 3, 0, 1, 60, 70, "Statue of Baby Angel", 0, "When receiving ATK based damage, 2% chance to cast [" + skillName(95) + "] Lvl 1 on yourself.", 19, 2, 0]
 	, [1184, 50, 0, 0, 0, 0, 10, 1, "Hair Brush", 0, "", 10, 6, 0]
 	, [1185, 50, 0, 3, 0, 0, 50, 70, "Frog Hat", 0, "", 19, 1, 34, 12, 174, 12, 0]
 	, [1186, 999, 0, 0, 0, 1, 30, 1, "Box of Fun [A]", 0, "<b style='color:#F00;'>[missing item data/effects]</b>", 0]
@@ -1277,26 +1277,26 @@ m_Item = [
 	, [1274, 999, 0, 3, 0, 0, 30, 70, "Aquarius Crown", 0, "<b>[Refine Rate 7~10]</b><br>DEF +1<br>ATK +15", 64, 5, 9, 10, 1, 2, 0]
 	, [1275, 999, 0, 3, 0, 0, 30, 70, "Aquarius Diadem", 0, "<b>[Refine Rate 7~10]</b><br>DEF +1<br>ATK +15", 64, 5, 9, 10, 1, 2, 0]
 	, [1276, 999, 0, 3, 0, 0, 30, 70, "Cancer Crown", 0, "<b>[Refine Rate 7~10]</b><br>DEF +1<br>ATK +15<br>FLEE +10", 61, 5, 1, 2, 0]
-	, [1277, 999, 0, 3, 0, 0, 30, 70, "Cancer Diadem", 0, "<b>[Refine Rate 7~10]</b><br>MDEF +1<br>MATK +2%<br>Your [Heal], [Sanctuary], and [" + skillName(245, SRV) + "] effectiveness +3%", 61, 5, 4, 2, 0]
-	, [1278, 999, 0, 3, 0, 1, 30, 1, "Capricorn Crown", 0, "<b>[Refine Rate 7~10]</b><br>Small chance to cast [" + skillName(346, SRV) + "] Lvl 1 (" + v_Element[2] + " Endow) when receiving ATK based damage.", 3, 2, 5, 2, 0]
+	, [1277, 999, 0, 3, 0, 0, 30, 70, "Cancer Diadem", 0, "<b>[Refine Rate 7~10]</b><br>MDEF +1<br>MATK +2%<br>Your [Heal], [Sanctuary], and [" + skillName(245) + "] effectiveness +3%", 61, 5, 4, 2, 0]
+	, [1278, 999, 0, 3, 0, 1, 30, 1, "Capricorn Crown", 0, "<b>[Refine Rate 7~10]</b><br>Small chance to cast [" + skillName(346) + "] Lvl 1 (" + v_Element[2] + " Endow) when receiving ATK based damage.", 3, 2, 5, 2, 0]
 	, [1279, 999, 0, 3, 0, 0, 30, 1, "Capricorn Diadem (old)", 0, "<b>[Refine Rate 7~10]</b><br>INT +2<br><b>[Refine Rate 8~10]</b><br>Casting Time -3%<br><b>[Refine Rate 9~10]</b><br>[Heal] and [Sanctuary] effectiveness +4%<br><b>[Refine Rate 10]</b><br>When receiving ATK based damage, 1% chance to cast [Hammer Fall] Lvl 5", 62, 5, 19, 5, 5, 2, 0]
 	, [1280, 999, 0, 4, 0, 0, 30, 70, "Gemini Crown", 0, "<b>[Refine Rate 7~10]</b><br>DEF +1<br>MATK +15<br>FLEE +10<br>[" + v_Element[4] + "] element resistance +5%", 19, 5, 2, 2, 17, 2, 0]
 	, [1281, 999, 0, 3, 0, 0, 30, 70, "Gemini Diadem (iRO)", 0, "<b>[Refine Rate 7~10]</b><br>MDEF +7<br>MATK +8%<br>[" + v_Element[4] + "] element resistance +5%", 89, 2, 0]
-	, [1282, 999, 0, 3, 0, 0, 30, 70, "Leo Crown (aRO)", 0, "<b>[Refine Rate 7~10]</b><br>DEF +1<br>FLEE + 10<br>5% chance to cast [" + skillName(346, SRV) + "] Lvl 4 (" + v_Element[3] + " Endow) when receiving ATK based damage.", 63, 5, 1, 2, 17, 15, 0]
+	, [1282, 999, 0, 3, 0, 0, 30, 70, "Leo Crown (aRO)", 0, "<b>[Refine Rate 7~10]</b><br>DEF +1<br>FLEE + 10<br>5% chance to cast [" + skillName(346) + "] Lvl 4 (" + v_Element[3] + " Endow) when receiving ATK based damage.", 63, 5, 1, 2, 17, 15, 0]
 	, [1283, 999, 0, 3, 0, 0, 30, 70, "Leo Diadem", 0, "<b>[Refine Rate 7~10]</b><br>ASPD +3%<br>FLEE +10<br>When performing an ATK based attack, 1% chance of all basic attacks become 3x3 splash damage [Baphomet MVP Card Effect] for 10 seconds.", 63, 5, 5, 2, 0]
 	, [1284, 999, 0, 3, 0, 0, 30, 1, "Libra Crown (iRO)", 0, "<b>[Refine Rate 7~10]</b><br>MATK +3%<br><b>[Refine Rate 9~10]</b><br>MATK +5%<br>Small chance to cast [Frost Nova] Lvl 5 when receiving ATK based damage.", 64, 7, 5, 3, -221, 29, 0]
-	, [1285, 999, 0, 3, 0, 0, 30, 1, "Libra Diadem", 0, "<b>[Refine Rate 7~10]</b><br>Small chance to cast [" + skillName(346, SRV) + "] Lvl 2 (" + v_Element[4] + " Endow) when receiving ATK based damage<br><b>[Refine Rate 9~10]</b><br>FLEE +5<br>ATK based damage +3% (versus Normal/Boss/Guardian)", 17, 7, 0]
+	, [1285, 999, 0, 3, 0, 0, 30, 1, "Libra Diadem", 0, "<b>[Refine Rate 7~10]</b><br>Small chance to cast [" + skillName(346) + "] Lvl 2 (" + v_Element[4] + " Endow) when receiving ATK based damage<br><b>[Refine Rate 9~10]</b><br>FLEE +5<br>ATK based damage +3% (versus Normal/Boss/Guardian)", 17, 7, 0]
 	, [1286, 999, 0, 3, 0, 0, 30, 70, "Pisces Crown", 0, "<b>[Refine Rate 7~10]</b><br>MDEF +1<br>MATK +2%", 61, 5, 19, 5, 4, 2, 0]
 	, [1287, 999, 0, 3, 0, 0, 30, 70, "Pisces Diadem", 0, "<b>[Refine Rate 7~10]</b><br>DEF +1<br>MATK +2%", 61, 7, 19, 5, 4, 2, 0]
 	, [1288, 999, 0, 3, 0, 0, 30, 1, "Sagittarius Crown", 0, "<b>[Refine Rate 7~10]</b><br>ASPD +2%<br><b>[Refine Rate 8~10]</b><br>AGI +2<br><b>[Refine Rate 9~10]</b><br>Increases ranged damage by 5%<br><b>[Refine Rate 10]</b><br>When performing an ATK based attack, there's a chance you gain DEX +10 and AGI +10 for 10 seconds.", 63, 7, 5, 2, 0]
 	, [1289, 999, 0, 3, 0, 0, 30, 1, "Sagittarius Diadem", 0, "<b>[Refine Rate 7~10]</b><br>Casting Time -3%<br><b>[Refine Rate 8~10]</b><br>When dealing MATK based damage, there's a low chance to cast [Sightrasher] Lvl 1<br><b>[Refine Rate 9~10]</b><br>Casting Time -2%<br><b>[Refine Rate 10]</b><br>MATK +4%", 5, 2, 63, 7, 19, 3, 0]
-	, [1290, 999, 0, 3, 0, 0, 30, 1, "Scorpio Crown", 0, "<b>[Refine Rate 7~10]</b><br>Small chance to cast [" + skillName(346, SRV) + "] Lvl 3 (" + v_Element[1] + " Endow) when receiving ATK based damage<br><b>[Refine Rate 8~10]</b><br>ASPD +2%<br><b>[Refine Rate 9~10]</b><br>When performing an ATK based attack, there's a chance to cast [Frost Nova] Lvl 5<br><b>[Refine Rate 10]</b><br>ASPD +2%<br>ATK +5", 17, 5, 61, 5, 12, 3, -221, 51, 0]
+	, [1290, 999, 0, 3, 0, 0, 30, 1, "Scorpio Crown", 0, "<b>[Refine Rate 7~10]</b><br>Small chance to cast [" + skillName(346) + "] Lvl 3 (" + v_Element[1] + " Endow) when receiving ATK based damage<br><b>[Refine Rate 8~10]</b><br>ASPD +2%<br><b>[Refine Rate 9~10]</b><br>When performing an ATK based attack, there's a chance to cast [Frost Nova] Lvl 5<br><b>[Refine Rate 10]</b><br>ASPD +2%<br>ATK +5", 17, 5, 61, 5, 12, 3, -221, 51, 0]
 	, [1291, 999, 0, 3, 0, 1, 30, 1, "Scorpio Diadem", 0, "<b>[Refine Rate 7~10]</b><br>DEX +1<br>ATK +5", 5, 2, 0]
 	, [1292, 999, 0, 3, 0, 0, 30, 70, "Taurus Crown (old)", 0, "<b>[Refine Rate 7~10]</b><br>DEF +2<br>[" + v_Element[2] + "] element resistance +5%", 5, 2, 3, 2, 0]
 	, [1293, 999, 0, 3, 0, 0, 30, 70, "Taurus Diadem", 0, "<b>[Refine Rate 7~10]</b><br>DEX +1<br>MATK +1%", 62, 5, 5, 2, 74, 2, 0]
 	, [1294, 999, 0, 3, 0, 0, 30, 70, "Virgo Crown", 0, "<b>[Refine Rate 7~10]</b><br>[" + v_Element[2] + "] element resistance +5%<br>When performing an ATK based attack, there's a chance you gain DEX +20 for 6 seconds.", 5, 2, 12, 1, 0]
-	, [1295, 999, 0, 3, 0, 1, 30, 70, "Virgo Diadem", 0, "<b>[Refine Rate 7~10]</b><br>When performing an ATK based attack, 5% chance to cast [" + skillName(382, SRV) + "] Lvl 1", 62, 5, 12, 3, -221, 156, 0]
-	, [1296, 999, 0, 2, 0, 0, 50, 50, "Ashura Fairy Hat", 0, "Enables the use of [" + skillName(211, SRV) + "] Lvl 1 (only available when equipping a whip weapon)", 200, 1, 5, 2, 6, 2, 0]
+	, [1295, 999, 0, 3, 0, 1, 30, 70, "Virgo Diadem", 0, "<b>[Refine Rate 7~10]</b><br>When performing an ATK based attack, 5% chance to cast [" + skillName(382) + "] Lvl 1", 62, 5, 12, 3, -221, 156, 0]
+	, [1296, 999, 0, 2, 0, 0, 50, 50, "Ashura Fairy Hat", 0, "Enables the use of [" + skillName(211) + "] Lvl 1 (only available when equipping a whip weapon)", 200, 1, 5, 2, 6, 2, 0]
 	, [1297, 999, 0, 4, 0, 0, 50, 1, "Australian Flag Hat", 0, "", 7, 2, 0]
 	, [1298, 999, 0, 0, 0, 0, 10, 1, "Autumn Leaves", 0, "", 13, 40, 14, 40, 0]
 	, [1299, 999, 0, 1, 0, 1, 10, 1, "Autumn Leaves", 0, "", 11, 5, 0]
@@ -1371,7 +1371,7 @@ m_Item = [
 	, [1367, 999, 1, 1, 0, 0, 50, 1, "[Color] Drooping Cat", 0, "", 19, 15, 153, 30, 0]
 	, [1368, 999, 1, 2, 0, 0, 20, 10, "Hello Mother Hat", 0, "", 6, 3, 0]
 	, [1369, 999, 0, 4, 0, 0, 50, 1, "Bandana Merah Putih", 0, "1% chance to drop a [Honey] item when killing a monster.", 0]
-	, [1370, 51, 0, 1, 0, 0, 10, 35, "Observer", 0, "Enables use of [" + skillName(123, SRV) + "] Lvl 1.", 0]
+	, [1370, 51, 0, 1, 0, 0, 10, 35, "Observer", 0, "Enables use of [" + skillName(123) + "] Lvl 1.", 0]
 	, [1371, 999, 0, 2, 0, 0, 30, 1, "Judge Hat", 0, "", 200, 1, 6, 1, 14, 30, 0]
 	, [1372, 999, 0, 1, 0, 1, 10, 1, "Savage Babe Hat", 0, "", 3, 1, 0]
 	, [1373, 50, 0, 2, 0, 1, 30, 70, "Wanderer's Sakkat", 0, "", 2, 2, 0]
@@ -1403,11 +1403,11 @@ m_Item = [
 	, [1399, 999, 0, 2, 0, 0, 10, 24, "Kerchief", 0, "", 19, 2, 10, 5, 0]
 	, [1400, 999, 0, 2, 0, 0, 70, 10, "Boyfriend Hat", 0, "", 0]
 	, [1401, 999, 0, 2, 0, 0, 70, 10, "Girlfriend Hat", 0, "", 0]
-	, [1402, 999, 0, 1, 0, 1, 20, 20, "Twin Pompom By JB", 0, "Enables use of [" + skillName(123, SRV) + "] Lvl 1.<br />When performing an ATK based attack, 50% chance to cast [Increase Agility] Lvl 1.", 6, 3, 0]
+	, [1402, 999, 0, 1, 0, 1, 20, 20, "Twin Pompom By JB", 0, "Enables use of [" + skillName(123) + "] Lvl 1.<br />When performing an ATK based attack, 50% chance to cast [Increase Agility] Lvl 1.", 6, 3, 0]
 	, [1403, 999, 0, 3, 0, 1, 30, 85, "Crown of Deceit", 0, "", 200, 1, 4, 4, 19, 10, 73, -10, 0]
 	, [1404, 51, 0, 1, 0, 0, 10, 70, "Filir's Pinions", 0, "", 12, 2, 73, -2, 0]
 	, [1405, 999, 0, 2, 0, 0, 20, 1, "Advanced Mini Propeller", 0, "", 2, 2, 5, 1, 9, 10, 0]
-	, [1406, 999, 0, 4, 0, 1, 30, 1, "Snowman Hat", 0, "10% chance to obtain a [Buche De Noel] item when killing monster ID no.530<br>10% chance to obtain a [Candy Cane] item when killing monster ID no.12354<br><b>[Refine Rate 0~7]</b><br>When receiving ATK or MATK based attack, 2% chance to cast [" + skillName(201, SRV) + "] Lvl 1 on yourself.<br><b>[Refine Rate 8~10]</b><br>When receiving ATK or MATK based attack, 2% chance to cast [" + skillName(201, SRV) + "] Lvl 5 on yourself.", 19, 3, 1, 1, 4, 1, 61, 7, 0]
+	, [1406, 999, 0, 4, 0, 1, 30, 1, "Snowman Hat", 0, "10% chance to obtain a [Buche De Noel] item when killing monster ID no.530<br>10% chance to obtain a [Candy Cane] item when killing monster ID no.12354<br><b>[Refine Rate 0~7]</b><br>When receiving ATK or MATK based attack, 2% chance to cast [" + skillName(201) + "] Lvl 1 on yourself.<br><b>[Refine Rate 8~10]</b><br>When receiving ATK or MATK based attack, 2% chance to cast [" + skillName(201) + "] Lvl 5 on yourself.", 19, 3, 1, 1, 4, 1, 61, 7, 0]
 	, [1407, 999, 0, 0, 0, 1, 60, 1, "Red Wing Hat", 0, "<b>[Refine Rate 7~10]</b><br>ATK +2%, MATK +2%<br><b>[Refine Rate 9~10]</b><br>Additional ATK+2% and MATK +2%", 0] //{ if (getrefine()>6) { bonus2 bAddRace,RC_NonBoss,2; bonus2 bAddRace,RC_Boss,2; bonus bMatkRate,2; } if (getrefine()>8) { bonus2 bAddRace,RC_NonBoss,2; bonus2 bAddRace,RC_Boss,2; bonus bMatkRate,2; } }
 	, [1408, 999, 0, 2, 0, 0, 20, 1, "Valentine Hat (fRO)", 0, "", 193, 1, 15, 7, 16, 7, 0]
 	, [1409, 999, 0, 0, 0, 0, 10, 1, "Victory Hairband", 0, "", 0]
@@ -1549,9 +1549,9 @@ m_Item = [
 	, [1545, 999, 0, 5, 0, 1, 10, 1, "Power of Thor (iRO)", 0, "<b>[Refine Rate 8~20]</b><br>When dealing ATK based damage, small chance to gain ATK +40 for 6 seconds.<br>When dealing MATK based damage, small chance to gain MATK +40 for 6 seconds.", 19, 3, 4, 1, 5, 1, 0]
 	, [1546, 999, 0, 6, 0, 1, 10, 1, "Power of Thor (aRO)", 0, "", 193, 1, 19, 3, 7, 1, 9, 5, 0]
 	, [1547, 999, 0, 0, 0, 0, 10, 45, "Whikebine's Black Tail", 0, "", 10, 7, 12, 3, 0]
-	, [1548, 999, 0, 3, 0, 0, 30, 70, "Cancer Diadem (iRO)", 0, "<b>[Refine Rate 7~10]</b><br>MDEF +1<br>MATK +2%<br>Your [Heal], [Sanctuary] and [" + skillName(245, SRV) + "] effectiveness +3%", 19, 1, 61, 5, 4, 2, 0]
+	, [1548, 999, 0, 3, 0, 0, 30, 70, "Cancer Diadem (iRO)", 0, "<b>[Refine Rate 7~10]</b><br>MDEF +1<br>MATK +2%<br>Your [Heal], [Sanctuary] and [" + skillName(245) + "] effectiveness +3%", 19, 1, 61, 5, 4, 2, 0]
 	, [1549, 999, 0, 3, 0, 0, 30, 70, "Gemini Crown (old)", 0, "<b>[Refine Rate 7~10]</b><br>HIT +5<br>ATK +15", 64, 5, 2, 2, 9, 10, 0]
-	, [1550, 999, 0, 3, 0, 0, 30, 70, "Leo Crown", 0, "<b>[Refine Rate 7~10]</b><br>DEF +1<br>FLEE + 10<br>5% chance to cast [" + skillName(346, SRV) + "] Lvl 4 (" + v_Element[3] + " Endow) when receiving ATK based damage.", 63, 5, 1, 2, 0]
+	, [1550, 999, 0, 3, 0, 0, 30, 70, "Leo Crown", 0, "<b>[Refine Rate 7~10]</b><br>DEF +1<br>FLEE + 10<br>5% chance to cast [" + skillName(346) + "] Lvl 4 (" + v_Element[3] + " Endow) when receiving ATK based damage.", 63, 5, 1, 2, 0]
 	, [1551, 999, 0, 3, 0, 0, 30, 70, "Aries Crown (iRO)", 0, "<b>[Refine Rate 7~10]</b><br>MDEF +5<br>MATK +2%", 63, 7, 4, 3, 0]
 	, [1552, 999, 0, 3, 0, 0, 30, 70, "Aries Diadem (iRO)", 0, "<b>[Refine Rate 7~10]</b><br>DEF +1<br>MDEF +5", 63, 5, 4, 2, 89, 2, 0]
 	, [1553, 999, 0, 3, 0, 0, 30, 1, "Sagittarius Crown (iRO)", 0, "<b>[Refine Rate 7~10]</b><br>ASPD +2%<br><b>[Refine Rate 8~10]</b><br>AGI +2<br><b>[Refine Rate 9~10]</b><br>Increases ranged damage by 3%<br><b>[Refine Rate 10]</b><br>When performing an ATK based attack, there's a chance you gain DEX +10 and AGI +10 for 10 seconds.", 63, 7, 5, 2, 0]
@@ -1574,7 +1574,7 @@ m_Item = [
 	, [1570, 999, 0, 5, 0, 0, 350, 94, "Sleipnir (iRO)", 0, "", 193, 1, 15, 20, 16, 20, 19, 10, 76, 25, 209, 25, 0]
 	, [1571, 999, 1, 149, 4, 0, 0, 0, "Refined Nagan", 0, "Enables use of [Double Attack] Lvl 5", 37, 40, 193, 1, 0]
 	, [1572, 999, 0, 9, 0, 0, 20, 1, "Fallen Angel Wings", 0, "", 19, 9, 6, 2, 67, 30, 66, -30, 57, 10, 0]
-	, [1573, 999, 1052, 135, 3, 2, 5, 50, "Weihna (iRO)", 0, "When using [" + skillName(171, SRV) + "] skill, 10% chance to cause [Poison] status effect on your target.<br>When dealing ATK based damage, 0.5% chance to increase ATK based damage by 5% for 5 seconds.", 0]
+	, [1573, 999, 1052, 135, 3, 2, 5, 50, "Weihna (iRO)", 0, "When using [" + skillName(171) + "] skill, 10% chance to cause [Poison] status effect on your target.<br>When dealing ATK based damage, 0.5% chance to increase ATK based damage by 5% for 5 seconds.", 0]
 	, [1574, 999, 0, 5, 0, 0, 0, 1, "Old Bandana", 0, "", 4, 2, 14, 50, 73, -10, 193, 1, 0]
 	, [1575, 999, 0, 0, 0, 0, 0, 0, "Ship Captain Hat + Captain's Pipe", 0, "Increases ranged damage by (''Ship Captain Hat'' Refine Rate)%", 0]
 	, [1576, 999, 0, 2, 0, 1, 30, 70, "Wanderer's Sakkat (aRO)", 0, "<b>[Refine Rate 5~10]</b><br>FLEE +5<br><b>[Refine Rate 7~10]</b><br>AGI +2<br>FLEE +2<br><b>[+ Wanderer pet]</b><br>ASPD +3% <b>*Not implemented*</b>", 200, 1, 9, 3, 0]
@@ -1719,7 +1719,7 @@ m_Item = [
 	, [1714, 999, 108, 4, 0, 0, 10, 60, "Nab Hood (aRO)", 0, "ATK +(refine)*2<BR>FLEE +(refine)*2", 196, 4, 0]
 	, [1715, 999, 108, 4, 0, 1, 40, 60, "Nab Shoes (aRO)", 0, "", 196, 4, 4, 2, 9, 3, 0]
 	, [1716, 999, 108, 0, 0, 0, 10, 60, "Nab Ring (aRO)", 0, "", 196, 4, 17, 10, 88, 20, 0]
-	, [1717, 999, 0, 0, 0, 0, 0, 0, "Nab Set (aRO)", 0, "If a higher level of [" + skillName(263, SRV) + "] skill is learned then that level will be autocasted instead.<BR><b>[Base STR >= 99]</b> ATK +30", 10, -20, 27, 10, 28, 10, 29, 10, 221, 155, 0]
+	, [1717, 999, 0, 0, 0, 0, 0, 0, "Nab Set (aRO)", 0, "If a higher level of [" + skillName(263) + "] skill is learned then that level will be autocasted instead.<BR><b>[Base STR >= 99]</b> ATK +30", 10, -20, 27, 10, 28, 10, 29, 10, 221, 155, 0]
 	, [1718, 999, 110, 8, 0, 1, 10, 60, "White Wing Suit (aRO)", 0, "FLEE +(refine)<BR>Deal +(refine*2)% ranged ATK based damage.", 196, 4, 0]
 	, [1719, 999, 110, 5, 0, 0, 20, 60, "White Wing Manteau (aRO)", 0, "2% chance to gain FLEE +20 for 7 seconds when dealing ATK based damage.", 196, 4, 2, 2, 9, 10, 0]
 	, [1720, 999, 110, 4, 0, 1, 40, 60, "White Wing Boots (aRO)", 0, "Reduces the SP cost of [Aimed Bolt] by 10.", 196, 4, 2, 2, 0]
@@ -1735,13 +1735,13 @@ m_Item = [
 	, [1730, 999, 107, 10, 0, 0, 300, 60, "Ur's Plate (aRO)", 0, "MaxHP +(refine)%", 196, 4, 19, 10, 57, 5, 60, 5, 0]
 	, [1731, 999, 107, 5, 0, 0, 60, 60, "Ur's Manteau (aRO)", 0, "", 196, 4, 15, 2, 60, 10, 0]
 	, [1732, 999, 107, 4, 0, 1, 90, 60, "Ur's Greaves (aRO)", 0, "<b>[Refine Rate 8~10]</b> MaxHP +(refine - 7)%", 196, 4, 14, 40, 0]
-	, [1733, 999, 107, 3, 0, 1, 20, 60, "Ur's Seal (aRO)", 0, "Reduces the SP cost of [" + skillName(259, SRV) + "] and [Hundred Spears] by 5.", 196, 4, 15, 2, 0]
-	, [1734, 999, 0, 0, 0, 0, 0, 0, "Ur's Set (aRO)", 0, "Increases damage of [Hundred Spears] skill by 50%<BR>Enables the use of [" + skillName(157, SRV) + "] Lvl 1", 15, 14, 0]
+	, [1733, 999, 107, 3, 0, 1, 20, 60, "Ur's Seal (aRO)", 0, "Reduces the SP cost of [" + skillName(259) + "] and [Hundred Spears] by 5.", 196, 4, 15, 2, 0]
+	, [1734, 999, 0, 0, 0, 0, 0, 0, "Ur's Set (aRO)", 0, "Increases damage of [Hundred Spears] skill by 50%<BR>Enables the use of [" + skillName(157) + "] Lvl 1", 15, 14, 0]
 	, [1735, 999, 107, 8, 0, 0, 300, 60, "Peuz's Plate (aRO)", 0, "", 196, 4, 19, 10, 17, 20, 9, 17, 0]
 	, [1736, 999, 107, 5, 0, 0, 60, 60, "Peuz's Manteau (aRO)", 0, "", 196, 4, 9, 10, 10, 10, 0]
 	, [1737, 999, 107, 5, 0, 1, 90, 60, "Peuz's Greaves (aRO)", 0, "<b>[Refine Rate 8~10]</b> AGI +(refine - 7)", 196, 4, 14, 40, 0]
 	, [1738, 999, 107, 2, 0, 1, 20, 60, "Peuz's Seal (aRO)", 0, "", 196, 4, 17, 20, 14, 20, 0]
-	, [1739, 999, 0, 0, 0, 0, 0, 0, "Peuz's Set (aRO)", 0, "Increases damage of [Wind Cutter] and [Sonic Wave] by 100%.<BR>Adds a chance of activating [" + skillName(256, SRV) + "] and adding 2 ASPD while physically attacking.", 80, 10, 0]
+	, [1739, 999, 0, 0, 0, 0, 0, 0, "Peuz's Set (aRO)", 0, "Increases damage of [Wind Cutter] and [Sonic Wave] by 100%.<BR>Adds a chance of activating [" + skillName(256) + "] and adding 2 ASPD while physically attacking.", 80, 10, 0]
 	, [1740, 999, 0, 0, 0, 0, 0, 70, "Pendant of Guardian", 0, "Allows use of [Call of Guardian] Lvl 1.", 196, 4, 0]
 	, [1741, 999, 0, 0, 0, 0, 30, 20, "Witch's Pumpkin Hat (iROc)", 0, "", 1, 2, 4, 2, 0]
 	, [1742, 999, 0, 0, 0, 0, 10, 100, "Driver Band (aRO)", 0, "<b>[Base STR >= 120]</b> ATK +10, CRI +3.", 19, 5, 1, 1, 5, 1, 0]
@@ -1777,7 +1777,7 @@ m_Item = [
 	, [1772, 999, 55, 80, 4, 0, 180, 60, "Staff Of Light", 0, "", 20, 6, 89, 18, 4, 6, 0]
 	, [1773, 999, 57, 70, 4, 0, 0, 80, "Glorious Destruction Staff (old)", 0, "MATK +(refine)%<br><b>[Refine Rate 6~10]</b><br><font color=red>[Destruction] Lvl 1</font>: Increases MATK based damage against [" + v_Race[7] + "] by (refine level - 5)*2<br>Increases MDEF ignoring by 5+(refine level - 5)*2<br><b>[Refine Rate 9~10]</b><br>20% chance to cast [Safety Wall] Lvl 10 on yourself when casting [Lord of Vermillion], [Meteor Storm] or [Storm Gust] Lvl 10", 195, 1, 177, 15, 317, 25, 194, 1, 0]
 	, [1774, 999, 1, 70, 4, 0, 0, 80, "Glorious Arc Wand (old)", 0, "<b>[Refine Rate 6~10]</b><br>On [" + v_Race[7] + "] race monsters, increases MDEF ignoring by 5%<br><b>[Refine Rate 9~10]</b><br>MATK +5%<br>Casting Time -5%<br>All skill's After-cast Delay -5%", 177, 15, 317, 25, 194, 1, 0]
-	, [1775, 999, 1, 70, 4, 0, 0, 80, "Glorious Cure Wand (old)", 0, "<b>[Refine Rate 6~10]</b><br>Your [Heal], [Sanctuary] and [" + skillName(245, SRV) + "] effectiveness + (5 + (refine level - 5) * 2)%<br>On [" + v_Race[7] + "] race targets, ignore 5% MDEF<br><b>[Refine Rate 9~10]</b><br>10% chance to cast [Heal] Lvl 10 when using [Heal] skill.<br><b>[Refine Rate 10]</b><br>Your [Heal], [Sanctuary] and [" + skillName(245, SRV) + "] effectiveness +10%", 99, 14, 74, 10, 194, 1, 0]
+	, [1775, 999, 1, 70, 4, 0, 0, 80, "Glorious Cure Wand (old)", 0, "<b>[Refine Rate 6~10]</b><br>Your [Heal], [Sanctuary] and [" + skillName(245) + "] effectiveness + (5 + (refine level - 5) * 2)%<br>On [" + v_Race[7] + "] race targets, ignore 5% MDEF<br><b>[Refine Rate 9~10]</b><br>10% chance to cast [Heal] Lvl 10 when using [Heal] skill.<br><b>[Refine Rate 10]</b><br>Your [Heal], [Sanctuary] and [" + skillName(245) + "] effectiveness +10%", 99, 14, 74, 10, 194, 1, 0]
 	, [1776, 999, 0, 10, 0, 0, 30, 20, "Witch's Pumpkin Hat (iROr)", 0, "", 19, 10, 1, 2, 4, 2, 0]
 	, [1777, 999, 1001, 160, 4, 0, 50, 99, "Aztoe Nail (aRO)", 0, "When performing an ATK based attack, (10+refine*5)% chance to cause [Freeze] status effect on your target.", 20, 4, 88, 80, 0]
 	, [1778, 999, 1001, 160, 4, 0, 50, 99, "Scarletto Nail (aRO)", 0, "When performing an ATK based attack, (10+refine*5)% chance to cause [Stone] status effect on your target.", 20, 3, 88, 80, 0]
@@ -1795,12 +1795,12 @@ m_Item = [
 	, [1790, 999, 1001, 150, 4, 0, 80, 99, "Bloody Cross (aRO)", 0, "When performing an ATK based attack, (refine*2)% chance to autocast [Hell Inferno] Lvl 1 on your target.", 20, 7, 0]    	//revisar def, weight, req.level, req.job
 	, [1791, 999, 123, 30, 4, 1, 40, 99, "Recovery Light (aRO)", 0, "Your [Heal], [Sanctuary], [High Heal], and [Coluseo Heal] effectiveness +(refine*6)%<BR>[Heal] skill SP cost +(refine*10).<BR>[High Heal] skill SP cost +(refine*14).<BR>[Coluseo Heal] skill SP cost +(refine*12).", 20, 6, 88, 160, 194, 1, 0]    	//revisar def, weight, req.level, req.job
 	, [1792, 999, 132, 100, 4, 2, 100, 99, "Chilly Spell Book (aRO)", 0, "[Cold Bolt] and [Diamond Dust] skills damage +(refine*3)%<BR>[Cold Bolt] and [Diamond Dust] skills SP cost +(refine*5).", 20, 1, 0]     //falta confirmar, implementar y revisar def, weight, req.level, req.job
-	, [1793, 999, 121, 20, 4, 0, 2000, 99, "Gigantic Lance (aRO)", 0, "Consumes 600 SP when unequipped.<BR>[" + skillName(259, SRV) + "] skill cooldown +20 seconds.<BR><b>[Base STR >= 120]</b> ATK+300", 12, -10, 0]     //falta confirmar, implementar y revisar def, weight, req.level, req.job
+	, [1793, 999, 121, 20, 4, 0, 2000, 99, "Gigantic Lance (aRO)", 0, "Consumes 600 SP when unequipped.<BR>[" + skillName(259) + "] skill cooldown +20 seconds.<BR><b>[Base STR >= 120]</b> ATK+300", 12, -10, 0]     //falta confirmar, implementar y revisar def, weight, req.level, req.job
 	, [1794, 999, 127, 180, 4, 1, 160, 99, "Cannon Spear (aRO)", 0, "[Cannon Spear] skill damage +(10+refine/3)%", 14, -100, 0]   	//revisar def, weight, req.level, req.job
 	, [1795, 999, 122, 200, 4, 1, 150, 99, "Guillotine Katar (aRO)", 0, "[Cross Impact] skill damage +30%", 5, 2, 9, -30, 37, 50, 0]   	//revisar def, weight, req.level, req.job
 	, [1796, 999, 122, 170, 3, 1, 120, 99, "Agent Katar (aRO)", 0, "HIT +(Base LUK /2)", 0]    	//revisar def, weight, req.level, req.job
 	, [1797, 999, 127, 6, 0, 1, 280, 99, "Giant Shield (aRO)", 0, "<b>[Refine Rate 9~10]</b><br>Reduces damage from [Large] size enemies by an additional 5%", 192, 5, 0]     //revisar def, weight, req.level, req.job
-	, [1798, 999, 136, 1, 0, 0, 40, 99, "Salvage Cape (aRO)", 0, "Enables the use of [" + skillName(402, SRV) + "] Lvl 1.<BR>[" + skillName(402, SRV) + "] skill cooldown +30 seconds.<BR>All skill's SP cost x2<BR>Consumes 1200 SP when unequipped.", 0]     //revisar def, weight, req.level, req.job
+	, [1798, 999, 136, 1, 0, 0, 40, 99, "Salvage Cape (aRO)", 0, "Enables the use of [" + skillName(402) + "] Lvl 1.<BR>[" + skillName(402) + "] skill cooldown +30 seconds.<BR>All skill's SP cost x2<BR>Consumes 1200 SP when unequipped.", 0]     //revisar def, weight, req.level, req.job
 	, [1799, 999, 82, 7, 0, 1, 40, 99, "Ancient Gold Ornament (aRO)", 0, "<b>[Swordman, Merchant, Thief Class]</b><BR>ATK +8%<BR><b>[Mage, Acolyte Class]</b><BR>MATK +8%<BR>All your healing skills effectiveness +7%<BR><b>[Archer Class]</b><BR>DEX +3<BR>Deal +10% long ranged ATK based damage.", 7, 2, 0]     //revisar def, weight, req.level, req.job
 	, [1800, 52, 0, 1, 0, 0, 10, 1, "Donut In Mouth", 0, "Recover 1 HP every 10 seconds.", 13, 100, 0]		//bonus2 bHPRegenRate,1,10000; bonus bMaxHP,100;
 	, [1801, 999, 0, 1, 0, 1, 10, 1, "Black Tail Ribbon", 0, "", 19, 5, 78, 5, 60, 5, 0]	//revisar def, weight, req.level, req.job
@@ -1826,7 +1826,7 @@ m_Item = [
 	, [1821, 2, 1001, 130, 4, 1, 150, 55, "Platinum Shotel", 0, "", 10, 50, 0]
 	, [1822, 2, 1001, 125, 4, 2, 80, 55, "Curved Sword", 0, "When performing an ATK based attack, 3% chance to cause [Curse] status effect on your target.", 12, 10, 0]
 	, [1823, 50, 0, 1, 0, 1, 20, 1, "Mercury Riser", 0, "<b>[Refine Rate 5~10]</b><br>CRIT +1<br>ASPD +1%<br>Critical damage +1%<BR><b>[Refine Rate 7~10]</b><BR>CRIT +1<br>ASPD +1%<br>Critical damage +1%", 12, 3, 10, 3, 70, 3, 0]
-	, [1824, 999, 0, 1, 0, 1, 50, 30, "Little Feather Hat", 0, "<b>[Refine Rate 7~10]</b><br>Critical damage +5%<BR><b>If equipped together with [Sharp Arrow]:</b> Critical damage +5%<BR><b>If equipped together with [+10 Falken Blitz]:</b> Reduces variable cast time of [" + skillName(272, SRV) + "] by 50%", 5, 2, 70, 10, 0]
+	, [1824, 999, 0, 1, 0, 1, 50, 30, "Little Feather Hat", 0, "<b>[Refine Rate 7~10]</b><br>Critical damage +5%<BR><b>If equipped together with [Sharp Arrow]:</b> Critical damage +5%<BR><b>If equipped together with [+10 Falken Blitz]:</b> Reduces variable cast time of [" + skillName(272) + "] by 50%", 5, 2, 70, 10, 0]
 	// custom alfheim items
 	, [1825, 60, 0, 7, 0, "1", 150, 70, "Witch's Robe", 0, "<b>[Mage or Acolyte Classes, Soul Linker, Ninja, Super Novice]</b><br>INT +2<br>MATK +3%<br><b>[Swordsman, Merchant or Thief Classes, Taekwon Kid, Star Gladiator]</b><br>STR +2<br>ATK +3%<br><b>[Archer Classes, Gunslinger]</b><br>DEX +2<br>Long Range Damage +3%", 19, 5, 0]
 	, [1826, 62, 0, 3, 0, "1", 70, 70, "Witch's Broomstick", 0, 0, 4, 1, 19, 5, 0]
@@ -1960,7 +1960,7 @@ m_Item = [
 	, [1953, 10, 124, 140, 4, 0, 150, 50, "Royal Guard's Bow", 0, "<b>[Base INT >= 90]</b> Deal +20% ranged ATK based damage.", 11, 10, 5106, 20, 5111, 20, 5112, 20, 5113, 20, 220, 51, 0]
 	, [1954, 5, 127, 160, 4, 1, 300, 50, "Royal Guard's Spear", 0, "[Holy Cross] SP Cost -10", 290, 35, 5161, 20, 0]
 	, [1955, 61, 0, 2, 0, 1, 150, 80, "Aegis of the Immortal", 0, "Gain the Immortal buff while wearing this item. This buff is lost upon taking damage.<br>Upon taking fatal damage lose the Immortal buff, and enter Stasis for 3 seconds.<br>While in Stasis, recover back to full HP over 3 seconds.<br>After Stasis ends, the Immortal buff goes on cooldown for 30 minutes.", 0]
-	, [1956, 2, 97, 170, 4, 2, 250, 60, "Save the King", 0, "<b>[Lord Knight]</b><br>[Bowling Bash] Cast time -(10*refine)%<br><br><b>[Paladin]</b><br>[Shield Chain] Range +4<br>[Shield Chain] skill damage +(1*refine)%<br><br><b>[Assassin Cross]</b><br>ASPD +7%<br>ATK +60<br>Reduces physical damage by 30%<br>Damage reduction does not affect [Soul Destroyer] or [Meteor Assault]<br><br><b>[Stalker]</b><br>VIT +3<br>DEX +3<br>Perfect Dodge +10<br>When performing an ATK based attack, chance to remove all [Chemical Protection] buffs from enemy.<br>[Raid] skill damage +50%<br><br><b>[Biochemist]</b><br>Deal +10% ranged ATK based damage.<br>Your [Heal], [Sanctuary], and [Aid Potion] effectiveness +10%<br>When performing an ATK based attack, 3.5% chance to cast [Stun], [Curse], [Silence], [Sleep], [Freeze], [Chaos], [Blind], or [Stone Curse] randomly on enemy.<br><br><b>[Whitesmith]</b><br>[Cart Revolution] skill damage +25%<br>DEF +5<br>MDEF +5<br>Received [Heal], [Sanctuary], and [Potion Pitcher] effectiveness +20%<br>Items recover 20% more HP", 194, 1, 0]
+	, [1956, 2, 97, 170, 4, 2, 250, 60, "Save the King", 0, "<b>[Lord Knight]</b><br>[Bowling Bash] Cast time -(10*refine)%<br><br><b>[Paladin]</b><br>[Shield Chain] Range +4<br>[Shield Chain] skill damage +(1*refine)%<br><br><b>[Assassin Cross]</b><br>ASPD +7%<br>ATK +60<br>Reduces physical damage by 30%<br>Damage reduction does not affect [Soul Destroyer] or [Meteor Assault]<br><br><b>[Stalker]</b><br>VIT +3<br>DEX +3<br>Perfect Dodge +10<br>When performing an ATK based attack, chance to remove all [Chemical Protection] buffs from enemy.<br>[Raid] skill damage +50%<br><br><b>[Biochemist]</b><br>Deal +10% ranged ATK based damage.<br>Your [Heal], [Sanctuary], and [Aid Potion] effectiveness +10%<br>When performing an ATK based attack, 3.5% chance to cast [Stun], [Curse], [Silence], [Sleep], [Freeze], [Confusion], [Blind], or [Stone Curse] randomly on enemy.<br><br><b>[Whitesmith]</b><br>[Cart Revolution] skill damage +25%<br>DEF +5<br>MDEF +5<br>Received [Heal], [Sanctuary], and [Potion Pitcher] effectiveness +20%<br>Items recover 20% more HP", 194, 1, 0]
 	, [1957, 100, 0, 0, 0, 0, 0, 0, "Save the King + Evil Jester Hat", 0, 0, 74, 5, 0]
 	, [1958, 64, 0, 0, 0, 1, 10, 90, "Cursed Royal Pendant", 0, "", 1, 2, 290, 1, 0]
 	, [1959, 64, 0, 0, 0, 1, 10, 90, "Ring of Mimir", 0, "", 4, 2, 295, 1, 0]
@@ -2012,7 +2012,7 @@ m_Item = [
 	, [2005, 63, 0, 3, 0, 1, 20, 0, "Airship Boots", 0, "Recover 50 HP every 10 seconds.<br>Recover 3 SP every 10 seconds.", 13, 350, 19, 2, 0]
 	, [2006, 100, 0, 0, 0, 0, 0, 0, "Airship Set", 0, "When dealing ATK based damage, 1% chance you gain 1% of the damage inflicted on your target as SP.", 11, 5, 0]
 	, [2007, 60, 0, 4, 0, 1, 40, 0, "Ferlock's Armor", 0, "Decrease magic damage from [Medium] size monsters by (1*refine)%", 13, 300, 19, 5, 0]
-	, [2008, 62, 0, 3, 0, 1, 30, 0, "Ferlock's Cloak", 0, "<b>[Refine Rate 9~10]</b> VIT +1", 78, 5, 77, -5, 79, -5, 0]
+	, [2008, 62, 0, 3, 0, 1, 30, 0, "Ferlock's Cloak", 0, "<b>[Refine Rate 9~10]</b> VIT +1", 78, 5, 376, -5, 0]
 	, [2009, 63, 0, 1, 0, 1, 25, 0, "Ferlock's Boots", 0, "", 15, 5, 19, 4, 0]
 	, [2010, 100, 0, 0, 0, 0, 0, 0, "Ferlock Set", 0, 0, 13, 1000, 0]
 	, [2011, 1, 62, 150, 4, 2, 120, 50, "Poison Bayonet", 0, 0, 89, 15, 1, 2, 4, 2, 5006, 15, 5007, 15, 5076, 15, 5161, 15, 5473, 15, 5162, 15, 5474, 15, 5159, 15, 5158, 15, 5051, 15, 5052, 15, 5053, 15, 5054, 15, 5055, 15, 5056, 15, 5057, 15, 5046, 15, 5047, 15, 5132, 15, 5133, 15, 5122, 15, 5124, 15, 5126, 15, 5127, 15, 5128, 15, 5130, 15, 5131, 15, 5044, 15, 5041, 15, 5106, 15, 5112, 15, 5113, 15, 5065, 15, 5244, 15, 5248, 15, 5088, 15, 5306, 15, 5025, 15, 5037, 15, 5187, 15, 5321, 15, 5197, 15, 5192, 15, 5193, 15, 5097, 15, 5102, 15, 5104, 15, 5339, 15, 5398, 15, 5400, 15, 5401, 15, 5407, 15, 5408, 15, 5409, 15, 5410, 15, 5412, 15, 5413, 15, 5414, 15, 5415, 15, 5302, 15, 5312, 15, 5489, 15, 5461, 15, 5463, 15, 5465, 15, 5466, 15, 5469, 15, 5510, 15, 5443, 15, 0]
@@ -2239,8 +2239,6 @@ function Click_Item(value) {
 }
 
 function ClickB_Item(CBI) {
-	SRV = 1 * c.server.value;
-
 	if (CBI == "SW") {
 		if (n_itemSW)
 			n_itemSW = 0;
@@ -2323,7 +2321,6 @@ function ClickB_Item(CBI) {
 }
 
 function Item_Setumei(nC1, nC2) {
-	SRV = 1 * c.server.value;
 	wNAME1 = ["0", "STR", "AGI", "VIT", "INT", "DEX", "LUK", "All Stats", "HIT", "FLEE", "CRIT", "Perfect Dodge", "ASPD", "MaxHP", "MaxSP", "MaxHP", "MaxSP", "ATK", "DEF", "MDEF"];
 	//	wIS = " +";	//mejorar: quitar el/los espacio/s
 	//	if(nC2 < 0)		//mejorar: podría no ser necesario (comprobar) si se hace una modificacion sencilla
@@ -2415,7 +2412,7 @@ function Item_Setumei(nC1, nC2) {
 		CBIstr += "Receive" + wISS + (-1 * nC2) + "% damage from [Boss] type monsters.<BR>";
 	if (78 == nC1)
 		//		CBIstr += "Adjusts your resistance to ranged attacks by "+ wIS + nC2 +"%<BR>";
-		CBIstr += "Receive" + wISS + (-1 * nC2) + "% damage from ATK and MATK based ranged attacks.<BR>";
+		CBIstr += "Receive" + wISS + (-1 * nC2) + "% damage from ranged attacks.<BR>";
 	if (79 == nC1)
 		//		CBIstr += "Adjusts your resistance to normal monsters by "+ wIS + nC2 +"%<BR>";
 		CBIstr += "Receive" + wISS + (-1 * nC2) + "% damage from [Normal] type monsters.<BR>";
@@ -2460,13 +2457,13 @@ function Item_Setumei(nC1, nC2) {
 		//		CBIstr += "[Sanctuary] damage against ["+v_Race[6]+"] race "+ wIS + nC2 +"%<BR>";
 		CBIstr += "[Sanctuary] skill damage" + wIS + nC2 + "% against [" + v_Race[6] + "] race monsters.<BR>";
 	if (97 == nC1)
-		CBIstr += "Your [" + skillName(245, SRV) + "] effectiveness" + wIS + nC2 + "%<BR>";
+		CBIstr += "Your [" + skillName(245) + "] effectiveness" + wIS + nC2 + "%<BR>";
 	if (98 == nC1)
-		CBIstr += "Received [" + skillName(245, SRV) + "] effectiveness" + wIS + nC2 + "%<BR>";
+		CBIstr += "Received [" + skillName(245) + "] effectiveness" + wIS + nC2 + "%<BR>";
 	if (99 == nC1)
-		CBIstr += "Your [Heal], [Sanctuary], and [" + skillName(245, SRV) + "] effectiveness" + wIS + nC2 + "%<BR>";		//healpower
+		CBIstr += "Your [Heal], [Sanctuary], and [" + skillName(245) + "] effectiveness" + wIS + nC2 + "%<BR>";		//healpower
 	if (100 == nC1)
-		CBIstr += "Received [Heal], [Sanctuary], and [" + skillName(245, SRV) + "] effectiveness" + wIS + nC2 + "%<BR>";	//healpower2
+		CBIstr += "Received [Heal], [Sanctuary], and [" + skillName(245) + "] effectiveness" + wIS + nC2 + "%<BR>";	//healpower2
 	if (110 <= nC1 && nC1 <= 119)
 		//		CBIstr += "Increases the critical rate against [" + v_Race[nC1-110] +"] race monsters by "+ wIS + nC2 +"<BR>";
 		CBIstr += "CRIT" + wIS + nC2 + " against [" + v_Race[nC1 - 110] + "] race monsters.<BR>";
@@ -2525,7 +2522,7 @@ function Item_Setumei(nC1, nC2) {
 		CBIstr += wNAME1[nC1 - 210] + wIS + nC2 + "<BR>";
 	if (220 == nC1)
 		//		CBIstr += "Enables the use of ["+ m_Skill[m_EnableSkill[nC2][2]][2] +"] Lvl "+ m_EnableSkill[nC2][3] +"<BR>";		// original
-		CBIstr += "Enables the use of [" + skillName(m_Skill[m_EnableSkill[nC2][2]][0], SRV) + "] Lvl " + m_EnableSkill[nC2][3] + "<BR>";
+		CBIstr += "Enables the use of [" + skillName(m_Skill[m_EnableSkill[nC2][2]][0]) + "] Lvl " + m_EnableSkill[nC2][3] + "<BR>";
 	/*	if(221 == nC1 && n_A_Equip[0] != 939 && n_A_Equip[2] != 1558 && n_A_Equip[0] != 1615 && n_A_Equip[0] != 1616 && n_A_Equip[2] != 1295 && n_A_Equip[2] != 1284 && n_A_Equip[2] != 1482 && n_A_Equip[2] != 1290){	//mejorable: cambiar excepciones por n_tok[222]
 			wNAME99 = [0,"When performing an ATK based attack, ","When performing a melee ATK based attack, ","When performing a long-range ATK based attack, ","When performing a MATK based attack, ","When attacking, ","When receiving ATK based damage, ","When receiving short-range ATK based damage, ","When receiving long-range ATK based damage, ","When receiving MATK based damage, ","When receiving ATK or MATK based damage, ","When dealing ATK or MATK based damage, "];
 			CBIstr += wNAME99[m_AutoSpellSkill[nC2][5]];
@@ -2546,7 +2543,7 @@ function Item_Setumei(nC1, nC2) {
 		else
 			CBIstr += "there's a";
 		//		CBIstr += " chance to cast ["+ m_Skill[m_AutoSpellSkill[nC2][2]][2] +"]";		// original
-		CBIstr += " chance to cast [" + skillName(m_Skill[m_AutoSpellSkill[nC2][2]][0], SRV) + "]";
+		CBIstr += " chance to cast [" + skillName(m_Skill[m_AutoSpellSkill[nC2][2]][0]) + "]";
 		if (m_AutoSpellSkill[nC2][3] != 0)
 			CBIstr += " Lvl " + m_AutoSpellSkill[nC2][3];
 		CBIstr += "<BR>";
@@ -2605,19 +2602,23 @@ function Item_Setumei(nC1, nC2) {
 	if(373 == nC1)
 		CBIstr += "Deal" + wIS + nC2 + "% melee ATK based damage.<BR>";
 	if(374 == nC1)
-		CBIstr += "Soft DEF" + wIS + nC2;
+		CBIstr += "Soft DEF" + wIS + nC2 + "<BR>";
+    if(375 == nC1)
+        CBIstr += "Deal " + wIS + nC2 + "% ATK based damage against Satan/Wounded Morroc.<BR>";
+    if(376 == nC1)
+        CBIstr += "Receive " + wISS + (-1 * nC2) + "% damage from short-range attacks.<BR>";
     if(380 <= nC1 && nC1 <= 389)
         CBIstr += "[" + v_Element[nC1 - 380] + "] element magic damage " + wIS + nC2 + "%<BR>";
 	if (5000 <= nC1 && nC1 <= 6999)		//mejorar: bastaría con 5000~5999
 		//		CBIstr += "["+ m_Skill[nC1 -5000][2] +"] skill damage"+ wIS + nC2 +"%<BR>";		// original
-		CBIstr += "[" + skillName(m_Skill[nC1 - 5000][0], SRV) + "] skill damage" + wIS + nC2 + "%<BR>";
+		CBIstr += "[" + skillName(m_Skill[nC1 - 5000][0]) + "] skill damage" + wIS + nC2 + "%<BR>";
 	if (7000 <= nC1 && nC1 <= 8999) {		//mejorar: bastaría con 7000~7999
 		if (nC2 > 0)
 			//			CBIstr += "[" + m_Skill[nC1 -7000][2] +"] skill Casting Time "+ (-1 * nC2) +"%<BR>";		// original
-			CBIstr += "[" + skillName(m_Skill[nC1 - 7000][0], SRV) + "] skill Casting Time " + (-1 * nC2) + "%<BR>";
+			CBIstr += "[" + skillName(m_Skill[nC1 - 7000][0]) + "] skill Casting Time " + (-1 * nC2) + "%<BR>";
 		else
 			//			CBIstr += "[" + m_Skill[nC1 -7000][2] +"] skill Casting Time"+ wIS + nC2 +"%<BR>";		// original
-			CBIstr += "[" + skillName(m_Skill[nC1 - 7000][0], SRV) + "] skill Casting Time" + wIS + nC2 + "%<BR>";
+			CBIstr += "[" + skillName(m_Skill[nC1 - 7000][0]) + "] skill Casting Time" + wIS + nC2 + "%<BR>";
 	}
 }
 

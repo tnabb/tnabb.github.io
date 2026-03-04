@@ -56,7 +56,6 @@ n_B = new Array,
     Item_or_Card = "Item",
     ItemCardNumberCheck = 142;
 var c = document.calcForm
-    , SRV = 0
     , equip_restrict = 1
     , card_restrict = 0
     , renewal = 0
@@ -72,7 +71,7 @@ v_Race_ = ["Formless", "Undead", "Brute", "Plant", "Insect", "Fish", "Demon", "D
 v_Element = ["<b style='color:#A89682'>Neutral</b>", "<b style='color:blue'>Water</b>", "<b style='color:brown'>Earth</b>", "<b style='color:red'>Fire</b>", "<b style='color:#00CC00'>Wind</b>", "<b style='color:#bb24bb'>Poison</b>", "<b style='color:#CDCD00'>Holy</b>", "<b style='color:#000000'>Shadow</b>", "<b style='color:#BFBEBB'>Ghost</b>", "<b style='color:purple'>Undead</b>", "<b style='color:#FF6600'>Non-Elemental</b>"],
 v_Element_ = ["Neutral ", "Water ", "Earth ", "Fire ", "Wind ", "Poison ", "Holy ", "Shadow ", "Ghost ", "Undead ", "Non-Elemental"],
 v_Size = ["Small", "Medium", "Large"],
-v_Effect = ["Poison", "Stun", "Freeze", "Curse", "Blind", "Sleep", "Silence", "Chaos", "Bleeding", "Stone", "Weapon Break", "Armor Break"],
+v_Effect = ["Poison", "Stun", "Freeze", "Curse", "Blind", "Sleep", "Silence", "Confusion", "Bleeding", "Stone", "Weapon Break", "Armor Break"],
 v_EnergyCoat = ["0", "6% Reduction", "12% Reduction", "18% Reduction", "24% Reduction", "30% Reduction"],
 v_Race2 = ["(none)", "Goblin", "Golem", "Guardian", "Kobold", "Orc", "Satan Morroc"],
 v_Type = ["Normal", "Boss"],
@@ -84,7 +83,7 @@ function cap_value(a, min, max){
     return a >= max ? max : a <= min ? min : a;
 }
 
-function servers() {
+function firstLoadFunction() {
     for (c.A_JOB.length = new Option(JobName[i], i),
         i = 0; i <= 48; i++)
         c.A_JOB.options[i] = new Option(JobName[i], i);
@@ -104,13 +103,6 @@ function servers() {
         c.A_SHOULDER_REFINE.options[i] = new Option("+" + i, i),
         c.A_SHOES_REFINE.options[i] = new Option("+" + i, i)
     firstLoad = 1,
-    1 * c.server.value == 10 ? (c.A_JOB.options[30].innerHTML = "Clown (iRO name: Minstrel)",
-        c.A_JOB.options[32].innerHTML = "Professor (iRO name: Scholar)",
-        c.A_JOB.options[33].innerHTML = "Creator (iRO name: Biochemist)",
-        c.A_JOB.options[42].innerHTML = "Star Gladiator (iRO name: Taekwon Master)") : (c.A_JOB.options[30].innerHTML = JobName[30],
-            c.A_JOB.options[32].innerHTML = JobName[32],
-            c.A_JOB.options[33].innerHTML = JobName[33],
-            c.A_JOB.options[42].innerHTML = JobName[42]),
     calc()
 }
 function restrictEquipslot() {
@@ -191,7 +183,6 @@ function myInnerHtml(e, _, n) {
 }
 function BattleCalc999() {
     console.log("BattleCalc999 called");
-    SRV = 1 * c.server.value,
     wMod = 1,
     wCast = 0,
     wHITsuu = 1,
@@ -258,7 +249,7 @@ function BattleCalc999() {
                 InnStr[0] += Last_DMG_A[0] + " (" + _ + " + " + w_left_Minatk + ")",
                 w998D && (str_bSUBname += "Double Attack damage (chance)<BR>",
                     str_bSUB += 2 * _ + w_left_Minatk + "~"),
-                SRV ? _ + w_left_Minatk < n_Min_DMG && w998G < 100 && (n_Min_DMG = _ + w_left_Minatk) : Last_DMG_A[0] < n_Min_DMG && (w998H > 0 ? n_Min_DMG = Last_DMG_A[0] : w998D > 0 && 2 * _ + w_left_Minatk < n_Min_DMG && (n_Min_DMG = 2 * _ + w_left_Minatk)),
+                _ + w_left_Minatk < n_Min_DMG && w998G < 100 && (n_Min_DMG = _ + w_left_Minatk),
                 w_DMG[0] = n_Min_DMG,
                 w_DMG[2] = BattleCalc(n_A_DMG[2], 2);
                 w_DMG[2] = Math.floor(w_DMG[2] * (100 + n_tok[355]) / 100); // auto attack damage mod
@@ -295,7 +286,7 @@ function BattleCalc999() {
                     l[e] = BattleCalc(n_A_DMG[e] * (wMod + wBC3_3danAtkMod), e) + EDP_DMG(e),
                         l[e] = 3 * Math.floor(l[e] / 3),
                         5 == n_B[19] && (l[e] = 3);
-                str_bSUBname += skillName(187, SRV) + " damage<BR>",
+                str_bSUBname += skillName(187) + " damage<BR>",
                     str_bSUB += l[0] + "~" + l[2] + " (30% chance)<BR>",
                     TyouEnkakuSousa3dan = 0,
                     n_Min_DMG > l[0] && (n_Min_DMG = l[0]),
@@ -317,7 +308,7 @@ function BattleCalc999() {
                 Last_DMG_A[0] = Last_DMG_B[0] + i[0],
                 InnStr[0] += Last_DMG_A[0],
                 11 == n_A_WeaponType && (InnStr[0] = Last_DMG_A[0] + " (" + Last_DMG_B[0] + "+" + i[0] + ")"),
-                SRV ? Last_DMG_A[0] < n_Min_DMG && w998G < 100 && (n_Min_DMG = Last_DMG_A[0]) : Last_DMG_A[0] < n_Min_DMG && (w998H > 0 ? n_Min_DMG = Last_DMG_A[0] : w998D > 0 && 2 * Last_DMG_A[0] < n_Min_DMG && (n_Min_DMG = 2 * Last_DMG_A[0])),
+                Last_DMG_A[0] < n_Min_DMG && w998G < 100 && (n_Min_DMG = Last_DMG_A[0]),
                 w998D && (SkillSearch(427) ? CardNumSearch(43) || 570 == n_A_Equip[2] || 1442 == n_A_Equip[2] || 1443 == n_A_Equip[2] || 1321 == n_A_Equip[2] || EquipNumSearch(1578) || 2173 == n_A_Equip[2] && n_A_SHOULDER_REFINE >= 5 ? str_bSUBname += "Double Attack damage (chance)<BR>" : str_bSUBname += "Chain Action damage (chance)<BR>" : str_bSUBname += "Double Attack damage (chance)<BR>",
                     str_bSUB += 2 * Last_DMG_A[0] + "~"),
                 w_DMG[0] = n_Min_DMG,
@@ -697,12 +688,11 @@ function BattleCalc999() {
             n_Delay[2] = .3,
             wCast *= n_A_CAST;
             for (e = 0; e <= 2; e++)
-                SRV ? (w_DMG[e] = BattleCalc(BK_n_A_MATK[e] * (1 + .05 * n_A_Buf2[8]), e) - 1,
+                (w_DMG[e] = BattleCalc(BK_n_A_MATK[e] * (1 + .05 * n_A_Buf2[8]), e) - 1,
                     0 == n_A_WeaponType && (w_DMG[1] = w_DMG[0],
-                    w_DMG[2] = w_DMG[0])) : 
-                w_DMG[e] = BattleCalc(BK_n_A_MATK[e], e),
-                    Last_DMG_A[e] = Last_DMG_B[e] = w_DMG[e] + EDP_DMG(e),
-                    InnStr[e] += Last_DMG_A[e];
+                    w_DMG[2] = w_DMG[0])),
+                Last_DMG_A[e] = Last_DMG_B[e] = w_DMG[e] + EDP_DMG(e),
+                InnStr[e] += Last_DMG_A[e];
             n_PerHIT_DMG = BattleCalc2(0) + n_A_WeaponLV_refineATK,
             w_DMG[1] = (w_DMG[1] * w_HIT + n_PerHIT_DMG * (100 - w_HIT)) / 100,
             EDPplus(1),
@@ -1020,8 +1010,7 @@ function BattleCalc999() {
                 Last_DMG_A[e] = Last_DMG_B[e] = w_DMG[e],
                 InnStr[e] += Last_DMG_A[e];
             wCast = (1.5 + .5 * n_A_ActiveSkillLV) * n_A_CAST,
-            n_Delay[2] = 1.5 + .5 * n_A_ActiveSkillLV,
-            SRV && (n_Delay[2] = (1.5 + .5 * n_A_ActiveSkillLV) / 2),
+            n_Delay[2] = (1.5 + .5 * n_A_ActiveSkillLV),
             w_HIT_HYOUJI = 100,
             CastAndDelay(),
             BattleCalc998()
@@ -1185,7 +1174,7 @@ function BattleCalc999() {
             n_rangedAtk = 1,
             ATKmod02(wMod, 0),
             405 == n_A_ActiveSkill ? w_1senHP = 1 * c.SkillSubNum.value : w_1senHP = n_A_MaxHP - 1,
-            w_DMG[0] = SRV ? 40 * (n_A_STR - SkillSearch(404)) + n_A_ActiveSkillLV * (w_1senHP / 10 + 35) : 40 * (n_A_STR + n_A_ActiveSkillLV) + w_1senHP * (n_A_BaseLV / 100) * n_A_ActiveSkillLV / 10,
+            w_DMG[0] = 40 * (n_A_STR - SkillSearch(404)) + n_A_ActiveSkillLV * (w_1senHP / 10 + 35)
             w_DMG[0] = w_DMG[0] * defReduction(n_B[14]),
             w_DMG[0] = ApplyModifiers(w_DMG[0]),
             w_DMG[0] = Math.floor(w_DMG[0] * element[n_B[3]][0]),
@@ -1823,16 +1812,9 @@ function BattleCalc999() {
             BattleCalc998()
         }
     }
-    if(m_Skill[n_A_ActiveSkill][4] == 1 || m_Skill[n_A_ActiveSkill][4] == 2 || m_Skill[n_A_ActiveSkill][4] == 3)
-        skill_type = BF.WEAPON;
-    else if(m_Skill[n_A_ActiveSkill][4] < 0)
-        skill_type = BF.MAGIC;
-    else if(m_Skill[n_A_ActiveSkill][4] == 5)
-        skill_type = BF.MISC;
-    let newDamage = battle_calc_attack(skill_type, player, monster, n_A_ActiveSkill, n_A_ActiveSkillLV, 0);
-    updatePlayerDamageDisplay(newDamage);
 }
 function ATKmod01() {
+    console.log("ATKmod01 called");
     var e = 100;
     193 != n_A_ActiveSkill && 197 != n_A_ActiveSkill && 321 != n_A_ActiveSkill && (SkillSearch(12) ? e += 32 : n_A_Buf6[5] ? e += 2 + 3 * n_A_Buf6[5] : n_A_Buf7[31] && (e += 5),
     SkillSearch(256) && (e += 5 * SkillSearch(256)),
@@ -1846,6 +1828,7 @@ function ATKmod01() {
             n_A_DMG[_] = n_A_DMG[_] * e / 100
 }
 function ATKmod02(e, _) {
+    console.log("ATKmod02 called with e:", e, "and _:", _);
     wA02 = 100 * e,
     SkillSearch(327) ? wA02 += 20 * SkillSearch(327) : (SkillSearch(154) && (wA02 += 5 * SkillSearch(154)),
     0 == SkillSearch(154) && n_A_Buf2[8] && (wA02 += 5 * n_A_Buf2[8])),
@@ -1856,6 +1839,7 @@ function ATKmod02(e, _) {
             n_A_CriATK[2] = Math.floor(n_A_CriATK[2] * wA02 / 100))
 }
 function BattleTAKA() {
+    console.log("BattleTAKA called");
     return 10 == n_A_WeaponType && SkillSearch(118) && 272 != n_A_ActiveSkill ? (wBTw1 = Math.floor((n_A_JobLV - 1) / 10 + 1),
         wBTw1 > 5 && (wBTw1 = 5),
         wBTw2 = SkillSearch(118),
@@ -1877,6 +1861,7 @@ function BattleTAKA() {
             0)
 }
 function HealCalc(e, _) {
+    console.log("HealCalc called with e:", e, "and _:", _);
     wHeal = Math.floor((n_A_BaseLV + n_A_INT) / 8) * (8 * e + 4);
     var n = 100 + 2 * SkillSearch(269);
     wHeal = Math.floor(wHeal * n / 100);
@@ -1890,6 +1875,7 @@ function HealCalc(e, _) {
     wHeal
 }
 function SanctuaryCalc(e, _) {
+    console.log("SanctuaryCalc called with e:", e, "and _:", _);
     wSanctuary = e < 7 ? 100 * e : 777;
     var n = 100 + 2 * SkillSearch(269);
     wSanctuary = Math.floor(wSanctuary * n / 100);
@@ -1904,6 +1890,7 @@ function SanctuaryCalc(e, _) {
 }
 
 function BattleCalc998() {
+    console.log("BattleCalc998 called");
     if(n_A_ActiveSkill != 0 && n_A_ActiveSkill != 272 && n_A_ActiveSkill != 401 && n_A_ActiveSkill != 430 && n_A_ActiveSkill != 847 && n_A_ActiveSkill != 197 && n_A_ActiveSkill != 321 && n_A_Buf3[47]){
         myInnerHtml("CRIATKname", "[SR] Critical damage (Critical rate)", 0);
         myInnerHtml("bSUB3name", "", 0);
@@ -2181,7 +2168,7 @@ function BattleCalc998() {
     updatePlayerDamageDisplay(newDamage);
 }
 function BattleHiDam() {
-    SRV = 1 * c.server.value;
+    console.log("BattleHiDam called");
     var e = 100, 
     _ = [0, 0, 0], 
     n = Math.floor(n_B[9] / 7);
@@ -2733,7 +2720,7 @@ function BattleHiDam() {
     if (o < 10 && (l = o),
         n_A_ResElem = 100 * Math.max(0, element[10 * n_A_Bodyelement + 1][l]),
         wBHD = n_A_ResElem - Math.floor(n_A_ResElem * n_tok[60 + 1 * l]) / 100,
-        10 == o || 10 != o || 1 == PvP || 158 == n_B_AtkSkill || 484 == n_B_AtkSkill || 10 == SRV) // removed ghostring exception in the beginning (8 != n_A_Bodyelement) &&
+        10 == o || 10 != o || 1 == PvP || 158 == n_B_AtkSkill || 484 == n_B_AtkSkill) // removed ghostring exception in the beginning (8 != n_A_Bodyelement) &&
         for (i = 0; i <= 6; i++)
             w_HiDam[i] = Math.floor(w_HiDam[i] * wBHD / 100);
     if (n_A_Buf2[5]) // assumptio
@@ -2875,6 +2862,7 @@ function BattleHiDam() {
     return wBHD
 }
 function BattleMagicCalc(e) {
+    console.log("BattleMagicCalc called with skill ID: " + n_A_ActiveSkill);
     wBMC2 = e;
     n = StPlusCalc2(5e3 + n_A_ActiveSkill) + StPlusCard(5e3 + n_A_ActiveSkill); // moved skill dmg % modifiers to before mdef reductionf
     n_A_Buf9[20] == n_A_ActiveSkill && (n += n_A_Buf9[19]), // skill dmg % on manual top
@@ -2898,7 +2886,6 @@ function BattleMagicCalc(e) {
     n_A_Buf7[24] && SUPURE_MONSTER() && (wBMC2 = 110 * wBMC2 / 100),
     131 == n_A_ActiveSkill && n_B_debuf[4] && 0 == n_B[19] && n_B[3] < 90 && (wBMC2 = 0),
     // mdef reduction calc
-    SRV = 1 * c.server.value,
     wBMC_MDEF = n_B[15];
     var _ = 0;
     0 == n_B[19] && CardNumSearch(424) && (_ = 1),
@@ -2909,7 +2896,7 @@ function BattleMagicCalc(e) {
     //console.log("post reduction magic dmg : " + wBMC2)
     //104 == n_A_ActiveSkill && 6 != n_B[2] && n_B[3] < 90 && (wBMC2 = 0), // make magnus exorcismus hit all
     606 != n_A_ActiveSkill && (wBMC2 = Math.floor(wBMC2 * Math.max(0, element[n_B[3]][n_A_Weapon_element]))),
-    SRV ? n_B[3] > 89 && n_B[3] < 95 && 47 == n_A_ActiveSkill && (wBMC2 = Math.floor(wBMC2 * (1 + .05 * n_A_ActiveSkillLV))) : 90 <= n_B[3] && 47 == n_A_ActiveSkill && (wBMC2 = Math.floor(wBMC2 * (1 + .05 * n_A_ActiveSkillLV)));
+    n_B[3] > 89 && n_B[3] < 95 && 47 == n_A_ActiveSkill && (wBMC2 = Math.floor(wBMC2 * (1 + .05 * n_A_ActiveSkillLV)));
     // magic damage modifiers
     // magic damage element % modifier
     var n = 0;
@@ -2972,7 +2959,6 @@ function BattleMagicCalc(e) {
 }
 
 function ClickJob(jobId) {
-    SRV = Number(c.server.value);
     myInnerHtml("A_KakutyouSel", "", 0);
     myInnerHtml("A_KakutyouData", "", 0);
     c.A_Kakutyou.value = 0;
@@ -3027,13 +3013,13 @@ function ClickJob(jobId) {
 
         // providence
         if(jobId == JOB.CRUSADER || jobId == JOB.PALADIN) {
-            myInnerHtml("AS11_1", "<S>" + skillName(164, SRV) + "</S>", 0);
+            myInnerHtml("AS11_1", "<S>" + skillName(164) + "</S>", 0);
             document.getElementById("AS11_1").style.textDecoration = "line-through";
             c.A2_Skill11.disabled = true;
             c.A2_Skill11.value = 0;
             n_A_Buf2[11] = 0;
         } else {
-            myInnerHtml("AS11_1", skillName(164, SRV), 0);
+            myInnerHtml("AS11_1", skillName(164), 0);
             document.getElementById("AS11_1").style.textDecoration = "";
             c.A2_Skill11.disabled = false;
         }
@@ -3073,11 +3059,6 @@ function ClickJob(jobId) {
         delete JOB_BASE_ASPD[JOB.SUPERNOVICE][WEAPON.TWOHANDAXE];
     }
 
-    if(SRV == 0 && n_A_JobClass2() == JOB.ASSASSIN && n_Nitou == 1) {
-        n_Nitou = 0;
-        ClickWeaponType2(0);
-    }
-
     WeaponSet(jobId);
 
     const availableBuffs = JOB_AVAILABLE_BUFFS[jobId] || [];
@@ -3095,7 +3076,7 @@ function ClickJob(jobId) {
             myInnerHtml("P_Skill" + i, m_Skill[skillId][2], 0);
             myInnerHtml("P_Skill" + i + "s", '<select name=A_skill' + i + ' id=A_skill' + i + ' onChange="StAllCalc() | WeaponSet(20) | restrictCardslot(1)"></select>', 0);
         } else if (skillId === 392) {
-            myInnerHtml("P_Skill" + i, skillName(m_Skill[skillId][0], SRV), 0);
+            myInnerHtml("P_Skill" + i, skillName(m_Skill[skillId][0]), 0);
             myInnerHtml("P_Skill" + i + "s", "<select name=A_skill" + i + " id=A_skill" + i + ' onChange="StAllCalc()" style="width:70px;"></select>', 0);
             if(n_Reborn == 0)
                 myInnerHtml("P_Skill" + i, "", 0);
@@ -3105,7 +3086,7 @@ function ClickJob(jobId) {
             if(n_Reborn == 0)
                 myInnerHtml("P_Skill" + i, "", 0);
         } else {
-            myInnerHtml("P_Skill" + i, skillName(m_Skill[skillId][0], SRV), 0);
+            myInnerHtml("P_Skill" + i, skillName(m_Skill[skillId][0]), 0);
             myInnerHtml("P_Skill" + i + "s", "<select name=A_skill" + i + " id=A_skill" + i + " onChange=StAllCalc()></select>", 0);
         }
     }
@@ -3183,7 +3164,6 @@ function ClickJob(jobId) {
 }
 
 function Askill() {
-    SRV = 1 * c.server.value;
     
     for(let i = 0; i < c.A_ActiveSkill.length; i++) {
         c.A_ActiveSkill.options[i] = null;
@@ -3191,13 +3171,13 @@ function Askill() {
 
     if(c.all_dmgSkills.checked) {
         for(let i = 0; i < All_DMGskill.length; i++) {
-            c.A_ActiveSkill.options[i] = new Option(skillNameInSelect(m_Skill[All_DMGskill[i]][0], SRV), All_DMGskill[i]);
+            c.A_ActiveSkill.options[i] = new Option(skillNameInSelect(m_Skill[All_DMGskill[i]][0]), All_DMGskill[i]);
         }
     } else {
         const jobSkills = JOB_ACTIVE_SKILLS[n_A_JOB] || [];
         for(let i = 0; i < jobSkills.length; i++) {
             const skillId = jobSkills[i];
-            const skillName = skillNameInSelect(m_Skill[skillId][0], SRV);
+            const skillName = skillNameInSelect(m_Skill[skillId][0]);
             c.A_ActiveSkill.options[i] = new Option(skillName, skillId);
         }
     }
@@ -3867,15 +3847,14 @@ function SaveTheme() {
     "undefined" == typeof Storage ? alert("Sorry, your browser does not support local storage. Please let me know if you see this message at tnaab on Discord") : (SaveData = new Array,
         SaveData[0] = 1,
         SaveData[1] = c.theme.value,
-        SaveData[2] = 1 * c.server.value,
+        SaveData[2] = 0,
         slotNum = 200,
         localStorage["Slot" + slotNum] = JSON.stringify(SaveData))
 }
 function LoadTheme() {
     "undefined" == typeof Storage ? alert("Sorry, your browser does not support local storage. If you see this message, please let me know at tnaab on Discord") : (slotNum = 50,
         SaveData = new Array,
-        void 0 === localStorage["Slot" + slotNum] ? (c.theme.value = 0,
-            c.server.value = 0) : (SaveData = JSON.parse(localStorage["Slot" + slotNum]),
+        void 0 === localStorage["Slot" + slotNum] ? (c.theme.value = 0, c.server.value = 0) : (SaveData = JSON.parse(localStorage["Slot" + slotNum]),
                 c.theme.value = SaveData[1],
                 void 0 !== SaveData[2] && (c.server.value = SaveData[2]))),
         themes()
@@ -3946,8 +3925,7 @@ var sheet = function () {
         e.sheet
 }();
 function BufSW(e) {
-    if (SRV = 1 * c.server.value,
-        n_SkillSW = e,
+    if (n_SkillSW = e,
         n_SkillSW) {
         for (_ = '<TR><TD id="A2TD" ColSpan="6" class="subheader point" onclick="BufSW(0)">Supportive / Party Skills <span id="A2used"></span>',
             _ += '<div class="right">(click to hide)</div></TD></TR>',
@@ -3958,7 +3936,7 @@ function BufSW(e) {
             _ += "</TR><TR>",
             _ += '<TD id="EN50"></TD><TD class="data"></TD>',
             _ += '<TD id="AS0_1" class="center">Blessing</TD><TD id="AS0_2" class="data"></TD>',
-            _ += '<TD id="AS6_1" class="center">Andrenaline Rush</TD><TD id="AS6_2"></TD>',
+            _ += '<TD id="AS6_1" class="center">Adrenaline Rush</TD><TD id="AS6_2"></TD>',
             _ += "</TR><TR>",
             _ += '<TD id="EN51"></TD><TD class="data"></TD>',
             _ += '<TD id="AS1_1" class="center">Increase Agi</TD><TD id="AS1_2" class="data"></TD>',
@@ -3966,7 +3944,7 @@ function BufSW(e) {
             _ += "</TR><TR>",
             _ += '<TD id="EN52"></TD><TD class="data"></TD>',
             _ += '<TD id="AS4_1" class="center">Angelus</TD><TD id="AS4_2" class="data"></TD>',
-            _ += '<TD id="AS8_1" class="center">' + skillName(154, SRV) + '</TD><TD id="AS8_2"></TD>',
+            _ += '<TD id="AS8_1" class="center">' + skillName(154) + '</TD><TD id="AS8_2"></TD>',
             _ += "</TR><TR>",
             _ += '<TD id="EN53"></TD><TD class="data"></TD>',
             _ += '<TD id="AS2_1" class="center">Impositio Manus</TD><TD id="AS2_2" class="data"></TD>',
@@ -3974,7 +3952,7 @@ function BufSW(e) {
             _ += "</TR><TR>",
             _ += '<TD id="EN55"></TD><TD class="data"></TD>',
             _ += '<TD id="AS3_1" class="center">Gloria</TD><TD id="AS3_2" class="data"></TD>',
-            _ += '<TD id="" class="center">' + skillName(157, SRV) + '</TD><TD id="AS13_2"></TD>',
+            _ += '<TD id="" class="center">' + skillName(157) + '</TD><TD id="AS13_2"></TD>',
             _ += "</TR><TR>",
             _ += '<TD id="EN54"></TD><TD class="data"></TD>',
             _ += '<TD id="AS10_1" class="center">Suffragium</TD><TD id="AS10_2" class="data"></TD>',
@@ -3982,11 +3960,11 @@ function BufSW(e) {
             _ += "</TR><TR>",
             _ += '<TD></TD><TD class="data"></TD>',
             _ += '<TD id="AS5_1" class="center">Assumptio</TD><TD id="AS5_2" class="data"></TD>',
-            _ += '<TD id="" class="center">' + skillName(165, SRV) + '</TD><TD id="AS15_2"></TD>',
+            _ += '<TD id="" class="center">' + skillName(165) + '</TD><TD id="AS15_2"></TD>',
             _ += "</TR><TR>",
             _ += '<TD></TD><TD class="data"></TD>',
             _ += '<TD id="AS12_1" class="center"># of Spirit Spheres</TD><TD id="AS12_2" class="data"></TD>',
-            _ += '<TD id="AS11_1" class="center">' + skillName(164, SRV) + '</TD><TD id="AS11_2"></TD>',
+            _ += '<TD id="AS11_1" class="center">' + skillName(164) + '</TD><TD id="AS11_2"></TD>',
             _ += "</TR><TR>",
             myInnerHtml("SIENSKILL", _ += "</TR>", 0),
             myInnerHtml("AS0_2", '<select name="A2_Skill0" onChange="A2(1)"></select>', 0),
@@ -4028,19 +4006,18 @@ function BufSW(e) {
             c.A2_Skill12.value = 0,
             n_A_Buf2[12] = 0) : (myInnerHtml("AS12_1", "# of Spirit Spheres", 0),
                 c.A2_Skill12.disabled = !1),
-            13 == n_A_JOB || 27 == n_A_JOB ? (myInnerHtml("AS11_1", "<S>" + skillName(164, SRV) + "</S>", 0),
+            13 == n_A_JOB || 27 == n_A_JOB ? (myInnerHtml("AS11_1", "<S>" + skillName(164) + "</S>", 0),
                 document.getElementById("AS11_1").style.textDecoration = "line-through",
                 c.A2_Skill11.disabled = !0,
                 c.A2_Skill11.value = 0,
-                n_A_Buf2[11] = 0) : (myInnerHtml("AS11_1", skillName(164, SRV), 0),
+                n_A_Buf2[11] = 0) : (myInnerHtml("AS11_1", skillName(164), 0),
                     document.getElementById("AS11_1").style.textDecoration = "",
                     c.A2_Skill11.disabled = !1),
             i = 0; i <= 3; i++)
             c.A2_Skill10.options[i] = new Option(i, i);
-        c.A2_Skill6.options[0] = new Option("OFF", 0),
+        c.A2_Skill6.options[0] = new Option("Off", 0),
             c.A2_Skill6.options[1] = new Option("Regular AR", 1),
-            c.A2_Skill6.options[2] = 10 == SRV ? new Option("Full AR", 2) : new Option("Advanced AR", 2),
-            c.A2_Skill6.options[3] = new Option("AR Scroll", 3),
+            c.A2_Skill6.options[2] = new Option("Full AR", 2),
             c.A2_Skill0.value = n_A_Buf2[0],
             c.A2_Skill1.value = n_A_Buf2[1],
             c.A2_Skill2.value = n_A_Buf2[2],
@@ -4106,7 +4083,7 @@ function Buf3SW(e) {
             myInnerHtml("SP_SIEN01", n += '<TR style="text-align:left;"><TD colspan=6><span id="EN11_1"></span><span id="EN11_2"></span><span id="EN11_1a"></span></TD></TR>', 0);
         var _ = [202, 203, 204, 205, 210, 212, 213, 223, 217, 219, 220];
         for (i = 0; i <= 10; i++)
-            myInnerHtml("EN" + i + "_1", skillName(_[i], 1 * c.server.value), 0);
+            myInnerHtml("EN" + i + "_1", skillName(_[i]), 0);
         for (myInnerHtml("EN0_2", '<select name="A3_Skill0_1" onChange="Skill3SW_2()|A3(1)"></select>', 0),
             myInnerHtml("EN1_2", '<select name="A3_Skill1_1" onChange="Skill3SW_2()|A3(1)"></select>', 0),
             myInnerHtml("EN2_2", '<select name="A3_Skill2_1" onChange="Skill3SW_2()|A3(1)"></select>', 0),
@@ -4458,7 +4435,7 @@ function Buf6SW(e) {
             _ += '<TR><TD class="right">Mind Breaker (self)</TD><TD id="EN61_2" class="data"></TD><TD class="right">Freeze</TD><TD id="EN78_2"></TD></TR>',
             _ += '<TR><TD class="right">AGI Down</TD><TD id="EN66_2" class="data"></TD><TD class="right">Curse</TD><TD id="EN64_2"></TD></TR>',
             _ += '<TR><TD class="right">Quagmire</TD><TD id="EN68_2" class="data"></TD><TD class="right">Blind</TD><TD id="EN74_2"></TD></TR>',
-            _ += '<TR><TD class="right">' + skillName(442, 1 * c.server.value) + '</TD><TD id="EN70_2" class="data"></TD><TD class="right">Sleep</TD><TD id="EN77_2"></TD></TR>',
+            _ += '<TR><TD class="right">' + skillName(442) + '</TD><TD id="EN70_2" class="data"></TD><TD class="right">Sleep</TD><TD id="EN77_2"></TD></TR>',
             _ += '<TR><TD class="right">Undead Attribute Change</TD><TD id="EN65_2" class="data"></TD><TD class="right">Stone</TD><TD id="EN76_2"></TD></TR>',
             _ += '<TR><TD class="right">Holy Armor [B.S.S.]</TD><TD id="EN67_2" class="data"></TD><TD class="right">Bleeding</TD><TD id="EN80_2"></TD></TR>',
             _ += '<TR><TD class="right">Magnum Break Bonus</TD><TD id="EN69_2" class="data"></TD><TD class="right">Lex Aeterna</TD><TD id="EN79_2"></TD></TR>',
@@ -4575,7 +4552,7 @@ function Buf7SW(e) {
             myInnerHtml("SP_SIEN05", _ += '<TR><TD id="EN740" class="data"></TD><TD colspan="2" id="EN751"></TD></TR>', 0),
             myInnerHtml("EN70", '<input type="checkbox" name="A7_Skill0" onClick="A7(1)">Sesame Pastry (HIT +10)', 0),
             myInnerHtml("EN71", '<input type="checkbox" name="A7_Skill1" onClick="A7(1)">Honey Pastry (FLEE +10)', 0),
-            myInnerHtml("EN72", '<input type="checkbox" name="A7_Skill2" onClick="A7(1)">Rainbow Cake (ATK/MATK +10)', 0),
+            myInnerHtml("EN72", '<input type="checkbox" name="A7_Skill2" onClick="A7(1)">Orlean\'s Full Course Meal (All Stats +7)', 0),
             myInnerHtml("EN79", '<input type="checkbox" name="A7_Skill9" onClick="A7(1)">Box of Resentment (ATK +20)', 0),
             myInnerHtml("EN710", '<input type="checkbox" name="A7_Skill10" onClick="A7(1)">Box of Drowsiness (MATK +20)', 0),
             myInnerHtml("EN711", '<input type="checkbox" name="A7_Skill11" onClick="A7(1)">Coldproof Potion', 0),
@@ -4587,13 +4564,13 @@ function Buf7SW(e) {
             myInnerHtml("EN717", '<input type="checkbox" name="A7_Skill31" onClick="A7(1)">Aloevera (Self Provoke Lvl 1)', 0),
             myInnerHtml("EN718", '<input type="checkbox" name="A7_Skill32" onClick="A7(1)">Small/Big Defense Potion (Physical DMG reduction +3%)', 0),
             myInnerHtml("EN719", '<input type="checkbox" name="A7_Skill33" onClick="A7(1)">Small/Big Magic Defense Potion (Magical DMG reduction +3%)', 0),
-            myInnerHtml("EN720", '<input type="checkbox" name="A7_Skill34" onClick="A7(1)">Box of Gloom (' + skillName(42, c.server.value) + " Lvl 1)", 0),
+            myInnerHtml("EN720", '<input type="checkbox" name="A7_Skill34" onClick="A7(1)">Box of Gloom (' + skillName(42) + " Lvl 1)", 0),
             myInnerHtml("EN721", '<input type="checkbox" name="A7_Skill36" onClick="A7(1)">Abrasive (CRIT +20)', 0),
             myInnerHtml("EN722", '<select name="A_SpeedPOT" onChange="A7(1)"><option value="0">(no Speed Potion)</option></select>', 0),
-            myInnerHtml("EN723", '<input type="checkbox" name="A7_Skill27" onClick="A7(1)">Military Ration B (HIT +33)', 0),
-            myInnerHtml("EN724", '<input type="checkbox" name="A7_Skill28" onClick="A7(1)">Military Ration C (FLEE +33)', 0),
-            myInnerHtml("EN725", '<input type="checkbox" name="A7_Skill29" onClick="A7(1)">Tasty Pink Ration (ATK +15)', 0),
-            myInnerHtml("EN726", '<input type="checkbox" name="A7_Skill30" onClick="A7(1)">Tasty White Ration (MATK +15)', 0),
+            myInnerHtml("EN723", '<input type="checkbox" name="A7_Skill27" onClick="A7(1)"><strike>Military Ration B (HIT +33)</strike>', 0),
+            myInnerHtml("EN724", '<input type="checkbox" name="A7_Skill28" onClick="A7(1)"><strike>Military Ration C (FLEE +33)</strike>', 0),
+            myInnerHtml("EN725", '<input type="checkbox" name="A7_Skill29" onClick="A7(1)"><strike>Tasty Pink Ration (ATK +15)</strike>', 0),
+            myInnerHtml("EN726", '<input type="checkbox" name="A7_Skill30" onClick="A7(1)"><strike>Tasty White Ration (MATK +15)</strike>', 0),
             myInnerHtml("EN727", '<input type="checkbox" name="A7_Skill17" onClick="A7(1)">Rune Strawberry Cake (ATK +5, MATK +5)', 0),
             myInnerHtml("EN728", '<input type="checkbox" name="A7_Skill18" onClick="A7(1)">Schwartzwald Pine Jubilee (HIT +10, FLEE +20)', 0),
             myInnerHtml("EN729", '<input type="checkbox" name="A7_Skill19" onClick="A7(1)">Arunafeltz Desert Sandwich (CRIT +7)', 0),
@@ -4603,21 +4580,21 @@ function Buf7SW(e) {
             myInnerHtml("EN733", '<input type="checkbox" name="A7_Skill23" onClick="A7(1)">Pinguicula\'s Fruit Jam (ATK based dmg on Splendide maps +10%)', 0),
             myInnerHtml("EN734", '<input type="checkbox" name="A7_Skill24" onClick="A7(1)">Cornus\' Tear (MATK based damage on Splendide maps +10%)', 0),
             myInnerHtml("EN735", '<input type="checkbox" name="A7_Skill25" onClick="A7(1)">Luciola\'s Honey Jam (Received damage on Splendide maps -10%)', 0),
-            myInnerHtml("EN737", '<input type="checkbox" name="A7_Skill37" onClick="A7(1)">Lucky Rice Cake (LUK +21)', 0),
+            myInnerHtml("EN745", '<input type="checkbox" name="A7_Skill37" onClick="A7(1)"><strike>Lucky Rice Cake (LUK +21)</strike>', 0),
             myInnerHtml("EN738", '<input type="checkbox" name="A7_Skill38" onClick="A7(1)">Chewy Ricecake (ATK +10)', 0),
-            myInnerHtml("EN746", "<input type=checkbox name=A7_Skill46 onClick=A7(1)>Tyr's Blessing (FLEE +30, HIT +30, ATK +20, MATK +20)", 0),
-            myInnerHtml("EN742", '<select name="A7_Skill42" onChange="A7(1)" style="width:175px;"><option value="0">(none)</option></select>', 0),
-            myInnerHtml("EN743", '<input type="checkbox" name="A7_Skill43" onClick="A7(1)">Luxurious Western Food (All Stats +3)', 0),
-            myInnerHtml("EN744", '<input type="checkbox" name="A7_Skill44" onClick="A7(1)">Ginger Bread (ASPD +% (same as Awakening Potion))', 0),
-            myInnerHtml("EN745", '<input type="checkbox" name="A7_Skill45" onClick="A7(1)">Regeneration Potion (Items/skills recover +20%)', 0),
-            myInnerHtml("EN739", '<select name="A7_Skill39" onChange="A7(1)"><option value="0">(no HP Increase Potion)</option></select>', 0),
-            myInnerHtml("EN740", '<select name="A7_Skill40" onChange="A7(1)"><option value="0">(no SP Increase Potion)</option></select>', 0),
-            myInnerHtml("EN741", '<input type="checkbox" name="A7_Skill41" onClick="A7(1)">Savage BBQ (STR +20)', 0),
-            myInnerHtml("EN747", '<input type="checkbox" name="A7_Skill47" onClick="A7(1)">Cocktail Warg Blood (AGI +20)', 0),
-            myInnerHtml("EN748", '<input type="checkbox" name="A7_Skill48" onClick="A7(1)">Minor Stew (VIT +20)', 0),
-            myInnerHtml("EN749", '<input type="checkbox" name="A7_Skill49" onClick="A7(1)">Siroma Iced Tea (INT +20)', 0),
-            myInnerHtml("EN750", '<input type="checkbox" name="A7_Skill50" onClick="A7(1)">Drosera Herb Salad (DEX +20) (not saved via URL)', 0),
-            myInnerHtml("EN751", '<input type="checkbox" name="A7_Skill51" onClick="A7(1)">Petite Tail Noodles (LUK +20) (not saved via URL)', 0),
+            myInnerHtml("EN746", "<input type=checkbox name=A7_Skill46 onClick=A7(1)><strike>Tyr's Blessing (FLEE +30, HIT +30, ATK +20, MATK +20)</strike>", 0),
+            myInnerHtml("EN742", '<select name="A7_Skill42" onChange="A7(1)" style="width:175px;" disabled><option value="0">(none)</option></select>', 0),
+            myInnerHtml("EN743", '<input type="checkbox" name="A7_Skill43" onClick="A7(1)">Sweets Macaron Cake (ATK/MATK +3%, Damage taken +10%)', 0),
+            myInnerHtml("EN744", '<input type="checkbox" name="A7_Skill44" onClick="A7(1)"><strike>Ginger Bread (ASPD +% (same as Awakening Potion))</strike>', 0),
+            myInnerHtml("EN737", '<input type="checkbox" name="A7_Skill45" onClick="A7(1)">Regeneration Potion (Items/skills recover +20%)', 0),
+            myInnerHtml("EN739", '<select name="A7_Skill39" onChange="A7(1)" disabled><option value="0"><strike>(no HP Increase Potion)</strike></option></select>', 0),
+            myInnerHtml("EN740", '<select name="A7_Skill40" onChange="A7(1)" disabled><option value="0"><strike>(no SP Increase Potion)</strike></option></select>', 0),
+            myInnerHtml("EN741", '<input type="checkbox" name="A7_Skill41" onClick="A7(1)"><strike>Savage BBQ (STR +20)</strike>', 0),
+            myInnerHtml("EN747", '<input type="checkbox" name="A7_Skill47" onClick="A7(1)"><strike>Cocktail Warg Blood (AGI +20)</strike>', 0),
+            myInnerHtml("EN748", '<input type="checkbox" name="A7_Skill48" onClick="A7(1)"><strike>Minor Stew (VIT +20)</strike>', 0),
+            myInnerHtml("EN749", '<input type="checkbox" name="A7_Skill49" onClick="A7(1)"><strike>Siroma Iced Tea (INT +20)</strike>', 0),
+            myInnerHtml("EN750", '<input type="checkbox" name="A7_Skill50" onClick="A7(1)"><strike>Drosera Herb Salad (DEX +20) (not saved via URL)</strike>', 0),
+            myInnerHtml("EN751", '<input type="checkbox" name="A7_Skill51" onClick="A7(1)"><strike>Petite Tail Noodles (LUK +20) (not saved via URL)</strike>', 0),
             myInnerHtml("EN73", '<select name="A7_Skill3" onChange="A7(1)"></select> ', 0),
             myInnerHtml("EN74", '<select name="A7_Skill4" onChange="A7(1)"></select> ', 0),
             myInnerHtml("EN75", '<select name="A7_Skill5" onChange="A7(1)"></select> ', 0),
@@ -4647,7 +4624,6 @@ function Buf7SW(e) {
             c.A7_Skill40.options[3] = new Option("Large SP Increase Potion", 3),
             c.A7_Skill42.options[0] = new Option("(no Mega Resist Potion)", 0),
             c.A7_Skill42.options[1] = new Option("Mega Resist Potion [+10% resistance to Blind, Bleeding, Confusion, Curse, Frozen, Poison, Silence, Sleep, Stun and Stone Curse status effects]", 1),
-            c.A7_Skill42.options[2] = new Option("Mega Resist Potion (iRO) [+20% resistance to Blind, Bleeding, Confusion, Curse, Frozen, Poison, Silence, Sleep, Stun and Stone Curse status effects]", 2),
             SpeedPotName = ["(no Speed Potion)", "Concentration Potion", "Awakening Potion (Lvl 40)", "Berserk Potion"],
             c.A_SpeedPOT.options[0] = new Option(SpeedPotName[0], 0),
             c.A_SpeedPOT.options[1] = new Option(SpeedPotName[1], 1),
@@ -4889,10 +4865,10 @@ function Buf9SW(e) {
             myInnerHtml("EN982", '+<input type="text" inputmode="numeric" maxlength="5" onkeypress="return isNumeric(event)" onkeyup="A9(1)" name="ARG_RC48" value="0" class="center">% <select name="A9_Skill9" onChange="A9(1)" style="width:170px;"></select> skill damage.', 0),
             c.A9_Skill8.options[0] = new Option("(no skill selected)", 0),
             i = 1; i < All_DMGskill.length; i++)
-            c.A9_Skill8.options[i] = new Option(skillNameInSelect(m_Skill[All_DMGskill[i]][0], SRV), All_DMGskill[i]);
+            c.A9_Skill8.options[i] = new Option(skillNameInSelect(m_Skill[All_DMGskill[i]][0]), All_DMGskill[i]);
         for (c.A9_Skill9.options[0] = new Option("(no skill selected)", 0),
             i = 1; i < All_DMGskill.length; i++)
-            c.A9_Skill9.options[i] = new Option(skillNameInSelect(m_Skill[All_DMGskill[i]][0], SRV), All_DMGskill[i]);
+            c.A9_Skill9.options[i] = new Option(skillNameInSelect(m_Skill[All_DMGskill[i]][0]), All_DMGskill[i]);
         c.A9_Skill0.value = n_A_Buf9[0],
             c.ARG_RC0.value = n_A_Buf9[1],
             c.A9_Skill1.value = n_A_Buf9[2],
@@ -5161,14 +5137,14 @@ function debufSW(e) {
             n += '<TR><TD id="BI6_1" class="center">Lex Aeterna</TD><TD id="BI6_2" class="data"></TD><TD id="BI4_1" class="center">Frozen</TD><TD id="BI4_2"></TD></TR>',
             n += '<TR><TD id="BI11_1" class="center">Decrease AGI</TD><TD id="BI11_2" class="data"></TD><TD id="BI9_1" class="center">Stone</TD><TD id="BI9_2"></TD></TR>',
             n += '<TR><TD id="BI17_1" class="center">Spider Web</TD><TD id="BI17_2" class="data"></TD><TD id="BI8_1" class="center">Sleep</TD><TD id="BI8_2"></TD></TR>',
-            n += '<TR><TD id="BI1_1" class="center">Quagmire</TD><TD id="BI1_2" class="data"></TD><TD id="BI19_1" class="center">' + skillName(211, SRV) + '</TD><TD id="BI19_2"></TD></TR>',
-            n += '<TR><TD id="BI24_1" class="center">Flying</TD><TD id="BI24_2" class="data"></TD><TD id="BI20_1" class="center">' + skillName(218, SRV) + '</TD><TD id="BI20_2"></TD></TR>',
+            n += '<TR><TD id="BI1_1" class="center">Quagmire</TD><TD id="BI1_2" class="data"></TD><TD id="BI19_1" class="center">' + skillName(211) + '</TD><TD id="BI19_2"></TD></TR>',
+            n += '<TR><TD id="BI24_1" class="center">Flying</TD><TD id="BI24_2" class="data"></TD><TD id="BI20_1" class="center">' + skillName(218) + '</TD><TD id="BI20_2"></TD></TR>',
             n += '<TR><TD id="BI25_1" class="center">Mass Spiral (IA)</TD><TD id="BI25_2" class="data"></TD><TD id="BI26_1" class="center">Disarm</TD><TD id="BI26_2"></TD></TR>',
             n += '<TR><TD id="BI27_1" class="center">Piercing Shot</TD><TD id="BI27_2" class="data"></TD><TD id="BI28_1" class="center">Fling</TD><TD id="BI28_2"></TD></TR>',
             n += '<TR><TD id="BI29_1" class="center dotB">Holy Light</TD><TD id="BI29_2" class="data dotB"></TD><TD id="BI30_1" class="center dotB">ME Combo</TD><TD id="BI30_2" class="dotB"></TD></TR>',
             n += '<TR><TD class="center" ColSpan="4"><b>Monster Exclusive Debuffs</b></TD></TR>',
-            n += '<TR><TD id="BI13_1" class="center">' + skillName(172, SRV) + '</TD><TD id="BI13_2" class="data"></TD><TD id="BI14_1" class="center">' + skillName(173, SRV) + '</TD><TD id="BI14_2"></TD></TR>',
-            n += '<TR><TD id="BI15_1" class="center">' + skillName(174, SRV) + '</TD><TD id="BI15_2" class="data"></TD><TD id="BI16_1" class="center">' + skillName(175, SRV) + '</TD><TD id="BI16_2"></TD></TR>',
+            n += '<TR><TD id="BI13_1" class="center">' + skillName(172) + '</TD><TD id="BI13_2" class="data"></TD><TD id="BI14_1" class="center">' + skillName(173) + '</TD><TD id="BI14_2"></TD></TR>',
+            n += '<TR><TD id="BI15_1" class="center">' + skillName(174) + '</TD><TD id="BI15_2" class="data"></TD><TD id="BI16_1" class="center">' + skillName(175) + '</TD><TD id="BI16_2"></TD></TR>',
             n += '<TR><TD id="BI21_1" class="center">Eska</TD><TD id="BI21_2" class="data"></TD><TD id="BI22_1" class="center">Eske</TD><TD id="BI22_2"></TD></TR>',
             myInnerHtml("EnemyDebuf", n += '<TR><TD id="BI23_1" class="center" colspan="4"></TD></TR>', 0),
             myInnerHtml("BI0_2", '<select name="B_debuf0" onChange="AI(1)"></select>', 0),
@@ -5193,7 +5169,7 @@ function debufSW(e) {
             myInnerHtml("BI14_2", '<input type="checkbox" name="B_debuf14" onClick="AI(1)">', 0),
             myInnerHtml("BI15_2", '<input type="checkbox" name="B_debuf15" onClick="AI(1)">', 0),
             myInnerHtml("BI16_2", '<input type="checkbox" name="B_debuf16" onClick="AI(1)">', 0),
-            myInnerHtml("BI21_2", '<input type="checkbox" name="B_debuf21" onClick="AI(1)">', 0),
+            myInnerHtml("BI21_2", '<select name="B_debuf21" onChange="AI(1)"></select>', 0),
             myInnerHtml("BI22_2", '<input type="checkbox" name="B_debuf22" onClick="AI(1)">', 0),
             myInnerHtml("BI23_1", 'Elemental Change (Sage Skill) <select name="B_debuf23" onChange="AI(1)||debufSW(1)"></select>', 0),
             myInnerHtml("BI25_2", '<select name="B_debuf25" onChange="AI(1)"></select>', 0),
@@ -5303,6 +5279,10 @@ function debufSW(e) {
         c.B_debuf25.options[0] = new Option("0", 0),
         c.B_debuf25.options[1] = new Option("50%", 1),
         c.B_debuf25.options[2] = new Option("75%", 2),
+        c.B_debuf21.options[0] = new Option(0, 0),
+        c.B_debuf21.options[1] = new Option(1, 1),
+        c.B_debuf21.options[2] = new Option(2, 2),
+        c.B_debuf21.options[3] = new Option(3, 3),
         c.B_debuf0.value = n_B_debuf[0],
             c.B_debuf1.value = n_B_debuf[1],
             c.B_debuf2.checked = n_B_debuf[2],
@@ -5324,7 +5304,7 @@ function debufSW(e) {
                 c.B_debuf14.checked = n_B_debuf[14],
                 c.B_debuf15.checked = n_B_debuf[15],
                 c.B_debuf16.checked = n_B_debuf[16],
-                c.B_debuf21.checked = n_B_debuf[21],
+                c.B_debuf21.value = n_B_debuf[21],
                 c.B_debuf22.checked = n_B_debuf[22],
                 c.B_debuf23.value = n_B_debuf[23]),
             c.B_debuf24.value = n_B_debuf[24],
@@ -5360,8 +5340,8 @@ function EnemyBufSW(e) {
             n += '<div class="right">(click to hide)</div></TD></TR>',
             n += '<TR><TD class="center">Increase AGI</TD><TD id="ID_Kb0" class="data"></TD><TD class="center">Assumptio</TD><TD id="ID_Kb1"></TD></TR>',
             n += '<TR><TD class="center">Angelus</TD><TD id="ID_Kb10" class="data"></TD><TD class="center">Maximize Power</TD><TD id="ID_Kb3"></TD></TR>',
-            n += '<TR><TD class="center">' + skillName(157, SRV) + '</TD><TD id="ID_Kb11" class="data"></TD><TD class="center">Adrenaline Rush</TD><TD id="ID_Kb2"></TD></TR>',
-            n += '<TR><TD class="center">Shield Reflect</TD><TD id="ID_Kb12" class="data"></TD><TD class="center">' + skillName(165, SRV) + '</TD><TD id="ID_Kb13"></TD></TR>',
+            n += '<TR><TD class="center">' + skillName(157) + '</TD><TD id="ID_Kb11" class="data"></TD><TD class="center">Adrenaline Rush</TD><TD id="ID_Kb2"></TD></TR>',
+            n += '<TR><TD class="center">Shield Reflect</TD><TD id="ID_Kb12" class="data"></TD><TD class="center">' + skillName(165) + '</TD><TD id="ID_Kb13"></TD></TR>',
             n += '<TR><TD class="center dotB">Energy Coat</TD><TD id="ID_Kb14" class="dotB" colspan="3"></TD></TR>',
             n += '<TR><TD class="center" colspan="4"><b>Monster Exclusive buffs</b></TD></TR>',
             n += '<TR><TD class="center">Attrib. Change</TD><TD id="ID_Kb6" class="data"></TD><TD class="center">Stone Skin</TD><TD id="ID_Kb7"></TD></TR>',
@@ -5432,8 +5412,7 @@ function AK(e) {
             myInnerHtml("AKused", " [active]", 0))
 }
 function ClickB_Enemy(enemyID) {
-    for (SRV = 1 * c.server.value,
-        n_B = new Array,
+    for (n_B = new Array,
         n_B2 = new Array,
         i = 0; i <= 22; i++)
         n_B[i] = m_Monster[enemyID][i],
@@ -5477,9 +5456,8 @@ function ClickB_Enemy(enemyID) {
                 n_B2[24] = n_B[7] + (Math.floor(n_B[7] / 20) * Math.floor(n_B[7] / 20) - 1),
                 n_B2[23] > n_B2[24] && (n_B2[24] = n_B2[23])),
         n_B2[25] = Math.floor(n_B[7] / 2) + n_B[9],
-        SRV < 50 ? (n_B2[26] = n_B[5] + n_B[10],
-            n_B2[27] = n_B[5] + n_B[8]) : (n_B2[26] = 175 + n_B[5] + n_B[10],
-                n_B2[27] = 100 + n_B[5] + n_B[8]),
+        (n_B2[26] = n_B[5] + n_B[10],
+            n_B2[27] = n_B[5] + n_B[8])
         n_debufSW && (n_B_debuf[0] = 1 * c.B_debuf0.value,
             n_B_debuf[1] = 1 * c.B_debuf1.value,
             n_B_debuf[2] = c.B_debuf2.checked,
@@ -5508,7 +5486,7 @@ function ClickB_Enemy(enemyID) {
                 n_B_debuf[14] = c.B_debuf14.checked,
                 n_B_debuf[15] = c.B_debuf15.checked,
                 n_B_debuf[16] = c.B_debuf16.checked,
-                n_B_debuf[21] = c.B_debuf21.checked,
+                n_B_debuf[21] = 1 * c.B_debuf21.value,
                 n_B_debuf[22] = c.B_debuf22.checked,
                 n_B_debuf[23] = 1 * c.B_debuf23.value),
             debufSW(n_debufSW)),
@@ -5564,9 +5542,7 @@ function ClickB_Enemy(enemyID) {
         (l = n_B_buf[10]) && (n_B[23] = Math.floor(n_B[23] * (1 + .05 * l)),
             n_B[24] = Math.floor(n_B[24] * (1 + .05 * l))),
         n_B[25] = Math.floor(n_B[7] / 2) + n_B[9],
-        SRV < 50 ? (n_B[26] = n_B[5] + n_B[10],
-            n_B[27] = n_B[5] + n_B[8]) : (n_B[26] = 175 + n_B[5] + n_B[10],
-                n_B[27] = 100 + n_B[5] + n_B[8]);
+        (n_B[26] = n_B[5] + n_B[10], n_B[27] = n_B[5] + n_B[8]);
     var n = 0;
     0 == n_B[19] && 0 != n_B_debuf[0] && n_B[3] < 90 && (n += 5 + 5 * n_B_debuf[0]),
         0 == PvP && n_B_debuf[22] && (n += 50),
@@ -5594,7 +5570,7 @@ function ClickB_Enemy(enemyID) {
     n_B_debuf[14] && 0 == PvP && (n_B[14] -= Math.floor(15 * n_B[14] / 100)),
     0 == n_B[19] && n_B_debuf[4] && n_B[3] < 90 && (n_B[14] -= Math.floor(50 * n_B[14] / 100)),
     0 == n_B[19] && n_B_debuf[9] && n_B[3] < 90 && (n_B[14] -= Math.floor(50 * n_B[14] / 100)),
-    n_B_buf[9] && (SRV ? n_B[14] = 90 : n_B[14] *= 2),
+    n_B_buf[9] && (n_B[14] = 90),
     n_B_debuf[12] && (6 == n_B[2] || n_B[3] >= 90) && (n_B[14] -= Math.floor(n_B[14] * (10 + 4 * n_B_debuf[12]) / 100)),
     n_B_debuf[20] && 0 == PvP && (n_B[14] = 0),
     n_B[23] -= Math.floor(n_B[23] * n / 100),
@@ -5725,11 +5701,24 @@ function ClickB_Enemy(enemyID) {
     PopulateMonsterData();
 }
 function calc(sortingParameter = false) {
+    StAllCalc();
+    if(m_Skill[n_A_ActiveSkill][4] == 1 || m_Skill[n_A_ActiveSkill][4] == 2 || m_Skill[n_A_ActiveSkill][4] == 3)
+        skill_type = BF.WEAPON;
+    else if(m_Skill[n_A_ActiveSkill][4] < 0)
+        skill_type = BF.MAGIC;
+    else if(m_Skill[n_A_ActiveSkill][4] == 5)
+        skill_type = BF.MISC;
+    let newDamage = battle_calc_attack(skill_type, player, monster, n_A_ActiveSkill, n_A_ActiveSkillLV, 0);
+    updatePlayerDamageDisplay(newDamage);
+
+
     console.log("calc called with sortingParameter =", sortingParameter);
-    SRV = 1 * c.server.value;
+
+    return;
+
     for (var e = 0; e <= 2; e++)
         InnStr[e] = "";
-    !sortingParameter && StAllCalc(),
+    //!sortingParameter && StAllCalc(),
         wCSize = m_WeaponSize[n_A_WeaponType][n_B[4]] / 100;
     var _ = c.A_ActiveSkill.value
         , n = WeaponNameShort[n_A_WeaponType]
@@ -5737,7 +5726,7 @@ function calc(sortingParameter = false) {
     158 != _ && 159 != _ && 384 != _ && 324 != _ || (n = "Shield",
         wCSize = 1,
         l = 1),
-        SkillSearch(78) && (4 != n_A_WeaponType && 5 != n_A_WeaponType || 1 != n_B[4] || (n = skillName(78, SRV),
+        SkillSearch(78) && (4 != n_A_WeaponType && 5 != n_A_WeaponType || 1 != n_B[4] || (n = skillName(78),
             wCSize = 1,
             l = 1)),
         (SkillSearch(153) || n_A_Buf2[7]) && (n = "Weapon Perfection",
@@ -5762,7 +5751,7 @@ function calc(sortingParameter = false) {
         2177 == n_A_Equip[0] && n_A_Weapon_refine >= 9 && (n = "Platinum Dagger", 
             wCSize = 1,
             l = 1),
-        259 == _ && (n = skillName(259, SRV),
+        259 == _ && (n = skillName(259),
             wCSize = 1.25 - .25 * n_B[4],
             l = 1),
         l || 0 == _ ? (myInnerHtml("nm076", "Weapon/Skill Size Modifier", 0),
@@ -5831,8 +5820,6 @@ function calc(sortingParameter = false) {
         w998I = w998H * w_HIT / 100,
         w998J = w998H - w998I,
         w998K = w998B + w998E + w998G + w998I,
-        0 == SRV && (w_HIT >= 100 && (w998K = 100),
-            w_Cri >= 100 && (w998K = 100)),
         w998L = 100 - w998K,
         (0 == n_A_ActiveSkill || 272 == n_A_ActiveSkill || 401 == n_A_ActiveSkill || 430 == n_A_ActiveSkill || 847 == n_A_ActiveSkill || (86 == n_A_ActiveSkill && 50 <= n_B[3] && n_B[3] < 60) || (n_A_Buf3[47] && 197 != n_A_ActiveSkill && 321 != n_A_ActiveSkill)) && (w_HIT_HYOUJI = Math.floor(100 * w998K) / 100,
             myInnerHtml("CRInum", " (" + Math.round(100 * w998G) / 100 + "%)", 0));
@@ -5866,7 +5853,7 @@ function calc(sortingParameter = false) {
         myInnerHtml("BattleFLEE", t / 100, 0),
         n_A_workDEX = Math.floor(n_A_DEX * (1 + .2 * (n_A_WeaponLV - 1))),
         n_A_DMG = [0, 0, 0],
-        SRV < 50)
+        true)
         n_A_workDEX >= n_A_Weapon_ATK || SkillSearch(155) ? n_A_DMG[2] = n_A_ATK + n_A_WeaponLV_Maxplus + Math.floor((n_A_Weapon_ATK + wImp) * wCSize) : n_A_DMG[2] = n_A_ATK + n_A_WeaponLV_Maxplus + Math.floor((n_A_Weapon_ATK - 1 + wImp) * wCSize),
             10 != n_A_WeaponType && 17 != n_A_WeaponType && 18 != n_A_WeaponType && 19 != n_A_WeaponType && 20 != n_A_WeaponType && 21 != n_A_WeaponType || (n_A_DMG[2] += Math.floor((m_Arrow[n_A_Arrow][0] - 1) * wCSize)),
             10 != n_A_WeaponType && 17 != n_A_WeaponType && 18 != n_A_WeaponType && 19 != n_A_WeaponType && 20 != n_A_WeaponType && 21 != n_A_WeaponType || (w1 = n_A_ATK + n_A_WeaponLV_Maxplus + Math.floor(n_A_Weapon_ATK * n_A_Weapon_ATK / 100 * wCSize) + Math.floor(wImp * wCSize),
@@ -5881,22 +5868,6 @@ function calc(sortingParameter = false) {
                 //s += Math.floor((m_Arrow[n_A_Arrow][0] - 1) * wCSize),
                 n_A_DMG[0] > s && (n_A_DMG[0] = s)) : n_A_workDEX >= n_A_Weapon_ATK ? n_A_DMG[0] = n_A_ATK + n_A_WeaponLV_Minplus + Math.floor((n_A_Weapon_ATK + wImp) * wCSize) : (SkillSearch(155) && (n_A_workDEX = n_A_Weapon_ATK),
                     n_A_DMG[0] = n_A_ATK + n_A_WeaponLV_Minplus + Math.floor((n_A_workDEX + wImp) * wCSize));
-    else { // renewal / server version of above > 50 ( does not exist )
-        if (n_A_workDEX >= n_A_Weapon_ATK || SkillSearch(155) ? n_A_DMG[2] = n_A_ATK + n_A_WeaponLV_Maxplus + Math.floor((n_A_Weapon_ATK + wImp) * wCSize) : n_A_DMG[2] = n_A_ATK + n_A_WeaponLV_Maxplus + Math.floor((n_A_Weapon_ATK - 1 + wImp) * wCSize),
-            10 == n_A_WeaponType || 17 == n_A_WeaponType || 18 == n_A_WeaponType || 19 == n_A_WeaponType || 20 == n_A_WeaponType || 21 == n_A_WeaponType) {
-            if (n_A_Weapon_ATK > n_A_workDEX)
-                var a = n_A_workDEX;
-            else
-                a = n_A_Weapon_ATK;
-            s = n_A_ATK + n_A_WeaponLV_Maxplus + Math.floor(n_A_Weapon_ATK * a / 100 * wCSize) + Math.floor(wImp * wCSize),
-                s += Math.floor((m_Arrow[n_A_Arrow][0] - 1) * wCSize),
-                n_A_DMG[2] < s && (n_A_DMG[2] = s)
-        }
-        10 == n_A_WeaponType || 17 == n_A_WeaponType || 18 == n_A_WeaponType || 19 == n_A_WeaponType || 20 == n_A_WeaponType || 21 == n_A_WeaponType ? (n_A_DMG[0] = n_A_ATK + n_A_WeaponLV_Minplus + Math.floor((n_A_Weapon_ATK * n_A_Weapon_ATK / 100 + wImp) * wCSize),
-            s = n_A_ATK + n_A_WeaponLV_Minplus + Math.floor((n_A_Weapon_ATK * n_A_workDEX / 100 + wImp) * wCSize),
-            n_A_DMG[0] > s && (n_A_DMG[0] = s)) : n_A_workDEX >= n_A_Weapon_ATK ? n_A_DMG[0] = n_A_ATK + n_A_WeaponLV_Minplus + Math.floor((n_A_Weapon_ATK + wImp) * wCSize) : (SkillSearch(155) && (n_A_workDEX = n_A_Weapon_ATK),
-                n_A_DMG[0] = n_A_ATK + n_A_WeaponLV_Minplus + Math.floor((n_A_workDEX + wImp) * wCSize))
-    }
     if (n_A_DMG[1] = (n_A_DMG[0] + n_A_DMG[2]) / 2,
         n_rangedAtk = 0,
         n_A_CriATK = [0, 0, 0],
@@ -6029,7 +6000,7 @@ function BattleCalc2(e) {
             e += 3 * SkillSearch(393),
             e += 4 * n_A_ActiveSkillLV),
         395 == n_A_ActiveSkill && (e += 3 * m_Kunai[1 * document.calcForm.SkillSubNum.value][0]),
-        1 * c.server.value < 50 && (e = ApplyModifiers(e)),
+        e = ApplyModifiers(e),
         169 == n_A_ActiveSkill && 10 == n_A_WeaponType && (e = Math.floor(e / 2)),
         //169 == n_A_ActiveSkill && 1 == n_A_WeaponType && (e *= 2), // backstab double damage with dagger
         n_Nitou && 0 == n_A_ActiveSkill && 0 != n_A_WeaponType && (e = Math.floor(e * (50 + 10 * SkillSearch(79)) / 100)),
@@ -6235,7 +6206,7 @@ function CastAndDelay() {
     0 != n_Delay[5] && (wDelay = n_Delay[5], n = 5),
     SkillSearch(187) && sandanDelay < 0.2 && (sandanDelay = 0.2),
     n_Delay[6] > wDelay + wCast && (wDelay = n_Delay[6] - wCast, n = 6),
-        1 == n && (0 == n_A_ActiveSkill ? SkillSearch(187) ? (e += "Attack interval (normal)<BR>Attack interval (" + skillName(187, c.server.value) + ")<BR>",
+        1 == n && (0 == n_A_ActiveSkill ? SkillSearch(187) ? (e += "Attack interval (normal)<BR>Attack interval (" + skillName(187) + ")<BR>",
             _ += n_Delay[1] + " seconds<BR>" + sandanDelay + " seconds<BR>",
             wDelay = n_Delay[1] * w998A / 100 + sandanDelay * wBC3_3danHatudouRitu / 100) : (e += "Time/Hit<BR>",
                 _ += n_Delay[1] + " seconds<BR>") : pingDelay > 0 ? (e += "Motion Delay (ASPD based) + Ping<BR>",

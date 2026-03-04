@@ -56,7 +56,7 @@ function status_has_mode(status, mode) {
 function status_get_class(bl) {
     switch(bl.type) {
         case BL.PC: return bl.battle_status.class_;
-        case BL.MOB: return bl.battle_status.class_;
+        case BL.MOB: return bl.mob_id;
     }
     return 1;
 }
@@ -577,7 +577,7 @@ function is_attack_right_handed(src, skill_id) {
  * @returns {Damage} Calculated damage structure
  */
 function battle_calc_attack(attack_type, bl, target, skill_id, skill_lv, flag) {
-    console.log(`%c[battle_calc_attack] START — attack_type=${attack_type}, skill_id=${skill_id}, skill_lv=${skill_lv}, flag=${flag}`, 'color: #ff6600; font-weight: bold');
+    battleDebug && console.log(`%c[battle_calc_attack] START â€” attack_type=${attack_type}, skill_id=${skill_id}, skill_lv=${skill_lv}, flag=${flag}`, 'color: #ff6600; font-weight: bold');
     let d = new Damage();
 
     // Call appropriate damage calculation function based on attack type
@@ -586,7 +586,7 @@ function battle_calc_attack(attack_type, bl, target, skill_id, skill_lv, flag) {
             d = battle_calc_weapon_attack(bl, target, skill_id, skill_lv, flag);
             break;
         case BF.MAGIC:
-            console.log("HEYYY");
+            battleDebug && console.log("HEYYY");
             d = battle_calc_magic_attack(bl, target, skill_id, skill_lv, flag);
             break;
         case BF.MISC:
@@ -598,7 +598,7 @@ function battle_calc_attack(attack_type, bl, target, skill_id, skill_lv, flag) {
             return d;
     }
 
-    console.log(`[battle_calc_attack] After sub-calc — damage=${d.getAverageDamage()}, damage2=${d.getAverageDamage2()}, damage_min=${d.damage_min}, damage_max=${d.damage_max}, crit_damage_min=${d.crit_damage_min}, crit_damage_max=${d.crit_damage_max}`);
+    battleDebug && console.log(`[battle_calc_attack] After sub-calc â€” damage=${d.getAverageDamage()}, damage2=${d.getAverageDamage2()}, damage_min=${d.damage_min}, damage_max=${d.damage_max}, crit_damage_min=${d.crit_damage_min}, crit_damage_max=${d.crit_damage_max}`);
 
     // Post-processing: Check if attack missed or was absorbed
     if (d.damage + d.damage2 < 1) {
@@ -627,8 +627,8 @@ function battle_calc_attack(attack_type, bl, target, skill_id, skill_lv, flag) {
     d.skill_id = skill_id;
     d.skill_lv = skill_lv;
 
-    console.log(`%c[battle_calc_attack] END — final damage_min=${d.damage_min}, damage_max=${d.damage_max}, damage2_min=${d.damage2_min}, damage2_max=${d.damage2_max}, crit_damage_min=${d.crit_damage_min}, crit_damage_max=${d.crit_damage_max}, crit_damage2_min=${d.crit_damage2_min}, crit_damage2_max=${d.crit_damage2_max}, dmg_lv=${d.dmg_lv}`, 'color: #ff6600; font-weight: bold');
-    console.log(`%c[battle_calc_attack] Final damage details: ${JSON.stringify(d)}`, 'color: #ff6600; font-weight: bold');
+    battleDebug && console.log(`%c[battle_calc_attack] END â€” final damage_min=${d.damage_min}, damage_max=${d.damage_max}, damage2_min=${d.damage2_min}, damage2_max=${d.damage2_max}, crit_damage_min=${d.crit_damage_min}, crit_damage_max=${d.crit_damage_max}, crit_damage2_min=${d.crit_damage2_min}, crit_damage2_max=${d.crit_damage2_max}, dmg_lv=${d.dmg_lv}`, 'color: #ff6600; font-weight: bold');
+    battleDebug && console.log(`%c[battle_calc_attack] Final damage details: ${JSON.stringify(d)}`, 'color: #ff6600; font-weight: bold');
     return d;
 }
 
@@ -654,9 +654,9 @@ function battle_calc_misc_attack(src, target, skill_id, skill_lv, mflag) {
     let md = new Damage();
     let sstatus = status_get_status_data(src);
     let tstatus = status_get_status_data(target);
-    console.log("[battle_calc_misc_attack] START skill_id:", skill_id, "skill_lv:", skill_lv, "mflag:", mflag);
-    console.log("[battle_calc_misc_attack] src dex:", sstatus.dex, "int:", sstatus.int, "hit:", sstatus.hit);
-    console.log("[battle_calc_misc_attack] target vit:", tstatus.vit, "flee:", tstatus.flee, "def_ele:", tstatus.def_ele, "ele_lv:", tstatus.ele_lv);
+    battleDebug && console.log("[battle_calc_misc_attack] START skill_id:", skill_id, "skill_lv:", skill_lv, "mflag:", mflag);
+    battleDebug && console.log("[battle_calc_misc_attack] src dex:", sstatus.dex, "int:", sstatus.int, "hit:", sstatus.hit);
+    battleDebug && console.log("[battle_calc_misc_attack] target vit:", tstatus.vit, "flee:", tstatus.flee, "def_ele:", tstatus.def_ele, "ele_lv:", tstatus.ele_lv);
 
     md.div_ = skill_get_num(src, skill_id, skill_lv);
     md.dmg_lv = ATK.DEF;
@@ -664,7 +664,7 @@ function battle_calc_misc_attack(src, target, skill_id, skill_lv, mflag) {
     md.miscflag = mflag;
 
     s_ele = battle_get_misc_element(src, target, skill_id, skill_lv, mflag);
-    console.log("[battle_calc_misc_attack] s_ele:", s_ele, "div_:", md.div_);
+    battleDebug && console.log("[battle_calc_misc_attack] s_ele:", s_ele, "div_:", md.div_);
 
     md.flag |= battle_range_type(src, target, skill_id, skill_lv);
 
@@ -694,7 +694,7 @@ function battle_calc_misc_attack(src, target, skill_id, skill_lv, mflag) {
             if(skill_id == SKILL.SN_FALCONASSAULT) {
                 damage = DAMAGE_DIV_FIX2(damage, skill_get_num(src, SKILL.HT_BLITZBEAT, 5));
 
-                console.log("[battle_calc_misc_attack] after div fix dmg:", damage);
+                battleDebug && console.log("[battle_calc_misc_attack] after div fix dmg:", damage);
                 damage = Math.trunc((damage * (150 + 70 * skill_lv)) / 100);
             }
             md.damage_min = md.damage_max = md.crit_damage_min = md.crit_damage_max = damage;
@@ -749,10 +749,10 @@ function battle_calc_misc_attack(src, target, skill_id, skill_lv, mflag) {
             md.damage_min = md.damage_max = md.crit_damage_min = md.crit_damage_max = damage;
             break;
     }
-    console.log("[battle_calc_misc_attack] after skill switch dmg_min:", md.damage_min, "dmg_max:", md.damage_max);
+    battleDebug && console.log("[battle_calc_misc_attack] after skill switch dmg_min:", md.damage_min, "dmg_max:", md.damage_max);
 
     if(!skill_ignore_flee(skill_id) && !ignore_flee) {
-        if(n_B_debuf[4] || n_B_debuf[7] || n_B_debuf[8] || n_B_debuf[9]) { // stun, freeze, petrify, sleep statuses
+        if(sc_get(target, SC.FREEZE) || sc_get(target, SC.STUN) || sc_get(target, SC.SLEEP) || sc_get(target, SC.STONE)) { // stun, freeze, petrify, sleep statuses
             md.hit_rate = 100;
         } else {
             let flee = tstatus.flee;
@@ -768,16 +768,16 @@ function battle_calc_misc_attack(src, target, skill_id, skill_lv, mflag) {
 
     md.damage_min += battle_calc_cardfix(BF.MISC, src, target, skill_id, s_ele, 0, md.damage_min, 0, md.flag);
     md.damage_max += battle_calc_cardfix(BF.MISC, src, target, skill_id, s_ele, 0, md.damage_max, 0, md.flag);
-    console.log("[battle_calc_misc_attack] after cardfix dmg_min:", md.damage_min, "dmg_max:", md.damage_max);
+    battleDebug && console.log("[battle_calc_misc_attack] after cardfix dmg_min:", md.damage_min, "dmg_max:", md.damage_max);
 
     if(sd && (i = pc_skillatk_bonus(sd, skill_id))) {
-        console.log("[battle_calc_misc_attack] pc_skillatk_bonus:", i);
+        battleDebug && console.log("[battle_calc_misc_attack] pc_skillatk_bonus:", i);
         md.damage_min += Math.trunc((md.damage_min * i) / 100);
         md.damage_max += Math.trunc((md.damage_max * i) / 100);
     }
 
     if(tsd && (i = pc_sub_skillatk_bonus(tsd, skill_id))) {
-        console.log("[battle_calc_misc_attack] pc_sub_skillatk_bonus:", i);
+        battleDebug && console.log("[battle_calc_misc_attack] pc_sub_skillatk_bonus:", i);
         md.damage_min -= Math.trunc((md.damage_min * i) / 100);
         md.damage_max -= Math.trunc((md.damage_max * i) / 100);
     }
@@ -785,7 +785,7 @@ function battle_calc_misc_attack(src, target, skill_id, skill_lv, mflag) {
     if(!skill_ignores_element(skill_id) && !ignore_element) {
         md.damage_min = battle_attr_fix(src, target, md.damage_min, s_ele, tstatus.def_ele, tstatus.ele_lv, 0);
         md.damage_max = battle_attr_fix(src, target, md.damage_max, s_ele, tstatus.def_ele, tstatus.ele_lv, 0);
-        console.log("[battle_calc_misc_attack] after element fix dmg_min:", md.damage_min, "dmg_max:", md.damage_max);
+        battleDebug && console.log("[battle_calc_misc_attack] after element fix dmg_min:", md.damage_min, "dmg_max:", md.damage_max);
     }
 
     if(md.getAverageDamage() < 0)
@@ -794,12 +794,12 @@ function battle_calc_misc_attack(src, target, skill_id, skill_lv, mflag) {
         md.damage_min = md.damage_max = md.crit_damage_min = md.crit_damage_max = 1;
 
     battle_apply_div_fix(md, skill_id);
-    console.log("[battle_calc_misc_attack] after div fix dmg_min:", md.damage_min, "dmg_max:", md.damage_max);
+    battleDebug && console.log("[battle_calc_misc_attack] after div fix dmg_min:", md.damage_min, "dmg_max:", md.damage_max);
 
     if(c.A8_Skill14.value == 1) { // woe map
         md.damage_min = battle_calc_gvg_damage(src, target, md.damage_min, skill_id, md.flag);
         md.damage_max = battle_calc_gvg_damage(src, target, md.damage_max, skill_id, md.flag);
-        console.log("[battle_calc_misc_attack] after GvG fix dmg_min:", md.damage_min, "dmg_max:", md.damage_max);
+        battleDebug && console.log("[battle_calc_misc_attack] after GvG fix dmg_min:", md.damage_min, "dmg_max:", md.damage_max);
     }
 
     battle_do_reflect(BF.MISC, md, src, target, skill_id, skill_lv);
@@ -809,7 +809,7 @@ function battle_calc_misc_attack(src, target, skill_id, skill_lv, mflag) {
 
     md.element = s_ele;
 
-    console.log("[battle_calc_misc_attack] FINAL dmg_min:", md.damage_min, "dmg_max:", md.damage_max, "hit_rate:", md.hit_rate);
+    battleDebug && console.log("[battle_calc_misc_attack] FINAL dmg_min:", md.damage_min, "dmg_max:", md.damage_max, "hit_rate:", md.hit_rate);
     return md;
 }
 
@@ -842,9 +842,9 @@ function battle_calc_magic_attack(src, target, skill_id, skill_lv, mflag) {
     let tsd = is_player_object(target) ? target : null; // get player data if target is player, otherwise null
     let sstatus = status_get_status_data(src);
     let tstatus = status_get_status_data(target);
-    console.log("[battle_calc_magic_attack] START skill_id:", skill_id, "skill_lv:", skill_lv, "mflag:", mflag);
-    console.log("[battle_calc_magic_attack] src matk_min:", sstatus.matk_min, "matk_max:", sstatus.matk_max, "int:", sstatus.int, "luk:", sstatus.luk);
-    console.log("[battle_calc_magic_attack] target mdef:", tstatus.mdef, "mdef2:", tstatus.mdef2, "def_ele:", tstatus.def_ele, "ele_lv:", tstatus.ele_lv, "race:", tstatus.race);
+    battleDebug && console.log("[battle_calc_magic_attack] START skill_id:", skill_id, "skill_lv:", skill_lv, "mflag:", mflag);
+    battleDebug && console.log("[battle_calc_magic_attack] src matk_min:", sstatus.matk_min, "matk_max:", sstatus.matk_max, "int:", sstatus.int, "luk:", sstatus.luk);
+    battleDebug && console.log("[battle_calc_magic_attack] target mdef:", tstatus.mdef, "mdef2:", tstatus.mdef2, "def_ele:", tstatus.def_ele, "ele_lv:", tstatus.ele_lv, "race:", tstatus.race);
 
     ad.damage_min = 1;
     ad.damage_max = 1;
@@ -872,7 +872,7 @@ function battle_calc_magic_attack(src, target, skill_id, skill_lv, mflag) {
     
     ad.flag |= battle_range_type(src, target, skill_id, skill_lv);
     infdef = is_infinite_defense(src, target, ad.flag, skill_id, skill_lv) ? 1 : 0;
-    console.log("[battle_calc_magic_attack] s_ele:", s_ele, "imdef:", imdef, "infdef:", infdef);
+    battleDebug && console.log("[battle_calc_magic_attack] s_ele:", s_ele, "imdef:", imdef, "infdef:", infdef);
 
     if(!infdef) {
         let skillratio = 100;
@@ -932,11 +932,15 @@ function battle_calc_magic_attack(src, target, skill_id, skill_lv, mflag) {
                     ad.damage_min = ad.damage_max = ad.crit_damage_min = ad.crit_damage_max = eq_damage;
                 } else {
                     let eq_damage = battle_calc_base_damage(src, sstatus, sstatus.rhw, tstatus.size, 0);
-                    ad.damage_min = ad.damage_max = ad.crit_damage_min = ad.crit_damage_max = eq_damage;
+                    ad.damage_min = eq_damage.min;
+                    ad.damage_max = eq_damage.max;
+                    ad.crit_damage_min = eq_damage.crit_min;
+                    ad.crit_damage_max = eq_damage.crit_max;
                     MATK_RATE(ad, src, skill_id, battle_get_atkpercent(src, skill_id));
                 }
 
-                MATK_RATE(ad, src, skill_id, 200 + 100 * skill_lv + 100 * Math.trunc(skill_lv / 2) + ((skill_lv > 4) ? 100 : 0));
+                let eq_skillrate = 200 + 100 * skill_lv + 100 * Math.trunc(skill_lv / 2) + ((skill_lv > 4) ? 100 : 0);
+                MATK_RATE(ad, src, skill_id, eq_skillrate);
                 if(!sd && c.BSkillSubNum.value > 0) { // number of players in range
                     ad.damage_min = Math.trunc(ad.damage_min / (1 * c.BSkillSubNum.value));
                     ad.damage_max = Math.trunc(ad.damage_max / (1 * c.BSkillSubNum.value));
@@ -961,7 +965,7 @@ function battle_calc_magic_attack(src, target, skill_id, skill_lv, mflag) {
                     ad.crit_damage_min += sstatus.matk_min;
                     ad.crit_damage_max += sstatus.matk_min;
                 }
-                console.log("[battle_calc_magic_attack] base MATK dmg_min:", ad.damage_min, "dmg_max:", ad.damage_max);
+                battleDebug && console.log("[battle_calc_magic_attack] base MATK dmg_min:", ad.damage_min, "dmg_max:", ad.damage_max);
 
                 switch(skill_id) {
                     case SKILL.MG_NAPALMBEAT:
@@ -1103,9 +1107,9 @@ function battle_calc_magic_attack(src, target, skill_id, skill_lv, mflag) {
                         break;
                 }
 
-                console.log("[battle_calc_magic_attack] skillratio:", skillratio);
+                battleDebug && console.log("[battle_calc_magic_attack] skillratio:", skillratio);
                 MATK_RATE(ad, src, skill_id, skillratio);
-                console.log("[battle_calc_magic_attack] after MATK_RATE dmg_min:", ad.damage_min, "dmg_max:", ad.damage_max);
+                battleDebug && console.log("[battle_calc_magic_attack] after MATK_RATE dmg_min:", ad.damage_min, "dmg_max:", ad.damage_max);
 
                 // constant/misc additions from skills
                 if(skill_id == SKILL.WZ_FIREPILLAR)
@@ -1116,7 +1120,7 @@ function battle_calc_magic_attack(src, target, skill_id, skill_lv, mflag) {
 
         if(sd) {
             if((i = pc_skillatk_bonus(sd, skill_id))) {
-                console.log("[battle_calc_magic_attack] pc_skillatk_bonus:", i);
+                battleDebug && console.log("[battle_calc_magic_attack] pc_skillatk_bonus:", i);
                 ad.damage_min += Math.trunc((ad.damage_min * i) / 100);
                 ad.damage_max += Math.trunc((ad.damage_max * i) / 100);
                 ad.crit_damage_min += Math.trunc((ad.crit_damage_min * i) / 100);
@@ -1132,7 +1136,7 @@ function battle_calc_magic_attack(src, target, skill_id, skill_lv, mflag) {
 
             // insert stuff for TK_FALLING_STAR_ATTACK's crit check
         }
-        console.log("[battle_calc_magic_attack] before mdef calc - imdef:", imdef, "dmg_min:", ad.damage_min, "dmg_max:", ad.damage_max);
+        battleDebug && console.log("[battle_calc_magic_attack] before mdef calc - imdef:", imdef, "dmg_min:", ad.damage_min, "dmg_max:", ad.damage_max);
 
         if(tsd && (i = pc_sub_skillatk_bonus(tsd, skill_id))) {
             ad.damage_min -= Math.trunc((ad.damage_min * i) / 100);
@@ -1180,12 +1184,12 @@ function battle_calc_magic_attack(src, target, skill_id, skill_lv, mflag) {
             if(mdef < 0)
                 mdef = 0;
 
-            console.log("[battle_calc_magic_attack] mdef:", mdef, "mdef2:", mdef2, "ignore_mdef%:", i);
+            battleDebug && console.log("[battle_calc_magic_attack] mdef:", mdef, "mdef2:", mdef2, "ignore_mdef%:", i);
             ad.damage_min = Math.trunc((ad.damage_min * (100 - mdef)) / 100) - mdef2;
             ad.damage_max = Math.trunc((ad.damage_max * (100 - mdef)) / 100) - mdef2;
             ad.crit_damage_min = Math.trunc((ad.crit_damage_min * (100 - mdef)) / 100) - mdef2;
             ad.crit_damage_max = Math.trunc((ad.crit_damage_max * (100 - mdef)) / 100) - mdef2;
-            console.log("[battle_calc_magic_attack] after mdef dmg_min:", ad.damage_min, "dmg_max:", ad.damage_max);
+            battleDebug && console.log("[battle_calc_magic_attack] after mdef dmg_min:", ad.damage_min, "dmg_max:", ad.damage_max);
         }
 
         i = 0; // pc_skillatk_bonus ratio
@@ -1205,18 +1209,18 @@ function battle_calc_magic_attack(src, target, skill_id, skill_lv, mflag) {
                     wd.crit_damage_max += sstatus.rhw.atk2;
                 }
 
-                console.log("[battle_calc_magic_attack] GRAND CROSS physical part - damage_min:", wd.damage_min, "damage_max:", wd.damage_max, "crit_damage_min:", wd.crit_damage_min, "crit_damage_max:", wd.crit_damage_max);
-                console.log("[battle_calc_magic_attack] GRAND CROSS magic part before combination - damage_min:", ad.damage_min, "damage_max:", ad.damage_max, "crit_damage_min:", ad.crit_damage_min, "crit_damage_max:", ad.crit_damage_max);
+                battleDebug && console.log("[battle_calc_magic_attack] GRAND CROSS physical part - damage_min:", wd.damage_min, "damage_max:", wd.damage_max, "crit_damage_min:", wd.crit_damage_min, "crit_damage_max:", wd.crit_damage_max);
+                battleDebug && console.log("[battle_calc_magic_attack] GRAND CROSS magic part before combination - damage_min:", ad.damage_min, "damage_max:", ad.damage_max, "crit_damage_min:", ad.crit_damage_min, "crit_damage_max:", ad.crit_damage_max);
                 // combine atk and matk
                 ad.damage_min = Math.max(1, wd.damage_min + ad.damage_min);
                 ad.damage_max = Math.max(1, wd.damage_max + ad.damage_max);
                 ad.crit_damage_min = Math.max(1, wd.crit_damage_min + ad.crit_damage_min);
                 ad.crit_damage_max = Math.max(1, wd.crit_damage_max + ad.crit_damage_max);
 
-                console.log("[battle_calc_magic_attack] GRAND CROSS combined damage - damage_min:", ad.damage_min, "damage_max:", ad.damage_max, "crit_damage_min:", ad.crit_damage_min, "crit_damage_max:", ad.crit_damage_max);
+                battleDebug && console.log("[battle_calc_magic_attack] GRAND CROSS combined damage - damage_min:", ad.damage_min, "damage_max:", ad.damage_max, "crit_damage_min:", ad.crit_damage_min, "crit_damage_max:", ad.crit_damage_max);
                 skillratio += 40 * skill_lv;
                 MATK_RATE(ad, src, skill_id, skillratio);
-                console.log("[battle_calc_magic_attack] GRAND CROSS after MATK_RATE - damage_min:", ad.damage_min, "damage_max:", ad.damage_max, "crit_damage_min:", ad.crit_damage_min, "crit_damage_max:", ad.crit_damage_max);
+                battleDebug && console.log("[battle_calc_magic_attack] GRAND CROSS after MATK_RATE - damage_min:", ad.damage_min, "damage_max:", ad.damage_max, "crit_damage_min:", ad.crit_damage_min, "crit_damage_max:", ad.crit_damage_max);
                 break;
             }
         }
@@ -1235,14 +1239,14 @@ function battle_calc_magic_attack(src, target, skill_id, skill_lv, mflag) {
             ad.damage_max = battle_attr_fix(src, target, ad.damage_max, s_ele, tstatus.def_ele, tstatus.ele_lv, 0);
             ad.crit_damage_min = battle_attr_fix(src, target, ad.crit_damage_min, s_ele, tstatus.def_ele, tstatus.ele_lv, 0);
             ad.crit_damage_max = battle_attr_fix(src, target, ad.crit_damage_max, s_ele, tstatus.def_ele, tstatus.ele_lv, 0);
-            console.log("[battle_calc_magic_attack] after element fix dmg_min:", ad.damage_min, "dmg_max:", ad.damage_max);
+            battleDebug && console.log("[battle_calc_magic_attack] after element fix dmg_min:", ad.damage_min, "dmg_max:", ad.damage_max);
         }
 
         ad.damage_min += battle_calc_cardfix(BF.MAGIC, src, target, skill_id, s_ele, 0, ad.damage_min, 0, ad.flag);
         ad.damage_max += battle_calc_cardfix(BF.MAGIC, src, target, skill_id, s_ele, 0, ad.damage_max, 0, ad.flag);
         ad.crit_damage_min += battle_calc_cardfix(BF.MAGIC, src, target, skill_id, s_ele, 0, ad.crit_damage_min, 0, ad.flag);
         ad.crit_damage_max += battle_calc_cardfix(BF.MAGIC, src, target, skill_id, s_ele, 0, ad.crit_damage_max, 0, ad.flag);
-        console.log("[battle_calc_magic_attack] after cardfix dmg_min:", ad.damage_min, "dmg_max:", ad.damage_max);
+        battleDebug && console.log("[battle_calc_magic_attack] after cardfix dmg_min:", ad.damage_min, "dmg_max:", ad.damage_max);
 
         switch(skill_id) {
             case SKILL.CR_GRANDCROSS:
@@ -1266,20 +1270,20 @@ function battle_calc_magic_attack(src, target, skill_id, skill_lv, mflag) {
     }
     
     battle_apply_div_fix(ad, skill_id);
-    console.log("[battle_calc_magic_attack] after div fix dmg_min:", ad.damage_min, "dmg_max:", ad.damage_max);
+    battleDebug && console.log("[battle_calc_magic_attack] after div fix dmg_min:", ad.damage_min, "dmg_max:", ad.damage_max);
 
     ad.damage_min = battle_calc_damage(src, target, ad, ad.damage_min, skill_id, skill_lv);
     ad.damage_max = battle_calc_damage(src, target, ad, ad.damage_max, skill_id, skill_lv);
     ad.crit_damage_min = battle_calc_damage(src, target, ad, ad.crit_damage_min, skill_id, skill_lv);
     ad.crit_damage_max = battle_calc_damage(src, target, ad, ad.crit_damage_max, skill_id, skill_lv);
-    console.log("[battle_calc_magic_attack] after battle_calc_damage dmg_min:", ad.damage_min, "dmg_max:", ad.damage_max);
+    battleDebug && console.log("[battle_calc_magic_attack] after battle_calc_damage dmg_min:", ad.damage_min, "dmg_max:", ad.damage_max);
 
     if(c.A8_Skill14.value == 1) { // woe map
         ad.damage_min = battle_calc_gvg_damage(src, target, ad.damage_min, skill_id, ad.flag);
         ad.damage_max = battle_calc_gvg_damage(src, target, ad.damage_max, skill_id, ad.flag);
         ad.crit_damage_min = battle_calc_gvg_damage(src, target, ad.crit_damage_min, skill_id, ad.flag);
         ad.crit_damage_max = battle_calc_gvg_damage(src, target, ad.crit_damage_max, skill_id, ad.flag);
-        console.log("[battle_calc_magic_attack] after GvG fix dmg_min:", ad.damage_min, "dmg_max:", ad.damage_max);
+        battleDebug && console.log("[battle_calc_magic_attack] after GvG fix dmg_min:", ad.damage_min, "dmg_max:", ad.damage_max);
     }
 
     // special "conditions" where skills cannot be used on a target, set damage to 0
@@ -1299,7 +1303,7 @@ function battle_calc_magic_attack(src, target, skill_id, skill_lv, mflag) {
 
     ad.element = s_ele;
 
-    console.log("[battle_calc_magic_attack] FINAL dmg_min:", ad.damage_min, "dmg_max:", ad.damage_max, "crit_min:", ad.crit_damage_min, "crit_max:", ad.crit_damage_max);
+    battleDebug && console.log("[battle_calc_magic_attack] FINAL dmg_min:", ad.damage_min, "dmg_max:", ad.damage_max, "crit_min:", ad.crit_damage_min, "crit_max:", ad.crit_damage_max);
     return ad;
 }
 
@@ -1334,7 +1338,7 @@ function battle_get_magic_element(src, target, skill_id, skill_lv, mflag) {
  * @returns {Damage} Calculated damage
  */
 function battle_calc_weapon_attack(src, target, skill_id, skill_lv, wflag) {
-    console.log(`%c[battle_calc_weapon_attack] START — skill_id=${skill_id}, skill_lv=${skill_lv}, wflag=${wflag}`, 'color: #00cc00; font-weight: bold');
+    battleDebug && console.log(`%c[battle_calc_weapon_attack] START â€” skill_id=${skill_id}, skill_lv=${skill_lv}, wflag=${wflag}`, 'color: #00cc00; font-weight: bold');
     let wd = new Damage();
     let sd = is_player_object(src) ? src : null; // get player data if src is player, otherwise null
     let tsd = is_player_object(target) ? target : null; // get player data if target is player, otherwise null
@@ -1344,14 +1348,14 @@ function battle_calc_weapon_attack(src, target, skill_id, skill_lv, wflag) {
     let infdef = false;
     
     wd = initialize_weapon_data(src, target, skill_id, skill_lv, wflag);
-    console.log(`[battle_calc_weapon_attack] After initialize_weapon_data — div_=${wd.div_}, flag=${wd.flag}, type=${wd.type}`);
+    battleDebug && console.log(`[battle_calc_weapon_attack] After initialize_weapon_data â€” div_=${wd.div_}, flag=${wd.flag}, type=${wd.type}`);
 
     right_element = battle_get_weapon_element(wd, src, target, skill_id, skill_lv, EQI.HAND_R);
     left_element = battle_get_weapon_element(wd, src, target, skill_id, skill_lv, EQI.HAND_L);
-    console.log(`[battle_calc_weapon_attack] Elements — right=${right_element}, left=${left_element}`);
+    battleDebug && console.log(`[battle_calc_weapon_attack] Elements â€” right=${right_element}, left=${left_element}`);
     
     battle_calc_multi_attack(wd, src, target, skill_id, skill_lv);
-    console.log(`[battle_calc_weapon_attack] After multi_attack — div_=${wd.div_}, type=${wd.type}, multi_attack_rate=${wd.multi_attack_rate}`);
+    battleDebug && console.log(`[battle_calc_weapon_attack] After multi_attack â€” div_=${wd.div_}, type=${wd.type}, multi_attack_rate=${wd.multi_attack_rate}`);
 
     // Now simply sets the critical rate of the crit damage 
     is_attack_critical(wd, src, target, skill_id, skill_lv, true);
@@ -1361,11 +1365,11 @@ function battle_calc_weapon_attack(src, target, skill_id, skill_lv, wflag) {
             wd.type = DMG.MULTI_HIT_CRITICAL;
         else
             wd.type = DMG.CRITICAL;
-        console.log(`[battle_calc_weapon_attack] CRITICAL HIT — type=${wd.type}`);
+        battleDebug && console.log(`[battle_calc_weapon_attack] CRITICAL HIT â€” type=${wd.type}`);
     } */
 
     if(!is_attack_hitting(wd, src, target, skill_id, skill_lv, true)) {
-        console.log(`[battle_calc_weapon_attack] Attack MISSED`);
+        battleDebug && console.log(`[battle_calc_weapon_attack] Attack MISSED`);
         wd.dmg_lv = ATK.FLEE;
     } else if(!(infdef = is_infinite_defense(src, target, wd.flag, skill_id, skill_lv))) {
         // first call function with id 0 to get base damage of a normal attack for damage calculation
@@ -1374,49 +1378,49 @@ function battle_calc_weapon_attack(src, target, skill_id, skill_lv, wflag) {
         wd.basedamage_max = wd.damage_max;
         wd.crit_basedamage_min = wd.crit_damage_min;
         wd.crit_basedamage_max = wd.crit_damage_max;
-        console.log(`[battle_calc_weapon_attack] Base normal atk — basedamage_min=${wd.basedamage_min}, basedamage_max=${wd.basedamage_max}, crit_basedamage_min=${wd.crit_basedamage_min}, crit_basedamage_max=${wd.crit_basedamage_max}`);
+        battleDebug && console.log(`[battle_calc_weapon_attack] Base normal atk â€” basedamage_min=${wd.basedamage_min}, basedamage_max=${wd.basedamage_max}, crit_basedamage_min=${wd.crit_basedamage_min}, crit_basedamage_max=${wd.crit_basedamage_max}`);
         // now actual skill damage
         if(skill_id != SKILL.NV_BASIC_ATTACK)
             battle_calc_skill_base_damage(wd, src, target, skill_id, skill_lv);
-        console.log(`[battle_calc_weapon_attack] After skill_base_damage — damage_min=${wd.damage_min}, damage_max=${wd.damage_max}, damage2_min=${wd.damage2_min}, damage2_max=${wd.damage2_max}, crit_damage_min=${wd.crit_damage_min}, crit_damage_max=${wd.crit_damage_max}`);
+        battleDebug && console.log(`[battle_calc_weapon_attack] After skill_base_damage â€” damage_min=${wd.damage_min}, damage_max=${wd.damage_max}, damage2_min=${wd.damage2_min}, damage2_max=${wd.damage2_max}, crit_damage_min=${wd.crit_damage_min}, crit_damage_max=${wd.crit_damage_max}`);
 
         ATK_RATE(wd, src, skill_id, battle_calc_attack_skill_ratio(wd, src, target, skill_id, skill_lv));
         CRIT_ATK_RATE(wd, src, skill_id, battle_calc_attack_skill_ratio(wd, src, target, skill_id, skill_lv));
-        console.log(`[battle_calc_weapon_attack] After skill_ratio ATK_RATE — damage_min=${wd.damage_min}, damage_max=${wd.damage_max}, crit_damage_min=${wd.crit_damage_min}, crit_damage_max=${wd.crit_damage_max}`);
+        battleDebug && console.log(`[battle_calc_weapon_attack] After skill_ratio ATK_RATE â€” damage_min=${wd.damage_min}, damage_max=${wd.damage_max}, crit_damage_min=${wd.crit_damage_min}, crit_damage_max=${wd.crit_damage_max}`);
         ATK_ADD2(wd, src, skill_id, battle_calc_skill_constant_addition(wd, src, target, skill_id, skill_lv).min, battle_calc_skill_constant_addition(wd, src, target, skill_id, skill_lv).max);
         CRIT_ATK_ADD2(wd, src, skill_id, battle_calc_skill_constant_addition(wd, src, target, skill_id, skill_lv).min, battle_calc_skill_constant_addition(wd, src, target, skill_id, skill_lv).max);
-        console.log(`[battle_calc_weapon_attack] After skill_constant_addition — damage_min=${wd.damage_min}, damage_max=${wd.damage_max}, crit_damage_min=${wd.crit_damage_min}, crit_damage_max=${wd.crit_damage_max}`);
+        battleDebug && console.log(`[battle_calc_weapon_attack] After skill_constant_addition â€” damage_min=${wd.damage_min}, damage_max=${wd.damage_max}, crit_damage_min=${wd.crit_damage_min}, crit_damage_max=${wd.crit_damage_max}`);
 
         let i = 0;
 
         if(sd && skill_id && (i = pc_skillatk_bonus(src, skill_id))) {
-            console.log(`[battle_calc_weapon_attack] pc_skillatk_bonus=${i}`);
+            battleDebug && console.log(`[battle_calc_weapon_attack] pc_skillatk_bonus=${i}`);
             ATK_ADDRATE(wd, src, skill_id, i);
             CRIT_ATK_ADDRATE(wd, src, skill_id, i);
         }
         if(tsd && (i = pc_sub_skillatk_bonus(tsd, skill_id))) {
             ATK_ADDRATE(wd, src, skill_id, -i);
             CRIT_ATK_ADDRATE(wd, src, skill_id, -i);
-             console.log(`[battle_calc_weapon_attack] pc_sub_skillatk_bonus=${i}`);
+             battleDebug && console.log(`[battle_calc_weapon_attack] pc_sub_skillatk_bonus=${i}`);
         }
 
         // final attack bonuses not affected by cards
         battle_attack_sc_bonus(wd, src, target, skill_id, skill_lv);
-        console.log(`[battle_calc_weapon_attack] After sc_bonus — damage_min=${wd.damage_min}, damage_max=${wd.damage_max}, crit_damage_min=${wd.crit_damage_min}, crit_damage_max=${wd.crit_damage_max}`);
+        battleDebug && console.log(`[battle_calc_weapon_attack] After sc_bonus â€” damage_min=${wd.damage_min}, damage_max=${wd.damage_max}, crit_damage_min=${wd.crit_damage_min}, crit_damage_max=${wd.crit_damage_max}`);
 
         if((wd.getAverageDamage() + wd.getAverageDamage2()) || (wd.getAverageCritDamage() + wd.getAverageCritDamage2())) {
             if(skill_id != SKILL.PA_SHIELDCHAIN && skill_id != SKILL.CR_SHIELDBOOMERANG) {
                 battle_calc_defense_reduction(wd, src, target, skill_id, skill_lv);
-                console.log(`[battle_calc_weapon_attack] After defense_reduction — damage_min=${wd.damage_min}, damage_max=${wd.damage_max}, crit_damage_min=${wd.crit_damage_min}, crit_damage_max=${wd.crit_damage_max}`);
+                battleDebug && console.log(`[battle_calc_weapon_attack] After defense_reduction â€” damage_min=${wd.damage_min}, damage_max=${wd.damage_max}, crit_damage_min=${wd.crit_damage_min}, crit_damage_max=${wd.crit_damage_max}`);
             }
 
             battle_calc_attack_post_defense(wd, src, target, skill_id, skill_lv);
-            console.log(`[battle_calc_weapon_attack] After post_defense — damage_min=${wd.damage_min}, damage_max=${wd.damage_max}, crit_damage_min=${wd.crit_damage_min}, crit_damage_max=${wd.crit_damage_max}`);
+            battleDebug && console.log(`[battle_calc_weapon_attack] After post_defense â€” damage_min=${wd.damage_min}, damage_max=${wd.damage_max}, crit_damage_min=${wd.crit_damage_min}, crit_damage_max=${wd.crit_damage_max}`);
         }
     }
 
     battle_calc_element_damage(wd, src, target, skill_id, skill_lv);
-    console.log(`[battle_calc_weapon_attack] After element_damage — damage_min=${wd.damage_min}, damage_max=${wd.damage_max}, crit_damage_min=${wd.crit_damage_min}, crit_damage_max=${wd.crit_damage_max}`);
+    battleDebug && console.log(`[battle_calc_weapon_attack] After element_damage â€” damage_min=${wd.damage_min}, damage_max=${wd.damage_max}, crit_damage_min=${wd.crit_damage_min}, crit_damage_max=${wd.crit_damage_max}`);
 
     switch(skill_id) {
         case SKILL.TK_DOWNKICK:
@@ -1434,7 +1438,7 @@ function battle_calc_weapon_attack(src, target, skill_id, skill_lv, wflag) {
         let skill;
 
         if((skill = SkillSearch(SKILL.BS_WEAPONRESEARCH)) > 0) {
-            console.log(`[battle_calc_weapon_attack] Weapon Research bonus: +${skill * 2}`);
+            battleDebug && console.log(`[battle_calc_weapon_attack] Weapon Research bonus: +${skill * 2}`);
             ATK_ADD(wd, src, skill_id, skill * 2);
             CRIT_ATK_ADD(wd, src, skill_id, skill * 2);
         }
@@ -1445,7 +1449,7 @@ function battle_calc_weapon_attack(src, target, skill_id, skill_lv, wflag) {
             CRIT_ATK_ADD(wd, src, skill_id, 4);
         }
 
-        console.log(`[battle_calc_weapon_attack] Before src cardfix — damage_min=${wd.damage_min}, damage_max=${wd.damage_max}, crit_damage_min=${wd.crit_damage_min}, crit_damage_max=${wd.crit_damage_max}`);
+        battleDebug && console.log(`[battle_calc_weapon_attack] Before src cardfix â€” damage_min=${wd.damage_min}, damage_max=${wd.damage_max}, crit_damage_min=${wd.crit_damage_min}, crit_damage_max=${wd.crit_damage_max}`);
         switch(skill_id) {
             default:
                 wd.damage_min += battle_calc_cardfix(BF.WEAPON, src, target, skill_id, right_element, left_element, wd.damage_min, 2, wd.flag);
@@ -1462,11 +1466,11 @@ function battle_calc_weapon_attack(src, target, skill_id, skill_lv, wflag) {
                 }
                 break;
         }
-        console.log(`[battle_calc_weapon_attack] After src cardfix — damage_min=${wd.damage_min}, damage_max=${wd.damage_max}, crit_damage_min=${wd.crit_damage_min}, crit_damage_max=${wd.crit_damage_max}`);
+        battleDebug && console.log(`[battle_calc_weapon_attack] After src cardfix â€” damage_min=${wd.damage_min}, damage_max=${wd.damage_max}, crit_damage_min=${wd.crit_damage_min}, crit_damage_max=${wd.crit_damage_max}`);
     }
 
     if(tsd) {
-        console.log(`[battle_calc_weapon_attack] Before target cardfix — damage_min=${wd.damage_min}, damage_max=${wd.damage_max}, crit_damage_min=${wd.crit_damage_min}, crit_damage_max=${wd.crit_damage_max}`);
+        battleDebug && console.log(`[battle_calc_weapon_attack] Before target cardfix â€” damage_min=${wd.damage_min}, damage_max=${wd.damage_max}, crit_damage_min=${wd.crit_damage_min}, crit_damage_max=${wd.crit_damage_max}`);
         wd.damage_min += battle_calc_cardfix(BF.WEAPON, src, target, skill_id, right_element, left_element, wd.damage_min, 0, wd.flag);
         wd.damage_max += battle_calc_cardfix(BF.WEAPON, src, target, skill_id, right_element, left_element, wd.damage_max, 0, wd.flag);
 
@@ -1479,11 +1483,11 @@ function battle_calc_weapon_attack(src, target, skill_id, skill_lv, wflag) {
             wd.crit_damage2_min += battle_calc_cardfix(BF.WEAPON, src, target, skill_id, right_element, left_element, wd.crit_damage2_min, 1, wd.flag);
             wd.crit_damage2_max += battle_calc_cardfix(BF.WEAPON, src, target, skill_id, right_element, left_element, wd.crit_damage2_max, 1, wd.flag);
         }
-        console.log(`[battle_calc_weapon_attack] After target cardfix — damage_min=${wd.damage_min}, damage_max=${wd.damage_max}, crit_damage_min=${wd.crit_damage_min}, crit_damage_max=${wd.crit_damage_max}`);
+        battleDebug && console.log(`[battle_calc_weapon_attack] After target cardfix â€” damage_min=${wd.damage_min}, damage_max=${wd.damage_max}, crit_damage_min=${wd.crit_damage_min}, crit_damage_max=${wd.crit_damage_max}`);
     }
 
     if(infdef) {
-        console.log(`[battle_calc_weapon_attack] Infinite defense (plant) — calling battle_calc_attack_plant`);
+        battleDebug && console.log(`[battle_calc_weapon_attack] Infinite defense (plant) â€” calling battle_calc_attack_plant`);
         battle_calc_attack_plant(wd, src, target, skill_id, skill_lv);
 
 
@@ -1492,16 +1496,16 @@ function battle_calc_weapon_attack(src, target, skill_id, skill_lv, wflag) {
     }
 
     battle_apply_div_fix(wd, skill_id);
-    console.log(`[battle_calc_weapon_attack] After div_fix — damage_min=${wd.damage_min}, damage_max=${wd.damage_max}, crit_damage_min=${wd.crit_damage_min}, crit_damage_max=${wd.crit_damage_max}, div_=${wd.div_}`);
+    battleDebug && console.log(`[battle_calc_weapon_attack] After div_fix â€” damage_min=${wd.damage_min}, damage_max=${wd.damage_max}, crit_damage_min=${wd.crit_damage_min}, crit_damage_max=${wd.crit_damage_max}, div_=${wd.div_}`);
 
     battle_calc_attack_left_right_hands(wd, src, target, skill_id, skill_lv);
-    console.log(`[battle_calc_weapon_attack] After left_right_hands — damage_min=${wd.damage_min}, damage_max=${wd.damage_max}, damage2_min=${wd.damage2_min}, damage2_max=${wd.damage2_max}, crit_damage_min=${wd.crit_damage_min}, crit_damage_max=${wd.crit_damage_max}, crit_damage2_min=${wd.crit_damage2_min}, crit_damage2_max=${wd.crit_damage2_max}`);
+    battleDebug && console.log(`[battle_calc_weapon_attack] After left_right_hands â€” damage_min=${wd.damage_min}, damage_max=${wd.damage_max}, damage2_min=${wd.damage2_min}, damage2_max=${wd.damage2_max}, crit_damage_min=${wd.crit_damage_min}, crit_damage_max=${wd.crit_damage_max}, crit_damage2_min=${wd.crit_damage2_min}, crit_damage2_max=${wd.crit_damage2_max}`);
 
     battle_calc_attack_gvg_bg(wd, src, target, skill_id, skill_lv);
-    console.log(`[battle_calc_weapon_attack] After gvg_bg — damage_min=${wd.damage_min}, damage_max=${wd.damage_max}, crit_damage_min=${wd.crit_damage_min}, crit_damage_max=${wd.crit_damage_max}`);
+    battleDebug && console.log(`[battle_calc_weapon_attack] After gvg_bg â€” damage_min=${wd.damage_min}, damage_max=${wd.damage_max}, crit_damage_min=${wd.crit_damage_min}, crit_damage_max=${wd.crit_damage_max}`);
 
     battle_calc_weapon_final_atk_modifiers(wd, src, target, skill_id, skill_lv);
-    console.log(`%c[battle_calc_weapon_attack] END — final damage_min=${wd.damage_min}, damage_max=${wd.damage_max}, damage2_min=${wd.damage2_min}, damage2_max=${wd.damage2_max}, crit_damage_min=${wd.crit_damage_min}, crit_damage_max=${wd.crit_damage_max}, crit_damage2_min=${wd.crit_damage2_min}, crit_damage2_max=${wd.crit_damage2_max}`, 'color: #00cc00; font-weight: bold');
+    battleDebug && console.log(`%c[battle_calc_weapon_attack] END â€” final damage_min=${wd.damage_min}, damage_max=${wd.damage_max}, damage2_min=${wd.damage2_min}, damage2_max=${wd.damage2_max}, crit_damage_min=${wd.crit_damage_min}, crit_damage_max=${wd.crit_damage_max}, crit_damage2_min=${wd.crit_damage2_min}, crit_damage2_max=${wd.crit_damage2_max}`, 'color: #00cc00; font-weight: bold');
 
     wd.element = right_element;
 
@@ -1578,15 +1582,10 @@ function battle_calc_return_damage(target, src, dmg, flag, skill_id, status_refl
             reflect_flag = true;
             rdamage += Math.trunc((damage * tsd.bonus.short_weapon_damage_return) / 100);
         } else if (status_reflect) {
-            if(tsd && n_A_Buf2[14] && skill_id != SKILL.WS_CARTTERMINATION) { // player reflect shield
+            if(sc_get(target, SC.SHIELDREFLECT) && skill_id != SKILL.WS_CARTTERMINATION) { // reflect shield
                 reflect_flag = true;
-                rdamage += Math.trunc((damage * (10 + n_A_Buf2[14] * 3)) / 100);
+                rdamage += Math.trunc((damage * (10 + sc_get(target, SC.SHIELDREFLECT).val2)) / 100);
             }
-
-            if(!tsd && target.buff[12] && skill_id != SKILL.WS_CARTTERMINATION) { // mob reflect shield
-                reflect_flag = true;
-                rdamage += Math.trunc((damage * (10 + target.buff[12] * 3)) / 100);
-             }
         }
     } else {
         if(!status_reflect && tsd && tsd.bonus.long_weapon_damage_return) {
@@ -1626,24 +1625,24 @@ function battle_cap_reflect_damage(src, target, damage) {
 }
 
 function battle_calc_weapon_final_atk_modifiers(wd, src, target, skill_id, skill_lv) {
-    console.log(`[battle_calc_weapon_final_atk_modifiers] START — damage_min=${wd.damage_min}, damage_max=${wd.damage_max}, crit_damage_min=${wd.crit_damage_min}, crit_damage_max=${wd.crit_damage_max}`);
+    battleDebug && console.log(`[battle_calc_weapon_final_atk_modifiers] START â€” damage_min=${wd.damage_min}, damage_max=${wd.damage_max}, crit_damage_min=${wd.crit_damage_min}, crit_damage_max=${wd.crit_damage_max}`);
     let skill_damage = 0;
 
     if(skill_id == SKILL.ASC_BREAKER) {
         let md = battle_calc_misc_attack(src, target, skill_id, skill_lv, wd.miscflag);
 
-        console.log(`[battle_calc_weapon_final_atk_modifiers] ASC_BREAKER misc portion — md.damage_min=${md.damage_min}, md.damage_max=${md.damage_max}`);
+        battleDebug && console.log(`[battle_calc_weapon_final_atk_modifiers] ASC_BREAKER misc portion â€” md.damage_min=${md.damage_min}, md.damage_max=${md.damage_max}`);
         wd.damage_min += md.damage_min;
         wd.damage_max += md.damage_max;
 
         wd.crit_damage_min += md.damage_min;
         wd.crit_damage_max += md.damage_max;
     }
-    console.log(`[battle_calc_weapon_final_atk_modifiers] END — damage_min=${wd.damage_min}, damage_max=${wd.damage_max}, crit_damage_min=${wd.crit_damage_min}, crit_damage_max=${wd.crit_damage_max}`);
+    battleDebug && console.log(`[battle_calc_weapon_final_atk_modifiers] END â€” damage_min=${wd.damage_min}, damage_max=${wd.damage_max}, crit_damage_min=${wd.crit_damage_min}, crit_damage_max=${wd.crit_damage_max}`);
 }
 
 function battle_calc_attack_gvg_bg(wd, src, target, skill_id, skill_lv) {
-    console.log(`[battle_calc_attack_gvg_bg] START — damage_min=${wd.damage_min}, damage_max=${wd.damage_max}, crit_damage_min=${wd.crit_damage_min}, crit_damage_max=${wd.crit_damage_max}`);
+    battleDebug && console.log(`[battle_calc_attack_gvg_bg] START â€” damage_min=${wd.damage_min}, damage_max=${wd.damage_max}, crit_damage_min=${wd.crit_damage_min}, crit_damage_max=${wd.crit_damage_max}`);
     let woe_map = c.A8_Skill14.value == 1;
 
     if((wd.getAverageDamage() + wd.getAverageDamage2()) || (wd.getAverageCritDamage() + wd.getAverageCritDamage2())) {
@@ -1702,8 +1701,18 @@ function battle_calc_attack_gvg_bg(wd, src, target, skill_id, skill_lv) {
     }
 }
 
+/**
+ * 
+ * @param {PlayerData|MonsterData} src 
+ * @param {PlayerData|MonsterData} target 
+ * @param {Damage} wd 
+ * @param {*} damage 
+ * @param {*} skill_id 
+ * @param {*} skill_lv 
+ * @returns 
+ */
 function battle_calc_damage(src, target, wd, damage, skill_id, skill_lv) {
-    console.log(`[battle_calc_damage] START — damage=${damage}, skill_id=${skill_id}`);
+    battleDebug && console.log(`[battle_calc_damage] START â€” damage=${damage}, skill_id=${skill_id}`);
     let sd = is_player_object(src) ? src : null; // get player data if src is player, otherwise null
     let tsd = is_player_object(target) ? target : null; // get player data if target is player, otherwise null
     let tstatus = status_get_status_data(target);
@@ -1715,27 +1724,27 @@ function battle_calc_damage(src, target, wd, damage, skill_id, skill_lv) {
 
     if(tsd) {
         if(flag&BF.WEAPON && tsd.special_state.no_weapon_damage) {
-            console.log(`[battle_calc_damage] tsd no_weapon_damage=${tsd.special_state.no_weapon_damage}`);
+            battleDebug && console.log(`[battle_calc_damage] tsd no_weapon_damage=${tsd.special_state.no_weapon_damage}`);
             damage -= Math.trunc(damage * tsd.special_state.no_weapon_damage / 100);
         }
         if(flag&BF.MAGIC && tsd.special_state.no_magic_damage) {
-            console.log(`[battle_calc_damage] tsd no_magic_damage=${tsd.special_state.no_magic_damage}`);
+            battleDebug && console.log(`[battle_calc_damage] tsd no_magic_damage=${tsd.special_state.no_magic_damage}`);
             damage -= Math.trunc(damage * tsd.special_state.no_magic_damage / 100);
         }
         if(flag&BF.MISC && tsd.special_state.no_misc_damage) {
-            console.log(`[battle_calc_damage] tsd no_misc_damage=${tsd.special_state.no_misc_damage}`);
+            battleDebug && console.log(`[battle_calc_damage] tsd no_misc_damage=${tsd.special_state.no_misc_damage}`);
             damage -= Math.trunc(damage * tsd.special_state.no_misc_damage / 100);
         }
 
         if(!damage)
             return 0;
     }
-    console.log(`[battle_calc_damage] after tsd special_state — damage=${damage}`);
+    battleDebug && console.log(`[battle_calc_damage] after tsd special_state â€” damage=${damage}`);
 
     if(sd && !(flag&BF.MAGIC) && (tstatus.race == RC.DEMON || tstatus.race == RC.UNDEAD)) {
-        console.log(`[battle_calc_damage] demonbane — AL_DEMONBANE=${SkillSearch(SKILL.AL_DEMONBANE)}`);
+        battleDebug && console.log(`[battle_calc_damage] demonbane â€” AL_DEMONBANE=${SkillSearch(SKILL.AL_DEMONBANE)}`);
         damage += Math.trunc(damage * SkillSearch(SKILL.AL_DEMONBANE) / 200);
-        console.log(`[battle_calc_damage] after demonbane — damage=${damage}`);
+        battleDebug && console.log(`[battle_calc_damage] after demonbane â€” damage=${damage}`);
     }
 
     switch(skill_id) {
@@ -1746,64 +1755,47 @@ function battle_calc_damage(src, target, wd, damage, skill_id, skill_lv) {
 
     // src is player, target is mob or custom player
     if(sd) {
-        console.log(`[battle_calc_damage] entering SD block — damage=${damage}, flag=${flag}`);
-        if(n_B_debuf[6]) // lex aeterna
+        battleDebug && console.log(`[battle_calc_damage] entering SD block â€” damage=${damage}, flag=${flag}`);
+        if(sc_get(target, SC.AETERNA)) // lex aeterna
             damage *= 2;
-        console.log(`[battle_calc_damage] after lex aeterna check — damage=${damage}`);
+        battleDebug && console.log(`[battle_calc_damage] after lex aeterna check â€” damage=${damage}`);
 
         // holy light debuff
-        if(n_B_debuf[29] && (flag&BF.MAGIC) && skill_get_ele(skill_id, skill_lv) == ELE.HOLY) {
+        if(sc_get(target, SC.HOLYLIGHT) && (flag&BF.MAGIC) && skill_get_ele(skill_id, skill_lv) == ELE.HOLY) {
             let bonus_damage = 10;
-            if(n_B_debuf[30])
+            if(sc_get(target, SC.JUDEXMAGNUS))
                 bonus_damage *= 2;
             damage += Math.trunc(damage * bonus_damage / 100);
         }
 
         // assumptio
-        if(n_B_buf[1]) {
+        if(sc_get(target, SC.ASSUMPTIO)) {
             if(c.A8_Skill14.value == 1) // woe map
                 damage = Math.trunc(damage * 2 / 3);
             else
                 damage = Math.trunc(damage / 2);
         }
-        console.log(`[battle_calc_damage] after assumptio — damage=${damage}`);
-
-
-        // defender on mobs
-        /* if(n_B_buf[13] && skill_id != SKILL.NJ_ZENYNAGE && ((flag&(BF.LONG|BF.WEAPON)) == (BF.LONG|BF.WEAPON) || skill_id == SKILL.LK_SPIRALPIERCE) && !(src.type == BL.PC && SkillSearch(SKILL.GS_WEAPON_MASTERY) == 2 && skill_id == SKILL.RL_MASS_SPIRAL)) {
-            damage -= Math.trunc(damage * (5 + 15 * n_B_buf[13]) / 100);
-        } */
+        battleDebug && console.log(`[battle_calc_damage] after assumptio â€” damage=${damage}`);
 
         // defender on mobs works differently
-        if(n_B_buf[13] && flag&BF.LONG && flag&(BF.WEAPON|BF.MISC))
+        if(sc_get(target, SC.ARMOR) && flag&BF.LONG && flag&(BF.WEAPON|BF.MISC))
             damage = Math.trunc(damage / 8);
-        console.log(`[battle_calc_damage] after defender — damage=${damage}`);
+        battleDebug && console.log(`[battle_calc_damage] after defender â€” damage=${damage}`);
 
         // stone skin & anti magic
-        if(n_B_buf[7] || n_B_buf[8]) {
-            let level = Math.trunc(1 + ((n_B_buf[7] - 1) % 5));
-            let physical_reduction = 0;
-            let magical_reduction = 0;
-            if(n_B_buf[8]) {
-                physical_reduction = -20 * level;
-                magical_reduction = 20 * level;
-            } else {
-                physical_reduction = 20 * level;
-                magical_reduction = -20 * level;
-            }
 
+        if(sc_get(target, SC.ARMORCHANGE)) {
             if(flag&BF.WEAPON)
-                damage -= Math.trunc((damage * physical_reduction) / 100);
+                damage -= Math.trunc(damage * sc_get(target, SC.ARMORCHANGE).val2 / 100);
             else if(flag&BF.MAGIC)
-                damage -= Math.trunc((damage * magical_reduction) / 100);
-            console.log(`[battle_calc_damage] after stone skin/anti magic — damage=${damage}`);
+                damage -= Math.trunc(damage * sc_get(target, SC.ARMORCHANGE).val3 / 100);
         }
 
         // energy coat
-        if(n_B_buf[14] && (flag&BF.WEAPON && skill_id != SKILL.WS_CARTTERMINATION)) {
-            damage -= Math.trunc((damage * 6 * n_B_buf[14]) / 100);
+        if(sc_get(target, SC.ENERGYCOAT) && (flag&BF.WEAPON && skill_id != SKILL.WS_CARTTERMINATION)) {
+            damage -= Math.trunc((damage * 6 * sc_get(target, SC.ENERGYCOAT).val1) / 100);
         }
-        console.log(`[battle_calc_damage] after energy coat — damage=${damage}`);
+        battleDebug && console.log(`[battle_calc_damage] after energy coat â€” damage=${damage}`);
 
         if(!damage)
             return 0;
@@ -1814,22 +1806,22 @@ function battle_calc_damage(src, target, wd, damage, skill_id, skill_lv) {
 
         if(SkillSearch(SKILL.GS_WEAPON_MASTERY_STACKS) && flag&BF.WEAPON) {
             damage += Math.trunc(damage * SkillSearch(SKILL.GS_WEAPON_MASTERY_STACKS) / 100);
-            console.log(`[battle_calc_damage] after GS_WEAPON_MASTERY_STACKS — damage=${damage}`);
+            battleDebug && console.log(`[battle_calc_damage] after GS_WEAPON_MASTERY_STACKS â€” damage=${damage}`);
         }
 
         if(SkillSearch(SKILL.GS_WEAPON_MASTERY) && skill_id) {
             damage += Math.trunc((damage * 65) / 100);
-            console.log(`[battle_calc_damage] after GS_WEAPON_MASTERY +65% — damage=${damage}`);
+            battleDebug && console.log(`[battle_calc_damage] after GS_WEAPON_MASTERY +65% â€” damage=${damage}`);
         }
 
-        if(skill_id == SKILL.GS_DESPERADO && n_A_Buf3[2] && !SkillSearch(SKILL.GS_WEAPON_MASTERY_STACKS_CONSUMED)) {
+        if(skill_id == SKILL.GS_DESPERADO && sc_get(src, SC.POEMBRAGI) && !SkillSearch(SKILL.GS_WEAPON_MASTERY_STACKS_CONSUMED)) {
             damage -= Math.trunc((damage * 65) / 100);
-            console.log(`[battle_calc_damage] after GS_DESPERADO -65% — damage=${damage}`);
+            battleDebug && console.log(`[battle_calc_damage] after GS_DESPERADO -65% â€” damage=${damage}`);
         }
 
         if(SkillSearch(SKILL.TK_READYCOUNTER_DMG_INCREASE)) {
             damage += Math.trunc((damage * 25) / 100);
-            console.log(`[battle_calc_damage] after TK_READYCOUNTER_DMG_INCREASE — damage=${damage}`);
+            battleDebug && console.log(`[battle_calc_damage] after TK_READYCOUNTER_DMG_INCREASE â€” damage=${damage}`);
         }
 
         // titanic stance damage increase
@@ -1847,26 +1839,26 @@ function battle_calc_damage(src, target, wd, damage, skill_id, skill_lv) {
                 damage_bonus += SkillSearch(SKILL.TK_POWER_STACKS) * 4 * SkillSearch(SKILL.TK_POWER);
 
             damage += Math.trunc((damage * damage_bonus) / 100);
-            console.log(`[battle_calc_damage] after TK_POWER — damage_bonus=${damage_bonus}, damage=${damage}`);
+            battleDebug && console.log(`[battle_calc_damage] after TK_POWER â€” damage_bonus=${damage_bonus}, damage=${damage}`);
         }
 
         // damage decrease from notes
         if(monster.damagetaken > 0) {
-            console.log(`[battle_calc_damage] monster.damagetaken=${monster.damagetaken}`);
+            battleDebug && console.log(`[battle_calc_damage] monster.damagetaken=${monster.damagetaken}`);
             damage = Math.trunc((damage * monster.damagetaken) / 100);
-            console.log(`[battle_calc_damage] after damagetaken — damage=${damage}`);
+            battleDebug && console.log(`[battle_calc_damage] after damagetaken â€” damage=${damage}`);
         }
-        console.log(`[battle_calc_damage] END of SD block — damage=${damage}`);
+        battleDebug && console.log(`[battle_calc_damage] END of SD block â€” damage=${damage}`);
     }
     
     // target is player, source is mob or custom player
     if(tsd) {
-        console.log(`[battle_calc_damage] entering TSD block — damage=${damage}`);
-        if(n_A_Buf6[16]) // lex aeterna
+        battleDebug && console.log(`[battle_calc_damage] entering TSD block â€” damage=${damage}`);
+        if(sc_get(target, SC.AETERNA)) // lex aeterna
             damage *= 2;
 
         // assumptio
-        if(n_A_Buf2[5]) {
+        if(sc_get(target, SC.ASSUMPTIO)) {
             if(c.A8_Skill14.value == 1) // woe map
                 damage = Math.trunc(damage * 2 / 3);
             else
@@ -1874,15 +1866,15 @@ function battle_calc_damage(src, target, wd, damage, skill_id, skill_lv) {
         }
 
         // defender on players
-        if(n_A_Buf2[15] && skill_id != SKILL.NJ_ZENYNAGE && ((flag&(BF.LONG|BF.WEAPON)) == (BF.LONG|BF.WEAPON) || skill_id == SKILL.LK_SPIRALPIERCE)) {
-            damage -= Math.trunc(damage * (5 + 15 * n_A_Buf2[15]) / 100);
+        if(sc_get(src, SC.DEFENDER) && skill_id != SKILL.NJ_ZENYNAGE && ((flag&(BF.LONG|BF.WEAPON)) == (BF.LONG|BF.WEAPON) || skill_id == SKILL.LK_SPIRALPIERCE)) {
+            damage -= Math.trunc(damage * (5 + sc_get(src, SC.DEFENDER).val2) / 100);
         }
 
         if(SkillSearch(SKILL.GS_ADJUSTMENT) && (flag&(BF.LONG|BF.WEAPON)) == (BF.LONG|BF.WEAPON))
             damage -= Math.trunc((damage * 20) / 100);
 
         // wall of fog
-        if(n_A_Buf6[3]) {
+        if(sc_get(src, SC.FOGWALL)) {
             if(flag&BF.SKILL)
                 damage -= Math.trunc((damage * 25) / 100);
             else if((flag&(BF.LONG|BF.WEAPON)) == (BF.LONG|BF.WEAPON))
@@ -1917,16 +1909,16 @@ function battle_calc_damage(src, target, wd, damage, skill_id, skill_lv) {
         if(!damage)
             return 0;
 
-        if(n_B_debuf[21] && flag&BF.SKILL) {
+        if(sc_get(src, SC.SKA) && flag&BF.SKILL) {
             if(flag & BF.WEAPON)
-                damage += Math.trunc((damage * (70 + 10 * n_B_debuf[21])) / 100);
+                damage += Math.trunc((damage * sc_get(src, SC.SKA).val4) / 100);
             else if (flag & BF.MAGIC)
-                damage -= Math.trunc((damage * (20 + 10 * n_B_debuf[21])) / 100);
+                damage -= Math.trunc((damage * sc_get(src, SC.SKA).val3) / 100);
         }
 
         if(SkillSearch(SKILL.MC_VENDING) && flag&BF.SHORT)
             damage -= Math.trunc((damage * SkillSearch(SKILL.MC_VENDING)) / 200);
-        console.log(`[battle_calc_damage] END of TSD block — damage=${damage}`);
+        battleDebug && console.log(`[battle_calc_damage] END of TSD block â€” damage=${damage}`);
     }
 
 
@@ -1943,7 +1935,7 @@ function battle_calc_damage(src, target, wd, damage, skill_id, skill_lv) {
             if(tstatus.race == RC.DEMON || tstatus.race == RC.UNDEAD) {
                 if(target.type == BL.MOB && n_B[1].includes("[MVP]")) {
                     let bonus_damage = 100;
-                    if(n_B_debuf[30])
+                    if(sc_get(target, SC.JUDEXMAGNUS))
                         bonus_damage *= 2;
                     damage += Math.trunc((damage * bonus_damage) / 100);
                 } else {
@@ -1953,9 +1945,9 @@ function battle_calc_damage(src, target, wd, damage, skill_id, skill_lv) {
             break;
         case 0:
             if(sd) {
-                console.log(`[battle_calc_damage] skill_id=0 normalatk_dmgrate=${sd.bonus.normalatk_dmgrate}`);
+                battleDebug && console.log(`[battle_calc_damage] skill_id=0 normalatk_dmgrate=${sd.bonus.normalatk_dmgrate}`);
                 damage += Math.trunc((damage * sd.bonus.normalatk_dmgrate) / 100);
-                console.log(`[battle_calc_damage] after normalatk_dmgrate — damage=${damage}`);
+                battleDebug && console.log(`[battle_calc_damage] after normalatk_dmgrate â€” damage=${damage}`);
             }
     }
 
@@ -1963,12 +1955,12 @@ function battle_calc_damage(src, target, wd, damage, skill_id, skill_lv) {
         // barrier
     }
 
-    console.log(`[battle_calc_damage] END — damage=${damage}`);
+    battleDebug && console.log(`[battle_calc_damage] END â€” damage=${damage}`);
     return damage;
 }
 
 function battle_calc_attack_left_right_hands(wd, src, target, skill_id, skill_lv) {
-    console.log(`[battle_calc_attack_left_right_hands] START — damage_min=${wd.damage_min}, damage_max=${wd.damage_max}, damage2_min=${wd.damage2_min}, damage2_max=${wd.damage2_max}, crit_damage_min=${wd.crit_damage_min}, crit_damage_max=${wd.crit_damage_max}, crit_damage2_min=${wd.crit_damage2_min}, crit_damage2_max=${wd.crit_damage2_max}`);
+    battleDebug && console.log(`[battle_calc_attack_left_right_hands] START â€” damage_min=${wd.damage_min}, damage_max=${wd.damage_max}, damage2_min=${wd.damage2_min}, damage2_max=${wd.damage2_max}, crit_damage_min=${wd.crit_damage_min}, crit_damage_max=${wd.crit_damage_max}, crit_damage2_min=${wd.crit_damage2_min}, crit_damage2_max=${wd.crit_damage2_max}`);
     let sd = is_player_object(src) ? src : null; // get player data if src is player, otherwise null
 
     if(sd) {
@@ -2018,11 +2010,11 @@ function battle_calc_attack_left_right_hands(wd, src, target, skill_id, skill_lv
         wd.damage2_min = wd.damage2_max = 0;
         wd.crit_damage2_min = wd.crit_damage2_max = 0;
     }
-    console.log(`[battle_calc_attack_left_right_hands] END — damage_min=${wd.damage_min}, damage_max=${wd.damage_max}, damage2_min=${wd.damage2_min}, damage2_max=${wd.damage2_max}, crit_damage_min=${wd.crit_damage_min}, crit_damage_max=${wd.crit_damage_max}, crit_damage2_min=${wd.crit_damage2_min}, crit_damage2_max=${wd.crit_damage2_max}`);
+    battleDebug && console.log(`[battle_calc_attack_left_right_hands] END â€” damage_min=${wd.damage_min}, damage_max=${wd.damage_max}, damage2_min=${wd.damage2_min}, damage2_max=${wd.damage2_max}, crit_damage_min=${wd.crit_damage_min}, crit_damage_max=${wd.crit_damage_max}, crit_damage2_min=${wd.crit_damage2_min}, crit_damage2_max=${wd.crit_damage2_max}`);
 }
 
 function battle_calc_attack_plant(wd, src, target, skill_id, skill_lv) {
-    console.log(`[battle_calc_attack_plant] START — skill_id=${skill_id}`);
+    battleDebug && console.log(`[battle_calc_attack_plant] START â€” skill_id=${skill_id}`);
     let tstatus = status_get_status_data(target);
     let attack_hits = is_attack_hitting(wd, src, target, skill_id, skill_lv, false);
 
@@ -2126,7 +2118,7 @@ function battle_calc_gvg_damage(src, target, damage, skill_id, flag) {
 }
 
 function battle_apply_div_fix(wd, skill_id) {
-    console.log(`[battle_apply_div_fix] START — damage_min=${wd.damage_min}, damage_max=${wd.damage_max}, crit_damage_min=${wd.crit_damage_min}, crit_damage_max=${wd.crit_damage_max}, div_=${wd.div_}`);
+    battleDebug && console.log(`[battle_apply_div_fix] START â€” damage_min=${wd.damage_min}, damage_max=${wd.damage_max}, crit_damage_min=${wd.crit_damage_min}, crit_damage_max=${wd.crit_damage_max}, div_=${wd.div_}`);
     if(wd.getAverageDamage() > 0 || wd.getAverageCritDamage() > 0) {
         wd.damage_min = DAMAGE_DIV_FIX(wd.damage_min, wd.div_);
         wd.damage_max = DAMAGE_DIV_FIX(wd.damage_max, wd.div_);
@@ -2135,11 +2127,11 @@ function battle_apply_div_fix(wd, skill_id) {
     } else if (wd.div_ < 0) {
         wd.div_ *= -1;
     }
-    console.log(`[battle_apply_div_fix] END — damage_min=${wd.damage_min}, damage_max=${wd.damage_max}, crit_damage_min=${wd.crit_damage_min}, crit_damage_max=${wd.crit_damage_max}, div_=${wd.div_}`);
+    battleDebug && console.log(`[battle_apply_div_fix] END â€” damage_min=${wd.damage_min}, damage_max=${wd.damage_max}, crit_damage_min=${wd.crit_damage_min}, crit_damage_max=${wd.crit_damage_max}, div_=${wd.div_}`);
 }
 
 function battle_calc_cardfix(attack_type, src, target, skill_id, rh_ele, lh_ele, damage, left, flag) {
-    console.log(`[battle_calc_cardfix] START — attack_type=${attack_type}, damage=${damage}, left=${left}, rh_ele=${rh_ele}, lh_ele=${lh_ele}`);
+    battleDebug && console.log(`[battle_calc_cardfix] START â€” attack_type=${attack_type}, damage=${damage}, left=${left}, rh_ele=${rh_ele}, lh_ele=${lh_ele}`);
     let sd = is_player_object(src) ? src : null; // get player data if src is player, otherwise null
     let tsd = is_player_object(target) ? target : null; // get player data if target is player, otherwise null
     let sstatus = status_get_status_data(src);
@@ -2149,7 +2141,7 @@ function battle_calc_cardfix(attack_type, src, target, skill_id, rh_ele, lh_ele,
     let s_race2, t_race2;
     let s_defele;
     let original_damage;
-    console.log(`[battle_calc_cardfix] after variable initialization — damage=${damage}, sd=${sd ? "exists" : "null"}, tsd=${tsd ? "exists" : "null"}`);
+    battleDebug && console.log(`[battle_calc_cardfix] after variable initialization â€” damage=${damage}, sd=${sd ? "exists" : "null"}, tsd=${tsd ? "exists" : "null"}`);
 
     if(!damage)
         return 0;
@@ -2254,26 +2246,29 @@ function battle_calc_cardfix(attack_type, src, target, skill_id, rh_ele, lh_ele,
                     cardfix = Math.trunc((cardfix * (100 - tsd.bonus.long_attack_def_rate)) / 100);
                 }
 
+                if(sc_get(target, SC.MDEF_RATE))
+                    cardfix = Math.trunc((cardfix * (100 - sc_get(target, SC.MDEF_RATE).val1)) / 100);
+
                 damage = APPLY_CARDFIX(damage, cardfix);
             }
             break;
 
         case BF.WEAPON:
-            console.log(`[battle_calc_cardfix] BF.WEAPON branch — sd=${!!sd}, tsd=${!!tsd}, left=${left}, skill_ignores_atkcard=${skill_ignores_atkcard(skill_id)}, skill_ignores_defcard=${skill_ignores_defcard(skill_id)}`);
+            battleDebug && console.log(`[battle_calc_cardfix] BF.WEAPON branch â€” sd=${!!sd}, tsd=${!!tsd}, left=${left}, skill_ignores_atkcard=${skill_ignores_atkcard(skill_id)}, skill_ignores_defcard=${skill_ignores_defcard(skill_id)}`);
             if(sd && !skill_ignores_atkcard(skill_id) && (left&2)) {
-                console.log(`[battle_calc_cardfix] Entering ATTACKER card bonuses — is_skill_using_arrow=${is_skill_using_arrow(src, skill_id)}`);
+                battleDebug && console.log(`[battle_calc_cardfix] Entering ATTACKER card bonuses â€” is_skill_using_arrow=${is_skill_using_arrow(src, skill_id)}`);
                 if(is_skill_using_arrow(src, skill_id)) {
                     let race_bonus = (sd.indexed_bonus.addrace[tstatus.race] + sd.indexed_bonus.addrace[RC.ALL]) * 10;
-                    console.log(`[battle_calc_cardfix] ARROW — addrace[${tstatus.race}]=${sd.indexed_bonus.addrace[tstatus.race]}, addrace[ALL]=${sd.indexed_bonus.addrace[RC.ALL]}, race_bonus=${race_bonus}`);
+                    battleDebug && console.log(`[battle_calc_cardfix] ARROW â€” addrace[${tstatus.race}]=${sd.indexed_bonus.addrace[tstatus.race]}, addrace[ALL]=${sd.indexed_bonus.addrace[RC.ALL]}, race_bonus=${race_bonus}`);
 
                     // tk mission bonus
 
                     cardfix = Math.trunc((cardfix * (1000 + race_bonus)) / 1000);
-                    console.log(`[battle_calc_cardfix] ARROW after race — cardfix=${cardfix}`);
+                    battleDebug && console.log(`[battle_calc_cardfix] ARROW after race â€” cardfix=${cardfix}`);
 
                     if(!skill_ignores_element(skill_id)) {
                         let ele_fix = (sd.indexed_bonus.addele[tstatus.def_ele] + sd.indexed_bonus.addele[ELE.MAX]) * 10;
-                        console.log(`[battle_calc_cardfix] ARROW — addele[${tstatus.def_ele}]=${sd.indexed_bonus.addele[tstatus.def_ele]}, addele[ALL]=${sd.indexed_bonus.addele[ELE.MAX]}, ele_fix=${ele_fix}`);
+                        battleDebug && console.log(`[battle_calc_cardfix] ARROW â€” addele[${tstatus.def_ele}]=${sd.indexed_bonus.addele[tstatus.def_ele]}, addele[ALL]=${sd.indexed_bonus.addele[ELE.MAX]}, ele_fix=${ele_fix}`);
 
                         for(const it of sd.addele2) {
                             if(it.ele != ELE.MAX && it.ele != tstatus.def_ele)
@@ -2288,26 +2283,26 @@ function battle_calc_cardfix(attack_type, src, target, skill_id, rh_ele, lh_ele,
                         // tk mission bonus
 
                         cardfix = Math.trunc((cardfix * (1000 + ele_fix)) / 1000);
-                        console.log(`[battle_calc_cardfix] ARROW after ele — cardfix=${cardfix}`);
+                        battleDebug && console.log(`[battle_calc_cardfix] ARROW after ele â€” cardfix=${cardfix}`);
                     }
 
-                    console.log(`[battle_calc_cardfix] ARROW — addsize[${tstatus.size}]=${sd.indexed_bonus.addsize[tstatus.size]}, addsize[ALL]=${sd.indexed_bonus.addsize[SZ.ALL]}`);
+                    battleDebug && console.log(`[battle_calc_cardfix] ARROW â€” addsize[${tstatus.size}]=${sd.indexed_bonus.addsize[tstatus.size]}, addsize[ALL]=${sd.indexed_bonus.addsize[SZ.ALL]}`);
                     cardfix = Math.trunc((cardfix * (100 + sd.indexed_bonus.addsize[tstatus.size] + sd.indexed_bonus.addsize[SZ.ALL])) / 100);
-                    console.log(`[battle_calc_cardfix] ARROW after size — cardfix=${cardfix}`);
+                    battleDebug && console.log(`[battle_calc_cardfix] ARROW after size â€” cardfix=${cardfix}`);
 
                     let race_fix = 0;
                     for(const raceit of t_race2) {
                         race_fix += sd.indexed_bonus.addrace2[raceit];
                     }
                     cardfix = Math.trunc((cardfix * (100 + race_fix)) / 100);
-                    console.log(`[battle_calc_cardfix] ARROW after race2 — race_fix=${race_fix}, cardfix=${cardfix}`);
+                    battleDebug && console.log(`[battle_calc_cardfix] ARROW after race2 â€” race_fix=${race_fix}, cardfix=${cardfix}`);
                     cardfix = Math.trunc((cardfix * (100 + sd.indexed_bonus.addclass[tstatus.class_] + sd.indexed_bonus.addclass[CLASS.ALL])) / 100);
-                    console.log(`[battle_calc_cardfix] ARROW after class — addclass[${tstatus.class_}]=${sd.indexed_bonus.addclass[tstatus.class_]}, addclass[ALL]=${sd.indexed_bonus.addclass[CLASS.ALL]}, cardfix=${cardfix}`);
+                    battleDebug && console.log(`[battle_calc_cardfix] ARROW after class â€” addclass[${tstatus.class_}]=${sd.indexed_bonus.addclass[tstatus.class_]}, addclass[ALL]=${sd.indexed_bonus.addclass[CLASS.ALL]}, cardfix=${cardfix}`);
                 } else {
                     let skill = 0;
 
                     let ele_fix = (sd.indexed_bonus.addele[tstatus.def_ele] + sd.indexed_bonus.addele[ELE.MAX]) * 10;
-                    console.log(`[battle_calc_cardfix] MELEE — addele[${tstatus.def_ele}]=${sd.indexed_bonus.addele[tstatus.def_ele]}, addele[ALL]=${sd.indexed_bonus.addele[ELE.MAX]}, ele_fix=${ele_fix}`);
+                    battleDebug && console.log(`[battle_calc_cardfix] MELEE â€” addele[${tstatus.def_ele}]=${sd.indexed_bonus.addele[tstatus.def_ele]}, addele[ALL]=${sd.indexed_bonus.addele[ELE.MAX]}, ele_fix=${ele_fix}`);
 
                     for(const it of sd.addele2) {
                         if(it.ele != ELE.MAX && it.ele != tstatus.def_ele)
@@ -2318,62 +2313,62 @@ function battle_calc_cardfix(attack_type, src, target, skill_id, rh_ele, lh_ele,
                             continue;
                         ele_fix += it.rate * 10;
                     }
-                    console.log(`[battle_calc_cardfix] MELEE after addele2 loop — ele_fix=${ele_fix}`);
+                    battleDebug && console.log(`[battle_calc_cardfix] MELEE after addele2 loop â€” ele_fix=${ele_fix}`);
 
                     // tk mission bonus
                     cardfix = Math.trunc((cardfix * (1000 + ele_fix)) / 1000);
-                    console.log(`[battle_calc_cardfix] MELEE after ele — cardfix=${cardfix}`);
+                    battleDebug && console.log(`[battle_calc_cardfix] MELEE after ele â€” cardfix=${cardfix}`);
 
                     let race_bonus = (sd.indexed_bonus.addrace[tstatus.race] + sd.indexed_bonus.addrace[RC.ALL]) * 10;
-                    console.log(`[battle_calc_cardfix] MELEE — addrace[${tstatus.race}]=${sd.indexed_bonus.addrace[tstatus.race]}, addrace[ALL]=${sd.indexed_bonus.addrace[RC.ALL]}, race_bonus=${race_bonus}`);
+                    battleDebug && console.log(`[battle_calc_cardfix] MELEE â€” addrace[${tstatus.race}]=${sd.indexed_bonus.addrace[tstatus.race]}, addrace[ALL]=${sd.indexed_bonus.addrace[RC.ALL]}, race_bonus=${race_bonus}`);
 
                     // tk mission bonus
 
                     cardfix = Math.trunc((cardfix * (1000 + race_bonus)) / 1000);
-                    console.log(`[battle_calc_cardfix] MELEE after race — cardfix=${cardfix}`);
+                    battleDebug && console.log(`[battle_calc_cardfix] MELEE after race â€” cardfix=${cardfix}`);
 
-                    console.log(`[battle_calc_cardfix] MELEE — addsize[${tstatus.size}]=${sd.indexed_bonus.addsize[tstatus.size]}, addsize[ALL]=${sd.indexed_bonus.addsize[SZ.ALL]}`);
+                    battleDebug && console.log(`[battle_calc_cardfix] MELEE â€” addsize[${tstatus.size}]=${sd.indexed_bonus.addsize[tstatus.size]}, addsize[ALL]=${sd.indexed_bonus.addsize[SZ.ALL]}`);
                     cardfix = Math.trunc((cardfix * (100 + sd.indexed_bonus.addsize[tstatus.size] + sd.indexed_bonus.addsize[SZ.ALL])) / 100);
-                    console.log(`[battle_calc_cardfix] MELEE after size — cardfix=${cardfix}`);
+                    battleDebug && console.log(`[battle_calc_cardfix] MELEE after size â€” cardfix=${cardfix}`);
 
                     for(const raceit of t_race2) {
-                        console.log(`[battle_calc_cardfix] MELEE race2 loop — raceit=${raceit}, addrace2[raceit]=${sd.indexed_bonus.addrace2[raceit]}`);
+                        battleDebug && console.log(`[battle_calc_cardfix] MELEE race2 loop â€” raceit=${raceit}, addrace2[raceit]=${sd.indexed_bonus.addrace2[raceit]}`);
                         cardfix = Math.trunc((cardfix * (100 + sd.indexed_bonus.addrace2[raceit])) / 100);
-                        console.log(`[battle_calc_cardfix] MELEE after race2 iter — cardfix=${cardfix}`);
+                        battleDebug && console.log(`[battle_calc_cardfix] MELEE after race2 iter â€” cardfix=${cardfix}`);
                     }
-                    console.log(`[battle_calc_cardfix] MELEE — addclass[${tstatus.class_}]=${sd.indexed_bonus.addclass[tstatus.class_]}, addclass[ALL]=${sd.indexed_bonus.addclass[CLASS.ALL]}`);
+                    battleDebug && console.log(`[battle_calc_cardfix] MELEE â€” addclass[${tstatus.class_}]=${sd.indexed_bonus.addclass[tstatus.class_]}, addclass[ALL]=${sd.indexed_bonus.addclass[CLASS.ALL]}`);
                     cardfix = Math.trunc((cardfix * (100 + sd.indexed_bonus.addclass[tstatus.class_] + sd.indexed_bonus.addclass[CLASS.ALL])) / 100);
-                    console.log(`[battle_calc_cardfix] MELEE after class - class bonus=${Math.trunc((100 + sd.indexed_bonus.addclass[tstatus.class_] + sd.indexed_bonus.addclass[CLASS.ALL]) / 100)}`);
-                    console.log(`[battle_calc_cardfix] MELEE after class — cardfix=${cardfix}`);
+                    battleDebug && console.log(`[battle_calc_cardfix] MELEE after class - class bonus=${Math.trunc((100 + sd.indexed_bonus.addclass[tstatus.class_] + sd.indexed_bonus.addclass[CLASS.ALL]) / 100)}`);
+                    battleDebug && console.log(`[battle_calc_cardfix] MELEE after class â€” cardfix=${cardfix}`);
 
                     if(player.weapontype1 == WEAPON.KATAR && (skill = SkillSearch(SKILL.ASC_KATAR)) > 0) {
                         cardfix = Math.trunc((cardfix * (100 + (10 + 2 * skill))) / 100);
-                        console.log(`[battle_calc_cardfix] MELEE after katar — cardfix=${cardfix}`);
+                        battleDebug && console.log(`[battle_calc_cardfix] MELEE after katar â€” cardfix=${cardfix}`);
                     }
                 }
 
                 for(const it of sd.add_dmg) {
                     if(it.id == t_class) {
                         cardfix = Math.trunc((cardfix * (100 + it.val)) / 100);
-                        console.log(`[battle_calc_cardfix] MELEE after add_dmg — id=${it.id}, val=${it.val}, cardfix=${cardfix}`);
+                        battleDebug && console.log(`[battle_calc_cardfix] MELEE after add_dmg â€” id=${it.id}, val=${it.val}, cardfix=${cardfix}`);
                         break;
                     }
                 }
 
                 if(flag & BF.SHORT) {
-                    console.log(`[battle_calc_cardfix] MELEE — short_attack_atk_rate=${sd.bonus.short_attack_atk_rate}`);
+                    battleDebug && console.log(`[battle_calc_cardfix] MELEE â€” short_attack_atk_rate=${sd.bonus.short_attack_atk_rate}`);
                     cardfix = Math.trunc((cardfix * (100 + sd.bonus.short_attack_atk_rate)) / 100);
-                    console.log(`[battle_calc_cardfix] MELEE after short — cardfix=${cardfix}`);
+                    battleDebug && console.log(`[battle_calc_cardfix] MELEE after short â€” cardfix=${cardfix}`);
                 }
                 if(flag & BF.LONG) {
-                    console.log(`[battle_calc_cardfix] MELEE — long_attack_atk_rate=${sd.bonus.long_attack_atk_rate}`);
+                    battleDebug && console.log(`[battle_calc_cardfix] MELEE â€” long_attack_atk_rate=${sd.bonus.long_attack_atk_rate}`);
                     cardfix = Math.trunc((cardfix * (100 + sd.bonus.long_attack_atk_rate)) / 100);
-                    console.log(`[battle_calc_cardfix] MELEE after long — cardfix=${cardfix}`);
+                    battleDebug && console.log(`[battle_calc_cardfix] MELEE after long â€” cardfix=${cardfix}`);
                 }
 
-                console.log(`[battle_calc_cardfix] MELEE before APPLY_CARDFIX — damage=${damage}, cardfix=${cardfix}`);
+                battleDebug && console.log(`[battle_calc_cardfix] MELEE before APPLY_CARDFIX â€” damage=${damage}, cardfix=${cardfix}`);
                 damage = APPLY_CARDFIX(damage, cardfix);
-                console.log(`[battle_calc_cardfix] MELEE after APPLY_CARDFIX — damage=${damage}`);
+                battleDebug && console.log(`[battle_calc_cardfix] MELEE after APPLY_CARDFIX â€” damage=${damage}`);
             } else if(tsd && !skill_ignores_defcard(skill_id) && !(left&2)) {
                 if(!skill_ignores_element(skill_id)) {
                     let ele_fix = tsd.indexed_bonus.subele[rh_ele] + tsd.indexed_bonus.subele[ELE.MAX] + tsd.indexed_bonus.subele_script[rh_ele] + tsd.indexed_bonus.subele_script[ELE.MAX];
@@ -2433,6 +2428,8 @@ function battle_calc_cardfix(attack_type, src, target, skill_id, rh_ele, lh_ele,
                     cardfix = Math.trunc((cardfix * (100 - tsd.bonus.near_attack_def_rate)) / 100);
                 else if(!skill_ignores_longcard(skill_id) && !(sd && SkillSearch(SKILL.GS_WEAPON_MASTERY) == 2 && skill_id == SKILL.RL_MASS_SPIRAL))
                     cardfix = Math.trunc((cardfix * (100 - tsd.bonus.long_attack_def_rate)) / 100);
+                if(sc_get(target, SC.DEF_RATE))
+                    cardfix = Math.trunc((cardfix * (100 - sc_get(target, SC.DEF_RATE).val1)) / 100);
                 damage = APPLY_CARDFIX(damage, cardfix);
             }
             break;
@@ -2485,12 +2482,12 @@ function battle_calc_cardfix(attack_type, src, target, skill_id, rh_ele, lh_ele,
             break;
     }
 
-    console.log(`[battle_calc_cardfix] END — cardfix=${cardfix}, original_damage=${original_damage}, damage=${damage}, result=${cap_value(damage - original_damage, INT_MIN, INT_MAX)}`);
+    battleDebug && console.log(`[battle_calc_cardfix] END â€” cardfix=${cardfix}, original_damage=${original_damage}, damage=${damage}, result=${cap_value(damage - original_damage, INT_MIN, INT_MAX)}`);
     return cap_value(damage - original_damage, INT_MIN, INT_MAX);
 }
 
 function battle_calc_element_damage(wd, src, target, skill_id, skill_lv) {
-    console.log(`[battle_calc_element_damage] START — damage_min=${wd.damage_min}, damage_max=${wd.damage_max}, damage2_min=${wd.damage2_min}, damage2_max=${wd.damage2_max}, crit_damage_min=${wd.crit_damage_min}, crit_damage_max=${wd.crit_damage_max}, crit_damage2_min=${wd.crit_damage2_min}, crit_damage2_max=${wd.crit_damage2_max}`);
+    battleDebug && console.log(`[battle_calc_element_damage] START â€” damage_min=${wd.damage_min}, damage_max=${wd.damage_max}, damage2_min=${wd.damage2_min}, damage2_max=${wd.damage2_max}, crit_damage_min=${wd.crit_damage_min}, crit_damage_max=${wd.crit_damage_max}, crit_damage2_min=${wd.crit_damage2_min}, crit_damage2_max=${wd.crit_damage2_max}`);
     let sd = is_player_object(src) ? src : null;
     let sstatus = status_get_status_data(src);
     let tstatus = status_get_status_data(target);
@@ -2610,81 +2607,80 @@ function battle_calc_element_damage(wd, src, target, skill_id, skill_lv) {
             let edp_dmg_rate = n_M_debuff[0];
             if(edp_dmg_rate != 0)
                 edp_rate = Math.trunc(edp_rate * edp_dmg_rate / 100);
-            console.log(`[battle_calc_element_damage] EDP — edp_lv=${SkillSearch(SKILL.ASC_EDP)}, edp_rate=${edp_rate}, edp_dmg_rate=${edp_dmg_rate}, damage_min before=${wd.damage_min}, damage_max before=${wd.damage_max}, crit_damage_min before=${wd.crit_damage_min}, crit_damage_max before=${wd.crit_damage_max}`);
+            battleDebug && console.log(`[battle_calc_element_damage] EDP â€” edp_lv=${SkillSearch(SKILL.ASC_EDP)}, edp_rate=${edp_rate}, edp_dmg_rate=${edp_dmg_rate}, damage_min before=${wd.damage_min}, damage_max before=${wd.damage_max}, crit_damage_min before=${wd.crit_damage_min}, crit_damage_max before=${wd.crit_damage_max}`);
             wd.damage_min += Math.trunc((wd.damage_min * edp_rate) / 100);
             wd.damage_max += Math.trunc((wd.damage_max * edp_rate) / 100);
 
             wd.crit_damage_min += Math.trunc((wd.crit_damage_min * edp_rate) / 100);
             wd.crit_damage_max += Math.trunc((wd.crit_damage_max * edp_rate) / 100);
-            console.log(`[battle_calc_element_damage] after EDP — damage_min=${wd.damage_min}, damage_max=${wd.damage_max}, crit_damage_min=${wd.crit_damage_min}, crit_damage_max=${wd.crit_damage_max}`);
+            battleDebug && console.log(`[battle_calc_element_damage] after EDP â€” damage_min=${wd.damage_min}, damage_max=${wd.damage_max}, crit_damage_min=${wd.crit_damage_min}, crit_damage_max=${wd.crit_damage_max}`);
         }
 
-        if(n_A_Buf6[7] || SkillSearch(SKILL.ASC_EDP)) { // magnum break bonus (edp also gives a similar bonus)
+        if(sc_get(player, SC.WATK_ELEMENT) || SkillSearch(SKILL.ASC_EDP)) { // magnum break bonus (edp also gives a similar bonus)
             let watk_element = SkillSearch(SKILL.ASC_EDP) ? ELE.POISON : ELE.FIRE;
             let watk_bonus = SkillSearch(SKILL.ASC_EDP) ? 25 : 20;
-            console.log(`[battle_calc_element_damage] magnum/edp bonus — watk_element=${watk_element}, watk_bonus=${watk_bonus}, basedamage_min=${wd.basedamage_min}, basedamage_max=${wd.basedamage_max}, crit_basedamage_min=${wd.crit_basedamage_min}, crit_basedamage_max=${wd.crit_basedamage_max}`);
+            battleDebug && console.log(`[battle_calc_element_damage] magnum/edp bonus â€” watk_element=${watk_element}, watk_bonus=${watk_bonus}, basedamage_min=${wd.basedamage_min}, basedamage_max=${wd.basedamage_max}, crit_basedamage_min=${wd.crit_basedamage_min}, crit_basedamage_max=${wd.crit_basedamage_max}`);
 
             wd.basedamage_min = battle_attr_fix(src, target, wd.basedamage_min, watk_element, tstatus.def_ele, tstatus.ele_lv, 1);
             wd.basedamage_max = battle_attr_fix(src, target, wd.basedamage_max, watk_element, tstatus.def_ele, tstatus.ele_lv, 1);
 
             wd.crit_basedamage_min = battle_attr_fix(src, target, wd.crit_basedamage_min, watk_element, tstatus.def_ele, tstatus.ele_lv, 1);
             wd.crit_basedamage_max = battle_attr_fix(src, target, wd.crit_basedamage_max, watk_element, tstatus.def_ele, tstatus.ele_lv, 1);
-            console.log(`[battle_calc_element_damage] after attr_fix — basedamage_min=${wd.basedamage_min}, basedamage_max=${wd.basedamage_max}, crit_basedamage_min=${wd.crit_basedamage_min}, crit_basedamage_max=${wd.crit_basedamage_max}`);
+            battleDebug && console.log(`[battle_calc_element_damage] after attr_fix â€” basedamage_min=${wd.basedamage_min}, basedamage_max=${wd.basedamage_max}, crit_basedamage_min=${wd.crit_basedamage_min}, crit_basedamage_max=${wd.crit_basedamage_max}`);
 
             wd.basedamage_min += sd.right_weapon.star;
             wd.basedamage_max += sd.right_weapon.star;
 
             wd.crit_basedamage_min += sd.right_weapon.star;
             wd.crit_basedamage_max += sd.right_weapon.star;
-            console.log(`[battle_calc_element_damage] after star crumb (${sd.right_weapon.star}) — basedamage_min=${wd.basedamage_min}, basedamage_max=${wd.basedamage_max}`);
+            battleDebug && console.log(`[battle_calc_element_damage] after star crumb (${sd.right_weapon.star}) â€” basedamage_min=${wd.basedamage_min}, basedamage_max=${wd.basedamage_max}`);
 
             wd.basedamage_min += battle_get_spiritball_damage(wd, src, skill_id);
             wd.basedamage_max += battle_get_spiritball_damage(wd, src, skill_id);
 
             wd.crit_basedamage_min += battle_get_spiritball_damage(wd, src, skill_id);
             wd.crit_basedamage_max += battle_get_spiritball_damage(wd, src, skill_id);
-            console.log(`[battle_calc_element_damage] after spiritball (${battle_get_spiritball_damage(wd, src, skill_id)}) — basedamage_min=${wd.basedamage_min}, basedamage_max=${wd.basedamage_max}`);
+            battleDebug && console.log(`[battle_calc_element_damage] after spiritball (${battle_get_spiritball_damage(wd, src, skill_id)}) â€” basedamage_min=${wd.basedamage_min}, basedamage_max=${wd.basedamage_max}`);
 
             wd.damage_min += Math.trunc((wd.basedamage_min * watk_bonus) / 100);
             wd.damage_max += Math.trunc((wd.basedamage_max * watk_bonus) / 100);
 
             wd.crit_damage_min += Math.trunc((wd.crit_basedamage_min * watk_bonus) / 100);
             wd.crit_damage_max += Math.trunc((wd.crit_basedamage_max * watk_bonus) / 100);
-            console.log(`[battle_calc_element_damage] after magnum/edp final bonus — damage_min=${wd.damage_min}, damage_max=${wd.damage_max}, crit_damage_min=${wd.crit_damage_min}, crit_damage_max=${wd.crit_damage_max}`);
+            battleDebug && console.log(`[battle_calc_element_damage] after magnum/edp final bonus â€” damage_min=${wd.damage_min}, damage_max=${wd.damage_max}, crit_damage_min=${wd.crit_damage_min}, crit_damage_max=${wd.crit_damage_max}`);
         }
     }
 
     battle_min_damage(wd, src, skill_id, 0);
-    console.log(`[battle_calc_element_damage] END — damage_min=${wd.damage_min}, damage_max=${wd.damage_max}, damage2_min=${wd.damage2_min}, damage2_max=${wd.damage2_max}, crit_damage_min=${wd.crit_damage_min}, crit_damage_max=${wd.crit_damage_max}, crit_damage2_min=${wd.crit_damage2_min}, crit_damage2_max=${wd.crit_damage2_max}`);
+    battleDebug && console.log(`[battle_calc_element_damage] END â€” damage_min=${wd.damage_min}, damage_max=${wd.damage_max}, damage2_min=${wd.damage2_min}, damage2_max=${wd.damage2_max}, crit_damage_min=${wd.crit_damage_min}, crit_damage_max=${wd.crit_damage_max}, crit_damage2_min=${wd.crit_damage2_min}, crit_damage2_max=${wd.crit_damage2_max}`);
 }
 
 function battle_attr_fix(src, target, damage, atk_elem, def_type, def_lv, flag) {
-    console.log(`[battle_attr_fix] START — damage=${damage}, atk_elem=${atk_elem}, def_type=${def_type}, def_lv=${def_lv}`);
+    battleDebug && console.log(`[battle_attr_fix] START â€” damage=${damage}, atk_elem=${atk_elem}, def_type=${def_type}, def_lv=${def_lv}`);
     let ratio;
 
     ratio = get_element_modifier(atk_elem, def_lv, def_type);
 
-    let enchant_eff = [10, 14, 17, 19, 20]; // bonuses for volcano/deluge/whirlwind
     switch(atk_elem) {
         case ELE.FIRE:
             if(src.type == BL.PC) {
-                if(n_A_Buf6[0] == 0 && n_A_Buf6[1] > 0)
-                    damage += Math.trunc((damage * enchant_eff[n_A_Buf6[1] - 1]) / 100);
+                if(sc_get(src, SC.VOLCANO))
+                    damage += Math.trunc((damage * sc_get(src, SC.VOLCANO).val3) / 100);
 
-                if(n_B_debuf[17]) // spider web
+                if(sc_get(target, SC.SPIDERWEB)) // spider web
                     damage *= 2;
             }
             break;
         case ELE.WIND:
             if(src.type == BL.PC) {
-                if(n_A_Buf6[0] == 2 && n_A_Buf6[1] > 0)
-                    damage += Math.trunc((damage * enchant_eff[n_A_Buf6[1] - 1]) / 100);
+                if(sc_get(src, SC.WHIRLWIND))
+                    damage += Math.trunc((damage * sc_get(src, SC.WHIRLWIND).val3) / 100);
             }
             break;
         case ELE.WATER:
             if(src.type == BL.PC) {
-                if(n_A_Buf6[0] == 1 && n_A_Buf6[1] > 0)
-                    damage += Math.trunc((damage * enchant_eff[n_A_Buf6[1] - 1]) / 100);
+                if(sc_get(src, SC.DELUGE))
+                    damage += Math.trunc((damage * sc_get(src, SC.DELUGE).val3) / 100);
             }
             break;
     }
@@ -2694,7 +2690,7 @@ function battle_attr_fix(src, target, damage, atk_elem, def_type, def_lv, flag) 
 
     damage = Math.trunc((damage * ratio) / 100);
 
-    console.log(`[battle_attr_fix] END — ratio=${ratio}, damage=${damage}`);
+    battleDebug && console.log(`[battle_attr_fix] END â€” ratio=${ratio}, damage=${damage}`);
     return damage;
 }
 
@@ -2708,14 +2704,14 @@ function battle_get_spiritball_damage(wd, src, skill_id) {
 }
 
 function battle_calc_attack_post_defense(wd, src, target, skill_id, skill_lv) {
-    console.log(`[battle_calc_attack_post_defense] START — damage_min=${wd.damage_min}, damage_max=${wd.damage_max}, basedamage_min=${wd.basedamage_min}, basedamage_max=${wd.basedamage_max}, crit_damage_min=${wd.crit_damage_min}, crit_damage_max=${wd.crit_damage_max}, crit_basedamage_min=${wd.crit_basedamage_min}, crit_basedamage_max=${wd.crit_basedamage_max}`);
+    battleDebug && console.log(`[battle_calc_attack_post_defense] START â€” damage_min=${wd.damage_min}, damage_max=${wd.damage_max}, basedamage_min=${wd.basedamage_min}, basedamage_max=${wd.basedamage_max}, crit_damage_min=${wd.crit_damage_min}, crit_damage_max=${wd.crit_damage_max}, crit_basedamage_min=${wd.crit_basedamage_min}, crit_basedamage_max=${wd.crit_basedamage_max}`);
     let sd = is_player_object(src) ? src : null;
     let sstatus = status_get_status_data(src);
 
     // refine bonus
     if(sd) {
         if(battle_skill_stacks_masteries_vvs(skill_id, BCHK.REFINE)) {
-            console.log(`[battle_calc_attack_post_defense] Refine bonus — rhw.atk2=${sstatus.rhw.atk2}, lhw.atk2=${sstatus.lhw.atk2}`);
+            battleDebug && console.log(`[battle_calc_attack_post_defense] Refine bonus â€” rhw.atk2=${sstatus.rhw.atk2}, lhw.atk2=${sstatus.lhw.atk2}`);
             ATK_ADD4(wd, src, skill_id, sstatus.rhw.atk2, sstatus.rhw.atk2, sstatus.lhw.atk2, sstatus.lhw.atk2);
             CRIT_ATK_ADD4(wd, src, skill_id, sstatus.rhw.atk2, sstatus.rhw.atk2, sstatus.lhw.atk2, sstatus.lhw.atk2);
         }
@@ -2731,18 +2727,18 @@ function battle_calc_attack_post_defense(wd, src, target, skill_id, skill_lv) {
 
     if(sd) {
         if(SkillSearch(SKILL.LK_AURABLADE) && skill_id != SKILL.LK_SPIRALPIERCE) {
-            console.log(`[battle_calc_attack_post_defense] Aura Blade bonus: +${20 * SkillSearch(SKILL.LK_AURABLADE)}`);
+            battleDebug && console.log(`[battle_calc_attack_post_defense] Aura Blade bonus: +${20 * SkillSearch(SKILL.LK_AURABLADE)}`);
             ATK_ADD(wd, src, skill_id, 20 * SkillSearch(SKILL.LK_AURABLADE));
             CRIT_ATK_ADD(wd, src, skill_id, 20 * SkillSearch(SKILL.LK_AURABLADE));
         }
     }
 
     battle_min_damage(wd, src, skill_id, 1);
-    console.log(`[battle_calc_attack_post_defense] END — damage_min=${wd.damage_min}, damage_max=${wd.damage_max}, basedamage_min=${wd.basedamage_min}, basedamage_max=${wd.basedamage_max}, crit_damage_min=${wd.crit_damage_min}, crit_damage_max=${wd.crit_damage_max}, crit_basedamage_min=${wd.crit_basedamage_min}, crit_basedamage_max=${wd.crit_basedamage_max}`);
+    battleDebug && console.log(`[battle_calc_attack_post_defense] END â€” damage_min=${wd.damage_min}, damage_max=${wd.damage_max}, basedamage_min=${wd.basedamage_min}, basedamage_max=${wd.basedamage_max}, crit_damage_min=${wd.crit_damage_min}, crit_damage_max=${wd.crit_damage_max}, crit_basedamage_min=${wd.crit_basedamage_min}, crit_basedamage_max=${wd.crit_basedamage_max}`);
 }
 
 function battle_calc_attack_masteries(wd, src, target, skill_id, skill_lv) {
-    console.log(`[battle_calc_attack_masteries] START — damage_min=${wd.damage_min}, damage_max=${wd.damage_max}, basedamage_min=${wd.basedamage_min}, basedamage_max=${wd.basedamage_max}, crit_damage_min=${wd.crit_damage_min}, crit_damage_max=${wd.crit_damage_max}, crit_basedamage_min=${wd.crit_basedamage_min}, crit_basedamage_max=${wd.crit_basedamage_max}`);
+    battleDebug && console.log(`[battle_calc_attack_masteries] START â€” damage_min=${wd.damage_min}, damage_max=${wd.damage_max}, basedamage_min=${wd.basedamage_min}, basedamage_max=${wd.basedamage_max}, crit_damage_min=${wd.crit_damage_min}, crit_damage_max=${wd.crit_damage_max}, crit_basedamage_min=${wd.crit_basedamage_min}, crit_basedamage_max=${wd.crit_basedamage_max}`);
     let sd = is_player_object(src) ? src : null;
     
     if(sd) {
@@ -2768,11 +2764,11 @@ function battle_calc_attack_masteries(wd, src, target, skill_id, skill_lv) {
             wd.crit_damage2_max = battle_addmastery(src, target, wd.crit_damage2_max, 1);
         }
     }
-    console.log(`[battle_calc_attack_masteries] END — damage_min=${wd.damage_min}, damage_max=${wd.damage_max}, basedamage_min=${wd.basedamage_min}, basedamage_max=${wd.basedamage_max}, damage2_min=${wd.damage2_min}, damage2_max=${wd.damage2_max}, crit_damage_min=${wd.crit_damage_min}, crit_damage_max=${wd.crit_damage_max}, crit_basedamage_min=${wd.crit_basedamage_min}, crit_basedamage_max=${wd.crit_basedamage_max}, crit_damage2_min=${wd.crit_damage2_min}, crit_damage2_max=${wd.crit_damage2_max}`);
+    battleDebug && console.log(`[battle_calc_attack_masteries] END â€” damage_min=${wd.damage_min}, damage_max=${wd.damage_max}, basedamage_min=${wd.basedamage_min}, basedamage_max=${wd.basedamage_max}, damage2_min=${wd.damage2_min}, damage2_max=${wd.damage2_max}, crit_damage_min=${wd.crit_damage_min}, crit_damage_max=${wd.crit_damage_max}, crit_basedamage_min=${wd.crit_basedamage_min}, crit_basedamage_max=${wd.crit_basedamage_max}, crit_damage2_min=${wd.crit_damage2_min}, crit_damage2_max=${wd.crit_damage2_max}`);
 }
 
 function battle_addmastery(src, target, dmg, type) {
-    console.log(`[battle_addmastery] START — dmg=${dmg}, type=${type}`);
+    battleDebug && console.log(`[battle_addmastery] START â€” dmg=${dmg}, type=${type}`);
     let sd = is_player_object(src) ? src : null;
     if(!sd)
         return 0;
@@ -2842,12 +2838,12 @@ function battle_addmastery(src, target, dmg, type) {
             break;
     }
 
-    console.log(`[battle_addmastery] END — damage=${damage} (added ${damage - dmg})`);
+    battleDebug && console.log(`[battle_addmastery] END â€” damage=${damage} (added ${damage - dmg})`);
     return damage;
 }
 
 function battle_min_damage(wd, src, skill_id, min) {
-    console.log(`[battle_min_damage] min=${min}, damage_min=${wd.damage_min}, damage_max=${wd.damage_max}, basedamage_min=${wd.basedamage_min}, basedamage_max=${wd.basedamage_max}, crit_damage_min=${wd.crit_damage_min}, crit_damage_max=${wd.crit_damage_max}, crit_basedamage_min=${wd.crit_basedamage_min}, crit_basedamage_max=${wd.crit_basedamage_max}`);
+    battleDebug && console.log(`[battle_min_damage] min=${min}, damage_min=${wd.damage_min}, damage_max=${wd.damage_max}, basedamage_min=${wd.basedamage_min}, basedamage_max=${wd.basedamage_max}, crit_damage_min=${wd.crit_damage_min}, crit_damage_max=${wd.crit_damage_max}, crit_basedamage_min=${wd.crit_basedamage_min}, crit_basedamage_max=${wd.crit_basedamage_max}`);
     if(is_attack_right_handed(src, skill_id)) {
         wd.damage_min = cap_value(wd.damage_min, min, INT64_MAX);
         wd.damage_max = cap_value(wd.damage_max, min, INT64_MAX);
@@ -2870,14 +2866,14 @@ function battle_min_damage(wd, src, skill_id, min) {
 }
 
 function battle_attack_sc_bonus(wd, src, target, skill_id, skill_lv) {
-    console.log(`[battle_attack_sc_bonus] START — damage_min=${wd.damage_min}, damage_max=${wd.damage_max}, crit_damage_min=${wd.crit_damage_min}, crit_damage_max=${wd.crit_damage_max}`);
+    battleDebug && console.log(`[battle_attack_sc_bonus] START â€” damage_min=${wd.damage_min}, damage_max=${wd.damage_max}, crit_damage_min=${wd.crit_damage_min}, crit_damage_max=${wd.crit_damage_max}`);
     let sd = is_player_object(src) ? src : null;
     let sstatus = status_get_status_data(src);
     let tstatus = status_get_status_data(target);
 
     ATK_RATE(wd, src, skill_id, battle_get_atkpercent(src, skill_id));
     CRIT_ATK_RATE(wd, src, skill_id, battle_get_atkpercent(src, skill_id));
-    console.log(`[battle_attack_sc_bonus] After atkpercent — damage_min=${wd.damage_min}, damage_max=${wd.damage_max}, crit_damage_min=${wd.crit_damage_min}, crit_damage_max=${wd.crit_damage_max}`);
+    battleDebug && console.log(`[battle_attack_sc_bonus] After atkpercent â€” damage_min=${wd.damage_min}, damage_max=${wd.damage_max}, crit_damage_min=${wd.crit_damage_min}, crit_damage_max=${wd.crit_damage_max}`);
     wd.basedamage_min = ATK_RATER(wd.basedamage_min, battle_get_atkpercent(src, 0));
     wd.basedamage_max = ATK_RATER(wd.basedamage_max, battle_get_atkpercent(src, 0));
     wd.crit_basedamage_min = ATK_RATER(wd.crit_basedamage_min, battle_get_atkpercent(src, 0));
@@ -2894,11 +2890,11 @@ function battle_attack_sc_bonus(wd, src, target, skill_id, skill_lv) {
             CRIT_ATK_ADDRATE(wd, src, skill_id, 100);
         }
     }
-    console.log(`[battle_attack_sc_bonus] END — damage_min=${wd.damage_min}, damage_max=${wd.damage_max}, crit_damage_min=${wd.crit_damage_min}, crit_damage_max=${wd.crit_damage_max}`);
+    battleDebug && console.log(`[battle_attack_sc_bonus] END â€” damage_min=${wd.damage_min}, damage_max=${wd.damage_max}, crit_damage_min=${wd.crit_damage_min}, crit_damage_max=${wd.crit_damage_max}`);
 }
 
 function battle_calc_skill_constant_addition(wd, src, target, skill_id, skill_lv) {
-    console.log(`[battle_calc_skill_constant_addition] START skill_id=${skill_id}`);
+    battleDebug && console.log(`[battle_calc_skill_constant_addition] START skill_id=${skill_id}`);
     let sd = is_player_object(src) ? src : null;
     let tsd = is_player_object(target) ? target : null;
     let sstatus = status_get_status_data(src);
@@ -2917,7 +2913,7 @@ function battle_calc_skill_constant_addition(wd, src, target, skill_id, skill_lv
                     bonus += Math.trunc(Math.pow(skill_lv + sd.refine[EQI.SHIELD], 2));
                     atk_min = 100;
                     atk_max = Math.max(100, bonus);
-                    console.log(`[battle_calc_skill_constant_addition] Shield Chain — shield refine=${sd.refine[EQI.SHIELD]}, bonus=${bonus}, atk_min=${atk_min}, atk_max=${atk_max}`);
+                    battleDebug && console.log(`[battle_calc_skill_constant_addition] Shield Chain â€” shield refine=${sd.refine[EQI.SHIELD]}, bonus=${bonus}, atk_min=${atk_min}, atk_max=${atk_max}`);
                 }
             }
             break;
@@ -2936,12 +2932,21 @@ function battle_calc_skill_constant_addition(wd, src, target, skill_id, skill_lv
             atk_max *= 3;
             break;
     }
-    console.log(`[battle_calc_skill_constant_addition] END — atk_min=${atk_min}, atk_max=${atk_max}`);
+    battleDebug && console.log(`[battle_calc_skill_constant_addition] END â€” atk_min=${atk_min}, atk_max=${atk_max}`);
     return { min: atk_min, max: atk_max };
 }
 
+/**
+ * 
+ * @param {Damage} wd 
+ * @param {PlayerData|MonsterData} src 
+ * @param {PlayerData|MonsterData} target 
+ * @param {*} skill_id 
+ * @param {*} skill_lv 
+ * @returns 
+ */
 function battle_calc_attack_skill_ratio(wd, src, target, skill_id, skill_lv) {
-    console.log(`[battle_calc_attack_skill_ratio] START skill_id=${skill_id}`);
+    battleDebug && console.log(`[battle_calc_attack_skill_ratio] START skill_id=${skill_id}`);
     let sd = is_player_object(src) ? src : null;
     let tsd = is_player_object(target) ? target : null;
     let sstatus = status_get_status_data(src);
@@ -2952,7 +2957,7 @@ function battle_calc_attack_skill_ratio(wd, src, target, skill_id, skill_lv) {
     if(sd && skill_id != SKILL.PA_SACRIFICE) {
         if(SkillSearch(SKILL.WS_OVERTHRUSTMAX))
             skillratio += SkillSearch(SKILL.WS_OVERTHRUSTMAX) * 20;
-        else if(SkillSearch(SKILL.BS_OVERTHRUST) || n_A_Buf2[8])
+        else if(SkillSearch(SKILL.BS_OVERTHRUST) || sc_get(src, SC.OVERTHRUST))
             skillratio += SkillSearch(SKILL.BS_OVERTHRUST) ? SkillSearch(SKILL.BS_OVERTHRUST) * 5 : 5;
 
         if(SkillSearch(SKILL.LK_BERSERK))
@@ -3187,7 +3192,7 @@ function battle_calc_attack_skill_ratio(wd, src, target, skill_id, skill_lv) {
             if (sd && SkillSearch(SKILL.SG_TAEKWON_KICK_MASTERY) > 0)
                 skillratio += skillratio * Math.trunc((SkillSearch(SKILL.SG_TAEKWON_KICK_MASTERY) * 5) / 100);
 
-            if (n_B_debuf[7])
+            if (sc_get(target, SC.STUN))
                 skillratio *= 3;
 			break;
 		case SKILL.GS_TRIPLEACTION:
@@ -3289,12 +3294,20 @@ function battle_calc_attack_skill_ratio(wd, src, target, skill_id, skill_lv) {
             break;
     }
 
-    console.log(`[battle_calc_attack_skill_ratio] END — skillratio=${skillratio}`);
+    battleDebug && console.log(`[battle_calc_attack_skill_ratio] END â€” skillratio=${skillratio}`);
     return skillratio;
 }
 
+/**
+ * 
+ * @param {Damage} wd 
+ * @param {PlayerData|MonsterData} src 
+ * @param {PlayerData|MonsterData} target 
+ * @param {*} skill_id 
+ * @param {*} skill_lv 
+ */
 function battle_calc_skill_base_damage(wd, src, target, skill_id, skill_lv) {
-    console.log(`[battle_calc_skill_base_damage] START skill_id=${skill_id}, skill_lv=${skill_lv}`);
+    battleDebug && console.log(`[battle_calc_skill_base_damage] START skill_id=${skill_id}, skill_lv=${skill_lv}`);
     let sstatus = status_get_status_data(src);
     let tstatus = status_get_status_data(target);
     let sd = is_player_object(src) ? src : null;
@@ -3349,12 +3362,12 @@ function battle_calc_skill_base_damage(wd, src, target, skill_id, skill_lv) {
         case SKILL.PA_SHIELDCHAIN:
             wd.damage_min = wd.damage_max = sstatus.batk;
             if(sd) {
-                console.log(`[battle_calc_skill_base_damage] Shield Chain / Shield Boomerang — base damage from batk: ${wd.damage_min}`);
+                battleDebug && console.log(`[battle_calc_skill_base_damage] Shield Chain / Shield Boomerang â€” base damage from batk: ${wd.damage_min}`);
                 if(sd.equip[EQI.SHIELD] >= 0) {
                     ATK_ADD(wd, src, skill_id, 4 * sd.refine[EQI.SHIELD]);
                     ATK_ADD(wd, src, skill_id, 1 * c.SkillSubNum.value); // shield weight added as flat damage
                 }
-                console.log(`[battle_calc_skill_base_damage] After shield refine and weight addition — damage_min=${wd.damage_min}, damage_max=${wd.damage_max}`);
+                battleDebug && console.log(`[battle_calc_skill_base_damage] After shield refine and weight addition â€” damage_min=${wd.damage_min}, damage_max=${wd.damage_max}`);
 
                 battle_calc_defense_reduction(wd, src, target, skill_id, skill_lv);
             } else {
@@ -3371,8 +3384,8 @@ function battle_calc_skill_base_damage(wd, src, target, skill_id, skill_lv) {
             // crit is no longer using flags to set the damage as "crit" since its a separate damage field
             // if(is_attack_critical(wd, src, target, skill_id, skill_lv, false)) bflag |= BDMG.CRIT;
             if(skill_id == SKILL.HW_MAGICCRASHER) bflag |= BDMG.MAGIC;
-            if(sd && n_A_Buf2[7]) bflag |= BDMG.NOSIZE; // weapon perfection
-            if(sd && n_A_Buf3[48]) bflag |= BDMG.NOSIZE; // humming SR buff
+            if(sd && sc_get(src, SC.WEAPONPERFECTION)) bflag |= BDMG.NOSIZE; // weapon perfection
+            if(sd && sc_get(src, SC.HUMMING_SRS)) bflag |= BDMG.NOSIZE; // humming SR buff
 
             if(is_skill_using_arrow(src, skill_id) && sd) {
                 switch(sd.status.weapon) {
@@ -3421,21 +3434,21 @@ function battle_calc_skill_base_damage(wd, src, target, skill_id, skill_lv) {
     }
 
     if(skill_id && !skill_can_crit(skill_id)) {
-        if(n_A_Buf3[47] && skill_id != SKILL.MO_EXTREMITYFIST && skill_id != SKILL.MO_EXTREMITYFIST_MAXSP) {
+        if(sc_get(player, SC.FORTUNE_SRS) && skill_id != SKILL.MO_EXTREMITYFIST && skill_id != SKILL.MO_EXTREMITYFIST_MAXSP) {
             skill_is_critical(wd, src, target); // sets the crit rate
             CRIT_ATK_ADDRATE(wd, src, skill_id, 15); // 15% damage boost with fortune's kiss SR buff
             wd.crit_from_sr_buff = true; // flag to indicate that the crit damage boost is from the SR buff, used to prevent other things to affect it such as def ignore
-            console.log("[battle_calc_skill_base_damage] APPLIED FORTUNE'S KISS BUFF TO NON-CRIT SKILL");
+            battleDebug && console.log("[battle_calc_skill_base_damage] APPLIED FORTUNE'S KISS BUFF TO NON-CRIT SKILL");
         } else {
             wd.crit_from_sr_buff = false;
         }
     }
 
-    console.log(`[battle_calc_skill_base_damage] END — damage_min=${wd.damage_min}, damage_max=${wd.damage_max}, damage2_min=${wd.damage2_min}, damage2_max=${wd.damage2_max}, crit_damage_min=${wd.crit_damage_min}, crit_damage_max=${wd.crit_damage_max}`);
+    battleDebug && console.log(`[battle_calc_skill_base_damage] END â€” damage_min=${wd.damage_min}, damage_max=${wd.damage_max}, damage2_min=${wd.damage2_min}, damage2_max=${wd.damage2_max}, crit_damage_min=${wd.crit_damage_min}, crit_damage_max=${wd.crit_damage_max}`);
 }
 
 function battle_calc_defense_reduction(wd, src, target, skill_id, skill_lv) {
-    console.log(`[battle_calc_defense_reduction] START — damage_min=${wd.damage_min}, damage_max=${wd.damage_max}, basedamage_min=${wd.basedamage_min}, basedamage_max=${wd.basedamage_max}, crit_damage_min=${wd.crit_damage_min}, crit_damage_max=${wd.crit_damage_max}, crit_basedamage_min=${wd.crit_basedamage_min}, crit_basedamage_max=${wd.crit_basedamage_max}`);
+    battleDebug && console.log(`[battle_calc_defense_reduction] START â€” damage_min=${wd.damage_min}, damage_max=${wd.damage_max}, basedamage_min=${wd.basedamage_min}, basedamage_max=${wd.basedamage_max}, crit_damage_min=${wd.crit_damage_min}, crit_damage_max=${wd.crit_damage_max}, crit_basedamage_min=${wd.crit_basedamage_min}, crit_basedamage_max=${wd.crit_basedamage_max}`);
     let sd = is_player_object(src) ? src : null;
     let tsd = is_player_object(target) ? target : null;
     let tplayer = is_player_for_battle(target) ? target : null;
@@ -3449,7 +3462,7 @@ function battle_calc_defense_reduction(wd, src, target, skill_id, skill_lv) {
         def1 -= Math.trunc(def1 * 33 / 100); // 33% def reduced while using grand cross
 
     let def2 = tstatus.def2;
-    console.log(`[battle_calc_defense_reduction] Initial def1=${def1}, def2=${def2}`);
+    battleDebug && console.log(`[battle_calc_defense_reduction] Initial def1=${def1}, def2=${def2}`);
 
     if(sd) {
         let i = sd.indexed_bonus.ignore_def_by_race[tstatus.race] + sd.indexed_bonus.ignore_def_by_race[RC.ALL];
@@ -3506,14 +3519,14 @@ function battle_calc_defense_reduction(wd, src, target, skill_id, skill_lv) {
         }
     } else {
         vit_def_min = vit_def_max = Math.trunc(def2 / 20) * Math.trunc(def2 / 20);
-        console.log("[battle_calc_defense_reduction] Non-player target vit def before swap: vit_def_min=" + vit_def_min + ", vit_def_max=" + vit_def_max);
+        battleDebug && console.log("[battle_calc_defense_reduction] Non-player target vit def before swap: vit_def_min=" + vit_def_min + ", vit_def_max=" + vit_def_max);
         // they are swapped since vit_def_min is added to def1 for minimum damage and vit_def_max is added to def1 for maximum damage, so vit_def_min should be the smaller value and vit_def_max should be the larger value
         vit_def_max = def2 + 0;
         vit_def_min = def2 + (vit_def_min > 0 ? vit_def_min - 1 : 0);
     }
 
     if(def1 > 100) def1 = 100;
-    console.log(`[battle_calc_defense_reduction] After reductions — def1=${def1}, def2=${def2}, vit_def_min=${vit_def_min}, vit_def_max=${vit_def_max}`);
+    battleDebug && console.log(`[battle_calc_defense_reduction] After reductions â€” def1=${def1}, def2=${def2}, vit_def_min=${vit_def_min}, vit_def_max=${vit_def_max}`);
     ATK_RATE4(wd, src, skill_id, 
         attack_ignores_def(wd, src, target, skill_id, skill_lv, EQI.HAND_R) ? 100 : (is_attack_piercing(wd, src, target, skill_id, skill_lv, EQI.HAND_R) ? is_attack_piercing(wd, src, target, skill_id, skill_lv, EQI.HAND_R) * (def1+vit_def_min) : (100-def1)),
         attack_ignores_def(wd, src, target, skill_id, skill_lv, EQI.HAND_R) ? 100 : (is_attack_piercing(wd, src, target, skill_id, skill_lv, EQI.HAND_R) ? is_attack_piercing(wd, src, target, skill_id, skill_lv, EQI.HAND_R) * (def1+vit_def_max) : (100-def1)),
@@ -3533,8 +3546,8 @@ function battle_calc_defense_reduction(wd, src, target, skill_id, skill_lv) {
 
     // "crit" damage from fortune's kiss SR buff should not be affected by def ignore or piercing, but should be affected by defense reduction from vit def, since it's technically not a "crit" damage but rather a damage boost that applies only when the attack is critical, so we need to apply the vit def reduction to it but not the def1 reduction
     // crits under fusion that can originally not crit can crit due to the fusion buff but should still be affected by def 
-    console.log(`[battle_calc_defense_reduction] Before crit adjustments — crit_damage_min=${wd.crit_damage_min}, crit_damage_max=${wd.crit_damage_max}, crit_basedamage_min=${wd.crit_basedamage_min}, crit_basedamage_max=${wd.crit_basedamage_max}`);
-    console.log(`[battle_calc_defense_reduction] Crit adjustments — crit_from_sr_buff=${wd.crit_from_sr_buff}, is_attack_critical=${is_attack_critical(wd, src, target, skill_id, skill_lv, false)}`);
+    battleDebug && console.log(`[battle_calc_defense_reduction] Before crit adjustments â€” crit_damage_min=${wd.crit_damage_min}, crit_damage_max=${wd.crit_damage_max}, crit_basedamage_min=${wd.crit_basedamage_min}, crit_basedamage_max=${wd.crit_basedamage_max}`);
+    battleDebug && console.log(`[battle_calc_defense_reduction] Crit adjustments â€” crit_from_sr_buff=${wd.crit_from_sr_buff}, is_attack_critical=${is_attack_critical(wd, src, target, skill_id, skill_lv, false)}`);
     if(wd.crit_from_sr_buff || (SkillSearch(SKILL.SG_FUSION) && is_attack_critical(wd, src, target, skill_id, skill_lv, false))) {
         CRIT_ATK_RATE4(wd, src, skill_id, 
             attack_ignores_def(wd, src, target, skill_id, skill_lv, EQI.HAND_R, true) ? 100 : (is_attack_piercing(wd, src, target, skill_id, skill_lv, EQI.HAND_R) ? is_attack_piercing(wd, src, target, skill_id, skill_lv, EQI.HAND_R) * (def1+vit_def_min) : (100-def1)),
@@ -3553,11 +3566,11 @@ function battle_calc_defense_reduction(wd, src, target, skill_id, skill_lv) {
         wd.crit_basedamage_min -= vit_def_min;
         wd.crit_basedamage_max -= vit_def_max;
     }
-    console.log(`[battle_calc_defense_reduction] END — damage_min=${wd.damage_min}, damage_max=${wd.damage_max}, basedamage_min=${wd.basedamage_min}, basedamage_max=${wd.basedamage_max}, crit_damage_min=${wd.crit_damage_min}, crit_damage_max=${wd.crit_damage_max}, crit_basedamage_min=${wd.crit_basedamage_min}, crit_basedamage_max=${wd.crit_basedamage_max}`);
+    battleDebug && console.log(`[battle_calc_defense_reduction] END â€” damage_min=${wd.damage_min}, damage_max=${wd.damage_max}, basedamage_min=${wd.basedamage_min}, basedamage_max=${wd.basedamage_max}, crit_damage_min=${wd.crit_damage_min}, crit_damage_max=${wd.crit_damage_max}, crit_basedamage_min=${wd.crit_basedamage_min}, crit_basedamage_max=${wd.crit_basedamage_max}`);
 }
 
 function battle_calc_base_damage(src, status, wa, t_size, flag) {
-    console.log(`[battle_calc_base_damage] START — wa.atk=${wa.atk}, wa.atk2=${wa.atk2}, t_size=${t_size}, flag=${flag}`);
+    battleDebug && console.log(`[battle_calc_base_damage] START â€” wa.atk=${wa.atk}, wa.atk2=${wa.atk2}, t_size=${t_size}, flag=${flag}`);
     let atkmin = 0, atkmax = 0;
     let type = 0;
     let damage_min = 0, damage_max = 0;
@@ -3572,51 +3585,51 @@ function battle_calc_base_damage(src, status, wa, t_size, flag) {
             atkmin = wa.atk;
             atkmax = wa.atk2;
         }
-        console.log(`[battle_calc_base_damage] MOB path — atkmin=${atkmin}, atkmax=${atkmax}`);
+        battleDebug && console.log(`[battle_calc_base_damage] MOB path â€” atkmin=${atkmin}, atkmax=${atkmax}`);
         if(atkmin > atkmax)
             atkmin = atkmax;
 
-        if(n_B_buf[3]) // maximize power
+        if(sc_get(src, SC.MAXIMIZEPOWER)) // maximize power
             atkmin = atkmax;
-        console.log(`[battle_calc_base_damage] MOB after maximize power check — atkmin=${atkmin}, atkmax=${atkmax}`);
+        battleDebug && console.log(`[battle_calc_base_damage] MOB after maximize power check â€” atkmin=${atkmin}, atkmax=${atkmax}`);
     } else {
         atkmax = wa.atk;
         type = (wa == status.lhw) ? EQI.HAND_L : EQI.HAND_R;
 
         atkmin = status.dex;
-        console.log(`[battle_calc_base_damage] PC path — atkmax(wa.atk)=${atkmax}, atkmin(dex)=${atkmin}, type=${type}, equip[type]=${sd.equip[type]}`);
+        battleDebug && console.log(`[battle_calc_base_damage] PC path â€” atkmax(wa.atk)=${atkmax}, atkmin(dex)=${atkmin}, type=${type}, equip[type]=${sd.equip[type]}`);
 
         if(sd.equip[type] >= 0)
             atkmin = Math.trunc(atkmin * (80 + (type == EQI.HAND_R ? sd.right_weapon.level : sd.left_weapon.level) * 20) / 100);
-        console.log(`[battle_calc_base_damage] weapon level=${type == EQI.HAND_R ? sd.right_weapon.level : sd.left_weapon.level}, dex_rate=${80 + (type == EQI.HAND_R ? sd.right_weapon.level : sd.left_weapon.level) * 20}`);
-        console.log(`[battle_calc_base_damage] after weapon level scaling — atkmin=${atkmin}, atkmax=${atkmax}`);
+        battleDebug && console.log(`[battle_calc_base_damage] weapon level=${type == EQI.HAND_R ? sd.right_weapon.level : sd.left_weapon.level}, dex_rate=${80 + (type == EQI.HAND_R ? sd.right_weapon.level : sd.left_weapon.level) * 20}`);
+        battleDebug && console.log(`[battle_calc_base_damage] after weapon level scaling â€” atkmin=${atkmin}, atkmax=${atkmax}`);
 
         if(atkmin > atkmax)
             atkmin = atkmax;
 
         if(flag&BDMG.ARROW) {
-            console.log(`[battle_calc_base_damage] ARROW — atkmin before=${atkmin}, atkmin*atkmax/100=${Math.trunc(atkmin*atkmax/100)}`);
+            battleDebug && console.log(`[battle_calc_base_damage] ARROW â€” atkmin before=${atkmin}, atkmin*atkmax/100=${Math.trunc(atkmin*atkmax/100)}`);
             atkmin = Math.trunc(atkmin*atkmax/100);
             if(atkmin > atkmax)
                 atkmax = atkmin;
         }
 
         if(SkillSearch(SKILL.BS_MAXIMIZE)) {
-            console.log(`[battle_calc_base_damage] BS_MAXIMIZE active — atkmin set to atkmax=${atkmax}`);
+            battleDebug && console.log(`[battle_calc_base_damage] BS_MAXIMIZE active â€” atkmin set to atkmax=${atkmax}`);
             atkmin = atkmax;
         }
-        console.log(`[battle_calc_base_damage] final atkmin=${atkmin}, atkmax=${atkmax}`);
+        battleDebug && console.log(`[battle_calc_base_damage] final atkmin=${atkmin}, atkmax=${atkmax}`);
     }
 
     damage_min = atkmin;
     damage_max = atkmax > atkmin ? atkmax - 1 : atkmin;
 
     crit_damage_min = crit_damage_max = atkmax;
-    console.log(`[battle_calc_base_damage] initial damage — damage_min=${damage_min}, damage_max=${damage_max}, crit_damage_min=${crit_damage_min}, crit_damage_max=${crit_damage_max}`);
+    battleDebug && console.log(`[battle_calc_base_damage] initial damage â€” damage_min=${damage_min}, damage_max=${damage_max}, crit_damage_min=${crit_damage_min}, crit_damage_max=${crit_damage_max}`);
 
     if(sd) {
         if(flag&BDMG.ARROW && sd.bonus.arrow_atk) {
-            console.log(`[battle_calc_base_damage] arrow_atk=${sd.bonus.arrow_atk}, weapon=${sd.status.weapon}, isGun=${sd.status.weapon >= WEAPON.REVOLVER && sd.status.weapon <= WEAPON.GRENADE}`);
+            battleDebug && console.log(`[battle_calc_base_damage] arrow_atk=${sd.bonus.arrow_atk}, weapon=${sd.status.weapon}, isGun=${sd.status.weapon >= WEAPON.REVOLVER && sd.status.weapon <= WEAPON.GRENADE}`);
             damage_min += 0;
             damage_max += sd.bonus.arrow_atk - 1;
 
@@ -3625,7 +3638,7 @@ function battle_calc_base_damage(src, status, wa, t_size, flag) {
                 crit_damage_min += sd.bonus.arrow_atk;
                 crit_damage_max += sd.bonus.arrow_atk;
             }
-            console.log(`[battle_calc_base_damage] after arrow_atk — damage_min=${damage_min}, damage_max=${damage_max}, crit_damage_min=${crit_damage_min}, crit_damage_max=${crit_damage_max}`);
+            battleDebug && console.log(`[battle_calc_base_damage] after arrow_atk â€” damage_min=${damage_min}, damage_max=${damage_max}, crit_damage_min=${crit_damage_min}, crit_damage_max=${crit_damage_max}`);
         }
 
         if(!(sd.special_state.no_sizefix || (flag&BDMG.NOSIZE))) {
@@ -3633,43 +3646,43 @@ function battle_calc_base_damage(src, status, wa, t_size, flag) {
             damage_max = Math.trunc(damage_max * ((type == EQI.HAND_R ? sd.right_weapon.atkmods[t_size] : sd.left_weapon.atkmods[t_size])) / 100);
             crit_damage_min = Math.trunc(crit_damage_min * ((type == EQI.HAND_R ? sd.right_weapon.atkmods[t_size] : sd.left_weapon.atkmods[t_size])) / 100);
             crit_damage_max = Math.trunc(crit_damage_max * ((type == EQI.HAND_R ? sd.right_weapon.atkmods[t_size] : sd.left_weapon.atkmods[t_size])) / 100);
-            console.log(`[battle_calc_base_damage] after size penalty — damage_min=${damage_min}, damage_max=${damage_max}, crit_damage_min=${crit_damage_min}, crit_damage_max=${crit_damage_max}`);
+            battleDebug && console.log(`[battle_calc_base_damage] after size penalty â€” damage_min=${damage_min}, damage_max=${damage_max}, crit_damage_min=${crit_damage_min}, crit_damage_max=${crit_damage_max}`);
         }
     }
 
     if(flag&BDMG.MAGIC) {
-        console.log(`[battle_calc_base_damage] adding matk_min=${status.matk_min}`);
+        battleDebug && console.log(`[battle_calc_base_damage] adding matk_min=${status.matk_min}`);
         damage_min += status.matk_min;
         damage_max += status.matk_min;
         crit_damage_min += status.matk_min;
         crit_damage_max += status.matk_min;
     }
     else if(sd) {
-        console.log(`[battle_calc_base_damage] adding batk=${status.batk}`);
+        battleDebug && console.log(`[battle_calc_base_damage] adding batk=${status.batk}`);
         damage_min += status.batk;
         damage_max += status.batk;
         crit_damage_min += status.batk;
         crit_damage_max += status.batk;
     }
-    console.log(`[battle_calc_base_damage] after batk/matk — damage_min=${damage_min}, damage_max=${damage_max}, crit_damage_min=${crit_damage_min}, crit_damage_max=${crit_damage_max}`);
+    battleDebug && console.log(`[battle_calc_base_damage] after batk/matk â€” damage_min=${damage_min}, damage_max=${damage_max}, crit_damage_min=${crit_damage_min}, crit_damage_max=${crit_damage_max}`);
 
     if(sd) {
         let weapon_damage = battle_add_weapon_damage(src, damage_min, damage_max, type);
-        console.log(`[battle_calc_base_damage] weapon_damage result — min=${weapon_damage.min}, max=${weapon_damage.max}`);
+        battleDebug && console.log(`[battle_calc_base_damage] weapon_damage result â€” min=${weapon_damage.min}, max=${weapon_damage.max}`);
         damage_min = weapon_damage.min;
         damage_max = weapon_damage.max;
         let crit_weapon_damage = battle_add_weapon_damage(src, crit_damage_min, crit_damage_max, type);
-        console.log(`[battle_calc_base_damage] crit_weapon_damage result — min=${crit_weapon_damage.min}, max=${crit_weapon_damage.max}`);
+        battleDebug && console.log(`[battle_calc_base_damage] crit_weapon_damage result â€” min=${crit_weapon_damage.min}, max=${crit_weapon_damage.max}`);
         crit_damage_min = crit_weapon_damage.min;
         crit_damage_max = crit_weapon_damage.max;
     }
 
-    console.log(`[battle_calc_base_damage] END — damage_min=${damage_min}, damage_max=${damage_max}, crit_damage_min=${crit_damage_min}, crit_damage_max=${crit_damage_max}`);
+    battleDebug && console.log(`[battle_calc_base_damage] END â€” damage_min=${damage_min}, damage_max=${damage_max}, crit_damage_min=${crit_damage_min}, crit_damage_max=${crit_damage_max}`);
     return {min: damage_min, max: damage_max, crit_min: crit_damage_min, crit_max: crit_damage_max};
 }
 
 function battle_add_weapon_damage(src, damage_min, damage_max, type) {
-    console.log(`[battle_add_weapon_damage] START — damage_min=${damage_min}, damage_max=${damage_max}, type=${type}`);
+    battleDebug && console.log(`[battle_add_weapon_damage] START â€” damage_min=${damage_min}, damage_max=${damage_max}, type=${type}`);
     let overrefine_bonus = 0;
     let sd = is_player_object(src) ? src : null;
     if(!sd)
@@ -3696,12 +3709,12 @@ function battle_add_weapon_damage(src, damage_min, damage_max, type) {
     damage_min += 0;
     damage_max += overrefine_bonus;
 
-    console.log(`[battle_add_weapon_damage] END — overrefine_bonus=${overrefine_bonus}, damage_min=${damage_min}, damage_max=${damage_max}`);
+    battleDebug && console.log(`[battle_add_weapon_damage] END â€” overrefine_bonus=${overrefine_bonus}, damage_min=${damage_min}, damage_max=${damage_max}`);
     return {min: damage_min, max: damage_max};
 }
 
 function initialize_weapon_data(src, target, skill_id, skill_lv, wflag) {
-    console.log(`[initialize_weapon_data] START — skill_id=${skill_id}, skill_lv=${skill_lv}, wflag=${wflag}`);
+    battleDebug && console.log(`[initialize_weapon_data] START â€” skill_id=${skill_id}, skill_lv=${skill_lv}, wflag=${wflag}`);
     let sstatus = status_get_status_data(src);
     let tstatus = status_get_status_data(target);
     let sd = is_player_object(src) ? src : null;
@@ -3760,7 +3773,7 @@ function initialize_weapon_data(src, target, skill_id, skill_lv, wflag) {
         wd.flag |= is_long ? BF.LONG : BF.SHORT;
     }
 
-    console.log(`[initialize_weapon_data] END — div_=${wd.div_}, flag=${wd.flag}, type=${wd.type}`);
+    battleDebug && console.log(`[initialize_weapon_data] END â€” div_=${wd.div_}, flag=${wd.flag}, type=${wd.type}`);
     return wd;
 }
 
@@ -3775,7 +3788,7 @@ function initialize_weapon_data(src, target, skill_id, skill_lv, wflag) {
  * @param {number} skill_lv - Skill level
  */
 function battle_calc_multi_attack(wd, src, target, skill_id, skill_lv) {
-    console.log(`[battle_calc_multi_attack] START — skill_id=${skill_id}, div_=${wd.div_}`);
+    battleDebug && console.log(`[battle_calc_multi_attack] START â€” skill_id=${skill_id}, div_=${wd.div_}`);
     let sd = is_player_object(src) ? src : null;
     let tstatus = status_get_status_data(target);
 
@@ -3822,7 +3835,7 @@ function battle_calc_multi_attack(wd, src, target, skill_id, skill_lv) {
                 wd.div_ = 5;
             break;
     }
-    console.log(`[battle_calc_multi_attack] END — div_=${wd.div_}, type=${wd.type}, multi_attack_rate=${wd.multi_attack_rate}`);
+    battleDebug && console.log(`[battle_calc_multi_attack] END â€” div_=${wd.div_}, type=${wd.type}, multi_attack_rate=${wd.multi_attack_rate}`);
 }
 
 function check_double_attack(src) {
@@ -3905,8 +3918,14 @@ function battle_check_undead(race, element) {
     return 0;
 }
 
+/**
+ * 
+ * @param {PlayerData|MonsterData} src 
+ * @param {*} skill_id 
+ * @returns 
+ */
 function battle_get_atkpercent(src, skill_id) {
-    console.log(`[battle_get_atkpercent] START skill_id=${skill_id}`);
+    battleDebug && console.log(`[battle_get_atkpercent] START skill_id=${skill_id}`);
     let sd = is_player_object(src) ? src : null;
     if(sd && !battle_skill_stacks_masteries_vvs(skill_id, BCHK.ALL))
         return 100;
@@ -3914,36 +3933,36 @@ function battle_get_atkpercent(src, skill_id) {
     let atkpercent = 100;
 
     if(sd) {
-        if(n_A_Buf6[22]) // curse
+        if(sc_get(src, SC.CURSE)) // curse
             atkpercent -= 25;
-        if(SkillSearch(SKILL.SM_AUTOBERSERK) || n_A_Buf6[5] > 0 || n_A_Buf7[31]) { // provoke
+        if(SkillSearch(SKILL.SM_AUTOBERSERK) || sc_get(src, SC.PROVOKE)) { // provoke
             let skill_lv = 1;
             if(SkillSearch(SKILL.SM_AUTOBERSERK))
                 skill_lv = 10;
-            else if(n_A_Buf6[5] > 0)
-                skill_lv = n_A_Buf6[5];
+            else if(sc_get(src, SC.PROVOKE))
+                skill_lv = sc_get(src, SC.PROVOKE).val1;
             atkpercent += 2 + 3 * skill_lv;
         }
         if(SkillSearch(SKILL.LK_CONCENTRATION))
             atkpercent += 5 * SkillSearch(SKILL.LK_CONCENTRATION);
         if(SkillSearch(SKILL.SN_SIGHT))
             atkpercent += 2 * SkillSearch(SKILL.SN_SIGHT);
-        if(n_A_Buf2[19]) // gospel atk%
-            atkpercent += 100;
+        if(sc_get(src, SC.INCATKRATE)) // gospel atk%
+            atkpercent += sc_get(src, SC.INCATKRATE).val1;
     }
 
     if(!sd) {
-        if(n_B_debuf[10]) // curse enemy
+        if(sc_get(src, SC.CURSE)) // curse enemy
             atkpercent -= 25;
-        if(n_B_debuf[0])
-            atkpercent += 2 * 3 * n_B_debuf[0]; // monster provoke debuff
-        if(n_B_debuf[13])
+        if(sc_get(src, SC.PROVOKE))
+            atkpercent += sc_get(src, SC.PROVOKE).val2; // monster provoke debuff
+        if(sc_get(src, SC.STRIPWEAPON))
             atkpercent -= 25;
-        if(n_B_buf[4]) // power up
+        if(sc_get(src, SC.POWERUP)) // power up
             atkpercent += 200;
     }
 
-    console.log(`[battle_get_atkpercent] END — atkpercent=${atkpercent}`);
+    battleDebug && console.log(`[battle_get_atkpercent] END â€” atkpercent=${atkpercent}`);
     return cap_value(atkpercent, 0, USHRT_MAX);
 }
 
@@ -4101,24 +4120,24 @@ function is_attack_critical(wd, src, target, skill_id, skill_lv, first_call) {
     if(!first_call)
         return (wd.type == DMG.CRITICAL || wd.type == DMG.MULTI_HIT_CRITICAL);
 
-    console.log(`[is_attack_critical] START — skill_id=${skill_id}, skill_lv=${skill_lv}`);
+    battleDebug && console.log(`[is_attack_critical] START â€” skill_id=${skill_id}, skill_lv=${skill_lv}`);
 
     // Forced critical skills
     if(skill_id == SKILL.NPC_CRITICALSLASH) {
-        console.log(`[is_attack_critical] NPC_CRITICALSLASH — forced crit`);
+        battleDebug && console.log(`[is_attack_critical] NPC_CRITICALSLASH â€” forced crit`);
         wd.crit_rate = 100;
         return true;
     }
 
     // Some skills cannot crit
     if(SkillSearch(SKILL.NW_GATLING_BERSERK)) {
-        console.log(`[is_attack_critical] NW_GATLING_BERSERK active — no crit`);
+        battleDebug && console.log(`[is_attack_critical] NW_GATLING_BERSERK active â€” no crit`);
         wd.crit_rate = 0;
         return false;
     }
 
     if(skill_id && !skill_can_crit(skill_id)) {
-        console.log(`[is_attack_critical] skill ${skill_id} cannot crit`);
+        battleDebug && console.log(`[is_attack_critical] skill ${skill_id} cannot crit`);
         wd.crit_rate = 0;
         return false;
     }
@@ -4131,12 +4150,12 @@ function is_attack_critical(wd, src, target, skill_id, skill_lv, first_call) {
         if(wd.type == DMG.MULTI_HIT) {
             // still calculate for display purposes and since u technically still can crit, if the double attack doesnt proc
             if(SkillSearch(SKILL.GS_CHAINACTION) && !skill_can_crit(SKILL.GS_CHAINACTION)) {
-                console.log(`[is_attack_critical] GS_CHAINACTION multi-hit — no crit`);
+                battleDebug && console.log(`[is_attack_critical] GS_CHAINACTION multi-hit â€” no crit`);
                 //wd.crit_rate = 0;
                 //return false;
             }
             if(SkillSearch(SKILL.TF_DOUBLE) && !skill_can_crit(SKILL.TF_DOUBLE)) {
-                console.log(`[is_attack_critical] TF_DOUBLE multi-hit — no crit`);
+                battleDebug && console.log(`[is_attack_critical] TF_DOUBLE multi-hit â€” no crit`);
                 //wd.crit_rate = 0;
                 //return false;
             }
@@ -4147,57 +4166,56 @@ function is_attack_critical(wd, src, target, skill_id, skill_lv, first_call) {
 
         let cri = sstatus.cri;
         let tluk = tstatus.luk;
-        console.log(`[is_attack_critical] base cri=${cri}, target luk=${tluk}`);
+        battleDebug && console.log(`[is_attack_critical] base cri=${cri}, target luk=${tluk}`);
 
         cri += sd.indexed_bonus.critaddrace[tstatus.race] + sd.indexed_bonus.critaddrace[RC.ALL];
-        console.log(`[is_attack_critical] after critaddrace — cri=${cri} (race[${tstatus.race}]=${sd.indexed_bonus.critaddrace[tstatus.race]}, race[ALL]=${sd.indexed_bonus.critaddrace[RC.ALL]})`);
+        battleDebug && console.log(`[is_attack_critical] after critaddrace â€” cri=${cri} (race[${tstatus.race}]=${sd.indexed_bonus.critaddrace[tstatus.race]}, race[ALL]=${sd.indexed_bonus.critaddrace[RC.ALL]})`);
         if(!skill_id && is_skill_using_arrow(src, skill_id)) {
             cri += sd.bonus.arrow_cri;
             cri += sd.bonus.critical_rangeatk;
-            console.log(`[is_attack_critical] arrow cri bonuses — arrow_cri=${sd.bonus.arrow_cri}, critical_rangeatk=${sd.bonus.critical_rangeatk}, cri=${cri}`);
+            battleDebug && console.log(`[is_attack_critical] arrow cri bonuses â€” arrow_cri=${sd.bonus.arrow_cri}, critical_rangeatk=${sd.bonus.critical_rangeatk}, cri=${cri}`);
         }
 
-        if(n_B_debuf[27]) {// piercing shot debuff reduces target luk
-            console.log(`[is_attack_critical] piercing shot debuff — n_B_debuf[27]=${n_B_debuf[27]}, luk reduction=${Math.trunc(tluk * n_B_debuf[27] * 20 / 100)}`);
-            tluk -= Math.trunc(tluk * n_B_debuf[27] * 20 / 100);
+        if(sc_get(target, SC.CRITIGNORELUK)) {// piercing shot debuff reduces target luk
+            tluk -= Math.trunc(tluk * sc_get(target, SC.CRITIGNORELUK).val1 * 20 / 100);
         }
 
         tluk = cap_value(tluk, 0, SHRT_MAX);
 
         if(SkillSearch(SKILL.SG_FUSION)) {
-            console.log(`[is_attack_critical] SG_FUSION — target luk set to 0`);
+            battleDebug && console.log(`[is_attack_critical] SG_FUSION â€” target luk set to 0`);
             tluk = 0;
         }
 
         let luk_reduction = tluk * ((!sd && tsd) ? 3 : 2);
         cri -= luk_reduction;
-        console.log(`[is_attack_critical] after luk reduction — tluk=${tluk}, multiplier=${(!sd && tsd) ? 3 : 2}, luk_reduction=${luk_reduction}, cri=${cri}`);
+        battleDebug && console.log(`[is_attack_critical] after luk reduction â€” tluk=${tluk}, multiplier=${(!sd && tsd) ? 3 : 2}, luk_reduction=${luk_reduction}, cri=${cri}`);
 
         // sleep debuff
-        if(n_B_debuf[8]) {
+        if(sc_get(target, SC.SLEEP)) {
             cri *= 2;
-            console.log(`[is_attack_critical] sleep debuff — cri doubled to ${cri}`);
+            battleDebug && console.log(`[is_attack_critical] sleep debuff â€” cri doubled to ${cri}`);
         }
 
         switch(skill_id) {
             case SKILL.SN_SHARPSHOOTING:
                 cri += 200;
-                console.log(`[is_attack_critical] SN_SHARPSHOOTING +200 — cri=${cri}`);
+                battleDebug && console.log(`[is_attack_critical] SN_SHARPSHOOTING +200 â€” cri=${cri}`);
                 break;
             case SKILL.NJ_KIRIKAGE:
                 cri += 250 + 50 * skill_lv;
-                console.log(`[is_attack_critical] NJ_KIRIKAGE +${250 + 50 * skill_lv} — cri=${cri}`);
+                battleDebug && console.log(`[is_attack_critical] NJ_KIRIKAGE +${250 + 50 * skill_lv} â€” cri=${cri}`);
                 break;
             case SKILL.GS_TRACKING:
                 if(SkillSearch(SKILL.GS_WEAPON_MASTERY) == 3 || SkillSearch(SKILL.GS_WEAPON_MASTERY) == 5) {
                     cri += 100;
-                    console.log(`[is_attack_critical] GS_TRACKING mastery crit +100 — cri=${cri}`);
+                    battleDebug && console.log(`[is_attack_critical] GS_TRACKING mastery crit +100 â€” cri=${cri}`);
                 }
                 break;
             case SKILL.GS_RAPIDFIRE:
                 if(SkillSearch(SKILL.GS_WEAPON_MASTERY) == 4) {
                     cri += 100;
-                    console.log(`[is_attack_critical] GS_RAPIDFIRE mastery crit +100 — cri=${cri}`);
+                    battleDebug && console.log(`[is_attack_critical] GS_RAPIDFIRE mastery crit +100 â€” cri=${cri}`);
                 }
                 break;
         }
@@ -4205,11 +4223,11 @@ function is_attack_critical(wd, src, target, skill_id, skill_lv, first_call) {
         // Store the calculated crit rate for DPS calculation
         wd.crit_rate = Math.max(0, Math.min(1000, cri)); // Convert to percentage and cap 0-100
         
-        console.log(`[is_attack_critical] END — final cri=${cri}, crit_rate=${wd.crit_rate}, is_crit=${cri > 0}`);
+        battleDebug && console.log(`[is_attack_critical] END â€” final cri=${cri}, crit_rate=${wd.crit_rate}, is_crit=${cri > 0}`);
         return cri > 0;
     }
 
-    console.log(`[is_attack_critical] No crit (no sd or no base cri) — sstatus.cri=${sstatus?.cri}`);
+    battleDebug && console.log(`[is_attack_critical] No crit (no sd or no base cri) â€” sstatus.cri=${sstatus?.cri}`);
     wd.crit_rate = 0;
     return false;
 }
@@ -4238,7 +4256,7 @@ function is_attack_hitting(wd, src, target, skill_id, skill_lv, first_call) {
         wd.hit_rate = 100;
         return true;
     }
-    else if(n_B_debuf[4] || n_B_debuf[7] || n_B_debuf[8] || n_B_debuf[9]) { // stun, freeze, petrify, sleep statuses
+    else if(sc_get(target, SC.STUN) || sc_get(target, SC.FREEZE) || sc_get(target, SC.SLEEP) || sc_get(target, SC.STONE)) { // stun, freeze, petrify, sleep statuses
         wd.hit_rate = 100;
         return true;
     }
@@ -4252,7 +4270,7 @@ function is_attack_hitting(wd, src, target, skill_id, skill_lv, first_call) {
 
     hitrate += sstatus.hit - flee;
 
-    if(sd && (wd.flag&(BF.LONG|BF.MAGIC)) == BF.LONG && !skill_id && n_A_Buf6[3]) // if target is in fog reduce hit rate by 50
+    if(md && (wd.flag&(BF.LONG|BF.MAGIC)) == BF.LONG && !skill_id && sc_get(target, SC.FOGWALL)) // if target is in fog reduce hit rate by 50
         hitrate -= 50;
 
     if(sd && is_skill_using_arrow(src, skill_id))
@@ -4320,12 +4338,12 @@ function is_attack_hitting(wd, src, target, skill_id, skill_lv, first_call) {
         hitrate += 20;
 
     // Apply Humming SR buff: 20% perfect hit + 80% normal calculation
-    if(sd && n_A_Buf3[48]) {
+    if(sd && sc_get(src, SC.HUMMING_SRS)) {
         hitrate = 20 + (hitrate * 0.80);
     }
 
     // Apply Disarm debuff: 35% auto-miss + 65% normal calculation
-    if(sd && !skill_id && n_B_debuf[26] && !n_B[1].includes("[MVP]")) {
+    if(md && !skill_id && sc_get(target, SC.DISARM) && !n_B[1].includes("[MVP]")) {
         hitrate = hitrate * 0.65;
     }
 
@@ -4377,7 +4395,7 @@ function is_attack_piercing(wd, src, target, skill_id, skill_lv, weapon_position
     return 0;
 }
 
-function skill_calc_heal(src, target, skill_id, skill_lv, heal) {
+function skill_calc_heal(src, target, skill_id, skill_lv, heal, display = true) {
     let skill, hp = 0;
 
     let sd = is_player_object(src) ? src : null;
@@ -4416,13 +4434,13 @@ function skill_calc_heal(src, target, skill_id, skill_lv, heal) {
             hp += Math.trunc((hp * skill) / 100);
     }
 
-    if(tsd && (skill = pc_skillheal2_bonus(tsd, skill_id)))
+    if(display && tsd && (skill = pc_skillheal2_bonus(tsd, skill_id)))
         hp += Math.trunc((hp * skill) / 100);
 
     if(tsd) {
         if(skill_id != SKILL.NPC_EVILLAND && skill_id != SKILL.BA_APPLEIDUN) {
-            if(n_A_Buf7[45]) // regeneration potion
-                hp += Math.trunc((hp * 20) / 100);
+            if(sc_get(target, SC.INCHEALRATE)) // regeneration potion
+                hp += Math.trunc((hp * sc_get(target, SC.INCHEALRATE).val1) / 100);
 
             // add black tortoise buff
         }
@@ -4430,8 +4448,8 @@ function skill_calc_heal(src, target, skill_id, skill_lv, heal) {
 
     if(heal && tsd) {
         let penalty = 0;
-        if(n_A_Buf6[18]) // critical wounds
-            penalty += 20 * n_A_Buf6[18];
+        if(sc_get(target, SC.CRITICALWOUND)) // critical wounds
+            penalty += sc_get(target, SC.CRITICALWOUND).val2;
         if(penalty > 0)
             hp -= Math.trunc((hp * penalty) / 100);
     }
@@ -4474,8 +4492,8 @@ function skill_castfix(src, skill_id, skill_lv) {
     if(monster.mob_id == 763) // muspel solo
         reduce_cast_rate += 50;
     
-    if(n_A_Buf3[2]) {
-        reduce_cast_rate += 3 * n_A_Buf3[2] + Math.trunc(n_A_Buf3[22] / 10) + n_A_Buf3[32];
+    if(sc_get(player, SC.POEMBRAGI)) { // bragi
+        reduce_cast_rate += sc_get(player, SC.POEMBRAGI).val2;
     }
 
     if(SkillSearch(SKILL.PF_MEMORIZE))
@@ -4494,6 +4512,16 @@ function skill_castfix(src, skill_id, skill_lv) {
     time = time * (1 - reduce_cast_rate / 100);
 
     time = Math.max(Math.trunc(time), 0);
+
+    if(SkillSearch(SKILL.PR_SUFFRAGIUM) || sc_get(player, SC.SUFFRAGIUM)) {
+        let reduction = 0;
+        if(SkillSearch(SKILL.PR_SUFFRAGIUM))
+            reduction += Math.floor((15 * SkillSearch(SKILL.PR_SUFFRAGIUM)) / 2);
+        else if(sc_get(player, SC.SUFFRAGIUM))
+            reduction += sc_get(player, SC.SUFFRAGIUM).val2;
+
+        time -= Math.floor((time * reduction) / 100);
+    }
 
     if(time < skill_get_fix_cast(skill_id, skill_lv))
         time = skill_get_fix_cast(skill_id, skill_lv);
@@ -4560,8 +4588,8 @@ function skill_delayfix(src, skill_id, skill_lv) {
 
     let delay = 0;
     if(!skill_get_delaynostatus(skill_id)) {
-        if(n_A_Buf3[2]) {
-            delay += (n_A_Buf3[2] < 10 ? 3 * n_A_Buf3[2] : 50) + Math.trunc(n_A_Buf3[29] / 5) + 2 * n_A_Buf3[32];
+        if(sc_get(player, SC.POEMBRAGI)) {
+            delay += sc_get(player, SC.POEMBRAGI).val3;
         }
     }
 
@@ -4589,18 +4617,18 @@ function skill_is_critical(wd, src, target) {
     let tsd = is_player_for_battle(target) ? target : null;
     let sstatus = status_get_status_data(src);
     let tstatus = status_get_status_data(target);
-    console.log("[skill_is_critical] src cri:", sstatus.cri, "target luk:", tstatus.luk);
+    battleDebug && console.log("[skill_is_critical] src cri:", sstatus.cri, "target luk:", tstatus.luk);
     if(sstatus.cri) {
         let cri = sstatus.cri;
 
         cri -= tstatus.luk * ((!sd && tsd) ? 3 : 2);
-        console.log("[skill_is_critical] cri after luk reduction:", cri, "(sd:", !!sd, ", tsd:", !!tsd, ")");
+        battleDebug && console.log("[skill_is_critical] cri after luk reduction:", cri, "(sd:", !!sd, ", tsd:", !!tsd, ")");
 
-        if(n_B_debuf[8])
+        if(sc_get(target, SC.SLEEP))
             cri <<= 1;
         
         wd.crit_rate = Math.max(0, Math.min(1000, cri)); // Convert to percentage and cap 0-100
-        console.log("[skill_is_critical] final crit_rate:", wd.crit_rate, "is critical:", cri > 0);
+        battleDebug && console.log("[skill_is_critical] final crit_rate:", wd.crit_rate, "is critical:", cri > 0);
         return cri > 0;
     }
 

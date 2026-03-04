@@ -474,6 +474,13 @@ function PlayerApplyBonus(type, val) {
             bonus = status.def2 + val;
             status.def2 = cap_value(bonus, SHRT_MIN, SHRT_MAX);
             break;
+        case 375: // increased dmg vs wounded morroc
+            PlayerBonusItemBonus(player.add_dmg, 495, val);
+            PlayerBonusItemBonus(player.add_dmg, 496, val);
+            break;
+        case 376:
+            player.bonus.near_attack_def_rate += val;
+            break;
         case 380:
         case 381:
         case 382:
@@ -1317,11 +1324,11 @@ function CalculateEquipmentBonuses() {
 
     // skill specific after cast delay calculations
     if(EquipNumSearch(1838) > 0) // evil jester hat + clown nose combo
-        PlayerBonusItemBonus(player.skilldelay, SKILL.ASC_BREAKER, -25);
+        PlayerBonusItemBonus(player.skilldelay, SKILL.ASC_BREAKER, -750);
     if(player.equip[EQI.HAND_R] == 2091) // soul stick
-        PlayerBonusItemBonus(player.skilldelay, SKILL.PR_TURNUNDEAD, -50);
+        PlayerBonusItemBonus(player.skilldelay, SKILL.PR_TURNUNDEAD, -1500);
     if(EquipNumSearch(2145) > 0) // ring of archbishop
-        PlayerBonusItemBonus(player.skilldelay, SKILL.AL_HEAL, -50);
+        PlayerBonusItemBonus(player.skilldelay, SKILL.AL_HEAL, -500);
 
     // % hp regen calculations
 
@@ -1982,7 +1989,7 @@ function CalculateAdditionalBonuses() {
     if(CardNumSearch(680) > 0 && player.status.luk >= 40) // elite revolver buffalo bandit card
         player.bonus.crit_atk_rate += 5;
 
-    if(n_A_Buf3[46]) // severe rainstorm buff for sinx song
+    if(sc_get(player, SC.ASSNCROS_SRS)) // severe rainstorm buff for sinx song
         player.bonus.crit_atk_rate += 10;
 
     // manual edit for crit dmg
@@ -2216,8 +2223,8 @@ function CalculateAdditionalBonuses() {
             PlayerBonusItemBonus(player.reseff, EFF.STUN, 30 * CardNumSearch(176));
         }
         if(player.status.vit >= 80) {
-            PlayerBonusItemBonus(player.reseff, EFF.STONE, 30 * CardNumSearch(176));
-            PlayerBonusItemBonus(player.reseff, EFF.SLEEP, 30 * CardNumSearch(176));
+            PlayerBonusItemBonus(player.reseff, EFF.STONE, 50 * CardNumSearch(176));
+            PlayerBonusItemBonus(player.reseff, EFF.SLEEP, 50 * CardNumSearch(176));
         }
     }
 
@@ -2269,80 +2276,86 @@ function CalculateAdditionalBonuses() {
     // bonuses from "statuses" which have a script
 
     // stats
-    if(n_A_Buf7[3]) // str food
-        status.str += n_A_Buf7[3];
-    if(n_A_Buf7[4]) // agi food
-        status.agi += n_A_Buf7[4];
-    if(n_A_Buf7[5]) // vit food
-        status.vit += n_A_Buf7[5];
-    if(n_A_Buf7[6]) // int food
-        status.int += n_A_Buf7[6];
-    if(n_A_Buf7[7]) // dex food
-        status.dex += n_A_Buf7[7];
-    if(n_A_Buf7[8]) // luk food
-        status.luk += n_A_Buf7[8];
+    if(sc_get(player, SC.FOOD_STR_CASH)) // str food
+        status.str += sc_get(player, SC.FOOD_STR_CASH).val1;
+    if(sc_get(player, SC.FOOD_AGI_CASH)) // agi food
+        status.agi += sc_get(player, SC.FOOD_AGI_CASH).val1;
+    if(sc_get(player, SC.FOOD_VIT_CASH)) // vit food
+        status.vit += sc_get(player, SC.FOOD_VIT_CASH).val1;
+    if(sc_get(player, SC.FOOD_INT_CASH)) // int food
+        status.int += sc_get(player, SC.FOOD_INT_CASH).val1;
+    if(sc_get(player, SC.FOOD_DEX_CASH)) // dex food
+        status.dex += sc_get(player, SC.FOOD_DEX_CASH).val1;
+    if(sc_get(player, SC.FOOD_LUK_CASH)) // luk food
+        status.luk += sc_get(player, SC.FOOD_LUK_CASH).val1;
 
     // flat atk from foods
-    if(n_A_Buf7[17] || n_A_Buf7[9] || n_A_Buf7[38]) {
-        bonus = 0;
-        if(n_A_Buf7[9]) // box of resentment
-            bonus = 20;
-        else if (n_A_Buf7[38]) // chewy rice cake
-            bonus = 10;
-        else if (n_A_Buf7[17]) // rune strawberry cake
-            bonus = 5;
-        status.batk += bonus;
+    if(sc_get(player, SC.ATKPOTION)) {
+        status.batk += sc_get(player, SC.ATKPOTION).val1;
     }
 
     // flat matk from foods
-    if(n_A_Buf7[10] || n_A_Buf7[17] || n_A_Buf7[16]) { // flat matk food
-        bonus = 0;
-        if(n_A_Buf7[10]) // box of drowsiness
-            bonus = 20;
-        else if(n_A_Buf7[16]) // oriental pastry
-            bonus = 10;
-        else if(n_A_Buf7[17]) // rune strawberry cake
-            bonus = 5;
-        player.bonus.ematk += bonus;
+    if(sc_get(player, SC.MATKPOTION)) { // flat matk food
+        player.bonus.ematk += sc_get(player, SC.MATKPOTION).val1;
     }
 
     // flat hit from foods
-    if(n_A_Buf7[0] || n_A_Buf7[18]) // sesame pastry / schwartzwald pine jubilee
-        status.hit += 10;
+    if(sc_get(player, SC.HITFOOD)) // sesame pastry / schwartzwald pine jubilee
+        status.hit += sc_get(player, SC.HITFOOD).val1;
 
     // flee food
-    if(n_A_Buf7[1] || n_A_Buf7[18]) { 
-        bonus = 0;
-        if (n_A_Buf7[18]) // schwartzwald pine jubilee
-            bonus = 20;
-        else if(n_A_Buf7[1]) // honey pastry
-            bonus = 10;
-        status.flee += bonus;
+    if(sc_get(player, SC.FLEEFOOD)) {
+        status.flee += sc_get(player, SC.FLEEFOOD).val1;
     } 
 
-    if(n_A_Buf7[36] || n_A_Buf7[19]) { // crit food
-        bonus = 0;
-        if(n_A_Buf7[36]) // abrasive
-            bonus = 200;
-        else if(n_A_Buf7[19]) // arunafeltz desert sandwich
-            bonus = 70;
-        status.cri += bonus;
+    if(sc_get(player, SC.INCCRI)) { // crit food
+        status.cri += sc_get(player, SC.INCCRI).val1 * 10;
     }
 
-    if(n_A_Buf7[11]) { // coldproof potion
-        player.indexed_bonus.subele[ELE.WATER] += 20;
-        player.indexed_bonus.subele[ELE.WIND] -= 15;
+    if(sc_get(player, SC.ARMOR_ELEMENT_WATER)) { // coldproof potion
+        player.indexed_bonus.subele[ELE.WATER] += sc_get(player, SC.ARMOR_ELEMENT_WATER).val1;
+        player.indexed_bonus.subele[ELE.WIND] += sc_get(player, SC.ARMOR_ELEMENT_WATER).val4;
     }
-    if(n_A_Buf7[12]) { // earthproof potion
-        player.indexed_bonus.subele[ELE.EARTH] += 20;
-        player.indexed_bonus.subele[ELE.FIRE] -= 15;
+    if(sc_get(player, SC.ARMOR_ELEMENT_EARTH)) { // earthproof potion
+        player.indexed_bonus.subele[ELE.EARTH] += sc_get(player, SC.ARMOR_ELEMENT_EARTH).val2;
+        player.indexed_bonus.subele[ELE.FIRE] += sc_get(player, SC.ARMOR_ELEMENT_EARTH).val3;
     }
-    if(n_A_Buf7[13]) { // fireproof potion
-        player.indexed_bonus.subele[ELE.FIRE] += 20;
-        player.indexed_bonus.subele[ELE.WATER] -= 15;
+    if(sc_get(player, SC.ARMOR_ELEMENT_FIRE)) { // fireproof potion
+        player.indexed_bonus.subele[ELE.FIRE] += sc_get(player, SC.ARMOR_ELEMENT_FIRE).val3;
+        player.indexed_bonus.subele[ELE.WATER] += sc_get(player, SC.ARMOR_ELEMENT_FIRE).val1;
     }
-    if(n_A_Buf7[14]) { // thunderproof potion
-        player.indexed_bonus.subele[ELE.WIND] += 20;
-        player.indexed_bonus.subele[ELE.EARTH] -= 15;
+    if(sc_get(player, SC.ARMOR_ELEMENT_WIND)) { // thunderproof potion
+        player.indexed_bonus.subele[ELE.WIND] += sc_get(player, SC.ARMOR_ELEMENT_WIND).val4;
+        player.indexed_bonus.subele[ELE.EARTH] += sc_get(player, SC.ARMOR_ELEMENT_WIND).val2;
+    }
+
+    if(sc_get(player, SC.MANU_ATK)) {
+        player.indexed_bonus.addrace2[RC2.MANUK] += sc_get(player, SC.MANU_ATK).val1;
+    }
+
+    if(sc_get(player, SC.MANU_DEF)) {
+        player.indexed_bonus.subrace2[RC2.MANUK] += sc_get(player, SC.MANU_DEF).val1;
+    }
+
+    if(sc_get(player, SC.MANU_MATK)) {
+        player.indexed_bonus.magic_addrace2[RC2.MANUK] += sc_get(player, SC.MANU_MATK).val1;
+    }
+
+    if(sc_get(player, SC.SPL_ATK)) {
+        player.indexed_bonus.addrace2[RC2.SPLENDIDE] += sc_get(player, SC.SPL_ATK).val1;
+    }
+
+    if(sc_get(player, SC.SPL_DEF)) {
+        player.indexed_bonus.subrace2[RC2.SPLENDIDE] += sc_get(player, SC.SPL_DEF).val1;
+    }
+
+    if(sc_get(player, SC.SPL_MATK)) {
+        player.indexed_bonus.magic_addrace2[RC2.SPLENDIDE] += sc_get(player, SC.SPL_MATK).val1;
+    }
+
+    if(sc_get(player, SC.MACARONCAKE)) {
+        player.indexed_bonus.addclass[CLASS.ALL] += 3;
+        player.matk_rate += 3;
+        player.indexed_bonus.subrace[RC.ALL] -= 10;
     }
 }
