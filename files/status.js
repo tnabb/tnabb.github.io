@@ -977,6 +977,7 @@ function sc_start(bl, type, val1 = 0, val2 = 0, val3 = 0, val4 = 0, val5 = 0, va
             val2 = 10 * val1;
             break;
         case SC.WINDWALK:
+            val2 = Math.trunc((val1 + 1) / 2);
             break;
         case SC.SUFFRAGIUM:
             val2 = 15 * val1;

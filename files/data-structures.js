@@ -164,6 +164,13 @@ class ItemBonus {
     }
 }
 
+class PassiveSkill {
+    constructor(id, level) {
+        this.id = id;
+        this.level = level;
+    }
+}
+
 class StatusChange {
     constructor(type, val1 = 0, val2 = 0, val3 = 0, val4 = 0, val5 = 0, val6 = 0, val7 = 0, val8 = 0, val9 = 0, val10 = 0) {
         this.type = type; // SC enum
@@ -191,8 +198,10 @@ class PlayerData {
         this.battle_status = new StatusData(); // Calculated battle status (with all bonuses applied)
         this.status = new CharStatus(); // Character status including job, levels, base stats, etc.
         this.sc = []; // holds status changes
+        this.passive_skills = []; // holds a list of passive skills the player has for easy access during calculations
         
         // Weapon info
+        this.dual_wield = false;
         this.weapontype1 = WEAPON.FIST;
         this.weapontype2 = WEAPON.FIST;
 
@@ -232,7 +241,7 @@ class PlayerData {
             no_magic_damage: false,
             no_misc_damage: false,
             no_sizefix: false,
-            lr_flag: 0,
+            lr_flag: LR_FLAG.NONE,
         };
 
         this.indexed_bonus = {

@@ -814,7 +814,7 @@ function allCard() {
 		c.A_weapon1_card2.options[0] = new Option(m_Card[0][2], m_Card[0][0]);
 		c.A_weapon1_card3.options[0] = new Option(m_Card[0][2], m_Card[0][0]);
 		c.A_weapon1_card4.options[0] = new Option(m_Card[0][2], m_Card[0][0]);
-		if (n_Nitou) {
+		if (player.dual_wield) {
 			c.A_weapon2_card1.options[0] = new Option(m_Card[0][2], m_Card[0][0]);
 			c.A_weapon2_card2.options[0] = new Option(m_Card[0][2], m_Card[0][0]);
 			c.A_weapon2_card3.options[0] = new Option(m_Card[0][2], m_Card[0][0]);
@@ -834,7 +834,7 @@ function allCard() {
 				if (j != 1) {
 					n++;
 					c.A_weapon1_card1.options[n] = new Option(m_Card[m_CardSort[j][i]][2], m_Card[m_CardSort[j][i]][0]);
-					if (n_Nitou) {
+					if (player.dual_wield) {
 						c.A_weapon2_card1.options[n] = new Option(m_Card[m_CardSort[j][i]][2], m_Card[m_CardSort[j][i]][0]);
 					}
 				}
@@ -847,7 +847,7 @@ function allCard() {
 				c.A_weapon1_card2.options[n] = new Option(m_Card[m_CardSort[j][i]][2], m_Card[m_CardSort[j][i]][0]);
 				c.A_weapon1_card3.options[n] = new Option(m_Card[m_CardSort[j][i]][2], m_Card[m_CardSort[j][i]][0]);
 				c.A_weapon1_card4.options[n] = new Option(m_Card[m_CardSort[j][i]][2], m_Card[m_CardSort[j][i]][0]);
-				if (n_Nitou) {
+				if (player.dual_wield) {
 					c.A_weapon2_card2.options[n] = new Option(m_Card[m_CardSort[j][i]][2], m_Card[m_CardSort[j][i]][0]);
 					c.A_weapon2_card3.options[n] = new Option(m_Card[m_CardSort[j][i]][2], m_Card[m_CardSort[j][i]][0]);
 					c.A_weapon2_card4.options[n] = new Option(m_Card[m_CardSort[j][i]][2], m_Card[m_CardSort[j][i]][0]);
@@ -863,7 +863,7 @@ function allCard() {
 			}
 		}
 		c.A_weapon1_card4.options[1] = new Option("* Top10 ranked", 106);
-		if (n_Nitou) {
+		if (player.dual_wield) {
 			c.A_weapon2_card4.options[1] = new Option("* Top10 ranked", 106);
 		}
 	}
@@ -875,7 +875,7 @@ function Click_Card(value) {
 	n_A_card[1] = 1 * c.A_weapon1_card2.value;
 	n_A_card[2] = 1 * c.A_weapon1_card3.value;
 	n_A_card[3] = 1 * c.A_weapon1_card4.value;
-	if (n_Nitou) {
+	if (player.dual_wield) {
 		n_A_card[4] = 1 * c.A_weapon2_card1.value;
 		n_A_card[5] = 1 * c.A_weapon2_card2.value;
 		n_A_card[6] = 1 * c.A_weapon2_card3.value;
@@ -1231,7 +1231,7 @@ function Click_RandOpt(){
 	n_A_randopt[5] = 1 * c.WEAP1_ROPT3.value;
 	n_A_randopt[6] = 1 * c.A_weapon1_ropt4.value;
 	n_A_randopt[7] = 1 * c.WEAP1_ROPT4.value;
-	if (n_Nitou) {
+	if (player.dual_wield) {
 		n_A_randopt[8] = 1 * c.A_weapon2_ropt1.value;
 		n_A_randopt[9] = 1 * c.WEAP2_ROPT1.value;
 		n_A_randopt[10] = 1 * c.A_weapon2_ropt2.value;
@@ -1297,7 +1297,7 @@ function RandOptReset(){
 	c.WEAP1_ROPT3.value = 0;
 	c.A_weapon1_ropt4.value = 0;
 	c.WEAP1_ROPT4.value = 0;
-	if(n_Nitou){
+	if(player.dual_wield){
 		c.A_weapon2_ropt1.value = 0;
 		c.WEAP2_ROPT1.value = 0;
 		c.A_weapon2_ropt2.value = 0;
@@ -1370,7 +1370,7 @@ function Click_Enchant(){
 	n_A_enchant[6] = 1 * c.A_shoes_enchant2.value;
 	n_A_enchant[7] = 1 * c.A_weapon1_enchant1.value;
 	n_A_enchant[8] = 1 * c.A_weapon1_enchant2.value;
-	if (n_Nitou) {
+	if (player.dual_wield) {
 		n_A_enchant[9] = 1 * c.A_weapon2_enchant1.value;
 		n_A_enchant[10] = 1 * c.A_weapon2_enchant2.value;
 	} else {

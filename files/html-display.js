@@ -21,6 +21,7 @@ function updatePlayerStatDisplay() {
     setVal("A_INTp", " + " + (status.int - player.status.int));
     setVal("A_DEXp", " + " + (status.dex - player.status.dex));
     setVal("A_LUKp", " + " + (status.luk - player.status.luk));
+    setVal("A_STPOINT", player.status.status_point);
 
 // ------------------ main stats ------------------
     setVal("A_MaxHP", status.max_hp);
@@ -31,7 +32,7 @@ function updatePlayerStatDisplay() {
     setVal("A_SPR", "ADDING LATER");
 
     setVal("A_ASPD", (2000 - status.amotion) / 10);
-    setVal("A_MovSPEED", status.speed); // is a bit fucked rn - fix later
+    setVal("A_MovSPEED", Math.trunc(60000 / status.speed) + " CPM"); // is a bit fucked rn - fix later
 
     setVal("A_totalDEF", status.def + "+" + status.def2);
     setVal("A_MDEF", status.mdef + "+" + (status.mdef2 - Math.trunc(status.vit / 2)));
@@ -224,7 +225,7 @@ function updatePlayerDamageDisplay(d) {
                 delayStr = aspdDelay + " seconds";
             } else if (pingDelay > 0) {
                 delayLabelStr = "Motion Delay (ASPD based) + Ping";
-                delayStr = Math.round(wDelay * 1000) / 1000 + " (" + aspdDelay + " + " + pingDelay + ") seconds";
+                delayStr = Math.round(delayUsed * 1000) / 1000 + " (" + aspdDelay + " + " + pingDelay + ") seconds";
             } else {
                 delayLabelStr = "Motion Delay (ASPD based)";
                 delayStr = aspdDelay + " seconds";
@@ -1930,6 +1931,8 @@ function getWeaponTypeName(type) {
         [WEAPON.DAGGER]: "Dagger",
         [WEAPON.ONEHANDSWORD]: "One-handed Sword",
         [WEAPON.TWOHANDSWORD]: "Two-handed Sword",
+        [WEAPON.ONEHANDSPEAR]: "One-handed Spear",
+        [WEAPON.TWOHANDSPEAR]: "Two-handed Spear",
         [WEAPON.ONEHANDAXE]: "One-handed Axe",
         [WEAPON.TWOHANDAXE]: "Two-handed Axe",
         [WEAPON.MACE]: "Mace",

@@ -13,6 +13,7 @@ const AMOTION_ZERO_ASPD = 2000;
 const AMOTION_INTERVAL = 10;
 const AMOTION_DIVIDER_PC = 2;
 const MIN_ASPD = 8000;
+const DEFAULT_WALK_SPEED = 150;
 const MIN_WALK_SPEED = 20;
 const MAX_WALK_SPEED = 1000;
 const battleDebug = false;

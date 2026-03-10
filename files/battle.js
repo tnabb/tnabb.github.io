@@ -1933,7 +1933,7 @@ function battle_calc_damage(src, target, wd, damage, skill_id, skill_lv) {
             break;
         case SKILL.AB_JUDEX:
             if(tstatus.race == RC.DEMON || tstatus.race == RC.UNDEAD) {
-                if(target.type == BL.MOB && n_B[1].includes("[MVP]")) {
+                if(target.type == BL.MOB && target.name.includes("[MVP]")) {
                     let bonus_damage = 100;
                     if(sc_get(target, SC.JUDEXMAGNUS))
                         bonus_damage *= 2;
@@ -2044,7 +2044,7 @@ function battle_calc_attack_plant(wd, src, target, skill_id, skill_lv) {
         }
     } */
 
-    if(attack_hits && target.type == BL.MOB && n_B[0] == 44) { // emperium
+    if(attack_hits && target.type == BL.MOB && target.mob_id == 44) { // emperium
         if(flag&BF.SKILL) {
             wd.damage_min = wd.damage_max = wd.damage2_min = wd.damage2_max = 0;
             wd.crit_damage_min = wd.crit_damage_max = wd.crit_damage2_min = wd.crit_damage2_max = 0;
@@ -4343,7 +4343,7 @@ function is_attack_hitting(wd, src, target, skill_id, skill_lv, first_call) {
     }
 
     // Apply Disarm debuff: 35% auto-miss + 65% normal calculation
-    if(md && !skill_id && sc_get(target, SC.DISARM) && !n_B[1].includes("[MVP]")) {
+    if(md && !skill_id && sc_get(target, SC.DISARM) && !target.name.includes("[MVP]")) {
         hitrate = hitrate * 0.65;
     }
 
@@ -4642,6 +4642,7 @@ function skill_get_num(src, skill_id, skill_lv) {
         case SKILL.SM_MAGNUM:
         case SKILL.TF_POISON:
         case SKILL.TF_SPRINKLESAND:
+        case SKILL.TF_THROWSTONE:
         case SKILL.AL_HEAL:
         case SKILL.ALL_RESURRECTION:
         case SKILL.AL_HOLYLIGHT:
@@ -4785,6 +4786,8 @@ function skill_get_num(src, skill_id, skill_lv) {
         case SKILL.CD_ARBITRIUM:
         case SKILL.CD_ARBITRIUM_ATK:
         case SKILL.EM_VENOM_SWAMP:
+        case SKILL.PR_MAGNUS_JUDEX_HOLYLIGHT:
+        case SKILL.HT_BEASTSTRAFE_DOUBLESTRAFE:
             return 1;
         case SKILL.TF_DOUBLE:
         case SKILL.AC_DOUBLE:
@@ -5002,6 +5005,7 @@ function skill_get_range(skill_id, skill_lv) {
         case SKILL.NPC_UNDEADBREATH_RANGED:
             return 6;
         case SKILL.NJ_ZENYNAGE:
+        case SKILL.TF_THROWSTONE:
         case SKILL.NPC_WATERATTACK:
         case SKILL.NPC_GROUNDATTACK:
         case SKILL.NPC_FIREATTACK:
@@ -5034,6 +5038,7 @@ function skill_get_range(skill_id, skill_lv) {
         case SKILL.AL_HOLYLIGHT_SL:
         case SKILL.AC_DOUBLE:
         case SKILL.AC_SHOWER:
+        case SKILL.AC_CHARGEARROW:
         case SKILL.MG_NAPALMBEAT:
         case SKILL.MG_SOULSTRIKE:
         case SKILL.MG_FIREBOLT:
@@ -5046,6 +5051,8 @@ function skill_get_range(skill_id, skill_lv) {
         case SKILL.ALL_RESURRECTION:
         case SKILL.PR_TURNUNDEAD:
         case SKILL.PR_MAGNUS:
+        case SKILL.PR_SANCTUARY:
+        case SKILL.PR_MAGNUS_JUDEX_HOLYLIGHT:
         case SKILL.WZ_FIREPILLAR:
         case SKILL.WZ_SIGHTRASHER:
         case SKILL.WZ_METEOR:
@@ -5073,6 +5080,7 @@ function skill_get_range(skill_id, skill_lv) {
         case SKILL.TK_JUMPKICK_SPRINT:
         case SKILL.AS_VENOMKNIFE:
         case SKILL.HT_PHANTASMIC:
+        case SKILL.HT_BEASTSTRAFE_DOUBLESTRAFE:
         case SKILL.NPC_DARKSTRIKE:
         case SKILL.NPC_DARKSTRIKE2:
         case SKILL.HW_GRAVITATION:
