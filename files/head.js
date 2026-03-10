@@ -1205,8 +1205,6 @@ function themes() {
     var s = document.querySelectorAll(".tborder");
     for (n = 0; n < s.length; n++)
         s[n].style.backgroundColor = tBGC[e];
-        A6(0),
-        A7(0),
         A8(0),
         A9(0),
         A10(0),
@@ -1360,11 +1358,9 @@ function updateSupportSkillStatus(e, tableHeaderFunction) {
         var lesson = skillMap[sc][3] ? document.getElementsByName(skillMap[sc][3])[0] : null;
         // Remove first, then add with stat/lesson values
         level = level ? parseInt(level.value, 10) : 0;
-        console.log("Updating " + sc + " with value " + level + ", lesson " + (lesson ? lesson.value : "N/A") + ", stat1 " + (stat1 ? stat1.value : "N/A") + ", stat2 " + (stat2 ? stat2.value : "N/A"));
         if(level > 0)
             sc_start(player, SC[sc], level, lesson ? parseInt(lesson.value, 10) : 0, stat1 ? parseInt(stat1.value, 10) : 0, stat2 ? parseInt(stat2.value, 10) : 0);
     } else if (sc === 'WHISTLE_SRS' || sc === 'ASSNCROS_SRS' || sc === 'HUMMING_SRS' || sc === 'FORTUNE_SRS') {
-        console.log("Updating " + sc + " with value " + (el.checked ? "active" : "inactive") + " and fixed " + fixed);
         var value = fixed ? parseInt(fixed, 10) : 1;
         // Mutual exclusivity logic
         if (sc === 'WHISTLE_SRS' && el.checked) {
@@ -1390,6 +1386,46 @@ function updateSupportSkillStatus(e, tableHeaderFunction) {
         } else {
             sc_end(player, SC[sc]);
         }
+    } else if (sc === 'SAGEGROUND') {
+        var label = document.getElementsByName('buff_sage_ground_label')[0] ? parseInt(document.getElementsByName('buff_sage_ground_label')[0].value, 10) : 0;
+        var status;
+        if(label == 0)
+            status = SC.VOLCANO;
+        else if (label == 1)
+            status = SC.DELUGE;
+        else if (label == 2)
+            status = SC.WHIRLWIND;
+
+        var level = document.getElementsByName("buff_sage_ground_lv")[0] ? parseInt(document.getElementsByName("buff_sage_ground_lv")[0].value, 10) : 0;
+        sc_end(player, SC.VOLCANO);
+        sc_end(player, SC.DELUGE);
+        sc_end(player, SC.WHIRLWIND);
+        if (level > 0) {
+            sc_start(player, status, level);
+        }
+    } else if (sc === 'WATK_ELEMENT') {
+        var value = fixed ? parseInt(fixed, 10) : 1;
+        if(el.checked)
+            sc_start(player, SC.WATK_ELEMENT, ELE.FIRE, 20);
+        else
+            sc_end(player, SC.WATK_ELEMENT);
+    } else if (sc === 'ASPDPOT') {
+        let label = document.getElementsByName("buff_aspdpot")[0] ? parseInt(document.getElementsByName("buff_aspdpot")[0].value, 10) : 0;
+        var status;
+        if(label === 1)
+            status = SC.ASPDPOTION0;
+        else if(label === 2)
+            status = SC.ASPDPOTION1;
+        else if(label === 3)
+            status = SC.ASPDPOTION2;
+        else if(label === 4)
+            status = SC.ASPDPOTION3;
+        sc_end(player, SC.ASPDPOTION0);
+        sc_end(player, SC.ASPDPOTION1);
+        sc_end(player, SC.ASPDPOTION2);
+        sc_end(player, SC.ASPDPOTION3);
+        if(label >= 0)
+            sc_start(player, status);
     }
     // Normal case
     else if (el.type === 'checkbox' && el.checked) {
@@ -1413,6 +1449,10 @@ function updateSupportSkillStatus(e, tableHeaderFunction) {
         updateMusicDanceSkillHeader();
     else if (tableHeaderFunction == 3)
         updateGuildSkillHeader();
+    else if(tableHeaderFunction == 4)
+        updateMiscEffectHeader();
+    else if(tableHeaderFunction == 7)
+        updateFoodEffectHeader();
     if (typeof calc === 'function') calc();
 }
 // Simple show/hide toggle for static SIENSKILL table
@@ -1446,6 +1486,8 @@ document.addEventListener('DOMContentLoaded', function() {
     updateMusicDanceStatLessonVisibility();
     updateMarionetteVisibility();
     Buf4SW(0);
+    Buf6SW(0);
+    Buf7SW(0);
 });
 
 // Checks static SIENSKILL table controls for any active buff and updates header
@@ -1521,279 +1563,98 @@ function updateGuildSkillHeader() {
     }
 }
 
-function Buf6SW(e) {
-    if (n_Skill6SW = e,
-        n_Skill6SW) {
-        for (_ = '<TR><TD id="A6TD" ColSpan="4" class="subheader point" onclick="Buf6SW(0)">Miscellaneous Effects on Player<span id="A6used"></span>',
-            _ += '<div class="right">(click to hide)</div></TD></TR>',
-            _ += '<TR><TD id="EN60_1" class="right"></TD><TD id="EN60_2" class="data"></TD><TD class="right">Poison</TD><TD id="EN62_2"></TD></TR>',
-            _ += '<TR><TD class="right">Provoke (self)</TD><TD id="EN63_2" class="data"></TD><TD class="right">Stun</TD><TD id="EN75_2"></TD></TR>',
-            _ += '<TR><TD class="right">Mind Breaker (self)</TD><TD id="EN61_2" class="data"></TD><TD class="right">Freeze</TD><TD id="EN78_2"></TD></TR>',
-            _ += '<TR><TD class="right">AGI Down</TD><TD id="EN66_2" class="data"></TD><TD class="right">Curse</TD><TD id="EN64_2"></TD></TR>',
-            _ += '<TR><TD class="right">Quagmire</TD><TD id="EN68_2" class="data"></TD><TD class="right">Blind</TD><TD id="EN74_2"></TD></TR>',
-            _ += '<TR><TD class="right">' + skillName(442) + '</TD><TD id="EN70_2" class="data"></TD><TD class="right">Sleep</TD><TD id="EN77_2"></TD></TR>',
-            _ += '<TR><TD class="right">Undead Attribute Change</TD><TD id="EN65_2" class="data"></TD><TD class="right">Stone</TD><TD id="EN76_2"></TD></TR>',
-            _ += '<TR><TD class="right">Holy Armor [B.S.S.]</TD><TD id="EN67_2" class="data"></TD><TD class="right">Bleeding</TD><TD id="EN80_2"></TD></TR>',
-            _ += '<TR><TD class="right">Magnum Break Bonus</TD><TD id="EN69_2" class="data"></TD><TD class="right">Lex Aeterna</TD><TD id="EN79_2"></TD></TR>',
-            _ += '<TR><TD class="right">Set CRIT to 0%</TD><TD id="EN71_2" class="data"></TD><TD class="right">Critical Wounds</TD><TD id="EN81_2"></TD></TR>',
-            _ += '<TR><TD id="EN72_1" class="center" colspan="3">All Stats +1 [SuperNovice wife Undying Love bonus]</TD><TD id="EN72_2"></TD></TR>',
-            myInnerHtml("SP_SIEN04", _ += '<TR><TD id="EN73_1" class="center" colspan="3"></TD><TD id="EN73_2"></TD></TR>', 0),
-            myInnerHtml("EN60_1", '<select name="A6_Skill0" onChange="StAllCalc()"></select>', 0),
-            myInnerHtml("EN60_2", '<select name="A6_Skill1" onChange="A6(1)"></select>', 0),
-            myInnerHtml("EN61_2", '<select name="A6_Skill4" onChange="A6(1)"></select>', 0),
-            myInnerHtml("EN62_2", '<input type="checkbox" name="A_debuf2" onClick="A6(1)">', 0),
-            myInnerHtml("EN63_2", '<select name="A6_Skill5" onChange="A6(1)"></select>', 0),
-            myInnerHtml("EN64_2", '<input type="checkbox" name="A_debuf3" onClick="A6(1)">', 0),
-            myInnerHtml("EN65_2", '<input type="checkbox" name="A6_Skill8" onClick="A6(1)">', 0),
-            myInnerHtml("EN66_2", '<select name="A_debuf1" onChange="A6(1)"></select>', 0),
-            myInnerHtml("EN67_2", '<input type="checkbox" name="A6_Skill6" onClick="A6(1)">', 0),
-            myInnerHtml("EN68_2", '<select name="A_debuf0" onChange="A6(1)"></select>', 0),
-            myInnerHtml("EN69_2", '<input type="checkbox" name="A6_Skill7" onClick="A6(1)">', 0),
-            myInnerHtml("EN70_2", '<input type="checkbox" name="A6_Skill3" onClick="A6(1)">', 0),
-            myInnerHtml("EN71_2", '<input type="checkbox" name="A6_Skill9" onClick="A6(1)">', 0),
-            myInnerHtml("EN72_2", '<input type="checkbox" name="A6_Skill10" onClick="A6(1)">', 0),
-            myInnerHtml("EN74_2", '<input type="checkbox" name="A6_Skill11" onClick="A6(1)">', 0),
-            myInnerHtml("EN75_2", '<input type="checkbox" name="A6_Skill12" onClick="A6(1)">', 0),
-            myInnerHtml("EN76_2", '<input type="checkbox" name="A6_Skill13" onClick="A6(1)">', 0),
-            myInnerHtml("EN77_2", '<input type="checkbox" name="A6_Skill14" onClick="A6(1)">', 0),
-            myInnerHtml("EN78_2", '<input type="checkbox" name="A6_Skill15" onClick="A6(1)">', 0),
-            myInnerHtml("EN79_2", '<input type="checkbox" name="A6_Skill16" onClick="A6(1)">', 0),
-            myInnerHtml("EN80_2", '<input type="checkbox" name="A6_Skill17" onClick="A6(1)">', 0),
-            myInnerHtml("EN81_2", '<select name="A6_Skill18" onChange="A6(1)"></select>', 0),
-            c.A6_Skill0.options[0] = new Option("Volcano", 0),
-            c.A6_Skill0.options[1] = new Option("Deluge", 1),
-            c.A6_Skill0.options[2] = new Option("Violent Gale", 2),
-            i = 0; i <= 5; i++)
-            c.A6_Skill1.options[i] = new Option(i, i);
-        for (i = 0; i <= 5; i++)
-            c.A6_Skill4.options[i] = new Option(i, i),
-                c.A6_Skill18.options[i] = new Option(i, i);
-        for (i = 0; i <= 10; i++)
-            c.A6_Skill5.options[i] = new Option(i, i);
-        for (c.A_debuf0.options[0] = new Option("-", 0),
-            i = 1; i <= 5; i++)
-            c.A_debuf0.options[i] = new Option(i, i);
-        for (c.A_debuf1.options[0] = new Option("-", 0),
-            i = 1; i <= 10; i++)
-            c.A_debuf1.options[i] = new Option("Lvl " + i, i);
-        c.A_debuf1.options[11] = new Option("Lvl 46", 46),
-            c.A6_Skill0.value = n_A_Buf6[0],
-            c.A6_Skill1.value = n_A_Buf6[1],
-            c.A6_Skill3.checked = n_A_Buf6[3],
-            c.A6_Skill4.value = n_A_Buf6[4],
-            c.A6_Skill5.value = n_A_Buf6[5],
-            c.A6_Skill6.checked = n_A_Buf6[6],
-            c.A6_Skill7.checked = n_A_Buf6[7],
-            c.A6_Skill8.checked = n_A_Buf6[8],
-            c.A6_Skill9.checked = n_A_Buf6[9],
-            c.A6_Skill10.checked = n_A_Buf6[10],
-            c.A6_Skill11.checked = n_A_Buf6[11],
-            c.A6_Skill12.checked = n_A_Buf6[12],
-            c.A6_Skill13.checked = n_A_Buf6[13],
-            c.A6_Skill14.checked = n_A_Buf6[14],
-            c.A6_Skill15.checked = n_A_Buf6[15],
-            c.A6_Skill16.checked = n_A_Buf6[16],
-            c.A6_Skill17.checked = n_A_Buf6[17],
-            c.A6_Skill18.value = n_A_Buf6[18],
-            c.A_debuf0.value = n_A_Buf6[19],
-            c.A_debuf1.value = n_A_Buf6[20],
-            c.A_debuf2.checked = n_A_Buf6[21],
-            c.A_debuf3.checked = n_A_Buf6[22]
-    } else {
-        var _;
-        _ = '<TR><TD id="A6TD" class="subheader point" onclick="Buf6SW(1)">Miscellaneous Effects on Player<span id="A6used"></span>',
-            myInnerHtml("SP_SIEN04", _ += '<div class="right">(click to show)</div></TD></TR>', 0)
+// --- Miscellaneous Effects on Player Table ---
+function Buf6SW(show) {
+    var table = document.getElementById('SP_SIEN04');
+    if (!table) return;
+    var rows = table.getElementsByTagName('tr');
+    if (rows.length < 2) return;
+    for (var i = 1; i < rows.length; i++) {
+        rows[i].style.display = show ? '' : 'none';
     }
-    A6(0)
-}
-function A6(e) {
-    1 == e && calc();
-    for (var _ = 0, n = 0; n < n_A_Buf6.length; n++)
-        if (0 != n && 0 != n_A_Buf6[n]) {
-            _ = 1;
-            break
+    var header = document.getElementById('A6TD');
+    if (header) {
+        header.setAttribute('colspan', '4');
+        var rightDiv = header.querySelector('.right');
+        if (rightDiv) {
+            rightDiv.textContent = show ? '(click to hide)' : '(click to show)';
         }
-    var l = c.theme.value;
-    0 == _ ? (document.getElementById("A6TD").style.backgroundColor = sBGC[l],
-        myInnerHtml("A6used", "", 0)) : (document.getElementById("A6TD").style.backgroundColor = saBGC[l],
-            myInnerHtml("A6used", " [active]", 0))
-}
-function Buf7SW(e) {
-    if (n_Skill7SW = e,
-        n_Skill7SW) {
-        for (_ = '<TR><TD id="A7TD" ColSpan="3" class="subheader point" onclick="Buf7SW(0)">Food / Speed Potions / other Items <span id="A7used"></span>',
-            _ += '<div class="right">(click to hide)</div></TD></TR>',
-            _ += '<TR><TD colspan="3" class="dotB"><span id="EN73"></span><span id="EN74"></span><span id="EN75"></span><span id="EN76"></span><span id="EN77"></span><span id="EN78"></span></TD></TR>',
-            _ += '<TR><TD id="EN722" class="data"></TD><TD class="data"><Font size="2"><B>Battle Grounds Food</B></Font></TD><TD><Font size="2"><B>Elemental Resist Potions</B></Font></TD></TR>',
-            _ += '<TR><TD id="EN717" class="data"></TD><TD id="EN723" class="data"></TD><TD id="EN711"></TD></TR>',
-            _ += '<TR><TD id="EN720" class="data"></TD><TD id="EN724" class="data"></TD><TD id="EN712"></TD></TR>',
-            _ += '<TR><TD id="EN710" class="data"></TD><TD id="EN725" class="data"></TD><TD id="EN713"></TD></TR>',
-            _ += '<TR><TD id="EN79" class="data"></TD><TD id="EN726" class="dotB data"></TD><TD id="EN714" class="dotB"></TD></TR>',
-            _ += '<TR><TD id="EN70" class="data"></TD><TD colspan="2"><Font size="2"><B>New World Food</B></Font></TD></TR>',
-            _ += '<TR><TD id="EN71" class="data"></TD><TD colspan="2" id="EN727"></TD></TR>',
-            _ += '<TR><TD id="EN72" class="data"></TD><TD colspan="2" id="EN728"></TD></TR>',
-            _ += '<TR><TD id="EN715" class="data"></TD><TD colspan="2" id="EN729"></TD></TR>',
-            _ += '<TR><TD id="EN716" class="data"></TD><TD colspan="2" id="EN730"></TD></TR>',
-            _ += '<TR><TD id="EN718" class="data"></TD><TD colspan="2" id="EN731"></TD></TR>',
-            _ += '<TR><TD id="EN719" class="data"></TD><TD colspan="2" id="EN732"></TD></TR>',
-            _ += '<TR><TD id="EN721" class="data"></TD><TD colspan="2" id="EN733"></TD></TR>',
-            _ += '<TR><TD id="EN743" class="data"></TD><TD colspan="2" id="EN734"></TD></TR>',
-            _ += '<TR><TD id="EN738" class="data"></TD><TD colspan="2" id="EN735" class="dotB"></TD></TR>',
-            _ += '<TR><TD id="EN737" class="data"></TD><TD colspan="2"><Font size="2"><B>Stat+20 Food</B></Font></TD></TR>',
-            _ += '<TR><TD id="EN742" class="data"></TD><TD colspan="2" id="EN741"></TD></TR>',
-            _ += '<TR><TD id="EN746" class="data"></TD><TD colspan="2" id="EN747"></TD></TR>',
-            _ += '<TR><TD id="EN744" class="data"></TD><TD colspan="2" id="EN748"></TD></TR>',
-            _ += '<TR><TD id="EN745" class="data"></TD><TD colspan="2" id="EN749"></TD></TR>',
-            _ += '<TR><TD id="EN739" class="data"></TD><TD colspan="2" id="EN750"></TD></TR>',
-            myInnerHtml("SP_SIEN05", _ += '<TR><TD id="EN740" class="data"></TD><TD colspan="2" id="EN751"></TD></TR>', 0),
-            myInnerHtml("EN70", '<input type="checkbox" name="A7_Skill0" onClick="A7(1)">Sesame Pastry (HIT +10)', 0),
-            myInnerHtml("EN71", '<input type="checkbox" name="A7_Skill1" onClick="A7(1)">Honey Pastry (FLEE +10)', 0),
-            myInnerHtml("EN72", '<input type="checkbox" name="A7_Skill2" onClick="A7(1)">Orlean\'s Full Course Meal (All Stats +7)', 0),
-            myInnerHtml("EN79", '<input type="checkbox" name="A7_Skill9" onClick="A7(1)">Box of Resentment (ATK +20)', 0),
-            myInnerHtml("EN710", '<input type="checkbox" name="A7_Skill10" onClick="A7(1)">Box of Drowsiness (MATK +20)', 0),
-            myInnerHtml("EN711", '<input type="checkbox" name="A7_Skill11" onClick="A7(1)">Coldproof Potion', 0),
-            myInnerHtml("EN712", '<input type="checkbox" name="A7_Skill12" onClick="A7(1)">Earthproof Potion', 0),
-            myInnerHtml("EN713", '<input type="checkbox" name="A7_Skill13" onClick="A7(1)">Fireproof Potion', 0),
-            myInnerHtml("EN714", '<input type="checkbox" name="A7_Skill14" onClick="A7(1)">Thunderproof Potion', 0),
-            myInnerHtml("EN715", '<input type="checkbox" name="A7_Skill26" onClick="A7(1)">Guarana Candy (Concentration Potion, AGI Lvl 5)', 0),
-            myInnerHtml("EN716", '<input type="checkbox" name="A7_Skill16" onClick="A7(1)">Oriental Pastry (MATK +10)', 0),
-            myInnerHtml("EN717", '<input type="checkbox" name="A7_Skill31" onClick="A7(1)">Aloevera (Self Provoke Lvl 1)', 0),
-            myInnerHtml("EN718", '<input type="checkbox" name="A7_Skill32" onClick="A7(1)">Small/Big Defense Potion (Physical DMG reduction +3%)', 0),
-            myInnerHtml("EN719", '<input type="checkbox" name="A7_Skill33" onClick="A7(1)">Small/Big Magic Defense Potion (Magical DMG reduction +3%)', 0),
-            myInnerHtml("EN720", '<input type="checkbox" name="A7_Skill34" onClick="A7(1)">Box of Gloom (' + skillName(42) + " Lvl 1)", 0),
-            myInnerHtml("EN721", '<input type="checkbox" name="A7_Skill36" onClick="A7(1)">Abrasive (CRIT +20)', 0),
-            myInnerHtml("EN722", '<select name="A_SpeedPOT" onChange="A7(1)"><option value="0">(no Speed Potion)</option></select>', 0),
-            myInnerHtml("EN723", '<input type="checkbox" name="A7_Skill27" onClick="A7(1)"><strike>Military Ration B (HIT +33)</strike>', 0),
-            myInnerHtml("EN724", '<input type="checkbox" name="A7_Skill28" onClick="A7(1)"><strike>Military Ration C (FLEE +33)</strike>', 0),
-            myInnerHtml("EN725", '<input type="checkbox" name="A7_Skill29" onClick="A7(1)"><strike>Tasty Pink Ration (ATK +15)</strike>', 0),
-            myInnerHtml("EN726", '<input type="checkbox" name="A7_Skill30" onClick="A7(1)"><strike>Tasty White Ration (MATK +15)</strike>', 0),
-            myInnerHtml("EN727", '<input type="checkbox" name="A7_Skill17" onClick="A7(1)">Rune Strawberry Cake (ATK +5, MATK +5)', 0),
-            myInnerHtml("EN728", '<input type="checkbox" name="A7_Skill18" onClick="A7(1)">Schwartzwald Pine Jubilee (HIT +10, FLEE +20)', 0),
-            myInnerHtml("EN729", '<input type="checkbox" name="A7_Skill19" onClick="A7(1)">Arunafeltz Desert Sandwich (CRIT +7)', 0),
-            myInnerHtml("EN730", '<input type="checkbox" name="A7_Skill20" onClick="A7(1)">Manuk\'s Sturdiness (ATK based damage on Manuk maps +10%)', 0),
-            myInnerHtml("EN731", '<input type="checkbox" name="A7_Skill21" onClick="A7(1)">Manuk\'s Faith (MATK based damage on Manuk maps +10%)', 0),
-            myInnerHtml("EN732", '<input type="checkbox" name="A7_Skill22" onClick="A7(1)">Manuk\'s Will (Received damage on Manuk maps -10%)', 0),
-            myInnerHtml("EN733", '<input type="checkbox" name="A7_Skill23" onClick="A7(1)">Pinguicula\'s Fruit Jam (ATK based dmg on Splendide maps +10%)', 0),
-            myInnerHtml("EN734", '<input type="checkbox" name="A7_Skill24" onClick="A7(1)">Cornus\' Tear (MATK based damage on Splendide maps +10%)', 0),
-            myInnerHtml("EN735", '<input type="checkbox" name="A7_Skill25" onClick="A7(1)">Luciola\'s Honey Jam (Received damage on Splendide maps -10%)', 0),
-            myInnerHtml("EN745", '<input type="checkbox" name="A7_Skill37" onClick="A7(1)"><strike>Lucky Rice Cake (LUK +21)</strike>', 0),
-            myInnerHtml("EN738", '<input type="checkbox" name="A7_Skill38" onClick="A7(1)">Chewy Ricecake (ATK +10)', 0),
-            myInnerHtml("EN746", "<input type=checkbox name=A7_Skill46 onClick=A7(1)><strike>Tyr's Blessing (FLEE +30, HIT +30, ATK +20, MATK +20)</strike>", 0),
-            myInnerHtml("EN742", '<select name="A7_Skill42" onChange="A7(1)" style="width:175px;" disabled><option value="0">(none)</option></select>', 0),
-            myInnerHtml("EN743", '<input type="checkbox" name="A7_Skill43" onClick="A7(1)">Sweets Macaron Cake (ATK/MATK +3%, Damage taken +10%)', 0),
-            myInnerHtml("EN744", '<input type="checkbox" name="A7_Skill44" onClick="A7(1)"><strike>Ginger Bread (ASPD +% (same as Awakening Potion))</strike>', 0),
-            myInnerHtml("EN737", '<input type="checkbox" name="A7_Skill45" onClick="A7(1)">Regeneration Potion (Items/skills recover +20%)', 0),
-            myInnerHtml("EN739", '<select name="A7_Skill39" onChange="A7(1)" disabled><option value="0"><strike>(no HP Increase Potion)</strike></option></select>', 0),
-            myInnerHtml("EN740", '<select name="A7_Skill40" onChange="A7(1)" disabled><option value="0"><strike>(no SP Increase Potion)</strike></option></select>', 0),
-            myInnerHtml("EN741", '<input type="checkbox" name="A7_Skill41" onClick="A7(1)"><strike>Savage BBQ (STR +20)</strike>', 0),
-            myInnerHtml("EN747", '<input type="checkbox" name="A7_Skill47" onClick="A7(1)"><strike>Cocktail Warg Blood (AGI +20)</strike>', 0),
-            myInnerHtml("EN748", '<input type="checkbox" name="A7_Skill48" onClick="A7(1)"><strike>Minor Stew (VIT +20)</strike>', 0),
-            myInnerHtml("EN749", '<input type="checkbox" name="A7_Skill49" onClick="A7(1)"><strike>Siroma Iced Tea (INT +20)</strike>', 0),
-            myInnerHtml("EN750", '<input type="checkbox" name="A7_Skill50" onClick="A7(1)"><strike>Drosera Herb Salad (DEX +20) (not saved via URL)</strike>', 0),
-            myInnerHtml("EN751", '<input type="checkbox" name="A7_Skill51" onClick="A7(1)"><strike>Petite Tail Noodles (LUK +20) (not saved via URL)</strike>', 0),
-            myInnerHtml("EN73", '<select name="A7_Skill3" onChange="A7(1)"></select> ', 0),
-            myInnerHtml("EN74", '<select name="A7_Skill4" onChange="A7(1)"></select> ', 0),
-            myInnerHtml("EN75", '<select name="A7_Skill5" onChange="A7(1)"></select> ', 0),
-            myInnerHtml("EN76", '<select name="A7_Skill6" onChange="A7(1)"></select> ', 0),
-            myInnerHtml("EN77", '<select name="A7_Skill7" onChange="A7(1)"></select> ', 0),
-            myInnerHtml("EN78", '<select name="A7_Skill8" onChange="A7(1)"></select> ', 0),
-            c.A7_Skill3.options[0] = new Option("STR+ food", 0),
-            c.A7_Skill4.options[0] = new Option("AGI+ food", 0),
-            c.A7_Skill5.options[0] = new Option("VIT+ food", 0),
-            c.A7_Skill6.options[0] = new Option("INT+ food", 0),
-            c.A7_Skill7.options[0] = new Option("DEX+ food", 0),
-            c.A7_Skill8.options[0] = new Option("LUK+ food", 0),
-            i = 1; i <= 10; i++)
-            c.A7_Skill3.options[i] = new Option("+" + i, i),
-                c.A7_Skill4.options[i] = new Option("+" + i, i),
-                c.A7_Skill5.options[i] = new Option("+" + i, i),
-                c.A7_Skill6.options[i] = new Option("+" + i, i),
-                c.A7_Skill7.options[i] = new Option("+" + i, i),
-                c.A7_Skill8.options[i] = new Option("+" + i, i);
-        c.A7_Skill39.options[0] = new Option("(no HP Increase Potion)", 0),
-            c.A7_Skill39.options[1] = new Option("Small HP Increase Potion", 1),
-            c.A7_Skill39.options[2] = new Option("Medium HP Increase Potion", 2),
-            c.A7_Skill39.options[3] = new Option("Large HP Increase Potion", 3),
-            c.A7_Skill40.options[0] = new Option("(no SP Increase Potion)", 0),
-            c.A7_Skill40.options[1] = new Option("Small SP Increase Potion", 1),
-            c.A7_Skill40.options[2] = new Option("Medium SP Increase Potion", 2),
-            c.A7_Skill40.options[3] = new Option("Large SP Increase Potion", 3),
-            c.A7_Skill42.options[0] = new Option("(no Mega Resist Potion)", 0),
-            c.A7_Skill42.options[1] = new Option("Mega Resist Potion [+10% resistance to Blind, Bleeding, Confusion, Curse, Frozen, Poison, Silence, Sleep, Stun and Stone Curse status effects]", 1),
-            SpeedPotName = ["(no Speed Potion)", "Concentration Potion", "Awakening Potion (Lvl 40)", "Berserk Potion"],
-            c.A_SpeedPOT.options[0] = new Option(SpeedPotName[0], 0),
-            c.A_SpeedPOT.options[1] = new Option(SpeedPotName[1], 1),
-            3 != n_A_JOB && 9 != n_A_JobClass2() && 16 != n_A_JobClass2() ? c.A_SpeedPOT.options[2] = new Option(SpeedPotName[2], 2) : c.A_SpeedPOT.options[2] = new Option("-", 0),
-            1 == n_A_JobClass() || 6 == n_A_JobClass() || 41 == n_A_JobClass() || 14 == n_A_JobClass2() || 11 == n_A_JobClass2() || 5 == n_A_JOB || 45 == n_A_JobClass() ? (c.A_SpeedPOT.options[3] = new Option(SpeedPotName[3] + " (Lvl 85)", 3), c.A_SpeedPOT.options.length = 4) : 22 == n_A_JOB ? (c.A_SpeedPOT.options[3] = new Option("* Special (" + m_Skill[304][2] + " Lvl 85)", 3), c.A_SpeedPOT.options[4] = new Option("Poison Bottle", 4), c.A_SpeedPOT.options.length = 5) : (c.A_SpeedPOT.options[3] = new Option("* Special (" + m_Skill[304][2] + ") (Lvl 85)", 3), c.A_SpeedPOT.options.length = 4),
-            c.A7_Skill0.checked = n_A_Buf7[0],
-            c.A7_Skill1.checked = n_A_Buf7[1],
-            c.A7_Skill2.checked = n_A_Buf7[2],
-            c.A7_Skill3.value = n_A_Buf7[3],
-            c.A7_Skill4.value = n_A_Buf7[4],
-            c.A7_Skill5.value = n_A_Buf7[5],
-            c.A7_Skill6.value = n_A_Buf7[6],
-            c.A7_Skill7.value = n_A_Buf7[7],
-            c.A7_Skill8.value = n_A_Buf7[8],
-            c.A7_Skill9.checked = n_A_Buf7[9],
-            c.A7_Skill10.checked = n_A_Buf7[10],
-            c.A7_Skill11.checked = n_A_Buf7[11],
-            c.A7_Skill12.checked = n_A_Buf7[12],
-            c.A7_Skill13.checked = n_A_Buf7[13],
-            c.A7_Skill14.checked = n_A_Buf7[14],
-            c.A7_Skill16.checked = n_A_Buf7[16],
-            c.A7_Skill17.checked = n_A_Buf7[17],
-            c.A7_Skill18.checked = n_A_Buf7[18],
-            c.A7_Skill19.checked = n_A_Buf7[19],
-            c.A7_Skill20.checked = n_A_Buf7[20],
-            c.A7_Skill21.checked = n_A_Buf7[21],
-            c.A7_Skill22.checked = n_A_Buf7[22],
-            c.A7_Skill23.checked = n_A_Buf7[23],
-            c.A7_Skill24.checked = n_A_Buf7[24],
-            c.A7_Skill25.checked = n_A_Buf7[25],
-            c.A7_Skill26.checked = n_A_Buf7[26],
-            c.A7_Skill27.checked = n_A_Buf7[27],
-            c.A7_Skill28.checked = n_A_Buf7[28],
-            c.A7_Skill29.checked = n_A_Buf7[29],
-            c.A7_Skill30.checked = n_A_Buf7[30],
-            c.A7_Skill31.checked = n_A_Buf7[31],
-            c.A7_Skill32.checked = n_A_Buf7[32],
-            c.A7_Skill33.checked = n_A_Buf7[33],
-            c.A7_Skill34.checked = n_A_Buf7[34],
-            c.A_SpeedPOT.value = n_A_Buf7[35],
-            c.A7_Skill36.checked = n_A_Buf7[36],
-            c.A7_Skill37.checked = n_A_Buf7[37],
-            c.A7_Skill38.checked = n_A_Buf7[38],
-            c.A7_Skill39.value = n_A_Buf7[39],
-            c.A7_Skill40.value = n_A_Buf7[40],
-            c.A7_Skill41.checked = n_A_Buf7[41],
-            c.A7_Skill42.value = n_A_Buf7[42],
-            c.A7_Skill43.checked = n_A_Buf7[43],
-            c.A7_Skill44.checked = n_A_Buf7[44],
-            c.A7_Skill45.checked = n_A_Buf7[45],
-            c.A7_Skill46.checked = n_A_Buf7[46],
-            c.A7_Skill47.checked = n_A_Buf7[47],
-            c.A7_Skill48.checked = n_A_Buf7[48],
-            c.A7_Skill49.checked = n_A_Buf7[49],
-            c.A7_Skill50.checked = n_A_Buf7[50],
-            c.A7_Skill51.checked = n_A_Buf7[51]
-    } else {
-        var _;
-        _ = '<TR><TD id="A7TD" class="subheader point" onclick="Buf7SW(1)">Food / Speed Potions / other Items <span id="A7used"></span>',
-            myInnerHtml("SP_SIEN05", _ += '<div class="right">(click to show)</div></TD></TR>', 0)
+        header.onclick = function() { Buf6SW(show ? 0 : 1); };
     }
-    A7(0)
+    updateMiscEffectHeader();
 }
-function A7(e) {
-    1 == e && calc();
-    for (var _ = 0, n = 0; n < n_A_Buf7.length; n++)
-        if (0 != n_A_Buf7[n]) {
-            _ = 1;
-            break
+
+// Checks static SP_SIEN04 table controls for any active buff and updates header
+function updateMiscEffectHeader() {
+    var table = document.getElementById('SP_SIEN04');
+    if (!table) return;
+    var hasActive = false;
+    // Check all inputs/selects in the table for active values
+    var inputs = table.querySelectorAll('input, select');
+    for (var i = 0; i < inputs.length; i++) {
+        var el = inputs[i];
+        if (el.type === 'checkbox' && el.checked) {
+            hasActive = true; break;
         }
-    var l = c.theme.value;
-    0 == _ ? (document.getElementById("A7TD").style.backgroundColor = sBGC[l],
-        myInnerHtml("A7used", "", 0)) : (document.getElementById("A7TD").style.backgroundColor = saBGC[l],
-            myInnerHtml("A7used", " [active]", 0))
+        if (el.tagName === 'SELECT' && el.value !== '0') {
+            hasActive = true; break;
+        }
+    }
+    var l = (typeof c !== 'undefined' && c.theme && c.theme.value) ? c.theme.value : 0;
+    var header = document.getElementById('A6TD');
+    if (header) {
+        header.style.backgroundColor = hasActive ? saBGC[l] : sBGC[l];
+    }
+    if (document.getElementById('A6used')) {
+        myInnerHtml('A6used', hasActive ? ' [active]' : '', 0);
+    }
+}
+
+// --- Food Effects Table ---
+function Buf7SW(show) {
+    var table = document.getElementById('SP_SIEN05');
+    if (!table) return;
+    var rows = table.getElementsByTagName('tr');
+    if (rows.length < 2) return;
+    for (var i = 1; i < rows.length; i++) {
+        rows[i].style.display = show ? '' : 'none';
+    }
+    var header = document.getElementById('A7TD');
+    if (header) {
+        header.setAttribute('colspan', '3');
+        var rightDiv = header.querySelector('.right');
+        if (rightDiv) {
+            rightDiv.textContent = show ? '(click to hide)' : '(click to show)';
+        }
+        header.onclick = function() { Buf7SW(show ? 0 : 1); };
+    }
+    updateFoodEffectHeader();
+}
+
+// Checks static SP_SIEN05 table controls for any active buff and updates header
+function updateFoodEffectHeader() {
+    var table = document.getElementById('SP_SIEN05');
+    if (!table) return;
+    var hasActive = false;
+    // Check all inputs/selects in the table for active values
+    var inputs = table.querySelectorAll('input, select');
+    for (var i = 0; i < inputs.length; i++) {
+        var el = inputs[i];
+        if (el.type === 'checkbox' && el.checked) {
+            hasActive = true; break;
+        }
+        if (el.tagName === 'SELECT' && el.value !== '0') {
+            hasActive = true; break;
+        }
+    }
+    var l = (typeof c !== 'undefined' && c.theme && c.theme.value) ? c.theme.value : 0;
+    var header = document.getElementById('A7TD');
+    if (header) {
+        header.style.backgroundColor = hasActive ? saBGC[l] : sBGC[l];
+    }
+    if (document.getElementById('A7used')) {
+        myInnerHtml('A7used', hasActive ? ' [active]' : '', 0);
+    }
 }
 function Buf8SW(e) {
     if (n_Skill8SW = e,

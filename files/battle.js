@@ -3935,7 +3935,7 @@ function battle_get_atkpercent(src, skill_id) {
     if(sd) {
         if(sc_get(src, SC.CURSE)) // curse
             atkpercent -= 25;
-        if(SkillSearch(SKILL.SM_AUTOBERSERK) || sc_get(src, SC.PROVOKE)) { // provoke
+        if(SkillSearch(SKILL.SM_AUTOBERSERK) || sc_get(src, SC.PROVOKE) || sc_get(src, SC.ALOEVERA)) { // provoke
             let skill_lv = 1;
             if(SkillSearch(SKILL.SM_AUTOBERSERK))
                 skill_lv = 10;
@@ -4439,8 +4439,10 @@ function skill_calc_heal(src, target, skill_id, skill_lv, heal, display = true) 
 
     if(tsd) {
         if(skill_id != SKILL.NPC_EVILLAND && skill_id != SKILL.BA_APPLEIDUN) {
-            if(sc_get(target, SC.INCHEALRATE)) // regeneration potion
-                hp += Math.trunc((hp * sc_get(target, SC.INCHEALRATE).val1) / 100);
+            if(sc_get(target, SC.INCHEALRATE) || sc_get(target, SC.REGENERATION_POTION)) { // regeneration potion
+                let bonus = sc_get(target, SC.INCHEALRATE) ? sc_get(target, SC.INCHEALRATE).val1 : sc_get(target, SC.REGENERATION_POTION).val1;
+                hp += Math.trunc((hp * bonus) / 100);
+            }
 
             // add black tortoise buff
         }

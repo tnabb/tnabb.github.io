@@ -2510,6 +2510,7 @@ Calc's theme: <select id="theme" onChange="themes()"><option value="0">Original<
 
             <div style="clear: both;"></div>
 
+            <!-- FOOD / SPEED POTIONS / OTHER ITEMS -->
             <table id="SP_SIEN05" class="tborder"
                 style="float: left; width: 760px; background-color: rgb(255, 255, 255);">
                 <tbody>
@@ -2518,6 +2519,260 @@ Calc's theme: <select id="theme" onChange="themes()"><option value="0">Original<
                             style="background-color: rgb(68, 102, 102);">Food
                             / Speed Potions / other Items <span id="A7used"></span>
                             <div class="right">(click to show)</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="3" class="dotB">
+                            <span id="buffcell_strfood_label" data-sc="FOOD_STR_CASH">
+                                <select name="buff_strfood" onchange="updateSupportSkillStatus(event, 7)" data-sc="FOOD_STR_CASH">
+                                    <option value="0">STR+ food</option>
+                                    <option value="1">+1</option>
+                                    <option value="2">+2</option>
+                                    <option value="3">+3</option>
+                                    <option value="4">+4</option>
+                                    <option value="5">+5</option>
+                                    <option value="6">+6</option>
+                                    <option value="7">+7</option>
+                                    <option value="8">+8</option>
+                                    <option value="9">+9</option>
+                                    <option value="10">+10</option>
+                                </select>
+                            </span>
+                            <span id="buffcell_agifood_label" data-sc="FOOD_AGI_CASH">
+                                <select name="buff_agifood" onchange="updateSupportSkillStatus(event, 7)" data-sc="FOOD_AGI_CASH">
+                                    <option value="0">AGI+ food</option>
+                                    <option value="1">+1</option>
+                                    <option value="2">+2</option>
+                                    <option value="3">+3</option>
+                                    <option value="4">+4</option>
+                                    <option value="5">+5</option>
+                                    <option value="6">+6</option>
+                                    <option value="7">+7</option>
+                                    <option value="8">+8</option>
+                                    <option value="9">+9</option>
+                                    <option value="10">+10</option>
+                                </select>
+                            </span>
+                            <span id="buffcell_vitfood_label" data-sc="FOOD_VIT_CASH">
+                                <select name="buff_vitfood" onchange="updateSupportSkillStatus(event, 7)" data-sc="FOOD_VIT_CASH">
+                                    <option value="0">VIT+ food</option>
+                                    <option value="1">+1</option>
+                                    <option value="2">+2</option>
+                                    <option value="3">+3</option>
+                                    <option value="4">+4</option>
+                                    <option value="5">+5</option>
+                                    <option value="6">+6</option>
+                                    <option value="7">+7</option>
+                                    <option value="8">+8</option>
+                                    <option value="9">+9</option>
+                                    <option value="10">+10</option>
+                                </select>
+                            </span>
+                            <span id="buffcell_intfood_label" data-sc="FOOD_INT_CASH">
+                                <select name="buff_intfood" onchange="updateSupportSkillStatus(event, 7)" data-sc="FOOD_INT_CASH">
+                                    <option value="0">INT+ food</option>
+                                    <option value="1">+1</option>
+                                    <option value="2">+2</option>
+                                    <option value="3">+3</option>
+                                    <option value="4">+4</option>
+                                    <option value="5">+5</option>
+                                    <option value="6">+6</option>
+                                    <option value="7">+7</option>
+                                    <option value="8">+8</option>
+                                    <option value="9">+9</option>
+                                    <option value="10">+10</option>
+                                </select>
+                            </span>
+                            <span id="buffcell_dexfood_label" data-sc="FOOD_DEX_CASH">
+                                <select name="buff_dexfood" onchange="updateSupportSkillStatus(event, 7)" data-sc="FOOD_DEX_CASH">
+                                    <option value="0">DEX+ food</option>
+                                    <option value="1">+1</option>
+                                    <option value="2">+2</option>
+                                    <option value="3">+3</option>
+                                    <option value="4">+4</option>
+                                    <option value="5">+5</option>
+                                    <option value="6">+6</option>
+                                    <option value="7">+7</option>
+                                    <option value="8">+8</option>
+                                    <option value="9">+9</option>
+                                    <option value="10">+10</option>
+                                </select>
+                            </span>
+                            <span id="buffcell_lukfood_label" data-sc="FOOD_LUK_CASH">
+                                <select name="buff_lukfood" onchange="updateSupportSkillStatus(event, 7)" data-sc="FOOD_LUK_CASH">
+                                    <option value="0">LUK+ food</option>
+                                    <option value="1">+1</option>
+                                    <option value="2">+2</option>
+                                    <option value="3">+3</option>
+                                    <option value="4">+4</option>
+                                    <option value="5">+5</option>
+                                    <option value="6">+6</option>
+                                    <option value="7">+7</option>
+                                    <option value="8">+8</option>
+                                    <option value="9">+9</option>
+                                    <option value="10">+10</option>
+                                </select>
+                            </span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td id="buffcell_speedpot_label" class="data">
+                            <select name="buff_aspdpot" onchange="updateSupportSkillStatus(event, 7)" data-sc="ASPDPOT">
+                                <option value="0">(no Speed Potion)</option>
+                                <option value="1">Concentration Potion</option>
+                                <option value="2">Awakening Potion (Lvl 40)</option>
+                                <option value="3">* Special (Berserk Pitcher) (Lvl 85)</option>
+                            </select>
+                        </td>
+                        <td colspan="2">
+                            <font size="2"><b>Elemental Resist Potions</b></font>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td id="buffcell_aloevera" class="data">
+                            <input type="checkbox" name="buff_aloevera" data-sc="ALOEVERA" onclick="updateSupportSkillStatus(event, 7)">
+                            Aloevera (Self Provoke Lvl 1)
+                        </td>
+                        <td colspan="2" id="buffcell_coldproof">
+                            <input type="checkbox" name="buff_coldproof" data-sc="ARMOR_ELEMENT_WATER" onclick="updateSupportSkillStatus(event, 7)">
+                            Coldproof Potion
+                        </td>
+                    </tr>
+                    <tr>
+                        <td id="buffcell_gloombox" class="data">
+                            <input type="checkbox" name="buff_gloombox" data-sc="GLOOM_BOX" onclick="updateSupportSkillStatus(event, 7)">
+                            Box of Gloom (Attention Concentrate Lvl 1)
+                        </td>
+                        <td colspan="2" id="buffcell_earthproof">
+                            <input type="checkbox" name="buff_earthproof" data-sc="ARMOR_ELEMENT_EARTH" onclick="updateSupportSkillStatus(event, 7)">
+                            Earthproof Potion
+                        </td>
+                    </tr>
+                    <tr>
+                        <td id="buffcell_drowsinessbox" class="data">
+                            <input type="checkbox" name="buff_drowsinessbox" data-sc="DROWSINESS_BOX" data-fixed="20" onclick="updateSupportSkillStatus(event, 7)">
+                            Box of Drowsiness (MATK +20)
+                        </td>
+                        <td colspan="2" id="buffcell_fireproof">
+                            <input type="checkbox" name="buff_fireproof" data-sc="ARMOR_ELEMENT_FIRE" onclick="updateSupportSkillStatus(event, 7)">
+                            Fireproof Potion
+                        </td>
+                    </tr>
+                    <tr>
+                        <td id="buffcell_resentmentbox" class="data">
+                            <input type="checkbox" name="buff_resentmentbox" data-sc="RESENTMENT_BOX" data-fixed="20" onclick="updateSupportSkillStatus(event, 7)">
+                            Box of Resentment (ATK +20)
+                        </td>
+                        <td colspan="2" id="buffcell_thunderproof" class="dotB">
+                            <input type="checkbox" name="buff_thunderproof" data-sc="ARMOR_ELEMENT_WIND" onclick="updateSupportSkillStatus(event, 7)">
+                            Thunderproof Potion
+                        </td>
+                    </tr>
+                    <tr>
+                        <td id="buffcell_sesame_pastry" class="data">
+                            <input type="checkbox" name="buff_sesame_pastry" data-sc="SESAME_PASTRY" data-fixed="10" onclick="updateSupportSkillStatus(event, 7)">
+                            Sesame Pastry (HIT +10)
+                        </td>
+                        <td colspan="2">
+                            <font size="2"><b>New World Food</b></font>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td id="buffcell_honey_pastry" class="data">
+                            <input type="checkbox" name="buff_honey_pastry" data-sc="HONEY_PASTRY" data-fixed="10" onclick="updateSupportSkillStatus(event, 7)">
+                            Honey Pastry (FLEE +10)
+                        </td>
+                        <td colspan="2" id="buffcell_rune_strawberry">
+                            <input type="checkbox" name="buff_rune_strawberry" data-sc="RUNE_STRAWBERRY_CAKE" data-fixed="5" onclick="updateSupportSkillStatus(event, 7)">
+                            Rune Strawberry Cake (ATK +5, MATK +5)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td id="buffcell_orleans_course" class="data">
+                            <input type="checkbox" name="buff_orleans_course" data-sc="ORLEANS_MEAL" data-fixed="7" onclick="updateSupportSkillStatus(event, 7)">
+                            Orlean's Full Course Meal (All Stats +7)
+                        </td>
+                        <td colspan="2" id="buffcell_pine_jubilee">
+                            <input type="checkbox" name="buff_pine_jubilee" data-sc="SCHWARTZWALD_PINE_JUBILEE" onclick="updateSupportSkillStatus(event, 7)">
+                            Schwartzwald Pine Jubilee (HIT +10, FLEE +20)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td id="buffcell_guarana_candy" class="data">
+                            <input type="checkbox" name="buff_guarana_candy" data-sc="GUARANA_CANDY" onclick="updateSupportSkillStatus(event, 7)">
+                            Guarana Candy (Concentration Potion, AGI Lvl 5)
+                        </td>
+                        <td colspan="2" id="buffcell_desert_sandwich">
+                            <input type="checkbox" name="buff_desert_sandwich" data-sc="ARUNAFELTZ_DESERT_SANDWICH" data-fixed="7" onclick="updateSupportSkillStatus(event, 7)">
+                            Arunafeltz Desert Sandwich (CRIT +7)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td id="buffcell_oriental_pastry" class="data">
+                            <input type="checkbox" name="buff_oriental_pastry" data-sc="ORIENTAL_PASTRY" data-fixed="10" onclick="updateSupportSkillStatus(event, 7)">
+                            Oriental Pastry (MATK +10)
+                        </td>
+                        <td colspan="2" id="buffcell_maunk_sturdiness">
+                            <input type="checkbox" name="buff_manuk_sturdiness" data-sc="MANU_ATK" data-fixed="10" onclick="updateSupportSkillStatus(event, 7)">
+                            Manuk's Sturdiness (ATK damage on Manuk maps +10%)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td id="buffcell_defense_potion" class="data">
+                            <input type="checkbox" name="buff_defense_potion" data-sc="DEF_RATE" data-fixed="3" onclick="updateSupportSkillStatus(event, 7)">
+                            Small/Big Defense Potion (Physical DMG reduction +3%)
+                        </td>
+                        <td colspan="2" id="buffcell_maunk_faith">
+                            <input type="checkbox" name="buff_manuk_faith" data-sc="MANU_MATK" data-fixed="10" onclick="updateSupportSkillStatus(event, 7)">
+                            Manuk's Faith (MATK damage on Manuk maps +10%)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td id="buffcell_magic_defense_potion" class="data">
+                            <input type="checkbox" name="buff_magic_defense_potion" data-sc="MDEF_RATE" data-fixed="3" onclick="updateSupportSkillStatus(event, 7)">
+                            Small/Big Magic Defense Potion (Magical DMG reduction +3%)
+                        </td>
+                        <td colspan="2" id="buffcell_maunk_will">
+                            <input type="checkbox" name="buff_manuk_will" data-sc="MANU_DEF" data-fixed="10" onclick="updateSupportSkillStatus(event, 7)">
+                            Manuk's Will (Received damage on Manuk maps -10%)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td id="buffcell_abrasive" class="data">
+                            <input type="checkbox" name="buff_abrasive" data-sc="ABRASIVE" data-fixed="20" onclick="updateSupportSkillStatus(event, 7)">
+                            Abrasive (CRIT +20)
+                        </td>
+                        <td colspan="2" id="buffcell_pinguicula_fruit_jam">
+                            <input type="checkbox" name="buff_pinguicula_fruit_jam" data-sc="SPL_ATK" data-fixed="10" onclick="updateSupportSkillStatus(event, 7)">
+                            Pinguicula's Fruit Jam (ATK damage on Splendide maps +10%)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td id="buffcell_sweet_macarons" class="data">
+                            <input type="checkbox" name="buff_sweet_macarons" data-sc="MACARONCAKE" onclick="updateSupportSkillStatus(event, 7)">
+                            Sweets Macaron Cake (ATK/MATK +3%, Damage taken +10%)
+                        </td>
+                        <td colspan="2" id="buffcell_cornus_tear">
+                            <input type="checkbox" name="buff_cornus_tear" data-sc="SPL_MATK" data-fixed="10" onclick="updateSupportSkillStatus(event, 7)">
+                            Cornus' Tear (MATK damage on Splendide maps +10%)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td id="buffcell_chewy_ricecake" class="data">
+                            <input type="checkbox" name="buff_chewy_ricecake" data-sc="CHEWY_RICE_CAKE" data-fixed="10" onclick="updateSupportSkillStatus(event, 7)">
+                            Chewy Rice Cake (ATK +10)
+                        </td>
+                        <td colspan="2" id="buffcell_luciola_honey_jam">
+                            <input type="checkbox" name="buff_luciola_honey_jam" data-sc="SPL_DEF" data-fixed="10" onclick="updateSupportSkillStatus(event, 7)">
+                            Luciola's Honey Jam (Received damage on Splendide maps -10%)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td id="buffcell_regeneration_potion" class="data">
+                            <input type="checkbox" name="buff_regeneration_potion" data-sc="REGENERATION_POTION" data-fixed="20" onclick="updateSupportSkillStatus(event, 7)">
+                            Regeneration Potion (Items/skills recover +20%)
+                        </td>
+                        <td colspan="2">
                         </td>
                     </tr>
                 </tbody>
@@ -5518,6 +5773,121 @@ Calc's theme: <select id="theme" onChange="themes()"><option value="0">Original<
                         </td>
                         <td class="right">Stun</td>
                         <td id="buffcell_stun_input" data-sc="STUN">
+                            <input type="checkbox" name="buff_stun" onclick="updateSupportSkillStatus(event, 4)" data-sc="STUN">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="right">Mind Breaker (self)</td>
+                        <td id="buffcell_mindbreaker_input" class="data" data-sc="MINDBREAKER">
+                            <select name="buff_mindbreaker" onchange="updateSupportSkillStatus(event, 4)" data-sc="MINDBREAKER">
+                                <option value="0">0</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                            </select>
+                        </td>
+                        <td class="right">Freeze</td>
+                        <td id="buffcell_freeze_input" data-sc="FREEZE">
+                            <input type="checkbox" name="buff_freeze" onclick="updateSupportSkillStatus(event, 4)" data-sc="FREEZE">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="right">AGI Down</td>
+                        <td id="buffcell_decreaseagi_input" class="data" data-sc="DECREASEAGI">
+                            <select name="buff_decreaseagi" onchange="updateSupportSkillStatus(event, 4)" data-sc="DECREASEAGI">
+                                <option value="0">0</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                <option value="6">6</option>
+                                <option value="7">7</option>
+                                <option value="8">8</option>
+                                <option value="9">9</option>
+                                <option value="10">10</option>
+                                <option value="46">46</option>
+                            </select>
+                        </td>
+                        <td class="right">Curse</td>
+                        <td id="buffcell_curse_input" data-sc="CURSE">
+                            <input type="checkbox" name="buff_curse" onclick="updateSupportSkillStatus(event, 4)" data-sc="CURSE">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="right">Quagmire</td>
+                        <td id="buffcell_quagmire_input" class="data" data-sc="QUAGMIRE">
+                            <select name="buff_quagmire" onchange="updateSupportSkillStatus(event, 4)" data-sc="QUAGMIRE">
+                                <option value="0">0</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                            </select>
+                        </td>
+                        <td class="right">Blind</td>
+                        <td id="buffcell_blind_input" data-sc="BLIND">
+                            <input type="checkbox" name="buff_blind" onclick="updateSupportSkillStatus(event, 4)" data-sc="BLIND">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="right">Wall of Fog</td>
+                        <td id="buffcell_fogwall_input" class="data" data-sc="FOGWALL">
+                            <input type="checkbox" name="buff_fogwall" onclick="updateSupportSkillStatus(event, 4)" data-sc="FOGWALL">
+                        </td>
+                        <td class="right">Sleep</td>
+                        <td id="buffcell_sleep_input" data-sc="SLEEP">
+                            <input type="checkbox" name="buff_sleep" onclick="updateSupportSkillStatus(event, 4)" data-sc="SLEEP">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="right">Undead Attribute Change</td>
+                        <td id="buffcell_changeundead_input" class="data" data-sc="CHANGEUNDEAD">
+                            <input type="checkbox" name="buff_changeundead" onclick="updateSupportSkillStatus(event, 4)" data-sc="CHANGEUNDEAD">
+                        </td>
+                        <td class="right">Stone</td>
+                        <td id="buffcell_stone_input" data-sc="STONE">
+                            <input type="checkbox" name="buff_stone" onclick="updateSupportSkillStatus(event, 4)" data-sc="STONE">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="right">Holy Armor [B.S.S]</td>
+                        <td id="buffcell_benedictio_input" class="data" data-sc="BENEDICTIO">
+                            <input type="checkbox" name="buff_benedictio" onclick="updateSupportSkillStatus(event, 4)" data-sc="BENEDICTIO">
+                        </td>
+                        <td class="right">Bleeding</td>
+                        <td id="buffcell_bleeding_input" data-sc="BLEEDING">
+                            <input type="checkbox" name="buff_bleeding" onclick="updateSupportSkillStatus(event, 4)" data-sc="BLEEDING">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="right">Magnum Break Bonus</td>
+                        <td id="buffcell_watk_element_input" class="data" data-sc="WATK_ELEMENT">
+                            <input type="checkbox" name="buff_watk_element" onclick="updateSupportSkillStatus(event, 4)" data-sc="WATK_ELEMENT">
+                        </td>
+                        <td class="right">Lex Aeterna</td>
+                        <td id="buffcell_aeterna_input" data-sc="AETERNA">
+                            <input type="checkbox" name="buff_aeterna" onclick="updateSupportSkillStatus(event, 4)" data-sc="AETERNA">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="right">Set CRIT to 0%</td>
+                        <td id="buffcell_nocrit_input" class="data" data-sc="NOCRIT">
+                            <input type="checkbox" name="buff_nocrit" onclick="updateSupportSkillStatus(event, 4)" data-sc="NOCRIT">
+                        </td>
+                        <td class="right">Critical Wounds</td>
+                        <td id="buffcell_criticalwound_input" data-sc="CRITICALWOUND">
+                            <select name="buff_criticalwound" onchange="updateSupportSkillStatus(event, 4)" data-sc="CRITICALWOUND">
+                                <option value="0">0</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                            </select>
                         </td>
                     </tr>
                 </tbody>
@@ -6738,7 +7108,7 @@ Calc's theme: <select id="theme" onChange="themes()"><option value="0">Original<
                             <td id="AITD" class="subheader point" onclick="debufSW(1)"
                                 style="background-color: rgb(68, 102, 102);">
                                 Debuffs on Enemy <span id="AIused"></span>
-                                <div class="right">(show)</div>
+                                <div class="right">(click to show)</div>
                             </td>
                         </tr>
                     </tbody>

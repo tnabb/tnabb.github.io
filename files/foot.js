@@ -272,7 +272,7 @@ function loadPlayerStatusChanges() {
     // Re-add party buffs from saved state
     for (var i = 0; i <= 21; i++) setBuf2ToSC(i, buf2[i]);
 
-    // guild skills
+    /* // guild skills
     if (n_A_Buf3[40]) sc_start(player, SC.BATTLEORDERS);
     if (n_A_Buf3[41]) sc_start(player, SC.LEADERSHIP, n_A_Buf3[41]);
     if (n_A_Buf3[42]) sc_start(player, SC.GLORYWOUNDS, n_A_Buf3[42]);
@@ -301,10 +301,10 @@ function loadPlayerStatusChanges() {
     if (n_A_Buf6[19]) sc_start(player, SC.QUAGMIRE, n_A_Buf6[19]);
     if (n_A_Buf6[20]) sc_start(player, SC.DECREASEAGI, n_A_Buf6[20]);
     if (n_A_Buf6[21]) sc_start(player, SC.POISON);
-    if (n_A_Buf6[22]) sc_start(player, SC.CURSE);
+    if (n_A_Buf6[22]) sc_start(player, SC.CURSE); */
 
     // food / speed potions / other items (all the non-used indexes are non-existent in the current version of the game)
-    if (n_A_Buf7[0]) sc_start(player, SC.HITFOOD, 10);
+    /* if (n_A_Buf7[0]) sc_start(player, SC.HITFOOD, 10);
     if (n_A_Buf7[1]) sc_start(player, SC.FLEEFOOD, 10);
     if (n_A_Buf7[2]) { sc_start(player, SC.FOOD_STR_CASH, 7); sc_start(player, SC.FOOD_AGI_CASH, 7); sc_start(player, SC.FOOD_VIT_CASH, 7); sc_start(player, SC.FOOD_INT_CASH, 7); sc_start(player, SC.FOOD_DEX_CASH, 7); sc_start(player, SC.FOOD_LUK_CASH, 7); }
     if (n_A_Buf7[3]) sc_start(player, SC.FOOD_STR_CASH, n_A_Buf7[3]);
@@ -341,7 +341,7 @@ function loadPlayerStatusChanges() {
     if (n_A_Buf7[36]) sc_start(player, SC.INCCRI, 20);
     if (n_A_Buf7[38]) sc_start(player, SC.ATKPOTION, 10);
     if (n_A_Buf7[43]) sc_start(player, SC.MACARONCAKE);
-    if (n_A_Buf7[45]) sc_start(player, SC.INCHEALRATE, 20);
+    if (n_A_Buf7[45]) sc_start(player, SC.INCHEALRATE, 20); */
 }
 
 function StatusCalcPlayerSub() {

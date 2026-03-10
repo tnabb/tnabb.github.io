@@ -2276,40 +2276,116 @@ function CalculateAdditionalBonuses() {
     // bonuses from "statuses" which have a script
 
     // stats
-    if(sc_get(player, SC.FOOD_STR_CASH)) // str food
-        status.str += sc_get(player, SC.FOOD_STR_CASH).val1;
-    if(sc_get(player, SC.FOOD_AGI_CASH)) // agi food
-        status.agi += sc_get(player, SC.FOOD_AGI_CASH).val1;
-    if(sc_get(player, SC.FOOD_VIT_CASH)) // vit food
-        status.vit += sc_get(player, SC.FOOD_VIT_CASH).val1;
-    if(sc_get(player, SC.FOOD_INT_CASH)) // int food
-        status.int += sc_get(player, SC.FOOD_INT_CASH).val1;
-    if(sc_get(player, SC.FOOD_DEX_CASH)) // dex food
-        status.dex += sc_get(player, SC.FOOD_DEX_CASH).val1;
-    if(sc_get(player, SC.FOOD_LUK_CASH)) // luk food
-        status.luk += sc_get(player, SC.FOOD_LUK_CASH).val1;
+    if(sc_get(player, SC.FOOD_STR_CASH) || sc_get(player, SC.ORLEANS_MEAL)) { // str food
+        bonus = 0;
+        const strFoods = [SC.FOOD_STR_CASH, SC.ORLEANS_MEAL];
+        for(const sc of strFoods) {
+            const effect = sc_get(player, sc);
+            if(effect && effect.val1 > bonus) bonus = effect.val1;
+        }
+        status.str += bonus;
+    }
+    if(sc_get(player, SC.FOOD_AGI_CASH) || sc_get(player, SC.ORLEANS_MEAL)) { // agi food
+        bonus = 0;
+        const agiFoods = [SC.FOOD_AGI_CASH, SC.ORLEANS_MEAL];
+        for(const sc of agiFoods) {
+            const effect = sc_get(player, sc);
+            if(effect && effect.val1 > bonus) bonus = effect.val1;
+        }
+        status.agi += bonus;
+    }
+    if(sc_get(player, SC.FOOD_VIT_CASH) || sc_get(player, SC.ORLEANS_MEAL)) { // vit food
+        bonus = 0;
+        const vitFoods = [SC.FOOD_VIT_CASH, SC.ORLEANS_MEAL];
+        for(const sc of vitFoods) {
+            const effect = sc_get(player, sc);
+            if(effect && effect.val1 > bonus) bonus = effect.val1;
+        }
+        status.vit += bonus;
+    }
+    if(sc_get(player, SC.FOOD_INT_CASH) || sc_get(player, SC.ORLEANS_MEAL)) { // int food
+        bonus = 0;
+        const intFoods = [SC.FOOD_INT_CASH, SC.ORLEANS_MEAL];
+        for(const sc of intFoods) {
+            const effect = sc_get(player, sc);
+            if(effect && effect.val1 > bonus) bonus = effect.val1;
+        }
+        status.int += bonus;
+    }
+    if(sc_get(player, SC.FOOD_DEX_CASH) || sc_get(player, SC.ORLEANS_MEAL)) { // dex food
+        bonus = 0;
+        const dexFoods = [SC.FOOD_DEX_CASH, SC.ORLEANS_MEAL];
+        for(const sc of dexFoods) {
+            const effect = sc_get(player, sc);
+            if(effect && effect.val1 > bonus) bonus = effect.val1;
+        }
+        status.dex += bonus;
+    }
+    if(sc_get(player, SC.FOOD_LUK_CASH) || sc_get(player, SC.ORLEANS_MEAL)) { // luk food
+        bonus = 0;
+        const lukFoods = [SC.FOOD_LUK_CASH, SC.ORLEANS_MEAL];
+        for(const sc of lukFoods) {
+            const effect = sc_get(player, sc);
+            if(effect && effect.val1 > bonus) bonus = effect.val1;
+        }
+        status.luk += bonus;
+    }
 
     // flat atk from foods
-    if(sc_get(player, SC.ATKPOTION)) {
-        status.batk += sc_get(player, SC.ATKPOTION).val1;
+    if(sc_get(player, SC.ATKPOTION) || sc_get(player, SC.RESENTMENT_BOX) || sc_get(player, SC.CHEWY_RICE_CAKE) || sc_get(player, SC.RUNE_STRAWBERRY_CAKE)) {
+        bonus = 0;
+        const atkFoods = [SC.ATKPOTION, SC.RESENTMENT_BOX, SC.CHEWY_RICE_CAKE, SC.RUNE_STRAWBERRY_CAKE];
+        for(const sc of atkFoods) {
+            const effect = sc_get(player, sc);
+            if(effect && effect.val1 > bonus) bonus = effect.val1;
+        }
+        status.batk += bonus;
     }
 
     // flat matk from foods
-    if(sc_get(player, SC.MATKPOTION)) { // flat matk food
-        player.bonus.ematk += sc_get(player, SC.MATKPOTION).val1;
+    if(sc_get(player, SC.MATKPOTION) || sc_get(player, SC.DROWSINESS_BOX) || sc_get(player, SC.ORIENTAL_PASTRY) || sc_get(player, SC.RUNE_STRAWBERRY_CAKE)) { // flat matk food
+        bonus = 0;
+        const matkFoods = [SC.MATKPOTION, SC.DROWSINESS_BOX, SC.ORIENTAL_PASTRY, SC.RUNE_STRAWBERRY_CAKE];
+        for(const sc of matkFoods) {
+            const effect = sc_get(player, sc);
+            if(effect && effect.val1 > bonus) bonus = effect.val1;
+        }
+        player.bonus.ematk += bonus;
     }
 
     // flat hit from foods
-    if(sc_get(player, SC.HITFOOD)) // sesame pastry / schwartzwald pine jubilee
-        status.hit += sc_get(player, SC.HITFOOD).val1;
-
-    // flee food
-    if(sc_get(player, SC.FLEEFOOD)) {
-        status.flee += sc_get(player, SC.FLEEFOOD).val1;
+    if(sc_get(player, SC.HITFOOD) || sc_get(player, SC.SESAME_PASTRY) || sc_get(player, SC.SCHWARTZWALD_PINE_JUBILEE)) {
+        bonus = 0;
+        const hitFoods = [SC.HITFOOD, SC.SESAME_PASTRY, SC.SCHWARTZWALD_PINE_JUBILEE];
+        for(const sc of hitFoods) {
+            const effect = sc_get(player, sc);
+            if(effect && effect.val1 > bonus) bonus = effect.val1;
+        }
+        status.hit += bonus;
     } 
 
-    if(sc_get(player, SC.INCCRI)) { // crit food
-        status.cri += sc_get(player, SC.INCCRI).val1 * 10;
+    // flee food
+    if(sc_get(player, SC.FLEEFOOD) || sc_get(player, SC.HONEY_PASTRY) || sc_get(player, SC.SCHWARTZWALD_PINE_JUBILEE)) {
+        bonus = 0;
+        const fleeFoods = [SC.FLEEFOOD, SC.HONEY_PASTRY, SC.SCHWARTZWALD_PINE_JUBILEE];
+        for(const sc of fleeFoods) {
+            const effect = sc_get(player, sc);
+            let val1 = effect ? effect.val1 : 0;
+            if(sc == SC.SCHWARTZWALD_PINE_JUBILEE)
+                val1 = effect ? effect.val2 : 0;
+            if(effect && val1 > bonus) bonus = val1;
+        }
+        status.flee += bonus;
+    } 
+
+    if(sc_get(player, SC.INCCRI) || sc_get(player, SC.ARUNAFELTZ_DESERT_SANDWICH) || sc_get(player, SC.ABRASIVE)) { // crit food
+        bonus = 0;
+        const criFoods = [SC.INCCRI, SC.ARUNAFELTZ_DESERT_SANDWICH, SC.ABRASIVE];
+        for(const sc of criFoods) {
+            const effect = sc_get(player, sc);
+            if(effect && effect.val1 > bonus) bonus = effect.val1;
+        }
+        status.cri += bonus * 10;
     }
 
     if(sc_get(player, SC.ARMOR_ELEMENT_WATER)) { // coldproof potion

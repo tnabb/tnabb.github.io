@@ -292,19 +292,25 @@ function status_calc_agi(player, agi) {
 
     if(SkillSearch(SKILL.GS_INCREASING))
         agi += 4;
-    if(SkillSearch(SKILL.AC_CONCENTRATION) || SkillSearch(SKILL.RG_CONCENTRATION_COPIED) || TimeItemNumSearch(4) || sc_get(player, SC.CONCENTRATE)) { // improve concentration
+    if(SkillSearch(SKILL.AC_CONCENTRATION) || SkillSearch(SKILL.RG_CONCENTRATION_COPIED) || TimeItemNumSearch(4) || sc_get(player, SC.GLOOM_BOX)) { // improve concentration
         bonus = 0; // represents skill level
         if(SkillSearch(SKILL.AC_CONCENTRATION))
             bonus = SkillSearch(SKILL.AC_CONCENTRATION);
         else if (SkillSearch(SKILL.RG_CONCENTRATION_COPIED))
             bonus = SkillSearch(SKILL.RG_CONCENTRATION_COPIED);
-        else if (TimeItemNumSearch(4) || sc_get(player, SC.CONCENTRATE))
+        else if (TimeItemNumSearch(4) || sc_get(player, SC.GLOOM_BOX))
             bonus = 1;
 
         agi += Math.floor(((player.base_status.agi - player.indexed_bonus.param_bonus[STAT.AGI]) * (2 + bonus)) / 100);
     }
-    if(!sc_get(player, SC.QUAGMIRE) && !sc_get(player, SC.DECREASEAGI) && sc_get(player, SC.INCREASEAGI)) { // increase agi
-        agi += (sc_get(player, SC.INCREASEAGI).val2 * 2) - 2;
+    if(!sc_get(player, SC.QUAGMIRE) && !sc_get(player, SC.DECREASEAGI) && (sc_get(player, SC.INCREASEAGI) || sc_get(player, SC.GUARANA_CANDY))) { // increase agi
+        bonus = 0;
+        if(sc_get(player, SC.INCREASEAGI))
+            bonus = sc_get(player, SC.INCREASEAGI).val2;
+        else if(sc_get(player, SC.GUARANA_CANDY))
+            bonus = 7;
+        
+        agi += (bonus * 2) - 2;
     }
     if(SkillSearch(SKILL.SN_SIGHT))
         agi += 5;
@@ -389,13 +395,13 @@ function status_calc_dex(player, dex) {
     if(SkillSearch(SKILL.GS_DEADAIM)) {
         dex += 1;
     }
-    if(SkillSearch(SKILL.AC_CONCENTRATION) || SkillSearch(SKILL.RG_CONCENTRATION_COPIED) || TimeItemNumSearch(4) || sc_get(player, SC.CONCENTRATE)) { // improve concentration
+    if(SkillSearch(SKILL.AC_CONCENTRATION) || SkillSearch(SKILL.RG_CONCENTRATION_COPIED) || TimeItemNumSearch(4) || sc_get(player, SC.GLOOM_BOX)) { // improve concentration
         bonus = 0; // represents skill level
         if(SkillSearch(SKILL.AC_CONCENTRATION))
             bonus = SkillSearch(SKILL.AC_CONCENTRATION);
         else if (SkillSearch(SKILL.RG_CONCENTRATION_COPIED))
             bonus = SkillSearch(SKILL.RG_CONCENTRATION_COPIED);
-        else if (TimeItemNumSearch(4) || sc_get(player, SC.CONCENTRATE))
+        else if (TimeItemNumSearch(4) || sc_get(player, SC.GLOOM_BOX))
             bonus = 1;
 
         dex += Math.floor(((player.base_status.dex - player.indexed_bonus.param_bonus[STAT.DEX]) * (2 + bonus)) / 100);
@@ -556,7 +562,7 @@ function status_calc_def2(player, def2) {
         def2 += Math.floor((def2 * sc_get(player, SC.ANGELUS).val2) / 100);
     if(SkillSearch(SKILL.LK_CONCENTRATION))
         def2 -= Math.floor((def2 * (5 * SkillSearch(SKILL.LK_CONCENTRATION))) / 100);
-    if(SkillSearch(SKILL.SM_AUTOBERSERK) || sc_get(player, SC.PROVOKE)) { // provoke
+    if(SkillSearch(SKILL.SM_AUTOBERSERK) || sc_get(player, SC.PROVOKE) || sc_get(player, SC.ALOEVERA)) { // provoke
         bonus = 1; // represents provoke level
         if(SkillSearch(SKILL.SM_AUTOBERSERK))
             bonus = 10;
@@ -645,7 +651,7 @@ function status_calc_speed(player, speed) {
     speed_rate += val;
     val = 0;
 
-    if(sc_get(player, SC.INCREASEAGI) && !sc_get(player, SC.QUAGMIRE) && !sc_get(player, SC.DECREASEAGI)) // increase agi
+    if((sc_get(player, SC.INCREASEAGI) || sc_get(player, SC.GUARANA_CANDY)) && !sc_get(player, SC.QUAGMIRE) && !sc_get(player, SC.DECREASEAGI)) // increase agi
         val = Math.max(val, 25);
     if(sc_get(player, SC.WINDWALK)) // wind walker
         val = Math.max(val, 2 * sc_get(player, SC.WINDWALK).val1);
@@ -816,7 +822,7 @@ function status_calc_aspd_rate(player, aspd_rate) {
             aspd_rate -= 100;
     }
 
-    if(sc_get(player, bonus = SC.ASPDPOTION3) || sc_get(player, bonus = SC.ASPDPOTION2) || sc_get(player, bonus = SC.ASPDPOTION1) || sc_get(player, bonus = SC.ASPDPOTION0)) { // aspd pot
+    if(sc_get(player, bonus = SC.ASPDPOTION3) || sc_get(player, bonus = SC.ASPDPOTION2) || sc_get(player, bonus = SC.ASPDPOTION1) || sc_get(player, bonus = SC.ASPDPOTION0) || sc_get(player, bonus = SC.GUARANA_CANDY)) { // aspd pot
         aspd_rate -= sc_get(player, bonus).val2;
     }
 
@@ -1117,6 +1123,9 @@ function sc_start(bl, type, val1 = 0, val2 = 0, val3 = 0, val4 = 0, val5 = 0, va
         case SC.ASPDPOTION3:
             val2 = 50 * (2 + type - SC.ASPDPOTION0);
             break;
+        case SC.GUARANA_CANDY:
+            val2 = 100;
+            break;
         case SC.PROVOKE:
             val2 = 2 + 3 * val1;
             val3 = 5 + 5 * val1;
@@ -1144,6 +1153,34 @@ function sc_start(bl, type, val1 = 0, val2 = 0, val3 = 0, val4 = 0, val5 = 0, va
             val1 = Math.trunc(1 + ((val1 - 1) % 5));
             val2 *= val1;
             val3 *= val1;
+            break;
+        case SC.SCHWARTZWALD_PINE_JUBILEE:
+            val1 = 10; // hit
+            val2 = 20; // flee
+            break;
+        case SC.ARMOR_ELEMENT_WATER:
+            val1 = 20;
+            val2 = 0;
+            val3 = 0;
+            val4 = -15;
+            break;
+        case SC.ARMOR_ELEMENT_EARTH:
+            val1 = 0;
+            val2 = 20;
+            val3 = -15;
+            val4 = 0;
+            break;
+        case SC.ARMOR_ELEMENT_FIRE:
+            val1 = -15;
+            val2 = 0;
+            val3 = 20;
+            val4 = 0;
+            break;
+        case SC.ARMOR_ELEMENT_WIND:
+            val1 = 0;
+            val2 = -15;
+            val3 = 0;
+            val4 = 20;
             break;
     }
 
