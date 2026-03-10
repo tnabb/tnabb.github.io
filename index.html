@@ -7093,14 +7093,9 @@ Calc's theme: <select id="theme" onChange="themes()"><option value="0">Original<
                     <option value="20">100</option>
                 </select> [WoE Zone only]
                 <br>
-                <!--
-<div style="text-align:center;">
-<input type="checkbox" id="scrollygg" onClick="ActiveSkillSetPlus()">Add <font color="brown">Spell-scrolls</font> and <font color="green">Yggdrasil Leaf</font> to Skill List.
-</div>
--->
                 <br>
 
-                <!--Monster State-->
+                <!-- Monster Debuffs -->
                 <table id="EnemyDebuf" class="tborder"
                     style="float: left; width: 260px; background-color: rgb(255, 255, 255);">
                     <tbody>
@@ -7111,10 +7106,247 @@ Calc's theme: <select id="theme" onChange="themes()"><option value="0">Original<
                                 <div class="right">(click to show)</div>
                             </td>
                         </tr>
+                        <tr>
+                            <td id="debuffcell_mindbreaker_label" class="center" style="width:90px;">Mind Breaker</td>
+                            <td id="debuffcell_mindbreaker_input" class="data" data-sc="MINDBREAKER">
+                                <select name="debuff_mindbreaker" onchange="updateStatusMonster(event, 1)" data-sc="MINDBREAKER">
+                                    <option value="0">0</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                </select>
+                            </td>
+                            <td id="debuffcell_poison_label" class="center">Poison</td>
+                            <td id="debuffcell_poison_input" data-sc="POISON">
+                                <input type="checkbox" name="debuff_poison" onclick="updateStatusMonster(event, 1)" data-sc="POISON">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td id="debuffcell_provoke_label" class="center">Provoke</td>
+                            <td id="debuffcell_provoke_input" class="data" data-sc="PROVOKE">
+                                <select name="debuff_provoke" onchange="updateStatusMonster(event, 1)" data-sc="PROVOKE">
+                                    <option value="0">0</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                    <option value="6">6</option>
+                                    <option value="7">7</option>
+                                    <option value="8">8</option>
+                                    <option value="9">9</option>
+                                    <option value="10">10</option>
+                                </select>
+                            </td>
+                            <td id="debuffcell_blind_label" class="center">Blind</td>
+                            <td id="debuffcell_blind_input" data-sc="BLIND">
+                                <input type="checkbox" name="debuff_blind" onclick="updateStatusMonster(event, 1)" data-sc="BLIND">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td id="debuffcell_crucis_label" class="center">Signum Crucis</td>
+                            <td id="debuffcell_crucis_input" class="data" data-sc="CRUCIS">
+                                <select name="debuff_crucis" onchange="updateStatusMonster(event, 1)" data-sc="CRUCIS">
+                                    <option value="0">0</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                    <option value="6">6</option>
+                                    <option value="7">7</option>
+                                    <option value="8">8</option>
+                                    <option value="9">9</option>
+                                    <option value="10">10</option>
+                                </select>
+                            </td>
+                            <td id="debuffcell_curse_label" class="center">Curse</td>
+                            <td id="debuffcell_curse_input" data-sc="CURSE">
+                                <input type="checkbox" name="debuff_curse" onclick="updateStatusMonster(event, 1)" data-sc="CURSE">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td id="debuffcell_blessing_label" class="center">Blessing</td>
+                            <td id="debuffcell_blessing_input" class="data" data-sc="BLESSING">
+                                <input type="checkbox" name="debuff_blessing" onclick="updateStatusMonster(event, 1)" data-sc="BLESSING">
+                            </td>
+                            <td id="debuffcell_stun_label" class="center">Stun</td>
+                            <td id="debuffcell_stun_input" data-sc="STUN">
+                                <input type="checkbox" name="debuff_stun" onclick="updateStatusMonster(event, 1)" data-sc="STUN">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td id="debuffcell_aeterna_label" class="center">Lex Aeterna</td>
+                            <td id="debuffcell_aeterna_input" class="data" data-sc="AETERNA">
+                                <input type="checkbox" name="debuff_aeterna" onclick="updateStatusMonster(event, 1)" data-sc="AETERNA">
+                            </td>
+                            <td id="debuffcell_freeze_label" class="center">Frozen</td>
+                            <td id="debuffcell_freeze_input" data-sc="FREEZE">
+                                <input type="checkbox" name="debuff_freeze" onclick="updateStatusMonster(event, 1)" data-sc="FREEZE">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td id="debuffcell_decreaseagi_label" class="center">Decrease AGI</td>
+                            <td id="debuffcell_decreaseagi_input" class="data" data-sc="DECREASEAGI">
+                                <select name="debuff_decreaseagi" onchange="updateStatusMonster(event, 1)" data-sc="DECREASEAGI">
+                                    <option value="0">0</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                    <option value="6">6</option>
+                                    <option value="7">7</option>
+                                    <option value="8">8</option>
+                                    <option value="9">9</option>
+                                    <option value="10">10</option>
+                                </select>
+                            </td>
+                            <td id="debuffcell_stone_label" class="center">Stone</td>
+                            <td id="debuffcell_stone_input" data-sc="STONE">
+                                <input type="checkbox" name="debuff_stone" onclick="updateStatusMonster(event, 1)" data-sc="STONE">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td id="debuffcell_spiderweb_label" class="center">Spider Web</td>
+                            <td id="debuffcell_spiderweb_input" class="data" data-sc="SPIDERWEB">
+                                <input type="checkbox" name="debuff_spiderweb" onclick="updateStatusMonster(event, 1)" data-sc="SPIDERWEB">
+                            </td>
+                            <td id="debuffcell_sleep_label" class="center">Sleep</td>
+                            <td id="debuffcell_sleep_input" data-sc="SLEEP">
+                                <input type="checkbox" name="debuff_sleep" onclick="updateStatusMonster(event, 1)" data-sc="SLEEP">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td id="debuffcell_quagmire_label" class="center">Quagmire</td>
+                            <td id="debuffcell_quagmire_input" class="data" data-sc="QUAGMIRE">
+                                <select name="debuff_quagmire" onchange="updateStatusMonster(event, 1)" data-sc="QUAGMIRE">
+                                    <option value="0">0</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                </select>
+                            </td>
+                            <td id="debuffcell_dontforgetme_label" class="center">Please Don't Forget Me</td>
+                            <td id="debuffcell_dontforgetme_input" data-sc="DONTFORGETME">
+                                <input type="checkbox" name="debuff_dontforgetme" onclick="updateStatusMonster(event, 1)" data-sc="DONTFORGETME">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td id="debuffcell_massspiral_label" class="center">Mass Spiral (IA)</td>
+                            <td id="debuffcell_massspiral_input" class="data" data-sc="REDUCE_DEFRATE">
+                                <select name="debuff_massspiral" onchange="updateStatusMonster(event, 1)" data-sc="REDUCE_DEFRATE">
+                                    <option value="0">0</option>
+                                    <option value="50">50%</option>
+                                    <option value="75">75%</option>
+                                </select>
+                            </td>
+                            <td id="debuffcell_eternalchaos_label" class="center">Eternal Chaos</td>
+                            <td id="debuffcell_eternalchaos_input" data-sc="ETERNALCHAOS">
+                                <input type="checkbox" name="debuff_eternalchaos" onclick="updateStatusMonster(event, 1)" data-sc="ETERNALCHAOS">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td id="debuffcell_piercingshot_label" class="center">Piercing Shot</td>
+                            <td id="debuffcell_piercingshot_input" class="data" data-sc="CRITIGNORELUK">
+                                <select name="debuff_piercingshot" onchange="updateStatusMonster(event, 1)" data-sc="CRITIGNORELUK">
+                                    <option value="0">0</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                </select>
+                            </td>
+                            <td id="debuffcell_disarm_label" class="center">Disarm</td>
+                            <td id="debuffcell_disarm_input" data-sc="DISARM">
+                                <input type="checkbox" name="debuff_disarm" onclick="updateStatusMonster(event, 1)" data-sc="DISARM">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td id="" class="center dotB"></td>
+                            <td id="" class="data dotB"></td>
+                            <td id="debuffcell_fling_label" class="center dotB">Fling</td>
+                            <td id="debuffcell_fling_input" class="dotB" data-sc="FLING">
+                                <select name="debuff_fling" onchange="updateStatusMonster(event, 1)" data-sc="FLING">
+                                    <option value="0">0</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="center" colspan="4">
+                                <b>Monster Exclusive Debuffs</b>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td id="debuffcell_holylight_label" class="center">Holy Light</td>
+                            <td id="debuffcell_holylight_input" class="data" data-sc="HOLYLIGHT">
+                                <input type="checkbox" name="debuff_holylight" onclick="updateStatusMonster(event, 1)" data-sc="HOLYLIGHT">
+                            </td>
+                            <td id="debuffcell_judexmagnus_label" class="center">ME Combo</td>
+                            <td id="debuffcell_judexmagnus_input" data-sc="JUDEXMAGNUS">
+                                <input type="checkbox" name="debuff_judexmagnus" onclick="updateStatusMonster(event, 1)" data-sc="JUDEXMAGNUS">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td id="debuffcell_stripweapon_label" class="center">Strip Weapon</td>
+                            <td id="debuffcell_stripweapon_input" class="data" data-sc="STRIPWEAPON">
+                                <input type="checkbox" name="debuff_stripweapon" onclick="updateStatusMonster(event, 1)" data-sc="STRIPWEAPON">
+                            </td>
+                            <td id="debuffcell_stripshield_label" class="center">Strip Shield</td>
+                            <td id="debuffcell_stripshield_input" data-sc="STRIPSHIELD">
+                                <input type="checkbox" name="debuff_stripshield" onclick="updateStatusMonster(event, 1)" data-sc="STRIPSHIELD">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td id="debuffcell_striparmor_label" class="center">Strip Armor</td>
+                            <td id="debuffcell_striparmor_input" class="data" data-sc="STRIPARMOR">
+                                <input type="checkbox" name="debuff_striparmor" onclick="updateStatusMonster(event, 1)" data-sc="STRIPARMOR">
+                            </td>
+                            <td id="debuffcell_striphelm_label" class="center">Strip Helm</td>
+                            <td id="debuffcell_striphelm_input" data-sc="STRIPHELM">
+                                <input type="checkbox" name="debuff_striphelm" onclick="updateStatusMonster(event, 1)" data-sc="STRIPHELM">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td id="debuffcell_eska_label" class="center">Eska</td>
+                            <td id="debuffcell_eska_input" class="data" data-sc="SKA">
+                                <select name="debuff_eska" onchange="updateStatusMonster(event, 1)" data-sc="SKA">
+                                    <option value="0">0</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                </select>
+                            </td>
+                            <td id="" class="center"></td>
+                            <td id="" data-sc="">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td id="debuffcell_elechange_label" class="center" colspan="4">
+                                Elemental Change (Sage Skill)
+                                <select name="debuff_elechange" onchange="updateStatusMonster(event, 1)" data-sc="ELEMENTALCHANGE">
+                                    <option value="0">(none)</option>
+                                    <option value="1">Water</option>
+                                    <option value="2">Earth</option>
+                                    <option value="3">Fire</option>
+                                    <option value="4">Wind</option>
+                                </select>
+                            </td>
+                        </tr>
                     </tbody>
                 </table>
 
-                <!--Monster Buffs-->
+                <!-- Monster Buffs -->
                 <table id="EnemyBuf" class="tborder"
                     style="width: 314px; margin-right: 0px; background-color: rgb(255, 255, 255);">
                     <tbody>
@@ -7122,6 +7354,218 @@ Calc's theme: <select id="theme" onChange="themes()"><option value="0">Original<
                             <td id="AKTD" class="subheader point" onclick="EnemyBufSW(1)"
                                 style="background-color: rgb(68, 102, 102);">Buffs on Enemy <span id="AKused"></span>
                                 <div class="right">(click to show)</div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td id="monster_buffcell_increaseagi_label" class="center">Increase AGI</td>
+                            <td id="monster_buffcell_increaseagi_input" class="data" data-sc="INCREASEAGI">
+                                <select name="monster_buff_increaseagi" onchange="updateStatusMonster(event, 2)" data-sc="INCREASEAGI">
+                                    <option value="0">0</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                    <option value="6">6</option>
+                                    <option value="7">7</option>
+                                    <option value="8">8</option>
+                                    <option value="9">9</option>
+                                    <option value="10">10</option>
+                                </select>
+                            </td>
+                            <td id="monster_buffcell_assumptio_label" class="center">Assumptio</td>
+                            <td id="monster_buffcell_assumptio_input" data-sc="ASSUMPTIO">
+                                <input type="checkbox" name="monster_buff_assumptio" onclick="updateStatusMonster(event, 2)" data-sc="ASSUMPTIO">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td id="monster_buffcell_angelus_label" class="center">Angelus</td>
+                            <td id="monster_buffcell_angelus_input" class="data" data-sc="ANGELUS">
+                                <select name="monster_buff_angelus" onchange="updateStatusMonster(event, 2)" data-sc="ANGELUS">
+                                    <option value="0">0</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                    <option value="6">6</option>
+                                    <option value="7">7</option>
+                                    <option value="8">8</option>
+                                    <option value="9">9</option>
+                                    <option value="10">10</option>
+                                </select>
+                            </td>
+                            <td id="monster_buffcell_maximizepower_label" class="center">Maximize Power</td>
+                            <td id="monster_buffcell_maximizepower_input" data-sc="MAXIMIZEPOWER">
+                                <input type="checkbox" name="monster_buff_maximizepower" onclick="updateStatusMonster(event, 2)" data-sc="MAXIMIZEPOWER">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td id="monster_buffcell_autoguard_label" class="center">Auto-Guard</td>
+                            <td id="monster_buffcell_autoguard_input" class="data" data-sc="AUTOGUARD">
+                                <select name="monster_buff_autoguard" onchange="updateStatusMonster(event, 2)" data-sc="AUTOGUARD">
+                                    <option value="0">0</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                    <option value="6">6</option>
+                                    <option value="7">7</option>
+                                    <option value="8">8</option>
+                                    <option value="9">9</option>
+                                    <option value="10">10</option>
+                                </select>
+                            </td>
+                            <td id="monster_buffcell_adrenalinerush_label" class="center">Adrenaline Rush</td>
+                            <td id="monster_buffcell_adrenalinerush_input" data-sc="ADRENALINE">
+                                <input type="checkbox" name="monster_buff_adrenalinerush" onclick="updateStatusMonster(event, 2)" data-sc="ADRENALINE">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td id="monster_buffcell_shieldreflect_label" class="center">Shield Reflect</td>
+                            <td id="monster_buffcell_shieldreflect_input" class="data" data-sc="SHIELDREFLECT">
+                                <select name="monster_buff_shieldreflect" onchange="updateStatusMonster(event, 2)" data-sc="SHIELDREFLECT">
+                                    <option value="0">0</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                    <option value="6">6</option>
+                                    <option value="7">7</option>
+                                    <option value="8">8</option>
+                                    <option value="9">9</option>
+                                    <option value="10">10</option>
+                                </select>
+                            </td>
+                            <td id="monster_buffcell_defender_label" class="center">Defender</td>
+                            <td id="monster_buffcell_defender_input" data-sc="ARMOR">
+                                <select name="monster_buff_defender" onchange="updateStatusMonster(event, 2)" data-sc="ARMOR">
+                                    <option value="0">0</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td id="monster_buffcell_energycoat_label" class="center dotB">Energy Coat</td>
+                            <td id="monster_buffcell_energycoat_input" class="dotB" colspan="3" data-sc="ENERGYCOAT">
+                                <select name="monster_buff_energycoat" onchange="updateStatusMonster(event, 2)" data-sc="ENERGYCOAT">
+                                    <option value="0">0</option>
+                                    <option value="1">6% reduction</option>
+                                    <option value="2">12% reduction</option>
+                                    <option value="3">18% reduction</option>
+                                    <option value="4">24% reduction</option>
+                                    <option value="5">30% reduction</option>
+                                </select>
+                            </td>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="center" colspan="4">
+                                <b>Monster Exclusive Buffs</b>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td id="monster_buffcell_elementalchange_label" class="center">Elemental Change</td>
+                            <td id="monster_buffcell_elementalchange_input" class="data" data-sc="ELEMENTALCHANGE_BUFF">
+                                <select name="monster_buff_elementalchange" onchange="updateStatusMonster(event, 2)" data-sc="ELEMENTALCHANGE_BUFF">
+                                    <option value="0">(none)</option>
+                                    <option value="1">Neutral 1</option>
+                                    <option value="2">Neutral 2</option>
+                                    <option value="3">Neutral 3</option>
+                                    <option value="4">Neutral 4</option>
+                                    <option value="11">Water 1</option>
+                                    <option value="12">Water 2</option>
+                                    <option value="13">Water 3</option>
+                                    <option value="14">Water 4</option>
+                                    <option value="21">Earth 1</option>
+                                    <option value="22">Earth 2</option>
+                                    <option value="23">Earth 3</option>
+                                    <option value="24">Earth 4</option>
+                                    <option value="31">Fire 1</option>
+                                    <option value="32">Fire 2</option>
+                                    <option value="33">Fire 3</option>
+                                    <option value="34">Fire 4</option>
+                                    <option value="41">Wind 1</option>
+                                    <option value="42">Wind 2</option>
+                                    <option value="43">Wind 3</option>
+                                    <option value="44">Wind 4</option>
+                                    <option value="51">Poison 1</option>
+                                    <option value="52">Poison 2</option>
+                                    <option value="53">Poison 3</option>
+                                    <option value="54">Poison 4</option>
+                                    <option value="61">Holy 1</option>
+                                    <option value="62">Holy 2</option>
+                                    <option value="63">Holy 3</option>
+                                    <option value="64">Holy 4</option>
+                                    <option value="71">Shadow 1</option>
+                                    <option value="72">Shadow 2</option>
+                                    <option value="73">Shadow 3</option>
+                                    <option value="74">Shadow 4</option>
+                                    <option value="81">Ghost 1</option>
+                                    <option value="82">Ghost 2</option>
+                                    <option value="83">Ghost 3</option>
+                                    <option value="84">Ghost 4</option>
+                                    <option value="91">Undead 1</option>
+                                    <option value="92">Undead 2</option>
+                                    <option value="93">Undead 3</option>
+                                    <option value="94">Undead 4</option>
+                                </select>
+                            </td>
+                            <td id="monster_buffcell_stoneskin_label" class="center">Stone Skin</td>
+                            <td id="monster_buffcell_stoneskin_input" data-sc="STONESKIN">
+                                <select name="monster_buff_stoneskin" onchange="updateStatusMonster(event, 2)" data-sc="STONESKIN">
+                                    <option value="0">0</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td id="monster_buffcell_keeping_label" class="center">Keeping</td>
+                            <td id="monster_buffcell_keeping_input" class="data" data-sc="KEEPING">
+                                <input type="checkbox" name="monster_buff_keeping" onclick="updateStatusMonster(event, 2)" data-sc="KEEPING">
+                            </td>
+                            <td id="monster_buffcell_antimagic_label" class="center">Anti Magic</td>
+                            <td id="monster_buffcell_antimagic_input" data-sc="ANTIMAGIC">
+                                <select name="monster_buff_antimagic" onchange="updateStatusMonster(event, 2)" data-sc="ANTIMAGIC">
+                                    <option value="0">0</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td id="" class="center"></td>
+                            <td id="" class="data" data-sc="">
+                            </td>
+                            <td id="monster_buffcell_agiup_label" class="center">Agi Up (Flee Up)</td>
+                            <td id="monster_buffcell_agiup_input" data-sc="AGIUP">
+                                <select name="monster_buff_agiup" onchange="updateStatusMonster(event, 2)" data-sc="AGIUP">
+                                    <option value="0">0</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td id="monster_buffcell_powerup_label" class="center" colspan="2">POWER UP (ATK x3, HIT x2)</td>
+                            <td id="monster_buffcell_powerup_input" colspan="2" data-sc="POWERUP">
+                                <input type="checkbox" name="monster_buff_powerup" onclick="updateStatusMonster(event, 2)" data-sc="POWERUP">
                             </td>
                         </tr>
                     </tbody>

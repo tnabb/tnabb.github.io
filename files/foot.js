@@ -1104,9 +1104,9 @@ function setMonsterRace2() {
 }
 
 function loadMonsterStatusChanges() {
-    monster.sc = [];
+    //monster.sc = [];
     // debuffs
-    if (n_B_debuf[0]) sc_start(monster, SC.PROVOKE, n_B_debuf[0]);
+    /* if (n_B_debuf[0]) sc_start(monster, SC.PROVOKE, n_B_debuf[0]);
     if (n_B_debuf[1]) sc_start(monster, SC.QUAGMIRE, n_B_debuf[1]);
     if (n_B_debuf[2]) sc_start(monster, SC.POISON);
     if (n_B_debuf[3]) sc_start(monster, SC.BLIND);
@@ -1135,10 +1135,10 @@ function loadMonsterStatusChanges() {
     if (n_B_debuf[27]) sc_start(monster, SC.CRITIGNORELUK, n_B_debuf[27]);
     if (n_B_debuf[28]) sc_start(monster, SC.FLING, n_B_debuf[28]);
     if (n_B_debuf[29]) sc_start(monster, SC.HOLYLIGHT);
-    if (n_B_debuf[30]) sc_start(monster, SC.JUDEXMAGNUS);
+    if (n_B_debuf[30]) sc_start(monster, SC.JUDEXMAGNUS); */
 
     // buffs
-    if (n_B_buf[0]) sc_start(monster, SC.INCREASEAGI, n_B_buf[0]);
+    /* if (n_B_buf[0]) sc_start(monster, SC.INCREASEAGI, n_B_buf[0]);
     if (n_B_buf[1]) sc_start(monster, SC.ASSUMPTIO);
     if (n_B_buf[2]) sc_start(monster, SC.ADRENALINE);
     if (n_B_buf[3]) sc_start(monster, SC.MAXIMIZEPOWER);
@@ -1152,7 +1152,7 @@ function loadMonsterStatusChanges() {
     if (n_B_buf[11]) sc_start(monster, SC.AUTOGUARD, n_B_buf[11]);
     if (n_B_buf[12]) sc_start(monster, SC.SHIELDREFLECT, n_B_buf[12]);
     if (n_B_buf[13]) sc_start(monster, SC.ARMOR, n_B_buf[13]);
-    if (n_B_buf[14]) sc_start(monster, SC.ENERGYCOAT, n_B_buf[14]);
+    if (n_B_buf[14]) sc_start(monster, SC.ENERGYCOAT, n_B_buf[14]); */
 }
 
 function StatusCalcMonsterSub() {

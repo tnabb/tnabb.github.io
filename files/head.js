@@ -1208,8 +1208,6 @@ function themes() {
         A8(0),
         A9(0),
         A10(0),
-        AI(0),
-        AK(0),
         SaveTheme()
 }
 function addCSSRule(e, _, n, l) {
@@ -1488,6 +1486,8 @@ document.addEventListener('DOMContentLoaded', function() {
     Buf4SW(0);
     Buf6SW(0);
     Buf7SW(0);
+    debufSW(0);
+    EnemyBufSW(0);
 });
 
 // Checks static SIENSKILL table controls for any active buff and updates header
@@ -1656,6 +1656,7 @@ function updateFoodEffectHeader() {
         myInnerHtml('A7used', hasActive ? ' [active]' : '', 0);
     }
 }
+
 function Buf8SW(e) {
     if (n_Skill8SW = e,
         n_Skill8SW) {
@@ -2082,292 +2083,152 @@ function A10(e) {
         myInnerHtml("A10used", "", 0)) : (document.getElementById("A10TD").style.backgroundColor = saBGC[l],
             myInnerHtml("A10used", " [active]", 0))
 }
-function debufSW(e) {
-    if (n_debufSW = e,
-        n_debufSW) {
-        n = '<TR><TD id="AITD" ColSpan="4" class="subheader point" onClick="debufSW(0)">Debuffs on Enemy <span id="AIused"></span>',
-            n += '<div class="right">(hide)</div></TD></TR>',
-            n += '<TR><TD id="BI18_1" class="center" style="width:90px;">Mind Breaker</TD><TD id="BI18_2" class="data"></TD><TD id="BI2_1" class="center">Poison</TD><TD id="BI2_2"></TD></TR>',
-            n += '<TR><TD id="BI0_1" class="center">Provoke</TD><TD id="BI0_2" class="data"></TD><TD id="BI3_1" class="center">Blind</TD><TD id="BI3_2"></TD></TR>',
-            n += '<TR><TD id="BI12_1" class="center">Signum Crucis</TD><TD id="BI12_2" class="data"></TD><TD id="BI10_1" class="center">Curse</TD><TD id="BI10_2"></TD></TR>',
-            n += '<TR><TD id="BI5_1" class="center">Blessing</TD><TD id="BI5_2" class="data"></TD><TD id="BI7_1" class="center">Stun</TD><TD id="BI7_2"></TD></TR>',
-            n += '<TR><TD id="BI6_1" class="center">Lex Aeterna</TD><TD id="BI6_2" class="data"></TD><TD id="BI4_1" class="center">Frozen</TD><TD id="BI4_2"></TD></TR>',
-            n += '<TR><TD id="BI11_1" class="center">Decrease AGI</TD><TD id="BI11_2" class="data"></TD><TD id="BI9_1" class="center">Stone</TD><TD id="BI9_2"></TD></TR>',
-            n += '<TR><TD id="BI17_1" class="center">Spider Web</TD><TD id="BI17_2" class="data"></TD><TD id="BI8_1" class="center">Sleep</TD><TD id="BI8_2"></TD></TR>',
-            n += '<TR><TD id="BI1_1" class="center">Quagmire</TD><TD id="BI1_2" class="data"></TD><TD id="BI19_1" class="center">' + skillName(211) + '</TD><TD id="BI19_2"></TD></TR>',
-            n += '<TR><TD id="BI24_1" class="center">Flying</TD><TD id="BI24_2" class="data"></TD><TD id="BI20_1" class="center">' + skillName(218) + '</TD><TD id="BI20_2"></TD></TR>',
-            n += '<TR><TD id="BI25_1" class="center">Mass Spiral (IA)</TD><TD id="BI25_2" class="data"></TD><TD id="BI26_1" class="center">Disarm</TD><TD id="BI26_2"></TD></TR>',
-            n += '<TR><TD id="BI27_1" class="center">Piercing Shot</TD><TD id="BI27_2" class="data"></TD><TD id="BI28_1" class="center">Fling</TD><TD id="BI28_2"></TD></TR>',
-            n += '<TR><TD id="BI29_1" class="center dotB">Holy Light</TD><TD id="BI29_2" class="data dotB"></TD><TD id="BI30_1" class="center dotB">ME Combo</TD><TD id="BI30_2" class="dotB"></TD></TR>',
-            n += '<TR><TD class="center" ColSpan="4"><b>Monster Exclusive Debuffs</b></TD></TR>',
-            n += '<TR><TD id="BI13_1" class="center">' + skillName(172) + '</TD><TD id="BI13_2" class="data"></TD><TD id="BI14_1" class="center">' + skillName(173) + '</TD><TD id="BI14_2"></TD></TR>',
-            n += '<TR><TD id="BI15_1" class="center">' + skillName(174) + '</TD><TD id="BI15_2" class="data"></TD><TD id="BI16_1" class="center">' + skillName(175) + '</TD><TD id="BI16_2"></TD></TR>',
-            n += '<TR><TD id="BI21_1" class="center">Eska</TD><TD id="BI21_2" class="data"></TD><TD id="BI22_1" class="center">Eske</TD><TD id="BI22_2"></TD></TR>',
-            myInnerHtml("EnemyDebuf", n += '<TR><TD id="BI23_1" class="center" colspan="4"></TD></TR>', 0),
-            myInnerHtml("BI0_2", '<select name="B_debuf0" onChange="AI(1)"></select>', 0),
-            myInnerHtml("BI1_2", '<select name="B_debuf1" onChange="AI(1)"></select>', 0),
-            myInnerHtml("BI2_2", '<input type="checkbox" name="B_debuf2" onClick="AI(1)">', 0),
-            myInnerHtml("BI3_2", '<input type="checkbox" name="B_debuf3" onClick="AI(1)">', 0),
-            myInnerHtml("BI4_2", '<input type="checkbox" name="B_debuf4" onClick="AI(1)">', 0),
-            myInnerHtml("BI5_2", '<input type="checkbox" name="B_debuf5" onClick="AI(1)">', 0),
-            myInnerHtml("BI6_2", '<input type="checkbox" name="B_debuf6" onClick="AI(1)">', 0),
-            myInnerHtml("BI7_2", '<input type="checkbox" name="B_debuf7" onClick="AI(1)">', 0),
-            myInnerHtml("BI8_2", '<input type="checkbox" name="B_debuf8" onClick="AI(1)">', 0),
-            myInnerHtml("BI9_2", '<input type="checkbox" name="B_debuf9" onClick="AI(1)">', 0),
-            myInnerHtml("BI10_2", '<input type="checkbox" name="B_debuf10" onClick="AI(1)">', 0),
-            myInnerHtml("BI11_2", '<select name="B_debuf11" onChange="AI(1)"></select>', 0),
-            myInnerHtml("BI12_2", '<select name="B_debuf12" onChange="AI(1)"></select>', 0),
-            myInnerHtml("BI17_2", '<input type="checkbox" name="B_debuf17" onClick="AI(1)">', 0),
-            myInnerHtml("BI18_2", '<select name="B_debuf18" onChange="AI(1)"></select>', 0),
-            myInnerHtml("BI19_2", '<input type="checkbox" name="B_debuf19" onClick="AI(1)">', 0),
-            myInnerHtml("BI20_2", '<input type="checkbox" name="B_debuf20" onClick="AI(1)">', 0),
-            myInnerHtml("BI24_2", '<select name="B_debuf24" onChange="AI(1)"></select>', 0),
-            myInnerHtml("BI13_2", '<input type="checkbox" name="B_debuf13" onClick="AI(1)">', 0),
-            myInnerHtml("BI14_2", '<input type="checkbox" name="B_debuf14" onClick="AI(1)">', 0),
-            myInnerHtml("BI15_2", '<input type="checkbox" name="B_debuf15" onClick="AI(1)">', 0),
-            myInnerHtml("BI16_2", '<input type="checkbox" name="B_debuf16" onClick="AI(1)">', 0),
-            myInnerHtml("BI21_2", '<select name="B_debuf21" onChange="AI(1)"></select>', 0),
-            myInnerHtml("BI22_2", '<input type="checkbox" name="B_debuf22" onClick="AI(1)">', 0),
-            myInnerHtml("BI23_1", 'Elemental Change (Sage Skill) <select name="B_debuf23" onChange="AI(1)||debufSW(1)"></select>', 0),
-            myInnerHtml("BI25_2", '<select name="B_debuf25" onChange="AI(1)"></select>', 0),
-            myInnerHtml("BI26_2", '<input type="checkbox" name="B_debuf26" onClick="AI(1)">', 0),
-            myInnerHtml("BI27_2", '<select name="B_debuf27" onChange="AI(1)"></select>', 0),
-            myInnerHtml("BI28_2", '<select name="B_debuf28" onChange="AI(1)"></select>', 0),
-            myInnerHtml("BI29_2", '<input type="checkbox" name="B_debuf29" onClick="AI(1)">', 0),
-            myInnerHtml("BI30_2", '<input type="checkbox" name="B_debuf30" onClick="AI(1)">', 0);
-        var _ = ["(none)", "Water", "Earth", "Fire", "Wind"];
-        for (i = 0; i <= 4; i++)
-            c.B_debuf23.options[i] = new Option(_[i], i);
-        for (n_B[19] ? (myInnerHtml("BI18_1", "<S>Mind Breaker</S>", 0),
-            c.B_debuf18.disabled = !0,
-            c.B_debuf18.value = 0,
-            n_B_debuf[18] = 0,
-            myInnerHtml("BI0_1", "<S>Provoke</S>", 0),
-            c.B_debuf0.disabled = !0,
-            c.B_debuf0.value = 0,
-            n_B_debuf[0] = 0,
-            myInnerHtml("BI11_1", "<S>Decrease AGI</S>", 0),
-            c.B_debuf11.disabled = !0,
-            c.B_debuf11.value = 0,
-            n_B_debuf[11] = 0,
-            myInnerHtml("BI2_1", "<S>Poison</S>", 0),
-            c.B_debuf2.disabled = !0,
-            c.B_debuf2.value = 0,
-            n_B_debuf[2] = 0,
-            myInnerHtml("BI3_1", "<S>Blind</S>", 0),
-            c.B_debuf3.disabled = !0,
-            c.B_debuf3.value = 0,
-            n_B_debuf[3] = 0,
-            myInnerHtml("BI10_1", "<S>Curse</S>", 0),
-            c.B_debuf10.disabled = !0,
-            c.B_debuf10.value = 0,
-            n_B_debuf[10] = 0,
-            myInnerHtml("BI7_1", "<S>Stun</S>", 0),
-            c.B_debuf7.disabled = !0,
-            c.B_debuf7.value = 0,
-            n_B_debuf[7] = 0,
-            myInnerHtml("BI4_1", "<S>Frozen</S>", 0),
-            c.B_debuf4.disabled = !0,
-            c.B_debuf4.value = 0,
-            n_B_debuf[4] = 0,
-            myInnerHtml("BI9_1", "<S>Stone</S>", 0),
-            c.B_debuf9.disabled = !0,
-            c.B_debuf9.value = 0,
-            n_B_debuf[9] = 0,
-            myInnerHtml("BI8_1", "<S>Sleep</S>", 0),
-            c.B_debuf8.disabled = !0,
-            c.B_debuf8.value = 0,
-            n_B_debuf[8] = 0) : n_B[3] < 90 || 0 != c.B_debuf23.value || 0 != n_B_debuf[23] || n_B_buf[6] < 90 && 0 != n_B_buf[6] ? (myInnerHtml("BI18_1", "Mind Breaker", 0),
-                c.B_debuf18.disabled = !1,
-                myInnerHtml("BI0_1", "Provoke", 0),
-                c.B_debuf0.disabled = !1,
-                myInnerHtml("BI11_1", "Decrease AGI", 0),
-                c.B_debuf11.disabled = !1,
-                myInnerHtml("BI4_1", "Frozen", 0),
-                c.B_debuf4.disabled = !1,
-                myInnerHtml("BI9_1", "Stone", 0),
-                c.B_debuf9.disabled = !1) : (myInnerHtml("BI2_1", "Poison", 0),
-                    c.B_debuf2.disabled = !1,
-                    myInnerHtml("BI3_1", "Blind", 0),
-                    c.B_debuf3.disabled = !1,
-                    myInnerHtml("BI10_1", "Curse", 0),
-                    c.B_debuf10.disabled = !1,
-                    myInnerHtml("BI7_1", "Stun", 0),
-                    c.B_debuf7.disabled = !1,
-                    myInnerHtml("BI8_1", "Sleep", 0),
-                    c.B_debuf8.disabled = !1,
-                    myInnerHtml("BI18_1", "<S>Mind Breaker</S>", 0),
-                    c.B_debuf18.disabled = !0,
-                    c.B_debuf18.value = 0,
-                    n_B_debuf[18] = 0,
-                    myInnerHtml("BI0_1", "<S>Provoke</S>", 0),
-                    c.B_debuf0.disabled = !0,
-                    c.B_debuf0.value = 0,
-                    n_B_debuf[0] = 0,
-                    myInnerHtml("BI4_1", "<S>Frozen</S>", 0),
-                    c.B_debuf4.disabled = !0,
-                    c.B_debuf4.value = 0,
-                    n_B_debuf[4] = 0,
-                    myInnerHtml("BI9_1", "<S>Stone</S>", 0),
-                    c.B_debuf9.disabled = !0,
-                    c.B_debuf9.value = 0,
-                    n_B_debuf[9] = 0),
-            6 == n_B[2] || n_B[3] >= 90 && (0 == c.B_debuf23.value || 0 == n_B_debuf[23] || n_B_buf[6] >= 90) ? (myInnerHtml("BI5_1", "Blessing", 0),
-                c.B_debuf5.disabled = !1,
-                myInnerHtml("BI12_1", "Signum Crucis", 0),
-                c.B_debuf12.disabled = !1) : (myInnerHtml("BI5_1", "<S>Blessing</S>", 0),
-                    c.B_debuf5.disabled = !0,
-                    c.B_debuf5.value = 0,
-                    n_B_debuf[5] = 0,
-                    myInnerHtml("BI12_1", "<S>Signum Crucis</S>", 0),
-                    c.B_debuf12.disabled = !0,
-                    c.B_debuf12.value = 0,
-                    n_B_debuf[12] = 0),
-            i = 0; i <= 10; i++)
-            c.B_debuf0.options[i] = new Option(i, i),
-                c.B_debuf11.options[i] = new Option(i, i),
-                c.B_debuf12.options[i] = new Option(i, i);
-        for (i = 0; i <= 5; i++)
-            c.B_debuf1.options[i] = new Option(i, i),
-                c.B_debuf18.options[i] = new Option(i, i),
-                c.B_debuf24.options[i] = new Option(i, i),
-                c.B_debuf27.options[i] = new Option(i, i),
-                c.B_debuf28.options[i] = new Option(i, i);
-        c.B_debuf25.options[0] = new Option("0", 0),
-        c.B_debuf25.options[1] = new Option("50%", 1),
-        c.B_debuf25.options[2] = new Option("75%", 2),
-        c.B_debuf21.options[0] = new Option(0, 0),
-        c.B_debuf21.options[1] = new Option(1, 1),
-        c.B_debuf21.options[2] = new Option(2, 2),
-        c.B_debuf21.options[3] = new Option(3, 3),
-        c.B_debuf0.value = n_B_debuf[0],
-            c.B_debuf1.value = n_B_debuf[1],
-            c.B_debuf2.checked = n_B_debuf[2],
-            c.B_debuf3.checked = n_B_debuf[3],
-            c.B_debuf4.checked = n_B_debuf[4],
-            c.B_debuf5.checked = n_B_debuf[5],
-            c.B_debuf6.checked = n_B_debuf[6],
-            c.B_debuf7.checked = n_B_debuf[7],
-            c.B_debuf8.checked = n_B_debuf[8],
-            c.B_debuf9.checked = n_B_debuf[9],
-            c.B_debuf10.checked = n_B_debuf[10],
-            c.B_debuf11.value = n_B_debuf[11],
-            c.B_debuf12.value = n_B_debuf[12],
-            c.B_debuf17.checked = n_B_debuf[17],
-            c.B_debuf18.value = n_B_debuf[18],
-            c.B_debuf19.checked = n_B_debuf[19],
-            c.B_debuf20.checked = n_B_debuf[20],
-            0 == PvP && (c.B_debuf13.checked = n_B_debuf[13],
-                c.B_debuf14.checked = n_B_debuf[14],
-                c.B_debuf15.checked = n_B_debuf[15],
-                c.B_debuf16.checked = n_B_debuf[16],
-                c.B_debuf21.value = n_B_debuf[21],
-                c.B_debuf22.checked = n_B_debuf[22],
-                c.B_debuf23.value = n_B_debuf[23]),
-            c.B_debuf24.value = n_B_debuf[24],
-            c.B_debuf25.value = n_B_debuf[25],
-            c.B_debuf26.checked = n_B_debuf[26],
-            c.B_debuf27.value = n_B_debuf[27],
-            c.B_debuf28.value = n_B_debuf[28],
-            c.B_debuf29.checked = n_B_debuf[29],
-            c.B_debuf30.checked = n_B_debuf[30]
+
+// Update monster status changes from tables
+function updateStatusMonster(e, tableHeaderFunction) {
+    var el = e.target || e;
+    var sc = el.getAttribute('data-sc');
+    if (!sc || !window.monster) return;
+    var fixed = el.getAttribute('data-fixed');
+    // Remove all related statuses first (handles toggling off)
+    if (sc.includes('|')) {
+        sc.split('|').forEach(function(s) { sc_end(monster, SC[s]); });
     } else {
-        var n;
-        n = '<TR><TD id="AITD" class="subheader point" onClick="debufSW(1)">Debuffs on Enemy <span id="AIused"></span>',
-            myInnerHtml("EnemyDebuf", n += '<div class="right">(show)</div></TD></TR>', 0)
+        sc_end(monster, SC[sc]);
     }
-    AI(0)
-}
-function AI(e) {
-    1 == e && calc();
-    for (var _ = 0, n = 0; n <= 30; n++)
-        if (0 != n_B_debuf[n]) {
-            _ = 1;
-            break
-        }
-    var l = c.theme.value;
-    0 == _ ? (document.getElementById("AITD").style.backgroundColor = sBGC[l],
-        myInnerHtml("AIused", "", 0)) : (document.getElementById("AITD").style.backgroundColor = saBGC[l],
-            myInnerHtml("AIused", " [active]", 0))
-}
-function EnemyBufSW(e) {
-    if (n_BbufSW = e,
-        n_BbufSW) {
-        for (n = '<TR><TD id="AKTD" colspan="4" class="subheader point" onClick="EnemyBufSW(0)">Buffs on Enemy <span id="AKused"></span>',
-            n += '<div class="right">(click to hide)</div></TD></TR>',
-            n += '<TR><TD class="center">Increase AGI</TD><TD id="ID_Kb0" class="data"></TD><TD class="center">Assumptio</TD><TD id="ID_Kb1"></TD></TR>',
-            n += '<TR><TD class="center">Angelus</TD><TD id="ID_Kb10" class="data"></TD><TD class="center">Maximize Power</TD><TD id="ID_Kb3"></TD></TR>',
-            n += '<TR><TD class="center">' + skillName(157) + '</TD><TD id="ID_Kb11" class="data"></TD><TD class="center">Adrenaline Rush</TD><TD id="ID_Kb2"></TD></TR>',
-            n += '<TR><TD class="center">Shield Reflect</TD><TD id="ID_Kb12" class="data"></TD><TD class="center">' + skillName(165) + '</TD><TD id="ID_Kb13"></TD></TR>',
-            n += '<TR><TD class="center dotB">Energy Coat</TD><TD id="ID_Kb14" class="dotB" colspan="3"></TD></TR>',
-            n += '<TR><TD class="center" colspan="4"><b>Monster Exclusive buffs</b></TD></TR>',
-            n += '<TR><TD class="center">Attrib. Change</TD><TD id="ID_Kb6" class="data"></TD><TD class="center">Stone Skin</TD><TD id="ID_Kb7"></TD></TR>',
-            n += '<TR><TD class="center">Keeping</TD><TD id="ID_Kb9" class="data"></TD><TD class="center">Anti Magic</TD><TD id="ID_Kb8"></TD></TR>',
-            n += '<TR><TD class="center"></TD><TD id="ID_Kb15" class="data"></TD><TD class="center">Agi Up (Flee Up)</TD><TD id="ID_Kb5"></TD></TR>',
-            myInnerHtml("EnemyBuf", n += '<TR><TD class="center" colspan="2">POWER UP (ATK x3, HIT x2)</TD><TD id="ID_Kb4" colspan="2"></TD></TR>', 0),
-            myInnerHtml("ID_Kb0", '<select name="B_buf0" onChange="AK(1)"></select>', 0),
-            myInnerHtml("ID_Kb1", '<input type="checkbox" name="B_buf1" onClick="AK(1)">', 0),
-            myInnerHtml("ID_Kb2", '<input type="checkbox" name="B_buf2" onClick="AK(1)">', 0),
-            myInnerHtml("ID_Kb3", '<input type="checkbox" name="B_buf3" onClick="AK(1)">', 0),
-            myInnerHtml("ID_Kb10", '<select name="B_buff10" onChange="AK(1)"></select>', 0),
-            myInnerHtml("ID_Kb11", '<select name="B_buff11" onChange="AK(1)"></select>', 0),
-            myInnerHtml("ID_Kb12", '<select name="B_buff12" onChange="AK(1)"></select>', 0),
-            myInnerHtml("ID_Kb13", '<select name="B_buff13" onChange="AK(1)"></select>', 0),
-            myInnerHtml("ID_Kb14", '<select name="B_buff14" onChange="AK(1)"></select>', 0),
-            myInnerHtml("ID_Kb4", '<input type="checkbox" name="B_buf4" onClick="AK(1)">', 0),
-            myInnerHtml("ID_Kb5", '<select name="B_buf5" onChange="AK(1)"></select>', 0),
-            myInnerHtml("ID_Kb6", '<select name="B_buf6" onChange="AK(1)||debufSW(n_debufSW)"></select>', 0),
-            myInnerHtml("ID_Kb7", '<select name="B_buf7" onChange="AK(1)"></select>', 0),
-            myInnerHtml("ID_Kb8", '<select name="B_buf8" onChange="AK(1)"></select>', 0),
-            myInnerHtml("ID_Kb9", '<input type="checkbox" name="B_buf9" onClick="AK(1)">', 0),
-            i = 0; i <= 10; i++)
-            c.B_buf0.options[i] = new Option(i, i),
-                c.B_buff10.options[i] = new Option(i, i),
-                c.B_buff11.options[i] = new Option(i, i),
-                c.B_buff12.options[i] = new Option(i, i);
-        for (i = 0; i <= 5; i++)
-            c.B_buf5.options[i] = new Option(i, i),
-                c.B_buf7.options[i] = new Option(i, i),
-                c.B_buf8.options[i] = new Option(i, i),
-                c.B_buff13.options[i] = new Option(i, i),
-                c.B_buff14.options[i] = new Option(v_EnergyCoat[i], i);
-        var _ = [["(none)", "Neutral 1", "Neutral 2", "Neutral 3", "Neutral 4", "Water 1", "Water 2", "Water 3", "Water 4", "Earth 1", "Earth 2", "Earth 3", "Earth 4", "Fire 1", "Fire 2", "Fire 3", "Fire 4", "Wind 1", "Wind 2", "Wind 3", "Wind 4", "Poison 1", "Poison 2", "Poison 3", "Poison 4", "Holy 1", "Holy 2", "Holy 3", "Holy 4", "Shadow 1", "Shadow 2", "Shadow 3", "Shadow 4", "Ghost 1", "Ghost 2", "Ghost 3", "Ghost 4", "Undead 1", "Undead 2", "Undead 3", "Undead 4"], [0, 1, 2, 3, 4, 11, 12, 13, 14, 21, 22, 23, 24, 31, 32, 33, 34, 41, 42, 43, 44, 51, 52, 53, 54, 61, 62, 63, 64, 71, 72, 73, 74, 81, 82, 83, 84, 91, 92, 93, 94]];
-        for (i = 0; i <= 40; i++)
-            c.B_buf6.options[i] = new Option(_[0][i], _[1][i]);
-        c.B_buf0.value = n_B_buf[0],
-            c.B_buf1.checked = n_B_buf[1],
-            c.B_buf2.checked = n_B_buf[2],
-            c.B_buf3.checked = n_B_buf[3],
-            c.B_buf4.checked = n_B_buf[4],
-            c.B_buf5.value = n_B_buf[5],
-            c.B_buf6.value = n_B_buf[6],
-            c.B_buf7.value = n_B_buf[7],
-            c.B_buf8.value = n_B_buf[8],
-            c.B_buf9.checked = n_B_buf[9],
-            c.B_buff10.value = n_B_buf[10],
-            c.B_buff11.value = n_B_buf[11],
-            c.B_buff12.value = n_B_buf[12],
-            c.B_buff13.value = n_B_buf[13],
-            c.B_buff14.value = n_B_buf[14]
-    } else {
-        var n;
-        n = '<TR><TD id="AKTD" class="subheader point" onClick="EnemyBufSW(1)">Buffs on Enemy <span id="AKused"></span>',
-            myInnerHtml("EnemyBuf", n += '<div class="right">(click to show)</div></TD></TR>', 0)
+    // Special case: ELEMENTALCHANGE
+    if (sc === 'ELEMENTALCHANGE') {
+        var val = el.tagName === 'SELECT' ? parseInt(el.value, 10) : 0; 
+        sc_start(monster, SC.ELEMENTALCHANGE, val, 1);
+    } else if (sc === 'ELEMENTALCHANGE_BUFF') {
+        var val = el.tagName === 'SELECT' ? parseInt(el.value, 10) : 0;
+        sc_end(monster, SC.ELEMENTALCHANGE);
+        if(val > 0)
+            sc_start(monster, SC.ELEMENTALCHANGE, Math.trunc(val / 10), val % 10);
+    } else if (sc === 'STONESKIN') {
+        var val = el.tagName === 'SELECT' ? parseInt(el.value, 10) : 0;
+        sc_end(monster, SC.ARMORCHANGE);
+        sc_start(monster, SC.ARMORCHANGE, val, SKILL.NPC_STONESKIN);
+    } else if (sc === 'ANTIMAGIC') {
+        var val = el.tagName === 'SELECT' ? parseInt(el.value, 10) : 0;
+        sc_end(monster, SC.ARMORCHANGE);
+        sc_start(monster, SC.ARMORCHANGE, val, SKILL.NPC_ANTIMAGIC);
     }
-    AK(0)
-}
-function AK(e) {
-    1 == e && calc();
-    for (var _ = 0, n = 0; n <= 14; n++)
-        if (0 != n_B_buf[n]) {
-            _ = 1;
-            break
+    // Normal case
+    else if (el.type === 'checkbox' && el.checked) {
+        var value = fixed ? parseInt(fixed, 10) : 1;
+        if (sc.includes('|')) {
+            sc.split('|').forEach(function(s) { sc_start(monster, SC[s], value); });
+        } else {
+            sc_start(monster, SC[sc], value);
         }
-    var l = c.theme.value;
-    0 == _ ? (document.getElementById("AKTD").style.backgroundColor = sBGC[l],
-        myInnerHtml("AKused", "", 0)) : (document.getElementById("AKTD").style.backgroundColor = saBGC[l],
-            myInnerHtml("AKused", " [active]", 0))
+    } else if (el.tagName === 'SELECT' && el.value !== '0') {
+        var value = fixed ? parseInt(fixed, 10) : parseInt(el.value, 10);
+        if (sc.includes('|')) {
+            sc.split('|').forEach(function(s) { sc_start(monster, SC[s], value); });
+        } else {
+            sc_start(monster, SC[sc], value);
+        }
+    }
+    if(tableHeaderFunction == 1)
+        updateMonsterDebuffHeader();
+    else if (tableHeaderFunction == 2)
+        updateMonsterBuffHeader();
+    if (typeof calc === 'function') calc();
 }
+
+// --- Monster Debuffs Table ---
+function debufSW(show) {
+    var table = document.getElementById('EnemyDebuf');
+    if (!table) return;
+    var rows = table.getElementsByTagName('tr');
+    if (rows.length < 2) return;
+    for (var i = 1; i < rows.length; i++) {
+        rows[i].style.display = show ? '' : 'none';
+    }
+    var header = document.getElementById('AITD');
+    if (header) {
+        header.setAttribute('colspan', '4');
+        var rightDiv = header.querySelector('.right');
+        if (rightDiv) {
+            rightDiv.textContent = show ? '(click to hide)' : '(click to show)';
+        }
+        header.onclick = function() { debufSW(show ? 0 : 1); };
+    }
+    updateMonsterDebuffHeader();
+}
+
+function updateMonsterDebuffHeader() {
+    var table = document.getElementById('EnemyDebuf');
+    if (!table) return;
+    var hasActive = false;
+    // Check all inputs/selects in the table for active values
+    var inputs = table.querySelectorAll('input, select');
+    for (var i = 0; i < inputs.length; i++) {
+        var el = inputs[i];
+        if (el.type === 'checkbox' && el.checked) {
+            hasActive = true; break;
+        }
+        if (el.tagName === 'SELECT' && el.value !== '0') {
+            hasActive = true; break;
+        }
+    }
+    var l = (typeof c !== 'undefined' && c.theme && c.theme.value) ? c.theme.value : 0;
+    var header = document.getElementById('AITD');
+    if (header) {
+        header.style.backgroundColor = hasActive ? saBGC[l] : sBGC[l];
+    }
+    if (document.getElementById('AIused')) {
+        myInnerHtml('AIused', hasActive ? ' [active]' : '', 0);
+    }
+}
+
+// --- Monster Debuffs Table ---
+function EnemyBufSW(show) {
+    var table = document.getElementById('EnemyBuf');
+    if (!table) return;
+    var rows = table.getElementsByTagName('tr');
+    if (rows.length < 2) return;
+    for (var i = 1; i < rows.length; i++) {
+        rows[i].style.display = show ? '' : 'none';
+    }
+    var header = document.getElementById('AKTD');
+    if (header) {
+        header.setAttribute('colspan', '4');
+        var rightDiv = header.querySelector('.right');
+        if (rightDiv) {
+            rightDiv.textContent = show ? '(click to hide)' : '(click to show)';
+        }
+        header.onclick = function() { EnemyBufSW(show ? 0 : 1); };
+    }
+    updateMonsterBuffHeader();
+}
+
+function updateMonsterBuffHeader() {
+    var table = document.getElementById('EnemyBuf');
+    if (!table) return;
+    var hasActive = false;
+    // Check all inputs/selects in the table for active values
+    var inputs = table.querySelectorAll('input, select');
+    for (var i = 0; i < inputs.length; i++) {
+        var el = inputs[i];
+        if (el.type === 'checkbox' && el.checked) {
+            hasActive = true; break;
+        }
+        if (el.tagName === 'SELECT' && el.value !== '0') {
+            hasActive = true; break;
+        }
+    }
+    var l = (typeof c !== 'undefined' && c.theme && c.theme.value) ? c.theme.value : 0;
+    var header = document.getElementById('AKTD');
+    if (header) {
+        header.style.backgroundColor = hasActive ? saBGC[l] : sBGC[l];
+    }
+    if (document.getElementById('AKused')) {
+        myInnerHtml('AKused', hasActive ? ' [active]' : '', 0);
+    }
+}
+
 function ClickB_Enemy(enemyID) {
     for (n_B = new Array,
         n_B2 = new Array,

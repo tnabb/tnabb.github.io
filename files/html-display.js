@@ -443,6 +443,9 @@ function updatePlayerDamageDisplay(d) {
     if(d.status_reflect_damage_min > 0 || d.status_reflect_damage_max > 0) {
         setVal("bREFLECT1name", '<span style="color: red">Damage reflected (Shield Reflect)</span>');
         setVal("bREFLECT1", '<b style="color: red">' + d.status_reflect_damage_min + "~" + d.status_reflect_damage_max + '</b>');
+    } else {
+        setVal("bREFLECT1name", "");
+        setVal("bREFLECT1", "");
     }
 
     // --- Expected damage calculation considering TA > DA > Crit priority ---
