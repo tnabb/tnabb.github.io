@@ -2521,20 +2521,7 @@ function Item_Setumei(nC1, nC2) {
 	if (212 <= nC1 && nC1 <= 215)
 		CBIstr += wNAME1[nC1 - 210] + wIS + nC2 + "<BR>";
 	if (220 == nC1)
-		//		CBIstr += "Enables the use of ["+ m_Skill[m_EnableSkill[nC2][2]][2] +"] Lvl "+ m_EnableSkill[nC2][3] +"<BR>";		// original
 		CBIstr += "Enables the use of [" + skillName(m_Skill[m_EnableSkill[nC2][2]][0]) + "] Lvl " + m_EnableSkill[nC2][3] + "<BR>";
-	/*	if(221 == nC1 && n_A_Equip[0] != 939 && n_A_Equip[2] != 1558 && n_A_Equip[0] != 1615 && n_A_Equip[0] != 1616 && n_A_Equip[2] != 1295 && n_A_Equip[2] != 1284 && n_A_Equip[2] != 1482 && n_A_Equip[2] != 1290){	//mejorable: cambiar excepciones por n_tok[222]
-			wNAME99 = [0,"When performing an ATK based attack, ","When performing a melee ATK based attack, ","When performing a long-range ATK based attack, ","When performing a MATK based attack, ","When attacking, ","When receiving ATK based damage, ","When receiving short-range ATK based damage, ","When receiving long-range ATK based damage, ","When receiving MATK based damage, ","When receiving ATK or MATK based damage, ","When dealing ATK or MATK based damage, "];
-			CBIstr += wNAME99[m_AutoSpellSkill[nC2][5]];
-			if(m_AutoSpellSkill[nC2][4] != 0)
-				CBIstr += m_AutoSpellSkill[nC2][4] + "%";
-			else
-				CBIstr += "there's a";
-			CBIstr += " chance to cast ["+ m_Skill[m_AutoSpellSkill[nC2][2]][2] +"]";
-			if(m_AutoSpellSkill[nC2][3] != 0)
-				CBIstr += " Lvl "+ m_AutoSpellSkill[nC2][3];
-			CBIstr += "<BR>";
-		}*/
 	if (221 == nC1) {
 		wNAME99 = [0, "When performing an ATK based attack, ", "When performing a melee ATK based attack, ", "When performing a long-range ATK based attack, ", "When performing a MATK based attack, ", "When attacking, ", "When receiving ATK based damage, ", "When receiving short-range ATK based damage, ", "When receiving long-range ATK based damage, ", "When receiving MATK based damage, ", "When receiving ATK or MATK based damage, ", "When dealing ATK or MATK based damage, "];
 		CBIstr += wNAME99[m_AutoSpellSkill[nC2][5]];

@@ -740,7 +740,7 @@ function allCard() {
 	var all_cards = c.all_card.checked;
 	var i = 0;
 	if (!all_cards) {
-		if(n_A_Equip[0] == 0 || !(m_ForgedItems.includes(n_A_Equip[0]))){
+		if(player.equip[EQI.HAND_R] == 0 || !(m_ForgedItems.includes(player.equip[EQI.HAND_R]))){
 			for (i = 0; m_CardSort[0][i] != "NULL"; i++){
 				c.A_weapon1_card1.options[i] = new Option(m_Card[m_CardSort[0][i]][2], m_Card[m_CardSort[0][i]][0]);
 				c.A_weapon1_card2.options[i] = new Option(m_Card[m_CardSort[0][i]][2], m_Card[m_CardSort[0][i]][0]);
@@ -767,7 +767,7 @@ function allCard() {
 		}
 		
 		/* if (n_Nitou) {
-			if(n_A_Equip[1] == 0 || !(m_ForgedItems.includes(n_A_Equip[1]))){
+			if(player.equip[EQI.HAND_L] == 0 || !(m_ForgedItems.includes(player.equip[EQI.HAND_L]))){
 				for (i = 0; m_CardSort[0][i] != "NULL"; i++){
 					c.A_weapon2_card1.options[i] = new Option(m_Card[m_CardSort[0][i]][2], m_Card[m_CardSort[0][i]][0]);
 					c.A_weapon2_card2.options[i] = new Option(m_Card[m_CardSort[0][i]][2], m_Card[m_CardSort[0][i]][0]);
@@ -1223,54 +1223,52 @@ m_RandomOptCrimsonWeapons = [2105, 2106, 2107, 2108, 2109, 2110, 2111, 2113, 211
 m_RandomOptMineWorkerPickaxe = [2178];
 
 function Click_RandOpt(){
-	n_A_randopt[0] = 1 * c.A_weapon1_ropt1.value;
-	n_A_randopt[1] = 1 * c.WEAP1_ROPT1.value;
-	n_A_randopt[2] = 1 * c.A_weapon1_ropt2.value;
-	n_A_randopt[3] = 1 * c.WEAP1_ROPT2.value;
-	n_A_randopt[4] = 1 * c.A_weapon1_ropt3.value;
-	n_A_randopt[5] = 1 * c.WEAP1_ROPT3.value;
-	n_A_randopt[6] = 1 * c.A_weapon1_ropt4.value;
-	n_A_randopt[7] = 1 * c.WEAP1_ROPT4.value;
+	player.randopt[0] = 1 * c.A_weapon1_ropt1.value;
+	player.randopt[1] = 1 * c.WEAP1_ROPT1.value;
+	player.randopt[2] = 1 * c.A_weapon1_ropt2.value;
+	player.randopt[3] = 1 * c.WEAP1_ROPT2.value;
+	player.randopt[4] = 1 * c.A_weapon1_ropt3.value;
+	player.randopt[5] = 1 * c.WEAP1_ROPT3.value;
+	player.randopt[6] = 1 * c.A_weapon1_ropt4.value;
+	player.randopt[7] = 1 * c.WEAP1_ROPT4.value;
 	if (player.dual_wield) {
-		n_A_randopt[8] = 1 * c.A_weapon2_ropt1.value;
-		n_A_randopt[9] = 1 * c.WEAP2_ROPT1.value;
-		n_A_randopt[10] = 1 * c.A_weapon2_ropt2.value;
-		n_A_randopt[11] = 1 * c.WEAP2_ROPT2.value;
-		n_A_randopt[12] = 1 * c.A_weapon2_ropt3.value;
-		n_A_randopt[13] = 1 * c.WEAP2_ROPT3.value;
-		n_A_randopt[14] = 1 * c.A_weapon2_ropt4.value;
-		n_A_randopt[15] = 1 * c.WEAP2_ROPT4.value;
+		player.randopt[8] = 1 * c.A_weapon2_ropt1.value;
+		player.randopt[9] = 1 * c.WEAP2_ROPT1.value;
+		player.randopt[10] = 1 * c.A_weapon2_ropt2.value;
+		player.randopt[11] = 1 * c.WEAP2_ROPT2.value;
+		player.randopt[12] = 1 * c.A_weapon2_ropt3.value;
+		player.randopt[13] = 1 * c.WEAP2_ROPT3.value;
+		player.randopt[14] = 1 * c.A_weapon2_ropt4.value;
+		player.randopt[15] = 1 * c.WEAP2_ROPT4.value;
 	} else {
-		n_A_randopt[8] = 0;
-		n_A_randopt[9] = 0;
-		n_A_randopt[10] = 0;
-		n_A_randopt[11] = 0;
-		n_A_randopt[12] = 0;
-		n_A_randopt[13] = 0;
-		n_A_randopt[14] = 0;
-		n_A_randopt[15] = 0;
+		player.randopt[8] = 0;
+		player.randopt[9] = 0;
+		player.randopt[10] = 0;
+		player.randopt[11] = 0;
+		player.randopt[12] = 0;
+		player.randopt[13] = 0;
+		player.randopt[14] = 0;
+		player.randopt[15] = 0;
 	}
-	n_A_randopt[16] = 1 * c.A_body_ropt1.value;
-	n_A_randopt[17] = 1 * c.BODY_ROPT1.value;
-	n_A_randopt[18] = 1 * c.A_body_ropt2.value;
-	n_A_randopt[19] = 1 * c.BODY_ROPT2.value;
-	n_A_randopt[20] = 1 * c.A_shoulder_ropt1.value;
-	n_A_randopt[21] = 1 * c.SHOULDER_ROPT1.value;
-	n_A_randopt[22] = 1 * c.A_shoulder_ropt2.value;
-	n_A_randopt[23] = 1 * c.SHOULDER_ROPT2.value;
-	n_A_randopt[24] = 1 * c.A_shoes_ropt1.value;
-	n_A_randopt[25] = 1 * c.SHOES_ROPT1.value;
-	n_A_randopt[26] = 1 * c.A_shoes_ropt2.value;
-	n_A_randopt[27] = 1 * c.SHOES_ROPT2.value;
-
-	//console.log(n_A_randopt);
+	player.randopt[16] = 1 * c.A_body_ropt1.value;
+	player.randopt[17] = 1 * c.BODY_ROPT1.value;
+	player.randopt[18] = 1 * c.A_body_ropt2.value;
+	player.randopt[19] = 1 * c.BODY_ROPT2.value;
+	player.randopt[20] = 1 * c.A_shoulder_ropt1.value;
+	player.randopt[21] = 1 * c.SHOULDER_ROPT1.value;
+	player.randopt[22] = 1 * c.A_shoulder_ropt2.value;
+	player.randopt[23] = 1 * c.SHOULDER_ROPT2.value;
+	player.randopt[24] = 1 * c.A_shoes_ropt1.value;
+	player.randopt[25] = 1 * c.SHOES_ROPT1.value;
+	player.randopt[26] = 1 * c.A_shoes_ropt2.value;
+	player.randopt[27] = 1 * c.SHOES_ROPT2.value;
 }
 
 function RandOptWeapon1Reset(){
-	myInnerHtml("nA_weapon1_ropt1", '<select name="A_weapon1_ropt1" onchange="Click_RandOpt(this[this.selectedIndex].value)|RandOptUpdate(1)" style="width: 218px; background-color: rgb(255, 204, 136);"></select> <input type="text" inputmode="numeric" style="width: 30px; height: 13px;" maxlength="3" onkeypress="return isNumeric(event)" onkeyup="RandOptUpdate(1)" name="WEAP1_ROPT1" value="0" class="center">', 0),
-    myInnerHtml("nA_weapon1_ropt2", '<select name="A_weapon1_ropt2" onchange="Click_RandOpt(this[this.selectedIndex].value)|RandOptUpdate(1)" style="width: 218px; background-color: rgb(255, 204, 136);"></select> <input type="text" inputmode="numeric" style="width: 30px; height: 13px;" maxlength="3" onkeypress="return isNumeric(event)" onkeyup="RandOptUpdate(1)" name="WEAP1_ROPT2" value="0" class="center">', 0),
-    myInnerHtml("nA_weapon1_ropt3", '<select name="A_weapon1_ropt3" onchange="Click_RandOpt(this[this.selectedIndex].value)|RandOptUpdate(1)" style="width: 218px; background-color: rgb(255, 204, 136);"></select> <input type="text" inputmode="numeric" style="width: 30px; height: 13px;" maxlength="3" onkeypress="return isNumeric(event)" onkeyup="RandOptUpdate(1)" name="WEAP1_ROPT3" value="0" class="center">', 0),
-    myInnerHtml("nA_weapon1_ropt4", '<select name="A_weapon1_ropt4" onchange="Click_RandOpt(this[this.selectedIndex].value)|RandOptUpdate(1)" style="width: 218px; background-color: rgb(255, 204, 136);"></select> <input type="text" inputmode="numeric" style="width: 30px; height: 13px;" maxlength="3" onkeypress="return isNumeric(event)" onkeyup="RandOptUpdate(1)" name="WEAP1_ROPT4" value="0" class="center">', 0);
+	myInnerHtml("nA_weapon1_ropt1", '<select name="A_weapon1_ropt1" onchange="Click_RandOpt(this[this.selectedIndex].value)|RandOptUpdate()" style="width: 218px; background-color: rgb(255, 204, 136);"></select> <input type="text" inputmode="numeric" style="width: 30px; height: 13px;" maxlength="3" onkeypress="return isNumeric(event)" onkeyup="RandOptUpdate()" name="WEAP1_ROPT1" value="0" class="center">', 0),
+    myInnerHtml("nA_weapon1_ropt2", '<select name="A_weapon1_ropt2" onchange="Click_RandOpt(this[this.selectedIndex].value)|RandOptUpdate()" style="width: 218px; background-color: rgb(255, 204, 136);"></select> <input type="text" inputmode="numeric" style="width: 30px; height: 13px;" maxlength="3" onkeypress="return isNumeric(event)" onkeyup="RandOptUpdate()" name="WEAP1_ROPT2" value="0" class="center">', 0),
+    myInnerHtml("nA_weapon1_ropt3", '<select name="A_weapon1_ropt3" onchange="Click_RandOpt(this[this.selectedIndex].value)|RandOptUpdate()" style="width: 218px; background-color: rgb(255, 204, 136);"></select> <input type="text" inputmode="numeric" style="width: 30px; height: 13px;" maxlength="3" onkeypress="return isNumeric(event)" onkeyup="RandOptUpdate()" name="WEAP1_ROPT3" value="0" class="center">', 0),
+    myInnerHtml("nA_weapon1_ropt4", '<select name="A_weapon1_ropt4" onchange="Click_RandOpt(this[this.selectedIndex].value)|RandOptUpdate()" style="width: 218px; background-color: rgb(255, 204, 136);"></select> <input type="text" inputmode="numeric" style="width: 30px; height: 13px;" maxlength="3" onkeypress="return isNumeric(event)" onkeyup="RandOptUpdate()" name="WEAP1_ROPT4" value="0" class="center">', 0);
     c.A_weapon1_ropt1.options[0] = new Option(m_RandomOpt[0][1], m_RandomOpt[0][0]);
     c.A_weapon1_ropt2.options[0] = new Option(m_RandomOpt[0][1], m_RandomOpt[0][0]);
     c.A_weapon1_ropt3.options[0] = new Option(m_RandomOpt[0][1], m_RandomOpt[0][0]);
@@ -1278,10 +1276,10 @@ function RandOptWeapon1Reset(){
 }
 
 function RandOptWeapon2Reset(){
-	myInnerHtml("nA_weapon2_ropt1", '<select name="A_weapon2_ropt1" onchange="Click_RandOpt(this[this.selectedIndex].value)|RandOptUpdate(1)" style="width: 218px; background-color: rgb(255, 204, 136);"></select> <input type="text" inputmode="numeric" style="width: 30px; height: 13px;" maxlength="3" onkeypress="return isNumeric(event)" onkeyup="RandOptUpdate(1)" name="WEAP2_ROPT1" value="0" class="center">', 0),
-	myInnerHtml("nA_weapon2_ropt2", '<select name="A_weapon2_ropt2" onchange="Click_RandOpt(this[this.selectedIndex].value)|RandOptUpdate(1)" style="width: 218px; background-color: rgb(255, 204, 136);"></select> <input type="text" inputmode="numeric" style="width: 30px; height: 13px;" maxlength="3" onkeypress="return isNumeric(event)" onkeyup="RandOptUpdate(1)" name="WEAP2_ROPT2" value="0" class="center">', 0),
-	myInnerHtml("nA_weapon2_ropt3", '<select name="A_weapon2_ropt3" onchange="Click_RandOpt(this[this.selectedIndex].value)|RandOptUpdate(1)" style="width: 218px; background-color: rgb(255, 204, 136);"></select> <input type="text" inputmode="numeric" style="width: 30px; height: 13px;" maxlength="3" onkeypress="return isNumeric(event)" onkeyup="RandOptUpdate(1)" name="WEAP2_ROPT3" value="0" class="center">', 0),
-	myInnerHtml("nA_weapon2_ropt4", '<select name="A_weapon2_ropt4" onchange="Click_RandOpt(this[this.selectedIndex].value)|RandOptUpdate(1)" style="width: 218px; background-color: rgb(255, 204, 136);"></select> <input type="text" inputmode="numeric" style="width: 30px; height: 13px;" maxlength="3" onkeypress="return isNumeric(event)" onkeyup="RandOptUpdate(1)" name="WEAP2_ROPT4" value="0" class="center">', 0);
+	myInnerHtml("nA_weapon2_ropt1", '<select name="A_weapon2_ropt1" onchange="Click_RandOpt(this[this.selectedIndex].value)|RandOptUpdate()" style="width: 218px; background-color: rgb(255, 204, 136);"></select> <input type="text" inputmode="numeric" style="width: 30px; height: 13px;" maxlength="3" onkeypress="return isNumeric(event)" onkeyup="RandOptUpdate()" name="WEAP2_ROPT1" value="0" class="center">', 0),
+	myInnerHtml("nA_weapon2_ropt2", '<select name="A_weapon2_ropt2" onchange="Click_RandOpt(this[this.selectedIndex].value)|RandOptUpdate()" style="width: 218px; background-color: rgb(255, 204, 136);"></select> <input type="text" inputmode="numeric" style="width: 30px; height: 13px;" maxlength="3" onkeypress="return isNumeric(event)" onkeyup="RandOptUpdate()" name="WEAP2_ROPT2" value="0" class="center">', 0),
+	myInnerHtml("nA_weapon2_ropt3", '<select name="A_weapon2_ropt3" onchange="Click_RandOpt(this[this.selectedIndex].value)|RandOptUpdate()" style="width: 218px; background-color: rgb(255, 204, 136);"></select> <input type="text" inputmode="numeric" style="width: 30px; height: 13px;" maxlength="3" onkeypress="return isNumeric(event)" onkeyup="RandOptUpdate()" name="WEAP2_ROPT3" value="0" class="center">', 0),
+	myInnerHtml("nA_weapon2_ropt4", '<select name="A_weapon2_ropt4" onchange="Click_RandOpt(this[this.selectedIndex].value)|RandOptUpdate()" style="width: 218px; background-color: rgb(255, 204, 136);"></select> <input type="text" inputmode="numeric" style="width: 30px; height: 13px;" maxlength="3" onkeypress="return isNumeric(event)" onkeyup="RandOptUpdate()" name="WEAP2_ROPT4" value="0" class="center">', 0);
 	c.A_weapon2_ropt1.options[0] = new Option(m_RandomOpt[0][1], m_RandomOpt[0][0]);
 	c.A_weapon2_ropt2.options[0] = new Option(m_RandomOpt[0][1], m_RandomOpt[0][0]);
 	c.A_weapon2_ropt3.options[0] = new Option(m_RandomOpt[0][1], m_RandomOpt[0][0]);
@@ -1403,16 +1401,16 @@ function LoadWeaponEnchants(id, oldWeaponId){
 	}
 }
 
-function loadNotes(e){
+function loadNotes(monsterId){
     resetNotesStats();
 	_ = '<tbody>',
 	_ += '<tr><td colspan="12" class="subheader" style="background-color: rgb(68, 102, 102);">Notes:</td></tr>';
 	for(i = 0; i < m_MonsterNotes.length; i++){
-		if(e == m_MonsterNotes[i][0]){
+		if(monsterId == m_MonsterNotes[i][0]){
 			_ += '<tr><td class="left" style="font-weight: bold">Monster:</td></tr>'
 			for(j = 1; j < m_MonsterNotes[i].length && m_MonsterNotes[i][j] != "NULL"; j += 2){
 				_ += Notes_Setumei(m_MonsterNotes[i][j], m_MonsterNotes[i][j + 1]);
-				n_M_debuff[m_MonsterNotes[i][j]] = m_MonsterNotes[i][j + 1];
+				monster.notes[m_MonsterNotes[i][j]] = m_MonsterNotes[i][j + 1];
 			}
 			break
 		}
@@ -1422,7 +1420,7 @@ function loadNotes(e){
 			_ += '<tr><td class="left" style="font-weight: bold">' + v_Place[m_PlaceNotes[i][0]] + ':</td></tr>'
 			for(j = 1; j < m_PlaceNotes[i].length && m_PlaceNotes[i][j] != "NULL"; j += 2){
 				_ += Notes_Setumei(m_PlaceNotes[i][j], m_PlaceNotes[i][j + 1]);
-				n_M_debuff[m_PlaceNotes[i][j]] = m_PlaceNotes[i][j + 1];
+				monster.notes[m_PlaceNotes[i][j]] = m_PlaceNotes[i][j + 1];
 			}
 		}
 	}
@@ -1451,9 +1449,7 @@ function NotesCalc(e, _){
 }
 
 function resetNotesStats(){
-	for(i = 0; i < n_M_debuff.length; i++){
-		n_M_debuff[i] = 0;
-	}
+	monster.notes = [];
 }
 
 function Notes_Setumei(nC1, nC2){

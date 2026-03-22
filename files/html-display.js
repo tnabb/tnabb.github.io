@@ -448,6 +448,14 @@ function updatePlayerDamageDisplay(d) {
         setVal("bREFLECT1", "");
     }
 
+    if(d.item_reflect_damage_min > 0 || d.item_reflect_damage_max > 0) {
+        setVal("bREFLECT2name", '<span style="color: red">Damage reflected (equip/card)</span>');
+        setVal("bREFLECT2", '<b style="color: red">' + d.item_reflect_damage_min + "~" + d.item_reflect_damage_max + '</b>');
+    } else {
+        setVal("bREFLECT2name", "");
+        setVal("bREFLECT2", "");
+    }
+
     // --- Expected damage calculation considering TA > DA > Crit priority ---
     let canCrit = (d.crit_from_sr_buff && d.skill_id != SKILL.MO_EXTREMITYFIST && d.skill_id != SKILL.MO_EXTREMITYFIST_MAXSP && d.skill_id != SKILL.CR_GRANDCROSS && d.skill_id != SKILL.NPC_GRANDDARKNESS) || d.skill_id == 0 || skill_can_crit(d.skill_id);
 
@@ -766,7 +774,7 @@ function displayOtherInfo(val) {
             break;
         case 10: // weight limit
             let maxWeight = JOB_WEIGHT[player.status.job_id] + player.status.str * 300;
-            if(n_A_Buf8[0] == 79) // wild rose pet
+            if(player.pet == 79) // wild rose pet
                 maxWeight += 6000;
             if(c.A_KakutyouChk.checked) // elite gym pass
                 maxWeight += 2000;
@@ -943,7 +951,7 @@ function displayOtherInfo(val) {
             displayData += `<table><tbody>`;
             displayData += `<tr><td><b>Magic damage vs All:</b> ${player.indexed_bonus.magic_addclass[CLASS.ALL]}%</td></tr>`;
             displayData += `<tr><td><b>Magic damage vs Boss:</b> ${player.indexed_bonus.magic_addclass[CLASS.BOSS]}%</td></tr>`;
-            displayData += `<tr><td><b>Magic DEF pierce on All targets:</b> ${player.indexed_bonus.ignore_mdef_by_class[CLASS.ALL]}%</td></tr>`;
+            displayData += `<tr><td><b>MDEF pierce on All targets:</b> ${player.indexed_bonus.ignore_mdef_by_class[CLASS.ALL]}%</td></tr>`;
             displayData += `</tbody></table>`;
             displayData += `<hr>`;
             displayData += `<table><tbody>`;

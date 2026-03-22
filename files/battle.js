@@ -1581,6 +1581,9 @@ function battle_calc_return_damage(target, src, dmg, flag, skill_id, status_refl
         if(!status_reflect && tsd && tsd.bonus.short_weapon_damage_return) {
             reflect_flag = true;
             rdamage += Math.trunc((damage * tsd.bonus.short_weapon_damage_return) / 100);
+        } else if(!status_reflect && target.type == BL.MOB && manualedits_get(monster, 71)) {
+            reflect_flag = true;
+            rdamage += Math.trunc((damage * manualedits_get(monster, 71).value) / 100);
         } else if (status_reflect) {
             if(sc_get(target, SC.SHIELDREFLECT) && skill_id != SKILL.WS_CARTTERMINATION) { // reflect shield
                 reflect_flag = true;
@@ -1591,6 +1594,9 @@ function battle_calc_return_damage(target, src, dmg, flag, skill_id, status_refl
         if(!status_reflect && tsd && tsd.bonus.long_weapon_damage_return) {
             reflect_flag = true;
             rdamage += Math.trunc((damage * tsd.bonus.long_weapon_damage_return) / 100);
+        } else if(!status_reflect && target.type == BL.MOB && manualedits_get(monster, 71)) {
+            reflect_flag = true;
+            rdamage += Math.trunc((damage * manualedits_get(monster, 71).value) / 100);
         }
     }
 
@@ -2134,6 +2140,8 @@ function battle_calc_cardfix(attack_type, src, target, skill_id, rh_ele, lh_ele,
     battleDebug && console.log(`[battle_calc_cardfix] START â€” attack_type=${attack_type}, damage=${damage}, left=${left}, rh_ele=${rh_ele}, lh_ele=${lh_ele}`);
     let sd = is_player_object(src) ? src : null; // get player data if src is player, otherwise null
     let tsd = is_player_object(target) ? target : null; // get player data if target is player, otherwise null
+    let md = is_monster_object(src) ? src : null; // get monster data if src is monster, otherwise null
+    let dstmd = is_monster_object(target) ? target : null; // get monster data if target is monster, otherwise null
     let sstatus = status_get_status_data(src);
     let tstatus = status_get_status_data(target);
     let cardfix = 1000;
@@ -2248,6 +2256,49 @@ function battle_calc_cardfix(attack_type, src, target, skill_id, rh_ele, lh_ele,
 
                 if(sc_get(target, SC.MDEF_RATE))
                     cardfix = Math.trunc((cardfix * (100 - sc_get(target, SC.MDEF_RATE).val1)) / 100);
+
+                damage = APPLY_CARDFIX(damage, cardfix);
+            }
+
+            if(src.type == BL.MOB && !skill_ignores_atkcard(skill_id)) {
+                cardfix = 1000;
+
+                if(manualedits_get(monster, 354))
+                    cardfix = Math.trunc((cardfix * (100 + manualedits_get(monster, 354).value)) / 100);
+
+                damage = APPLY_CARDFIX(damage, cardfix);
+            } 
+
+            if(target.type == BL.MOB && !skill_ignores_defcard(skill_id)) {
+                cardfix = 1000;
+
+                if(!skill_ignores_element(skill_id)) {
+                    let ele_fix = 0;
+                    if(manualedits_get(monster, 6000 + rh_ele))
+                        ele_fix += manualedits_get(monster, 6000 + rh_ele).value;
+                    if(manualedits_get(monster, 6010 + rh_ele))
+                        ele_fix += manualedits_get(monster, 6010 + rh_ele).value;
+
+                    if(ele_fix)
+                        cardfix = Math.trunc((cardfix * (100 - ele_fix)) / 100);
+                }
+
+                let racefix = 0;
+                if(manualedits_get(monster, 604))
+                    racefix += manualedits_get(monster, 604).value;
+                cardfix = Math.trunc((cardfix * (100 - racefix)) / 100);
+
+                let sizefix = 0;
+                if(manualedits_get(monster, 602))
+                    sizefix += manualedits_get(monster, 602).value;
+                cardfix = Math.trunc((cardfix * (100 - sizefix)) / 100);
+
+                let longrangefix = 0;
+                if(manualedits_get(monster, 78))
+                    longrangefix += manualedits_get(monster, 78).value;
+
+                if(longrangefix && !skill_ignores_longcard(skill_id) && !(flag&BF.SHORT))
+                    cardfix = Math.trunc((cardfix * (100 - longrangefix)) / 100);
 
                 damage = APPLY_CARDFIX(damage, cardfix);
             }
@@ -2432,6 +2483,48 @@ function battle_calc_cardfix(attack_type, src, target, skill_id, rh_ele, lh_ele,
                     cardfix = Math.trunc((cardfix * (100 - sc_get(target, SC.DEF_RATE).val1)) / 100);
                 damage = APPLY_CARDFIX(damage, cardfix);
             }
+
+            if(src.type == BL.MOB && !skill_ignores_atkcard(skill_id)) {
+                cardfix = 1000;
+
+                if(manualedits_get(monster, 80))
+                    cardfix = Math.trunc((cardfix * (100 + manualedits_get(monster, 80).value)) / 100);
+                damage = APPLY_CARDFIX(damage, cardfix);
+            }
+
+            if(target.type == BL.MOB && !skill_ignores_defcard(skill_id)) {
+                cardfix = 1000;
+
+                if(!skill_ignores_element(skill_id)) {
+                    let ele_fix = 0;
+                    if(manualedits_get(monster, 6000 + rh_ele))
+                        ele_fix += manualedits_get(monster, 6000 + rh_ele).value;
+                    if(manualedits_get(monster, 6010 + rh_ele))
+                        ele_fix += manualedits_get(monster, 6010 + rh_ele).value;
+
+                    if(ele_fix)
+                        cardfix = Math.trunc((cardfix * (100 - ele_fix)) / 100);
+                }
+
+                let racefix = 0;
+                if(manualedits_get(monster, 604))
+                    racefix += manualedits_get(monster, 604).value;
+                cardfix = Math.trunc((cardfix * (100 - racefix)) / 100);
+
+                let sizefix = 0;
+                if(manualedits_get(monster, 602))
+                    sizefix += manualedits_get(monster, 602).value;
+                cardfix = Math.trunc((cardfix * (100 - sizefix)) / 100);
+
+                let longrangefix = 0;
+                if(manualedits_get(monster, 78))
+                    longrangefix += manualedits_get(monster, 78).value;
+
+                if(longrangefix && !skill_ignores_longcard(skill_id) && (flag&BF.LONG))
+                    cardfix = Math.trunc((cardfix * (100 - longrangefix)) / 100);
+
+                damage = APPLY_CARDFIX(damage, cardfix);
+            }
             break;
         
         case BF.MISC:
@@ -2477,6 +2570,40 @@ function battle_calc_cardfix(attack_type, src, target, skill_id, rh_ele, lh_ele,
                     cardfix = Math.trunc((cardfix * (100 - tsd.bonus.near_attack_def_rate)) / 100);
                 else if(!skill_ignores_longcard(skill_id))
                     cardfix = Math.trunc((cardfix * (100 - tsd.bonus.long_attack_def_rate)) / 100);
+                damage = APPLY_CARDFIX(damage, cardfix);
+            }
+
+            if(target.type == BL.MOB && !skill_ignores_defcard(skill_id)) {
+                cardfix = 1000;
+
+                if(!skill_ignores_element(skill_id) && !(skill_id == SKILL.ASC_BREAKER)) {
+                    let ele_fix = 0;
+                    if(manualedits_get(monster, 6000 + rh_ele))
+                        ele_fix += manualedits_get(monster, 6000 + rh_ele).value;
+                    if(manualedits_get(monster, 6010 + rh_ele))
+                        ele_fix += manualedits_get(monster, 6010 + rh_ele).value;
+
+                    if(ele_fix)
+                        cardfix = Math.trunc((cardfix * (100 - ele_fix)) / 100);
+                }
+
+                let racefix = 0;
+                if(manualedits_get(monster, 604))
+                    racefix += manualedits_get(monster, 604).value;
+                cardfix = Math.trunc((cardfix * (100 - racefix)) / 100);
+
+                let sizefix = 0;
+                if(manualedits_get(monster, 602))
+                    sizefix += manualedits_get(monster, 602).value;
+                cardfix = Math.trunc((cardfix * (100 - sizefix)) / 100);
+
+                let longrangefix = 0;
+                if(manualedits_get(monster, 78))
+                    longrangefix += manualedits_get(monster, 78).value;
+
+                if(longrangefix && !skill_ignores_longcard(skill_id) && !(flag&BF.SHORT))
+                    cardfix = Math.trunc((cardfix * (100 - longrangefix)) / 100);
+
                 damage = APPLY_CARDFIX(damage, cardfix);
             }
             break;
@@ -2604,7 +2731,7 @@ function battle_calc_element_damage(wd, src, target, skill_id, skill_lv) {
     if(sd && !skill_ignores_element(skill_id) && !skill_ignores_atkcard(skill_id) && ((wd.getAverageDamage() > 0 || wd.getAverageDamage2() > 0) || (wd.getAverageCritDamage() > 0 || wd.getAverageCritDamage2() > 0))) {
         if(SkillSearch(SKILL.ASC_EDP)) {
             let edp_rate = 50 * (SkillSearch(SKILL.ASC_EDP) + 1);
-            let edp_dmg_rate = n_M_debuff[0];
+            let edp_dmg_rate = monster.notes[0];
             if(edp_dmg_rate != 0)
                 edp_rate = Math.trunc(edp_rate * edp_dmg_rate / 100);
             battleDebug && console.log(`[battle_calc_element_damage] EDP â€” edp_lv=${SkillSearch(SKILL.ASC_EDP)}, edp_rate=${edp_rate}, edp_dmg_rate=${edp_dmg_rate}, damage_min before=${wd.damage_min}, damage_max before=${wd.damage_max}, crit_damage_min before=${wd.crit_damage_min}, crit_damage_max before=${wd.crit_damage_max}`);
@@ -3094,7 +3221,10 @@ function battle_calc_attack_skill_ratio(wd, src, target, skill_id, skill_lv) {
 			skillratio += 75 * skill_lv;
 			break;
 		case SKILL.MO_EXTREMITYFIST:
-			skillratio += 700 + (1 * c.SkillSubNum.value) * 10;
+            if(src.type == BL.PC)
+			    skillratio += 700 + (1 * c.SkillSubNum.value) * 10;
+            else
+                skillratio += 700;
             break;
         case SKILL.MO_EXTREMITYFIST_MAXSP:
             skillratio += 700 + (sstatus.max_sp) * 10;
@@ -4037,7 +4167,7 @@ function battle_range_type(src, target, skill_id, skill_lv) {
         
         case SKILL.TK_JUMPKICK:
         case SKILL.TK_JUMPKICK_SPRINT:
-            if(!player.pvp)
+            if(1 * c.A8_Skill14.value == 1)
                 return BF.SHORT;
             break;
     }

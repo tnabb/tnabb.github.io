@@ -1199,3 +1199,16 @@ function sc_end(bl, type) {
 function sc_get(bl, type) {
     return bl.sc.find(sc => sc.type == type) || null;
 }
+
+function manualedits_start(bl, type, val = 0) {
+    bl.manual_edits = bl.manual_edits.filter(edit => edit.type != type);
+    bl.manual_edits.push(new ManualEdit(type, val));
+}
+
+function manualedits_end(bl, type) {
+    bl.manual_edits = bl.manual_edits.filter(edit => edit.type != type);
+}
+
+function manualedits_get(bl, type) {
+    return bl.manual_edits.find(edit => edit.type == type) || null;
+}

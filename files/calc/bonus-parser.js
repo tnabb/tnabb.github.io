@@ -560,32 +560,19 @@ function ParseItemScripts() {
         }
     }
 
-    // Parse item combos from w_SE
-    for (let i = 0; i <= SE_MAXnum; i++) {
-        // Check if all member items (indices 1+) are equipped
-        let allEquipped = true;
-        for (let k = 1; w_SE[i][k] !== "NULL"; k++) {
-            let found = false;
-            for (let slot = 0; slot < EQI.MAX; slot++) {
-                if (player.equip[slot] === w_SE[i][k]) {
-                    found = true;
-                    break;
-                }
-            }
-            if (!found) { allEquipped = false; break; }
-        }
-
-        if (!allEquipped) continue;
-
-        // All combo members equipped — parse the combo bonus item's effects
-        const comboItemId = w_SE[i][0];
-        if (!m_Item[comboItemId]) continue;
-
+    // Parse item combos — player.equip[EQI.MAX..20] contains active combo item IDs
+    // populated by populateEquipCombos() in PopulatePlayerData
+    for (let i = EQI.MAX; i < player.equip.length; i++) {
+        const comboItemId = player.equip[i];
+        if (!comboItemId || !m_Item[comboItemId]) continue;
+ 
         for (let j = 11; m_Item[comboItemId][j] !== 0 && m_Item[comboItemId][j] !== undefined; j += 2) {
+            console.log("Parsing combo item bonus: comboItemId=" + comboItemId + ", effectId=" + m_Item[comboItemId][j] + ", value=" + m_Item[comboItemId][j + 1]);
             const effectId = m_Item[comboItemId][j];
             const value = m_Item[comboItemId][j + 1];
             // Skip effect 90 (combo marker, not a real bonus)
             if (effectId && effectId !== 90 && value !== undefined) {
+                console.log("Applying combo item bonus: effectId=" + effectId + ", value=" + value);
                 PlayerApplyBonus(effectId, value);
             }
         }
@@ -618,7 +605,7 @@ function ParseAdditionalScripts() {
     }
     
     // Parse pet effects
-    const petId = n_A_Buf8[0];
+    const petId = player.pet;
     if (petId && m_PET[petId]) {
         // Pet effects start at index 3
         // Format: [effectId, value, effectId, value, ..., 0]
@@ -639,10 +626,6 @@ function ParseAdditionalScripts() {
         
         const enchant = m_Enchant[enchantId];
         
-        if (debug && enchant[1]) {
-            console.log(`[ParseItemScripts] Parsing enchant slot ${slot}: ${enchant[1]}`);
-        }
-        
         // Enchant effects start at index 2
         // Format: [effectId, value, effectId, value, ..., 0]
         for (let i = 2; enchant[i] !== 0 && enchant[i] !== undefined; i += 2) {
@@ -651,7 +634,6 @@ function ParseAdditionalScripts() {
             
             if (effectId && value !== undefined) {
                 PlayerApplyBonus(effectId, value);
-                effectsApplied++;
             }
         }
     }
@@ -660,7 +642,7 @@ function ParseAdditionalScripts() {
     const seenTempEffects = new Set();
     
     for (let i = 0; i <= 3; i++) {
-        const tempEffectId = n_A_Buf8[8 + i];
+        const tempEffectId = player.temp_effect[i];
         
         // Skip if 0, not found, or already processed (duplicate)
         if (!tempEffectId || !m_TempEffect[tempEffectId] || seenTempEffects.has(tempEffectId)) {
@@ -680,113 +662,23 @@ function ParseAdditionalScripts() {
             }
         }
     }
-    
-    // Parse buff-based bonuses (n_A_Buf9 array)
-    // Race/Element damage bonuses
-    for (let i = 0; i < 8; i += 2) {
-        if (n_A_Buf9[i] < 20) {
-            const effectId = n_A_Buf9[i] + 30; // Maps to race/element bonuses
-            const value = n_A_Buf9[i + 1];
-            if (value) {
-                PlayerApplyBonus(effectId, value);
-            }
+
+    for(let i = 0; i < player.manual_edits.length; i++) {
+        let type = player.manual_edits[i].type;
+        let value = player.manual_edits[i].value;
+
+        if(type == 73)
+            value = -value;
+
+        if(type && value) {
+            PlayerApplyBonus(type, value);
         }
-    }
-    
-    // Size damage bonuses
-    for (let i = 0; i < 8; i += 2) {
-        if (n_A_Buf9[i] >= 20 && n_A_Buf9[i] < 23) {
-            const effectId = n_A_Buf9[i] + 7; // Maps to size bonuses
-            const value = n_A_Buf9[i + 1];
-            if (value) {
-                PlayerApplyBonus(effectId, value);
-            }
-        }
-    }
-    
-    // Type-based damage bonuses (Boss, Normal, etc.)
-    for (let i = 0; i < 8; i += 2) {
-        const buffType = n_A_Buf9[i];
-        const value = n_A_Buf9[i + 1];
-        
-        if (buffType === 23) {
-            PlayerApplyBonus(26, value); // Boss damage
-        } else if (buffType === 24) {
-            PlayerApplyBonus(81, value); // Race2 related
-        } else if (buffType === 25) {
-            PlayerApplyBonus(84, value); // Race2 related
-        } else if (buffType === 26) {
-            PlayerApplyBonus(1063, value); // Special case
-        } else if (buffType === 27 || buffType === 28) {
-            PlayerApplyBonus(buffType + 55, value);
-        } else if (buffType === 29) {
-            PlayerApplyBonus(1495, value); // Special case
-        }
-    }
-    
-    // Resistance bonuses (element and race)
-    for (let i = 8; i < 16; i += 2) {
-        if (n_A_Buf9[i] < 20) {
-            const effectId = n_A_Buf9[i] + 50; // Maps to resistance bonuses
-            const value = n_A_Buf9[i + 1];
-            if (value) {
-                PlayerApplyBonus(effectId, value);
-            }
-        }
-    }
-    
-    // Size resistance
-    for (let i = 8; i < 16; i += 2) {
-        if (n_A_Buf9[i] >= 20 && n_A_Buf9[i] < 23) {
-            const effectId = n_A_Buf9[i] + 170; // Maps to size resistance
-            const value = n_A_Buf9[i + 1];
-            if (value) {
-                PlayerApplyBonus(effectId, value);
-            }
-        }
-    }
-    
-    // Type resistance (Boss, Normal)
-    for (let i = 8; i < 16; i += 2) {
-        const buffType = n_A_Buf9[i];
-        const value = n_A_Buf9[i + 1];
-        
-        if (buffType === 23) {
-            PlayerApplyBonus(77, value); // Boss resistance
-        } else if (buffType === 24) {
-            PlayerApplyBonus(79, value); // Normal resistance
-        } else if (buffType === 25) {
-            PlayerApplyBonus(3063, value); // Special resistance
-        }
-    }
-    
-    // Stats from Buf9 (indices 47-52)
-    for (let i = 47; i < 53; i++) {
-        const statIndex = i - 46; // Maps to stats 1-6 (STR, AGI, VIT, INT, DEX, LUK)
-        const value = n_A_Buf9[i];
-        if (value) {
-            PlayerApplyBonus(statIndex, value);
-        }
-    }
-    
-    // Special buff bonuses
-    if (n_A_Buf9[41]) {
-        PlayerApplyBonus(80, n_A_Buf9[41]); // ATK damage vs all targets
-    }
-    if (n_A_Buf9[16]) {
-        PlayerApplyBonus(290, n_A_Buf9[16]); // DEF ignore
-    }
-    if (n_A_Buf9[17]) {
-        PlayerApplyBonus(295, n_A_Buf9[17]); // MDEF ignore
-    }
-    if (n_A_Buf9[18]) {
-        PlayerApplyBonus(78, n_A_Buf9[18]); // Long range resistance
     }
     
     // Parse random options (27 slots total, paired as option_id + value)
     for (let i = 0; i <= 26; i += 2) {
-        const optionId = n_A_randopt[i];
-        const optionValue = n_A_randopt[i + 1];
+        const optionId = player.randopt[i];
+        const optionValue = player.randopt[i + 1];
         
         if (!optionId || !m_RandomOpt[optionId]) continue;
         
@@ -1052,8 +944,6 @@ function CalculateEquipmentBonuses() {
         status.def += 6;
     if(player.equip[EQI.ARMOR] == 986 && (n_A_JobClass() == JOB.SWORDMAN || n_A_JobClass() == JOB.MERCHANT || n_A_JobClass() == JOB.THIEF)) // chameleon armor
         status.def += 3;
-    if(TimeItemNumSearch(2)) // ice titan card temp effect
-        status.def += 10;
     if(TimeItemNumSearch(8)) // ulfhedinn temp effect
         status.def += 20;
     if(TimeItemNumSearch(19)) // mithril magic cape
@@ -1103,8 +993,6 @@ function CalculateEquipmentBonuses() {
         status.flee += 10 * EquipNumSearch(442);
     if(TimeItemNumSearch(1)) // isilla temp effect
         status.flee += 30 * TimeItemNumSearch(1);
-    if(TimeItemNumSearch(12)) // shadow guard set
-        status.flee += 20;
 
     // flat perfect dodge calculations
 
@@ -1699,13 +1587,7 @@ function CalculateAdditionalBonuses() {
     if(CardNumSearch(267) > 0 && player.status.str >= 80) // giant whisper card
         status.batk += 20;
 
-    // manual edits
-    if(n_A_Buf9[40])
-        status.batk += n_A_Buf9[40];
-
     // atk% calculations - this is the atk% that increases atk so not used 
-
-    // if(n_A_Buf9[53]) - get rid of this and replace with something else
 
     // flat max hp calculations
     if(CardNumSearch(474) > 0 && n_A_JobClass() == JOB.MAGICIAN) // banshee card
@@ -1714,10 +1596,6 @@ function CalculateAdditionalBonuses() {
         status.max_hp += 500 * CardNumSearch(477);
     if(CardNumSearch(186) > 0) // remover card
         status.max_hp -= 40 * player.refine[EQI.ARMOR];
-
-    // manual edits
-    if(n_A_Buf9[30])
-        status.max_hp += n_A_Buf9[30];
 
     // max hp % calculations
 
@@ -1740,10 +1618,6 @@ function CalculateAdditionalBonuses() {
     if(CardNumSearch(405) > 0 && (n_A_JobClass() == JOB.SWORDMAN || n_A_JobClass() == JOB.THIEF || n_A_JobClass() == JOB.MERCHANT))
         player.hprate += 5;
 
-    // manual edits
-    if(n_A_Buf9[31])
-        player.hprate += n_A_Buf9[31];
-
     // flat max sp calculations
 
     if(player.card[9] == 179) // blue acidus card on mid headgear
@@ -1756,10 +1630,6 @@ function CalculateAdditionalBonuses() {
         status.max_sp += 100 * CardNumSearch(474);
     if(CardNumSearch(476) > 0 && n_A_JobClass() == JOB.MAGICIAN) // agav card
         status.max_sp += 100;
-
-    // manual edits
-    if(n_A_Buf9[32])
-        status.max_sp += n_A_Buf9[32];
 
     // max sp % calculations
 
@@ -1774,10 +1644,6 @@ function CalculateAdditionalBonuses() {
     if(CardNumSearch(662) > 0) // abandoned teddy bear card
         player.sprate += player.refine[EQI.SHOES];
 
-    // manual edits
-    if(n_A_Buf9[33])
-        player.sprate += n_A_Buf9[33];
-
     // flat def calculations
 
     if(CardNumSearch(222) > 0 && player.refine[EQI.SHIELD] <= 5) // arclouze card
@@ -1786,10 +1652,6 @@ function CalculateAdditionalBonuses() {
         status.def += 2;
     if(CardNumSearch(392) > 0) // tao gunka card
         status.def -= 50;
-
-    // manual edits
-    if(n_A_Buf9[34])
-        status.def += n_A_Buf9[34];
 
     // flat mdef calculations
 
@@ -1820,26 +1682,12 @@ function CalculateAdditionalBonuses() {
     if(CardNumSearch(392) > 0) // tao gunka card
         status.mdef -= 50;
 
-    // manual edits
-    if(n_A_Buf9[35])
-        status.mdef += n_A_Buf9[35];
-
     // flat hit calculations
 
     if(CardNumSearch(492) > 0) // ifrit card
         status.hit += Math.floor(player.status.job_level / 10) * CardNumSearch(492);
     if(CardNumSearch(465) > 0 && player.weapontype1 == WEAPON.BOW) // bow guardian card
         status.hit += 5 * CardNumSearch(465);
-
-    // manual edits
-    if(n_A_Buf9[36])
-        status.hit += n_A_Buf9[36];
-
-    // perfect hit calculations
-
-    // manual edits
-    if(n_A_Buf9[55])
-        player.bonus.perfect_hit_add += n_A_Buf9[55];
 
     // flat flee calculations
 
@@ -1858,10 +1706,6 @@ function CalculateAdditionalBonuses() {
     if(CardNumSearch(595) > 0) // baba yaga card
         status.flee += player.refine[EQI.SHOES] * 2;
 
-    // manual edits
-    if(n_A_Buf9[37])
-        status.flee += n_A_Buf9[37];
-
     // perfect dodge calculations
 
     if(CardNumSearch(354) > 0 && n_A_JobClass() == JOB.SWORDMAN) // heater card
@@ -1870,10 +1714,6 @@ function CalculateAdditionalBonuses() {
         status.flee2 += 5;
     if(CardNumSearch(401) > 0 && player.refine[EQI.GARMENT] <= 4) // kavach icarus card
         status.flee2 += 1;
-
-    // manual edits
-    if(n_A_Buf9[38])
-        status.flee2 += n_A_Buf9[38];
 
     // flat crit calculations
 
@@ -1898,21 +1738,9 @@ function CalculateAdditionalBonuses() {
     if(CardNumSearch(462) > 0) // drosera card
         player.bonus.critical_rangeatk += (15 * CardNumSearch(462)) * 10;
 
-    // manual edits
-    if(n_A_Buf9[39])
-        status.cri += n_A_Buf9[39] * 10;
-
     // flat matk calculations
 
-    // manual edits
-    if(n_A_Buf9[42])
-        player.bonus.ematk += n_A_Buf9[42];
-
     // matk% calculations
-
-    // manual edits
-    if(n_A_Buf9[43])
-        player.matk_rate += n_A_Buf9[43];
 
     // speed calculations
 
@@ -1925,10 +1753,6 @@ function CalculateAdditionalBonuses() {
         status.aspd_rate -= (5 * CardNumSearch(528)) * 10;
     if(CardNumSearch(525) > 0 && player.weapontype1 == WEAPON.TWOHANDSWORD) // fanat card
         status.aspd_rate -= (5 * CardNumSearch(525)) * 10;
-
-    // manual edit
-    if(n_A_Buf9[44])
-        status.aspd_rate -= 10 * n_A_Buf9[44];
 
     // cast time calculations
 
@@ -1948,10 +1772,6 @@ function CalculateAdditionalBonuses() {
     if(CardNumSearch(407) && player.refine[EQI.SHOES] <= 4) // gold acidus card
         player.hprecov_rate += 5;
 
-    // manual edit
-    if(n_A_Buf9[45])
-        player.hprecov_rate += n_A_Buf9[45];
-
     // % sp regen calculations
     
     if(CardNumSearch(221) > 0 && player.status.luk >= 77) // arch angeling ard
@@ -1963,24 +1783,12 @@ function CalculateAdditionalBonuses() {
     if(player.card[9] == 179) // blue acidus card on mid headgear
         player.sprecov_rate += 5;
 
-    // manual edit
-    if(n_A_Buf9[46])
-        player.sprecov_rate += n_A_Buf9[46];
-
     // misc calculations
-    
-    // manual edit for magic vs all
-    if(n_A_Buf9[54])
-        player.indexed_bonus.magic_addclass[CLASS.ALL] += n_A_Buf9[54];
 
     // long range attack calculations
 
     if(player.card[8] == 578 && player.refine[EQI.HEAD_TOP] >= 9) // disguiser card on top headgear
         player.bonus.long_attack_atk_rate += 5;
-
-    // manual edit for long range atk
-    if(n_A_Buf9[56])
-        player.bonus.long_attack_atk_rate += n_A_Buf9[56];
 
     // crit damage calculations
 
@@ -1991,10 +1799,6 @@ function CalculateAdditionalBonuses() {
 
     if(sc_get(player, SC.ASSNCROS_SRS)) // severe rainstorm buff for sinx song
         player.bonus.crit_atk_rate += 10;
-
-    // manual edit for crit dmg
-    if(n_A_Buf9[57])
-        player.bonus.crit_atk_rate += n_A_Buf9[57];
 
     // elemental reduction calculations
     if(CardNumSearch(403) > 0 && player.refine[EQI.GARMENT] >= 9) // orc baby card
@@ -2265,13 +2069,6 @@ function CalculateAdditionalBonuses() {
         PlayerBonusItemBonus(player.skillatk, SKILL.AC_SHOWER, 50 * CardNumSearch(465));
     if(CardNumSearch(523) && n_A_JobClass() == JOB.MERCHANT) // heavy metaling card
         PlayerBonusItemBonus(player.skillatk, SKILL.MC_CARTREVOLUTION, 50);
-    
-
-    // manual edits
-    if(n_A_Buf9[20] > 0)
-        PlayerBonusItemBonus(player.skillatk, n_A_Buf9[20], n_A_Buf9[19]);
-    if(n_A_Buf9[22] > 0)
-        PlayerBonusItemBonus(player.skillatk, n_A_Buf9[22], n_A_Buf9[21]);
 
     // bonuses from "statuses" which have a script
 

@@ -1,7 +1,5 @@
-﻿for (var c = document.calcForm, i = 1; i <= 22; i++)
-    c.B_num.options[i - 1] = new Option(i, i - 1);
-for (i = 1; i <= 20; i++)
-    c.A8_Skill15.options[i] = new Option(5 * i, i);
+﻿var c = document.calcForm;
+
 function StCalc(_) {
     CalculateStatusPoints(_);
 }
@@ -67,7 +65,7 @@ function SuperNoviceFullWeapon(enabled) {
         }
     }
 
-    const currentWeapon = n_A_Equip[0];
+    const currentWeapon = player.equip[EQI.HAND_R];
     const weaponData = m_Item[currentWeapon];
     if (weaponData[2] !== WEAPON.TWOHANDAXE && JobEquipItemSearch(weaponData[2])) {
         n_A_WeaponType = weaponData[1];
@@ -225,23 +223,34 @@ function PopulatePlayerData() {
         player.enchant[2] = 0;
     }
     if (m_GarmentEnchant.includes(player.equip[EQI.GARMENT])) {
-        player.enchant[3] = 1 * c.A_shoulder_enchant.value;
+        player.enchant[3] = 1 * c.A_shoulder_enchant1.value;
         player.enchant[4] = 1 * c.A_shoulder_enchant2.value;
     } else {
         player.enchant[3] = 0;
         player.enchant[4] = 0;
     }
     if (m_ShoesEnchant.includes(player.equip[EQI.SHOES])) {
-        player.enchant[5] = 1 * c.A_shoes_enchant.value;
+        player.enchant[5] = 1 * c.A_shoes_enchant1.value;
         player.enchant[6] = 1 * c.A_shoes_enchant2.value;
     } else {
         player.enchant[5] = 0;
         player.enchant[6] = 0;
     }
 
-    player.active_skill = n_A_ActiveSkill;
-    player.active_skill_lv = n_A_ActiveSkillLV;
-    player.tok = n_tok;
+    const rawActiveSkill = 1 * c.A_ActiveSkill.value;
+    if (rawActiveSkill >= 5000) {
+        player.active_skill = m_EnableSkill[rawActiveSkill - 5000][2];
+        player.active_skill_lv = m_EnableSkill[rawActiveSkill - 5000][3];
+    } else if (rawActiveSkill >= 3000) {
+        player.active_skill = m_EnableSkill[rawActiveSkill - 3000][2];
+        player.active_skill_lv = m_EnableSkill[rawActiveSkill - 3000][3];
+    } else if (rawActiveSkill >= 2000) {
+        player.active_skill = m_AutoSpellSkill[rawActiveSkill - 2000][2];
+        player.active_skill_lv = m_AutoSpellSkill[rawActiveSkill - 2000][3];
+    } else {
+        player.active_skill = rawActiveSkill;
+        player.active_skill_lv = 1 * c.A_ActiveSkillLV.value;
+    }
 
     player.spiritball = player.spiritball || 0;
 
@@ -252,25 +261,74 @@ function PopulatePlayerData() {
         player.passive_skills.push(new PassiveSkill(skillID, skillLV));
     }
 
+    populateEquipCombos();
+    populateCardCombos();
+
     loadPlayerStatusChanges();
 
     StatusCalcPlayerSub();
     updatePlayerStatDisplay();
 }
 
+/**
+ * Checks which set combos from w_SE are fully equipped and writes their
+ * combo item IDs into player.equip[11..20] so EquipNumSearch can find them.
+ * 
+ * w_SE format: [comboItemId, memberItemId1, memberItemId2, ..., "NULL"]
+ */
+function populateEquipCombos() {
+    const MAX_COMBO_SLOTS = 10; // slots 11..20
+
+    // Clear existing combo slots
+    for (let i = EQI.MAX; i < EQI.MAX + MAX_COMBO_SLOTS; i++)
+        player.equip[i] = 0;
+
+    let nextSlot = EQI.MAX;
+
+    for (let k = 0; k <= SE_MAXnum && nextSlot < EQI.MAX + MAX_COMBO_SLOTS; k++) {
+        let allPresent = true;
+        for (let j = 1; w_SE[k][j] !== "NULL"; j++) {
+            let found = false;
+            for (let i = 0; i < EQI.MAX; i++) {
+                if (player.equip[i] === w_SE[k][j]) { found = true; break; }
+            }
+            if (!found) { allPresent = false; break; }
+        }
+        if (allPresent)
+            player.equip[nextSlot++] = w_SE[k][0];
+    }
+}
+
+/**
+ * Checks which card set combos from w_SC are fully slotted and writes their
+ * combo card IDs into player.card[16..25] so CardNumSearch can find them.
+ *
+ * w_SC format: [comboCardId, memberCardId1, memberCardId2, ..., "NULL"]
+ */
+function populateCardCombos() {
+    const MAX_COMBO_SLOTS = 10; // slots 16..25
+    const REGULAR_SLOTS = 16;
+ 
+    for (let i = REGULAR_SLOTS; i < REGULAR_SLOTS + MAX_COMBO_SLOTS; i++)
+        player.card[i] = 0;
+ 
+    let nextSlot = REGULAR_SLOTS;
+ 
+    for (let k = 0; k <= SC_MAXnum && nextSlot < REGULAR_SLOTS + MAX_COMBO_SLOTS; k++) {
+        let allPresent = true;
+        for (let j = 1; w_SC[k][j] !== "NULL"; j++) {
+            let found = false;
+            for (let i = 0; i < REGULAR_SLOTS; i++) {
+                if (player.card[i] === w_SC[k][j]) { found = true; break; }
+            }
+            if (!found) { allPresent = false; break; }
+        }
+        if (allPresent)
+            player.card[nextSlot++] = w_SC[k][0];
+    }
+}
+
 function loadPlayerStatusChanges() {
-    // Save party buff state from player.sc before clearing
-    var buf2 = [];
-    for (var i = 0; i <= 21; i++) buf2[i] = getBuf2FromSC(i);
-    var spiritball = player.spiritball;
-
-
-    // TEMPORARY: Do not reset player.sc so UI-applied statuses persist
-    // player.sc = [];
-    player.spiritball = spiritball;
-
-    // Re-add party buffs from saved state
-    for (var i = 0; i <= 21; i++) setBuf2ToSC(i, buf2[i]);
 
     /* // guild skills
     if (n_A_Buf3[40]) sc_start(player, SC.BATTLEORDERS);
@@ -646,7 +704,7 @@ function StatusCalcPlayerSub() {
     base_status.int = cap_value(i, 0, USHRT_MAX);
     i = base_status.dex + player.status.dex + player.indexed_bonus.param_bonus[STAT.DEX] + player.indexed_bonus.param_equip[STAT.DEX];
     base_status.dex = cap_value(i, 0, USHRT_MAX);
-    i = base_status.luk + player.status.luk + player.indexed_bonus.param_bonus[STAT.LUK];
+    i = base_status.luk + player.status.luk + player.indexed_bonus.param_bonus[STAT.LUK] + player.indexed_bonus.param_equip[STAT.LUK];
     base_status.luk = cap_value(i, 0, USHRT_MAX);
 
     // attack calculation
@@ -848,14 +906,10 @@ function StatusCalcPlayerSub() {
     if (sc_get(player, SC.MINDBREAKER))
         player.matk_rate += sc_get(player, SC.MINDBREAKER).val2;
 
-    console.log("rhw: ", base_status.rhw);
-    console.log("lhw: ", base_status.lhw);
     player.battle_status = Object.assign(new StatusData(), base_status, {
         rhw: Object.assign(new WeaponATK(), base_status.rhw),
         lhw: Object.assign(new WeaponATK(), base_status.lhw)
     });
-    console.log("battle rhw: ", player.battle_status.rhw);
-    console.log("battle lhw: ", player.battle_status.lhw);
 
     StatusCalcBLMain(); // function to recalculate every stat after all bonuses have been applied - this uses battle_status for calculations so that all bonuses are included
 }
@@ -933,9 +987,7 @@ function StatusCalcBLMain() {
         status.mdef2 = status_calc_mdef2(player, b_status.mdef2 + (status.int - b_status.int) + (Math.trunc(status.vit - b_status.vit / 2)));
 
     // speed
-    console.log("original speed: ", b_status.speed);
     status.speed = status_calc_speed(player, b_status.speed);
-    console.log("new speed: ", status.speed);
 
     // crit
     if (status.luk == b_status.luk)
@@ -1041,15 +1093,15 @@ function PopulateMonsterData() {
 
     monster.ranged = monsterInfo[20] == 1;
     setMonsterRace2();
-    monster.notes = n_M_debuff;
+    monster.notes = [];
+    loadNotes(monster.mob_id);
 
     if (monster.name.includes("[MVP]"))
         monster.base_status.mode |= MD.MVP;
-    if (n_M_debuff[7])
+    if (monster.notes[7])
         monster.damagetaken = 100 - NotesCalc(monster.mob_id, 7);
 
     loadMonsterStatusChanges();
-
     StatusCalcMonsterSub();
     updateMonsterStatDisplay();
 }
@@ -1179,19 +1231,19 @@ function StatusCalcMonsterSub() {
     b_status.ele_lv = monsterInfo[3] % 10;
     b_status.class_ = monsterInfo[19] == 1 ? CLASS.BOSS : CLASS.NORMAL;
 
-    if (n_M_debuff[1])
+    if (monster.notes[1])
         b_status.mode |= MD.IGNOREMELEE;
-    if (n_M_debuff[2])
+    if (monster.notes[2])
         b_status.mode |= MD.IGNORERANGED;
-    if (n_M_debuff[3])
+    if (monster.notes[3])
         b_status.mode |= MD.IGNOREMAGIC;
-    if (n_M_debuff[4])
+    if (monster.notes[4])
         b_status.mode |= MD.IGNOREMISC;
-    if (n_M_debuff[8])
+    if (monster.notes[8])
         b_status.mode |= MD.IGNOREIGNOREDEF;
-    if (n_M_debuff[9])
+    if (monster.notes[9])
         b_status.mode |= MD.IGNOREIGNOREMDEF;
-    if (n_M_debuff[10])
+    if (monster.notes[10])
         b_status.mode |= MD.IGNOREPIERCEATK;
 
     status_calc_misc(monster, monster.base_status, monster.level);
@@ -1203,6 +1255,7 @@ function StatusCalcMonsterSub() {
         lhw: Object.assign(new WeaponATK(), b_status.lhw)
     });
 
+    updateMonsterDebuffsDisplay();
     StatusCalcBLMob();
 }
 
@@ -1217,8 +1270,8 @@ function StatusCalcBLMob() {
     // agi
     let agi = b_status.agi;
 
-    if (n_B_manual[48]) // manual edit
-        agi += n_B_manual[48];
+    if(manualedits_get(monster, 2))
+        agi += manualedits_get(monster, 2).value;
     if (sc_get(monster, SC.INCREASEAGI)) // increase agi
         agi += (sc_get(monster, SC.INCREASEAGI).val2 * 2) - 2;
     if (sc_get(monster, SC.DECREASEAGI)) // decrease agi
@@ -1230,8 +1283,8 @@ function StatusCalcBLMob() {
 
     // vit
     let vit = b_status.vit;
-    if (n_B_manual[49]) // manual edit
-        vit += n_B_manual[49];
+    if (manualedits_get(monster, 3)) // manual edit
+        vit += manualedits_get(monster, 3).value;
     if (sc_get(monster, SC.STRIPARMOR)) // strip armor
         vit -= Math.trunc((vit * 40) / 100);
 
@@ -1239,26 +1292,30 @@ function StatusCalcBLMob() {
 
     // int
     let int = b_status.int;
-    if (n_B_manual[50]) // manual edit
-        int += n_B_manual[50];
+    if (manualedits_get(monster, 4)) // manual edit
+        int += manualedits_get(monster, 4).value;
     if (sc_get(monster, SC.STRIPHELM)) // strip helm
         int -= Math.trunc((int * 40) / 100);
+    if (sc_get(monster, SC.BLESSING))
+        int -= Math.trunc(int / 2);
 
     status.int = cap_value(int, 0, USHRT_MAX);
 
     // dex
     let dex = b_status.dex;
-    if (n_B_manual[51]) // manual edit
-        dex += n_B_manual[51];
+    if (manualedits_get(monster, 5)) // manual edit
+        dex += manualedits_get(monster, 5).value;
     if (sc_get(monster, SC.QUAGMIRE)) // quagmire
         dex -= sc_get(monster, SC.QUAGMIRE).val2;
+    if (sc_get(monster, SC.BLESSING))
+        dex -= Math.trunc(dex / 2);
 
     status.dex = cap_value(dex, 0, USHRT_MAX);
 
     // luk
     let luk = b_status.luk;
-    if (n_B_manual[52]) // manual edit
-        luk += n_B_manual[52];
+    if (manualedits_get(monster, 6)) // manual edit
+        luk += manualedits_get(monster, 6).value;
     if (sc_get(monster, SC.CURSE)) // curse
         luk = 0;
 
@@ -1274,11 +1331,21 @@ function StatusCalcBLMob() {
     // no additional bonuses to monster batk
 
     // watk
-    if (n_B_manual[40]) { // manual edit
-        status.rhw.atk += n_B_manual[40];
-        status.rhw.atk2 += n_B_manual[40];
-    }
+    if (manualedits_get(monster, 17)) // manual edit
+        status.rhw.atk += manualedits_get(monster, 17).value;
+    if(manualedits_get(monster, 87))
+        status.rhw.atk2 += manualedits_get(monster, 87).value;
     // nothing that affects watk
+
+    // matk min and max
+    let matk_min = b_status.matk_min;
+    let matk_max = b_status.matk_max;
+    if(manualedits_get(monster, 88)) {
+        matk_min += manualedits_get(monster, 88).value;
+        matk_max += manualedits_get(monster, 88).value;
+    }
+    status.matk_min = cap_value(matk_min, 0, USHRT_MAX);
+    status.matk_max = cap_value(matk_max, 0, USHRT_MAX);
 
     // hit
     let hit = b_status.hit;
@@ -1286,8 +1353,8 @@ function StatusCalcBLMob() {
         hit += status.dex - b_status.dex;
     }
 
-    if (n_B_manual[36]) // manual edit
-        hit += n_B_manual[36];
+    if(manualedits_get(monster, 8))
+        hit += manualedits_get(monster, 8).value;
     if (sc_get(monster, SC.POWERUP)) // power up
         hit += Math.trunc((hit * 100) / 100);
     if (sc_get(monster, SC.BLIND)) // blind
@@ -1301,8 +1368,8 @@ function StatusCalcBLMob() {
         flee += status.agi - b_status.agi;
     }
 
-    if (n_B_manual[37]) // manual edit
-        flee += n_B_manual[37];
+    if (manualedits_get(monster, 9)) // manual edit
+        flee += manualedits_get(monster, 9).value;
     if (sc_get(monster, SC.AGIUP)) // npc agi up
         flee += Math.trunc((flee * 100) / 100);
     if (sc_get(monster, SC.SPIDERWEB)) // spider web
@@ -1314,8 +1381,8 @@ function StatusCalcBLMob() {
 
     // def
     let def = b_status.def;
-    if (n_B_manual[34]) // manual edit
-        def += n_B_manual[34];
+    if (manualedits_get(monster, 18)) // manual edit
+        def += manualedits_get(monster, 18).value;
     if (sc_get(monster, SC.STONE)) // stone curse
         def = Math.trunc(def / 2);
     if (sc_get(monster, SC.FREEZE)) // frozen
@@ -1350,10 +1417,13 @@ function StatusCalcBLMob() {
 
     status.def2 = cap_value(def2, 1, SHRT_MAX);
 
+    if(sc_get(monster, SC.ETERNALCHAOS))
+        status.def2 = 0;
+
     // mdef
     let mdef = b_status.mdef;
-    if (n_B_manual[35]) // manual edit
-        mdef += n_B_manual[35];
+    if (manualedits_get(monster, 19)) // manual edit
+        mdef += manualedits_get(monster, 19).value;
     if (sc_get(monster, SC.STONE)) // stone curse
         mdef += Math.trunc((mdef * 25) / 100);
     if (sc_get(monster, SC.FREEZE)) // frozen
@@ -1386,8 +1456,8 @@ function StatusCalcBLMob() {
         def_ele = ELE.WATER;
     if (sc_get(monster, SC.ELEMENTALCHANGE)) // elemental change
         def_ele = sc_get(monster, SC.ELEMENTALCHANGE).val1;
-    if (n_B_manual[58]) // manual edit
-        def_ele = n_B_manual[56];
+    if(manualedits_get(monster, 610))
+        def_ele = Math.trunc(manualedits_get(monster, 610).value / 10);
 
     status.def_ele = def_ele;
 
@@ -1399,8 +1469,8 @@ function StatusCalcBLMob() {
         ele_lv = 1;
     if (sc_get(monster, SC.ELEMENTALCHANGE)) // elemental change
         ele_lv = sc_get(monster, SC.ELEMENTALCHANGE).val2;
-    if (n_B_manual[58]) // manual edit
-        ele_lv = n_B_manual[57] + 1;
+    if(manualedits_get(monster, 610)) // manual edit
+        ele_lv = (Math.trunc(manualedits_get(monster, 610).value) % 10);
 
     status.ele_lv = cap_value(ele_lv, 1, 4);
 
@@ -1408,10 +1478,12 @@ function StatusCalcBLMob() {
 
     // max hp
     let max_hp = b_status.max_hp;
-    if (n_B_manual[30]) // manual edit
-        max_hp += n_B_manual[30];
+    if(manualedits_get(monster, 13))
+        max_hp += manualedits_get(monster, 13).value;
     if (sc_get(monster, SC.ANGELUS)) // angelus
         max_hp += sc_get(monster, SC.ANGELUS).val1 * 100;
+    if(manualedits_get(monster, 15))
+        max_hp += Math.trunc((max_hp * manualedits_get(monster, 15).value) / 100);
     status.max_hp = cap_value(max_hp, 1, UINT_MAX);
 
     // max sp - doesnt matter
@@ -1424,509 +1496,65 @@ function StatusCalcBLMob() {
     // dspd - doesnt matter
 
     // size
-    if (n_B_manual[60]) // manual edit
-        status.size = n_B_manual[59];
+    if(manualedits_get(monster, 611)) // manual edit
+        status.size = manualedits_get(monster, 611).value;
 
     // experience
+    // 3x rate
+    b_status.base_exp *= 3;
+    b_status.job_exp *= 3;
+
     let base_exp = b_status.base_exp;
     let job_exp = b_status.job_exp;
-    if (sc_get(player, SC.RICHMANKIM)) {
-        base_exp += Math.trunc((base_exp * sc_get(player, SC.RICHMANKIM).val2) / 100);
-        job_exp += Math.trunc((job_exp * sc_get(player, SC.RICHMANKIM).val2) / 100);
+
+    // Party share
+    const partyCount = player.exp_modifiers.party_member_count;
+    if (partyCount > 1) {
+        base_exp = base_exp / partyCount;
+        job_exp = job_exp / partyCount;
+
+        base_exp += base_exp * (partyCount * 50) / 100;
+        job_exp += job_exp * (partyCount * 50) / 100;
     }
-    status.base_exp = cap_value(base_exp, 0, UINT_MAX);
-    status.job_exp = cap_value(job_exp, 0, UINT_MAX);
+    // Battle manual
+    if (player.exp_modifiers.battle_manual > 0) {
+        base_exp += base_exp * player.exp_modifiers.battle_manual / 100;
+        job_exp += job_exp * player.exp_modifiers.battle_manual / 100;
+    }
+    // Job manual (+50% job exp only)
+    if (player.exp_modifiers.job_manual) {
+        job_exp += job_exp * 50 / 100;
+    }
+
+    if (sc_get(player, SC.RICHMANKIM)) {
+        base_exp += (base_exp * sc_get(player, SC.RICHMANKIM).val2) / 100;
+        job_exp += (job_exp * sc_get(player, SC.RICHMANKIM).val2) / 100;
+    }
+    if(manualedits_get(monster, 500))
+        base_exp += manualedits_get(monster, 500).value;
+    if(manualedits_get(monster, 501))
+        job_exp += manualedits_get(monster, 501).value;
+    status.base_exp = cap_value(Math.trunc(base_exp), 0, UINT_MAX);
+    status.job_exp = cap_value(Math.trunc(job_exp), 0, UINT_MAX);
+
+    // level
+    let level = monster.level;
+    if(manualedits_get(monster, 499))
+        level += manualedits_get(monster, 499).value;
+    monster.level = level;
 }
 
 function StAllCalc() {
-    console.log("HEYOOOO");
-    n_A_JobSet(),
-    20 == n_A_JOB && (0 == SuperNoviceFullWeaponCHECK && 1 * c.A_skill9.value == 1 ? SuperNoviceFullWeapon(1) : 1 == SuperNoviceFullWeaponCHECK && 1 * c.A_skill9.value == 0 && SuperNoviceFullWeapon(0)),
-    n_A_BaseLV = 1 * c.A_BaseLV.value,
-    n_A_JobLV = 1 * c.A_JobLV.value,
-    n_A_STR = 1 * c.A_STR.value,
-    n_A_AGI = 1 * c.A_AGI.value,
-    n_A_VIT = 1 * c.A_VIT.value,
-    n_A_DEX = 1 * c.A_DEX.value,
-    n_A_INT = 1 * c.A_INT.value,
-    n_A_LUK = 1 * c.A_LUK.value,
-    SU_STR = n_A_STR,
-    SU_AGI = n_A_AGI,
-    SU_VIT = n_A_VIT,
-    SU_DEX = n_A_DEX,
-    SU_INT = n_A_INT,
-    SU_LUK = n_A_LUK,
-    n_A_WeaponType = m_Item[c.A_weapon1.value][1],
-    player.dual_wield && (n_A_Weapon2Type = m_Item[c.A_weapon2.value][1]),
-    n_A_Arrow = 1 * c.A_Arrow.value,
-    n_A_HEAD_REFINE = 1 * c.A_HEAD_REFINE.value,
-    n_A_BODY_REFINE = 1 * c.A_BODY_REFINE.value,
-    n_A_LEFT_REFINE = 1 * c.A_LEFT_REFINE.value,
-    n_A_SHOULDER_REFINE = 1 * c.A_SHOULDER_REFINE.value,
-    n_A_SHOES_REFINE = 1 * c.A_SHOES_REFINE.value,
-    n_A_ActiveSkill = 1 * c.A_ActiveSkill.value,
-    n_A_ActiveSkill >= 5e3 ? n_A_ActiveSkill = m_EnableSkill[n_A_ActiveSkill - 5e3][2] : n_A_ActiveSkill >= 3e3 ? n_A_ActiveSkill = m_EnableSkill[n_A_ActiveSkill - 3e3][2] : n_A_ActiveSkill >= 2e3 && (n_A_ActiveSkill = m_AutoSpellSkill[n_A_ActiveSkill - 2e3][2]),
-    n_A_ActiveSkillLV = 1 * c.A_ActiveSkillLV.value,
-    n_A_Equip[0] = 1 * c.A_weapon1.value,
-    n_A_Equip[1] = 0,
-    player.dual_wield && (n_A_Equip[1] = 1 * c.A_weapon2.value),
-    n_A_Equip[2] = 1 * c.A_head1.value,
-    n_A_Equip[3] = 1 * c.A_head2.value,
-    n_A_Equip[4] = 1 * c.A_head3.value,
-    n_A_Equip[5] = 1 * c.A_left.value,
-    n_A_Equip[6] = 1 * c.A_body.value,
-    n_A_Equip[7] = 1 * c.A_shoulder.value,
-    n_A_Equip[8] = 1 * c.A_shoes.value,
-    n_A_Equip[9] = 1 * c.A_acces1.value,
-    n_A_Equip[10] = 1 * c.A_acces2.value,
-    n_A_Shadow[0] = 1 * c.A_weapon_shadow.value,
-    n_A_Shadow[1] = 1 * c.A_left_shadow.value,
-    //n_A_Shadow[2] = 1 * c.A_armor_shadow.value,
-    n_A_Shadow[3] = 1 * c.A_shoes_shadow.value,
-    //n_A_Shadow[4] = 1 * c.A_acces1_shadow.value,
-    //n_A_Shadow[5] = 1 * c.A_acces2_shadow.value,
-    SetEquip(),
-    n_A_card[0] = 1 * c.A_weapon1_card1.value,
-    n_A_card[1] = 1 * c.A_weapon1_card2.value,
-    n_A_card[2] = 1 * c.A_weapon1_card3.value,
-    n_A_card[3] = 1 * c.A_weapon1_card4.value,
-    player.dual_wield ? (n_A_card[4] = 1 * c.A_weapon2_card1.value,
-        n_A_card[5] = 1 * c.A_weapon2_card2.value,
-        n_A_card[6] = 1 * c.A_weapon2_card3.value,
-        n_A_card[7] = 1 * c.A_weapon2_card4.value) : (n_A_card[4] = 0,
-            n_A_card[5] = 0,
-            n_A_card[6] = 0,
-            n_A_card[7] = 0),
-    n_A_card[8] = 1 * c.A_head1_card.value,
-    n_A_card[9] = 1 * c.A_head2_card.value,
-    n_A_card[10] = 1 * c.A_left_card.value,
-    n_A_card[11] = 1 * c.A_body_card.value,
-    n_A_card[12] = 1 * c.A_shoulder_card.value,
-    n_A_card[13] = 1 * c.A_shoes_card.value,
-    n_A_card[14] = 1 * c.A_acces1_card.value,
-    n_A_card[15] = 1 * c.A_acces2_card.value,
-    SetCard(),
-    // random options defined
-    n_A_randopt[0] = 1 * c.A_weapon1_ropt1.value,
-    n_A_randopt[1] = 1 * c.WEAP1_ROPT1.value,
-    n_A_randopt[2] = 1 * c.A_weapon1_ropt2.value,
-    n_A_randopt[3] = 1 * c.WEAP1_ROPT2.value,
-    n_A_randopt[4] = 1 * c.A_weapon1_ropt3.value,
-    n_A_randopt[5] = 1 * c.WEAP1_ROPT3.value,
-    n_A_randopt[6] = 1 * c.A_weapon1_ropt4.value,
-    n_A_randopt[7] = 1 * c.WEAP1_ROPT4.value,
-    player.dual_wield ? (n_A_randopt[8] = 1 * c.A_weapon2_ropt1.value,
-        n_A_randopt[9] = 1 * c.WEAP2_ROPT1.value,
-        n_A_randopt[10] = 1 * c.A_weapon2_ropt2.value,
-        n_A_randopt[11] = 1 * c.WEAP2_ROPT2.value,
-        n_A_randopt[12] = 1 * c.A_weapon2_ropt3.value,
-        n_A_randopt[13] = 1 * c.WEAP2_ROPT3.value,
-        n_A_randopt[14] = 1 * c.A_weapon2_ropt4.value,
-        n_A_randopt[15] = 1 * c.WEAP2_ROPT4.value) : (n_A_randopt[8] = 0,
-            n_A_randopt[9] = 0,
-            n_A_randopt[10] = 0,
-            n_A_randopt[11] = 0,
-            n_A_randopt[12] = 0,
-            n_A_randopt[13] = 0,
-            n_A_randopt[14] = 0,
-            n_A_randopt[15] = 0),
-    n_A_randopt[16] = 1 * c.A_body_ropt1.value,
-    n_A_randopt[17] = 1 * c.BODY_ROPT1.value,
-    n_A_randopt[18] = 1 * c.A_body_ropt2.value,
-    n_A_randopt[19] = 1 * c.BODY_ROPT2.value,
-    n_A_randopt[20] = 1 * c.A_shoulder_ropt1.value,
-    n_A_randopt[21] = 1 * c.SHOULDER_ROPT1.value,
-    n_A_randopt[22] = 1 * c.A_shoulder_ropt2.value,
-    n_A_randopt[23] = 1 * c.SHOULDER_ROPT2.value,
-    n_A_randopt[24] = 1 * c.A_shoes_ropt1.value,
-    n_A_randopt[25] = 1 * c.SHOES_ROPT1.value,
-    n_A_randopt[26] = 1 * c.A_shoes_ropt2.value,
-    n_A_randopt[27] = 1 * c.SHOES_ROPT2.value,
-    // headgear enchant
-    m_HeadgearEnchant.includes(n_A_Equip[2]) ? (n_A_enchant[0] = 1 * c.A_head_enchant.value, c.A_head_enchant.style.display = 'inline-block', document.getElementById("A_head_enchant_row").style.display = 'table-row') : (n_A_enchant[0] = 0, c.A_head_enchant.style.display = 'none', document.getElementById("A_head_enchant_row").style.display = 'none', c.A_head_enchant.value = 0),
-    m_ArmorEnchant.includes(n_A_Equip[6]) ? (
-        n_A_enchant[1] = 1 * c.A_body_enchant1.value, c.A_body_enchant1.style.display = 'inline-block',
-        n_A_enchant[2] = 1 * c.A_body_enchant2.value, c.A_body_enchant2.style.display = 'inline-block',
-        n_A_randopt[16] = 0, n_A_randopt[17] = 0, c.A_body_ropt1.style.display = 'none', c.BODY_ROPT1.style.display = 'none',
-        n_A_randopt[18] = 0, n_A_randopt[19] = 0, c.A_body_ropt2.style.display = 'none', c.BODY_ROPT2.style.display = 'none'
-    ) : (
-        n_A_enchant[1] = 0, c.A_body_enchant1.style.display = 'none', c.A_body_enchant1.value = 0,
-        n_A_enchant[2] = 0, c.A_body_enchant2.style.display = 'none', c.A_body_enchant2.value = 0,
-        c.A_body_ropt1.style.display = 'inline-block', c.BODY_ROPT1.style.display = 'inline-block',
-        c.A_body_ropt2.style.display = 'inline-block', c.BODY_ROPT2.style.display = 'inline-block'
-    ),
-    m_GarmentEnchant.includes(n_A_Equip[7]) ? (
-        n_A_enchant[3] = 1 * c.A_shoulder_enchant1.value, c.A_shoulder_enchant1.style.display = 'inline-block',
-        n_A_enchant[4] = 1 * c.A_shoulder_enchant2.value, c.A_shoulder_enchant2.style.display = 'inline-block',
-        n_A_randopt[20] = 0, n_A_randopt[21] = 0, c.A_shoulder_ropt1.style.display = 'none', c.SHOULDER_ROPT1.style.display = 'none',
-        n_A_randopt[22] = 0, n_A_randopt[23] = 0, c.A_shoulder_ropt2.style.display = 'none', c.SHOULDER_ROPT2.style.display = 'none'
-    ) : (
-        n_A_enchant[3] = 0, c.A_shoulder_enchant1.style.display = 'none', c.A_shoulder_enchant1.value = 0,
-        n_A_enchant[4] = 0, c.A_shoulder_enchant2.style.display = 'none', c.A_shoulder_enchant2.value = 0,
-        c.A_shoulder_ropt1.style.display = 'inline-block', c.SHOULDER_ROPT1.style.display = 'inline-block',
-        c.A_shoulder_ropt2.style.display = 'inline-block', c.SHOULDER_ROPT2.style.display = 'inline-block'
-    ),
-    m_ShoesEnchant.includes(n_A_Equip[8]) ? (
-        n_A_enchant[5] = 1 * c.A_shoes_enchant1.value, c.A_shoes_enchant1.style.display = 'inline-block',
-        n_A_enchant[6] = 1 * c.A_shoes_enchant2.value, c.A_shoes_enchant2.style.display = 'inline-block',
-        n_A_randopt[24] = 0, n_A_randopt[25] = 0, c.A_shoes_ropt1.style.display = 'none', c.SHOES_ROPT1.style.display = 'none',
-        n_A_randopt[26] = 0, n_A_randopt[27] = 0, c.A_shoes_ropt2.style.display = 'none', c.SHOES_ROPT2.style.display = 'none'
-    ) : (
-        n_A_enchant[5] = 0, c.A_shoes_enchant1.style.display = 'none', c.A_shoes_enchant1.value = 0,
-        n_A_enchant[6] = 0, c.A_shoes_enchant2.style.display = 'none', c.A_shoes_enchant2.value = 0,
-        c.A_shoes_ropt1.style.display = 'inline-block', c.SHOES_ROPT1.style.display = 'inline-block',
-        c.A_shoes_ropt2.style.display = 'inline-block', c.SHOES_ROPT2.style.display = 'inline-block'
-    ),
-    n_A_Weapon_element = 1 * c.A_Weapon_element.value,
-    n_A_Weapon2_element = n_A_Weapon_element;
-    for (n_SkillSW && (setBuf2ToSC(0, 1 * c.A2_Skill0.value),
-        setBuf2ToSC(1, 1 * c.A2_Skill1.value),
-        setBuf2ToSC(2, 1 * c.A2_Skill2.value),
-        setBuf2ToSC(3, 1 * c.A2_Skill3.checked),
-        setBuf2ToSC(4, 1 * c.A2_Skill4.value),
-        setBuf2ToSC(5, 1 * c.A2_Skill5.checked),
-        setBuf2ToSC(6, 1 * c.A2_Skill6.value),
-        setBuf2ToSC(7, 1 * c.A2_Skill7.checked),
-        setBuf2ToSC(8, 1 * c.A2_Skill8.checked),
-        setBuf2ToSC(9, 1 * c.A2_Skill9.value),
-        setBuf2ToSC(10, 1 * c.A2_Skill10.value),
-        setBuf2ToSC(11, 1 * c.A2_Skill11.value),
-        setBuf2ToSC(12, 1 * c.A2_Skill12.value),
-        setBuf2ToSC(13, 1 * c.A2_Skill13.value),
-        setBuf2ToSC(14, 1 * c.A2_Skill14.value),
-        setBuf2ToSC(15, 1 * c.A2_Skill15.value),
-        setBuf2ToSC(16, 1 * c.A5_Skill0.checked),
-        setBuf2ToSC(17, 1 * c.A5_Skill1.checked),
-        setBuf2ToSC(18, 1 * c.A5_Skill2.checked),
-        setBuf2ToSC(19, 1 * c.A5_Skill3.checked),
-        setBuf2ToSC(20, 1 * c.A5_Skill4.checked),
-        setBuf2ToSC(21, 1 * c.A5_Skill5.checked)),
-        n_Skill3SW && (n_A_Buf3[0] = 1 * c.A3_Skill0_1.value,
-            n_A_Buf3[1] = 1 * c.A3_Skill1_1.value,
-            n_A_Buf3[2] = 1 * c.A3_Skill2_1.value,
-            n_A_Buf3[3] = 1 * c.A3_Skill3_1.value,
-            n_A_Buf3[4] = 1 * c.A3_Skill4_1.value,
-            n_A_Buf3[5] = 1 * c.A3_Skill5_1.value,
-            n_A_Buf3[6] = 1 * c.A3_Skill6_1.value,
-            n_A_Buf3[7] = 1 * c.A3_Skill7.value,
-            n_A_Buf3[8] = 1 * c.A3_Skill8.value,
-            n_A_Buf3[9] = 1 * c.A3_Skill9.value,
-            n_A_Buf3[10] = 1 * c.A3_Skill10.value,
-            n_A_Buf3[11] = 1 * c.A3_Skill11.checked,
-            n_A_Buf3[45] = c.A3_Skill12.checked,
-            n_A_Buf3[46] = c.A3_Skill13.checked,
-            n_A_Buf3[47] = c.A3_Skill14.checked,
-            n_A_Buf3[48] = c.A3_Skill15.checked,
-            n_A_Buf3[11] && (n_A_Buf3[12] = 1 * c.A3_Skill11_STR.value,
-                n_A_Buf3[13] = 1 * c.A3_Skill11_AGI.value,
-                n_A_Buf3[14] = 1 * c.A3_Skill11_VIT.value,
-                n_A_Buf3[15] = 1 * c.A3_Skill11_INT.value,
-                n_A_Buf3[16] = 1 * c.A3_Skill11_DEX.value,
-                n_A_Buf3[17] = 1 * c.A3_Skill11_LUK.value,
-                n_A_Buf3[18] = 1 * c.A3_Skill11a.checked),
-            n_A_Buf3[0] && (n_A_Buf3[20] = 1 * c.A3_Skill0_2.value,
-                n_A_Buf3[30] = 1 * c.A3_Skill0_3.value,
-                n_A_Buf3[37] = 1 * c.A3_Skill0_4.value),
-            n_A_Buf3[1] && (n_A_Buf3[21] = 1 * c.A3_Skill1_2.value,
-                n_A_Buf3[31] = 1 * c.A3_Skill1_3.value),
-            n_A_Buf3[2] && (n_A_Buf3[22] = 1 * c.A3_Skill2_2.value,
-                n_A_Buf3[29] = 1 * c.A3_Skill2_3.value,
-                n_A_Buf3[32] = 1 * c.A3_Skill2_4.value),
-            n_A_Buf3[3] && (n_A_Buf3[23] = 1 * c.A3_Skill3_2.value,
-                n_A_Buf3[33] = 1 * c.A3_Skill3_3.value),
-            n_A_Buf3[4] && (n_A_Buf3[24] = 1 * c.A3_Skill4_2.value,
-                n_A_Buf3[34] = 1 * c.A3_Skill4_3.value),
-            n_A_Buf3[5] && (n_A_Buf3[25] = 1 * c.A3_Skill5_2.value,
-                n_A_Buf3[35] = 1 * c.A3_Skill5_3.value),
-            n_A_Buf3[6] && (n_A_Buf3[26] = 1 * c.A3_Skill6_2.value,
-                n_A_Buf3[36] = 1 * c.A3_Skill6_3.value)),
-        n_Skill4SW && (n_A_Buf3[40] = 1 * c.A3_Skill40.checked,
-            n_A_Buf3[41] = 1 * c.A3_Skill41.value,
-            n_A_Buf3[42] = 1 * c.A3_Skill42.value,
-            n_A_Buf3[43] = 1 * c.A3_Skill43.value,
-            n_A_Buf3[44] = 1 * c.A3_Skill44.value),
-        n_Skill6SW && (n_A_Buf6[0] = 1 * c.A6_Skill0.value,
-            n_A_Buf6[1] = 1 * c.A6_Skill1.value,
-            n_A_Buf6[3] = 1 * c.A6_Skill3.checked,
-            n_A_Buf6[4] = 1 * c.A6_Skill4.value,
-            n_A_Buf6[5] = 1 * c.A6_Skill5.value,
-            n_A_Buf6[6] = 1 * c.A6_Skill6.checked,
-            n_A_Buf6[7] = 1 * c.A6_Skill7.checked,
-            n_A_Buf6[8] = 1 * c.A6_Skill8.checked,
-            n_A_Buf6[9] = 1 * c.A6_Skill9.checked,
-            n_A_Buf6[10] = 1 * c.A6_Skill10.checked,
-            n_A_Buf6[11] = 1 * c.A6_Skill11.checked,
-            n_A_Buf6[12] = 1 * c.A6_Skill12.checked,
-            n_A_Buf6[13] = 1 * c.A6_Skill13.checked,
-            n_A_Buf6[14] = 1 * c.A6_Skill14.checked,
-            n_A_Buf6[15] = 1 * c.A6_Skill15.checked,
-            n_A_Buf6[16] = 1 * c.A6_Skill16.checked,
-            n_A_Buf6[17] = 1 * c.A6_Skill17.checked,
-            n_A_Buf6[18] = 1 * c.A6_Skill18.value,
-            n_A_Buf6[19] = 1 * c.A_debuf0.value,
-            n_A_Buf6[20] = 1 * c.A_debuf1.value,
-            n_A_Buf6[21] = 1 * c.A_debuf2.checked,
-            n_A_Buf6[22] = 1 * c.A_debuf3.checked),
-        n_Skill7SW && (n_A_Buf7[0] = 1 * c.A7_Skill0.checked,
-            n_A_Buf7[1] = 1 * c.A7_Skill1.checked,
-            n_A_Buf7[2] = 1 * c.A7_Skill2.checked,
-            n_A_Buf7[3] = 1 * c.A7_Skill3.value,
-            n_A_Buf7[4] = 1 * c.A7_Skill4.value,
-            n_A_Buf7[5] = 1 * c.A7_Skill5.value,
-            n_A_Buf7[6] = 1 * c.A7_Skill6.value,
-            n_A_Buf7[7] = 1 * c.A7_Skill7.value,
-            n_A_Buf7[8] = 1 * c.A7_Skill8.value,
-            n_A_Buf7[9] = 1 * c.A7_Skill9.checked,
-            n_A_Buf7[10] = 1 * c.A7_Skill10.checked,
-            n_A_Buf7[11] = 1 * c.A7_Skill11.checked,
-            n_A_Buf7[12] = 1 * c.A7_Skill12.checked,
-            n_A_Buf7[13] = 1 * c.A7_Skill13.checked,
-            n_A_Buf7[14] = 1 * c.A7_Skill14.checked,
-            n_A_Buf7[16] = 1 * c.A7_Skill16.checked,
-            n_A_Buf7[17] = 1 * c.A7_Skill17.checked,
-            n_A_Buf7[18] = 1 * c.A7_Skill18.checked,
-            n_A_Buf7[19] = 1 * c.A7_Skill19.checked,
-            n_A_Buf7[20] = 1 * c.A7_Skill20.checked,
-            n_A_Buf7[21] = 1 * c.A7_Skill21.checked,
-            n_A_Buf7[22] = 1 * c.A7_Skill22.checked,
-            n_A_Buf7[23] = 1 * c.A7_Skill23.checked,
-            n_A_Buf7[24] = 1 * c.A7_Skill24.checked,
-            n_A_Buf7[25] = 1 * c.A7_Skill25.checked,
-            n_A_Buf7[26] = 1 * c.A7_Skill26.checked,
-            n_A_Buf7[27] = 1 * c.A7_Skill27.checked,
-            n_A_Buf7[28] = 1 * c.A7_Skill28.checked,
-            n_A_Buf7[29] = 1 * c.A7_Skill29.checked,
-            n_A_Buf7[30] = 1 * c.A7_Skill30.checked,
-            n_A_Buf7[31] = 1 * c.A7_Skill31.checked,
-            n_A_Buf7[32] = 1 * c.A7_Skill32.checked,
-            n_A_Buf7[33] = 1 * c.A7_Skill33.checked,
-            n_A_Buf7[34] = 1 * c.A7_Skill34.checked,
-            n_A_Buf7[35] = 1 * c.A_SpeedPOT.value,
-            n_A_Buf7[36] = 1 * c.A7_Skill36.checked,
-            n_A_Buf7[37] = 1 * c.A7_Skill37.checked,
-            n_A_Buf7[38] = 1 * c.A7_Skill38.checked,
-            n_A_Buf7[39] = 1 * c.A7_Skill39.value,
-            n_A_Buf7[40] = 1 * c.A7_Skill40.value,
-            n_A_Buf7[41] = 1 * c.A7_Skill41.checked,
-            n_A_Buf7[42] = 1 * c.A7_Skill42.value,
-            n_A_Buf7[43] = 1 * c.A7_Skill43.checked,
-            n_A_Buf7[44] = 1 * c.A7_Skill44.checked,
-            n_A_Buf7[45] = 1 * c.A7_Skill45.checked,
-            n_A_Buf7[46] = 1 * c.A7_Skill46.checked,
-            n_A_Buf7[47] = 1 * c.A7_Skill47.checked,
-            n_A_Buf7[48] = 1 * c.A7_Skill48.checked,
-            n_A_Buf7[49] = 1 * c.A7_Skill49.checked,
-            n_A_Buf7[50] = 1 * c.A7_Skill50.checked,
-            n_A_Buf7[51] = 1 * c.A7_Skill51.checked),
-        n_Skill8SW && (n_A_Buf8[0] = 1 * c.A8_Skill0.value,
-            n_A_Buf8[1] = 1 * c.A8_Skill1.value,
-            n_A_Buf8[2] = 1 * c.A8_Skill2.checked,
-            n_A_Buf8[3] = 1 * c.A8_Skill3.value,
-            n_A_Buf8[5] = 1 * c.A8_Skill5.value,
-            n_A_Buf8[6] = 1 * c.A8_Skill6.value,
-            n_A_Buf8[7] = 1 * c.A8_Skill7.value,
-            n_A_Buf8[8] = 1 * c.A8_Skill8.value,
-            n_A_Buf8[9] = 1 * c.A8_Skill9.value,
-            n_A_Buf8[10] = 1 * c.A8_Skill10.value,
-            n_A_Buf8[11] = 1 * c.A8_Skill11.value),
-        n_Skill9SW && (n_A_Buf9[0] = 1 * c.A9_Skill0.value,
-            n_A_Buf9[1] = 1 * c.ARG_RC0.value,
-            n_A_Buf9[2] = 1 * c.A9_Skill1.value,
-            n_A_Buf9[3] = 1 * c.ARG_RC1.value,
-            n_A_Buf9[4] = 1 * c.A9_Skill2.value,
-            n_A_Buf9[5] = 1 * c.ARG_RC2.value,
-            n_A_Buf9[6] = 1 * c.A9_Skill3.value,
-            n_A_Buf9[7] = 1 * c.ARG_RC3.value,
-            n_A_Buf9[8] = 1 * c.A9_Skill4.value,
-            n_A_Buf9[9] = 1 * c.ARG_RC4.value,
-            n_A_Buf9[10] = 1 * c.A9_Skill5.value,
-            n_A_Buf9[11] = 1 * c.ARG_RC5.value,
-            n_A_Buf9[12] = 1 * c.A9_Skill6.value,
-            n_A_Buf9[13] = 1 * c.ARG_RC6.value,
-            n_A_Buf9[14] = 1 * c.A9_Skill7.value,
-            n_A_Buf9[15] = 1 * c.ARG_RC7.value,
-            n_A_Buf9[16] = 1 * c.ARG_RC43.value,
-            n_A_Buf9[17] = 1 * c.ARG_RC44.value,
-            n_A_Buf9[18] = 1 * c.ARG_RC45.value,
-            n_A_Buf9[19] = 1 * c.ARG_RC47.value,
-            n_A_Buf9[20] = 1 * c.A9_Skill8.value,
-            n_A_Buf9[21] = 1 * c.ARG_RC48.value,
-            n_A_Buf9[22] = 1 * c.A9_Skill9.value,
-            n_A_Buf9[30] = 1 * c.ARG_RC15.value,
-            n_A_Buf9[31] = 1 * c.ARG_RC16.value,
-            n_A_Buf9[32] = 1 * c.ARG_RC17.value,
-            n_A_Buf9[33] = 1 * c.ARG_RC18.value,
-            n_A_Buf9[34] = 1 * c.ARG_RC19.value,
-            n_A_Buf9[35] = 1 * c.ARG_RC20.value,
-            n_A_Buf9[36] = 1 * c.ARG_RC21.value,
-            n_A_Buf9[37] = 1 * c.ARG_RC22.value,
-            n_A_Buf9[38] = 1 * c.ARG_RC23.value,
-            n_A_Buf9[39] = 1 * c.ARG_RC24.value,
-            n_A_Buf9[40] = 1 * c.ARG_RC25.value,
-            n_A_Buf9[41] = 1 * c.ARG_RC26.value,
-            n_A_Buf9[42] = 1 * c.ARG_RC27.value,
-            n_A_Buf9[43] = 1 * c.ARG_RC28.value,
-            n_A_Buf9[44] = 1 * c.ARG_RC29.value,
-            n_A_Buf9[45] = 1 * c.ARG_RC30.value,
-            n_A_Buf9[46] = 1 * c.ARG_RC31.value,
-            n_A_Buf9[47] = 1 * c.ARG_RC32.value,
-            n_A_Buf9[48] = 1 * c.ARG_RC33.value,
-            n_A_Buf9[49] = 1 * c.ARG_RC34.value,
-            n_A_Buf9[50] = 1 * c.ARG_RC35.value,
-            n_A_Buf9[51] = 1 * c.ARG_RC36.value,
-            n_A_Buf9[52] = 1 * c.ARG_RC37.value,
-            n_A_Buf9[53] = 1 * c.ARG_RC38.value,
-            n_A_Buf9[54] = 1 * c.ARG_RC39.value,
-            n_A_Buf9[55] = 1 * c.ARG_RC40.value,
-            n_A_Buf9[56] = 1 * c.ARG_RC41.value,
-            n_A_Buf9[57] = 1 * c.ARG_RC42.value,
-            n_A_Buf9[58] = 0,
-            n_A_Buf9[59] = 0),
-        n_Skill10SW && (n_B_manual[1] = 1 * c.BRG_RC0.value,
-            n_B_manual[2] = 1 * c.Bman1.value,
-            n_B_manual[3] = 1 * c.BRG_RC1.value,
-            n_B_manual[4] = 1 * c.Bman2.value,
-            n_B_manual[5] = 1 * c.BRG_RC2.value,
-            n_B_manual[7] = 1 * c.BRG_RC3.value,
-            n_B_manual[9] = 1 * c.BRG_RC4.value,
-            n_B_manual[21] = 1 * c.BRG_RC10.value,
-            n_B_manual[30] = 1 * c.BRG_RC15.value,
-            n_B_manual[31] = 1 * c.BRG_RC16.value,
-            n_B_manual[34] = 1 * c.BRG_RC19.value,
-            n_B_manual[35] = 1 * c.BRG_RC20.value,
-            n_B_manual[36] = 1 * c.BRG_RC21.value,
-            n_B_manual[37] = 1 * c.BRG_RC22.value,
-            n_B_manual[38] = 1 * c.BRG_RC23.value,
-            n_B_manual[39] = 1 * c.BRG_RC24.value,
-            n_B_manual[40] = 1 * c.BRG_RC25.value,
-            n_B_manual[41] = 1 * c.BRG_RC26.value,
-            n_B_manual[42] = 1 * c.BRG_RC27.value,
-            n_B_manual[43] = 1 * c.BRG_RC28.value,
-            n_B_manual[44] = 1 * c.BRG_RC29.value,
-            n_B_manual[48] = 1 * c.BRG_RC33.value,
-            n_B_manual[49] = 1 * c.BRG_RC34.value,
-            n_B_manual[50] = 1 * c.BRG_RC35.value,
-            n_B_manual[51] = 1 * c.BRG_RC36.value,
-            n_B_manual[52] = 1 * c.BRG_RC37.value,
-            n_B_manual[53] = 1 * c.BRG_RC38.value,
-            n_B_manual[54] = 1 * c.BRG_RC39.value,
-            n_B_manual[55] = 1 * c.BRG_RC40.value,
-            n_B_manual[56] = 1 * c.Bman3.value,
-            n_B_manual[57] = 1 * c.Bman4.value,
-            n_B_manual[58] = 1 * c.B_mEle.checked,
-            n_B_manual[59] = 1 * c.Bman5.value,
-            n_B_manual[60] = 1 * c.B_mSize.checked),
-        _ = 0; _ <= 22; _++)
-        n_B[_] = m_Monster[c.B_Enemy.value][_];
-    n_A_Bodyelement = 0;
-    for (_ = 1; _ <= 210; _++)
-        n_tok[_] = 0,
-            n_tok[_] += StPlusCalc2(_),
-            n_tok[_] += StPlusCard(_);
-    for (_ = 290; _ <= 400; _++) // add more options
-        n_tok[_] = 0,
-            n_tok[_] += StPlusCalc2(_),
-            n_tok[_] += StPlusCard(_);
-    restrictEquipslot(),
-    equip_restrict ? (n_tok[195] ? (c.A_LEFT_REFINE.disabled = !0,
-            c.A_LEFT_REFINE.value = 0,
-            c.A_left.disabled = !0,
-            c.A_left.value = 305,
-            c.A_left_card.disabled = !0,
-            c.A_left_card.value = 0) : 9 == n_A_WeaponType && (c.A_LEFT_REFINE.disabled = !1,
-                c.A_left.disabled = !1,
-                card_restrict && 0 != m_Item[c.A_left.value][5] && (c.A_left_card.disabled = !1)),
-            1 == n_tok[200] ? (c.A_head2.disabled = !0,
-                c.A_head2.value = 243,
-                c.A_head2_card.disabled = !0,
-                c.A_head2_card.value = 0,
-                c.A_head3.disabled = !1) : 2 == n_tok[200] ? (c.A_head2.disabled = !1,
-                    c.A_head2_card.disabled = !1,
-                    c.A_head3.disabled = !0,
-                    c.A_head3.value = 268) : 3 == n_tok[200] ? (c.A_head3.disabled = !0,
-                        c.A_head3.value = 268) : n_tok[200] >= 4 ? (c.A_head2.disabled = !0,
-                            c.A_head2.value = 243,
-                            c.A_head2_card.disabled = !0,
-                            c.A_head2_card.value = 0,
-                            c.A_head3.disabled = !0,
-                            c.A_head3.value = 268) : (c.A_head2.disabled = !1,
-                                c.A_head3.disabled = !1)) : (c.A_LEFT_REFINE.disabled = !1,
-                                    c.A_left.disabled = !1,
-                                    card_restrict = 1 * c.restrict_cardslot.checked,
-                                    card_restrict || (c.A_left_card.disabled = !1,
-                                        c.A_head2_card.disabled = !1),
-                                    c.A_head2.disabled = !1,
-                                    c.A_head3.disabled = !1),
-    ClickB_Enemy(c.B_Enemy.value),
+    restrictEquipslot();
+    reloadEnchant();
+    ClickB_Enemy(c.B_Enemy.value);
     PopulatePlayerData();
     KakutyouKansuu();
 }
 
-function StPlusCalc2(_) {
-    var n = 0;
-    for (a = 0; a <= 20; a++)
-        for (var e = 0; 0 != m_Item[n_A_Equip[a]][e + 11]; e += 2)
-            _ == Math.abs(m_Item[n_A_Equip[a]][e + 11]) && (n += m_Item[n_A_Equip[a]][e + 12]);
-    for (a = 0; a <= 5; a++)
-        for (var e = 0; 0 != m_ShadowEquips[n_A_Shadow[a]][e + 6]; e += 2)
-            _ == Math.abs(m_ShadowEquips[n_A_Shadow[a]][e + 6]) && (n += m_ShadowEquips[n_A_Shadow[a]][e + 7]);
-    for (a = 0; a <= 10; a++)
-        for (var e = 0; 0 != m_Enchant[n_A_enchant[a]][e + 2]; e += 2)
-            _ == Math.abs(m_Enchant[n_A_enchant[a]][e + 2]) && (n += m_Enchant[n_A_enchant[a]][e + 3]);
-    return n
-}
-function StPlusCard(_) { // buffs / stats from cards perhaps
-    for (var n = 0, a = 0; a <= 25; a++)
-        for (var e = 0; 0 != m_Card[n_A_card[a]][e + 4]; e += 2)
-            _ == Math.abs(m_Card[n_A_card[a]][e + 4]) && (n += m_Card[n_A_card[a]][e + 5]);
-    for (e = 0; 0 != m_PET[n_A_Buf8[0]][e + 3]; e += 2)
-        _ == Math.abs(m_PET[n_A_Buf8[0]][e + 3]) && (n += m_PET[n_A_Buf8[0]][e + 4]);
-    var t = [0, 0, 0, 0];
-    for (a = 0; a <= 3; a++)
-        t[a] = n_A_Buf8[8 + a];
-    for (a = 0; a <= 2; a++)
-        for (e = a + 1; e <= 3; e++)
-            t[a] == t[e] && (t[e] = 0);
-    for (a = 0; a <= 3; a++)
-        for (e = 0; 0 != m_TempEffect[t[a]][5 + e]; e += 2)
-            _ == Math.abs(m_TempEffect[t[a]][5 + e]) && (n += m_TempEffect[t[a]][6 + e]);
-    for (a = 0; a < 8; a += 2) // buffs from temp effects ?
-        _ == n_A_Buf9[a] + 30 && n_A_Buf9[a] < 20 && (n += n_A_Buf9[a + 1]); // % atk based dmg for races and elements (_ = option id in comparison to the effects)
-    for (a = 0; a < 8; a += 2)
-        _ == n_A_Buf9[a] + 7 && n_A_Buf9[a] >= 20 && n_A_Buf9[a] < 23 && (n += n_A_Buf9[a + 1]); // % atk based dmg for sizes
-    for (a = 0; a < 8; a += 2)
-        _ == n_A_Buf9[a] + 3 && 23 == n_A_Buf9[a] || _ == n_A_Buf9[a] + 57 && 24 == n_A_Buf9[a] || _ == n_A_Buf9[a] + 59 && 25 == n_A_Buf9[a] ? n += n_A_Buf9[a + 1] : 1063 != _ && 1064 != _ && 1065 != _ && 1575 != _ && 1576 != _ || 26 != n_A_Buf9[a] ? _ == n_A_Buf9[a] + 55 && 27 == n_A_Buf9[a] || _ == n_A_Buf9[a] + 55 && 28 == n_A_Buf9[a] ? n += n_A_Buf9[a + 1] : 1495 != _ && 1496 != _ || 29 != n_A_Buf9[a] || (n += n_A_Buf9[a + 1]) : n += n_A_Buf9[a + 1]; // % atk based dmg on different types
-    for (a = 8; a < 16; a += 2)
-        _ == n_A_Buf9[a] + 50 && n_A_Buf9[a] < 20 && (n += n_A_Buf9[a + 1]); // ele and race reduction
-    for (a = 8; a < 16; a += 2)
-        _ == n_A_Buf9[a] + 170 && n_A_Buf9[a] >= 20 && n_A_Buf9[a] < 23 && (n += n_A_Buf9[a + 1]); // size reduction
-    for (a = 8; a < 16; a += 2)
-        _ == n_A_Buf9[a] + 54 && 23 == n_A_Buf9[a] || _ == n_A_Buf9[a] + 55 && 24 == n_A_Buf9[a] ? n += n_A_Buf9[a + 1] : 3063 != _ && 3064 != _ && 3065 != _ || 25 != n_A_Buf9[a] || (n += n_A_Buf9[a + 1]); // type reduction
-    for (a = 47; a < 53; a++)
-        _ == a - 46 && (n += n_A_Buf9[a]); // stats
-    for (a = 0; a <= 26; a += 2) // adds effects from random options
-        _ == m_RandomOpt[n_A_randopt[a]][2] && (_ == 73 || _ == 370) && (n -= n_A_randopt[a + 1]),
-            _ == m_RandomOpt[n_A_randopt[a]][2] && (_ != 73 && _ != 370) && (n += n_A_randopt[a + 1]);
-    return 80 == _ && (n += n_A_Buf9[41]), // atk% based dmg on any target
-        290 == _ && (n += n_A_Buf9[16]), // def ignore
-        295 == _ && (n += n_A_Buf9[17]), // mdef ignore
-        78 == _ && (n += n_A_Buf9[18]), // long range resistance
-        n
-}
-function sort(_) {
-    for (var n = 1; "EOF" != _[n]; n++)
-        for (var a = n; a > 0; a--)
-            if (m_Item[_[a - 1]][8] > m_Item[_[a]][8]) {
-                var e = _[a - 1];
-                _[a - 1] = _[a],
-                    _[a] = e
-            }
-    return _
-}
-
 function WeaponSet(jobId) {
     if (jobId === undefined) {
-        jobId = n_A_JOB;
+        jobId = player.status.job_id;
     }
 
     myInnerHtml("A_w1", '<select name="A_weapon1" style="width:185px;" onchange="ClickWeaponType(this[this.selectedIndex].value) | Click_Item(this[this.selectedIndex].value)| ClickActiveSkill2() |restrictCardslot(1)"><option value="0">(no weapon)</option></select>', 0);
@@ -1964,11 +1592,10 @@ function WeaponSet(jobId) {
         }
 
         if (availableWeapons.length > 0) {
-            availableWeapons.push("EOF");
-            const sortedWeapons = sort(availableWeapons);
+            availableWeapons.sort((a, b) => m_Item[a][8] > m_Item[b][8] ? 1 : m_Item[a][8] < m_Item[b][8] ? -1 : 0);
 
-            for (let i = 0; i < sortedWeapons.length - 1; i++) {
-                const itemId = sortedWeapons[i];
+            for (let i = 0; i < availableWeapons.length; i++) {
+                const itemId = availableWeapons[i];
                 const item = m_Item[itemId];
 
                 let itemName = item[8];
@@ -1993,7 +1620,7 @@ function WeaponSet(jobId) {
 
 function WeaponSetLeft(jobId) {
     if (jobId === undefined) {
-        jobId = n_A_JOB;
+        jobId = player.status.job_id;
     }
 
     const levelRestrict = Number(c.restrict_lvlequip.checked);
@@ -2035,11 +1662,10 @@ function WeaponSetLeft(jobId) {
         }
 
         if (availableWeapons.length > 0) {
-            availableWeapons.push("EOF");
-            const sortedWeapons = sort(availableWeapons);
+            availableWeapons.sort((a, b) => m_Item[a][8] > m_Item[b][8] ? 1 : m_Item[a][8] < m_Item[b][8] ? -1 : 0);
 
-            for (let i = 0; i < sortedWeapons.length - 1; i++) {
-                const itemId = sortedWeapons[i];
+            for (let i = 0; i < availableWeapons.length; i++) {
+                const itemId = availableWeapons[i];
                 const item = m_Item[itemId];
 
                 let itemName = item[8];
@@ -2058,106 +1684,61 @@ function WeaponSetLeft(jobId) {
         }
     }
 }
-function WeaponSet2(_) {
-    var n = 1 * c.restrict_lvlequip.checked;
-    if (!_ || 1 != n) {
-        n_A_JobSet();
-        for (var a = 0; a < c.A_head1.length; a++)
-            c.A_head1.options[0] = null;
-        for (a = 0; a < c.A_head2.length; a++)
-            c.A_head2.options[0] = null;
-        for (a = 0; a < c.A_head3.length; a++)
-            c.A_head3.options[0] = null;
-        for (a = 0; a < c.A_left.length; a++)
-            c.A_left.options[0] = null;
-        for (a = 0; a < c.A_body.length; a++)
-            c.A_body.options[0] = null;
-        for (a = 0; a < c.A_shoulder.length; a++)
-            c.A_shoulder.options[0] = null;
-        for (a = 0; a < c.A_shoes.length; a++)
-            c.A_shoes.options[0] = null;
-        for (a = 0; a < c.A_acces1.length; a++)
-            c.A_acces1.options[0] = null,
-                c.A_acces2.options[0] = null;
-        if (0 == first_check)
-            return first_check = 1,
-                c.A_head1.options[0] = new Option(m_Item[142][8], m_Item[142][0]),
-                c.A_head2.options[0] = new Option(m_Item[243][8], m_Item[243][0]),
-                c.A_head3.options[0] = new Option(m_Item[268][8], m_Item[268][0]),
-                c.A_left.options[0] = new Option(m_Item[305][8], m_Item[305][0]),
-                c.A_body.options[0] = new Option(m_Item[279][8], m_Item[279][0]),
-                c.A_shoulder.options[0] = new Option(m_Item[311][8], m_Item[311][0]),
-                c.A_shoes.options[0] = new Option(m_Item[317][8], m_Item[317][0]),
-                c.A_acces1.options[0] = new Option(m_Item[326][8], m_Item[326][0]),
-                void (c.A_acces2.options[0] = new Option(m_Item[326][8], m_Item[326][0]));
-        first_check = 2;
-        var e = new Array
-            , t = 1 * c.restrict_jobequip.checked;
-        n = 1 * c.restrict_lvlequip.checked;
-        for (a = 0; a <= 7; a++)
-            e[a] = new Array;
-        var A = new Array;
-        for (a = 0; a <= 7; a++)
-            A[a] = 0;
-        for (a = 0; a <= ItemMax; a++)
-            50 == m_Item[a][1] && (1 == JobEquipItemSearch(m_Item[a][2]) || SuperNoviceFullWeaponCHECK || 0 == t) && (m_Item[a][7] <= n_A_BaseLV || SuperNoviceFullWeaponCHECK || 0 == n) ? (e[0][A[0]] = a,
-                A[0]++) : 51 == m_Item[a][1] && (1 == JobEquipItemSearch(m_Item[a][2]) || SuperNoviceFullWeaponCHECK || 0 == t) && (m_Item[a][7] <= n_A_BaseLV || SuperNoviceFullWeaponCHECK || 0 == n) ? (e[1][A[1]] = a,
-                    A[1]++) : 52 == m_Item[a][1] && (1 == JobEquipItemSearch(m_Item[a][2]) || SuperNoviceFullWeaponCHECK || 0 == t) && (m_Item[a][7] <= n_A_BaseLV || SuperNoviceFullWeaponCHECK || 0 == n) ? (e[2][A[2]] = a,
-                        A[2]++) : 61 != m_Item[a][1] || 1 != JobEquipItemSearch(m_Item[a][2]) && 0 != t || !(m_Item[a][7] <= n_A_BaseLV || 0 == n) ? 60 != m_Item[a][1] || 1 != JobEquipItemSearch(m_Item[a][2]) && 0 != t || !(m_Item[a][7] <= n_A_BaseLV || 0 == n) ? 62 != m_Item[a][1] || 1 != JobEquipItemSearch(m_Item[a][2]) && 0 != t || !(m_Item[a][7] <= n_A_BaseLV || 0 == n) ? 63 != m_Item[a][1] || 1 != JobEquipItemSearch(m_Item[a][2]) && 0 != t || !(m_Item[a][7] <= n_A_BaseLV || 0 == n) ? 64 != m_Item[a][1] || 1 != JobEquipItemSearch(m_Item[a][2]) && 0 != t || !(m_Item[a][7] <= n_A_BaseLV || 0 == n) || (e[7][A[7]] = a,
-                            A[7]++) : (e[6][A[6]] = a,
-                                A[6]++) : (e[5][A[5]] = a,
-                                    A[5]++) : (e[4][A[4]] = a,
-                                        A[4]++) : (e[3][A[3]] = a,
-                                            A[3]++);
-        for (a = 0; a <= 7; a++)
-            e[a][A[a]] = "EOF";
-        for (var l = 0; l <= 7; l++)
-            e[l] = sort(e[l]);
-        var o = 0
-            , u = "";
-        for (a = 0; a < A[0]; a++)
-            o = e[0][a],
-                //u = m_Item[o][2] >= 3e3 && n_A_JOB >= 41 ? " (aRO)" : "",
-                m_Item[o][5] ? c.A_head1.options[a] = new Option(m_Item[o][8] + u + " [" + m_Item[o][5] + "]", m_Item[o][0]) : c.A_head1.options[a] = new Option(m_Item[o][8] + u, m_Item[o][0]);
-        for (a = 0; a < A[1]; a++)
-            o = e[1][a],
-                //u = m_Item[o][2] >= 3e3 && n_A_JOB >= 41 ? " (aRO)" : "",
-                m_Item[o][5] ? c.A_head2.options[a] = new Option(m_Item[o][8] + u + " [" + m_Item[o][5] + "]", m_Item[o][0]) : c.A_head2.options[a] = new Option(m_Item[o][8] + u, m_Item[o][0]);
-        for (a = 0; a < A[2]; a++)
-            o = e[2][a],
-                //u = m_Item[o][2] >= 3e3 && n_A_JOB >= 41 ? " (aRO)" : "",
-                m_Item[o][5] ? c.A_head3.options[a] = new Option(m_Item[o][8] + u + " [" + m_Item[o][5] + "]", m_Item[o][0]) : c.A_head3.options[a] = new Option(m_Item[o][8] + u, m_Item[o][0]);
-        for (a = 0; a < A[3]; a++)
-            o = e[3][a],
-                //u = m_Item[o][2] >= 3e3 && n_A_JOB >= 41 ? " (aRO)" : "",
-                m_Item[o][5] ? c.A_left.options[a] = new Option(m_Item[o][8] + u + " [" + m_Item[o][5] + "]", m_Item[o][0]) : c.A_left.options[a] = new Option(m_Item[o][8] + u, m_Item[o][0]);
-        for (a = 0; a < A[4]; a++)
-            o = e[4][a],
-                //u = m_Item[o][2] >= 3e3 && n_A_JOB >= 41 ? " (aRO)" : "",
-                m_Item[o][5] ? c.A_body.options[a] = new Option(m_Item[o][8] + u + " [" + m_Item[o][5] + "]", m_Item[o][0]) : c.A_body.options[a] = new Option(m_Item[o][8] + u, m_Item[o][0]);
-        for (a = 0; a < A[5]; a++)
-            o = e[5][a],
-                //u = m_Item[o][2] >= 3e3 && n_A_JOB >= 41 ? " (aRO)" : "",
-                m_Item[o][5] ? c.A_shoulder.options[a] = new Option(m_Item[o][8] + u + " [" + m_Item[o][5] + "]", m_Item[o][0]) : c.A_shoulder.options[a] = new Option(m_Item[o][8] + u, m_Item[o][0]);
-        for (a = 0; a < A[6]; a++)
-            o = e[6][a],
-                //u = m_Item[o][2] >= 3e3 && n_A_JOB >= 41 ? " (aRO)" : "",
-                m_Item[o][5] ? c.A_shoes.options[a] = new Option(m_Item[o][8] + u + " [" + m_Item[o][5] + "]", m_Item[o][0]) : c.A_shoes.options[a] = new Option(m_Item[o][8] + u, m_Item[o][0]);
-        for (a = 0; a < A[7]; a++)
-            o = e[7][a],
-                //u = m_Item[o][2] >= 3e3 && n_A_JOB >= 41 ? " (aRO)" : "",
-                m_Item[o][5] ? (c.A_acces1.options[a] = new Option(m_Item[o][8] + u + " [" + m_Item[o][5] + "]", m_Item[o][0]),
-                    c.A_acces2.options[a] = new Option(m_Item[o][8] + u + " [" + m_Item[o][5] + "]", m_Item[o][0])) : (c.A_acces1.options[a] = new Option(m_Item[o][8] + u, m_Item[o][0]),
-                        c.A_acces2.options[a] = new Option(m_Item[o][8] + u, m_Item[o][0]))
+
+function WeaponSet2() {
+    const levelRestrict = 1 * c.restrict_lvlequip.checked;
+
+    n_A_JobSet();
+
+    // Slot indices: 0=head1, 1=head2, 2=head3, 3=shield, 4=armor, 5=garment, 6=shoes, 7=accessory
+    const SLOT_TYPES   = [50, 51, 52, 61, 60, 62, 63, 64];
+    const SLOT_SELECTS = [c.A_head1, c.A_head2, c.A_head3, c.A_left, c.A_body, c.A_shoulder, c.A_shoes, c.A_acces1];
+
+    // Clear all dropdowns
+    for (const sel of SLOT_SELECTS)
+        sel.options.length = 0;
+
+    const jobRestrict = 1 * c.restrict_jobequip.checked;
+    const baseLevel = player.status.base_level;
+
+    // Bucket items by slot type
+    const buckets = SLOT_TYPES.map(() => []);
+
+    for (let a = 0; a <= ItemMax; a++) {
+        const itemType = m_Item[a][1];
+        const slotIdx = SLOT_TYPES.indexOf(itemType);
+        if (slotIdx === -1) continue;
+
+        const jobOk = !jobRestrict || SuperNoviceFullWeaponCHECK || JobEquipItemSearch(m_Item[a][2]);
+        const levelOk = !levelRestrict || SuperNoviceFullWeaponCHECK || m_Item[a][7] <= baseLevel;
+        if (jobOk && levelOk)
+            buckets[slotIdx].push(a);
     }
-}
-function FirstNovis() {
-    1 == first_check && (first_check = 2,
-        WeaponSet2())
+
+    // Sort each bucket alphabetically by item name
+    for (const bucket of buckets)
+        bucket.sort((a, b) => m_Item[a][8] > m_Item[b][8] ? 1 : m_Item[a][8] < m_Item[b][8] ? -1 : 0);
+
+    // Populate dropdowns
+    for (let s = 0; s < SLOT_SELECTS.length; s++) {
+        const sel = SLOT_SELECTS[s];
+        for (let i = 0; i < buckets[s].length; i++) {
+            const o = buckets[s][i];
+            const label = m_Item[o][8] + (m_Item[o][5] ? ` [${m_Item[o][5]}]` : "");
+            sel.options[i] = new Option(label, m_Item[o][0]);
+        }
+    }
+    // Accessory 2 mirrors accessory 1
+    c.A_acces2.options.length = 0;
+    for (let i = 0; i < buckets[7].length; i++) {
+        const o = buckets[7][i];
+        const label = m_Item[o][8] + (m_Item[o][5] ? ` [${m_Item[o][5]}]` : "");
+        c.A_acces2.options[i] = new Option(label, m_Item[o][0]);
+    }
 }
 
 function JobEquipItemSearch(searchId) {
-    if (searchId >= 2000 && (n_A_JOB <= JOB.HIGH_MERCHANT || n_A_JOB == JOB.NIGHT_WATCH || n_A_JOB == JOB.SOUL_ASCETIC)) {
+    if (searchId >= 2000 && (player.status.job_id <= JOB.HIGH_MERCHANT || player.status.job_id == JOB.NIGHT_WATCH || player.status.job_id == JOB.SOUL_ASCETIC)) {
         searchId -= 2000;
     }
 
@@ -2167,7 +1748,7 @@ function JobEquipItemSearch(searchId) {
         searchId -= 1000;
     }
 
-    const equippableWeapons = JOB_EQUIPPABLE_WEAPONS[n_A_JOB] || [];
+    const equippableWeapons = JOB_EQUIPPABLE_WEAPONS[player.status.job_id] || [];
     return equippableWeapons.includes(searchId) ? 1 : 0;
 }
 
@@ -2191,7 +1772,6 @@ function n_A_JobSet() {
     }
 
     player.status.job_id = newJob;
-    n_A_JOB = newJob;
 }
 /**
  * Function to get Base Job Class
@@ -2300,39 +1880,28 @@ function n_A_JobClass2() {
     return jobClassMap[player.status.job_id] ?? 0;
 }
 
-function EquipNumSearch(_) {
-    
-
-    for (var n = 0, a = 0; a <= 20; a++)
-        _ == n_A_Equip[a] && (n += 1);
-    return n
+function EquipNumSearch(id) {
+    return player.equip.filter(e => e === id).length;
 }
-function CardNumSearch(_) {
-    for (var n = 0, a = 0; a <= 25; a++)
-        _ == n_A_card[a] && (n += 1);
-    return n
+function CardNumSearch(id) {
+    return player.card.filter(c => c === id).length;
 }
-function TimeItemNumSearch(_) {
-    for (var n = 0, a = 0; a <= 3; a++)
-        _ == n_A_Buf8[8 + a] && (n += 1);
-    return n
+function TimeItemNumSearch(id) {
+    return player.temp_effect.filter(e => e === id).length;
 }
-function NumSearch(_, n) {
-    for (var a = n.length - 1, e = 0; e <= a; e++)
-        if (_ == n[e])
-            return 1;
-    return 0
-}
-
-const w_ASSP0bk = new Array(20).fill(999);
 
 function ActiveSkillSetPlus() {
-    const w_ASSP0 = new Array(100).fill(999);
-    const w_ASSP9 = new Array(100).fill(0);
-    let skillIndex = 0;
+    // Build a list of extra skills granted by equipped items, cards, and scrolls
+    // that should be appended to the active skill dropdown.
+    // Each entry is { skillId, source } where source encodes the origin:
+    //   >= 5000 = scroll skill (index + 5000)
+    //   >= 3000 = acquired/enabled skill (index + 3000)
+    //   >= 2000 = auto-cast skill (index + 2000)
+    const extraSkills = [];
 
+    // Skills granted by equipped items
     for (let slot = 0; slot <= 20; slot++) {
-        const itemId = n_A_Equip[slot];
+        const itemId = player.equip[slot];
         let bonusIndex = 0;
 
         while (m_Item[itemId][11 + bonusIndex] !== 0) {
@@ -2340,20 +1909,17 @@ function ActiveSkillSetPlus() {
             const bonusValue = m_Item[itemId][12 + bonusIndex];
 
             if (bonusType === 220 && m_EnableSkill[bonusValue][1] === 1) {
-                w_ASSP0[skillIndex] = m_EnableSkill[bonusValue][2];
-                w_ASSP9[skillIndex] = bonusValue + 3000;
-                skillIndex++;
+                extraSkills.push({ skillId: m_EnableSkill[bonusValue][2], source: bonusValue + 3000 });
             } else if (bonusType === 221 && m_AutoSpellSkill[bonusValue][1] === 1) {
-                w_ASSP0[skillIndex] = m_AutoSpellSkill[bonusValue][2];
-                w_ASSP9[skillIndex] = bonusValue + 2000;
-                skillIndex++;
+                extraSkills.push({ skillId: m_AutoSpellSkill[bonusValue][2], source: bonusValue + 2000 });
             }
             bonusIndex += 2;
         }
     }
 
+    // Skills granted by cards
     for (let cardSlot = 0; cardSlot <= 25; cardSlot++) {
-        const cardId = n_A_card[cardSlot];
+        const cardId = player.card[cardSlot];
         let bonusIndex = 0;
 
         while (m_Card[cardId][4 + bonusIndex] !== 0) {
@@ -2361,137 +1927,72 @@ function ActiveSkillSetPlus() {
             const bonusValue = m_Card[cardId][5 + bonusIndex];
 
             if (bonusType === 220 && m_EnableSkill[bonusValue][1] === 1) {
-                w_ASSP0[skillIndex] = m_EnableSkill[bonusValue][2];
-                w_ASSP9[skillIndex] = bonusValue + 3000;
-                skillIndex++;
+                extraSkills.push({ skillId: m_EnableSkill[bonusValue][2], source: bonusValue + 3000 });
             } else if (bonusType === 221 && m_AutoSpellSkill[bonusValue][1] === 1) {
-                w_ASSP0[skillIndex] = m_AutoSpellSkill[bonusValue][2];
-                w_ASSP9[skillIndex] = bonusValue + 2000;
-                skillIndex++;
+                extraSkills.push({ skillId: m_AutoSpellSkill[bonusValue][2], source: bonusValue + 2000 });
             }
             bonusIndex += 2;
         }
     }
 
-    if (CardNumSearch(164) && (n_A_JOB === JOB.PRIEST || n_A_JOB === JOB.HIGH_PRIEST)) {
-        w_ASSP0[skillIndex] = 162;
-        w_ASSP9[skillIndex] = 2095;
-        skillIndex++;
+    // Priest/High Priest card 164 grants Lex Divina (skill 162)
+    if (CardNumSearch(164) && (player.status.job_id === JOB.PRIEST || player.status.job_id === JOB.HIGH_PRIEST)) {
+        extraSkills.push({ skillId: SKILL.CR_GRANDCROSS, source: 2095 });
     }
 
+    // Card 277 grants Endure (skill 76) for Swordman class
     if (CardNumSearch(277) && n_A_JobClass() === JOB.SWORDMAN) {
-        w_ASSP0[skillIndex] = 76;
-        w_ASSP9[skillIndex] = 2096;
-        skillIndex++;
+        extraSkills.push({ skillId: SKILL.KN_BOWLINGBASH, source: 2096 });
     }
 
+    // Scroll skills (always available)
     const scrollSkillIds = [33, 34, 35, 36, 13, 37, 38, 39, 7];
-    for (let i = 0; i < scrollSkillIds.length; i++) {
-        const skillId = scrollSkillIds[i];
-        w_ASSP0[skillIndex] = m_EnableSkill[skillId][2];
-        w_ASSP9[skillIndex] = skillId + 5000;
-        skillIndex++;
+    for (const skillId of scrollSkillIds) {
+        extraSkills.push({ skillId: m_EnableSkill[skillId][2], source: skillId + 5000 });
     }
+    // Yggdrasil Leaf (index 40) is a special case with its own label
+    extraSkills.push({ skillId: m_EnableSkill[40][2], source: 5040 });
 
-    w_ASSP0[skillIndex] = m_EnableSkill[40][2];
-    w_ASSP9[skillIndex] = 5040;
-    skillIndex++;
+    // Rebuild the extra portion of the dropdown unconditionally
+    const baseSkillCount = c.all_dmgSkills.checked
+        ? 109
+        : (JOB_ACTIVE_SKILLS[player.status.job_id] || []).length;
 
-    let skillsChanged = false;
-    for (let i = 0; i < 20; i++) {
-        if (w_ASSP0bk[i] !== w_ASSP0[i]) {
-            skillsChanged = true;
-            break;
-        }
-    }
+    // Clear old extra entries
+    for (let i = baseSkillCount + 20; i >= baseSkillCount; i--)
+        c.A_ActiveSkill.options[i] = null;
 
-    if (skillsChanged) {
-        let dropDownStartIndex;
-        if (c.all_dmgSkills.checked) {
-            dropDownStartIndex = 109;
+    // Append new extra entries
+    for (let i = 0; i < extraSkills.length; i++) {
+        const { skillId, source } = extraSkills[i];
+        const skillName = m_Skill[skillId][2];
+        let label;
+
+        if (source === 5040) {
+            label = `${skillName} (Yggdrasil Leaf)`;
+        } else if (source >= 5000) {
+            label = `${skillName} (scroll skill)`;
+        } else if (source >= 3000) {
+            label = `${skillName} (acquired skill)`;
         } else {
-            const activeSkills = JOB_ACTIVE_SKILLS[n_A_JOB] || [0];
-            dropDownStartIndex = activeSkills.length;
+            label = `${skillName} (auto-cast skill)`;
         }
 
-        for (let i = dropDownStartIndex + 20; i >= dropDownStartIndex; i--) {
-            c.A_ActiveSkill.options[i] = null;
-        }
-
-        let dropDownIndex = dropDownStartIndex;
-        for (let i = 0; w_ASSP0[i] !== 999; i++, dropDownIndex++) {
-            const skillId = w_ASSP0[i];
-            const source = w_ASSP9[i];
-            const skillName = m_Skill[skillId][2];
-            let label;
-
-            if (source === 5040) {
-                label = `${skillName} (Yggdrasil Leaf)`;
-            } else if (source >= 5000) {
-                label = `${skillName} (scroll skill)`;
-            } else if (source >= 3000) {
-                label = `${skillName} (acquired skill)`;
-            } else {
-                label = `${skillName} (auto-casted skill)`;
-            }
-
-            c.A_ActiveSkill.options[dropDownIndex] = new Option(label, source);
-        }
-    }
-
-    for (let i = 0; i < 20; i++) {
-        w_ASSP0bk[i] = w_ASSP0[i];
+        c.A_ActiveSkill.options[baseSkillCount + i] = new Option(label, source);
     }
 
     if (Number(c.A_ActiveSkill.value) === 0)
         c.A_ActiveSkillLV.style.visibility = "hidden";
 }
+
 function KakutyouKansuu() {
     displayOtherInfo(1 * c.A_Kakutyou.value);
-}
-function Kanma(_) {
-    var n = ""
-        , a = new Array;
-    _ < 0 && (_ *= -1,
-        n += "-");
-    for (var e = 0; 0 != Math.floor(_ / 1e3); e++) {
-        var t = _ % 1e3;
-        a[e] = 0 == t ? ",000" : t < 10 ? ",00" + t : t < 100 ? ",0" + t : "," + t,
-            _ = Math.floor(_ / 1e3)
-    }
-    for (a[e] = _; e >= 0;)
-        n += a[e],
-            e--;
-    return n
 }
 function KakutyouKansuu2() {
     displayOtherInfoSelect(1 * c.A_Kakutyou.value);
 }
-function SetEquipShort() {
-    w = 1 * c.A_equipshort.value,
-        w > 0 && ("Remove All Cards" != m_CardShort[w][0] ? (0 != m_CardShort[w][2] && (c.A_weapon1_card1.value = m_CardShort[w][2]),
-            0 != m_CardShort[w][3] && (c.A_head1_card.value = m_CardShort[w][3]),
-            0 != m_CardShort[w][4] && (c.A_left_card.value = m_CardShort[w][4]),
-            0 != m_CardShort[w][5] && (c.A_body_card.value = m_CardShort[w][5]),
-            0 != m_CardShort[w][6] && (c.A_shoulder_card.value = m_CardShort[w][6]),
-            0 != m_CardShort[w][7] && (c.A_shoes_card.value = m_CardShort[w][7]),
-            0 != m_CardShort[w][8] && (c.A_acces1_card.value = m_CardShort[w][8]),
-            0 != m_CardShort[w][9] && (c.A_acces2_card.value = m_CardShort[w][9]),
-            0 != m_CardShort[w][10] && (c.A_head2_card.value = m_CardShort[w][10])) : (c.A_weapon1_card1.value = 0,
-                c.A_weapon1_card2.value = 0,
-                c.A_weapon1_card3.value = 0,
-                c.A_weapon1_card4.value = 0,
-                c.A_head1_card.value = 0,
-                c.A_head2_card.value = 0,
-                c.A_left_card.value = 0,
-                c.A_body_card.value = 0,
-                c.A_shoulder_card.value = 0,
-                c.A_shoes_card.value = 0,
-                c.A_acces1_card.value = 0,
-                c.A_acces2_card.value = 0),
-            ActiveSkillSetPlus())
-}
-function Setm_CardShort() {
+
+/* function Setm_CardShort() {
     w = 1 * c.A_cardshort.value,
         w > 0 && (m_CardShort[w][1] < 1e4 ? (c.A_weapon1_card1.value = m_CardShort[w][1],
             c.A_weapon1_card2.value = m_CardShort[w][2],
@@ -2537,138 +2038,234 @@ function Setm_CardShortLeft() {
                 (20 <= w && w <= 24 || 80 <= w && w <= 94) && (c.A_weapon2_card1.value = 203),
                 30 <= w && w <= 34 && (c.A_weapon2_card1.value = 201),
                 40 <= w && w <= 44 && (c.A_weapon2_card1.value = 202)))
-}
-for (wESx = new Array,
-    i = 0; i <= EnemyNum; i++)
-    wESx[i] = new Array;
-function EnemySort() {
-    let hitsByMonsterID = {};
-    for (var _ = c.B_Enemy.length, n = 0; n < _; n++)
-        c.B_Enemy.options[0] = null;
-    if (ESNum = [1, 3, 2, 4, 21, 22, 16, 17, 13, 14, 15, 30, 60, 100],
-        0 != 1 * c.ENEMY_SORT.value) {
-        if (60 != ESNum[1 * c.ENEMY_SORT.value]) {
-            for (wES = ESNum[1 * c.ENEMY_SORT.value],
-                wESx[0][0] = "S",
-                wESx[0][1] = "E",
-                STERTw = 0,
-                ENDw = 0,
-                n = 1; n <= EnemyNum; n++)
-                if (e = ENDw,
-                    wES != 30 ? m_Monster[n][wES] >= m_Monster[e][wES] : m_Monster[n][7] + m_Monster[n][14] >= m_Monster[e][7] + m_Monster[e][14])
-                    wESx[e][1] = n,
-                        wESx[n][0] = e,
-                        wESx[n][1] = "E",
-                        ENDw = n;
-                else if (e = STERTw,
-                    wES != 30 ? m_Monster[n][wES] <= m_Monster[e][wES] : m_Monster[n][7] + m_Monster[n][14] <= m_Monster[e][7] + m_Monster[e][14])
-                    wESx[e][0] = n,
-                        wESx[n][0] = "S",
-                        wESx[n][1] = e,
-                        STERTw = n;
-                else {
-                    for (e = STERTw,
-                        jbk = STERTw; wES != 30 ? m_Monster[n][wES] > m_Monster[e][wES] : m_Monster[n][7] + m_Monster[n][14] > m_Monster[e][7] + m_Monster[e][14];)
-                        jbk = e,
-                            e = wESx[e][1];
-                    wESx[jbk][1] = n,
-                        wESx[n][0] = jbk,
-                        wESx[n][1] = e,
-                        wESx[e][0] = n
-                }
-        } else {
-            for (var _ = 0; _ <= EnemyNum; _++) {
-                ClickB_Enemy(_);
-                calc(true);
-                let averageAtkNum = document.getElementById("AveATKnum").innerText;
-                if (averageAtkNum.includes("10000")) {
-                    hitsByMonsterID[_] = 10000;
-                } else {
-                    hitsByMonsterID[_] = parseInt(averageAtkNum);
-                }
-            }
+} */
 
-            for (wES = ESNum[1 * c.ENEMY_SORT.value],
-                wESx[0][0] = "S",
-                wESx[0][1] = "E",
-                STERTw = 0,
-                ENDw = 0,
-                n = 1; n <= EnemyNum; n++)
-                if (e = ENDw,
-                    hitsByMonsterID[n] >= hitsByMonsterID[e])
-                    wESx[e][1] = n,
-                        wESx[n][0] = e,
-                        wESx[n][1] = "E",
-                        ENDw = n;
-                else if (e = STERTw,
-                    hitsByMonsterID[n] <= hitsByMonsterID[e])
-                    wESx[e][0] = n,
-                        wESx[n][0] = "S",
-                        wESx[n][1] = e,
-                        STERTw = n;
-                else {
-                    for (e = STERTw,
-                        jbk = STERTw; hitsByMonsterID[n] > hitsByMonsterID[e];)
-                        jbk = e,
-                            e = wESx[e][1];
-                    wESx[jbk][1] = n,
-                        wESx[n][0] = jbk,
-                        wESx[n][1] = e,
-                        wESx[e][0] = n
-                }
+/**
+ * Applies a weapon card preset to the right-hand weapon card slots.
+ * Handles three cases:
+ *   - Weapon-only preset (sentinel [1] < 10000): fills all 4 weapon card slots directly
+ *   - Full-set preset (sentinel [1] >= 10000): fills individual gear slots, only overwriting non-zero entries
+ *   - "Remove All Cards": clears every card slot including dual-wield weapon if present
+ */
+function Setm_CardShort() {
+    const presetIndex = 1 * c.A_cardshort.value;
+    if (presetIndex <= 0)
+        return;
+
+    const preset = m_CardShort[presetIndex];
+    const isWeaponPreset = preset[1] < 10000;
+    const isRemoveAll = preset[0] === "Remove All Cards";
+
+    if (isWeaponPreset) {
+        c.A_weapon1_card1.value = preset[1];
+        c.A_weapon1_card2.value = preset[2];
+        c.A_weapon1_card3.value = preset[3];
+        c.A_weapon1_card4.value = preset[4];
+
+        // Presets 16 and 17 are elemental stone presets — auto-select the correct
+        // elemental stone card based on the current target monster's element.
+        if (presetIndex === 16 || presetIndex === 17) {
+            const monsterElement = m_Monster[1 * c.B_Enemy.value][3];
+            if (monsterElement >= 10 && monsterElement <= 14)
+                c.A_weapon1_card1.value = 204; // Water elemental stone
+            else if ((monsterElement >= 20 && monsterElement <= 24) || (monsterElement >= 80 && monsterElement <= 94))
+                c.A_weapon1_card1.value = 203; // Fire elemental stone
+            else if (monsterElement >= 30 && monsterElement <= 34)
+                c.A_weapon1_card1.value = 201; // Wind elemental stone
+            else if (monsterElement >= 40 && monsterElement <= 44)
+                c.A_weapon1_card1.value = 202; // Earth elemental stone
         }
-        (a = new Array)[0] = n = STERTw;
-        for (e = 1; "E" != wESx[n][1]; e++)
-            a[e] = wESx[n][1],
-                n = wESx[n][1];
-        if (a = SortZ(a),
-            ESwork2 = new Array,
-            21 == wES || 22 == wES || 16 == wES || 17 == wES || 13 == wES || 14 == wES || 15 == wES)
-            for (n = 0; n <= EnemyNum; n++)
-                ESwork2[n] = " [" + m_Monster[n][wES] + "]";
-        else if (2 == wES)
-            for (n = 0; n <= EnemyNum; n++)
-                ESwork2[n] = " [" + v_Race_[m_Monster[n][2]] + "]";
-        else if (3 == wES)
-            for (n = 0; n <= EnemyNum; n++)
-                ESwork2[n] = " [" + v_Element_[Math.floor(m_Monster[n][3] / 10)] + m_Monster[n][3] % 10 + "]";
-        else if (4 == wES)
-            for (n = 0; n <= EnemyNum; n++)
-                ESwork2[n] = " [" + v_Size[m_Monster[n][4]] + "]";
-        else if (30 == wES)
-            for (n = 0; n <= EnemyNum; n++)
-                ESwork2[n] = " [" + parseInt(m_Monster[n][7] + m_Monster[n][14]) + "]";
-        else if (60 == wES)
-            for (n = 0; n <= EnemyNum; n++)
-                ESwork2[n] = " [" + hitsByMonsterID[n] + "]";
-        else
-            for (n = 0; n <= EnemyNum; n++)
-                ESwork2[n] = "";
-        e = 0;
-        for (n = 0; n <= EnemyNum; n++)
-            -1 != a[n] && !v_MonsterExclude.includes(m_Monster[a[n]][0]) && (c.B_Enemy.options[e] = new Option(m_Monster[a[n]][1] + ESwork2[a[n]], a[n]),
-                e++)
+    } else if (isRemoveAll) {
+        c.A_weapon1_card1.value = 0;
+        c.A_weapon1_card2.value = 0;
+        c.A_weapon1_card3.value = 0;
+        c.A_weapon1_card4.value = 0;
+        if (player.dual_wield) {
+            c.A_weapon2_card1.value = 0;
+            c.A_weapon2_card2.value = 0;
+            c.A_weapon2_card3.value = 0;
+            c.A_weapon2_card4.value = 0;
+        }
+        c.A_head1_card.value    = 0;
+        c.A_head2_card.value    = 0;
+        c.A_left_card.value     = 0;
+        c.A_body_card.value     = 0;
+        c.A_shoulder_card.value = 0;
+        c.A_shoes_card.value    = 0;
+        c.A_acces1_card.value   = 0;
+        c.A_acces2_card.value   = 0;
     } else {
-        for (var a = new Array, n = 0; n <= EnemyNumSort; n++)
-            a[n] = v_MonsterSort[n];
-        a = SortZ(a);
-        var e = 0;
-        for (n = 0; n <= EnemyNumSort; n++)
-            -1 != a[n] && (c.B_Enemy.options[e] = new Option(m_Monster[a[n]][1], a[n]), e++)
+        // Full-set preset: only overwrite slots that have a non-zero value in the preset.
+        // preset[2]=weapon card1, [3]=head1, [4]=shield, [5]=body,
+        // [6]=garment, [7]=shoes, [8]=acc1, [9]=acc2
+        if (preset[2]) c.A_weapon1_card1.value = preset[2];
+        if (preset[3]) c.A_head1_card.value    = preset[3];
+        if (preset[4]) c.A_left_card.value      = preset[4];
+        if (preset[5]) c.A_body_card.value      = preset[5];
+        if (preset[6]) c.A_shoulder_card.value  = preset[6];
+        if (preset[7]) c.A_shoes_card.value     = preset[7];
+        if (preset[8]) c.A_acces1_card.value    = preset[8];
+        if (preset[9]) c.A_acces2_card.value    = preset[9];
+    }
 
+    ActiveSkillSetPlus();
+}
+
+/**
+ * Applies a weapon card preset to the left-hand (dual-wield) weapon card slots.
+ * Only handles weapon-only presets (sentinel [1] < 10000).
+ * Same elemental stone auto-select logic as Setm_CardShort.
+ */
+function Setm_CardShortLeft() {
+    const presetIndex = 1 * c.A_cardshortLeft.value;
+    if (presetIndex <= 0)
+        return;
+
+    const preset = m_CardShort[presetIndex];
+
+    c.A_weapon2_card1.value = preset[1];
+    c.A_weapon2_card2.value = preset[2];
+    c.A_weapon2_card3.value = preset[3];
+    c.A_weapon2_card4.value = preset[4];
+
+    if (presetIndex === 16 || presetIndex === 17) {
+        const monsterElement = m_Monster[1 * c.B_Enemy.value][3];
+        if (monsterElement >= 10 && monsterElement <= 14)
+            c.A_weapon2_card1.value = 204;
+        else if ((monsterElement >= 20 && monsterElement <= 24) || (monsterElement >= 80 && monsterElement <= 94))
+            c.A_weapon2_card1.value = 203;
+        else if (monsterElement >= 30 && monsterElement <= 34)
+            c.A_weapon2_card1.value = 201;
+        else if (monsterElement >= 40 && monsterElement <= 44)
+            c.A_weapon2_card1.value = 202;
     }
 }
-function SortZ(_) {
-    var n = document.calcForm.ENEMY_SORT2.value;
-    if (0 != n)
-        for (var a = 0; a <= EnemyNum; a++)
-            if (-1 != _[a]) {
-                for (var e = 0; "N" != m_MonsterMap[n][e] && _[a] != m_MonsterMap[n][e]; e++)
-                    ;
-                "N" == m_MonsterMap[n][e] && (_[a] = -1)
-            }
-    return _
+
+function calcAvgHitsToKill(monsterIndex) {
+    // Temporarily populate monster data directly without DOM side effects
+    const savedMonster = monster;
+    monster = new MonsterData();
+
+    const monsterInfo = m_Monster[monsterIndex];
+    monster.mob_id = monsterInfo[0];
+    monster.level = monsterInfo[5];
+    monster.name = monsterInfo[1];
+    monster.is_custom_player = monster.mob_id == 586;
+    monster.ranged = monsterInfo[20] == 1;
+
+    // Minimal status calc for the monster
+    StatusCalcMonsterSub();
+
+    // Run the damage calc — same logic as calc()
+    let skill_type = BF.WEAPON;
+    if (m_Skill[n_A_ActiveSkill][4] < 0)
+        skill_type = BF.MAGIC;
+    else if (m_Skill[n_A_ActiveSkill][4] == 5)
+        skill_type = BF.MISC;
+
+    const d = battle_calc_attack(skill_type, player, monster, n_A_ActiveSkill, n_A_ActiveSkillLV, 0);
+
+    // Compute avgHits the same way updatePlayerDamageDisplay does
+    const avgDamage = d.getAverageDamage();
+    let avgHits = avgDamage > 0 ? Math.ceil(monster.battle_status.max_hp / avgDamage) : 10000;
+    if (d.hit_rate < 100)
+        avgHits = Math.ceil(avgHits / (d.hit_rate / 100));
+    if (avgHits > 10000) avgHits = 10000;
+
+    // Restore the real monster
+    monster = savedMonster;
+
+    return avgHits;
 }
+
+// Maps ENEMY_SORT dropdown index → m_Monster field index used for sorting.
+// Index 12 (value 60) is the special "sort by damage dealt" mode.
+// Index 13 (value 100) is the default alphabetical sort (no custom sort).
+const ENEMY_SORT_FIELD = [3, 2, 4, 21, 22, 16, 17, 13, 14, 15, 30, 60];
+
+function EnemySort() {
+    const sortMode = 1 * c.ENEMY_SORT.value;
+    const sortField = sortMode > 0 ? ENEMY_SORT_FIELD[sortMode - 1] : null;
+
+    // Pre-calculate hits-to-kill for all monsters before touching the dropdown.
+    // Done up here so it can use the existing valid dropdown state if needed.
+    const damageByMonster = {};
+    if (sortField === 60) {
+        for (let i = 0; i <= EnemyNum; i++)
+            damageByMonster[i] = calcAvgHitsToKill(i);
+    }
+
+    // Clear and rebuild the dropdown
+    c.B_Enemy.options.length = 0;
+
+    // Value 0: default alphabetical sort using the pre-built v_MonsterSort list
+    if (sortMode === 0) {
+        const filtered = applyRegionFilter(v_MonsterSort.slice(0, -1)); // strip "N" sentinel
+        for (const monsterId of filtered)
+            c.B_Enemy.options[c.B_Enemy.options.length] = new Option(m_Monster[monsterId][1], monsterId);
+        return;
+    }
+
+    // Build list of non-excluded monster array indices
+    let monsterIds = [];
+    for (let i = 0; i <= EnemyNum; i++) {
+        if (!v_MonsterExclude.includes(m_Monster[i][0]))
+            monsterIds.push(i);
+    }
+
+    // Sort
+    let sortKey;
+    if (sortField === 60) {
+        sortKey = (id) => damageByMonster[id];
+    } else if (sortField === 30) {
+        sortKey = (id) => m_Monster[id][7] + m_Monster[id][14]; // DEF + MDEF
+    } else {
+        sortKey = (id) => m_Monster[id][sortField];
+    }
+
+    monsterIds.sort((a, b) => sortKey(a) - sortKey(b));
+    monsterIds = applyRegionFilter(monsterIds);
+
+    // Build label suffix showing the sorted field value
+    const getSuffix = (id) => {
+        if ([21, 22, 16, 17, 13, 14, 15].includes(sortField))
+            return ` [${m_Monster[id][sortField]}]`;
+        if (sortField === 2)
+            return ` [${v_Race_[m_Monster[id][2]]}]`;
+        if (sortField === 3)
+            return ` [${v_Element_[Math.floor(m_Monster[id][3] / 10)]}${m_Monster[id][3] % 10}]`;
+        if (sortField === 4)
+            return ` [${v_Size[m_Monster[id][4]]}]`;
+        if (sortField === 30)
+            return ` [${m_Monster[id][7] + m_Monster[id][14]}]`;
+        if (sortField === 60)
+            return ` [${damageByMonster[id]}]`;
+        return "";
+    };
+
+    for (const id of monsterIds)
+        c.B_Enemy.options[c.B_Enemy.options.length] = new Option(m_Monster[id][1] + getSuffix(id), id);
+}
+
+/**
+ * Filters a list of monster IDs to only those belonging to the selected region.
+ * Returns the list unmodified if "All Regions" (index 0) is selected.
+ * m_MonsterMap[regionIndex] is an array of valid monster IDs terminated by "N".
+ */
+function applyRegionFilter(monsterIds) {
+    const regionIndex = 1 * c.ENEMY_SORT2.value;
+    if (regionIndex === 0)
+        return monsterIds;
+
+    const regionMap = m_MonsterMap[regionIndex];
+    // regionMap ends with "N" sentinel — collect valid IDs into a Set for O(1) lookup
+    const regionSet = new Set();
+    for (let i = 0; regionMap[i] !== "N"; i++)
+        regionSet.add(regionMap[i]);
+
+    return monsterIds.filter(id => regionSet.has(id));
+}
+
 function SaveLocal() {
     if ("undefined" == typeof Storage)
         alert("Sorry, your browser does not support local storage. Please let me know if you see this message at tnaab on Discord");
@@ -2783,7 +2380,7 @@ function SaveLocal() {
             SaveData[237] = c.Conf01.value,
             SaveData[238] = c.B_num.value,
             SaveData[239] = c.A8_Skill14.value,
-            SaveData[240] = c.A8_Skill15.value,
+            SaveData[240] = 0,
             SaveData[241] = 0,
             SaveData[242] = 0,
             SaveData[243] = 1 * c.A_ActiveSkill.value,
@@ -2926,14 +2523,13 @@ function LoadLocal() {
             c.Conf01.value = 20,
             c.B_num.value = 1,
             c.A8_Skill14.value = 0,
-            c.A8_Skill15.value = 0,
             c.A_ActiveSkill.value = 0,
             ClickActiveSkill(),
             c.A_ActiveSkillLV.value = 0,
             (326 == n_A_ActiveSkill || 159 == n_A_ActiveSkill || 384 == n_A_ActiveSkill || 324 == n_A_ActiveSkill || 131 == n_A_ActiveSkill || 88 == n_A_ActiveSkill || 197 == n_A_ActiveSkill || 394 == n_A_ActiveSkill || 395 == n_A_ActiveSkill || 405 == n_A_ActiveSkill || 429 == n_A_ActiveSkill || SkillSearch(441) && (51 == n_A_ActiveSkill || 54 == n_A_ActiveSkill || 56 == n_A_ActiveSkill || 540 == n_A_ActiveSkill || 541 == n_A_ActiveSkill || 542 == n_A_ActiveSkill)) && (c.SkillSubNum.value = 0),
             c.B_Enemy.value = 144,
             c.B_AtkRange.value = 0,
-            Bskill(),
+            LoadEnemySkills(),
             c.B_AtkSkill.value = 0,
             n = 0; n <= 30; n++)
             n_B_debuf[n] = 0;
@@ -2982,7 +2578,7 @@ function LoadLocal() {
             n_A_WeaponType = SaveData[13],
             ClickWeaponType(SaveData[13]),
             8 != SaveData[2] && 22 != SaveData[2] || 11 == SaveData[13] || (
-                n_A_Equip[1] = 0,
+                player.equip[EQI.HAND_L] = 0,
                 n_A_Weapon2Type = SaveData[20],
                 ClickWeaponType2(SaveData[21])),
             n_A_JobSet(),
@@ -3032,7 +2628,7 @@ function LoadLocal() {
         c.Conf01.value = SaveData[237],
             c.B_num.value = SaveData[238],
             c.A8_Skill14.value = SaveData[239],
-            c.A8_Skill15.value = SaveData[240],
+            //c.A8_Skill15.value = SaveData[240],
             StCalc(1),
             ActiveSkillSetPlus(),
             c.A_ActiveSkill.value = SaveData[243],
@@ -3062,7 +2658,7 @@ function LoadLocal() {
         for (SaveData[246] == "" && (SaveData[246] = 586),
             n_B[0] = SaveData[246],
             c.B_Enemy.value = SaveData[246],
-            Bskill(),
+            LoadEnemySkills(),
             c.B_AtkSkill.value = SaveData[247],
             BClickAtkSkill(),
             444 != SaveData[247] && 445 != SaveData[247] && 125 != SaveData[247] && 131 != SaveData[247] || (c.BSkillSubNum.value = SaveData[248]),
@@ -3072,7 +2668,7 @@ function LoadLocal() {
             setBuf2ToSC(n, SaveData[73 + n]);
         for (n = 0; n <= 37; n++)
             n_A_Buf3[n] = SaveData[96 + n];
-        for (Buf3SW(0),
+        for (SetDanceSkillsVisibility(0),
             n = 0; n <= 4; n++)
             n_A_Buf3[40 + n] = SaveData[136 + n];
         for (n = 0; n <= 23; n++)
@@ -3454,7 +3050,7 @@ function URLOUT() {
         SaveData[t + 1] = NtoS2(1 * c.Conf01.value, 2),
         SaveData[t + 2] = NtoS2(c.B_num.value, 1),
         SaveData[t + 3] = NtoS2(c.A8_Skill14.value, 1),
-        SaveData[t + 4] = NtoS2(c.A8_Skill15.value, 2),
+        //SaveData[t + 4] = NtoS2(c.A8_Skill15.value, 2),
         SaveData[t + 5] = NtoS01(0, 0, 0, 0, 0),
         SaveData[t + 6] = NtoS2(c.A_ActiveSkill.value, 2),
         SaveData[t + 7] = NtoS2(1 * c.A_ActiveSkillLV.value, 1),
@@ -3786,7 +3382,7 @@ function URLIN() {
                 s[3] = Math.floor(l % 4 / 2),
                 s[4] = Math.floor(l % 2 / 1),
                 S += 1,
-                Buf3SW(0),
+                SetDanceSkillsVisibility(0),
                 s[0] && (n_A_Buf3[0] = StoN2(n.substr(S + 1, 1)),
                     n_A_Buf3[1] = StoN2(n.substr(S + 2, 1)),
                     n_A_Buf3[2] = StoN2(n.substr(S + 3, 1)),
@@ -3896,7 +3492,7 @@ function URLIN() {
                 r = 0; r < u; r++) {
                 document.getElementById("A_skill" + r).value = StoN2(n.substr(89 + r, 1))
             }
-            BufSW(0);
+            SetSupportSkillsVisibility(0);
             S = 89 + r;
             if (1 == StoN2(n.substr(S, 1))) {
                 setBuf2ToSC(0, StoN2(n.substr(S + 1, 1)) > 5 ? StoN2(n.substr(S + 1, 1)) / 2 : StoN2(n.substr(S + 1, 1))),
@@ -3925,7 +3521,7 @@ function URLIN() {
                     setBuf2ToSC(21, Math.floor(l % 2 / 1)),
                     S += 11
             }
-            if (debufSW(0),
+            if (SetMonsterDebuffsVisibility(0),
                 S += 1,
                 1 == StoN2(n.substr(S, 1))) {
                 n_B_debuf[0] = StoN2(n.substr(S + 1, 1)),
@@ -3959,7 +3555,7 @@ function URLIN() {
                     n_B_debuf[24] = StoN2(n.substr(S + 9, 1)) % 6,
                     S += 9
             }
-            if (EnemyBufSW(0),
+            if (SetMonsterBuffsVisibility(0),
                 S += 1,
                 1 == StoN2(n.substr(S, 1))) {
                 n_B_buf[0] = StoN2(n.substr(S + 1, 1));
@@ -3989,7 +3585,7 @@ function URLIN() {
                 s[3] = Math.floor(l % 4 / 2),
                 s[4] = Math.floor(l % 2 / 1),
                 S += 1,
-                Buf3SW(0),
+                SetDanceSkillsVisibility(0),
                 s[0] && (n_A_Buf3[0] = StoN2(n.substr(S + 1, 1)),
                     n_A_Buf3[1] = StoN2(n.substr(S + 2, 1)),
                     n_A_Buf3[2] = StoN2(n.substr(S + 3, 1)),
@@ -4025,7 +3621,7 @@ function URLIN() {
                     n_A_Buf3[26] = StoN2(n.substr(S + 43, 2)),
                     n_A_Buf3[36] = StoN2(n.substr(S + 45, 1)),
                     S += 45),
-                Buf4SW(0),
+                SetGuildSkillsVisibility(0),
                 s[1]) {
                 l = StoN2(n.substr(S + 1, 1));
                 n_A_Buf3[40] = Math.floor(l / 16),
@@ -4035,7 +3631,7 @@ function URLIN() {
                     n_A_Buf3[44] = StoN2(n.substr(S + 3, 1)) % 6,
                     S += 3
             }
-            if (Buf6SW(0),
+            if (SetMiscEffectsVisibility(0),
                 s[3] && (n_A_Buf6[5] = StoN2(n.substr(S + 1, 1)),
                     n_A_Buf6[20] = StoN2(n.substr(S + 2, 1)),
                     n_A_Buf6[0] = Math.floor(StoN2(n.substr(S + 3, 1)) / 6),
@@ -4063,7 +3659,7 @@ function URLIN() {
                     n_A_Buf6[21] = Math.floor(l % 4 / 2),
                     n_A_Buf6[22] = Math.floor(l % 2 / 1),
                     S += 8),
-                Buf7SW(0),
+                SetFoodEffectsVisibility(0),
                 s[4] && (n_A_Buf7[3] = StoN2(n.substr(S + 1, 1)),
                     n_A_Buf7[4] = StoN2(n.substr(S + 2, 1)),
                     n_A_Buf7[5] = StoN2(n.substr(S + 3, 1)),
@@ -4136,7 +3732,7 @@ function URLIN() {
                         n_A_Buf7[60] = Math.floor(l % 2 / 1),
                         S += 3),
                     S += 16),
-                Buf8SW(0),
+                SetAdditionalEffectsVisibility(0),
                 S += 1,
                 1 == StoN2(n.substr(S, 1))) {
                 n_A_Buf8[0] = StoN2(n.substr(S + 1, 2)),
@@ -4154,7 +3750,7 @@ function URLIN() {
                     S += 18
             }
             if (A >= 6) {
-                if (Buf9SW(0),
+                if (SetPlayerManualEditsVisibility(0),
                     S += 1,
                     1 == StoN2(n.substr(S, 1)))
                     if (n_A_Buf9[0] = StoN2(n.substr(S + 1, 1)),
@@ -4197,7 +3793,7 @@ function URLIN() {
                             n_A_Buf9[r] = StoN2(n.substr(S - 13 + 2 * r, 2));
                         S += 98
                     }
-                Buf10SW(0),
+                SetMonsterManualEditsVisibility(0),
                     S += 1,
                     1 == StoN2(n.substr(S, 1)) && (n_B_manual[1] = StoN2(n.substr(S + 1, 2)),
                         n_B_manual[2] = StoN2(n.substr(S + 3, 1)),
@@ -4232,8 +3828,7 @@ function URLIN() {
             }
             c.Conf01.value = StoN2(n.substr(S + 1, 2)),
                 c.B_num.value = StoN2(n.substr(S + 3, 1)),
-                c.A8_Skill14.value = StoN2(n.substr(S + 4, 1)),
-                c.A8_Skill15.value = StoN2(n.substr(S + 5, 2));
+                c.A8_Skill14.value = StoN2(n.substr(S + 4, 1));
             l = StoN2(n.substr(S + 7, 1));
             StCalc(1),
                 ActiveSkillSetPlus(),
@@ -4264,7 +3859,7 @@ function URLIN() {
             n_B[0] = StoN2(n.substr(S + 14, 2)),
                 c.B_Enemy.value = StoN2(n.substr(S + 14, 2)),
                 calc(),
-                Bskill(),
+                LoadEnemySkills(),
                 c.B_AtkSkill.value = StoN2(n.substr(S + 16, 2)),
                 BClickAtkSkill(),
                 n_B_AtkSkill = 1 * c.B_AtkSkill.value,
@@ -4402,16 +3997,16 @@ for (i = 0; i < m_TempEffect.length; i++)
     }
 function refreshFields() {
     ClickB_Item("SW"),
-        debufSW(n_debufSW),
-        EnemyBufSW(n_BbufSW),
-        BufSW(n_SkillSW),
-        Buf3SW(n_Skill3SW),
-        Buf4SW(n_Skill4SW),
-        Buf6SW(n_Skill6SW),
-        Buf7SW(n_Skill7SW),
-        Buf8SW(n_Skill8SW),
-        Buf9SW(n_Skill9SW),
-        Buf10SW(n_Skill10SW),
+        SetMonsterDebuffsVisibility(n_debufSW),
+        SetMonsterBuffsVisibility(n_BbufSW),
+        SetSupportSkillsVisibility(n_SkillSW),
+        SetDanceSkillsVisibility(n_Skill3SW),
+        SetGuildSkillsVisibility(n_Skill4SW),
+        SetMiscEffectsVisibility(n_Skill6SW),
+        SetFoodEffectsVisibility(n_Skill7SW),
+        SetAdditionalEffectsVisibility(n_Skill8SW),
+        SetPlayerManualEditsVisibility(n_Skill9SW),
+        SetMonsterManualEditsVisibility(n_Skill10SW),
         reloadRandOpt()
     reloadShadowEquip()
     reloadEnchant()
@@ -4434,7 +4029,7 @@ allCard(),
 EnemySort(),
 StCalc(),
 firstLoadFunction(),
-Bskill(),
+LoadEnemySkills(),
 LoadLocal3(),
 URLIN(),
 refreshFields(),

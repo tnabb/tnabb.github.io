@@ -182,27 +182,15 @@ Calc's theme: <select id="theme" onChange="themes()"><option value="0">Original<
                                 <option value="5">Dark</option>
                                 <option value="4">Darker</option>
                             </select><br>
-                            RO server: <select id="server" onchange="firstLoadFunction() | SaveTheme()"
-                                style="background-color: rgb(255, 204, 136);">
+                            RO server: <select id="server" onchange="firstLoadFunction() | SaveTheme()" style="background-color: rgb(255, 204, 136);" disabled>
                                 <option value="0">Project Alfheim</option>
                             </select><br>
-                            <!--<input type="checkbox" id="autocalc" onClick="auto()" checked disabled><S>Auto-Calculate</S><br>-->
-                            <input type="checkbox" id="restrict_jobequip" onclick="ClickJob() | StAllCalc() | StCalc()"
-                                checked="" disabled="">Equipment job restrictions (this will clear equip, cards, and
-                            stats)<br>
-                            <input type="checkbox" id="restrict_lvlequip"
-                                onclick="WeaponSet() | ClickWeaponType(0) | WeaponSet2()" disabled=""><s>Equipment Level
-                                restrictions</s><br>
-                            <!--<input type="checkbox" id="restrict_lvlequip" onClick="ClickJob() | StAllCalc() | StCalc()" checked disabled><S>Equip Level Restrictions</S><br>-->
-                            <input type="checkbox" id="restrict_equipslot" onclick="StAllCalc() | calc()">Equipment slot
-                            restrictions<br>
-                            <input type="checkbox" id="restrict_cardslot" onclick="restrictCardslot(0)">Equipment Card
-                            slot
-                            restrictions<br>
-                            <input type="checkbox" id="all_card" onclick="allCard()">All Cards everywhere (with
-                            bugs)<br>
-                            <input type="checkbox" id="increase_aspdcap" onclick="StAllCalc() | calc()">Increase ASPD
-                            cap to 193<br>
+                            <input type="checkbox" id="restrict_jobequip" onclick="ClickJob() | StAllCalc() | StCalc()" checked="" disabled="">Equipment job restrictions (this will clear equip, cards, and stats)<br>
+                            <input type="checkbox" id="restrict_lvlequip" onclick="WeaponSet() | ClickWeaponType(0) | WeaponSet2()">Equipment level restrictions<br>
+                            <input type="checkbox" id="restrict_equipslot" onclick="StAllCalc() | calc()">Equipment slot restrictions<br>
+                            <input type="checkbox" id="restrict_cardslot" onclick="restrictCardslot(0)">Equipment card slot restrictions<br>
+                            <input type="checkbox" id="all_card" onclick="allCard()">All Cards everywhere (with bugs)<br>
+                            <input type="checkbox" id="increase_aspdcap" onclick="StAllCalc() | calc()">Increase ASPD cap to 193<br>
                         </td>
                     </tr>
                 </tbody>
@@ -1144,8 +1132,7 @@ Calc's theme: <select id="theme" onChange="themes()"><option value="0">Original<
             </table>
 
 
-            <table class="tborder" onmouseover="FirstNovis()"
-                style="margin-right: 0px; background-color: rgb(255, 255, 255);">
+            <table class="tborder" style="margin-right: 0px; background-color: rgb(255, 255, 255);">
                 <tbody>
                     <tr>
                         <td class="subheader" colspan="3" style="background-color: rgb(68, 102, 102);">
@@ -1166,7 +1153,6 @@ Calc's theme: <select id="theme" onChange="themes()"><option value="0">Original<
                                     <option value="0">(no arrow)</option>
                                     <option value="1">Silver Arrow</option>
                                 </select></div>
-                            <!--<div class="right"><select name="A_equipshort" onchange="SetEquipShort()|StAllCalc()|ActiveSkillSetPlus()"></select>&nbsp;&nbsp;<select name="A_cardshort" onchange="Setm_CardShort()|StAllCalc()|ActiveSkillSetPlus()"></select></div>-->
                         </td>
                     </tr>
 
@@ -1378,19 +1364,19 @@ Calc's theme: <select id="theme" onChange="themes()"><option value="0">Original<
                                     <tr> <!-- WEAPON RANDOM OPTIONS -->
                                         <td id="nA_weapon1_ropt1">
                                             <select name="A_weapon1_ropt1"
-                                                onchange="Click_RandOpt(this[this.selectedIndex].value)|RandOptUpdate(1)"
+                                                onchange="Click_RandOpt(this[this.selectedIndex].value)|RandOptUpdate()"
                                                 style="width: 218px; background-color: rgb(255, 204, 136);">
                                                 <option value="0">(no option)</option>
                                             </select>
 
                                             <input type="text" inputmode="numeric" style="width: 30px; height: 13px;"
                                                 maxlength="3" onkeypress="return isNumeric(event)"
-                                                onkeyup="RandOptUpdate(1)" name="WEAP1_ROPT1" value="0" class="center">
+                                                onkeyup="RandOptUpdate()" name="WEAP1_ROPT1" value="0" class="center">
                                         </td>
 
                                         <td id="nA_weapon1_enchant1">
                                             <select name="A_weapon1_enchant1"
-                                                onchange="Click_Enchant() | RandOptUpdate(1)"
+                                                onchange="Click_Enchant() | RandOptUpdate()"
                                                 style="width: 200px; background-color: rgb(255, 204, 136);">
                                                 <option value="0">(no enchant)</option>
                                                 <option value="1">10 ATK</option>
@@ -1410,19 +1396,19 @@ Calc's theme: <select id="theme" onChange="themes()"><option value="0">Original<
                                     <tr>
                                         <td id="nA_weapon1_ropt2">
                                             <select name="A_weapon1_ropt2"
-                                                onchange="Click_RandOpt(this[this.selectedIndex].value)|RandOptUpdate(1)"
+                                                onchange="Click_RandOpt(this[this.selectedIndex].value)|RandOptUpdate()"
                                                 style="width: 218px; background-color: rgb(255, 204, 136);">
                                                 <option value="0">(no option)</option>
                                             </select>
 
                                             <input type="text" inputmode="numeric" style="width: 30px; height: 13px;"
                                                 maxlength="3" onkeypress="return isNumeric(event)"
-                                                onkeyup="RandOptUpdate(1)" name="WEAP1_ROPT2" value="0" class="center">
+                                                onkeyup="RandOptUpdate()" name="WEAP1_ROPT2" value="0" class="center">
                                         </td>
 
                                         <td id="nA_weapon1_enchant2" style="display: none;">
                                             <select name="A_weapon1_enchant2"
-                                                onchange="Click_Enchant() | RandOptUpdate(1)"
+                                                onchange="Click_Enchant() | RandOptUpdate()"
                                                 style="width: 200px; background-color: rgb(255, 204, 136);">
                                                 <option value="0">(no enchant)</option>
                                                 <option value="1">10 ATK</option>
@@ -1442,27 +1428,27 @@ Calc's theme: <select id="theme" onChange="themes()"><option value="0">Original<
                                     <tr>
                                         <td id="nA_weapon1_ropt3">
                                             <select name="A_weapon1_ropt3"
-                                                onchange="Click_RandOpt(this[this.selectedIndex].value)|RandOptUpdate(1)"
+                                                onchange="Click_RandOpt(this[this.selectedIndex].value)|RandOptUpdate()"
                                                 style="width: 218px; background-color: rgb(255, 204, 136);">
                                                 <option value="0">(no option)</option>
                                             </select>
 
                                             <input type="text" inputmode="numeric" style="width: 30px; height: 13px;"
                                                 maxlength="3" onkeypress="return isNumeric(event)"
-                                                onkeyup="RandOptUpdate(1)" name="WEAP1_ROPT3" value="0" class="center">
+                                                onkeyup="RandOptUpdate()" name="WEAP1_ROPT3" value="0" class="center">
                                         </td>
                                     </tr>
                                     <tr>
                                         <td id="nA_weapon1_ropt4">
                                             <select name="A_weapon1_ropt4"
-                                                onchange="Click_RandOpt(this[this.selectedIndex].value)|RandOptUpdate(1)"
+                                                onchange="Click_RandOpt(this[this.selectedIndex].value)|RandOptUpdate()"
                                                 style="width: 218px; background-color: rgb(255, 204, 136);">
                                                 <option value="0">(no option)</option>
                                             </select>
 
                                             <input type="text" inputmode="numeric" style="width: 30px; height: 13px;"
                                                 maxlength="3" onkeypress="return isNumeric(event)"
-                                                onkeyup="RandOptUpdate(1)" name="WEAP1_ROPT4" value="0" class="center">
+                                                onkeyup="RandOptUpdate()" name="WEAP1_ROPT4" value="0" class="center">
                                         </td>
                                     </tr>
                                     <tr>
@@ -1539,7 +1525,7 @@ Calc's theme: <select id="theme" onChange="themes()"><option value="0">Original<
 
                                         <td id="nA_weapon2_enchant1" style="display: none;">
                                             <select name="A_weapon2_enchant1"
-                                                onchange="Click_Enchant() | RandOptUpdate(1)"
+                                                onchange="Click_Enchant() | RandOptUpdate()"
                                                 style="width: 200px; background-color: rgb(255, 204, 136);">
                                                 <option value="0">(no enchant)</option>
                                                 <option value="1">10 ATK</option>
@@ -1561,7 +1547,7 @@ Calc's theme: <select id="theme" onChange="themes()"><option value="0">Original<
 
                                         <td id="nA_weapon2_enchant2" style="display: none;">
                                             <select name="A_weapon2_enchant2"
-                                                onchange="Click_Enchant() | RandOptUpdate(1)"
+                                                onchange="Click_Enchant() | RandOptUpdate()"
                                                 style="width: 200px; background-color: rgb(255, 204, 136);">
                                                 <option value="0">(no enchant)</option>
                                                 <option value="1">10 ATK</option>
@@ -1627,7 +1613,7 @@ Calc's theme: <select id="theme" onChange="themes()"><option value="0">Original<
                                     <tr id="A_head_enchant_row" style="height: 20px; display: none;">
                                         <td style="padding-left:51px;">
                                             <!--headgear enchants-->
-                                            <select name="A_head_enchant" onchange="Click_Enchant() | RandOptUpdate(1)"
+                                            <select name="A_head_enchant" onchange="Click_Enchant() | RandOptUpdate()"
                                                 style="width: 200px; background-color: rgb(255, 204, 136);">
                                                 <option value="0">(no enchant)</option>
                                                 <option value="1">10 ATK</option>
@@ -1743,7 +1729,7 @@ Calc's theme: <select id="theme" onChange="themes()"><option value="0">Original<
                                             </select>
                                             <!--random option armor-->
                                             <select name="A_body_ropt1"
-                                                onchange="Click_RandOpt(this[this.selectedIndex].value)|RandOptUpdate(1)"
+                                                onchange="Click_RandOpt(this[this.selectedIndex].value)|RandOptUpdate()"
                                                 style="width: auto; background-color: rgb(255, 204, 136);">
                                                 <option value="0">(no option)</option>
                                                 <option value="1">ATK [17]</option>
@@ -1760,9 +1746,9 @@ Calc's theme: <select id="theme" onChange="themes()"><option value="0">Original<
 
                                             <input type="text" inputmode="numeric" style="width: 30px; height: 13px;"
                                                 maxlength="3" onkeypress="return isNumeric(event)"
-                                                onkeyup="RandOptUpdate(1)" name="BODY_ROPT1" value="0" class="center">
+                                                onkeyup="RandOptUpdate()" name="BODY_ROPT1" value="0" class="center">
                                             <!--armor enchant 1-->
-                                            <select name="A_body_enchant1" onchange="Click_Enchant() | RandOptUpdate(1)"
+                                            <select name="A_body_enchant1" onchange="Click_Enchant() | RandOptUpdate()"
                                                 style="width: auto; background-color: rgb(255, 204, 136);">
                                                 <option value="0">(no enchant)</option>
                                                 <option value="1">10 ATK</option>
@@ -1782,7 +1768,7 @@ Calc's theme: <select id="theme" onChange="themes()"><option value="0">Original<
                                                 <option value="0">(no card)</option>
                                             </select>
                                             <select name="A_body_ropt2"
-                                                onchange="Click_RandOpt(this[this.selectedIndex].value)|RandOptUpdate(1)"
+                                                onchange="Click_RandOpt(this[this.selectedIndex].value)|RandOptUpdate()"
                                                 style="width: 189px; background-color: rgb(255, 204, 136);">
                                                 <option value="0">(no option)</option>
                                                 <option value="29">Neutral Element Resist [25]</option>
@@ -1799,10 +1785,10 @@ Calc's theme: <select id="theme" onChange="themes()"><option value="0">Original<
 
                                             <input type="text" inputmode="numeric" style="width: 30px; height: 13px;"
                                                 maxlength="3" onkeypress="return isNumeric(event)"
-                                                onkeyup="RandOptUpdate(1)" name="BODY_ROPT2" value="0" class="center">
+                                                onkeyup="RandOptUpdate()" name="BODY_ROPT2" value="0" class="center">
 
                                             <!--armor enchant 2-->
-                                            <select name="A_body_enchant2" onchange="Click_Enchant() | RandOptUpdate(1)"
+                                            <select name="A_body_enchant2" onchange="Click_Enchant() | RandOptUpdate()"
                                                 style="width: auto; background-color: rgb(255, 204, 136);">
                                                 <option value="0">(no enchant)</option>
                                                 <option value="1">10 ATK</option>
@@ -1838,7 +1824,7 @@ Calc's theme: <select id="theme" onChange="themes()"><option value="0">Original<
 
                                             <!--random option garment-->
                                             <select name="A_shoulder_ropt1"
-                                                onchange="Click_RandOpt(this[this.selectedIndex].value)|RandOptUpdate(1)"
+                                                onchange="Click_RandOpt(this[this.selectedIndex].value)|RandOptUpdate()"
                                                 style="width: 189px; background-color: rgb(255, 204, 136);">
                                                 <option value="0">(no option)</option>
                                                 <option value="1">ATK [17]</option>
@@ -1855,12 +1841,12 @@ Calc's theme: <select id="theme" onChange="themes()"><option value="0">Original<
 
                                             <input type="text" inputmode="numeric" style="width: 30px; height: 13px;"
                                                 maxlength="3" onkeypress="return isNumeric(event)"
-                                                onkeyup="RandOptUpdate(1)" name="SHOULDER_ROPT1" value="0"
+                                                onkeyup="RandOptUpdate()" name="SHOULDER_ROPT1" value="0"
                                                 class="center">
 
                                             <!--garment enchants-->
                                             <select name="A_shoulder_enchant1"
-                                                onchange="Click_Enchant() | RandOptUpdate(1)"
+                                                onchange="Click_Enchant() | RandOptUpdate()"
                                                 style="width: auto; background-color: rgb(255, 204, 136);">
                                                 <option value="0">(no enchant)</option>
                                                 <option value="1">10 ATK</option>
@@ -1881,7 +1867,7 @@ Calc's theme: <select id="theme" onChange="themes()"><option value="0">Original<
                                                 <option value="0">(no card)</option>
                                             </select>
                                             <select name="A_shoulder_ropt2"
-                                                onchange="Click_RandOpt(this[this.selectedIndex].value)|RandOptUpdate(1)"
+                                                onchange="Click_RandOpt(this[this.selectedIndex].value)|RandOptUpdate()"
                                                 style="width: 189px; background-color: rgb(255, 204, 136);">
                                                 <option value="0">(no option)</option>
                                                 <option value="39">Formless Race Resist [87]</option>
@@ -1898,12 +1884,12 @@ Calc's theme: <select id="theme" onChange="themes()"><option value="0">Original<
 
                                             <input type="text" inputmode="numeric" style="width: 30px; height: 13px;"
                                                 maxlength="3" onkeypress="return isNumeric(event)"
-                                                onkeyup="RandOptUpdate(1)" name="SHOULDER_ROPT2" value="0"
+                                                onkeyup="RandOptUpdate()" name="SHOULDER_ROPT2" value="0"
                                                 class="center">
 
                                             <!--garment enchants-->
                                             <select name="A_shoulder_enchant2"
-                                                onchange="Click_Enchant() | RandOptUpdate(1)"
+                                                onchange="Click_Enchant() | RandOptUpdate()"
                                                 style="width: auto; background-color: rgb(255, 204, 136);">
                                                 <option value="0">(no enchant)</option>
                                                 <option value="1">10 ATK</option>
@@ -1939,7 +1925,7 @@ Calc's theme: <select id="theme" onChange="themes()"><option value="0">Original<
                                             </select>
                                             <!--random option shoes-->
                                             <select name="A_shoes_ropt1"
-                                                onchange="Click_RandOpt(this[this.selectedIndex].value)|RandOptUpdate(1)"
+                                                onchange="Click_RandOpt(this[this.selectedIndex].value)|RandOptUpdate()"
                                                 style="width: 189px; background-color: rgb(255, 204, 136);">
                                                 <option value="0">(no option)</option>
                                                 <option value="1">ATK [17]</option>
@@ -1956,11 +1942,11 @@ Calc's theme: <select id="theme" onChange="themes()"><option value="0">Original<
 
                                             <input type="text" inputmode="numeric" style="width: 30px; height: 13px;"
                                                 maxlength="3" onkeypress="return isNumeric(event)"
-                                                onkeyup="RandOptUpdate(1)" name="SHOES_ROPT1" value="0" class="center">
+                                                onkeyup="RandOptUpdate()" name="SHOES_ROPT1" value="0" class="center">
 
                                             <!--shoes enchants-->
                                             <select name="A_shoes_enchant1"
-                                                onchange="Click_Enchant() | RandOptUpdate(1)"
+                                                onchange="Click_Enchant() | RandOptUpdate()"
                                                 style="width: auto; background-color: rgb(255, 204, 136);">
                                                 <option value="0">(no enchant)</option>
                                                 <option value="1">10 ATK</option>
@@ -2024,11 +2010,11 @@ Calc's theme: <select id="theme" onChange="themes()"><option value="0">Original<
 
                                             <input type="text" inputmode="numeric" style="width: 30px; height: 13px;"
                                                 maxlength="3" onkeypress="return isNumeric(event)"
-                                                onkeyup="RandOptUpdate(1)" name="SHOES_ROPT2" value="0" class="center">
+                                                onkeyup="RandOptUpdate()" name="SHOES_ROPT2" value="0" class="center">
 
                                             <!--shoes enchants-->
                                             <select name="A_shoes_enchant2"
-                                                onchange="Click_Enchant() | RandOptUpdate(1)"
+                                                onchange="Click_Enchant() | RandOptUpdate()"
                                                 style="width: auto; background-color: rgb(255, 204, 136);">
                                                 <option value="0">(no enchant)</option>
                                                 <option value="1">10 ATK</option>
@@ -2191,10 +2177,852 @@ Calc's theme: <select id="theme" onChange="themes()"><option value="0">Original<
                 style="float: left; width: 600px; background-color: rgb(255, 255, 255);">
                 <tbody>
                     <tr>
-                        <td id="A9TD" class="subheader point" onclick="Buf9SW(1)"
+                        <td id="A9TD" class="subheader point" onclick="SetPlayerManualEditsVisibility(1)"
                             style="background-color: rgb(68, 102, 102);">
-                            Additional Enchants &amp; Manual Edits on Player <span id="A9used"></span>
+                            Manual Edits on Player <span id="A9used"></span>
                             <div class="right">(click to show)</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="dotB" colspan="4">
+                            <table>
+                                <tbody>
+                                    <tr>
+                                        <td class="data"><font size="2"><b>Player Stats</b></font></td>
+                                        <td colspan="3"><font size="2"><b>Player Sub-Stats</b></font></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="data" id="manual_str_cell">
+                                            +
+                                            <input type="text" inputmode="numeric" maxlength="5" onkeypress="return isNumeric(event)" onkeyup="updatePlayerManualEdits(event, 1)" name="manual_str" value="0" class="center" data-type="1">
+                                            STR
+                                        </td>
+                                        <td id="manual_maxhp_cell">
+                                            +
+                                            <input type="text" inputmode="numeric" maxlength="5" onkeypress="return isNumeric(event)" onkeyup="updatePlayerManualEdits(event, 1)" name="manual_maxhp" value="0" class="center" data-type="13">
+                                            MaxHP
+                                        </td>
+                                        <td id="manual_atk_cell">
+                                            +
+                                            <input type="text" inputmode="numeric" maxlength="5" onkeypress="return isNumeric(event)" onkeyup="updatePlayerManualEdits(event, 1)" name="manual_atk" value="0" class="center" data-type="17">
+                                            ATK
+                                        </td>
+                                        <td id="manual_aspd_cell">
+                                            +
+                                            <input type="text" inputmode="numeric" maxlength="5" onkeypress="return isNumeric(event)" onkeyup="updatePlayerManualEdits(event, 1)" name="manual_aspd" value="0" class="center" data-type="12">
+                                            % ASPD
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="data" id="manual_agi_cell">
+                                            +
+                                            <input type="text" inputmode="numeric" maxlength="5" onkeypress="return isNumeric(event)" onkeyup="updatePlayerManualEdits(event, 1)" name="manual_agi" value="0" class="center" data-type="2">
+                                            AGI
+                                        </td>
+                                        <td id="manual_maxhpper_cell">
+                                            +
+                                            <input type="text" inputmode="numeric" maxlength="5" onkeypress="return isNumeric(event)" onkeyup="updatePlayerManualEdits(event, 1)" name="manual_maxhpper" value="0" class="center" data-type="15">
+                                            % MaxHP
+                                        </td>
+                                        <td id="manual_matk_cell">
+                                            +
+                                            <input type="text" inputmode="numeric" maxlength="5" onkeypress="return isNumeric(event)" onkeyup="updatePlayerManualEdits(event, 1)" name="manual_matk" value="0" class="center" data-type="88">
+                                            MATK
+                                        </td>
+                                        <td id="manual_flee_cell">
+                                            +
+                                            <input type="text" inputmode="numeric" maxlength="5" onkeypress="return isNumeric(event)" onkeyup="updatePlayerManualEdits(event, 1)" name="manual_flee" value="0" class="center" data-type="9">
+                                            FLEE
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="data" id="manual_vit_cell">
+                                            +
+                                            <input type="text" inputmode="numeric" maxlength="5" onkeypress="return isNumeric(event)" onkeyup="updatePlayerManualEdits(event, 1)" name="manual_vit" value="0" class="center" data-type="3">
+                                            VIT
+                                        </td>
+                                        <td id="manual_maxsp_cell">
+                                            +
+                                            <input type="text" inputmode="numeric" maxlength="5" onkeypress="return isNumeric(event)" onkeyup="updatePlayerManualEdits(event, 1)" name="manual_maxsp" value="0" class="center" data-type="14">
+                                            MaxSP
+                                        </td>
+                                        <td id="manual_atkper_cell">
+                                            +
+                                            <input type="text" inputmode="numeric" maxlength="5" onkeypress="return isNumeric(event)" onkeyup="updatePlayerManualEdits(event, 1)" name="manual_atkper" value="0" class="center" data-type="80">
+                                            % ATK
+                                        </td>
+                                        <td id="manual_perfectdodge_cell">
+                                            +
+                                            <input type="text" inputmode="numeric" maxlength="5" onkeypress="return isNumeric(event)" onkeyup="updatePlayerManualEdits(event, 1)" name="manual_perfectdodge" value="0" class="center" data-type="11">
+                                            Perfect Dodge
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="data" id="manual_int_cell">
+                                            +
+                                            <input type="text" inputmode="numeric" maxlength="5" onkeypress="return isNumeric(event)" onkeyup="updatePlayerManualEdits(event, 1)" name="manual_int" value="0" class="center" data-type="4">
+                                            INT
+                                        </td>
+                                        <td id="manual_maxspper_cell">
+                                            +
+                                            <input type="text" inputmode="numeric" maxlength="5" onkeypress="return isNumeric(event)" onkeyup="updatePlayerManualEdits(event, 1)" name="manual_maxspper" value="0" class="center" data-type="16">
+                                            % MaxSP
+                                        </td>
+                                        <td id="manual_matkper_cell">
+                                            +
+                                            <input type="text" inputmode="numeric" maxlength="5" onkeypress="return isNumeric(event)" onkeyup="updatePlayerManualEdits(event, 1)" name="manual_matkper" value="0" class="center" data-type="89">
+                                            % MATK
+                                        </td>
+                                        <td id="manual_hit_cell">
+                                            +
+                                            <input type="text" inputmode="numeric" maxlength="5" onkeypress="return isNumeric(event)" onkeyup="updatePlayerManualEdits(event, 1)" name="manual_hit" value="0" class="center" data-type="8">
+                                            HIT
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="data" id="manual_dex_cell">
+                                            +
+                                            <input type="text" inputmode="numeric" maxlength="5" onkeypress="return isNumeric(event)" onkeyup="updatePlayerManualEdits(event, 1)" name="manual_dex" value="0" class="center" data-type="5">
+                                            DEX
+                                        </td>
+                                        <td id="manual_def_cell">
+                                            +
+                                            <input type="text" inputmode="numeric" maxlength="5" onkeypress="return isNumeric(event)" onkeyup="updatePlayerManualEdits(event, 1)" name="manual_def" value="0" class="center" data-type="18">
+                                            DEF
+                                        </td>
+                                        <td id="manual_casttime_cell">
+                                            +
+                                            <input type="text" inputmode="numeric" maxlength="5" onkeypress="return isNumeric(event)" onkeyup="updatePlayerManualEdits(event, 1)" name="manual_casttime" value="0" class="center" data-type="73">
+                                            % Cast Time
+                                        </td>
+                                        <td id="manual_perfecthit_cell">
+                                            +
+                                            <input type="text" inputmode="numeric" maxlength="5" onkeypress="return isNumeric(event)" onkeyup="updatePlayerManualEdits(event, 1)" name="manual_perfecthit" value="0" class="center" data-type="86">
+                                            Perfect HIT
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="data" id="manual_luk_cell">
+                                            +
+                                            <input type="text" inputmode="numeric" maxlength="5" onkeypress="return isNumeric(event)" onkeyup="updatePlayerManualEdits(event, 1)" name="manual_luk" value="0" class="center" data-type="6">
+                                            LUK
+                                        </td>
+                                        <td id="manual_mdef_cell">
+                                            +
+                                            <input type="text" inputmode="numeric" maxlength="5" onkeypress="return isNumeric(event)" onkeyup="updatePlayerManualEdits(event, 1)" name="manual_mdef" value="0" class="center" data-type="19">
+                                            MDEF
+                                        </td>
+                                        <td id="manual_castdelay_cell">
+                                            +
+                                            <input type="text" inputmode="numeric" maxlength="5" onkeypress="return isNumeric(event)" onkeyup="updatePlayerManualEdits(event, 1)" name="manual_castdelay" value="0" class="center" data-type="74">
+                                            % After-Cast Delay
+                                        </td>
+                                        <td id="manual_critical_cell">
+                                            +
+                                            <input type="text" inputmode="numeric" maxlength="5" onkeypress="return isNumeric(event)" onkeyup="updatePlayerManualEdits(event, 1)" name="manual_critical" value="0" class="center" data-type="10">
+                                            Critical Rate
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="data">
+                            <font size="2"><b>+% ATK based damage</b></font>
+                        </td>
+                        <td colspan="3">
+                            <font size="2"><b>Other</b></font>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td id="manual_atkmod_cell" class="data">
+                            +
+                            <input type="text" inputmode="numeric" maxlength="5" onkeypress="return isNumeric(event)" onkeyup="updatePlayerManualEdits(event, 1)" name="manual_atkmod" value="0" class="center" data-type="500">
+                            % vs
+                            <select name="manual_atkmod_type" onchange="updatePlayerManualEdits(event, 1)" data-type="500">
+                                <option value="0">(none)</option>
+                                <optgroup label="Race">
+                                    <option value="30">Formless</option>
+                                    <option value="31">Undead</option>
+                                    <option value="32">Brute</option>
+                                    <option value="33">Plant</option>
+                                    <option value="34">Insect</option>
+                                    <option value="35">Fish</option>
+                                    <option value="36">Demon</option>
+                                    <option value="37">Demi-Human</option>
+                                    <option value="38">Angel</option>
+                                    <option value="39">Dragon</option>
+                                </optgroup>
+                                <optgroup label="Element">
+                                    <option value="40">Neutral</option>
+                                    <option value="41">Water</option>
+                                    <option value="42">Earth</option>
+                                    <option value="43">Fire</option>
+                                    <option value="44">Wind</option>
+                                    <option value="45">Poison</option>
+                                    <option value="46">Holy</option>
+                                    <option value="47">Shadow</option>
+                                    <option value="48">Ghost</option>
+                                    <option value="49">Undead</option>
+                                </optgroup>
+                                <optgroup label="Size">
+                                    <option value="27">Small</option>
+                                    <option value="28">Medium</option>
+                                    <option value="29">Large</option>
+                                </optgroup>
+                                <optgroup label="Type">
+                                    <option value="26">Boss</option>
+                                    <option value="81">Goblin</option>
+                                    <option value="82">Kobold</option>
+                                    <option value="83">Orc</option>
+                                    <option value="84">Golem</option>
+                                    <option value="375">Satan Morroc</option>
+                                </optgroup>
+                            </select>
+                        </td>
+                        <td id="manual_matkmod_cell" colspan="3">
+                            +
+                            <input type="text" inputmode="numeric" maxlength="5" onkeypress="return isNumeric(event)" onkeyup="updatePlayerManualEdits(event, 1)" name="manual_matkmod" value="0" class="center" data-type="354">
+                            % MATK based damage on any target.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td id="manual_atkmod2_cell" class="data">
+                            +
+                            <input type="text" inputmode="numeric" maxlength="5" onkeypress="return isNumeric(event)" onkeyup="updatePlayerManualEdits(event, 1)" name="manual_atkmod2" value="0" class="center" data-type="501">
+                            % vs
+                            <select name="manual_atkmod2_type" onchange="updatePlayerManualEdits(event, 1)" data-type="501">
+                                <option value="0">(none)</option>
+                                <optgroup label="Race">
+                                    <option value="30">Formless</option>
+                                    <option value="31">Undead</option>
+                                    <option value="32">Brute</option>
+                                    <option value="33">Plant</option>
+                                    <option value="34">Insect</option>
+                                    <option value="35">Fish</option>
+                                    <option value="36">Demon</option>
+                                    <option value="37">Demi-Human</option>
+                                    <option value="38">Angel</option>
+                                    <option value="39">Dragon</option>
+                                </optgroup>
+                                <optgroup label="Element">
+                                    <option value="40">Neutral</option>
+                                    <option value="41">Water</option>
+                                    <option value="42">Earth</option>
+                                    <option value="43">Fire</option>
+                                    <option value="44">Wind</option>
+                                    <option value="45">Poison</option>
+                                    <option value="46">Holy</option>
+                                    <option value="47">Shadow</option>
+                                    <option value="48">Ghost</option>
+                                    <option value="49">Undead</option>
+                                </optgroup>
+                                <optgroup label="Size">
+                                    <option value="27">Small</option>
+                                    <option value="28">Medium</option>
+                                    <option value="29">Large</option>
+                                </optgroup>
+                                <optgroup label="Type">
+                                    <option value="26">Boss</option>
+                                    <option value="81">Goblin</option>
+                                    <option value="82">Kobold</option>
+                                    <option value="83">Orc</option>
+                                    <option value="84">Golem</option>
+                                    <option value="375">Satan Morroc</option>
+                                </optgroup>
+                            </select>
+                        </td>
+                        <td id="manual_longrange_cell" colspan="3">
+                            +
+                            <input type="text" inputmode="numeric" maxlength="5" onkeypress="return isNumeric(event)" onkeyup="updatePlayerManualEdits(event, 1)" name="manual_longrange" value="0" class="center" data-type="25">
+                            % Long-range ATK based damage on any target.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td id="manual_atkmod3_cell" class="data">
+                            +
+                            <input type="text" inputmode="numeric" maxlength="5" onkeypress="return isNumeric(event)" onkeyup="updatePlayerManualEdits(event, 1)" name="manual_atkmod3" value="0" class="center" data-type="502">
+                            % vs
+                            <select name="manual_atkmod3_type" onchange="updatePlayerManualEdits(event, 1)" data-type="502">
+                                <option value="0">(none)</option>
+                                <optgroup label="Race">
+                                    <option value="30">Formless</option>
+                                    <option value="31">Undead</option>
+                                    <option value="32">Brute</option>
+                                    <option value="33">Plant</option>
+                                    <option value="34">Insect</option>
+                                    <option value="35">Fish</option>
+                                    <option value="36">Demon</option>
+                                    <option value="37">Demi-Human</option>
+                                    <option value="38">Angel</option>
+                                    <option value="39">Dragon</option>
+                                </optgroup>
+                                <optgroup label="Element">
+                                    <option value="40">Neutral</option>
+                                    <option value="41">Water</option>
+                                    <option value="42">Earth</option>
+                                    <option value="43">Fire</option>
+                                    <option value="44">Wind</option>
+                                    <option value="45">Poison</option>
+                                    <option value="46">Holy</option>
+                                    <option value="47">Shadow</option>
+                                    <option value="48">Ghost</option>
+                                    <option value="49">Undead</option>
+                                </optgroup>
+                                <optgroup label="Size">
+                                    <option value="27">Small</option>
+                                    <option value="28">Medium</option>
+                                    <option value="29">Large</option>
+                                </optgroup>
+                                <optgroup label="Type">
+                                    <option value="26">Boss</option>
+                                    <option value="81">Goblin</option>
+                                    <option value="82">Kobold</option>
+                                    <option value="83">Orc</option>
+                                    <option value="84">Golem</option>
+                                    <option value="375">Satan Morroc</option>
+                                </optgroup>
+                            </select>
+                        </td>
+                        <td id="manual_critdamage_cell" colspan="3">
+                            +
+                            <input type="text" inputmode="numeric" maxlength="5" onkeypress="return isNumeric(event)" onkeyup="updatePlayerManualEdits(event, 1)" name="manual_critdamage" value="0" class="center" data-type="70">
+                            % Critical damage on any target.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td id="manual_atkmod4_cell" class="data dotB">
+                            +
+                            <input type="text" inputmode="numeric" maxlength="5" onkeypress="return isNumeric(event)" onkeyup="updatePlayerManualEdits(event, 1)" name="manual_atkmod4" value="0" class="center" data-type="503">
+                            % vs
+                            <select name="manual_atkmod4_type" onchange="updatePlayerManualEdits(event, 1)" data-type="503">
+                                <option value="0">(none)</option>
+                                <optgroup label="Race">
+                                    <option value="30">Formless</option>
+                                    <option value="31">Undead</option>
+                                    <option value="32">Brute</option>
+                                    <option value="33">Plant</option>
+                                    <option value="34">Insect</option>
+                                    <option value="35">Fish</option>
+                                    <option value="36">Demon</option>
+                                    <option value="37">Demi-Human</option>
+                                    <option value="38">Angel</option>
+                                    <option value="39">Dragon</option>
+                                </optgroup>
+                                <optgroup label="Element">
+                                    <option value="40">Neutral</option>
+                                    <option value="41">Water</option>
+                                    <option value="42">Earth</option>
+                                    <option value="43">Fire</option>
+                                    <option value="44">Wind</option>
+                                    <option value="45">Poison</option>
+                                    <option value="46">Holy</option>
+                                    <option value="47">Shadow</option>
+                                    <option value="48">Ghost</option>
+                                    <option value="49">Undead</option>
+                                </optgroup>
+                                <optgroup label="Size">
+                                    <option value="27">Small</option>
+                                    <option value="28">Medium</option>
+                                    <option value="29">Large</option>
+                                </optgroup>
+                                <optgroup label="Type">
+                                    <option value="26">Boss</option>
+                                    <option value="81">Goblin</option>
+                                    <option value="82">Kobold</option>
+                                    <option value="83">Orc</option>
+                                    <option value="84">Golem</option>
+                                    <option value="375">Satan Morroc</option>
+                                </optgroup>
+                            </select>
+                        </td>
+                        <td id="manual_meleerange_cell" colspan="3">
+                            +
+                            <input type="text" inputmode="numeric" maxlength="5" onkeypress="return isNumeric(event)" onkeyup="updatePlayerManualEdits(event, 1)" name="manual_meleerange" value="0" class="center" data-type="373">
+                            % Melee-range ATK based damage on any target.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="data">
+                            <font size="2"><b>+% Resistance</b></font>
+                        </td>
+                        <td id="manual_longrange_res_cell" colspan="3">
+                            +
+                            <input type="text" inputmode="numeric" maxlength="5" onkeypress="return isNumeric(event)" onkeyup="updatePlayerManualEdits(event, 1)" name="manual_longrange_res" value="0" class="center" data-type="78">
+                            % Long-range ATK and MATK based damage resistance.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td id="manual_resmod_cell" class="data">
+                            +
+                            <input type="text" inputmode="numeric" maxlength="5" onkeypress="return isNumeric(event)" onkeyup="updatePlayerManualEdits(event, 1)" name="manual_resmod" value="0" class="center" data-type="505">
+                            % vs
+                            <select name="manual_resmod_type" onchange="updatePlayerManualEdits(event, 1)" data-type="505">
+                                <option value="0">(none)</option>
+                                <optgroup label="Race">
+                                    <option value="50">Formless</option>
+                                    <option value="51">Undead</option>
+                                    <option value="52">Brute</option>
+                                    <option value="53">Plant</option>
+                                    <option value="54">Insect</option>
+                                    <option value="55">Fish</option>
+                                    <option value="56">Demon</option>
+                                    <option value="57">Demi-Human</option>
+                                    <option value="58">Angel</option>
+                                    <option value="59">Dragon</option>
+                                </optgroup>
+                                <optgroup label="Element">
+                                    <option value="60">Neutral</option>
+                                    <option value="61">Water</option>
+                                    <option value="62">Earth</option>
+                                    <option value="63">Fire</option>
+                                    <option value="64">Wind</option>
+                                    <option value="65">Poison</option>
+                                    <option value="66">Holy</option>
+                                    <option value="67">Shadow</option>
+                                    <option value="68">Ghost</option>
+                                    <option value="69">Undead</option>
+                                </optgroup>
+                                <optgroup label="Size">
+                                    <option value="190">Small</option>
+                                    <option value="191">Medium</option>
+                                    <option value="192">Large</option>
+                                </optgroup>
+                                <optgroup label="Type">
+                                    <option value="77">Boss</option>
+                                    <option value="79">Normal</option>
+                                </optgroup>
+                            </select>
+                        </td>
+                        <td id="manual_defignore_cell" colspan="3">
+                            +
+                            <input type="text" inputmode="numeric" maxlength="5" onkeypress="return isNumeric(event)" onkeyup="updatePlayerManualEdits(event, 1)" name="manual_defignore" value="0" class="center" data-type="290">
+                            % DEF ignoring on any target.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td id="manual_resmod2_cell" class="data">
+                            +
+                            <input type="text" inputmode="numeric" maxlength="5" onkeypress="return isNumeric(event)" onkeyup="updatePlayerManualEdits(event, 1)" name="manual_resmod2" value="0" class="center" data-type="506">
+                            % vs
+                            <select name="manual_resmod2_type" onchange="updatePlayerManualEdits(event, 1)" data-type="506">
+                                <option value="0">(none)</option>
+                                <optgroup label="Race">
+                                    <option value="50">Formless</option>
+                                    <option value="51">Undead</option>
+                                    <option value="52">Brute</option>
+                                    <option value="53">Plant</option>
+                                    <option value="54">Insect</option>
+                                    <option value="55">Fish</option>
+                                    <option value="56">Demon</option>
+                                    <option value="57">Demi-Human</option>
+                                    <option value="58">Angel</option>
+                                    <option value="59">Dragon</option>
+                                </optgroup>
+                                <optgroup label="Element">
+                                    <option value="60">Neutral</option>
+                                    <option value="61">Water</option>
+                                    <option value="62">Earth</option>
+                                    <option value="63">Fire</option>
+                                    <option value="64">Wind</option>
+                                    <option value="65">Poison</option>
+                                    <option value="66">Holy</option>
+                                    <option value="67">Shadow</option>
+                                    <option value="68">Ghost</option>
+                                    <option value="69">Undead</option>
+                                </optgroup>
+                                <optgroup label="Size">
+                                    <option value="190">Small</option>
+                                    <option value="191">Medium</option>
+                                    <option value="192">Large</option>
+                                </optgroup>
+                                <optgroup label="Type">
+                                    <option value="77">Boss</option>
+                                    <option value="79">Normal</option>
+                                </optgroup>
+                            </select>
+                        </td>
+                        <td id="manual_mdefignore_cell" colspan="3">
+                            +
+                            <input type="text" inputmode="numeric" maxlength="5" onkeypress="return isNumeric(event)" onkeyup="updatePlayerManualEdits(event, 1)" name="manual_mdefignore" value="0" class="center" data-type="295">
+                            % MDEF ignoring on any target.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td id="manual_resmod3_cell" class="data">
+                            +
+                            <input type="text" inputmode="numeric" maxlength="5" onkeypress="return isNumeric(event)" onkeyup="updatePlayerManualEdits(event, 1)" name="manual_resmod3" value="0" class="center" data-type="507">
+                            % vs
+                            <select name="manual_resmod3_type" onchange="updatePlayerManualEdits(event, 1)" data-type="507">
+                                <option value="0">(none)</option>
+                                <optgroup label="Race">
+                                    <option value="50">Formless</option>
+                                    <option value="51">Undead</option>
+                                    <option value="52">Brute</option>
+                                    <option value="53">Plant</option>
+                                    <option value="54">Insect</option>
+                                    <option value="55">Fish</option>
+                                    <option value="56">Demon</option>
+                                    <option value="57">Demi-Human</option>
+                                    <option value="58">Angel</option>
+                                    <option value="59">Dragon</option>
+                                </optgroup>
+                                <optgroup label="Element">
+                                    <option value="60">Neutral</option>
+                                    <option value="61">Water</option>
+                                    <option value="62">Earth</option>
+                                    <option value="63">Fire</option>
+                                    <option value="64">Wind</option>
+                                    <option value="65">Poison</option>
+                                    <option value="66">Holy</option>
+                                    <option value="67">Shadow</option>
+                                    <option value="68">Ghost</option>
+                                    <option value="69">Undead</option>
+                                </optgroup>
+                                <optgroup label="Size">
+                                    <option value="190">Small</option>
+                                    <option value="191">Medium</option>
+                                    <option value="192">Large</option>
+                                </optgroup>
+                                <optgroup label="Type">
+                                    <option value="77">Boss</option>
+                                    <option value="79">Normal</option>
+                                </optgroup>
+                            </select>
+                        </td>
+                        <td id="manual_skilldamage_cell">
+                            +
+                            <input type="text" inputmode="numeric" maxlength="5" onkeypress="return isNumeric(event)" onkeyup="updatePlayerManualEdits(event, 1)" name="manual_skilldamage" value="0" class="center" data-type="600">
+                            % 
+                            <select name="manual_skilldamage_skill" onchange="updatePlayerManualEdits(event, 1)" data-type="600">
+                                <option value="0">(no skill selected)</option>
+                                <option value="6">Bash</option>
+                                <option value="7">Magnum Break</option>
+                                <option value="17">Envenom</option>
+                                <option value="22">Throw Stone</option>
+                                <option value="19">Sand Attack</option>
+                                <option value="25">Heal</option>
+                                <option value="37">Holy Light</option>
+                                <option value="97">Resurrection</option>
+                                <option value="40">Double Strafe</option>
+                                <option value="41">Arrow Shower</option>
+                                <option value="44">Charge Arrow</option>
+                                <option value="46">Napalm Beat</option>
+                                <option value="47">Soul Strike</option>
+                                <option value="51">Fire Bolt</option>
+                                <option value="52">Fire Ball</option>
+                                <option value="53">Fire Wall</option>
+                                <option value="54">Cold Bolt</option>
+                                <option value="55">Frost Diver</option>
+                                <option value="56">Lightning Bolt</option>
+                                <option value="57">Thunder Storm</option>
+                                <option value="65">Mammonite</option>
+                                <option value="66">Cart Revolution</option>
+                                <option value="70">Pierce</option>
+                                <option value="71">Spear Stab</option>
+                                <option value="72">Spear Boomerang</option>
+                                <option value="73">Brandish Spear</option>
+                                <option value="76">Bowling Bash</option>
+                                <option value="308">Charge Attack</option>
+                                <option value="83">Sonic Blow</option>
+                                <option value="84">Grimtooth</option>
+                                <option value="88">Venom Splasher</option>
+                                <option value="86">Poison React (Counter)</option>
+                                <option value="306">Throw Venom Knife</option>
+                                <option value="102">Turn Undead</option>
+                                <option value="104">Magnus Exorcismus</option>
+                                <option value="94">Sanctuary</option>
+                                <option value="307">Phantasmic Arrow</option>
+                                <option value="118">Blitz Beat</option>
+                                <option value="106">Land Mine</option>
+                                <option value="111">Freezing Trap</option>
+                                <option value="112">Blast Mine</option>
+                                <option value="113">Claymore Trap</option>
+                                <option value="391">Beast Strafing</option>
+                                <option value="122">Fire Pillar</option>
+                                <option value="124">Sightrasher</option>
+                                <option value="125">Meteor Storm</option>
+                                <option value="126">Jupitel Thunder</option>
+                                <option value="127">Lord of Vermillion</option>
+                                <option value="128">Water Ball</option>
+                                <option value="130">Frost Nova</option>
+                                <option value="131">Storm Gust</option>
+                                <option value="132">Earth Spike</option>
+                                <option value="133">Heaven's Drive</option>
+                                <option value="158">Shield Charge</option>
+                                <option value="159">Shield Boomerang</option>
+                                <option value="161">Holy Cross</option>
+                                <option value="162">Grand Cross</option>
+                                <option value="169">Back Stab</option>
+                                <option value="171">Raid</option>
+                                <option value="167">Intimidate</option>
+                                <option value="473">Dark Cross</option>
+                                <option value="474">Grand Cross of Darkness</option>
+                                <option value="187">Triple Attack</option>
+                                <option value="188">Chain Combo</option>
+                                <option value="189">Combo Finish</option>
+                                <option value="192">Finger Offensive</option>
+                                <option value="193">Investigate</option>
+                                <option value="197">Asura Strike</option>
+                                <option value="382">Ki Explosion</option>
+                                <option value="199">Musical Strike</option>
+                                <option value="207">Throw Arrow</option>
+                                <option value="244">Acid Terror</option>
+                                <option value="248">Demonstration</option>
+                                <option value="259">Spiral Pierce</option>
+                                <option value="260">Head Crush</option>
+                                <option value="261">Joint Beat</option>
+                                <option value="263">Soul Destroyer</option>
+                                <option value="264">Meteor Assault</option>
+                                <option value="590">Judex</option>
+                                <option value="606">Duple Light</option>
+                                <option value="271">Falcon Assault</option>
+                                <option value="272">Sharp Shooting</option>
+                                <option value="275">Magic Crasher</option>
+                                <option value="277">Napalm Vulcan</option>
+                                <option value="325">Gravitation Field</option>
+                                <option value="326">Cart Termination</option>
+                                <option value="283">Pressure</option>
+                                <option value="284">Sacrifice</option>
+                                <option value="324">Shield Chain</option>
+                                <option value="288">Palm Push Strike</option>
+                                <option value="289">Tiger Knuckle Fist</option>
+                                <option value="290">Chain Crush Combo</option>
+                                <option value="292">Arrow Vulcan</option>
+                                <option value="752">Reverberation</option>
+                                <option value="328">Acid Demonstration</option>
+                                <option value="331">Tornado Kick</option>
+                                <option value="333">Heel Drop Kick</option>
+                                <option value="335">Roundhouse Kick</option>
+                                <option value="337">Counter Kick</option>
+                                <option value="339">Flying Side Kick</option>
+                                <option value="317">Heat</option>
+                                <option value="373">Estin</option>
+                                <option value="374">Estun</option>
+                                <option value="375">Esma</option>
+                                <option value="407">Flaming Petals</option>
+                                <option value="408">Blaze Shield</option>
+                                <option value="409">Exploding Dragon</option>
+                                <option value="410">Freezing Spear</option>
+                                <option value="412">Snow Flake Draft</option>
+                                <option value="413">Wind Blade</option>
+                                <option value="414">Lightning Jolt</option>
+                                <option value="415">First Wind</option>
+                                <option value="394">Throw Shuriken</option>
+                                <option value="395">Throw Kunai</option>
+                                <option value="396">Throw Huuma Shuriken</option>
+                                <option value="397">Throw Coins</option>
+                                <option value="398">Flip Tatami</option>
+                                <option value="400">Haze Slasher</option>
+                                <option value="401">Shadow Slash</option>
+                                <option value="405">Final Strike</option>
+                                <option value="418">Triple Action</option>
+                                <option value="419">Bull's Eye</option>
+                                <option value="428">Rapid Shower</option>
+                                <option value="429">Desperado</option>
+                                <option value="430">Tracking</option>
+                                <option value="431">Disarm</option>
+                                <option value="432">Piercing Shot</option>
+                                <option value="434">Dust</option>
+                                <option value="435">Full Buster</option>
+                                <option value="436">Spread Attack</option>
+                                <option value="853">Basic Grenade</option>
+                                <option value="847">Rapid Fire</option>
+                                <option value="848">Mass Spiral</option>
+                                <option value="849">Hasty Fire in the Hole</option>
+                                <option value="850">Mission Bombard</option>
+                                <option value="854">Slug Shot</option>
+                            </select>
+                            skill damage.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td id="manual_resmod4_cell" class="data">
+                            +
+                            <input type="text" inputmode="numeric" maxlength="5" onkeypress="return isNumeric(event)" onkeyup="updatePlayerManualEdits(event, 1)" name="manual_resmod4" value="0" class="center" data-type="508">
+                            % vs
+                            <select name="manual_resmod4_type" onchange="updatePlayerManualEdits(event, 1)" data-type="508">
+                                <option value="0">(none)</option>
+                                <optgroup label="Race">
+                                    <option value="50">Formless</option>
+                                    <option value="51">Undead</option>
+                                    <option value="52">Brute</option>
+                                    <option value="53">Plant</option>
+                                    <option value="54">Insect</option>
+                                    <option value="55">Fish</option>
+                                    <option value="56">Demon</option>
+                                    <option value="57">Demi-Human</option>
+                                    <option value="58">Angel</option>
+                                    <option value="59">Dragon</option>
+                                </optgroup>
+                                <optgroup label="Element">
+                                    <option value="60">Neutral</option>
+                                    <option value="61">Water</option>
+                                    <option value="62">Earth</option>
+                                    <option value="63">Fire</option>
+                                    <option value="64">Wind</option>
+                                    <option value="65">Poison</option>
+                                    <option value="66">Holy</option>
+                                    <option value="67">Shadow</option>
+                                    <option value="68">Ghost</option>
+                                    <option value="69">Undead</option>
+                                </optgroup>
+                                <optgroup label="Size">
+                                    <option value="190">Small</option>
+                                    <option value="191">Medium</option>
+                                    <option value="192">Large</option>
+                                </optgroup>
+                                <optgroup label="Type">
+                                    <option value="77">Boss</option>
+                                    <option value="79">Normal</option>
+                                </optgroup>
+                            </select>
+                        </td>
+                        <td id="manual_skilldamage2_cell">
+                            +
+                            <input type="text" inputmode="numeric" maxlength="5" onkeypress="return isNumeric(event)" onkeyup="updatePlayerManualEdits(event, 1)" name="manual_skilldamage2" value="0" class="center" data-type="601">
+                            % 
+                            <select name="manual_skilldamage2_skill" onchange="updatePlayerManualEdits(event, 1)" data-type="601">
+                                <option value="0">(no skill selected)</option>
+                                <option value="6">Bash</option>
+                                <option value="7">Magnum Break</option>
+                                <option value="17">Envenom</option>
+                                <option value="22">Throw Stone</option>
+                                <option value="19">Sand Attack</option>
+                                <option value="25">Heal</option>
+                                <option value="37">Holy Light</option>
+                                <option value="97">Resurrection</option>
+                                <option value="40">Double Strafe</option>
+                                <option value="41">Arrow Shower</option>
+                                <option value="44">Charge Arrow</option>
+                                <option value="46">Napalm Beat</option>
+                                <option value="47">Soul Strike</option>
+                                <option value="51">Fire Bolt</option>
+                                <option value="52">Fire Ball</option>
+                                <option value="53">Fire Wall</option>
+                                <option value="54">Cold Bolt</option>
+                                <option value="55">Frost Diver</option>
+                                <option value="56">Lightning Bolt</option>
+                                <option value="57">Thunder Storm</option>
+                                <option value="65">Mammonite</option>
+                                <option value="66">Cart Revolution</option>
+                                <option value="70">Pierce</option>
+                                <option value="71">Spear Stab</option>
+                                <option value="72">Spear Boomerang</option>
+                                <option value="73">Brandish Spear</option>
+                                <option value="76">Bowling Bash</option>
+                                <option value="308">Charge Attack</option>
+                                <option value="83">Sonic Blow</option>
+                                <option value="84">Grimtooth</option>
+                                <option value="88">Venom Splasher</option>
+                                <option value="86">Poison React (Counter)</option>
+                                <option value="306">Throw Venom Knife</option>
+                                <option value="102">Turn Undead</option>
+                                <option value="104">Magnus Exorcismus</option>
+                                <option value="94">Sanctuary</option>
+                                <option value="307">Phantasmic Arrow</option>
+                                <option value="118">Blitz Beat</option>
+                                <option value="106">Land Mine</option>
+                                <option value="111">Freezing Trap</option>
+                                <option value="112">Blast Mine</option>
+                                <option value="113">Claymore Trap</option>
+                                <option value="391">Beast Strafing</option>
+                                <option value="122">Fire Pillar</option>
+                                <option value="124">Sightrasher</option>
+                                <option value="125">Meteor Storm</option>
+                                <option value="126">Jupitel Thunder</option>
+                                <option value="127">Lord of Vermillion</option>
+                                <option value="128">Water Ball</option>
+                                <option value="130">Frost Nova</option>
+                                <option value="131">Storm Gust</option>
+                                <option value="132">Earth Spike</option>
+                                <option value="133">Heaven's Drive</option>
+                                <option value="158">Shield Charge</option>
+                                <option value="159">Shield Boomerang</option>
+                                <option value="161">Holy Cross</option>
+                                <option value="162">Grand Cross</option>
+                                <option value="169">Back Stab</option>
+                                <option value="171">Raid</option>
+                                <option value="167">Intimidate</option>
+                                <option value="473">Dark Cross</option>
+                                <option value="474">Grand Cross of Darkness</option>
+                                <option value="187">Triple Attack</option>
+                                <option value="188">Chain Combo</option>
+                                <option value="189">Combo Finish</option>
+                                <option value="192">Finger Offensive</option>
+                                <option value="193">Investigate</option>
+                                <option value="197">Asura Strike</option>
+                                <option value="382">Ki Explosion</option>
+                                <option value="199">Musical Strike</option>
+                                <option value="207">Throw Arrow</option>
+                                <option value="244">Acid Terror</option>
+                                <option value="248">Demonstration</option>
+                                <option value="259">Spiral Pierce</option>
+                                <option value="260">Head Crush</option>
+                                <option value="261">Joint Beat</option>
+                                <option value="263">Soul Destroyer</option>
+                                <option value="264">Meteor Assault</option>
+                                <option value="590">Judex</option>
+                                <option value="606">Duple Light</option>
+                                <option value="271">Falcon Assault</option>
+                                <option value="272">Sharp Shooting</option>
+                                <option value="275">Magic Crasher</option>
+                                <option value="277">Napalm Vulcan</option>
+                                <option value="325">Gravitation Field</option>
+                                <option value="326">Cart Termination</option>
+                                <option value="283">Pressure</option>
+                                <option value="284">Sacrifice</option>
+                                <option value="324">Shield Chain</option>
+                                <option value="288">Palm Push Strike</option>
+                                <option value="289">Tiger Knuckle Fist</option>
+                                <option value="290">Chain Crush Combo</option>
+                                <option value="292">Arrow Vulcan</option>
+                                <option value="752">Reverberation</option>
+                                <option value="328">Acid Demonstration</option>
+                                <option value="331">Tornado Kick</option>
+                                <option value="333">Heel Drop Kick</option>
+                                <option value="335">Roundhouse Kick</option>
+                                <option value="337">Counter Kick</option>
+                                <option value="339">Flying Side Kick</option>
+                                <option value="317">Heat</option>
+                                <option value="373">Estin</option>
+                                <option value="374">Estun</option>
+                                <option value="375">Esma</option>
+                                <option value="407">Flaming Petals</option>
+                                <option value="408">Blaze Shield</option>
+                                <option value="409">Exploding Dragon</option>
+                                <option value="410">Freezing Spear</option>
+                                <option value="412">Snow Flake Draft</option>
+                                <option value="413">Wind Blade</option>
+                                <option value="414">Lightning Jolt</option>
+                                <option value="415">First Wind</option>
+                                <option value="394">Throw Shuriken</option>
+                                <option value="395">Throw Kunai</option>
+                                <option value="396">Throw Huuma Shuriken</option>
+                                <option value="397">Throw Coins</option>
+                                <option value="398">Flip Tatami</option>
+                                <option value="400">Haze Slasher</option>
+                                <option value="401">Shadow Slash</option>
+                                <option value="405">Final Strike</option>
+                                <option value="418">Triple Action</option>
+                                <option value="419">Bull's Eye</option>
+                                <option value="428">Rapid Shower</option>
+                                <option value="429">Desperado</option>
+                                <option value="430">Tracking</option>
+                                <option value="431">Disarm</option>
+                                <option value="432">Piercing Shot</option>
+                                <option value="434">Dust</option>
+                                <option value="435">Full Buster</option>
+                                <option value="436">Spread Attack</option>
+                                <option value="853">Basic Grenade</option>
+                                <option value="847">Rapid Fire</option>
+                                <option value="848">Mass Spiral</option>
+                                <option value="849">Hasty Fire in the Hole</option>
+                                <option value="850">Mission Bombard</option>
+                                <option value="854">Slug Shot</option>
+                            </select>
+                            skill damage.
                         </td>
                     </tr>
                 </tbody>
@@ -2276,7 +3104,7 @@ Calc's theme: <select id="theme" onChange="themes()"><option value="0">Original<
                             <table id="SIENSKILL" class="tborder" style="background-color: rgb(255, 255, 255);">
                                 <tbody>
                                     <tr>
-                                        <td id="A2TD" class="subheader point" onclick="BufSW(1)"
+                                        <td id="A2TD" class="subheader point" onclick="SetSupportSkillsVisibility(1)"
                                             style="background-color: rgb(68, 102, 102);">
                                             Supportive / Party Skills
                                             <span id="A2used"></span>
@@ -2515,7 +3343,7 @@ Calc's theme: <select id="theme" onChange="themes()"><option value="0">Original<
                 style="float: left; width: 760px; background-color: rgb(255, 255, 255);">
                 <tbody>
                     <tr>
-                        <td id="A7TD" class="subheader point" onclick="Buf7SW(1)"
+                        <td id="A7TD" class="subheader point" onclick="SetFoodEffectsVisibility(1)"
                             style="background-color: rgb(68, 102, 102);">Food
                             / Speed Potions / other Items <span id="A7used"></span>
                             <div class="right">(click to show)</div>
@@ -2618,7 +3446,7 @@ Calc's theme: <select id="theme" onChange="themes()"><option value="0">Original<
                     <tr>
                         <td id="buffcell_speedpot_label" class="data">
                             <select name="buff_aspdpot" onchange="updateSupportSkillStatus(event, 7)" data-sc="ASPDPOT">
-                                <option value="0">(no Speed Potion)</option>
+                                <option value="0">(no ASPD Potion)</option>
                                 <option value="1">Concentration Potion</option>
                                 <option value="2">Awakening Potion (Lvl 40)</option>
                                 <option value="3">* Special (Berserk Pitcher) (Lvl 85)</option>
@@ -2783,7 +3611,7 @@ Calc's theme: <select id="theme" onChange="themes()"><option value="0">Original<
                 style="float: left; width: 210px; background-color: rgb(255, 255, 255);">
                 <tbody>
                     <tr>
-                        <td id="A4TD" class="subheader point" onclick="Buf4SW(1)"
+                        <td id="A4TD" class="subheader point" onclick="SetGuildSkillsVisibility(1)"
                             style="background-color: rgb(68, 102, 102);">Guild
                             Skills <span id="A4used"></span>
                             <div class="right">(click to show)</div>
@@ -2867,7 +3695,7 @@ Calc's theme: <select id="theme" onChange="themes()"><option value="0">Original<
                 style="float: left; width: 470px; text-align: right; background-color: rgb(255, 255, 255);">
                 <tbody>
                     <tr>
-                        <td id="A3TD" class="subheader point" onclick="Buf3SW(1)"
+                        <td id="A3TD" class="subheader point" onclick="SetDanceSkillsVisibility(1)"
                             style="text-align: left; background-color: rgb(68, 102, 102);">
                             Music and Dance Skills 
                             <span id="A3used"></span>
@@ -5725,7 +6553,7 @@ Calc's theme: <select id="theme" onChange="themes()"><option value="0">Original<
                 style="float: left; width: 400px; background-color: rgb(255, 255, 255);">
                 <tbody>
                     <tr>
-                        <td id="A6TD" class="subheader point" onclick="Buf6SW(1)"
+                        <td id="A6TD" class="subheader point" onclick="SetMiscEffectsVisibility(1)"
                             style="background-color: rgb(68, 102, 102);">
                             Miscellaneous Effects on Player<span id="A6used"></span>
                             <div class="right">(click to show)</div>
@@ -5898,10 +6726,138 @@ Calc's theme: <select id="theme" onChange="themes()"><option value="0">Original<
             <table id="ID_ETC" class="tborder" style="width: 640px; background-color: rgb(255, 255, 255);">
                 <tbody>
                     <tr>
-                        <td id="A8TD" class="subheader point" onclick="Buf8SW(1)"
+                        <td id="A8TD" class="subheader point" onclick="SetAdditionalEffectsVisibility(1)"
                             style="background-color: rgb(68, 102, 102);">
                             Additional Effects <span id="A8used"></span>
                             <div class="right">(click to show)</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <font size="2"><b>Pets</b></font>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td id="buffcell_pet_input" class="dotB">
+                            <select name="buff_pet" onchange="updatePlayerAdditionalEffects(event)" data-id="PET">
+                                <option value="0">None</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td id="buffcell_temp_effects" class="dotB">
+                            <font size="2"><b>Temporary Card/Item active Effects</b></font>
+                            <font color="red"> (Duration and Chance are ignored)</font>
+                            <br>
+                            <select name="buff_temp_effects_1" onchange="updatePlayerAdditionalEffects(event)" data-id="TEMP_EFFECTS_1">
+                                <option value="0">None</option>
+                            </select>
+                            <br>
+                            <select name="buff_temp_effects_2" onchange="updatePlayerAdditionalEffects(event)" data-id="TEMP_EFFECTS_2">
+                                <option value="0">None</option>
+                            </select>
+                            <br>
+                            <select name="buff_temp_effects_3" onchange="updatePlayerAdditionalEffects(event)" data-id="TEMP_EFFECTS_3">
+                                <option value="0">None</option>
+                            </select>
+                            <br>
+                            <select name="buff_temp_effects_4" onchange="updatePlayerAdditionalEffects(event)" data-id="TEMP_EFFECTS_4">
+                                <option value="0">None</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <font size="2"><b>EXP Items & Variables</b></font>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td id="buffcell_exp_base_rate">
+                            Server Base Experience Rate 
+                            <select name="buff_exp_base_rate" onchange="updatePlayerAdditionalEffects(event)" data-id="EXP_BASE_RATE" disabled>
+                                <option value="1">1x</option>
+                                <option value="2">2x</option>
+                                <option value="3" selected="selected">3x</option>
+                                <option value="4">4x</option>
+                                <option value="5">5x</option>
+                                <option value="6">6x</option>
+                                <option value="7">7x</option>
+                                <option value="8">8x</option>
+                                <option value="9">9x</option>
+                                <option value="10">10x</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td id="buffcell_exp_job_rate">
+                            Server Job Experience Rate 
+                            <select name="buff_exp_job_rate" onchange="updatePlayerAdditionalEffects(event)" data-id="EXP_JOB_RATE" disabled>
+                                <option value="1">1x</option>
+                                <option value="2">2x</option>
+                                <option value="3" selected="selected">3x</option>
+                                <option value="4">4x</option>
+                                <option value="5">5x</option>
+                                <option value="6">6x</option>
+                                <option value="7">7x</option>
+                                <option value="8">8x</option>
+                                <option value="9">9x</option>
+                                <option value="10">10x</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td id="buffcell_exp_party_member">
+                            Party Member Count
+                            <select name="buff_exp_party_member" onchange="updatePlayerAdditionalEffects(event)" data-id="EXP_PARTY_MEMBER">
+                                <option value="0">0</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                <option value="6">6</option>
+                                <option value="7">7</option>
+                                <option value="8">8</option>
+                                <option value="9">9</option>
+                                <option value="10">10</option>
+                                <option value="11">11</option>
+                                <option value="12">12</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td id="buffcell_exp_tap_bonus">
+                            EXP Tap Bonus per Party Member
+                            <select name="buff_exp_tap_bonus" onchange="updatePlayerAdditionalEffects(event)" data-id="EXP_TAP_BONUS" disabled>
+                                <option value="25">+25%</option>
+                                <option value="50" selected="selected">+50%</option>
+                                <option value="75">+75%</option>
+                                <option value="100">+100%</option>
+                                <option value="125">+125%</option>
+                                <option value="150">+150%</option>
+                                <option value="175">+175%</option>
+                                <option value="200">+200%</option>
+                                <option value="225">+225%</option>
+                                <option value="250">+250%</option>
+                                <option value="275">+275%</option>
+                                <option value="300">+300%</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td id="buffcell_exp_battle_manual">
+                            Battle Manual
+                            <select name="buff_exp_battle_manual" onchange="updatePlayerAdditionalEffects(event)" data-id="EXP_BATTLE_MANUAL">
+                                <option value="0">None</option>
+                                <option value="67">Battle Manual (+67%)</option>
+                                <option value="100">Advanced Battle Manual (+100%)</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td id="buffcell_exp_job_manual">
+                            Job Manual (+50%)
+                            <input type="checkbox" name="buff_exp_job_manual" onclick="updatePlayerAdditionalEffects(event)" data-id="EXP_JOB_MANUAL">
                         </td>
                     </tr>
                 </tbody>
@@ -5924,83 +6880,11 @@ Calc's theme: <select id="theme" onChange="themes()"><option value="0">Original<
                     <tbody>
                         <tr>
                             <td colspan="6" class="subheader" style="background-color: rgb(68, 102, 102);">Place:
-                                <select name="ENEMY_SORT2" onchange="EnemySort()|calc()"
+                                <select name="ENEMY_SORT2" onchange="EnemySort()|LoadEnemySkills()|calc()"
                                     style="width: 155px; background-color: rgb(221, 238, 238);">
                                     <option value="0">All Regions</option>
-                                    <option value="1">Abyss Lake Dungeon</option>
-                                    <option value="2">Amatsu</option>
-                                    <option value="3">Ant Hell</option>
-                                    <option value="4">Ayothaya</option>
-                                    <option value="5">Battlegrounds</option>
-                                    <option value="6">Bibilan</option>
-                                    <option value="7">Bio Labs</option>
-                                    <option value="8">Bio Labs 4 (aRO)</option>
-                                    <option value="9">Bifrost</option>
-                                    <option value="10">Bossnia</option>
-                                    <option value="11">Brasilis</option>
-                                    <option value="12">Clock Tower</option>
-                                    <option value="13">Coal Mine</option>
-                                    <option value="14">Comodo Caves</option>
-                                    <option value="15">Comodo Fields</option>
-                                    <option value="16">Culverts</option>
-                                    <option value="17">Dewata</option>
-                                    <option value="18">Dimensional Crack</option>
-                                    <option value="19">Einbroch Dungeon</option>
-                                    <option value="20">Einbroch Fields</option>
-                                    <option value="21">El Dicastes</option>
-                                    <option value="22">Endless Tower Finale</option>
-                                    <option value="23">Geffenia</option>
-                                    <option value="24">Geffen Dungeon</option>
-                                    <option value="25">Geffen Fields</option>
-                                    <option value="26">Glast Heim</option>
-                                    <option value="27">Glast Heim Dungeons</option>
-                                    <option value="28">Gonryun</option>
-                                    <option value="29">Guild Dungeon [Aldebaran]</option>
-                                    <option value="30">Guild Dungeon [Arunafeltz]</option>
-                                    <option value="31">Guild Dungeon [Geffen]</option>
-                                    <option value="32">Guild Dungeon [Payon]</option>
-                                    <option value="33">Guild Dungeon [Prontera]</option>
-                                    <option value="34">Guild Dungeon [Schwartzvald]</option>
-                                    <option value="35">Hidden Temple</option>
-                                    <option value="36">Hugel Fields</option>
-                                    <option value="37">Ice Cave</option>
-                                    <option value="38">Juperos Dungeon</option>
-                                    <option value="39">Kiel Dungeon</option>
-                                    <option value="40">Lighthalzen Fields</option>
-                                    <option value="41">Louyang</option>
-                                    <option value="42">Lutie &amp; Toy Factory</option>
-                                    <option value="43">Magma Dungeon</option>
-                                    <option value="44">Malangdo</option>
-                                    <option value="45">Manuk</option>
-                                    <option value="46">Morroc Fields</option>
-                                    <option value="47">Moscovia</option>
-                                    <option value="48">Mt. Mjolnir</option>
-                                    <option value="49">Nameless Island</option>
-                                    <option value="50">Nidhoggr's Nest</option>
-                                    <option value="51">Niflheim</option>
-                                    <option value="52">Odins Shrine</option>
-                                    <option value="53">Orc Dungeon</option>
-                                    <option value="54">Payon Dungeon</option>
-                                    <option value="55">Payon Fields</option>
-                                    <option value="56">Poring Island</option>
-                                    <option value="57">Prontera Fields</option>
-                                    <option value="58">Pyramid</option>
-                                    <option value="59">Rachel Fields</option>
-                                    <option value="60">Rachel Sanctuary</option>
-                                    <option value="61">Scaraba Hole</option>
-                                    <option value="62">Sphinx</option>
-                                    <option value="63">Splendide</option>
-                                    <option value="64">Sunken Ship</option>
-                                    <option value="65">Thanatos Tower</option>
-                                    <option value="66">Thor's Volcano</option>
-                                    <option value="67">Turtle Island</option>
-                                    <option value="68">Umbala Dungeon</option>
-                                    <option value="69">Umbala Fields</option>
-                                    <option value="70">Veins Fields</option>
-                                    <option value="71">War of Emperium</option>
-                                    <option value="72">Yuno Fields</option>
                                 </select>
-                                Sort: <select name="ENEMY_SORT" onchange="EnemySort()|calc()"
+                                Sort: <select name="ENEMY_SORT" onchange="EnemySort()|LoadEnemySkills()|calc()"
                                     style="background-color: rgb(221, 238, 238);">
                                     <option value="0">Alphabetical
                                     </option>
@@ -6033,664 +6917,9 @@ Calc's theme: <select id="theme" onChange="themes()"><option value="0">Original<
                         </tr>
                         <tr>
                             <td colspan="6" class="subheader" style="background-color: rgb(68, 102, 102);">Enemy:
-                                <select name="B_Enemy" onchange="Bskill() | calc()"
+                                <select name="B_Enemy" onchange="LoadEnemySkills() | calc()"
                                     style="background-color: rgb(221, 238, 238);">
                                     <option value="586">[Custom Player]</option>
-                                    <option value="144">Abysmal Knight</option>
-                                    <option value="408">Acidus [Blue]</option>
-                                    <option value="407">Acidus [Gold]</option>
-                                    <option value="462">Agav</option>
-                                    <option value="11">Alarm</option>
-                                    <option value="13">Alice</option>
-                                    <option value="432">Alicel</option>
-                                    <option value="433">Aliot</option>
-                                    <option value="431">Aliza</option>
-                                    <option value="12">Alligator</option>
-                                    <option value="549">Alnoldi (Custom)</option>
-                                    <option value="599">Alnoldi (Renewal)</option>
-                                    <option value="639">Alphoccio (aRO)</option>
-                                    <option value="10">Am Mut</option>
-                                    <option value="19">Ambernite</option>
-                                    <option value="333">Amon Ra</option>
-                                    <option value="7">Anacondaq</option>
-                                    <option value="412">Ancient Mimic</option>
-                                    <option value="42">Ancient Mummy</option>
-                                    <option value="542">Ancient Tree</option>
-                                    <option value="43">Ancient Worm</option>
-                                    <option value="18">Andre</option>
-                                    <option value="41">Angeling</option>
-                                    <option value="632">Angeling (Poring War)</option>
-                                    <option value="627">Angra Mantis (aRO)</option>
-                                    <option value="566">Angra Mantis (Custom)</option>
-                                    <option value="8">Anolian</option>
-                                    <option value="376">Anopheles</option>
-                                    <option value="14">Ant Egg</option>
-                                    <option value="140">Antique Firelock</option>
-                                    <option value="560">Antler Scaraba (Custom)</option>
-                                    <option value="610">Antler Scaraba (aRO)</option>
-                                    <option value="561">Antler Scaraba Egg (Custom)</option>
-                                    <option value="611">Antler Scaraba Egg (aRO)</option>
-                                    <option value="17">Antonio</option>
-                                    <option value="484">Anubis</option>
-                                    <option value="9">Apocalypse</option>
-                                    <option value="538">Aqua Elemental</option>
-                                    <option value="0">Arc Angeling</option>
-                                    <option value="382">Archdam_G</option>
-                                    <option value="383">Archdam</option>
-                                    <option value="1">Archer Skeleton</option>
-                                    <option value="5">Arclouse</option>
-                                    <option value="15">Argiope</option>
-                                    <option value="16">Argos</option>
-                                    <option value="362">Armeyer Dinze</option>
-                                    <option value="371">Assassin Cross Eremes [MVP]</option>
-                                    <option value="6">Assaulter</option>
-                                    <option value="240">Aster</option>
-                                    <option value="450">Atroce</option>
-                                    <option value="520">Aunoe</option>
-                                    <option value="573">BG Crystal</option>
-                                    <option value="574">BG Food Storage</option>
-                                    <option value="576">BG Guardian (Bow)</option>
-                                    <option value="575">BG Guardian (Sword)</option>
-                                    <option value="487">Baba Yaga</option>
-                                    <option value="189">Baby Desert Wolf</option>
-                                    <option value="102">Baby Leopard</option>
-                                    <option value="553">Banaspaty (Custom)</option>
-                                    <option value="603">Banaspaty (Renewal)</option>
-                                    <option value="477">Banshee</option>
-                                    <option value="522">Banshee Master</option>
-                                    <option value="228">Baphomet</option>
-                                    <option value="523">Baphomet [Sealed Shrine]</option>
-                                    <option value="229">Baphomet Jr.</option>
-                                    <option value="415">Baroness of Retribution</option>
-                                    <option value="504">Barricades</option>
-                                    <option value="218">Bathory</option>
-                                    <option value="585">Beelzebub (Fly Form)</option>
-                                    <option value="480">Beelzebub (True Form)</option>
-                                    <option value="235">Beetle King</option>
-                                    <option value="397">Beholder</option>
-                                    <option value="521">Beholder Master</option>
-                                    <option value="239">Bigfoot</option>
-                                    <option value="642">Biochemist Flamel (aRO)</option>
-                                    <option value="649">Biochemist Flamel [MVP] (aRO)</option>
-                                    <option value="99">Black Mushroom</option>
-                                    <option value="259">Blazer</option>
-                                    <option value="227">Bloody Butterfly</option>
-                                    <option value="253">Bloody Knight</option>
-                                    <option value="331">Bloody Murderer</option>
-                                    <option value="2">Blue Plant</option>
-                                    <option value="158">Boa</option>
-                                    <option value="583">Boitata</option>
-                                    <option value="275">Bongun</option>
-                                    <option value="467">Bow Guardian</option>
-                                    <option value="541">Bradium Golem</option>
-                                    <option value="404">Breeze</option>
-                                    <option value="257">Brilight</option>
-                                    <option value="554">Butoijo (Custom)</option>
-                                    <option value="604">Butoijo (Renewal)</option>
-                                    <option value="470">Byorgue</option>
-                                    <option value="82">Caramel</option>
-                                    <option value="134">Carat</option>
-                                    <option value="81">Cat O' Nine Tails</option>
-                                    <option value="80">Caterpillar</option>
-                                    <option value="367">Cecil Damon</option>
-                                    <option value="500">Cecil Damon [Lv99]</option>
-                                    <option value="636">Celia (aRO)</option>
-                                    <option value="550">Cendrawasih (Custom)</option>
-                                    <option value="600">Cendrawasih (Renewal)</option>
-                                    <option value="531">Centipede</option>
-                                    <option value="595">Centipede (aRO)</option>
-                                    <option value="530">Centipede Larva</option>
-                                    <option value="594">Centipede Larva (aRO)</option>
-                                    <option value="644">Champion Chen (aRO)</option>
-                                    <option value="651">Champion Chen [MVP] (aRO)</option>
-                                    <option value="637">Chen (aRO)</option>
-                                    <option value="181">Chepet</option>
-                                    <option value="79">Chimera</option>
-                                    <option value="183">Choco</option>
-                                    <option value="184">Chonchon</option>
-                                    <option value="94">Christmas Gobin</option>
-                                    <option value="100">Clock</option>
-                                    <option value="514">Cobalt Mineral</option>
-                                    <option value="103">Coco</option>
-                                    <option value="551">Comodo (Custom)</option>
-                                    <option value="601">Comodo (Renewal)</option>
-                                    <option value="121">Condor</option>
-                                    <option value="430">Constant</option>
-                                    <option value="88">Cookie [Green]</option>
-                                    <option value="87">Cookie [Red]</option>
-                                    <option value="529">Cornus</option>
-                                    <option value="593">Cornus (aRO)</option>
-                                    <option value="71">Cornutus</option>
-                                    <option value="72">Crab</option>
-                                    <option value="90">Cramp</option>
-                                    <option value="92">Creamy</option>
-                                    <option value="93">Creamy Fear</option>
-                                    <option value="98">Cruiser</option>
-                                    <option value="577">Curupira</option>
-                                    <option value="417">Dame of Sentinel</option>
-                                    <option value="174">Dark Frame</option>
-                                    <option value="173">Dark Illusion</option>
-                                    <option value="175">Dark Lord</option>
-                                    <option value="537">Dark Pinguicula</option>
-                                    <option value="545">Dark Shadow</option>
-                                    <option value="190">Wraith Dead</option>
-                                    <option value="413">Deathword</option>
-                                    <option value="655">Death Witch</option>
-                                    <option value="195">Deleter [Earth]</option>
-                                    <option value="194">Deleter [Sky]</option>
-                                    <option value="187">Demon Pungus</option>
-                                    <option value="191">Deniro</option>
-                                    <option value="188">Desert Wolf</option>
-                                    <option value="420">Despero of Thanatos</option>
-                                    <option value="411">Detardeurus</option>
-                                    <option value="192">Deviace</option>
-                                    <option value="340">Deviling</option>
-                                    <option value="633">Deviling (Poring War)</option>
-                                    <option value="193">Deviruchi</option>
-                                    <option value="186">Diabolic</option>
-                                    <option value="392">Dimik [Earth]</option>
-                                    <option value="393">Dimik [Fire]</option>
-                                    <option value="389">Dimik [Neutral]</option>
-                                    <option value="391">Dimik [Water]</option>
-                                    <option value="390">Dimik [Wind]</option>
-                                    <option value="330">Disguise</option>
-                                    <option value="205">Dokebi</option>
-                                    <option value="555">Dolomedes (Custom)</option>
-                                    <option value="605">Dolomedes (aRO)</option>
-                                    <option value="419">Dolor of Thanatos</option>
-                                    <option value="206">Doppelganger</option>
-                                    <option value="536">Draco</option>
-                                    <option value="535">Draco Egg</option>
-                                    <option value="207">Dracula</option>
-                                    <option value="409">Dragon Egg</option>
-                                    <option value="209">Dragon Fly</option>
-                                    <option value="208">Dragon Tail</option>
-                                    <option value="213">Drainliar</option>
-                                    <option value="212">Drake</option>
-                                    <option value="211">Driller</option>
-                                    <option value="214">Drops</option>
-                                    <option value="448">Drosera</option>
-                                    <option value="210">Dryad</option>
-                                    <option value="329">Dullahan</option>
-                                    <option value="180">Dumpling Child</option>
-                                    <option value="544">Duneyrr</option>
-                                    <option value="177">Dustiness</option>
-                                    <option value="461">Echio</option>
-                                    <option value="37">Eclipse</option>
-                                    <option value="38">Eddga</option>
-                                    <option value="34">Eggyra</option>
-                                    <option value="357">Egnigem Cenia</option>
-                                    <option value="363">Egnigem Cenia [MVP]</option>
-                                    <option value="39">Elder</option>
-                                    <option value="40">Elder Willow</option>
-                                    <option value="44">Emperium</option>
-                                    <option value="548">Emperium [assuming it's bosstype]</option>
-                                    <option value="547">Emperium [iRO]</option>
-                                    <option value="145">Enchanted Peach Tree</option>
-                                    <option value="509">Entweihen Knothen</option>
-                                    <option value="365">Eremes Guile</option>
-                                    <option value="498">Eremes Guile [Lv99]</option>
-                                    <option value="359">Errende Ebecee</option>
-                                    <option value="22">Evil Druid</option>
-                                    <option value="198">Evil Nymph</option>
-                                    <option value="101">Evil Snake Lord</option>
-                                    <option value="35">Executioner</option>
-                                    <option value="36">Explosion</option>
-                                    <option value="242">Fabre</option>
-                                    <option value="243">Fabre [Novicegrounds]</option>
-                                    <option value="247">Fake Angel</option>
-                                    <option value="479">Fallen Bishop Hibram</option>
-                                    <option value="244">Familiar</option>
-                                    <option value="519">Fanat</option>
-                                    <option value="201">Female Thief Bug</option>
-                                    <option value="405">Ferus [Green]</option>
-                                    <option value="406">Ferus [Red]</option>
-                                    <option value="473">Flame Skull</option>
-                                    <option value="635">Flamel (aRO)</option>
-                                    <option value="261">Flora</option>
-                                    <option value="255">Freezer</option>
-                                    <option value="258">Frilldora</option>
-                                    <option value="436">Frus</option>
-                                    <option value="69">Gajomart</option>
-                                    <option value="75">Galapago</option>
-                                    <option value="447">Galion</option>
-                                    <option value="62">Gargoyle</option>
-                                    <option value="225">Garm</option>
-                                    <option value="339">Garm Baby</option>
-                                    <option value="394">Gate Controller</option>
-                                    <option value="453">Gazeti</option>
-                                    <option value="381">Gemini-S58</option>
-                                    <option value="136">Geographer</option>
-                                    <option value="638">Gertie (aRO)</option>
-                                    <option value="104">Ghostring</option>
-                                    <option value="85">Ghoul</option>
-                                    <option value="138">Giant Hornet</option>
-                                    <option value="137">Giant Spider</option>
-                                    <option value="83">Giant Whisper</option>
-                                    <option value="328">Gibbet</option>
-                                    <option value="67">Giearth</option>
-                                    <option value="77">Gig</option>
-                                    <option value="463">Gloom Under Night</option>
-                                    <option value="105">Goat</option>
-                                    <option value="108">Goblin [Axe]</option>
-                                    <option value="110">Goblin [Dagger]</option>
-                                    <option value="109">Goblin [Flail]</option>
-                                    <option value="111">Goblin [Hammer]</option>
-                                    <option value="112">Goblin [Morning Star]</option>
-                                    <option value="113">Goblin Archer</option>
-                                    <option value="115">Goblin Leader</option>
-                                    <option value="114">Goblin Steamrider</option>
-                                    <option value="619">Gold Antler Scaraba (aRO)</option>
-                                    <option value="620">Gold Antler Scaraba Egg (aRO)</option>
-                                    <option value="615">Gold One-Horn Scaraba (aRO)</option>
-                                    <option value="616">Gold One-Horn Scaraba Egg (aRO)</option>
-                                    <option value="623">Gold Queen Scaraba (aRO)</option>
-                                    <option value="621">Gold Rake Scaraba (aRO)</option>
-                                    <option value="622">Gold Rake Scaraba Egg (aRO)</option>
-                                    <option value="617">Gold Two-Horn Scaraba (aRO)</option>
-                                    <option value="618">Gold Two-Horn Scaraba Egg (aRO)</option>
-                                    <option value="45">Golden Thief Bug</option>
-                                    <option value="106">Golem</option>
-                                    <option value="490">Gopinich</option>
-                                    <option value="91">Grand Peco</option>
-                                    <option value="196">Greatest General</option>
-                                    <option value="398">Green Maiden</option>
-                                    <option value="295">Green Plant</option>
-                                    <option value="396">Gremlin</option>
-                                    <option value="95">Grizzly</option>
-                                    <option value="403">Grove</option>
-                                    <option value="96">Gryphon</option>
-                                    <option value="503">Guardian Stone</option>
-                                    <option value="97">Gullinbursti</option>
-                                    <option value="647">Gypsy Trentini (aRO)</option>
-                                    <option value="654">Gypsy Trentini [MVP] (aRO)</option>
-                                    <option value="534">Hardrock Mammoth</option>
-                                    <option value="598">Hardrock Mammoth (aRO)</option>
-                                    <option value="219">Harpy</option>
-                                    <option value="582">Headless Mule</option>
-                                    <option value="234">Heater</option>
-                                    <option value="515">Heavy Metaling</option>
-                                    <option value="517">Hell Apocalypse</option>
-                                    <option value="584">Hell Fly</option>
-                                    <option value="474">Hell Poodle</option>
-                                    <option value="483">Hellion Revenant</option>
-                                    <option value="318">Hermit Plant</option>
-                                    <option value="221">High Orc</option>
-                                    <option value="372">High Priest Margaretha [MVP]</option>
-                                    <option value="374">High Wizard Kathryne [MVP]</option>
-                                    <option value="379">Hill Wind</option>
-                                    <option value="378">Hill Wind [Spear]</option>
-                                    <option value="527">Hillslion</option>
-                                    <option value="591">Hillslion (aRO)</option>
-                                    <option value="269">Hode</option>
-                                    <option value="458">Hodremlin</option>
-                                    <option value="377">Holden</option>
-                                    <option value="273">Horn</option>
-                                    <option value="270">Hornet</option>
-                                    <option value="274">Horong</option>
-                                    <option value="369">Howard Alt-Eisen</option>
-                                    <option value="502">Howard Alt-Eisen [Lv99]</option>
-                                    <option value="232">Hunter Fly</option>
-                                    <option value="241">Hydra</option>
-                                    <option value="410">Hydrolancer</option>
-                                    <option value="327">Hylozoist</option>
-                                    <option value="581">Iara</option>
-                                    <option value="455">Ice Titan</option>
-                                    <option value="451">Iceicle</option>
-                                    <option value="472">Ifrit</option>
-                                    <option value="466">Imp</option>
-                                    <option value="491">Incarnation of Morroc [Angel]</option>
-                                    <option value="492">Incarnation of Morroc [Golem]</option>
-                                    <option value="493">Incarnation of Morroc [Human]</option>
-                                    <option value="494">Incarnation of Morroc [Spirit]</option>
-                                    <option value="23">Incubus</option>
-                                    <option value="24">Injustice</option>
-                                    <option value="513">Iron Fist</option>
-                                    <option value="459">Isilla</option>
-                                    <option value="20">Isis</option>
-                                    <option value="579">Jaguar</option>
-                                    <option value="139">Jakk</option>
-                                    <option value="338">Jing Guai</option>
-                                    <option value="141">Joker</option>
-                                    <option value="341">Kaho</option>
-                                    <option value="70">Kapha</option>
-                                    <option value="74">Karakasa</option>
-                                    <option value="468">Kasa</option>
-                                    <option value="368">Kathryne Keyron</option>
-                                    <option value="501">Katrinn Keyron [Lv99]</option>
-                                    <option value="360">Kavach Icarus</option>
-                                    <option value="66">Khalitzburg</option>
-                                    <option value="434">Kiel</option>
-                                    <option value="435">Kiel-D-01</option>
-                                    <option value="84">Killer Mantis</option>
-                                    <option value="571">King Dramoh (Custom)</option>
-                                    <option value="465">Knocker</option>
-                                    <option value="116">Kobold [Axe]</option>
-                                    <option value="117">Kobold [Hammer]</option>
-                                    <option value="118">Kobold [Morning Star]</option>
-                                    <option value="119">Kobold Archer</option>
-                                    <option value="120">Kobold Leader</option>
-                                    <option value="342">Kraben</option>
-                                    <option value="456">Ktullanux</option>
-                                    <option value="518">Kublin</option>
-                                    <option value="86">Kukre</option>
-                                    <option value="414">Lady Solace</option>
-                                    <option value="428">Lady Tanee</option>
-                                    <option value="361">Laurell Weinder</option>
-                                    <option value="308">Lava Golem</option>
-                                    <option value="345">Leaf Cat</option>
-                                    <option value="552">Leak (Custom)</option>
-                                    <option value="602">Leak (Renewal)</option>
-                                    <option value="315">Leib Olmai</option>
-                                    <option value="485">Les</option>
-                                    <option value="629">Little Fatum (aRO)</option>
-                                    <option value="568">Little Fatum (Custom)</option>
-                                    <option value="326">Loli Ruri</option>
-                                    <option value="370">Lord Knight Seyren [MVP]</option>
-                                    <option value="332">Lord of the Dead</option>
-                                    <option value="631">Lost Dragon (aRO)</option>
-                                    <option value="526">Luciola Vespa</option>
-                                    <option value="590">Luciola Vespa (aRO)</option>
-                                    <option value="324">Lude</option>
-                                    <option value="311">Lunatic</option>
-                                    <option value="418">Maero of Thanatos</option>
-                                    <option value="464">Magmaring</option>
-                                    <option value="223">Magnolia</option>
-                                    <option value="107">Majoruros</option>
-                                    <option value="200">Male Thief Bug</option>
-                                    <option value="290">Mandragora</option>
-                                    <option value="289">Mantis</option>
-                                    <option value="334">Mao Guai</option>
-                                    <option value="286">Marc</option>
-                                    <option value="288">Marduk</option>
-                                    <option value="366">Margaretha Sorin</option>
-                                    <option value="499">Margaretha Sorin [Lv99]</option>
-                                    <option value="278">Marin</option>
-                                    <option value="284">Marina</option>
-                                    <option value="285">Marine Sphere</option>
-                                    <option value="283">Marionette</option>
-                                    <option value="287">Marse</option>
-                                    <option value="277">Martin</option>
-                                    <option value="276">Matyr</option>
-                                    <option value="279">Mastering</option>
-                                    <option value="375">Mastersmith Howard [MVP]</option>
-                                    <option value="489">Mavka</option>
-                                    <option value="281">Maya</option>
-                                    <option value="282">Maya Purple</option>
-                                    <option value="306">Medusa</option>
-                                    <option value="303">Megalith</option>
-                                    <option value="304">Megalodon</option>
-                                    <option value="422">Memory of Thanatos</option>
-                                    <option value="230">Merman</option>
-                                    <option value="346">Metaling</option>
-                                    <option value="305">Metaller</option>
-                                    <option value="335">Mi Gao</option>
-                                    <option value="298">Mimic</option>
-                                    <option value="630">Miming (aRO)</option>
-                                    <option value="569">Miming (Custom)</option>
-                                    <option value="352">Mineral</option>
-                                    <option value="296">Mini Demon</option>
-                                    <option value="297">Minorous</option>
-                                    <option value="646">Minstel Alphoccio (aRO)</option>
-                                    <option value="653">Minstel Alphoccio [MVP] (aRO)</option>
-                                    <option value="294">Mistress</option>
-                                    <option value="416">Mistress of Shelter</option>
-                                    <option value="299">Miyabi Doll</option>
-                                    <option value="185">Mobster</option>
-                                    <option value="31">Moonlight Flower</option>
-                                    <option value="301">Muka</option>
-                                    <option value="280">Mummy</option>
-                                    <option value="302">Munak</option>
-                                    <option value="449">Muscipular</option>
-                                    <option value="78">Mushroom [Thief Test]</option>
-                                    <option value="300">Mutant Dragonoid</option>
-                                    <option value="292">Myst</option>
-                                    <option value="293">Myst Case</option>
-                                    <option value="291">Mysteltainn</option>
-                                    <option value="532">Naga</option>
-                                    <option value="596">Naga (aRO)</option>
-                                    <option value="510">Naght Sieger</option>
-                                    <option value="478">Necromancer</option>
-                                    <option value="524">Nepenthes</option>
-                                    <option value="588">Nepenthes (aRO)</option>
-                                    <option value="217">Nereid</option>
-                                    <option value="546">Nidhoggr's Shadow</option>
-                                    <option value="215">Nightmare</option>
-                                    <option value="216">Nightmare Terror</option>
-                                    <option value="89">Nine Tail</option>
-                                    <option value="401">Novus [Red]</option>
-                                    <option value="402">Novus [Yellow]</option>
-                                    <option value="348">Noxious</option>
-                                    <option value="60">Obeaune</option>
-                                    <option value="351">Obsidian</option>
-                                    <option value="421">Odium of Thanatos</option>
-                                    <option value="48">Ogretooth / Tirfing</option>
-                                    <option value="556">One-Horn Scaraba (Custom)</option>
-                                    <option value="606">One-Horn Scaraba (aRO)</option>
-                                    <option value="557">One-Horn Scaraba Egg (Custom)</option>
-                                    <option value="607">One-Horn Scaraba Egg (aRO)</option>
-                                    <option value="49">Orc Archer</option>
-                                    <option value="429">Orc Baby</option>
-                                    <option value="54">Orc Hero</option>
-                                    <option value="55">Orc Lady</option>
-                                    <option value="56">Orc Lord</option>
-                                    <option value="51">Orc Skeleton</option>
-                                    <option value="50">Orc Warrior</option>
-                                    <option value="52">Orc Zombie</option>
-                                    <option value="57">Osiris</option>
-                                    <option value="47">Owl Baron</option>
-                                    <option value="46">Owl Duke</option>
-                                    <option value="641">Paladin Randel (aRO)</option>
-                                    <option value="648">Paladin Randel [MVP] (aRO)</option>
-                                    <option value="233">Panzer Goblin</option>
-                                    <option value="246">Parasite</option>
-                                    <option value="628">Parus (aRO)</option>
-                                    <option value="567">Parus (Custom)</option>
-                                    <option value="224">Pasana</option>
-                                    <option value="262">Peco Peco</option>
-                                    <option value="263">Peco Peco Egg</option>
-                                    <option value="265">Penomena</option>
-                                    <option value="220">Permeter</option>
-                                    <option value="264">Pest</option>
-                                    <option value="251">Petite [Earth]</option>
-                                    <option value="250">Petite [Sky]</option>
-                                    <option value="245">Pharaoh</option>
-                                    <option value="248">Phen</option>
-                                    <option value="249">Phendark</option>
-                                    <option value="442">Photon Cannon [Blue]</option>
-                                    <option value="441">Photon Cannon [Green]</option>
-                                    <option value="443">Photon Cannon [Red]</option>
-                                    <option value="444">Photon Cannon [Yellow]</option>
-                                    <option value="256">Phreeoni</option>
-                                    <option value="539">Phylla</option>
-                                    <option value="238">Picky</option>
-                                    <option value="149">Picky [Super]</option>
-                                    <option value="236">Piere</option>
-                                    <option value="525">Pinguicula</option>
-                                    <option value="589">Pinguicula (aRO)</option>
-                                    <option value="580">Piranha</option>
-                                    <option value="222">Pirate Skeleton</option>
-                                    <option value="350">Pitman</option>
-                                    <option value="254">Plankton</option>
-                                    <option value="423">Plasma [Blue]</option>
-                                    <option value="425">Plasma [Green]</option>
-                                    <option value="426">Plasma [Purple]</option>
-                                    <option value="424">Plasma [Red]</option>
-                                    <option value="427">Plasma [Yellow]</option>
-                                    <option value="267">Poison Spore</option>
-                                    <option value="53">Poison Toad</option>
-                                    <option value="626">Pom Spider (aRO)</option>
-                                    <option value="565">Pom Spider (Custom)</option>
-                                    <option value="271">Poporing</option>
-                                    <option value="347">Porcellio</option>
-                                    <option value="587">Pori Pori / Bring It On</option>
-                                    <option value="272">Poring</option>
-                                    <option value="624">Pouring</option>
-                                    <option value="625">Pouring (Renewal)</option>
-                                    <option value="231">Punk</option>
-                                    <option value="252">Pupa</option>
-                                    <option value="564">Queen Scaraba (Custom)</option>
-                                    <option value="614">Queen Scaraba (aRO)</option>
-                                    <option value="325">Quve</option>
-                                    <option value="400">Rafflesia</option>
-                                    <option value="475">Ragged Zombie</option>
-                                    <option value="317">Raggler</option>
-                                    <option value="562">Rake Scaraba (Custom)</option>
-                                    <option value="612">Rake Scaraba (aRO)</option>
-                                    <option value="563">Rake Scaraba Egg (Custom)</option>
-                                    <option value="613">Rake Scaraba Egg (aRO)</option>
-                                    <option value="634">Randel (aRO)</option>
-                                    <option value="543">Rata</option>
-                                    <option value="313">Raydric</option>
-                                    <option value="314">Raydric Archer</option>
-                                    <option value="3">Red Mushroom</option>
-                                    <option value="570">Red Eruma (Custom)</option>
-                                    <option value="4">Red Plant</option>
-                                    <option value="380">Remover</option>
-                                    <option value="316">Requiem</option>
-                                    <option value="540">Rhyncho</option>
-                                    <option value="309">Rideword</option>
-                                    <option value="320">Rocker</option>
-                                    <option value="321">Roda Frog</option>
-                                    <option value="319">Rotar Zairo</option>
-                                    <option value="446">Roween</option>
-                                    <option value="356">RSX-0806</option>
-                                    <option value="310">Rybio</option>
-                                    <option value="163">Sage Worm</option>
-                                    <option value="471">Salamander</option>
-                                    <option value="61">Samurai Specter</option>
-                                    <option value="131">Sandman</option>
-                                    <option value="130">Santa Poring</option>
-                                    <option value="125">Sasquatch</option>
-                                    <option value="495">Satan Morroc</option>
-                                    <option value="127">Savage</option>
-                                    <option value="128">Savage Babe</option>
-                                    <option value="643">Scholar Celia (aRO)</option>
-                                    <option value="650">Scholar Celia [MVP] (aRO)</option>
-                                    <option value="150">Scorpion</option>
-                                    <option value="133">Sea Otter</option>
-                                    <option value="58">Seal</option>
-                                    <option value="460">Seeker</option>
-                                    <option value="364">Seyren Windsor</option>
-                                    <option value="497">Seyron Windsor [Lv99]</option>
-                                    <option value="59">Shellfish</option>
-                                    <option value="68">Shining Plant</option>
-                                    <option value="73">Shinobi</option>
-                                    <option value="122">Side Winder</option>
-                                    <option value="572">Siorava (Custom)</option>
-                                    <option value="452">Siroma</option>
-                                    <option value="438">Skeggiold [Black]</option>
-                                    <option value="511">Skeggiold [Black] Slave</option>
-                                    <option value="439">Skeggiold [Blue]</option>
-                                    <option value="512">Skeggiold [Blue] Slave</option>
-                                    <option value="147">Skel Prisoner</option>
-                                    <option value="148">Skel Worker</option>
-                                    <option value="146">Skeleton</option>
-                                    <option value="135">Skeleton General</option>
-                                    <option value="437">Skogul</option>
-                                    <option value="162">Sleeper</option>
-                                    <option value="161">Smokie</option>
-                                    <option value="373">Sniper Cecil [MVP]</option>
-                                    <option value="454">Snowier</option>
-                                    <option value="167">Sohee</option>
-                                    <option value="169">Soldier Skeleton</option>
-                                    <option value="168">Solider</option>
-                                    <option value="160">Spore</option>
-                                    <option value="159">Spring Rabbit</option>
-                                    <option value="151">Stainer</option>
-                                    <option value="152">Stalactic Golem</option>
-                                    <option value="645">Stalker Gertie (aRO)</option>
-                                    <option value="652">Stalker Gertie [MVP] (aRO)</option>
-                                    <option value="445">Stapo</option>
-                                    <option value="153">Steel Chonchon</option>
-                                    <option value="155">Stem Worm</option>
-                                    <option value="154">Sting</option>
-                                    <option value="260">Stone Shooter</option>
-                                    <option value="156">Stormy Knight</option>
-                                    <option value="157">Strouf</option>
-                                    <option value="123">Succubus</option>
-                                    <option value="469">Sword Guardian</option>
-                                    <option value="166">Swordfish</option>
-                                    <option value="344">Tamruan</option>
-                                    <option value="343">Tao Gunka</option>
-                                    <option value="197">Taoist Hermit</option>
-                                    <option value="179">Tarou</option>
-                                    <option value="528">Tatacho</option>
-                                    <option value="592">Tatacho (aRO)</option>
-                                    <option value="355">Teddy Bear</option>
-                                    <option value="533">Tendrillion</option>
-                                    <option value="597">Tendrillion (aRO)</option>
-                                    <option value="124">Tengu</option>
-                                    <option value="178">Thara Frog</option>
-                                    <option value="21">The Paper</option>
-                                    <option value="199">Thief Bug</option>
-                                    <option value="202">Thief Bug Egg</option>
-                                    <option value="506">Thorn of Bone</option>
-                                    <option value="507">Thorn of Magic</option>
-                                    <option value="508">Thorn of Purity</option>
-                                    <option value="505">Thorn of Recovery</option>
-                                    <option value="203">Toad</option>
-                                    <option value="578">Toucan</option>
-                                    <option value="204">Tower Keeper</option>
-                                    <option value="640">Trentini (aRO)</option>
-                                    <option value="132">Tri Joint</option>
-                                    <option value="482">Tristan III</option>
-                                    <option value="176">Turtle General</option>
-                                    <option value="558">Two-Horn Scaraba (Custom)</option>
-                                    <option value="608">Two-Horn Scaraba (aRO)</option>
-                                    <option value="559">Two-Horn Scaraba Egg (Custom)</option>
-                                    <option value="609">Two-Horn Scaraba Egg (aRO)</option>
-                                    <option value="354">Ungoliant</option>
-                                    <option value="488">Uzhas</option>
-                                    <option value="226">Vadon</option>
-                                    <option value="126">Vagabond Wolf</option>
-                                    <option value="481">Valkyrie</option>
-                                    <option value="440">Valkyrie Randgris</option>
-                                    <option value="457">Vanberk</option>
-                                    <option value="387">Venatu [Earth]</option>
-                                    <option value="386">Venatu [Fire]</option>
-                                    <option value="384">Venatu [Neutral]</option>
-                                    <option value="385">Venatu [Water]</option>
-                                    <option value="388">Venatu [Wind]</option>
-                                    <option value="349">Venomous</option>
-                                    <option value="266">Verit</option>
-                                    <option value="395">Vesper</option>
-                                    <option value="25">Violy</option>
-                                    <option value="237">Vitata</option>
-                                    <option value="268">Vocal</option>
-                                    <option value="129">Wanderer</option>
-                                    <option value="353">Waste Stove</option>
-                                    <option value="358">Whikebine Tres</option>
-                                    <option value="26">Whisper</option>
-                                    <option value="143">White Plant</option>
-                                    <option value="399">White Lady / Bacsojin</option>
-                                    <option value="323">Wild Rose</option>
-                                    <option value="27">Willow</option>
-                                    <option value="28">Wind Ghost</option>
-                                    <option value="65">WoE Guardian [Bow]</option>
-                                    <option value="63">WoE Guardian [Master]</option>
-                                    <option value="64">WoE Guardian [Soldier]</option>
-                                    <option value="33">Wolf</option>
-                                    <option value="486">Wood Goblin</option>
-                                    <option value="32">Wooden Golem</option>
-                                    <option value="30">Wootan Fighter</option>
-                                    <option value="29">Wootan Shooter</option>
-                                    <option value="322">Wormtail</option>
-                                    <option value="496">Wounded Morroc</option>
-                                    <option value="312">Wraith</option>
-                                    <option value="337">Yao Jun</option>
-                                    <option value="76">Yellow Plant</option>
-                                    <option value="307">Yoyo</option>
-                                    <option value="516">Zakudam</option>
-                                    <option value="142">Zealotus</option>
-                                    <option value="164">Zenorc</option>
-                                    <option value="165">Zerom</option>
-                                    <option value="336">Zhu Po Long</option>
-                                    <option value="182">Zipper Bear</option>
-                                    <option value="170">Zombie</option>
-                                    <option value="172">Zombie Master</option>
-                                    <option value="171">Zombie Prisoner</option>
-                                    <option value="476">Zombie Slaughter</option>
                                 </select></td>
                         </tr>
                         <tr>
@@ -6757,7 +6986,7 @@ Calc's theme: <select id="theme" onChange="themes()"><option value="0">Original<
                     <tbody>
                         <tr>
                             <td style="padding-bottom:0;"><input type="checkbox" id="all_dmgSkills"
-                                    onclick="Askill() | calc()">All
+                                    onclick="LoadPlayerSkills() | calc()">All
                                 Damage Skills</td>
                             <td><input type="button" id="ReCalcButton" value="ReCalculate" onclick="calc()"
                                     style="width:100px;"></td>
@@ -6875,8 +7104,6 @@ Calc's theme: <select id="theme" onChange="themes()"><option value="0">Original<
                             <td id="AtkJobExp"></td>
                         </tr>
 
-                        <!--<tr><td colspan="2" class="subheader" style="padding-bottom:0;">Number of Enemies attacking you: <select name="B_num" onChange="calc()"><option selected="selected" value="1">1</option></select></td></tr>
--->
                         <tr>
                             <td colspan="2" class="subheader"
                                 style="padding-bottom: 0px; background-color: rgb(68, 102, 102);">Enemy
@@ -7068,31 +7295,6 @@ Calc's theme: <select id="theme" onChange="themes()"><option value="0">Original<
                     <option value="3">URDR Server</option>
                 </select>
                 <br>
-                Defense Investment (custom): <select name="A8_Skill15" onchange="calc()"
-                    style="background-color: rgb(255, 204, 136);">
-                    <option selected="selected" value="0">-</option>
-                    <option value="1">5</option>
-                    <option value="2">10</option>
-                    <option value="3">15</option>
-                    <option value="4">20</option>
-                    <option value="5">25</option>
-                    <option value="6">30</option>
-                    <option value="7">35</option>
-                    <option value="8">40</option>
-                    <option value="9">45</option>
-                    <option value="10">50</option>
-                    <option value="11">55</option>
-                    <option value="12">60</option>
-                    <option value="13">65</option>
-                    <option value="14">70</option>
-                    <option value="15">75</option>
-                    <option value="16">80</option>
-                    <option value="17">85</option>
-                    <option value="18">90</option>
-                    <option value="19">95</option>
-                    <option value="20">100</option>
-                </select> [WoE Zone only]
-                <br>
                 <br>
 
                 <!-- Monster Debuffs -->
@@ -7100,7 +7302,7 @@ Calc's theme: <select id="theme" onChange="themes()"><option value="0">Original<
                     style="float: left; width: 260px; background-color: rgb(255, 255, 255);">
                     <tbody>
                         <tr>
-                            <td id="AITD" class="subheader point" onclick="debufSW(1)"
+                            <td id="AITD" class="subheader point" onclick="SetMonsterDebuffsVisibility(1)"
                                 style="background-color: rgb(68, 102, 102);">
                                 Debuffs on Enemy <span id="AIused"></span>
                                 <div class="right">(click to show)</div>
@@ -7351,7 +7553,7 @@ Calc's theme: <select id="theme" onChange="themes()"><option value="0">Original<
                     style="width: 314px; margin-right: 0px; background-color: rgb(255, 255, 255);">
                     <tbody>
                         <tr>
-                            <td id="AKTD" class="subheader point" onclick="EnemyBufSW(1)"
+                            <td id="AKTD" class="subheader point" onclick="SetMonsterBuffsVisibility(1)"
                                 style="background-color: rgb(68, 102, 102);">Buffs on Enemy <span id="AKused"></span>
                                 <div class="right">(click to show)</div>
                             </td>
@@ -7577,10 +7779,228 @@ Calc's theme: <select id="theme" onChange="themes()"><option value="0">Original<
                     style="width: 100%; max-width: 550px; background-color: rgb(255, 255, 255);">
                     <tbody>
                         <tr>
-                            <td id="A10TD" class="subheader point" onclick="Buf10SW(1)"
+                            <td id="A10TD" class="subheader point" onclick="SetMonsterManualEditsVisibility(1)"
                                 style="background-color: rgb(68, 102, 102);">
                                 Manual Edits on Enemy <span id="A10used"></span>
                                 <div class="right">(click to show)</div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="data">
+                                <font size="2"><b>Enemy Stats</b></font>
+                            </td>
+                            <td colspan="3">
+                                <font size="2"><b>Enemy Sub-Stats</b></font>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td id="enemy_manualcell_agi" class="data">
+                                +
+                                <input type="text" inputmode="numeric" maxlength="5" onkeypress="return isNumeric(event)" onkeyup="updateEnemyManualEdits(event, 1)" name="enemy_manual_agi" value="0" class="center" data-type="2">
+                                AGI
+                            </td>
+                            <td id="enemy_manualcell_maxhp">
+                                +
+                                <input type="text" inputmode="numeric" maxlength="5" onkeypress="return isNumeric(event)" onkeyup="updateEnemyManualEdits(event, 1)" name="enemy_manual_maxhp" value="0" class="center" data-type="13">
+                                MaxHP
+                            </td>
+                            <td id="enemy_manualcell_minatk">
+                                +
+                                <input type="text" inputmode="numeric" maxlength="5" onkeypress="return isNumeric(event)" onkeyup="updateEnemyManualEdits(event, 1)" name="enemy_manual_minatk" value="0" class="center" data-type="17">
+                                MinATK
+                            </td>
+                            <td id="enemy_manualcell_hit">
+                                +
+                                <input type="text" inputmode="numeric" maxlength="5" onkeypress="return isNumeric(event)" onkeyup="updateEnemyManualEdits(event, 1)" name="enemy_manual_hit" value="0" class="center" data-type="8">
+                                HIT
+                            </td>
+                        </tr>
+                        <tr>
+                            <td id="enemy_manualcell_vit" class="data">
+                                +
+                                <input type="text" inputmode="numeric" maxlength="5" onkeypress="return isNumeric(event)" onkeyup="updateEnemyManualEdits(event, 1)" name="enemy_manual_vit" value="0" class="center" data-type="3">
+                                VIT
+                            </td>
+                            <td id="enemy_manualcell_maxhpper">
+                                +
+                                <input type="text" inputmode="numeric" maxlength="5" onkeypress="return isNumeric(event)" onkeyup="updateEnemyManualEdits(event, 1)" name="enemy_manual_maxhpper" value="0" class="center" data-type="15">
+                                % MaxHP
+                            </td>
+                            <td id="enemy_manualcell_maxatk">
+                                +
+                                <input type="text" inputmode="numeric" maxlength="5" onkeypress="return isNumeric(event)" onkeyup="updateEnemyManualEdits(event, 1)" name="enemy_manual_maxatk" value="0" class="center" data-type="87">
+                                MaxATK
+                            </td>
+                            <td id="enemy_manualcell_flee">
+                                +
+                                <input type="text" inputmode="numeric" maxlength="5" onkeypress="return isNumeric(event)" onkeyup="updateEnemyManualEdits(event, 1)" name="enemy_manual_flee" value="0" class="center" data-type="9">
+                                FLEE
+                            </td>
+                        </tr>
+                        <tr>
+                            <td id="enemy_manualcell_int" class="data">
+                                +
+                                <input type="text" inputmode="numeric" maxlength="5" onkeypress="return isNumeric(event)" onkeyup="updateEnemyManualEdits(event, 1)" name="enemy_manual_int" value="0" class="center" data-type="4">
+                                INT
+                            </td>
+                            <td id="enemy_manualcell_def">
+                                +
+                                <input type="text" inputmode="numeric" maxlength="5" onkeypress="return isNumeric(event)" onkeyup="updateEnemyManualEdits(event, 1)" name="enemy_manual_def" value="0" class="center" data-type="18">
+                                DEF
+                            </td>
+                            <td id="enemy_manualcell_matk">
+                                +
+                                <input type="text" inputmode="numeric" maxlength="5" onkeypress="return isNumeric(event)" onkeyup="updateEnemyManualEdits(event, 1)" name="enemy_manual_matk" value="0" class="center" data-type="88">
+                                MATK
+                            </td>
+                            <td id="enemy_manualcell_bexp">
+                                +
+                                <input type="text" inputmode="numeric" maxlength="5" onkeypress="return isNumeric(event)" onkeyup="updateEnemyManualEdits(event, 1)" name="enemy_manual_bexp" value="0" class="center" data-type="500">
+                                BaseExp
+                            </td>
+                        </tr>
+                        <tr>
+                            <td id="enemy_manualcell_dex" class="data">
+                                +
+                                <input type="text" inputmode="numeric" maxlength="5" onkeypress="return isNumeric(event)" onkeyup="updateEnemyManualEdits(event, 1)" name="enemy_manual_dex" value="0" class="center" data-type="5">
+                                DEX
+                            </td>
+                            <td id="enemy_manualcell_mdef">
+                                +
+                                <input type="text" inputmode="numeric" maxlength="5" onkeypress="return isNumeric(event)" onkeyup="updateEnemyManualEdits(event, 1)" name="enemy_manual_mdef" value="0" class="center" data-type="19">
+                                MDEF
+                            </td>
+                            <td id="enemy_manualcell_level">
+                                +
+                                <input type="text" inputmode="numeric" maxlength="5" onkeypress="return isNumeric(event)" onkeyup="updateEnemyManualEdits(event, 1)" name="enemy_manual_level" value="0" class="center" data-type="499">
+                                Level
+                            </td>
+                            <td id="enemy_manualcell_jexp">
+                                +
+                                <input type="text" inputmode="numeric" maxlength="5" onkeypress="return isNumeric(event)" onkeyup="updateEnemyManualEdits(event, 1)" name="enemy_manual_jexp" value="0" class="center" data-type="501">
+                                JobExp
+                            </td>
+                        </tr>
+                        <tr>
+                            <td id="enemy_manualcell_luk" class="data dotB">
+                                +
+                                <input type="text" inputmode="numeric" maxlength="5" onkeypress="return isNumeric(event)" onkeyup="updateEnemyManualEdits(event, 1)" name="enemy_manual_luk" value="0" class="center" data-type="6">
+                                LUK
+                            </td>
+                            <td colspan="3" class="dotB"></td>
+                        </tr>
+                        <tr>
+                            <td colspan="4">
+                                <font size="2"><b>Enemy's damage reductions:</b></font>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td id="enemy_manualcell_eleres" class="data" colspan="2">
+                                +
+                                <input type="text" inputmode="numeric" maxlength="5" onkeypress="return isNumeric(event)" onkeyup="updateEnemyManualEdits(event, 1)" name="enemy_manual_eleres" value="0" class="center" data-type="600">
+                                vs
+                                <select name="enemy_manual_eleres_element" onchange="updateEnemyManualEdits(event, 1)" data-type="600">
+                                    <option value="0">Neutral</option>
+                                    <option value="1">Water</option>
+                                    <option value="2">Earth</option>
+                                    <option value="3">Fire</option>
+                                    <option value="4">Wind</option>
+                                    <option value="5">Poison</option>
+                                    <option value="6">Holy</option>
+                                    <option value="7">Shadow</option>
+                                    <option value="8">Ghost</option>
+                                    <option value="9">Undead</option>
+                                </select>
+                            </td>
+                            <td id="enemy_manualcell_sizeres" colspan="2">
+                                +
+                                <input type="text" inputmode="numeric" maxlength="5" onkeypress="return isNumeric(event)" onkeyup="updateEnemyManualEdits(event, 1)" name="enemy_manual_sizeres" value="0" class="center" data-type="602">
+                                % Size Resistance
+                            </td>
+                        </tr>
+                        <tr>
+                            <td id="enemy_manualcell_eleres2" class="data" colspan="2">
+                                +
+                                <input type="text" inputmode="numeric" maxlength="5" onkeypress="return isNumeric(event)" onkeyup="updateEnemyManualEdits(event, 1)" name="enemy_manual_eleres2" value="0" class="center" data-type="601">
+                                vs
+                                <select name="enemy_manual_eleres2_element" onchange="updateEnemyManualEdits(event, 1)" data-type="601">
+                                    <option value="0">Neutral</option>
+                                    <option value="1">Water</option>
+                                    <option value="2">Earth</option>
+                                    <option value="3">Fire</option>
+                                    <option value="4">Wind</option>
+                                    <option value="5">Poison</option>
+                                    <option value="6">Holy</option>
+                                    <option value="7">Shadow</option>
+                                    <option value="8">Ghost</option>
+                                    <option value="9">Undead</option>
+                                </select>
+                            </td>
+                            <td id="enemy_manualcell_longres" colspan="2">
+                                +
+                                <input type="text" inputmode="numeric" maxlength="5" onkeypress="return isNumeric(event)" onkeyup="updateEnemyManualEdits(event, 1)" name="enemy_manual_longres" value="0" class="center" data-type="78">
+                                % Long-range Resistance
+                            </td>
+                        </tr>
+                        <tr>
+                            <td id="enemy_manualcell_raceres" class="data dotB" colspan="2">
+                                +
+                                <input type="text" inputmode="numeric" maxlength="5" onkeypress="return isNumeric(event)" onkeyup="updateEnemyManualEdits(event, 1)" name="enemy_manual_raceres" value="0" class="center" data-type="604">
+                                % Race Resistance
+                            </td>
+                            <td id="enemy_manualcell_reflect" class="dotB" colspan="2">
+                                +
+                                <input type="text" inputmode="numeric" maxlength="5" onkeypress="return isNumeric(event)" onkeyup="updateEnemyManualEdits(event, 1)" name="enemy_manual_reflect" value="0" class="center" data-type="71">
+                                % Additional Reflect (equip/card)
+                            </td>
+                        </tr>
+                        <tr>
+                            <td id="enemy_manualcell_atkper" class="data" colspan="4">
+                                +
+                                <input type="text" inputmode="numeric" maxlength="5" onkeypress="return isNumeric(event)" onkeyup="updateEnemyManualEdits(event, 1)" name="enemy_manual_atkper" value="0" class="center" data-type="80">
+                                % ATK based damage on any target.
+                            </td>
+                        </tr>
+                        <tr>
+                            <td id="enemy_manualcell_matkper" class="data" colspan="4">
+                                +
+                                <input type="text" inputmode="numeric" maxlength="5" onkeypress="return isNumeric(event)" onkeyup="updateEnemyManualEdits(event, 1)" name="enemy_manual_matkper" value="0" class="center" data-type="354">
+                                % MATK based damage on any target.
+                            </td>
+                        </tr>
+                        <tr>
+                            <td id="enemy_manualcell_element" class="data" colspan="4">
+                                Monster element:
+                                <select name="enemy_manual_element" onchange="updateEnemyManualEdits(event, 1)" data-type="610">
+                                    <option value="0">Neutral</option>
+                                    <option value="1">Water</option>
+                                    <option value="2">Earth</option>
+                                    <option value="3">Fire</option>
+                                    <option value="4">Wind</option>
+                                    <option value="5">Poison</option>
+                                    <option value="6">Holy</option>
+                                    <option value="7">Shadow</option>
+                                    <option value="8">Ghost</option>
+                                    <option value="9">Undead</option>
+                                </select>
+                                <select name="enemy_manual_elelv" onchange="updateEnemyManualEdits(event, 1)" data-type="610">
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                </select>
+                                <input type="checkbox" name="enemy_manual_elementbuff" onclick="updateEnemyManualEdits(event, 1)" data-type="610">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td id="enemy_manualcell_size" class="data" colspan="4">
+                                Monster size:
+                                <select name="enemy_manual_size" onchange="updateEnemyManualEdits(event, 1)" data-type="611">
+                                    <option value="0">Small</option>
+                                    <option value="1">Medium</option>
+                                    <option value="2">Large</option>
+                                </select>
+                                <input type="checkbox" name="enemy_manual_elementbuff" onclick="updateEnemyManualEdits(event, 1)" data-type="611">
                             </td>
                         </tr>
                     </tbody>

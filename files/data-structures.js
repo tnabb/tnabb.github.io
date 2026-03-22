@@ -187,6 +187,13 @@ class StatusChange {
     }
 }
 
+class ManualEdit {
+    constructor(type, value) {
+        this.type = type; // string identifier for what is being edited (e.g. "hp", "str", "weapon_atk", etc.)
+        this.value = value; // the new value to set
+    }
+}
+
 /**
  * Player character data structure
  * Consolidates all player-related data that was previously in global variables
@@ -198,6 +205,7 @@ class PlayerData {
         this.battle_status = new StatusData(); // Calculated battle status (with all bonuses applied)
         this.status = new CharStatus(); // Character status including job, levels, base stats, etc.
         this.sc = []; // holds status changes
+        this.manual_edits = [];
         this.passive_skills = []; // holds a list of passive skills the player has for easy access during calculations
         
         // Weapon info
@@ -211,11 +219,11 @@ class PlayerData {
         this.weapon_element = 0;
         
         // Equipment IDs (indices into item database)
-        this.equip = new Array(11).fill(0); // [weapon, weapon2, head1, head2, head3, left, body, shoulder, shoes, acces1, acces2]
+        this.equip = new Array(21).fill(0); // [weapon, weapon2, head1, head2, head3, left, body, shoulder, shoes, acces1, acces2]
         this.shadow = new Array(6).fill(0); // Shadow equipment
         
         // Cards (4 per weapon, 1 per other slot)
-        this.card = new Array(16).fill(0);
+        this.card = new Array(26).fill(0);
         
         // Random options
         this.randopt = new Array(28).fill(0);
@@ -227,14 +235,19 @@ class PlayerData {
         this.refine = new Array(11).fill(0); // [head, body, shield, shoulder, shoes]
 
         this.arrow = 0; // arrow type for archers
+
+        this.pet = 0; // pet id for pet bonuses
+        this.temp_effect = new Array(4).fill(0);
+
+        this.exp_modifiers = {
+            party_member_count: 0,
+            battle_manual: 0,
+            job_manual: false
+        };
         
         // Active skill
         this.active_skill = 0;
         this.active_skill_lv = 0;
-        
-        // Buffs/status effects (token array)
-        // IDEALLY replacing this with the indexed_bonus, etc below but for now just keeping it as is for compatibility with existing code
-        this.tok = new Array(451).fill(0);
 
         this.special_state = {
             no_weapon_damage: false,
@@ -380,7 +393,6 @@ class PlayerData {
         this.mdef2_rate = 0;
 
         this.spiritball = 0;
-
     }
 }
 
@@ -399,6 +411,7 @@ class MonsterData {
         this.type = BL.MOB;
         this.is_custom_player = false;
         this.sc = []; // holds status changes
+        this.manual_edits = [];
 
         // extra properties not in rA's status_data struct but stored elsewhere still needed for calcs
         this.ranged = false; // its default attack is ranged or not
@@ -407,9 +420,7 @@ class MonsterData {
         this.job_exp = 0;
         this.damagetaken = 0;
         
-        // Debuffs/status effects
-        this.debuff = new Array(10000).fill(0);
-        this.buff = new Array(10000).fill(0);
+        // "Notes"
         this.notes = new Array(10000).fill(0); // "notes" basically special properties or db entries such as "DamageTaken" or flags such as "IgnoreMelee"
     }
 }
