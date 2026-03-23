@@ -567,12 +567,10 @@ function ParseItemScripts() {
         if (!comboItemId || !m_Item[comboItemId]) continue;
  
         for (let j = 11; m_Item[comboItemId][j] !== 0 && m_Item[comboItemId][j] !== undefined; j += 2) {
-            console.log("Parsing combo item bonus: comboItemId=" + comboItemId + ", effectId=" + m_Item[comboItemId][j] + ", value=" + m_Item[comboItemId][j + 1]);
             const effectId = m_Item[comboItemId][j];
             const value = m_Item[comboItemId][j + 1];
             // Skip effect 90 (combo marker, not a real bonus)
             if (effectId && effectId !== 90 && value !== undefined) {
-                console.log("Applying combo item bonus: effectId=" + effectId + ", value=" + value);
                 PlayerApplyBonus(effectId, value);
             }
         }

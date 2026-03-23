@@ -1003,7 +1003,7 @@ function displayOtherInfo(val) {
 
             // Step 4: reduce_cast_rate (gear + bragi + muspel are additive, applied once at the end)
             let gearReduction = 100 - player.castrate;
-            let bragiReduction = sc_get(player, SC.POEMBRAGI) ? sc_get(player, SC.POEMBRAGI).val2 : 0;
+            let bragiReduction = sc_get(player, SC.POEMBRAGI) ? sc_get(player, SC.POEMBRAGI).val5 : 0;
             let muspelCast = monster.mob_id == 763 ? 50 : 0;
             let totalReduceRate = gearReduction + bragiReduction + muspelCast;
 
@@ -1025,7 +1025,7 @@ function displayOtherInfo(val) {
             // Bragi delay reduction (different formula from cast)
             let bragiDelay = 0;
             if(!delaynostatus && sc_get(player, SC.POEMBRAGI)) {
-                bragiDelay = sc_get(player, SC.POEMBRAGI).val3;
+                bragiDelay = sc_get(player, SC.POEMBRAGI).val6;
             }
 
             // Gear delay reduction (stored as negative in bonus-parser, so negate it)

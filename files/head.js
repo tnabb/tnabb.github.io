@@ -1,39 +1,21 @@
 ﻿PvP = 0,
-n_itemSW = 0,
-n_SkillSW = 0,
-n_Skill3SW = 0,
-n_Skill4SW = 0,
-n_Skill5SW = 0,
-n_Skill6SW = 0,
-n_Skill7SW = 0,
-n_Skill8SW = 0,
-n_Skill9SW = 0,
-n_Skill10SW = 0,
-n_debufSW = 0,
-n_BbufSW = 0;
-var n_B_AtkSkill = 0;
+n_itemSW = 0;
 SuperNoviceFullWeaponCHECK = 0,
-n_tok = new Array;
-for (var i = 0; i <= 450; i++)
-    n_tok[i] = 0;
-n_B = new Array,
-    Item_or_Card = "Item",
-    ItemCardNumberCheck = 142;
+Item_or_Card = "Item",
+ItemCardNumberCheck = 142;
 var c = document.calcForm
     , equip_restrict = 1
     , card_restrict = 0;
-n_A_WeaponTypesArray = new Array;
-var n_A_WeaponType = 0;
 var player = new PlayerData();
 var monster = new MonsterData();
 
-v_Race = ["<b style='color:#9F9E9B'>Formless</b>", "<b style='color:purple'>Undead</b>", "<b style='color:brown'>Brute</b>", "<b style='color:#00DD00'>Plant</b>", "<b style='color:green'>Insect</b>", "<b style='color:blue'>Fish</b>", "<b style='color:#000000'>Demon</b>", "<b style='color:orange'>Demi-Human</b>", "<b style='color:#CDCD40'>Angel</b>", "<b style='color:red'>Dragon</b>"],
-v_Race_ = ["Formless", "Undead", "Brute", "Plant", "Insect", "Fish", "Demon", "Demi-Human", "Angel", "Dragon"],
-v_Element = ["<b style='color:#A89682'>Neutral</b>", "<b style='color:blue'>Water</b>", "<b style='color:brown'>Earth</b>", "<b style='color:red'>Fire</b>", "<b style='color:#00CC00'>Wind</b>", "<b style='color:#bb24bb'>Poison</b>", "<b style='color:#CDCD00'>Holy</b>", "<b style='color:#000000'>Shadow</b>", "<b style='color:#BFBEBB'>Ghost</b>", "<b style='color:purple'>Undead</b>", "<b style='color:#FF6600'>Non-Elemental</b>"],
-v_Element_ = ["Neutral ", "Water ", "Earth ", "Fire ", "Wind ", "Poison ", "Holy ", "Shadow ", "Ghost ", "Undead ", "Non-Elemental"],
-v_Size = ["Small", "Medium", "Large"],
-v_Effect = ["Poison", "Stun", "Freeze", "Curse", "Blind", "Sleep", "Silence", "Confusion", "Bleeding", "Stone", "Weapon Break", "Armor Break"],
-JobName = ["Novice", "Swordman", "Thief", "Acolyte", "Archer", "Magician", "Merchant", "Knight", "Assassin", "Priest", "Hunter", "Wizard", "Blacksmith", "Crusader", "Rogue", "Monk", "Bard", "Dancer", "Sage", "Alchemist", "Super Novice", "Lord Knight", "Assassin Cross", "High Priest", "Sniper", "High Wizard", "Whitesmith", "Paladin", "Stalker", "Champion", "Clown", "Gypsy", "Professor", "Creator", "High Novice", "High Swordman", "High Thief", "High Acolyte", "High Archer", "High Magician", "High Merchant", "Taekwon Kid", "Star Gladiator", "Soul Linker", "Ninja", "Gunslinger", "Night Watch", "High Taekwon Kid", "Soul Ascetic"];
+const v_Race = ["<b style='color:#9F9E9B'>Formless</b>", "<b style='color:purple'>Undead</b>", "<b style='color:brown'>Brute</b>", "<b style='color:#00DD00'>Plant</b>", "<b style='color:green'>Insect</b>", "<b style='color:blue'>Fish</b>", "<b style='color:#000000'>Demon</b>", "<b style='color:orange'>Demi-Human</b>", "<b style='color:#CDCD40'>Angel</b>", "<b style='color:red'>Dragon</b>"];
+const v_Race_ = ["Formless", "Undead", "Brute", "Plant", "Insect", "Fish", "Demon", "Demi-Human", "Angel", "Dragon"];
+const v_Element = ["<b style='color:#A89682'>Neutral</b>", "<b style='color:blue'>Water</b>", "<b style='color:brown'>Earth</b>", "<b style='color:red'>Fire</b>", "<b style='color:#00CC00'>Wind</b>", "<b style='color:#bb24bb'>Poison</b>", "<b style='color:#CDCD00'>Holy</b>", "<b style='color:#000000'>Shadow</b>", "<b style='color:#BFBEBB'>Ghost</b>", "<b style='color:purple'>Undead</b>", "<b style='color:#FF6600'>Non-Elemental</b>"];
+const v_Element_ = ["Neutral ", "Water ", "Earth ", "Fire ", "Wind ", "Poison ", "Holy ", "Shadow ", "Ghost ", "Undead ", "Non-Elemental"];
+const v_Size = ["Small", "Medium", "Large"];
+const v_Effect = ["Poison", "Stun", "Freeze", "Curse", "Blind", "Sleep", "Silence", "Confusion", "Bleeding", "Stone", "Weapon Break", "Armor Break"];
+const JobName = ["Novice", "Swordman", "Thief", "Acolyte", "Archer", "Magician", "Merchant", "Knight", "Assassin", "Priest", "Hunter", "Wizard", "Blacksmith", "Crusader", "Rogue", "Monk", "Bard", "Dancer", "Sage", "Alchemist", "Super Novice", "Lord Knight", "Assassin Cross", "High Priest", "Sniper", "High Wizard", "Whitesmith", "Paladin", "Stalker", "Champion", "Clown", "Gypsy", "Professor", "Creator", "High Novice", "High Swordman", "High Thief", "High Acolyte", "High Archer", "High Magician", "High Merchant", "Taekwon Kid", "Star Gladiator", "Soul Linker", "Ninja", "Gunslinger", "Night Watch", "High Taekwon Kid", "Soul Ascetic"];
 var All_DMGskill = [0, 6, 7, 17, 19, 40, 41, 44, 46, 47, 51, 52, 53, 54, 55, 56, 57, 65, 66, 70, 71, 72, 73, 76, 83, 84, 88, 97, 102, 104, 106, 111, 112, 113, 118, 122, 124, 125, 126, 127, 128, 130, 131, 132, 133, 158, 159, 161, 162, 167, 169, 171, 188, 189, 192, 193, 197, 199, 207, 244, 248, 259, 260, 261, 263, 264, 271, 272, 275, 277, 324, 325, 391, 326, 328, 321, 382, 339, 331, 333, 335, 337, 317, 318, 373, 374, 375, 407, 408, 409, 410, 412, 413, 414, 415, 397, 398, 399, 400, 401, 405, 434, 438, 417, 418, 419, 423, 424, 474, 489, 302, 611, 752, 461, 463, 465, 466, 469, 510, 443, 473, 847, 848, 849, 850, 853, 854, 606, 513, 514, 515, 516];
 
 function cap_value(a, min, max){
@@ -183,6 +165,7 @@ function restrictCardslot(e) {
         }
     }
     calc();
+    console.log("Card slot restriction " + (card_restrict ? "enabled" : "disabled"));
 }
 
 function ClickJob(jobId) {
@@ -543,8 +526,8 @@ function ClickWeaponType(weaponType) {
         allCard();
 
     if(m_WeaponEnchant.includes(newWeapon)) {
-        n_A_enchant[7] = 1 * c.A_weapon1_enchant1.value;
-        n_A_enchant[8] = 1 * c.A_weapon1_enchant2.value;
+        player.enchant[7] = 1 * c.A_weapon1_enchant1.value;
+        player.enchant[8] = 1 * c.A_weapon1_enchant2.value;
         document.getElementById("nA_weapon1_enchant1").style.display = 'table-cell';
         document.getElementById("nA_weapon1_enchant2").style.display = 'table-cell';
         LoadWeaponEnchants(newWeapon, oldWeapon);
@@ -554,8 +537,8 @@ function ClickWeaponType(weaponType) {
             document.getElementById(`nA_weapon1_ropt${i}`).style.display = 'none';
         });
     } else {
-        n_A_enchant[7] = 0; c.A_weapon1_enchant1.value = 0;
-        n_A_enchant[8] = 0; c.A_weapon1_enchant2.value = 0;
+        player.enchant[7] = 0; c.A_weapon1_enchant1.value = 0;
+        player.enchant[8] = 0; c.A_weapon1_enchant2.value = 0;
         document.getElementById("nA_weapon1_enchant1").style.display = 'none';
         document.getElementById("nA_weapon1_enchant2").style.display = 'none';
         [1, 2, 3, 4].forEach(i =>
@@ -622,8 +605,8 @@ function ClickWeaponType2(weaponType) {
  
     // Enchant vs random option visibility
     if (m_WeaponEnchant.includes(newWeapon)) {
-        n_A_enchant[9] = 1 * c.A_weapon2_enchant1.value;
-        n_A_enchant[10] = 1 * c.A_weapon2_enchant2.value;
+        player.enchant[9] = 1 * c.A_weapon2_enchant1.value;
+        player.enchant[10] = 1 * c.A_weapon2_enchant2.value;
         document.getElementById("nA_weapon2_enchant1").style.display = 'table-cell';
         document.getElementById("nA_weapon2_enchant2").style.display = 'table-cell';
         LoadWeaponEnchants(newWeapon, oldWeapon);
@@ -632,8 +615,8 @@ function ClickWeaponType2(weaponType) {
         player.randopt[12] = 0; player.randopt[13] = 0; document.getElementById("nA_weapon2_ropt3").style.display = 'none';
         player.randopt[14] = 0; player.randopt[15] = 0; document.getElementById("nA_weapon2_ropt4").style.display = 'none';
     } else {
-        n_A_enchant[9] = 0;  c.A_weapon2_enchant1.value = 0; document.getElementById("nA_weapon2_enchant1").style.display = 'none';
-        n_A_enchant[10] = 0; c.A_weapon2_enchant2.value = 0; document.getElementById("nA_weapon2_enchant2").style.display = 'none';
+        player.enchant[9] = 0;  c.A_weapon2_enchant1.value = 0; document.getElementById("nA_weapon2_enchant1").style.display = 'none';
+        player.enchant[10] = 0; c.A_weapon2_enchant2.value = 0; document.getElementById("nA_weapon2_enchant2").style.display = 'none';
         document.getElementById("nA_weapon2_ropt1").style.display = 'table-cell';
         document.getElementById("nA_weapon2_ropt2").style.display = 'table-cell';
         document.getElementById("nA_weapon2_ropt3").style.display = 'table-cell';
@@ -748,15 +731,14 @@ function ClickActiveSkill() {
 
 function BClickAtkSkill() {
     const skillId = 1 * c.B_AtkSkill.value;
-    // Keep global in sync for foot.js save/load until it's migrated
-    n_B_AtkSkill = skillId;
+    let monsterId = c.B_Enemy.value;
  
     if (skillId == SKILL.NPC_EARTHQUAKE_MELEE || skillId == SKILL.NPC_EARTHQUAKE_RANGED) {
         myInnerHtml("BBSkill", 'Players in Range: <select name="BSkillSubNum" onChange="calc()"></select>', 0);
         for (let i = 1; i <= 99; i++)
             c.BSkillSubNum.options[i - 1] = new Option(i, i);
     } else if (skillId == SKILL.WZ_METEOR) {
-        const skillLv = m_Monster[n_B[0]][2 * c.B_AtkSkill.selectedIndex + 22];
+        const skillLv = m_Monster[monsterId][2 * c.B_AtkSkill.selectedIndex + 22];
         const maxMeteors = 2 + Math.floor(skillLv / 2);
         myInnerHtml("BBSkill", 'Meteors landing on Player: <select name="BSkillSubNum" onChange="calc()"></select>', 0);
         for (let i = 1; i <= maxMeteors; i++)
@@ -859,6 +841,7 @@ function ClickActiveSkill2() {
         c.SkillSubNum.value = m_Item[player.equip[EQI.SHIELD]][6];
  
     } else if (skillId == SKILL.LK_SPIRALPIERCE) {
+        console.log("Spiral Pierce damage bonus is based on weapon weight, but weapon weight is not currently editable in the sim. Please adjust the value below and recalculate to see the effect of different weapon weights.");
         myInnerHtml("AASkill", 'Weapon weight: <input type="text" inputmode="numeric" maxlength="4" name="SkillSubNum" size=2 onkeypress="return isNumeric(event)" onkeyup="calc()">', 0);
         c.SkillSubNum.value = m_Item[player.equip[EQI.HAND_R]][6];
  
@@ -877,6 +860,7 @@ function SaveTheme() {
 }
  
 function LoadTheme() {
+    console.log("Loading theme");
     if (typeof Storage === "undefined") {
         alert("Sorry, your browser does not support local storage. If you see this message, please let me know at tnaab on Discord");
         themes();
@@ -893,9 +877,11 @@ function LoadTheme() {
             c.server.value = saveData[2];
     }
     themes();
+    refreshTableHeaders();
 }
  
 function themes() {
+    console.log("Applying theme " + c.theme.value);
     const e = 1 * c.theme.value;
     const gradient = `linear-gradient(to bottom, ${hBGC1[e]}, ${hBGC2[e]})`;
     const isDark = (e == 3 || e == 5);
@@ -1552,7 +1538,7 @@ function populateAdditionalEffectSelects() {
 
 /**
  * onChange handler for the pet and temporary effect selects.
- * Writes to player.pet / player.temp_effect and keeps n_A_Buf8 in sync
+ * Writes to player.pet / player.temp_effect
  * for foot.js save/load and StPlusCard/TimeItemNumSearch.
  */
 function updatePlayerAdditionalEffects(e) {
@@ -1563,23 +1549,18 @@ function updatePlayerAdditionalEffects(e) {
     switch (dataId) {
         case "PET":
             player.pet = val;
-            n_A_Buf8[0] = val;
             break;
         case "TEMP_EFFECTS_1":
             player.temp_effect[0] = val;
-            n_A_Buf8[8] = val;
             break;
         case "TEMP_EFFECTS_2":
             player.temp_effect[1] = val;
-            n_A_Buf8[9] = val;
             break;
         case "TEMP_EFFECTS_3":
             player.temp_effect[2] = val;
-            n_A_Buf8[10] = val;
             break;
         case "TEMP_EFFECTS_4":
             player.temp_effect[3] = val;
-            n_A_Buf8[11] = val;
             break;
         case "EXP_PARTY_MEMBER":
             player.exp_modifiers.party_member_count = val || 1;
@@ -1807,6 +1788,7 @@ function updatePlayerManualEditsHeader() {
 }
 
 function reloadRandOpt(){
+    console.log("Reloading random options from player.randopt:", player.randopt);
     c.A_weapon1_ropt1.value = player.randopt[0];
     c.WEAP1_ROPT1.value = player.randopt[1];
     c.A_weapon1_ropt2.value = player.randopt[2];
@@ -1844,9 +1826,9 @@ function RandOptUpdate(){
 }
 
 function reloadShadowEquip(){
-    c.A_weapon_shadow.value = n_A_Shadow[0];
-    c.A_left_shadow.value = n_A_Shadow[1];
-    c.A_shoes_shadow.value = n_A_Shadow[3];
+    c.A_weapon_shadow.value = player.shadow[0];
+    c.A_left_shadow.value = player.shadow[1];
+    c.A_shoes_shadow.value = player.shadow[3];
 }
 
 function reloadEnchant() {
@@ -2407,6 +2389,7 @@ function calc() {
     updatePlayerDamageDisplay(playerDamage);
 
     let n_B_AtkSkill = 1 * c.B_AtkSkill.value;
+    let monsterId = 1 * c.B_Enemy.value;
     skill_type = BF.WEAPON;
     if(m_Skill[n_B_AtkSkill][4] == 1 || m_Skill[n_B_AtkSkill][4] == 2 || m_Skill[n_B_AtkSkill][4] == 3)
         skill_type = BF.WEAPON;
@@ -2414,7 +2397,7 @@ function calc() {
         skill_type = BF.MAGIC;
     else if(m_Skill[n_B_AtkSkill][4] == 5)
         skill_type = BF.MISC;
-    let monsterDamage = battle_calc_attack(skill_type, monster, player, n_B_AtkSkill, n_B_AtkSkill > 0 ? m_Monster[n_B[0]][2 * c.B_AtkSkill.selectedIndex + 22] : 0, 0);
+    let monsterDamage = battle_calc_attack(skill_type, monster, player, n_B_AtkSkill, n_B_AtkSkill > 0 ? m_Monster[monsterId][2 * c.B_AtkSkill.selectedIndex + 22] : 0, 0);
     updateMonsterDamageDisplay(monsterDamage);
 
     console.log("calc called with");
@@ -2436,5 +2419,6 @@ document.addEventListener('DOMContentLoaded', function() {
     SetMonsterDebuffsVisibility(0);
     SetMonsterBuffsVisibility(0);
     SetAdditionalEffectsVisibility(0);
-    populateAdditionalEffectSelects();
+    SetPlayerManualEditsVisibility(0);
+    SetMonsterManualEditsVisibility(0);
 });

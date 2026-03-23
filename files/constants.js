@@ -17,6 +17,8 @@ const DEFAULT_WALK_SPEED = 150;
 const MIN_WALK_SPEED = 20;
 const MAX_WALK_SPEED = 1000;
 const battleDebug = false;
+const SAVE_VERSION = "2";
+const URL_DATA_VERSION = "2";
 
 /**
  * Job ID constants

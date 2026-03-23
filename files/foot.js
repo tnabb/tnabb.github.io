@@ -52,23 +52,9 @@ function SuperNoviceFullWeapon(enabled) {
         }
     }
 
-    for (let i = 0; i < n_A_WeaponTypesArray.length; i++) {
-        n_A_WeaponTypesArray[i] = null;
-    }
-
-    const jobWeapons = JOB_BASE_ASPD[JOB.SUPERNOVICE] || {};
-    let j = 0;
-    for (let weaponType = 0; weaponType < WEAPON.MAX; weaponType++) {
-        if (jobWeapons[weaponType] !== undefined) {
-            n_A_WeaponTypesArray[j] = weaponType;
-            j++;
-        }
-    }
-
     const currentWeapon = player.equip[EQI.HAND_R];
     const weaponData = m_Item[currentWeapon];
     if (weaponData[2] !== WEAPON.TWOHANDAXE && JobEquipItemSearch(weaponData[2])) {
-        n_A_WeaponType = weaponData[1];
         ClickWeaponType(weaponData[1]);
         WeaponSet2();
         c.A_weapon1.value = currentWeapon;
@@ -77,22 +63,22 @@ function SuperNoviceFullWeapon(enabled) {
         WeaponSet2();
     }
 
-    if (JobEquipItemSearch(m_Item[n_A_Equip[2]][2])) {
-        c.A_head1.value = n_A_Equip[2];
+    if (JobEquipItemSearch(m_Item[player.equip[EQI.HEAD_TOP]][2])) {
+        c.A_head1.value = player.equip[EQI.HEAD_TOP];
     }
-    if (JobEquipItemSearch(m_Item[n_A_Equip[3]][2])) {
-        c.A_head2.value = n_A_Equip[3];
+    if (JobEquipItemSearch(m_Item[player.equip[EQI.HEAD_MID]][2])) {
+        c.A_head2.value = player.equip[EQI.HEAD_MID];
     }
-    if (JobEquipItemSearch(m_Item[n_A_Equip[4]][2])) {
-        c.A_head3.value = n_A_Equip[4];
+    if (JobEquipItemSearch(m_Item[player.equip[EQI.HEAD_LOW]][2])) {
+        c.A_head3.value = player.equip[EQI.HEAD_LOW];
     }
 
-    c.A_left.value = n_A_Equip[5];
-    c.A_body.value = n_A_Equip[6];
-    c.A_shoulder.value = n_A_Equip[7];
-    c.A_shoes.value = n_A_Equip[8];
-    c.A_acces1.value = n_A_Equip[9];
-    c.A_acces2.value = n_A_Equip[10];
+    c.A_left.value = player.equip[EQI.SHIELD];
+    c.A_body.value = player.equip[EQI.ARMOR];
+    c.A_shoulder.value = player.equip[EQI.GARMENT];
+    c.A_shoes.value = player.equip[EQI.SHOES];
+    c.A_acces1.value = player.equip[EQI.ACC_L];
+    c.A_acces2.value = player.equip[EQI.ACC_R];
 }
 
 function PopulatePlayerData() {
@@ -174,6 +160,7 @@ function PopulatePlayerData() {
     player.card[14] = 1 * c.A_acces1_card.value;
     player.card[15] = 1 * c.A_acces2_card.value;
 
+    console.log("Loading random options from form inputs...");
     player.randopt[0] = 1 * c.A_weapon1_ropt1.value;
     player.randopt[1] = 1 * c.WEAP1_ROPT1.value;
     player.randopt[2] = 1 * c.A_weapon1_ropt2.value;
@@ -264,8 +251,6 @@ function PopulatePlayerData() {
     populateEquipCombos();
     populateCardCombos();
 
-    loadPlayerStatusChanges();
-
     StatusCalcPlayerSub();
     updatePlayerStatDisplay();
 }
@@ -308,12 +293,12 @@ function populateEquipCombos() {
 function populateCardCombos() {
     const MAX_COMBO_SLOTS = 10; // slots 16..25
     const REGULAR_SLOTS = 16;
- 
+
     for (let i = REGULAR_SLOTS; i < REGULAR_SLOTS + MAX_COMBO_SLOTS; i++)
         player.card[i] = 0;
- 
+
     let nextSlot = REGULAR_SLOTS;
- 
+
     for (let k = 0; k <= SC_MAXnum && nextSlot < REGULAR_SLOTS + MAX_COMBO_SLOTS; k++) {
         let allPresent = true;
         for (let j = 1; w_SC[k][j] !== "NULL"; j++) {
@@ -326,80 +311,6 @@ function populateCardCombos() {
         if (allPresent)
             player.card[nextSlot++] = w_SC[k][0];
     }
-}
-
-function loadPlayerStatusChanges() {
-
-    /* // guild skills
-    if (n_A_Buf3[40]) sc_start(player, SC.BATTLEORDERS);
-    if (n_A_Buf3[41]) sc_start(player, SC.LEADERSHIP, n_A_Buf3[41]);
-    if (n_A_Buf3[42]) sc_start(player, SC.GLORYWOUNDS, n_A_Buf3[42]);
-    if (n_A_Buf3[43]) sc_start(player, SC.SOULCOLD, n_A_Buf3[43]);
-    if (n_A_Buf3[44]) sc_start(player, SC.HAWKEYES, n_A_Buf3[44]);
-
-    // misc effects on player
-    if (n_A_Buf6[0] == 0) sc_start(player, SC.VOLCANO, n_A_Buf6[1]);
-    else if (n_A_Buf6[0] == 1) sc_start(player, SC.DELUGE, n_A_Buf6[1]);
-    else if (n_A_Buf6[0] == 2) sc_start(player, SC.WHIRLWIND, n_A_Buf6[1]);
-    if (n_A_Buf6[3]) sc_start(player, SC.FOGWALL);
-    if (n_A_Buf6[4]) sc_start(player, SC.MINDBREAKER, n_A_Buf6[4]);
-    if (n_A_Buf6[5]) sc_start(player, SC.PROVOKE, n_A_Buf6[5]);
-    if (n_A_Buf6[6]) sc_start(player, SC.BENEDICTIO);
-    if (n_A_Buf6[7]) sc_start(player, SC.WATK_ELEMENT, ELE.FIRE, 20);
-    if (n_A_Buf6[8]) sc_start(player, SC.CHANGEUNDEAD);
-    if (n_A_Buf6[9]) sc_start(player, SC.NOCRIT);
-    if (n_A_Buf6[11]) sc_start(player, SC.BLIND);
-    if (n_A_Buf6[12]) sc_start(player, SC.STUN);
-    if (n_A_Buf6[13]) sc_start(player, SC.STONE);
-    if (n_A_Buf6[14]) sc_start(player, SC.SLEEP);
-    if (n_A_Buf6[15]) sc_start(player, SC.FREEZE);
-    if (n_A_Buf6[16]) sc_start(player, SC.AETERNA);
-    if (n_A_Buf6[17]) sc_start(player, SC.BLEEDING);
-    if (n_A_Buf6[18]) sc_start(player, SC.CRITICALWOUND, n_A_Buf6[18]);
-    if (n_A_Buf6[19]) sc_start(player, SC.QUAGMIRE, n_A_Buf6[19]);
-    if (n_A_Buf6[20]) sc_start(player, SC.DECREASEAGI, n_A_Buf6[20]);
-    if (n_A_Buf6[21]) sc_start(player, SC.POISON);
-    if (n_A_Buf6[22]) sc_start(player, SC.CURSE); */
-
-    // food / speed potions / other items (all the non-used indexes are non-existent in the current version of the game)
-    /* if (n_A_Buf7[0]) sc_start(player, SC.HITFOOD, 10);
-    if (n_A_Buf7[1]) sc_start(player, SC.FLEEFOOD, 10);
-    if (n_A_Buf7[2]) { sc_start(player, SC.FOOD_STR_CASH, 7); sc_start(player, SC.FOOD_AGI_CASH, 7); sc_start(player, SC.FOOD_VIT_CASH, 7); sc_start(player, SC.FOOD_INT_CASH, 7); sc_start(player, SC.FOOD_DEX_CASH, 7); sc_start(player, SC.FOOD_LUK_CASH, 7); }
-    if (n_A_Buf7[3]) sc_start(player, SC.FOOD_STR_CASH, n_A_Buf7[3]);
-    if (n_A_Buf7[4]) sc_start(player, SC.FOOD_AGI_CASH, n_A_Buf7[4]);
-    if (n_A_Buf7[5]) sc_start(player, SC.FOOD_VIT_CASH, n_A_Buf7[5]);
-    if (n_A_Buf7[6]) sc_start(player, SC.FOOD_INT_CASH, n_A_Buf7[6]);
-    if (n_A_Buf7[7]) sc_start(player, SC.FOOD_DEX_CASH, n_A_Buf7[7]);
-    if (n_A_Buf7[8]) sc_start(player, SC.FOOD_LUK_CASH, n_A_Buf7[8]);
-    if (n_A_Buf7[9]) sc_start(player, SC.ATKPOTION, 20);
-    if (n_A_Buf7[10]) sc_start(player, SC.MATKPOTION, 20);
-    if (n_A_Buf7[11]) sc_start(player, SC.ARMOR_ELEMENT_WATER, 20, 0, 0, -15);
-    if (n_A_Buf7[12]) sc_start(player, SC.ARMOR_ELEMENT_EARTH, 0, 20, -15, 0);
-    if (n_A_Buf7[13]) sc_start(player, SC.ARMOR_ELEMENT_FIRE, -15, 0, 20, 0);
-    if (n_A_Buf7[14]) sc_start(player, SC.ARMOR_ELEMENT_WIND, 0, -15, 0, 20);
-    if (n_A_Buf7[16]) sc_start(player, SC.MATKPOTION, 10);
-    if (n_A_Buf7[17]) { sc_start(player, SC.ATKPOTION, 5); sc_start(player, SC.MATKPOTION, 5); }
-    if (n_A_Buf7[18]) { sc_start(player, SC.HITFOOD, 10); sc_start(player, SC.FLEEFOOD, 20); }
-    if (n_A_Buf7[19]) sc_start(player, SC.INCCRI, 7);
-    if (n_A_Buf7[20]) sc_start(player, SC.MANU_ATK, 10);
-    if (n_A_Buf7[21]) sc_start(player, SC.MANU_MATK, 10);
-    if (n_A_Buf7[22]) sc_start(player, SC.MANU_DEF, 10);
-    if (n_A_Buf7[23]) sc_start(player, SC.SPL_ATK, 10);
-    if (n_A_Buf7[24]) sc_start(player, SC.SPL_MATK, 10);
-    if (n_A_Buf7[25]) sc_start(player, SC.SPL_DEF, 10);
-    if (n_A_Buf7[26]) { sc_start(player, SC.ASPDPOTION0); sc_start(player, SC.INCREASEAGI, 5); }
-    if (n_A_Buf7[31]) sc_start(player, SC.PROVOKE, 1);
-    if (n_A_Buf7[32]) sc_start(player, SC.DEF_RATE, 3);
-    if (n_A_Buf7[33]) sc_start(player, SC.MDEF_RATE, 3);
-    if (n_A_Buf7[34]) sc_start(player, SC.CONCENTRATE, 1);
-    if (n_A_Buf7[35] == 1) sc_start(player, SC.ASPDPOTION0);
-    else if (n_A_Buf7[35] == 2) sc_start(player, SC.ASPDPOTION1);
-    else if (n_A_Buf7[35] == 3) sc_start(player, SC.ASPDPOTION2);
-    else if (n_A_Buf7[35] == 4) sc_start(player, SC.ASPDPOTION3);
-    if (n_A_Buf7[36]) sc_start(player, SC.INCCRI, 20);
-    if (n_A_Buf7[38]) sc_start(player, SC.ATKPOTION, 10);
-    if (n_A_Buf7[43]) sc_start(player, SC.MACARONCAKE);
-    if (n_A_Buf7[45]) sc_start(player, SC.INCHEALRATE, 20); */
 }
 
 function StatusCalcPlayerSub() {
@@ -855,7 +766,7 @@ function StatusCalcPlayerSub() {
         player.dsprate -= 4 * skill;
 
     if (sc_get(player, SC.SERVICE4U)) // service for you
-        player.dsprate -= sc_get(player, SC.SERVICE4U).val3;
+        player.dsprate -= sc_get(player, SC.SERVICE4U).val6;
 
     if (player.dsprate < 0)
         player.dsprate = 0;
@@ -1101,7 +1012,6 @@ function PopulateMonsterData() {
     if (monster.notes[7])
         monster.damagetaken = 100 - NotesCalc(monster.mob_id, 7);
 
-    loadMonsterStatusChanges();
     StatusCalcMonsterSub();
     updateMonsterStatDisplay();
 }
@@ -1153,58 +1063,6 @@ function setMonsterRace2() {
     if (monster.mob_id == 532) monster.race2.push(RC2.SPLENDIDE);
     if (monster.mob_id == 526) monster.race2.push(RC2.SPLENDIDE);
     if (monster.mob_id == 525) monster.race2.push(RC2.SPLENDIDE);
-}
-
-function loadMonsterStatusChanges() {
-    //monster.sc = [];
-    // debuffs
-    /* if (n_B_debuf[0]) sc_start(monster, SC.PROVOKE, n_B_debuf[0]);
-    if (n_B_debuf[1]) sc_start(monster, SC.QUAGMIRE, n_B_debuf[1]);
-    if (n_B_debuf[2]) sc_start(monster, SC.POISON);
-    if (n_B_debuf[3]) sc_start(monster, SC.BLIND);
-    if (n_B_debuf[4]) sc_start(monster, SC.FREEZE);
-    if (n_B_debuf[5]) sc_start(monster, SC.BLESSING);
-    if (n_B_debuf[6]) sc_start(monster, SC.AETERNA);
-    if (n_B_debuf[7]) sc_start(monster, SC.STUN);
-    if (n_B_debuf[8]) sc_start(monster, SC.SLEEP);
-    if (n_B_debuf[9]) sc_start(monster, SC.STONE);
-    if (n_B_debuf[10]) sc_start(monster, SC.CURSE);
-    if (n_B_debuf[11]) sc_start(monster, SC.DECREASEAGI, n_B_debuf[11]);
-    if (n_B_debuf[12]) sc_start(monster, SC.CRUCIS, n_B_debuf[12]);
-    if (n_B_debuf[13]) sc_start(monster, SC.STRIPWEAPON);
-    if (n_B_debuf[14]) sc_start(monster, SC.STRIPSHIELD);
-    if (n_B_debuf[15]) sc_start(monster, SC.STRIPARMOR);
-    if (n_B_debuf[16]) sc_start(monster, SC.STRIPHELM);
-    if (n_B_debuf[17]) sc_start(monster, SC.SPIDERWEB);
-    if (n_B_debuf[18]) sc_start(monster, SC.MINDBREAKER, n_B_debuf[18]);
-    if (n_B_debuf[19]) sc_start(monster, SC.DONTFORGETME);
-    if (n_B_debuf[20]) sc_start(monster, SC.ETERNALCHAOS);
-    if (n_B_debuf[21]) sc_start(monster, SC.SKA, n_B_debuf[21]);
-    if (n_B_debuf[22]) sc_start(monster, SC.SKE);
-    if (n_B_debuf[23]) sc_start(monster, SC.ELEMENTALCHANGE, n_B_debuf[23], 1);
-    if (n_B_debuf[25]) sc_start(monster, SC.REDUCE_DEFRATE, n_B_debuf[25] == 1 ? 50 : 75);
-    if (n_B_debuf[26]) sc_start(monster, SC.DISARM);
-    if (n_B_debuf[27]) sc_start(monster, SC.CRITIGNORELUK, n_B_debuf[27]);
-    if (n_B_debuf[28]) sc_start(monster, SC.FLING, n_B_debuf[28]);
-    if (n_B_debuf[29]) sc_start(monster, SC.HOLYLIGHT);
-    if (n_B_debuf[30]) sc_start(monster, SC.JUDEXMAGNUS); */
-
-    // buffs
-    /* if (n_B_buf[0]) sc_start(monster, SC.INCREASEAGI, n_B_buf[0]);
-    if (n_B_buf[1]) sc_start(monster, SC.ASSUMPTIO);
-    if (n_B_buf[2]) sc_start(monster, SC.ADRENALINE);
-    if (n_B_buf[3]) sc_start(monster, SC.MAXIMIZEPOWER);
-    if (n_B_buf[4]) sc_start(monster, SC.POWERUP);
-    if (n_B_buf[5]) sc_start(monster, SC.AGIUP, n_B_buf[5]);
-    if (n_B_buf[6]) sc_start(monster, SC.ELEMENTALCHANGE, Math.trunc(n_B_buf[6] / 10), n_B_buf[6] % 10);
-    if (n_B_buf[7]) sc_start(monster, SC.ARMORCHANGE, n_B_buf[7], SKILL.NPC_STONESKIN);
-    if (n_B_buf[8]) sc_start(monster, SC.ARMORCHANGE, n_B_buf[8], SKILL.NPC_ANTIMAGIC);
-    if (n_B_buf[9]) sc_start(monster, SC.KEEPING);
-    if (n_B_buf[10]) sc_start(monster, SC.ANGELUS, n_B_buf[10]);
-    if (n_B_buf[11]) sc_start(monster, SC.AUTOGUARD, n_B_buf[11]);
-    if (n_B_buf[12]) sc_start(monster, SC.SHIELDREFLECT, n_B_buf[12]);
-    if (n_B_buf[13]) sc_start(monster, SC.ARMOR, n_B_buf[13]);
-    if (n_B_buf[14]) sc_start(monster, SC.ENERGYCOAT, n_B_buf[14]); */
 }
 
 function StatusCalcMonsterSub() {
@@ -1270,7 +1128,7 @@ function StatusCalcBLMob() {
     // agi
     let agi = b_status.agi;
 
-    if(manualedits_get(monster, 2))
+    if (manualedits_get(monster, 2))
         agi += manualedits_get(monster, 2).value;
     if (sc_get(monster, SC.INCREASEAGI)) // increase agi
         agi += (sc_get(monster, SC.INCREASEAGI).val2 * 2) - 2;
@@ -1333,14 +1191,14 @@ function StatusCalcBLMob() {
     // watk
     if (manualedits_get(monster, 17)) // manual edit
         status.rhw.atk += manualedits_get(monster, 17).value;
-    if(manualedits_get(monster, 87))
+    if (manualedits_get(monster, 87))
         status.rhw.atk2 += manualedits_get(monster, 87).value;
     // nothing that affects watk
 
     // matk min and max
     let matk_min = b_status.matk_min;
     let matk_max = b_status.matk_max;
-    if(manualedits_get(monster, 88)) {
+    if (manualedits_get(monster, 88)) {
         matk_min += manualedits_get(monster, 88).value;
         matk_max += manualedits_get(monster, 88).value;
     }
@@ -1353,7 +1211,7 @@ function StatusCalcBLMob() {
         hit += status.dex - b_status.dex;
     }
 
-    if(manualedits_get(monster, 8))
+    if (manualedits_get(monster, 8))
         hit += manualedits_get(monster, 8).value;
     if (sc_get(monster, SC.POWERUP)) // power up
         hit += Math.trunc((hit * 100) / 100);
@@ -1417,7 +1275,7 @@ function StatusCalcBLMob() {
 
     status.def2 = cap_value(def2, 1, SHRT_MAX);
 
-    if(sc_get(monster, SC.ETERNALCHAOS))
+    if (sc_get(monster, SC.ETERNALCHAOS))
         status.def2 = 0;
 
     // mdef
@@ -1456,7 +1314,7 @@ function StatusCalcBLMob() {
         def_ele = ELE.WATER;
     if (sc_get(monster, SC.ELEMENTALCHANGE)) // elemental change
         def_ele = sc_get(monster, SC.ELEMENTALCHANGE).val1;
-    if(manualedits_get(monster, 610))
+    if (manualedits_get(monster, 610))
         def_ele = Math.trunc(manualedits_get(monster, 610).value / 10);
 
     status.def_ele = def_ele;
@@ -1469,7 +1327,7 @@ function StatusCalcBLMob() {
         ele_lv = 1;
     if (sc_get(monster, SC.ELEMENTALCHANGE)) // elemental change
         ele_lv = sc_get(monster, SC.ELEMENTALCHANGE).val2;
-    if(manualedits_get(monster, 610)) // manual edit
+    if (manualedits_get(monster, 610)) // manual edit
         ele_lv = (Math.trunc(manualedits_get(monster, 610).value) % 10);
 
     status.ele_lv = cap_value(ele_lv, 1, 4);
@@ -1478,11 +1336,11 @@ function StatusCalcBLMob() {
 
     // max hp
     let max_hp = b_status.max_hp;
-    if(manualedits_get(monster, 13))
+    if (manualedits_get(monster, 13))
         max_hp += manualedits_get(monster, 13).value;
     if (sc_get(monster, SC.ANGELUS)) // angelus
         max_hp += sc_get(monster, SC.ANGELUS).val1 * 100;
-    if(manualedits_get(monster, 15))
+    if (manualedits_get(monster, 15))
         max_hp += Math.trunc((max_hp * manualedits_get(monster, 15).value) / 100);
     status.max_hp = cap_value(max_hp, 1, UINT_MAX);
 
@@ -1496,7 +1354,7 @@ function StatusCalcBLMob() {
     // dspd - doesnt matter
 
     // size
-    if(manualedits_get(monster, 611)) // manual edit
+    if (manualedits_get(monster, 611)) // manual edit
         status.size = manualedits_get(monster, 611).value;
 
     // experience
@@ -1530,16 +1388,16 @@ function StatusCalcBLMob() {
         base_exp += (base_exp * sc_get(player, SC.RICHMANKIM).val2) / 100;
         job_exp += (job_exp * sc_get(player, SC.RICHMANKIM).val2) / 100;
     }
-    if(manualedits_get(monster, 500))
+    if (manualedits_get(monster, 500))
         base_exp += manualedits_get(monster, 500).value;
-    if(manualedits_get(monster, 501))
+    if (manualedits_get(monster, 501))
         job_exp += manualedits_get(monster, 501).value;
     status.base_exp = cap_value(Math.trunc(base_exp), 0, UINT_MAX);
     status.job_exp = cap_value(Math.trunc(job_exp), 0, UINT_MAX);
 
     // level
     let level = monster.level;
-    if(manualedits_get(monster, 499))
+    if (manualedits_get(monster, 499))
         level += manualedits_get(monster, 499).value;
     monster.level = level;
 }
@@ -1550,6 +1408,7 @@ function StAllCalc() {
     ClickB_Enemy(c.B_Enemy.value);
     PopulatePlayerData();
     KakutyouKansuu();
+    console.log("StAllCalc complete");
 }
 
 function WeaponSet(jobId) {
@@ -1571,7 +1430,6 @@ function WeaponSet(jobId) {
 
         const availableWeapons = [];
         n_A_JobSet();
-        n_A_WeaponType = weaponType;
 
         for (let itemId = 0; itemId <= ItemMax; itemId++) {
             const item = m_Item[itemId];
@@ -1691,7 +1549,7 @@ function WeaponSet2() {
     n_A_JobSet();
 
     // Slot indices: 0=head1, 1=head2, 2=head3, 3=shield, 4=armor, 5=garment, 6=shoes, 7=accessory
-    const SLOT_TYPES   = [50, 51, 52, 61, 60, 62, 63, 64];
+    const SLOT_TYPES = [50, 51, 52, 61, 60, 62, 63, 64];
     const SLOT_SELECTS = [c.A_head1, c.A_head2, c.A_head3, c.A_left, c.A_body, c.A_shoulder, c.A_shoes, c.A_acces1];
 
     // Clear all dropdowns
@@ -1992,54 +1850,6 @@ function KakutyouKansuu2() {
     displayOtherInfoSelect(1 * c.A_Kakutyou.value);
 }
 
-/* function Setm_CardShort() {
-    w = 1 * c.A_cardshort.value,
-        w > 0 && (m_CardShort[w][1] < 1e4 ? (c.A_weapon1_card1.value = m_CardShort[w][1],
-            c.A_weapon1_card2.value = m_CardShort[w][2],
-            c.A_weapon1_card3.value = m_CardShort[w][3],
-            c.A_weapon1_card4.value = m_CardShort[w][4],
-            16 != w && 17 != w || (w = m_Monster[1 * c.B_Enemy.value][3],
-                10 <= w && w <= 14 && (c.A_weapon1_card1.value = 204),
-                (20 <= w && w <= 24 || 80 <= w && w <= 94) && (c.A_weapon1_card1.value = 203),
-                30 <= w && w <= 34 && (c.A_weapon1_card1.value = 201),
-                40 <= w && w <= 44 && (c.A_weapon1_card1.value = 202))) : "Remove All Cards" != m_CardShort[w][0] ? (0 != m_CardShort[w][2] && (c.A_weapon1_card1.value = m_CardShort[w][2]),
-                    0 != m_CardShort[w][3] && (c.A_head1_card.value = m_CardShort[w][3]),
-                    0 != m_CardShort[w][4] && (c.A_left_card.value = m_CardShort[w][4]),
-                    0 != m_CardShort[w][5] && (c.A_body_card.value = m_CardShort[w][5]),
-                    0 != m_CardShort[w][6] && (c.A_shoulder_card.value = m_CardShort[w][6]),
-                    0 != m_CardShort[w][7] && (c.A_shoes_card.value = m_CardShort[w][7]),
-                    0 != m_CardShort[w][8] && (c.A_acces1_card.value = m_CardShort[w][8]),
-                    0 != m_CardShort[w][9] && (c.A_acces2_card.value = m_CardShort[w][9])) : (c.A_weapon1_card1.value = 0,
-                        c.A_weapon1_card2.value = 0,
-                        c.A_weapon1_card3.value = 0,
-                        c.A_weapon1_card4.value = 0,
-                        "undefined" != typeof A_weapon2_card1 && (c.A_weapon2_card1.value = 0,
-                            c.A_weapon2_card2.value = 0,
-                            c.A_weapon2_card3.value = 0,
-                            c.A_weapon2_card4.value = 0),
-                        c.A_head1_card.value = 0,
-                        c.A_head2_card.value = 0,
-                        c.A_left_card.value = 0,
-                        c.A_body_card.value = 0,
-                        c.A_shoulder_card.value = 0,
-                        c.A_shoes_card.value = 0,
-                        c.A_acces1_card.value = 0,
-                        c.A_acces2_card.value = 0),
-            ActiveSkillSetPlus())
-}
-function Setm_CardShortLeft() {
-    w = 1 * c.A_cardshortLeft.value,
-        w > 0 && (c.A_weapon2_card1.value = m_CardShort[w][1],
-            c.A_weapon2_card2.value = m_CardShort[w][2],
-            c.A_weapon2_card3.value = m_CardShort[w][3],
-            c.A_weapon2_card4.value = m_CardShort[w][4],
-            16 != w && 17 != w || (w = m_Monster[1 * c.B_Enemy.value][3],
-                10 <= w && w <= 14 && (c.A_weapon2_card1.value = 204),
-                (20 <= w && w <= 24 || 80 <= w && w <= 94) && (c.A_weapon2_card1.value = 203),
-                30 <= w && w <= 34 && (c.A_weapon2_card1.value = 201),
-                40 <= w && w <= 44 && (c.A_weapon2_card1.value = 202)))
-} */
-
 /**
  * Applies a weapon card preset to the right-hand weapon card slots.
  * Handles three cases:
@@ -2086,26 +1896,26 @@ function Setm_CardShort() {
             c.A_weapon2_card3.value = 0;
             c.A_weapon2_card4.value = 0;
         }
-        c.A_head1_card.value    = 0;
-        c.A_head2_card.value    = 0;
-        c.A_left_card.value     = 0;
-        c.A_body_card.value     = 0;
+        c.A_head1_card.value = 0;
+        c.A_head2_card.value = 0;
+        c.A_left_card.value = 0;
+        c.A_body_card.value = 0;
         c.A_shoulder_card.value = 0;
-        c.A_shoes_card.value    = 0;
-        c.A_acces1_card.value   = 0;
-        c.A_acces2_card.value   = 0;
+        c.A_shoes_card.value = 0;
+        c.A_acces1_card.value = 0;
+        c.A_acces2_card.value = 0;
     } else {
         // Full-set preset: only overwrite slots that have a non-zero value in the preset.
         // preset[2]=weapon card1, [3]=head1, [4]=shield, [5]=body,
         // [6]=garment, [7]=shoes, [8]=acc1, [9]=acc2
         if (preset[2]) c.A_weapon1_card1.value = preset[2];
-        if (preset[3]) c.A_head1_card.value    = preset[3];
-        if (preset[4]) c.A_left_card.value      = preset[4];
-        if (preset[5]) c.A_body_card.value      = preset[5];
-        if (preset[6]) c.A_shoulder_card.value  = preset[6];
-        if (preset[7]) c.A_shoes_card.value     = preset[7];
-        if (preset[8]) c.A_acces1_card.value    = preset[8];
-        if (preset[9]) c.A_acces2_card.value    = preset[9];
+        if (preset[3]) c.A_head1_card.value = preset[3];
+        if (preset[4]) c.A_left_card.value = preset[4];
+        if (preset[5]) c.A_body_card.value = preset[5];
+        if (preset[6]) c.A_shoulder_card.value = preset[6];
+        if (preset[7]) c.A_shoes_card.value = preset[7];
+        if (preset[8]) c.A_acces1_card.value = preset[8];
+        if (preset[9]) c.A_acces2_card.value = preset[9];
     }
 
     ActiveSkillSetPlus();
@@ -2266,469 +2076,1186 @@ function applyRegionFilter(monsterIds) {
     return monsterIds.filter(id => regionSet.has(id));
 }
 
-function SaveLocal() {
-    if ("undefined" == typeof Storage)
-        alert("Sorry, your browser does not support local storage. Please let me know if you see this message at tnaab on Discord");
-    else {
-        for (SaveData = new Array,
-            n = 0; n <= 414; n++)
-            SaveData[n] = 0;
-        SaveData[0] = 1,
-            SaveData[2] = 1 * c.A_JOB.value,
-            SaveData[3] = 1 * c.A_JobLV.value,
-            SaveData[4] = 1 * c.A_BaseLV.value,
-            SaveData[5] = 1 * c.A_adopted.checked,
-            1 == SaveData[5] ? SaveData[5] = 1 : 0 == SaveData[5] && (SaveData[5] = 0),
-            SaveData[6] = 1 * c.A_STR.value,
-            SaveData[7] = 1 * c.A_AGI.value,
-            SaveData[8] = 1 * c.A_VIT.value,
-            SaveData[9] = 1 * c.A_DEX.value,
-            SaveData[10] = 1 * c.A_INT.value,
-            SaveData[11] = 1 * c.A_LUK.value,
-            SaveData[12] = 1 * c.A_Weapon_element.value,
-            SaveData[13] = m_Item[c.A_weapon1.value][1],
-            SaveData[14] = 1 * c.A_weapon1.value,
-            SaveData[15] = 1 * c.A_Weapon_refine.value,
-            SaveData[16] = 1 * c.A_weapon1_card1.value,
-            SaveData[17] = 1 * c.A_weapon1_card2.value,
-            SaveData[18] = 1 * c.A_weapon1_card3.value,
-            SaveData[19] = 1 * c.A_weapon1_card4.value,
-            player.dual_wield ? (SaveData[20] = m_Item[c.A_weapon2.value][1],
-                SaveData[21] = 1 * c.A_weapon2.value,
-                SaveData[22] = 1 * c.A_Weapon2_refine.value,
-                SaveData[23] = 1 * c.A_weapon2_card1.value,
-                SaveData[24] = 1 * c.A_weapon2_card2.value,
-                SaveData[25] = 1 * c.A_weapon2_card3.value,
-                SaveData[26] = 1 * c.A_weapon2_card4.value) : (SaveData[20] = 0,
-                    SaveData[21] = 0,
-                    SaveData[22] = 0,
-                    SaveData[23] = 0,
-                    SaveData[24] = 0,
-                    SaveData[25] = 0,
-                    SaveData[26] = 0),
-            (2 == n_A_JobClass() || 4 == n_A_JobClass() || 45 == n_A_JobClass() && 0 != n_A_WeaponType) && (SaveData[27] = 1 * c.A_Arrow.value),
-            SaveData[28] = 1 * c.A_head1.value,
-            SaveData[29] = 1 * c.A_head1_card.value,
-            SaveData[30] = 1 * c.A_HEAD_REFINE.value,
-            SaveData[31] = 1 * c.A_head2.value,
-            SaveData[32] = 1 * c.A_head2_card.value,
-            SaveData[33] = 1 * c.A_head3.value,
-            SaveData[34] = 1 * c.A_left.value,
-            SaveData[35] = 1 * c.A_left_card.value,
-            SaveData[36] = 1 * c.A_LEFT_REFINE.value,
-            SaveData[37] = 1 * c.A_body.value,
-            SaveData[38] = 1 * c.A_body_card.value,
-            SaveData[39] = 1 * c.A_BODY_REFINE.value,
-            SaveData[40] = 1 * c.A_shoulder.value,
-            SaveData[41] = 1 * c.A_shoulder_card.value,
-            SaveData[42] = 1 * c.A_SHOULDER_REFINE.value,
-            SaveData[43] = 1 * c.A_shoes.value,
-            SaveData[44] = 1 * c.A_shoes_card.value,
-            SaveData[45] = 1 * c.A_SHOES_REFINE.value,
-            SaveData[46] = 1 * c.A_acces1.value,
-            SaveData[47] = 1 * c.A_acces1_card.value,
-            SaveData[48] = 1 * c.A_acces2.value,
-            SaveData[49] = 1 * c.A_acces2_card.value,
-            SaveData[50] = 0,
-            SaveData[51] = 0
-        SaveData[52] = 0,
-            SaveData[53] = 0,
-            SaveData[54] = 0,
-            SaveData[55] = 0,
-            n_A_JobSet(),
-            w = n_A_JOB;
+// ─── SAVE ────────────────────────────────────────────────────────────────────
 
-        const availableBuffs = JOB_AVAILABLE_BUFFS[w] || [];
-        for (let n = 0; n < availableBuffs.length && n <= 14; n++) {
-            const skillElement = document.getElementById("A_skill" + n);
-            SaveData[56 + n] = 1 * skillElement.value;
-        }
-        for (SaveData[71] = 0,
-            SaveData[72] = 0,
-            n = 0; n <= 21; n++)
-            SaveData[73 + n] = getBuf2FromSC(n),
-                1 == SaveData[73 + n] ? SaveData[73 + n] = 1 : 0 == SaveData[73 + n] && (SaveData[73 + n] = 0);
-        for (SaveData[95] = 0,
-            SaveData[96] = 0,
-            n = 0; n <= 37; n++)
-            SaveData[96 + n] = n_A_Buf3[n],
-                1 == SaveData[96 + n] ? SaveData[96 + n] = 1 : 0 == SaveData[96 + n] && (SaveData[96 + n] = 0);
-        for (SaveData[134] = 0,
-            SaveData[135] = 0,
-            SaveData[136] = n_A_Buf3[40],
-            SaveData[137] = n_A_Buf3[41],
-            SaveData[138] = n_A_Buf3[42],
-            SaveData[139] = n_A_Buf3[43],
-            SaveData[140] = n_A_Buf3[44],
-            SaveData[141] = 0,
-            SaveData[142] = 0,
-            n = 0; n <= 23; n++)
-            SaveData[143 + n] = n_A_Buf6[n],
-                1 == SaveData[143 + n] ? SaveData[143 + n] = 1 : 0 == SaveData[143 + n] && (SaveData[143 + n] = 0);
-        for (SaveData[167] = 0,
-            SaveData[168] = 0,
-            n = 0; n <= 51; n++)
-            SaveData[169 + n] = n_A_Buf7[n],
-                1 == SaveData[169 + n] ? SaveData[169 + n] = 1 : 0 == SaveData[169 + n] && (SaveData[169 + n] = 0);
-        for (n = 0; n <= 11; n++)
-            SaveData[221 + n] = n_A_Buf8[n],
-                1 == SaveData[221 + n] ? SaveData[221 + n] = 1 : 0 == SaveData[221 + n] && (SaveData[221 + n] = 0);
-        for (SaveData[233] = 0,
-            SaveData[234] = 0,
-            SaveData[235] = 0,
-            SaveData[236] = 0,
-            SaveData[237] = c.Conf01.value,
-            SaveData[238] = c.B_num.value,
-            SaveData[239] = c.A8_Skill14.value,
-            SaveData[240] = 0,
-            SaveData[241] = 0,
-            SaveData[242] = 0,
-            SaveData[243] = 1 * c.A_ActiveSkill.value,
-            SaveData[244] = 1 * c.A_ActiveSkillLV.value,
-            (326 == n_A_ActiveSkill || 159 == n_A_ActiveSkill || 384 == n_A_ActiveSkill || 324 == n_A_ActiveSkill || 131 == n_A_ActiveSkill || 88 == n_A_ActiveSkill || 197 == n_A_ActiveSkill || 394 == n_A_ActiveSkill || 395 == n_A_ActiveSkill || 405 == n_A_ActiveSkill || 429 == n_A_ActiveSkill || SkillSearch(441) && (51 == n_A_ActiveSkill || 54 == n_A_ActiveSkill || 56 == n_A_ActiveSkill || 540 == n_A_ActiveSkill || 541 == n_A_ActiveSkill || 542 == n_A_ActiveSkill)) && (SaveData[245] = 1 * c.SkillSubNum.value),
-            SaveData[246] = c.B_Enemy.value,
-            SaveData[247] = 1 * c.B_AtkSkill.value,
-            444 != n_B_AtkSkill && 445 != n_B_AtkSkill && 125 != n_B_AtkSkill && 131 != n_B_AtkSkill || (SaveData[248] = 1 * c.BSkillSubNum.value),
-            n = 0; n <= 27; n++)
-            SaveData[253 + n] = n_B_debuf[n],
-                1 == SaveData[253 + n] ? SaveData[253 + n] = 1 : 0 == SaveData[253 + n] && (SaveData[253 + n] = 0);
-        for (n = 0; n <= 14; n++)
-            SaveData[281 + n] = n_B_buf[n],
-                1 == SaveData[281 + n] ? SaveData[281 + n] = 1 : 0 == SaveData[281 + n] && (SaveData[281 + n] = 0);
-        for (SaveData[296] = 0,
-            SaveData[297] = 0,
-            SaveData[298] = 0,
-            SaveData[299] = 0,
-            SaveData[300] = 0,
-            SaveData[301] = 0,
-            SaveData[302] = 0,
-            n = 0; n <= 59; n++)
-            SaveData[303 + n] = n_A_Buf9[n],
-                1 == SaveData[303 + n] ? SaveData[303 + n] = 1 : 0 == SaveData[303 + n] && (SaveData[303 + n] = 0);
-        for (SaveData[363] = 0,
-            n = 0; n <= 60; n++)
-            SaveData[364 + n] = n_B_manual[n],
-                1 == SaveData[364 + n] ? SaveData[364 + n] = 1 : 0 == SaveData[364 + n] && (SaveData[364 + n] = 0);
-        /* SaveData[420] = 0,
-            SaveData[421] = 0,
-            SaveData[422] = 0, */
-        SaveData[423] = 0,
-            SaveData[424] = 0,
-            SaveData[425] = c.theme.value,
-            SaveData[426] = 0,
-            SaveData[428] = c.all_dmgSkills.checked,
-            SaveData[429] = c.restrict_jobequip.checked,
-            SaveData[430] = c.restrict_lvlequip.checked,
-            SaveData[431] = c.restrict_equipslot.checked,
-            SaveData[432] = c.restrict_cardslot.checked,
-            SaveData[433] = c.all_card.checked,
-            SaveData[434] = c.B_AtkRange.value,
-            SaveData[435] = c.B_AtkElem.value;
-        for (n = 0; n <= 27; n++) // rand options save
-            SaveData[436 + n] = n_A_randopt[n];
-        for (n = 0; n <= 5; n++)
-            SaveData[464 + n] = n_A_Shadow[n];
-        for (n = 0; n <= 3; n++)
-            SaveData[470 + n] = n_A_Buf3[45 + n];
-        for (n = 0; n <= 10; n++)
-            SaveData[474 + n] = n_A_enchant[n];
-        SaveData[500] = c.saveDataName.value,
-            slotNum = c.A_SaveSlotLocal.value,
-            localStorage["Slot" + slotNum] = JSON.stringify(SaveData),
-            bkcN = slotNum,
-            LoadLocal3(),
-            c.A_SaveSlotLocal.value = bkcN
+function SaveLocal() {
+    if (typeof Storage === "undefined") {
+        alert("Sorry, your browser does not support local storage.");
+        return;
+    }
+
+    const slotNum = c.A_SaveSlotLocal.value;
+
+    // Snapshot all passive skill levels from the DOM
+    const passiveSkillLevels = {};
+    const availableBuffs = JOB_AVAILABLE_BUFFS[player.status.job_id] || [];
+    for (let i = 0; i < availableBuffs.length && i <= 14; i++) {
+        const el = document.getElementById("A_skill" + i);
+        if (el) passiveSkillLevels[i] = 1 * el.value;
+    }
+
+    const data = {
+        version: SAVE_VERSION,
+        name: c.saveDataName.value,
+
+        // ── Player character ──────────────────────────────────────────────
+        job_id: player.status.job_id,
+        job_level: player.status.job_level,
+        base_level: player.status.base_level,
+        adopted: player.status.adopted,
+        str: player.status.str,
+        agi: player.status.agi,
+        vit: player.status.vit,
+        int: player.status.int,
+        dex: player.status.dex,
+        luk: player.status.luk,
+
+        // ── Equipment ─────────────────────────────────────────────────────
+        equip: player.equip.slice(),    // array of item IDs per slot
+        refine: player.refine.slice(),   // array of refine levels per slot
+        card: player.card.slice(),     // array of card IDs
+        shadow: player.shadow.slice(),
+        randopt: player.randopt.slice(),
+        enchant: player.enchant.slice(),
+
+        // ── Weapon specifics ──────────────────────────────────────────────
+        weapon_element: player.weapon_element,
+        dual_wield: player.dual_wield,
+        arrow: player.arrow,
+
+        // ── Active skill ──────────────────────────────────────────────────
+        active_skill: player.active_skill,
+        active_skill_lv: player.active_skill_lv,
+        active_skill_raw: 1 * c.A_ActiveSkill.value, // preserves autospell/scroll offsets
+        skill_sub_num: c.SkillSubNum ? 1 * c.SkillSubNum.value : 0,
+
+        // ── Passive skill levels (job-specific, keyed by buff slot index) ─
+        passive_skill_levels: passiveSkillLevels,
+
+        // ── Status changes (buffs/debuffs on player) ──────────────────────
+        player_sc: player.sc.map(sc => ({
+            type: sc.type,
+            val1: sc.val1, val2: sc.val2, val3: sc.val3, val4: sc.val4,
+            val5: sc.val5, val6: sc.val6, val7: sc.val7, val8: sc.val8,
+            val9: sc.val9, val10: sc.val10
+        })),
+        player_manual_edits: player.manual_edits.map(e => ({ type: e.type, value: e.value })),
+
+        // ── Monster / target ──────────────────────────────────────────────
+        monster_id: c.B_Enemy.value,
+        monster_sc: monster.sc.map(sc => ({
+            type: sc.type,
+            val1: sc.val1, val2: sc.val2, val3: sc.val3, val4: sc.val4,
+            val5: sc.val5, val6: sc.val6, val7: sc.val7, val8: sc.val8,
+            val9: sc.val9, val10: sc.val10
+        })),
+        monster_manual_edits: monster.manual_edits.map(e => ({ type: e.type, value: e.value })),
+        monster_atk_skill: 1 * c.B_AtkSkill.value,
+        monster_atk_range: 1 * c.B_AtkRange.value,
+        monster_atk_elem: 1 * c.B_AtkElem.value,
+        b_num: 1 * c.B_num.value,
+
+        // ── UI state ──────────────────────────────────────────────────────
+        all_dmg_skills: c.all_dmgSkills.checked,
+        restrict_jobequip: c.restrict_jobequip.checked,
+        restrict_lvlequip: c.restrict_lvlequip.checked,
+        restrict_equipslot: c.restrict_equipslot.checked,
+        restrict_cardslot: c.restrict_cardslot.checked,
+        all_card: c.all_card.checked,
+        theme: c.theme.value,
+        conf01: 1 * c.Conf01.value,
+        pet: player.pet,
+        temp_effect: player.temp_effect.slice(),
+        exp_modifiers: {
+            party_member_count: player.exp_modifiers.party_member_count,
+            battle_manual: player.exp_modifiers.battle_manual,
+            job_manual: player.exp_modifiers.job_manual ? 1 : 0,
+        },
+    };
+
+    localStorage["Slot" + slotNum] = JSON.stringify(data);
+
+    const bkcN = slotNum;
+    LoadLocal3();
+    c.A_SaveSlotLocal.value = bkcN;
+}
+
+// ─── LOAD ─────────────────────────────────────────────────────────────────────
+
+function LoadLocal() {
+    if (typeof Storage === "undefined") {
+        alert("Sorry, your browser does not support local storage.");
+        return;
+    }
+
+    myInnerHtml("bREFLECT2", "", 0);
+    myInnerHtml("bREFLECT2name", "", 0);
+
+    const slotNum = c.A_SaveSlotLocal.value;
+    const raw = localStorage["Slot" + slotNum];
+
+    if (!raw || raw === "0") {
+        loadDefaultState();
+        return;
+    }
+
+    let data;
+    try {
+        data = JSON.parse(raw);
+    } catch (e) {
+        alert("Save data is corrupted in slot " + slotNum);
+        return;
+    }
+
+    if (data.version === SAVE_VERSION) {
+        loadNewFormat(data);
+    } else {
+        // Legacy: old saves are plain arrays — Array.isArray check as extra safety
+        loadLegacyFormat(Array.isArray(data) ? data : Object.values(data));
     }
 }
-function LoadLocal() {
-    if ("undefined" == typeof Storage)
-        alert("Sorry, your browser does not support local storage. If you see this message, please let me know at tnaab on Discord");
-    else if (myInnerHtml("bREFLECT2", "", 0),
-        myInnerHtml("bREFLECT2name", "", 0),
-        slotNum = c.A_SaveSlotLocal.value,
-        SaveData = new Array,
-        void 0 === localStorage["Slot" + slotNum]) {
-        c.A_JOB.value = 0,
-            ClickJob(0),
-            c.A_JobLV.value = 1,
-            c.A_BaseLV.value = 1,
-            c.A_adopted.checked = 0,
-            c.A_STR.value = 1,
-            c.A_AGI.value = 1,
-            c.A_VIT.value = 1,
-            c.A_DEX.value = 1,
-            c.A_INT.value = 1,
-            c.A_LUK.value = 1,
-            c.A_Weapon_element.value = 0,
-            c.A_weapon1.value = 0,
-            n_A_WeaponType = 0,
-            ClickWeaponType(0),
-            n_A_JobSet(),
-            c.A_Weapon_refine.value = 0,
-            c.A_weapon1_card1.value = 0,
-            c.A_weapon1_card2.value = 0,
-            c.A_weapon1_card3.value = 0,
-            c.A_weapon1_card4.value = 0,
-            c.A_head1.value = 142,
-            c.A_head1_card.value = 0,
-            c.A_HEAD_REFINE.value = 0,
-            c.A_head2.value = 243,
-            c.A_head2_card.value = 0,
-            c.A_head3.value = 268,
-            c.A_left.value = 305,
-            c.A_left_card.value = 0,
-            c.A_LEFT_REFINE.value = 0,
-            c.A_body.value = 279,
-            c.A_body_card.value = 0,
-            c.A_BODY_REFINE.value = 0,
-            c.A_shoulder.value = 311,
-            c.A_shoulder_card.value = 0,
-            c.A_SHOULDER_REFINE.value = 0,
-            c.A_shoes.value = 317,
-            c.A_shoes_card.value = 0,
-            c.A_SHOES_REFINE.value = 0,
-            c.A_acces1.value = 326,
-            c.A_acces1_card.value = 0,
-            c.A_acces2.value = 326,
-            c.A_acces2_card.value = 0,
-            n_itemSW = 0,
-            ClickB_Item("SW"),
-            w = n_A_JOB;
 
-        const availableBuffs = JOB_AVAILABLE_BUFFS[w] || [];
+function loadNewFormat(data) {
+    // ── UI flags first (affects what WeaponSet/ClickJob show) ────────────
+    c.all_dmgSkills.checked = data.all_dmg_skills;
+    c.restrict_jobequip.checked = data.restrict_jobequip;
+    c.restrict_lvlequip.checked = data.restrict_lvlequip;
+    c.restrict_equipslot.checked = data.restrict_equipslot;
+    c.restrict_cardslot.checked = data.restrict_cardslot;
+    c.all_card.checked = data.all_card;
 
-        for (let n = 0; n < availableBuffs.length && n <= 14; n++) {
-            const skillElement = document.getElementById("A_skill" + n);
-            if (skillElement)
-                skillElement.value = 0;
+    // ── Job + levels ──────────────────────────────────────────────────────
+    c.A_JOB.value = data.job_id;
+    ClickJob(data.job_id);
+    c.A_JobLV.value = data.job_level;
+    c.A_BaseLV.value = data.base_level;
+    c.A_adopted.checked = data.adopted;
+
+    // ── Base stats ────────────────────────────────────────────────────────
+    c.A_STR.value = data.str;
+    c.A_AGI.value = data.agi;
+    c.A_VIT.value = data.vit;
+    c.A_INT.value = data.int;
+    c.A_DEX.value = data.dex;
+    c.A_LUK.value = data.luk;
+
+    // ── Weapon ────────────────────────────────────────────────────────────
+    c.A_Weapon_element.value = data.weapon_element;
+    c.A_weapon1.value = data.equip[EQI.HAND_R];
+    ClickWeaponType(m_Item[data.equip[EQI.HAND_R]][1]);
+    c.A_Weapon_refine.value = data.refine[EQI.HAND_R];
+
+    if (data.dual_wield) {
+        c.A_weapon2.value = data.equip[EQI.HAND_L];
+        ClickWeaponType2(m_Item[data.equip[EQI.HAND_L]][1]);
+        c.A_Weapon2_refine.value = data.refine[EQI.HAND_L];
+        c.A_weapon2_card1.value = data.card[4];
+        c.A_weapon2_card2.value = data.card[5];
+        c.A_weapon2_card3.value = data.card[6];
+        c.A_weapon2_card4.value = data.card[7];
+    }
+
+    c.A_weapon1_card1.value = data.card[0];
+    c.A_weapon1_card2.value = data.card[1];
+    c.A_weapon1_card3.value = data.card[2];
+    c.A_weapon1_card4.value = data.card[3];
+
+    ClickB_Item(data.equip[EQI.HAND_R]);
+
+    // ── Armor slots ───────────────────────────────────────────────────────
+    c.A_head1.value = data.equip[EQI.HEAD_TOP];
+    c.A_head1_card.value = data.card[8];
+    c.A_HEAD_REFINE.value = data.refine[EQI.HEAD_TOP];
+
+    c.A_head2.value = data.equip[EQI.HEAD_MID];
+    c.A_head2_card.value = data.card[9];
+
+    c.A_head3.value = data.equip[EQI.HEAD_LOW];
+
+    c.A_left.value = data.equip[EQI.SHIELD];
+    c.A_left_card.value = data.card[10];
+    c.A_LEFT_REFINE.value = data.refine[EQI.SHIELD];
+
+    c.A_body.value = data.equip[EQI.ARMOR];
+    c.A_body_card.value = data.card[11];
+    c.A_BODY_REFINE.value = data.refine[EQI.ARMOR];
+
+    c.A_shoulder.value = data.equip[EQI.GARMENT];
+    c.A_shoulder_card.value = data.card[12];
+    c.A_SHOULDER_REFINE.value = data.refine[EQI.GARMENT];
+
+    c.A_shoes.value = data.equip[EQI.SHOES];
+    c.A_shoes_card.value = data.card[13];
+    c.A_SHOES_REFINE.value = data.refine[EQI.SHOES];
+
+    c.A_acces1.value = data.equip[EQI.ACC_L];
+    c.A_acces1_card.value = data.card[14];
+
+    c.A_acces2.value = data.equip[EQI.ACC_R];
+    c.A_acces2_card.value = data.card[15];
+
+    // ── Shadow, random options, enchants ──────────────────────────────────
+    for (let i = 0; i < data.shadow.length; i++)
+        player.shadow[i] = data.shadow[i];
+    for (let i = 0; i < data.randopt.length; i++)
+        player.randopt[i] = data.randopt[i];
+    reloadRandOpt();
+    for (let i = 0; i < data.enchant.length; i++)
+        player.enchant[i] = data.enchant[i];
+
+    // ── Arrow ─────────────────────────────────────────────────────────────
+    if (!c.A_Arrow.disabled)
+        c.A_Arrow.value = data.arrow;
+
+    // ── Passive skill levels ──────────────────────────────────────────────
+    const availableBuffs = JOB_AVAILABLE_BUFFS[data.job_id] || [];
+    for (let i = 0; i < availableBuffs.length && i <= 14; i++) {
+        const el = document.getElementById("A_skill" + i);
+        if (el) el.value = data.passive_skill_levels[i] ?? 0;
+    }
+
+    // ── Player status changes ─────────────────────────────────────────────
+    player.sc = (data.player_sc || []).map(s =>
+        new StatusChange(s.type, s.val1, s.val2, s.val3, s.val4, s.val5, s.val6, s.val7, s.val8, s.val9, s.val10)
+    );
+    player.manual_edits = (data.player_manual_edits || []).map(e =>
+        new ManualEdit(e.type, e.value)
+    );
+
+    // ── Monster ───────────────────────────────────────────────────────────
+    c.B_Enemy.value = data.monster_id;
+    ClickB_Enemy();
+    LoadEnemySkills();
+    c.B_AtkSkill.value = data.monster_atk_skill;
+    c.B_AtkRange.value = data.monster_atk_range;
+    c.B_AtkElem.value = data.monster_atk_elem;
+    c.B_num.value = data.b_num;
+    BClickAtkSkill();
+
+    monster.sc = (data.monster_sc || []).map(s =>
+        new StatusChange(s.type, s.val1, s.val2, s.val3, s.val4, s.val5, s.val6, s.val7, s.val8, s.val9, s.val10)
+    );
+    monster.manual_edits = (data.monster_manual_edits || []).map(e =>
+        new ManualEdit(e.type, e.value)
+    );
+
+    // ── Active skill ──────────────────────────────────────────────────────
+    c.Conf01.value = data.conf01;
+    StCalc(1);
+    ActiveSkillSetPlus();
+    c.A_ActiveSkill.value = data.active_skill_raw;
+    ClickActiveSkill();
+    c.A_ActiveSkillLV.value = data.active_skill_lv;
+    if (c.SkillSubNum) c.SkillSubNum.value = data.skill_sub_num;
+
+    player.pet = data.pet;
+    player.temp_effect = data.temp_effect || [];
+    player.exp_modifiers = data.exp_modifiers || {};
+
+    // ── Finish ────────────────────────────────────────────────────────────
+    c.saveDataName.value = data.name || "";
+    c.theme.value = data.theme;
+    refreshFields();
+    StCalc(1);
+    StAllCalc();
+    ActiveSkillSetPlus();
+    calc();
+    themes();
+
+    syncBuffDOMFromSC(player);
+    syncBuffDOMFromSC(monster);
+    syncAdditionalEffectsDOMFromData();
+    syncManualEditsDOMFromData(player, 'ID_ARG');
+    syncMonsterManualEditsDOMFromData();
+    console.log("End of load new format");
+}
+
+// ─── SLOT LIST ────────────────────────────────────────────────────────────────
+
+function LoadLocal3() {
+    for (let k = 1; k <= 200; k++) {
+        let slotNum = k < 9 ? "num0" + (k - 1)
+            : k == 9 ? "num09"
+                : "num" + k;
+
+        const raw = localStorage["Slot" + slotNum];
+        if (!raw || raw === "0") {
+            c.A_SaveSlotLocal.options[k - 1] = new Option(k + ": No Data", slotNum);
+            continue;
         }
 
-        resetBuf2SC();
-        for (n_SkillSW = 0,
-            n = 0; n <= 37; n++)
-            n_A_Buf3[n] = 0;
-        for (n_Skill3SW = 0,
-            n = 0; n <= 8; n++)
-            n_A_Buf3[40 + n] = 0;
-        for (n_Skill4SW = 0,
-            n = 0; n <= 23; n++)
-            n_A_Buf6[n] = 0;
-        for (n_Skill6SW = 0,
-            n = 0; n <= 60; n++)
-            n_A_Buf7[n] = 0;
-        for (n_Skill7SW = 0,
-            n = 0; n <= 15; n++)
-            n_A_Buf8[n] = 0;
-        for (n_Skill8SW = 0,
-            c.Conf01.value = 20,
-            c.B_num.value = 1,
-            c.A8_Skill14.value = 0,
-            c.A_ActiveSkill.value = 0,
-            ClickActiveSkill(),
-            c.A_ActiveSkillLV.value = 0,
-            (326 == n_A_ActiveSkill || 159 == n_A_ActiveSkill || 384 == n_A_ActiveSkill || 324 == n_A_ActiveSkill || 131 == n_A_ActiveSkill || 88 == n_A_ActiveSkill || 197 == n_A_ActiveSkill || 394 == n_A_ActiveSkill || 395 == n_A_ActiveSkill || 405 == n_A_ActiveSkill || 429 == n_A_ActiveSkill || SkillSearch(441) && (51 == n_A_ActiveSkill || 54 == n_A_ActiveSkill || 56 == n_A_ActiveSkill || 540 == n_A_ActiveSkill || 541 == n_A_ActiveSkill || 542 == n_A_ActiveSkill)) && (c.SkillSubNum.value = 0),
-            c.B_Enemy.value = 144,
-            c.B_AtkRange.value = 0,
-            LoadEnemySkills(),
-            c.B_AtkSkill.value = 0,
-            n = 0; n <= 30; n++)
-            n_B_debuf[n] = 0;
-        for (n_debufSW = 0,
-            n = 0; n <= 14; n++)
-            n_B_buf[n] = 0;
-        for (n_BbufSW = 0,
-            n = 0; n <= 59; n++)
-            n_A_Buf9[n] = 0;
-        for (n_A_Buf9[2] = 10,
-            n_A_Buf9[4] = 20,
-            n_A_Buf9[6] = 23,
-            n_A_Buf9[10] = 10,
-            n_A_Buf9[12] = 20,
-            n_A_Buf9[14] = 23,
-            n_Skill9SW = 0,
-            n = 0; n <= 60; n++)
-            n_B_manual[n] = 0;
-        for (n = 0; n <= 27; n++)
-            n_A_randopt[n] = 0;
-        for (n = 0; n <= 5; n++)
-            n_A_Shadow[n] = 0;
-        n_A_Shadow[1] = 22;
-        n_A_Shadow[3] = 44;
-        for (n = 0; n <= 10; n++)
-            n_A_enchant[n] = 0;
-        n_Skill10SW = 0
-    } else {
-        for (n = 0; n <= 336; n++)
-            SaveData[n] = 0;
-        SaveData = JSON.parse(localStorage["Slot" + slotNum]),
-            c.all_dmgSkills.checked = SaveData[428],
-            c.A_JOB.value = SaveData[2],
-            ClickJob(SaveData[2]),
-            c.A_JobLV.value = SaveData[3],
-            c.A_BaseLV.value = SaveData[4],
-            c.A_adopted.checked = SaveData[5],
-            c.A_STR.value = SaveData[6],
-            c.A_AGI.value = SaveData[7],
-            c.A_VIT.value = SaveData[8],
-            c.A_DEX.value = SaveData[9],
-            c.A_INT.value = SaveData[10],
-            c.A_LUK.value = SaveData[11],
-            c.A_Weapon_element.value = SaveData[12],
-            c.A_weapon1.value = SaveData[14],
-            n_A_WeaponType = SaveData[13],
-            ClickWeaponType(SaveData[13]),
-            8 != SaveData[2] && 22 != SaveData[2] || 11 == SaveData[13] || (
-                player.equip[EQI.HAND_L] = 0,
-                n_A_Weapon2Type = SaveData[20],
-                ClickWeaponType2(SaveData[21])),
-            n_A_JobSet(),
-            (2 == n_A_JobClass() || 4 == n_A_JobClass() || 45 == n_A_JobClass() && 0 != SaveData[13]) && (c.A_Arrow.value = SaveData[27]),
-            ClickB_Item(SaveData[14]),
-            c.A_Weapon_refine.value = SaveData[15],
-            c.A_weapon1_card1.value = SaveData[16],
-            c.A_weapon1_card2.value = SaveData[17],
-            c.A_weapon1_card3.value = SaveData[18],
-            c.A_weapon1_card4.value = SaveData[19],
-            player.dual_wield && (c.A_weapon2.value = SaveData[21],
-                c.A_Weapon2_refine.value = SaveData[22],
-                c.A_weapon2_card1.value = SaveData[23],
-                c.A_weapon2_card2.value = SaveData[24],
-                c.A_weapon2_card3.value = SaveData[25],
-                c.A_weapon2_card4.value = SaveData[26]),
-            c.A_head1.value = SaveData[28],
-            c.A_head1_card.value = SaveData[29],
-            c.A_HEAD_REFINE.value = SaveData[30],
-            c.A_head2.value = SaveData[31],
-            c.A_head2_card.value = SaveData[32],
-            c.A_head3.value = SaveData[33],
-            c.A_left.value = SaveData[34],
-            c.A_left_card.value = SaveData[35],
-            c.A_LEFT_REFINE.value = SaveData[36],
-            c.A_body.value = SaveData[37],
-            c.A_body_card.value = SaveData[38],
-            c.A_BODY_REFINE.value = SaveData[39],
-            c.A_shoulder.value = SaveData[40],
-            c.A_shoulder_card.value = SaveData[41],
-            c.A_SHOULDER_REFINE.value = SaveData[42],
-            c.A_shoes.value = SaveData[43],
-            c.A_shoes_card.value = SaveData[44],
-            c.A_SHOES_REFINE.value = SaveData[45],
-            c.A_acces1.value = SaveData[46],
-            c.A_acces1_card.value = SaveData[47],
-            c.A_acces2.value = SaveData[48],
-            c.A_acces2_card.value = SaveData[49],
-            w = n_A_JOB;
-
-        const availableBuffs = JOB_AVAILABLE_BUFFS[w] || [];
-        for (let n = 0; n < availableBuffs.length && n <= 14; n++) {
-            const skillElement = document.getElementById("A_skill" + n);
-            if (skillElement)
-                skillElement.value = SaveData[56 + n];
+        let data;
+        try { data = JSON.parse(raw); } catch (e) {
+            c.A_SaveSlotLocal.options[k - 1] = new Option(k + ": (corrupted)", slotNum);
+            continue;
         }
-        c.Conf01.value = SaveData[237],
-            c.B_num.value = SaveData[238],
-            c.A8_Skill14.value = SaveData[239],
-            //c.A8_Skill15.value = SaveData[240],
-            StCalc(1),
-            ActiveSkillSetPlus(),
-            c.A_ActiveSkill.value = SaveData[243],
-            ClickActiveSkill(),
-            c.A_ActiveSkillLV.value = SaveData[244],
-            66 != n_A_ActiveSkill && 326 != n_A_ActiveSkill && 159 != n_A_ActiveSkill && 384 != n_A_ActiveSkill && 324 != n_A_ActiveSkill && 131 != n_A_ActiveSkill && 88 != n_A_ActiveSkill && 197 != n_A_ActiveSkill && 394 != n_A_ActiveSkill && 395 != n_A_ActiveSkill && 405 != n_A_ActiveSkill && 429 != n_A_ActiveSkill || (c.SkillSubNum.value = SaveData[245]);
 
-        const doubleCastIndex = JOB_AVAILABLE_BUFFS[n_A_JOB].indexOf(441);
-        if (doubleCastIndex !== -1) {
-            const doubleCastSkillElement = document.getElementById("A_skill" + doubleCastIndex);
+        let label;
+        let saveName = "";
 
-            if (doubleCastSkillElement) {
-                const doubleCastSkillLevel = 1 * doubleCastSkillElement.value;
+        if (data.version === SAVE_VERSION) {
+            // New format
+            if (data.name) saveName = " (" + data.name + ")";
+            const jobId = data.job_id;
+            if (jobId >= 0 && jobId < JobName.length)
+                label = k + ": " + (data.adopted ? "Baby " : "") + JobName[jobId] + saveName;
+            else
+                label = k + ": Unknown" + saveName;
+        } else {
+            // Legacy format — data is a plain array
+            const sd = Array.isArray(data) ? data : Object.values(data);
+            if (sd[500] != null && sd[500] !== "") saveName = " (" + sd[500] + ")";
+            const jobId = sd[2];
+            if (jobId >= 1 && jobId <= 48)
+                label = k + ": " + (sd[5] == 0 ? "" : "Baby ") + JobName[jobId] + saveName;
+            else if (jobId === 999 || jobId === 0)
+                label = k + ": Novice" + saveName;
+            else
+                label = k + ": No Data";
+        }
 
-                const isCompatibleBoltSkill = n_A_ActiveSkill == 51 || n_A_ActiveSkill == 54 || n_A_ActiveSkill == 56 || n_A_ActiveSkill == 540 || n_A_ActiveSkill == 541 || n_A_ActiveSkill == 542;
+        c.A_SaveSlotLocal.options[k - 1] = new Option(label, slotNum);
+    }
+}
 
-                if (doubleCastSkillLevel > 0 && isCompatibleBoltSkill) {
-                    const averageChance = doubleCastSkillLevel + 3;
-                    myInnerHtml("AASkill", 'Double Bolt chance: <select name="SkillSubNum" onChange="calc()"></select>', 0);
-                    c.SkillSubNum.options[0] = new Option("No chance (0%)", 0);
-                    c.SkillSubNum.options[1] = new Option("Average chance (" + 10 * averageChance + "%)", averageChance);
-                    c.SkillSubNum.options[2] = new Option("Max chance (100%)", 10);
-                    c.SkillSubNum.value = SaveData[245];
+/**
+ * Syncs buff table DOM controls from player.sc or monster.sc.
+ * Pass 'player' or 'monster' as the entity argument.
+ * Scopes the query to the specific table container so player and
+ * monster controls never interfere with each other.
+ */
+function syncBuffDOMFromSC(entity) {
+    // Scope to only player buff tables, not the whole document
+    const playerTableIds = ['SIENSKILL', 'SP_SIEN01', 'SP_SIEN02', 'SP_SIEN03', 'SP_SIEN04', 'SP_SIEN05', 'ID_ARG'];
+    const monsterTableIds = ['EnemyDebuf', 'EnemyBuf'];
+
+    const tableIds = (entity === monster) ? monsterTableIds : playerTableIds;
+
+    for (const tableId of tableIds) {
+        const table = document.getElementById(tableId);
+        if (!table) continue;
+
+        const controls = table.querySelectorAll('input[data-sc], select[data-sc]');
+
+        for (const el of controls) {
+            const scAttr = el.getAttribute('data-sc');
+            if (!scAttr) continue;
+
+            const scNames = scAttr.split('|');
+
+            if (scAttr === 'SPIRITSPHERE') {
+                if (el.tagName === 'SELECT')
+                    el.value = player.spiritball || 0;
+                continue;
+            }
+
+            if (scAttr === 'ADRENALINE|ADRENALINE2') {
+                if (sc_get(entity, SC.ADRENALINE2)) el.value = 2;
+                else if (sc_get(entity, SC.ADRENALINE)) el.value = 1;
+                else el.value = 0;
+                continue;
+            }
+
+            if (scAttr == 'ASPDPOT') {
+                if (sc_get(entity, SC.ASPDPOTION3)) el.value = 4;
+                else if (sc_get(entity, SC.ASPDPOTION2)) el.value = 3;
+                else if (sc_get(entity, SC.ASPDPOTION1)) el.value = 2;
+                else if (sc_get(entity, SC.ASPDPOTION0)) el.value = 1;
+                else el.value = 0;
+                continue;
+            }
+
+            if(scAttr == 'SAGEGROUND') {
+                if(sc_get(player, SC.VOLCANO)) {
+                    document.getElementsByName("buff_sage_ground_label")[0].value = 0;
+                    document.getElementsByName("buff_sage_ground_lv")[0].value = sc_get(player, SC.VOLCANO) ? sc_get(player, SC.VOLCANO).val1 : 0;
+                    continue;
+                } else if(sc_get(player, SC.DELUGE)) {
+                    document.getElementsByName("buff_sage_ground_label")[0].value = 1;
+                    document.getElementsByName("buff_sage_ground_lv")[0].value = sc_get(player, SC.DELUGE) ? sc_get(player, SC.DELUGE).val1 : 0;
+                    continue;
+                } else if(sc_get(player, SC.WHIRLWIND)) {
+                    document.getElementsByName("buff_sage_ground_label")[0].value = 2;
+                    document.getElementsByName("buff_sage_ground_lv")[0].value = sc_get(player, SC.WHIRLWIND) ? sc_get(player, SC.WHIRLWIND).val1 : 0;
+                    continue;
                 }
             }
+
+            if (scNames.length > 1) {
+                el.checked = scNames.some(name => sc_get(entity, SC[name]));
+                continue;
+            }
+
+            const scType = SC[scNames[0]];
+            if (scType === undefined) continue;
+
+            const activeSC = sc_get(entity, scType);
+            const fixedVal = el.getAttribute('data-fixed');
+
+            if (el.type === 'checkbox') {
+                el.checked = !!activeSC;
+            } else if (el.tagName === 'SELECT') {
+                el.value = activeSC ? (fixedVal ? 1 : activeSC.val1) : 0;
+            }
         }
-        for (SaveData[246] == "" && (SaveData[246] = 586),
-            n_B[0] = SaveData[246],
-            c.B_Enemy.value = SaveData[246],
-            LoadEnemySkills(),
-            c.B_AtkSkill.value = SaveData[247],
-            BClickAtkSkill(),
-            444 != SaveData[247] && 445 != SaveData[247] && 125 != SaveData[247] && 131 != SaveData[247] || (c.BSkillSubNum.value = SaveData[248]),
-            setBuf2ToSC(0, SaveData[73] > 5 ? SaveData[73] / 2 : SaveData[73]),
-            setBuf2ToSC(1, SaveData[74] > 5 ? SaveData[74] / 2 : SaveData[74]),
-            n = 2; n <= 21; n++)
-            setBuf2ToSC(n, SaveData[73 + n]);
-        for (n = 0; n <= 37; n++)
-            n_A_Buf3[n] = SaveData[96 + n];
-        for (SetDanceSkillsVisibility(0),
-            n = 0; n <= 4; n++)
-            n_A_Buf3[40 + n] = SaveData[136 + n];
-        for (n = 0; n <= 23; n++)
-            n_A_Buf6[n] = SaveData[143 + n];
-        for (n = 0; n <= 51; n++)
-            n_A_Buf7[n] = SaveData[169 + n];
-        for (n = 0; n <= 11; n++)
-            n_A_Buf8[n] = SaveData[221 + n];
-        for (n = 0; n <= 27; n++)
-            n_B_debuf[n] = SaveData[253 + n];
-        if (0 == SaveData[0]) {
-            for (n = 0; n <= 9; n++)
-                n_B_buf[n] = SaveData[281 + n];
-            var A = 0
-        } else {
-            for (n = 0; n <= 14; n++)
-                n_B_buf[n] = SaveData[281 + n];
-            A = 10
-        }
-        for (n = 0; n <= 59; n++)
-            n_A_Buf9[n] = SaveData[293 + n + A];
-        for (n = 0; n <= 60; n++)
-            n_B_manual[n] = SaveData[354 + n + A];
-        c.theme.value = SaveData[425],
-            c.restrict_jobequip.checked = SaveData[429],
-            c.restrict_lvlequip.checked = SaveData[430],
-            c.restrict_equipslot.checked = SaveData[431],
-            c.restrict_cardslot.checked = SaveData[432],
-            c.all_card.checked = SaveData[433],
-            c.B_AtkRange.value = SaveData[434],
-            c.B_AtkElem.value = SaveData[435];
-        for (n = 0; n <= 27; n++) // rand options load
-            n_A_randopt[n] = SaveData[436 + n];
-        for (n = 0; n <= 5; n++)
-            n_A_Shadow[n] = SaveData[464 + n] == null ? 0 : SaveData[464 + n];
-        n_A_Shadow[1] == 0 && (n_A_Shadow[1] = 22);
-        n_A_Shadow[3] == 0 && (n_A_Shadow[3] = 44);
-        for (n = 0; n <= 3; n++)
-            n_A_Buf3[45 + n] = SaveData[470 + n] == null ? 0 : SaveData[470 + n];
-        for (n = 0; n <= 10; n++)
-            n_A_enchant[n] = SaveData[474 + n] == null ? 0 : SaveData[474 + n];
     }
-    c.saveDataName.value = SaveData[500],
-        refreshFields(),
-        StCalc(1),
-        StAllCalc(),
-        ActiveSkillSetPlus(),
-        calc(),
-        themes()
+
+    // ── Song stat/lesson sub-selects ──────────────────────────────────────
+    // These selects have no data-sc — they're secondary fields whose values
+    // are packed into val2/val3/val4 of the song SC.
+    // sc_start(player, SC.WHISTLE, level, lesson, agi, luk)
+    //   val1=level, val2=lesson, val3=stat1, val4=stat2
+    if (entity !== monster) {
+        const songMap = [
+            {
+                sc: SC.WHISTLE,
+                stat1: 'buff_whistle_agi',
+                stat2: 'buff_whistle_luk',
+                lesson: 'buff_whistle_lesson'
+            },
+            {
+                sc: SC.ASSNCROS,
+                stat1: 'buff_assncros_agi',
+                stat2: null,
+                lesson: 'buff_assncros_lesson'
+            },
+            {
+                sc: SC.POEMBRAGI,
+                stat1: 'buff_poembragi_dex',
+                stat2: 'buff_poembragi_int',
+                lesson: 'buff_poembragi_lesson'
+            },
+            {
+                sc: SC.APPLEIDUN,
+                stat1: 'buff_appleidun_vit',
+                stat2: null,
+                lesson: 'buff_appleidun_lesson'
+            },
+            {
+                sc: SC.HUMMING,
+                stat1: 'buff_humming_dex',
+                stat2: null,
+                lesson: 'buff_humming_lesson'
+            },
+            {
+                sc: SC.FORTUNE,
+                stat1: 'buff_fortunekiss_luk',
+                stat2: null,
+                lesson: 'buff_fortunekiss_lesson'
+            },
+            {
+                sc: SC.SERVICE4U,
+                stat1: 'buff_service4u_int',
+                stat2: null,
+                lesson: 'buff_service4u_lesson'
+            },
+        ];
+
+        const setEl = (name, val) => {
+            if (!name) return;
+            const el = document.getElementsByName(name)[0];
+            if (el) el.value = val;
+        };
+
+        for (const entry of songMap) {
+            const activeSC = sc_get(player, entry.sc);
+            console.log(`Syncing ${entry.sc}: active=${!!activeSC}, val1=${activeSC ? activeSC.val1 : 0}, val2=${activeSC ? activeSC.val2 : 0}, val3=${activeSC ? activeSC.val3 : 0}, val4=${activeSC ? activeSC.val4 : 0}`);
+
+            // val1=level (already handled by data-sc above)
+            // val2=lesson, val3=stat1, val4=stat2
+            const lessonVal = activeSC ? (activeSC.val2 || 0) : 0;
+            const stat1Val = activeSC ? (activeSC.val3 || 0) : 0;
+            const stat2Val = activeSC ? (activeSC.val4 || 0) : 0;
+
+            setEl(entry.lesson, lessonVal);
+            setEl(entry.stat1, stat1Val);
+            setEl(entry.stat2, stat2Val);
+        }
+
+        if(sc_get(player, SC.MARIONETTE)) {
+            const marionetteSC = sc_get(player, SC.MARIONETTE);
+            if(marionetteSC.val1 === 1)
+                document.getElementsByName("buff_marionette_status_compensation")[0].checked = true;
+            else
+                document.getElementsByName("buff_marionette_status_compensation")[0].checked = false;
+            console.log(`Syncing MARIONETTE: val1=${marionetteSC.val1}, val2=${marionetteSC.val2}, val3=${marionetteSC.val3}, val4=${marionetteSC.val4}, val5=${marionetteSC.val5}, val6=${marionetteSC.val6}, val7=${marionetteSC.val7}`);
+            setEl("buff_marionette_str", marionetteSC.val2 || 0);
+            setEl("buff_marionette_agi", marionetteSC.val3 || 0);
+            setEl("buff_marionette_vit", marionetteSC.val4 || 0);
+            setEl("buff_marionette_int", marionetteSC.val5 || 0);
+            setEl("buff_marionette_dex", marionetteSC.val6 || 0);
+            setEl("buff_marionette_luk", marionetteSC.val7 || 0);
+        }
+    }
+
+    // Update headers — only for the relevant entity
+    if (entity === monster) {
+        updateMonsterDebuffHeader();
+        updateMonsterBuffHeader();
+    } else {
+        updateSupportSkillHeader();
+        updateMusicDanceSkillHeader();
+        updateMusicDanceStatLessonVisibility();
+        updateMarionetteVisibility();
+        updateGuildSkillHeader();
+        updateMiscEffectHeader();
+        updateFoodEffectHeader();
+    }
 }
-function LoadLocal3() {
-    for (SaveData = new Array,
-        k = 1; k <= 200; k++)
-        slotNum = "num0" + (k - 1),
-            9 == k && (slotNum = "num0" + k),
-            k >= 10 && (slotNum = "num" + k),
-            saveName = "",
-            void 0 === localStorage["Slot" + slotNum] ? c.A_SaveSlotLocal.options[k - 1] = new Option(k + ": No Data", slotNum) : (SaveData = JSON.parse(localStorage["Slot" + slotNum]), (SaveData[500] != undefined && SaveData[500] != "") && (saveName = " (" + SaveData[500] + ") "),
-                1 <= SaveData[2] && SaveData[2] <= 48 ? 0 == SaveData[5] ? c.A_SaveSlotLocal.options[k - 1] = new Option(k + ": " + JobName[SaveData[2]] + saveName, slotNum) : c.A_SaveSlotLocal.options[k - 1] = new Option(k + ": Baby " + JobName[SaveData[2]] + saveName, slotNum) : 999 == SaveData[2] || 0 == SaveData[2] ? c.A_SaveSlotLocal.options[k - 1] = new Option(k + ": Novice" + saveName, slotNum) : c.A_SaveSlotLocal.options[k - 1] = new Option(k + ": No Data", slotNum))
+
+/**
+ * Reads player.manual_edits and pushes values back into the
+ * Player Manual Edits table DOM (ID_ARG).
+ * 
+ * Each input/select in the table has data-type="N" matching the
+ * numeric type used in manualedits_start/manualedits_get.
+ * 
+ * The atkmod, resmod, and skilldamage fields are compound (a type
+ * select + a value input), so they need special handling.
+ */
+function syncManualEditsDOMFromData(entity, tableId) {
+    const table = document.getElementById(tableId);
+    if (!table) return;
+
+    // Compound field groups — each has a type-select and a value-input
+    // that together encode one manual edit entry.
+    const compoundFields = [
+        { inputName: 'manual_atkmod', selectName: 'manual_atkmod_type', type: 500 },
+        { inputName: 'manual_atkmod2', selectName: 'manual_atkmod2_type', type: 501 },
+        { inputName: 'manual_atkmod3', selectName: 'manual_atkmod3_type', type: 502 },
+        { inputName: 'manual_atkmod4', selectName: 'manual_atkmod4_type', type: 503 },
+        { inputName: 'manual_resmod', selectName: 'manual_resmod_type', type: 505 },
+        { inputName: 'manual_resmod2', selectName: 'manual_resmod2_type', type: 506 },
+        { inputName: 'manual_resmod3', selectName: 'manual_resmod3_type', type: 507 },
+        { inputName: 'manual_resmod4', selectName: 'manual_resmod4_type', type: 508 },
+    ];
+
+    // Skilldamage is extra-compound: the select encodes the skill ID which
+    // gets packed into a type of 5000+skillId, and there's a separate value input.
+    const skilldamageFields = [
+        { inputName: 'manual_skilldamage', selectName: 'manual_skilldamage_skill', type: 600 },
+        { inputName: 'manual_skilldamage2', selectName: 'manual_skilldamage2_skill', type: 601 },
+    ];
+
+    // First pass: simple fields with a single data-type attribute
+    const simpleControls = table.querySelectorAll('[data-type]');
+    for (const el of simpleControls) {
+        const dataType = parseInt(el.getAttribute('data-type'), 10);
+        if (!dataType) continue;
+
+        // Skip compound field inputs/selects — handled separately below
+        const isCompound = compoundFields.some(f => f.type === dataType) ||
+            skilldamageFields.some(f => f.type === dataType);
+        if (isCompound) continue;
+
+        const edit = manualedits_get(entity, dataType);
+        const val = edit ? edit.value : 0;
+
+        if (el.type === 'checkbox') {
+            el.checked = !!val;
+        } else if (el.tagName === 'SELECT') {
+            el.value = val;
+        } else if (el.type === 'text' || el.type === 'number') {
+            el.value = val || 0;
+        }
+    }
+
+    // Second pass: compound atkmod/resmod fields
+    for (const field of compoundFields) {
+        const edit = manualedits_get(entity, field.type);
+        const typeSelect = document.getElementsByName(field.selectName)[0];
+        const valueInput = document.getElementsByName(field.inputName)[0];
+        if (!typeSelect || !valueInput) continue;
+
+        if (edit && edit.value !== 0) {
+            // The edit stores the subtype in val (via the select) and
+            // the numeric amount in value. But ManualEdit only has type+value,
+            // so we need to find the right subtype select value from the edit.
+            // The subtype IS the data stored — atkmod type selects store
+            // things like BF.WEAPON, BF.MAGIC etc. We store these separately.
+            // For now restore what we can: the value input.
+            valueInput.value = edit.value;
+            // The type select can't be restored without storing it separately —
+            // leave it at its current value if it was already set.
+        } else {
+            typeSelect.value = 0;
+            valueInput.value = 0;
+        }
+    }
+
+    // Third pass: skilldamage fields (type is 5000+skillId, stored differently)
+    for (const field of skilldamageFields) {
+        const skillSelect = document.getElementsByName(field.selectName)[0];
+        const valueInput = document.getElementsByName(field.inputName)[0];
+        if (!skillSelect || !valueInput) continue;
+
+        // Find any manual edit with type >= 5000 for this field slot
+        // We can't distinguish slot 0 vs slot 1 without extra storage,
+        // so just clear both and restore what matches
+        let found = null;
+        for (const edit of entity.manual_edits) {
+            if (edit.type >= 5000) {
+                const skillId = edit.type - 5000;
+                // Check if this skill is in the select's options
+                const option = Array.from(skillSelect.options)
+                    .find(o => parseInt(o.value) === skillId);
+                if (option) { found = { skillId, value: edit.value }; break; }
+            }
+        }
+
+        if (found) {
+            skillSelect.value = found.skillId;
+            valueInput.value = found.value;
+        } else {
+            skillSelect.value = 0;
+            valueInput.value = 0;
+        }
+    }
+
+    updatePlayerManualEditsHeader();
 }
+
+/**
+ * Reads player.pet, player.temp_effect, and player.exp_modifiers and
+ * pushes their values back into the Additional Effects table DOM (ID_ETC).
+ * Uses data-id attributes to identify each control.
+ */
+function syncAdditionalEffectsDOMFromData() {
+    const table = document.getElementById('ID_ETC');
+    if (!table) return;
+
+    const controls = table.querySelectorAll('[data-id]');
+    for (const el of controls) {
+        const dataId = el.getAttribute('data-id');
+        if (!dataId) continue;
+
+        switch (dataId) {
+            case 'PET':
+                console.log("Restoring pet value:", player.pet);
+                el.value = player.pet || 0;
+                console.log(el.value);
+                break;
+            case 'TEMP_EFFECTS_1':
+                el.value = player.temp_effect[0] || 0;
+                break;
+            case 'TEMP_EFFECTS_2':
+                el.value = player.temp_effect[1] || 0;
+                break;
+            case 'TEMP_EFFECTS_3':
+                el.value = player.temp_effect[2] || 0;
+                break;
+            case 'TEMP_EFFECTS_4':
+                el.value = player.temp_effect[3] || 0;
+                break;
+            case 'EXP_PARTY_MEMBER':
+                el.value = player.exp_modifiers.party_member_count || 1;
+                break;
+            case 'EXP_BATTLE_MANUAL':
+                el.value = player.exp_modifiers.battle_manual || 0;
+                break;
+            case 'EXP_JOB_MANUAL':
+                el.checked = !!player.exp_modifiers.job_manual;
+                break;
+        }
+    }
+
+    updateAdditionalEffectHeader();
+}
+
+/**
+ * Reads monster.manual_edits and pushes values back into the
+ * Monster Manual Edits table DOM (B_MANUAL).
+ */
+function syncMonsterManualEditsDOMFromData() {
+    const table = document.getElementById('B_MANUAL');
+    if (!table) return;
+
+    // ── Element resistance fields (data-type 600 and 601) ─────────────────
+    // Stored as type = dataType * 10 + elementIndex, value = resistance amount
+    const eleresPairs = [
+        { inputName: 'enemy_manual_eleres', selectName: 'enemy_manual_eleres_element', baseType: 600 },
+        { inputName: 'enemy_manual_eleres2', selectName: 'enemy_manual_eleres2_element', baseType: 601 },
+    ];
+
+    for (const pair of eleresPairs) {
+        const input = table.querySelector(`[name="${pair.inputName}"]`);
+        const select = table.querySelector(`[name="${pair.selectName}"]`);
+        if (!input || !select) continue;
+
+        // Search manual_edits for any type in range baseType*10 + 0..9
+        let found = null;
+        for (const edit of monster.manual_edits) {
+            const baseCheck = Math.floor(edit.type / 10);
+            if (baseCheck === pair.baseType) {
+                found = edit;
+                break;
+            }
+        }
+
+        if (found) {
+            const elementIndex = found.type % 10;
+            select.value = elementIndex;
+            input.value = found.value;
+        } else {
+            select.value = 0;
+            input.value = 0;
+        }
+    }
+
+    // ── Element/size buff fields (data-type 610 and 611) ──────────────────
+    // Type 610 stores packedVal = element * 10 + level
+    // Type 611 stores size value
+    const elementEdit = manualedits_get(monster, 610);
+    const sizeEdit = manualedits_get(monster, 611);
+
+    const elementCheckbox = table.querySelector('[name="enemy_manual_elementbuff"]');
+    const elementSelect = table.querySelector('[name="enemy_manual_element"]');
+    const eleLvSelect = table.querySelector('[name="enemy_manual_elelv"]');
+    const sizeSelect = table.querySelector('[name="enemy_manual_size"]');
+
+    if (elementEdit && elementCheckbox) {
+        elementCheckbox.checked = true;
+        const packedVal = elementEdit.value;
+        if (elementSelect) elementSelect.value = Math.floor(packedVal / 10);
+        if (eleLvSelect) eleLvSelect.value = packedVal % 10;
+    } else {
+        if (elementCheckbox) elementCheckbox.checked = false;
+    }
+
+    if (sizeEdit && sizeSelect) {
+        sizeSelect.value = sizeEdit.value;
+    } else {
+        if (sizeSelect) sizeSelect.value = 0;
+    }
+
+    // ── Simple fields ─────────────────────────────────────────────────────
+    // All other data-type controls map directly to manualedits_get(monster, dataType)
+    const skipTypes = new Set([600, 601, 610, 611]);
+    const simpleControls = table.querySelectorAll('[data-type]');
+
+    for (const el of simpleControls) {
+        const dataType = parseInt(el.getAttribute('data-type'), 10);
+        if (!dataType || skipTypes.has(dataType)) continue;
+
+        const edit = manualedits_get(monster, dataType);
+        const val = edit ? edit.value : 0;
+
+        if (el.type === 'checkbox') {
+            el.checked = !!val;
+        } else if (el.tagName === 'SELECT') {
+            el.value = val;
+        } else if (el.type === 'text' || el.type === 'number') {
+            el.value = val || 0;
+        }
+    }
+
+    updateEnemyManualEditsHeader();
+}
+
+/**
+ * Loads a legacy (v1) save array into the current player/monster structures
+ * and syncs the DOM. The legacy format used flat numeric arrays + global
+ * n_A_Buf* arrays. We translate those into player.sc entries then call
+ * syncBuffDOMFromSC() to reflect them in the UI.
+ */
+function loadLegacyFormat(sd) {
+    // ── UI flags ──────────────────────────────────────────────────────────
+    c.all_dmgSkills.checked = sd[428];
+    c.restrict_jobequip.checked = sd[429];
+    c.restrict_lvlequip.checked = sd[430];
+    c.restrict_equipslot.checked = sd[431];
+    c.restrict_cardslot.checked = sd[432];
+    c.all_card.checked = sd[433];
+
+    // ── Job + levels ──────────────────────────────────────────────────────
+    c.A_JOB.value = sd[2];
+    ClickJob(sd[2]);
+    c.A_JobLV.value = sd[3];
+    c.A_BaseLV.value = sd[4];
+    c.A_adopted.checked = sd[5];
+
+    // ── Base stats ────────────────────────────────────────────────────────
+    c.A_STR.value = sd[6];
+    c.A_AGI.value = sd[7];
+    c.A_VIT.value = sd[8];
+    c.A_DEX.value = sd[9];
+    c.A_INT.value = sd[10];
+    c.A_LUK.value = sd[11];
+
+    // ── Weapon ────────────────────────────────────────────────────────────
+    c.A_Weapon_element.value = sd[12];
+    c.A_weapon1.value = sd[14];
+    ClickWeaponType(sd[13]);
+    c.A_Weapon_refine.value = sd[15];
+    c.A_weapon1_card1.value = sd[16];
+    c.A_weapon1_card2.value = sd[17];
+    c.A_weapon1_card3.value = sd[18];
+    c.A_weapon1_card4.value = sd[19];
+
+    if (sd[20] && sd[21]) { // dual wield was saved
+        c.A_weapon2.value = sd[21];
+        ClickWeaponType2(sd[20]);
+        c.A_Weapon2_refine.value = sd[22];
+        c.A_weapon2_card1.value = sd[23];
+        c.A_weapon2_card2.value = sd[24];
+        c.A_weapon2_card3.value = sd[25];
+        c.A_weapon2_card4.value = sd[26];
+    }
+
+    n_A_JobSet();
+    if (n_A_JobClass() === JOB.THIEF || n_A_JobClass() === JOB.ARCHER ||
+        n_A_JobClass() === JOB.GUNSLINGER)
+        c.A_Arrow.value = sd[27];
+
+    ClickB_Item(sd[14]);
+
+    // ── Armor slots ───────────────────────────────────────────────────────
+    c.A_head1.value = sd[28];
+    c.A_head1_card.value = sd[29];
+    c.A_HEAD_REFINE.value = sd[30];
+    c.A_head2.value = sd[31];
+    c.A_head2_card.value = sd[32];
+    c.A_head3.value = sd[33];
+    c.A_left.value = sd[34];
+    c.A_left_card.value = sd[35];
+    c.A_LEFT_REFINE.value = sd[36];
+    c.A_body.value = sd[37];
+    c.A_body_card.value = sd[38];
+    c.A_BODY_REFINE.value = sd[39];
+    c.A_shoulder.value = sd[40];
+    c.A_shoulder_card.value = sd[41];
+    c.A_SHOULDER_REFINE.value = sd[42];
+    c.A_shoes.value = sd[43];
+    c.A_shoes_card.value = sd[44];
+    c.A_SHOES_REFINE.value = sd[45];
+    c.A_acces1.value = sd[46];
+    c.A_acces1_card.value = sd[47];
+    c.A_acces2.value = sd[48];
+    c.A_acces2_card.value = sd[49];
+
+    // ── Passive skills (buff table dropdowns) ─────────────────────────────
+    const availableBuffs = JOB_AVAILABLE_BUFFS[sd[2]] || [];
+    for (let i = 0; i < availableBuffs.length && i <= 14; i++) {
+        const el = document.getElementById("A_skill" + i);
+        if (el) el.value = sd[56 + i] || 0;
+    }
+
+    // ── Random options, shadow, enchants ──────────────────────────────────
+    for (let i = 0; i <= 27; i++) player.randopt[i] = sd[436 + i] || 0;
+    reloadRandOpt();
+    console.log("Loaded randopts:", player.randopt);
+    for (let i = 0; i <= 5; i++)  player.shadow[i] = sd[464 + i] || 0;
+    if (player.shadow[1] === 0) player.shadow[1] = 22;
+    if (player.shadow[3] === 0) player.shadow[3] = 44;
+    for (let i = 0; i <= 10; i++) player.enchant[i] = sd[474 + i] || 0;
+
+    // ── Translate old n_A_Buf* arrays → player.sc ─────────────────────────
+    // Each setBuf2ToSC call writes directly into player.sc via sc_start/sc_end.
+    player.sc = []; // clear first
+
+    // Party/support skills (old n_A_Buf2, indices 0-21, saved at sd[73..94])
+    if (sd[73]) sc_start(player, SC.BLESSING, sd[73] > 5 ? sd[73] / 2 : sd[73]);
+    if (sd[74]) sc_start(player, SC.INCREASEAGI, sd[74] > 5 ? sd[74] / 2 : sd[74]);
+    if (sd[75]) sc_start(player, SC.IMPOSITIO, sd[75]);
+    if (sd[76]) sc_start(player, SC.GLORIA);
+    if (sd[77]) sc_start(player, SC.ANGELUS, sd[77]);
+    if (sd[78]) sc_start(player, SC.ASSUMPTIO);
+    if (sd[79] == 1) sc_start(player, SC.ADRENALINE);
+    else if (sd[79] == 2) sc_start(player, SC.ADRENALINE2);
+    if (sd[80]) sc_start(player, SC.WEAPONPERFECTION);
+    if (sd[81]) sc_start(player, SC.OVERTHRUST);
+    if (sd[82]) sc_start(player, SC.WINDWALK, sd[82]);
+    if (sd[83]) sc_start(player, SC.SUFFRAGIUM, sd[83]);
+    if (sd[84]) sc_start(player, SC.PROVIDENCE, sd[84]);
+    if (sd[85]) player.spiritball = sd[85];
+    if (sd[86]) sc_start(player, SC.AUTOGUARD, sd[86]);
+    if (sd[87]) sc_start(player, SC.SHIELDREFLECT, sd[87]);
+    if (sd[88]) sc_start(player, SC.DEFENDER, sd[88]);
+    if (sd[89]) sc_start(player, SC.INCALLSTATUS, 20);
+    if (sd[90]) sc_start(player, SC.INCMHPRATE, 100);
+    if (sd[91]) sc_start(player, SC.INCMSPRATE, 100);
+    if (sd[92]) sc_start(player, SC.INCATKRATE, 100);
+    if (sd[93]) { sc_start(player, SC.INCHIT, 50); sc_start(player, SC.INCFLEE, 50); }
+    if (sd[94]) sc_start(player, SC.INCDEFRATE, 25);
+
+    // music/dance skills
+    if (sd[96]) sc_start(player, SC.WHISTLE, sd[96], sd[126], sd[116], sd[133]);
+    if (sd[97]) sc_start(player, SC.ASSNCROS, sd[97], sd[127], sd[117]);
+    if (sd[98]) sc_start(player, SC.POEMBRAGI, sd[98], sd[128], sd[118], sd[125]);
+    if (sd[99]) sc_start(player, SC.APPLEIDUN, sd[99], sd[129], sd[119]);
+    if (sd[100]) sc_start(player, SC.HUMMING, sd[100], sd[130], sd[120]);
+    if (sd[101]) sc_start(player, SC.FORTUNE, sd[101], sd[131], sd[121]);
+    if (sd[102]) sc_start(player, SC.SERVICE4U, sd[102], sd[132], sd[122]);
+    if (sd[103]) sc_start(player, SC.SIEGFRIED, sd[103]);
+    if (sd[104]) sc_start(player, SC.RICHMANKIM, sd[104]);
+    if (sd[105]) sc_start(player, SC.DRUMBATTLE, sd[105]);
+    if (sd[106]) sc_start(player, SC.NIBELUNGEN, sd[106]);
+    if (sd[107]) sc_start(player, SC.MARIONETTE, sd[114], sd[108], sd[109], sd[110], sd[111], sd[112], sd[113]);
+    if (sd[470]) sc_start(player, SC.WHISTLE_SRS);
+    if (sd[471]) sc_start(player, SC.ASSNCROS_SRS);
+    if (sd[472]) sc_start(player, SC.FORTUNE_SRS);
+    if (sd[473]) sc_start(player, SC.HUMMING_SRS);
+
+    if (sd[136]) sc_start(player, SC.BATTLEORDERS);
+    if (sd[137]) sc_start(player, SC.LEADERSHIP, sd[137]);
+    if (sd[138]) sc_start(player, SC.GLORYWOUNDS, sd[138]);
+    if (sd[139]) sc_start(player, SC.SOULCOLD, sd[139]);
+    if (sd[140]) sc_start(player, SC.HAWKEYES, sd[140]);
+
+    if (sd[143] === 0 && sd[144]) sc_start(player, SC.VOLCANO, sd[144]);
+    else if (sd[143] === 1 && sd[144]) sc_start(player, SC.DELUGE, sd[144]);
+    else if (sd[143] === 2 && sd[144]) sc_start(player, SC.WHIRLWIND, sd[144]);
+    if (sd[146]) sc_start(player, SC.FOGWALL);
+    if (sd[147]) sc_start(player, SC.MINDBREAKER, sd[147]);
+    if (sd[148]) sc_start(player, SC.PROVOKE, sd[148]);
+    if (sd[149]) sc_start(player, SC.BENEDICTIO);
+    if (sd[150]) sc_start(player, SC.WATK_ELEMENT, ELE.FIRE, 20);
+    if (sd[151]) sc_start(player, SC.CHANGEUNDEAD);
+    if (sd[152]) sc_start(player, SC.NOCRIT);
+    if (sd[154]) sc_start(player, SC.BLIND);
+    if (sd[155]) sc_start(player, SC.STUN);
+    if (sd[156]) sc_start(player, SC.STONE);
+    if (sd[157]) sc_start(player, SC.SLEEP);
+    if (sd[158]) sc_start(player, SC.FREEZE);
+    if (sd[159]) sc_start(player, SC.AETERNA);
+    if (sd[160]) sc_start(player, SC.BLEEDING);
+    if (sd[161]) sc_start(player, SC.CRITICALWOUND, sd[161]);
+    if (sd[162]) sc_start(player, SC.QUAGMIRE, sd[162]);
+    if (sd[163]) sc_start(player, SC.DECREASEAGI, sd[163]);
+    if (sd[164]) sc_start(player, SC.POISON);
+    if (sd[165]) sc_start(player, SC.CURSE);
+
+    if (sd[169]) sc_start(player, SC.SESAME_PASTRY, 10);
+    if (sd[170]) sc_start(player, SC.HONEY_PASTRY, 10);
+    if (sd[171]) sc_start(player, SC.ORLEANS_MEAL, 7);
+    if (sd[172]) sc_start(player, SC.FOOD_STR_CASH, sd[172]);
+    if (sd[173]) sc_start(player, SC.FOOD_AGI_CASH, sd[173]);
+    if (sd[174]) sc_start(player, SC.FOOD_VIT_CASH, sd[174]);
+    if (sd[175]) sc_start(player, SC.FOOD_INT_CASH, sd[175]);
+    if (sd[176]) sc_start(player, SC.FOOD_DEX_CASH, sd[176]);
+    if (sd[177]) sc_start(player, SC.FOOD_LUK_CASH, sd[177]);
+    if (sd[178]) sc_start(player, SC.RESENTMENT_BOX, 20);
+    if (sd[179]) sc_start(player, SC.DROWSINESS_BOX, 20);
+    if (sd[180]) sc_start(player, SC.ARMOR_ELEMENT_WATER);
+    if (sd[181]) sc_start(player, SC.ARMOR_ELEMENT_EARTH);
+    if (sd[182]) sc_start(player, SC.ARMOR_ELEMENT_FIRE);
+    if (sd[183]) sc_start(player, SC.ARMOR_ELEMENT_WIND);
+    // 184
+    if (sd[185]) sc_start(player, SC.ORIENTAL_PASTRY, 10);
+    if (sd[186]) sc_start(player, SC.RUNE_STRAWBERRY_CAKE, 5);
+    if (sd[187]) sc_start(player, SC.SCHWARTZWALD_PINE_JUBILEE);
+    if (sd[188]) sc_start(player, SC.ARUNAFELTZ_DESERT_SANDWICH, 7);
+    if (sd[189]) sc_start(player, SC.MANU_ATK, 10);
+    if (sd[190]) sc_start(player, SC.MANU_MATK, 10);
+    if (sd[191]) sc_start(player, SC.MANU_DEF, 10);
+    if (sd[192]) sc_start(player, SC.SPL_ATK, 10);
+    if (sd[193]) sc_start(player, SC.SPL_MATK, 10);
+    if (sd[194]) sc_start(player, SC.SPL_DEF, 10);
+    if (sd[195]) sc_start(player, SC.GUARANA_CANDY);
+    // 196
+    // 197
+    // 198
+    // 199
+    if (sd[200]) sc_start(player, SC.ALOEVERA);
+    if (sd[201]) sc_start(player, SC.DEF_RATE, 3);
+    if (sd[202]) sc_start(player, SC.MDEF_RATE, 3);
+    if (sd[203]) sc_start(player, SC.GLOOM_BOX);
+    if (sd[204] == 1) sc_start(player, SC.ASPDPOTION0);
+    else if (sd[204] == 2) sc_start(player, SC.ASPDPOTION1);
+    else if (sd[204] == 3) sc_start(player, SC.ASPDPOTION2);
+    else if (sd[204] == 4) sc_start(player, SC.ASPDPOTION3);
+    if (sd[205]) sc_start(player, SC.ABRASIVE, 20);
+    if (sd[206]) sc_start(player, SC.REGENERATION_POTION, 20);
+    if (sd[207]) sc_start(player, SC.CHEWY_RICE_CAKE, 10);
+    // 208
+    // 209
+    // 210
+    // 211
+    if (sd[212]) sc_start(player, SC.MACARONCAKE);
+    // 213
+    // 214
+    // 215
+    // 216
+    // 217
+    // 218
+    // 219 
+    // 220
+
+    // "additional" effects
+    player.pet = sd[221];
+    // 222 - battle manual
+    player.exp_modifiers.job_manual = sd[223];
+    // 224 - base rate
+    // 225
+    player.exp_modifiers.party_member_count = sd[226];
+    // 227 - exp tap bonus
+    // 228 - job rate
+    player.temp_effect[0] = sd[229];
+    player.temp_effect[1] = sd[230];
+    player.temp_effect[2] = sd[231];
+    player.temp_effect[3] = sd[232];
+
+    // player manual edits
+    if (sd[319]) manualedits_start(player, 290, sd[319]);
+    if (sd[320]) manualedits_start(player, 295, sd[320]);
+    if (sd[321]) manualedits_start(player, 78, sd[321]);
+    if (sd[333]) manualedits_start(player, 13, sd[333]);
+    if (sd[334]) manualedits_start(player, 15, sd[334]);
+    if (sd[335]) manualedits_start(player, 14, sd[335]);
+    if (sd[336]) manualedits_start(player, 16, sd[336]);
+    if (sd[337]) manualedits_start(player, 18, sd[337]);
+    if (sd[338]) manualedits_start(player, 19, sd[338]);
+    if (sd[339]) manualedits_start(player, 8, sd[339]);
+    if (sd[340]) manualedits_start(player, 9, sd[340]);
+    if (sd[341]) manualedits_start(player, 11, sd[341]);
+    if (sd[342]) manualedits_start(player, 10, sd[342]);
+    if (sd[343]) manualedits_start(player, 17, sd[343]);
+    if (sd[344]) manualedits_start(player, 80, sd[344]);
+    if (sd[345]) manualedits_start(player, 88, sd[345]);
+    if (sd[346]) manualedits_start(player, 89, sd[346]);
+    if (sd[347]) manualedits_start(player, 12, sd[347]);
+    // 348
+    // 349
+    if (sd[350]) manualedits_start(player, 1, sd[350]);
+    if (sd[351]) manualedits_start(player, 2, sd[351]);
+    if (sd[352]) manualedits_start(player, 3, sd[352]);
+    if (sd[353]) manualedits_start(player, 4, sd[353]);
+    if (sd[354]) manualedits_start(player, 5, sd[354]);
+    if (sd[355]) manualedits_start(player, 6, sd[355]);
+    // 356
+    if (sd[357]) manualedits_start(player, 354, sd[357]);
+    if (sd[358]) manualedits_start(player, 86, sd[358]);
+    if (sd[359]) manualedits_start(player, 25, sd[359]);
+    if (sd[360]) manualedits_start(player, 70, sd[360]);
+
+    monster.sc = [];
+    if (sd[253]) sc_start(monster, SC.PROVOKE, sd[253]);
+    if (sd[254]) sc_start(monster, SC.QUAGMIRE, sd[254]);
+    if (sd[255]) sc_start(monster, SC.POISON);
+    if (sd[256]) sc_start(monster, SC.BLIND);
+    if (sd[257]) sc_start(monster, SC.FREEZE);
+    if (sd[258]) sc_start(monster, SC.BLESSING, sd[258]);
+    if (sd[259]) sc_start(monster, SC.AETERNA);
+    if (sd[260]) sc_start(monster, SC.STUN);
+    if (sd[261]) sc_start(monster, SC.SLEEP);
+    if (sd[262]) sc_start(monster, SC.STONE);
+    if (sd[263]) sc_start(monster, SC.CURSE);
+    if (sd[264]) sc_start(monster, SC.DECREASEAGI, sd[264]);
+    if (sd[265]) sc_start(monster, SC.CRUCIS, sd[265]);
+    if (sd[266]) sc_start(monster, SC.STRIPWEAPON);
+    if (sd[267]) sc_start(monster, SC.STRIPSHIELD);
+    if (sd[268]) sc_start(monster, SC.STRIPARMOR);
+    if (sd[269]) sc_start(monster, SC.STRIPHELM);
+    if (sd[270]) sc_start(monster, SC.SPIDERWEB);
+    if (sd[271]) sc_start(monster, SC.MINDBREAKER, sd[271]);
+    if (sd[272]) sc_start(monster, SC.DONTFORGETME);
+    if (sd[273]) sc_start(monster, SC.ETERNALCHAOS);
+    if (sd[274]) sc_start(monster, SC.SKA, sd[274]);
+    // 275 - eske
+    if (sd[276]) sc_start(monster, SC.ELEMENTALCHANGE, sd[276], 1);
+    // 277 - flying
+    if (sd[278]) sc_start(monster, SC.REDUCE_DEFRATE, sd[278]);
+    if (sd[279]) sc_start(monster, SC.DISARM);
+    if (sd[280]) sc_start(monster, SC.CRITIGNORELUK, sd[280]);
+
+    // monster buffs
+    if (sd[281]) sc_start(monster, SC.INCREASEAGI, sd[281]);
+    if (sd[282]) sc_start(monster, SC.ASSUMPTIO);
+    if (sd[283]) sc_start(monster, SC.ADRENALINE);
+    if (sd[284]) sc_start(monster, SC.MAXIMIZEPOWER);
+    if (sd[285]) sc_start(monster, SC.POWERUP);
+    if (sd[286]) sc_start(monster, SC.AGIUP, sd[286]);
+    if (sd[287]) sc_start(monster, SC.ELEMENTALCHANGE, Math.trunc(sd[287] / 10), sd[287] % 10);
+    if (sd[288]) sc_start(monster, SC.ARMORCHANGE, sd[288], SKILL.NPC_STONESKIN);
+    if (sd[289]) sc_start(monster, SC.ARMORCHANGE, sd[289], SKILL.NPC_ANTIMAGIC);
+    if (sd[290]) sc_start(monster, SC.KEEPING);
+    if (sd[291]) sc_start(monster, SC.ANGELUS, sd[291]);
+    if (sd[292]) sc_start(monster, SC.AUTOGUARD, sd[292]);
+    if (sd[293]) sc_start(monster, SC.SHIELDREFLECT, sd[293]);
+    if (sd[294]) sc_start(monster, SC.ARMOR, sd[294]);
+    if (sd[295]) sc_start(monster, SC.ENERGYCOAT, sd[295]);
+
+    // monster manual edits
+    // 364
+    if (sd[365]) manualedits_start(monster, 604, sd[365]);
+    if (sd[367]) manualedits_start(monster, 6000 + sd[366], sd[367]);
+    if (sd[369]) manualedits_start(monster, 6010 + sd[368], sd[369]);
+    if (sd[371]) manualedits_start(monster, 602, sd[371]);
+    if (sd[373]) manualedits_start(monster, 78, sd[373]);
+    if (sd[385]) manualedits_start(monster, 71, sd[385]);
+    if (sd[394]) manualedits_start(monster, 13, sd[394]);
+    if (sd[395]) manualedits_start(monster, 15, sd[395]);
+    // 396
+    // 397
+    if (sd[398]) manualedits_start(monster, 18, sd[398]);
+    if (sd[399]) manualedits_start(monster, 19, sd[399]);
+    if (sd[400]) manualedits_start(monster, 8, sd[400]);
+    if (sd[401]) manualedits_start(monster, 9, sd[401]);
+    // 402
+    // 403
+    if (sd[404]) manualedits_start(monster, 17, sd[404]);
+    if (sd[405]) manualedits_start(monster, 80, sd[405]);
+    if (sd[406]) manualedits_start(monster, 88, sd[406]);
+    // 407
+    // 408
+    // 409
+    // 410
+    // 411
+    if (sd[412]) manualedits_start(monster, 2, sd[412]);
+    if (sd[413]) manualedits_start(monster, 3, sd[413]);
+    if (sd[414]) manualedits_start(monster, 4, sd[414]);
+    if (sd[415]) manualedits_start(monster, 5, sd[415]);
+    if (sd[416]) manualedits_start(monster, 6, sd[416]);
+    if (sd[417]) manualedits_start(monster, 87, sd[417]);
+    if (sd[418]) manualedits_start(monster, 354, sd[418]);
+    // 419
+    if (sd[422]) manualedits_start(monster, 610, (sd[420] * 10) + sd[421]);
+    if (sd[424]) manualedits_start(monster, 611, sd[423]);
+
+    console.log("Loaded legacy monster debuffs (sd[253..280]) but exact mapping to monster.sc entries is not implemented yet");
+    // ── Active skill ──────────────────────────────────────────────────────
+    c.Conf01.value = sd[237];
+    c.B_num.value = sd[238];
+    c.A8_Skill14.value = sd[239];
+    StCalc(1);
+    ActiveSkillSetPlus();
+    c.A_ActiveSkill.value = sd[243];
+    ClickActiveSkill();
+    c.A_ActiveSkillLV.value = sd[244];
+    console.log("Loaded active skill ID:", sd[243], "level:", sd[244], "subnum:", sd[245]);
+    const skillsToLoadSubNum = [66, 326, 159, 384, 324, 131, 88, 197, 394, 395, 405, 429];
+    if (c.SkillSubNum && (skillsToLoadSubNum.includes(player.active_skill) || SkillSearch(SKILL.PF_DOUBLECASTING))) c.SkillSubNum.value = sd[245] || 0;
+
+    // ── Monster ───────────────────────────────────────────────────────────
+    c.B_Enemy.value = sd[246] || 586;
+    LoadEnemySkills();
+    c.B_AtkSkill.value = sd[247];
+    BClickAtkSkill();
+    const skillsToLoadSubNumForMonster = [444, 445, 125, 131];
+    if (c.BSkillSubNum && skillsToLoadSubNumForMonster.includes(c.B_AtkSkill.value)) c.BSkillSubNum.value = sd[248] || 0;
+    c.B_AtkRange.value = sd[434];
+    c.B_AtkElem.value = sd[435];
+
+    // ── UI ────────────────────────────────────────────────────────────────
+    c.theme.value = sd[425];
+    c.saveDataName.value = sd[500] || "";
+
+    // ── Sync all buff table DOM controls from the SC state we just built ──
+    console.log("Loaded legacy save, translating n_A_Buf* → player.sc and syncing buff DOM");
+
+    refreshFields();
+    StCalc(1);
+    StAllCalc();
+    ActiveSkillSetPlus();
+    calc();
+    themes();
+    syncBuffDOMFromSC(player);
+    syncBuffDOMFromSC(monster);
+    syncAdditionalEffectsDOMFromData();
+    syncManualEditsDOMFromData(player, 'ID_ARG');
+    syncMonsterManualEditsDOMFromData();
+}
+
 function delLocal() {
     window.confirm("Do you really want to DELETE selected saved data?") && (slotNum = document.calcForm.A_SaveSlotLocal.value,
         localStorage["Slot" + slotNum] = 0,
@@ -2736,399 +3263,9 @@ function delLocal() {
         LoadLocal3(),
         document.calcForm.A_SaveSlotLocal.value = bkcN)
 }
-function NtoS2(_, n) {
-    var a = "";
-    return 3 == n ? (a += n_NtoS2[Math.floor(_ / 3844)],
-        a += n_NtoS2[Math.floor(_ % 3844 / 62)],
-        a += n_NtoS2[_ % 62]) : 2 == n ? (a += n_NtoS2[Math.floor(_ / 62)],
-            a += n_NtoS2[_ % 62]) : a += n_NtoS2[_],
-        a
-}
-function NtoS01(_, n, a, e, t) {
-    var A = 0;
-    return 1 == _ && (A += 16),
-        1 == n && (A += 8),
-        1 == a && (A += 4),
-        1 == e && (A += 2),
-        1 == t && (A += 1),
-        NtoS2(A, 1)
-}
-function NtoS05(_, n) {
-    var a;
-    return a = 6 * _,
-        NtoS2(a += n, 1)
-}
-function URLOUT() {
-    calc(),
-        SaveData = new Array;
-    for (var _ = 0; _ <= 88; _++)
-        SaveData[_] = "a";
-    SaveData[0] = NtoS2(7, 1),
-        SaveData[1] = NtoS2(1 * c.A_JOB.value, 2),
-        SaveData[2] = NtoS2(1 * c.A_BaseLV.value, 2),
-        SaveData[3] = NtoS2(1 * c.A_JobLV.value, 2),
-        SaveData[4] = NtoS2(1 * c.A_STR.value, 2),
-        SaveData[5] = NtoS2(1 * c.A_AGI.value, 2),
-        SaveData[6] = NtoS2(1 * c.A_VIT.value, 2),
-        SaveData[7] = NtoS2(1 * c.A_DEX.value, 2),
-        SaveData[8] = NtoS2(1 * c.A_INT.value, 2),
-        SaveData[9] = NtoS2(1 * c.A_LUK.value, 2),
-        SaveData[10] = NtoS2(10 * n_A_Buf7[35] + 1 * c.A_Weapon_element.value, 1),
-        SaveData[11] = NtoS2(m_Item[c.A_weapon1.value][1], 1),
-        player.dual_wield && (SaveData[12] = NtoS2(m_Item[c.A_weapon2.value][1], 1)),
-        (2 == n_A_JobClass() || 4 == n_A_JobClass() || 45 == n_A_JobClass() && 0 != n_A_WeaponType) && (SaveData[13] = NtoS2(1 * c.A_Arrow.value, 1)),
-        SaveData[14] = NtoS2(1 * c.A_weapon1.value, 2),
-        SaveData[15] = NtoS2(1 * c.A_Weapon_refine.value, 1),
-        SaveData[16] = NtoS2(1 * c.A_weapon1_card1.value, 2),
-        SaveData[17] = NtoS2(1 * c.A_weapon1_card2.value, 2),
-        SaveData[18] = NtoS2(1 * c.A_weapon1_card3.value, 2),
-        SaveData[19] = NtoS2(1 * c.A_weapon1_card4.value, 2),
-        player.dual_wield ? (SaveData[20] = NtoS2(1 * c.A_weapon2.value, 2),
-            SaveData[21] = NtoS2(1 * c.A_Weapon2_refine.value, 1),
-            SaveData[22] = NtoS2(1 * c.A_weapon2_card1.value, 2),
-            SaveData[23] = NtoS2(1 * c.A_weapon2_card2.value, 2),
-            SaveData[24] = NtoS2(1 * c.A_weapon2_card3.value, 2),
-            SaveData[25] = NtoS2(1 * c.A_weapon2_card4.value, 2)) : (SaveData[20] = NtoS2(1 * c.A_left.value, 2),
-                SaveData[21] = NtoS2(1 * c.A_LEFT_REFINE.value, 1),
-                SaveData[22] = NtoS2(1 * c.A_left_card.value, 2),
-                SaveData[24] = SaveData[25] = SaveData[23] = NtoS2(0, 2)),
-        SaveData[26] = NtoS2(1 * c.A_head1.value, 2),
-        SaveData[27] = NtoS2(1 * c.A_head1_card.value, 2),
-        SaveData[28] = NtoS2(1 * c.A_head2.value, 2),
-        SaveData[29] = NtoS2(1 * c.A_head2_card.value, 2),
-        SaveData[30] = NtoS2(1 * c.A_head3.value, 2),
-        SaveData[31] = NtoS2(1 * c.A_body.value, 2),
-        SaveData[32] = NtoS2(1 * c.A_body_card.value, 2),
-        SaveData[33] = NtoS2(1 * c.A_shoulder.value, 2),
-        SaveData[34] = NtoS2(1 * c.A_shoulder_card.value, 2),
-        SaveData[35] = NtoS2(1 * c.A_shoes.value, 2),
-        SaveData[36] = NtoS2(1 * c.A_shoes_card.value, 2),
-        SaveData[37] = NtoS2(1 * c.A_acces1.value, 2),
-        SaveData[38] = NtoS2(1 * c.A_acces1_card.value, 2),
-        SaveData[39] = NtoS2(1 * c.A_acces2.value, 2),
-        SaveData[40] = NtoS2(1 * c.A_acces2_card.value, 2),
-        SaveData[41] = NtoS2(1 * c.A_HEAD_REFINE.value, 1),
-        SaveData[42] = NtoS2(1 * c.A_BODY_REFINE.value, 1),
-        SaveData[43] = NtoS2(1 * c.A_SHOULDER_REFINE.value, 1),
-        SaveData[44] = NtoS2(1 * c.A_SHOES_REFINE.value, 1),
-        SaveData[45] = NtoS01(c.A_adopted.checked, 0, 0, 0, 0),
-        SaveData[46] = NtoS2(0, 2),
-        SaveData[47] = NtoS2(0, 2),
-        SaveData[48] = NtoS2(0, 2),
-        SaveData[49] = NtoS2(0, 2),
-        n_A_JobSet();
-    var n = n_A_JOB, a = 0;
-    const availableBuffs = JOB_AVAILABLE_BUFFS[n_A_JOB] || [];
 
-    for (let i = 0; i < availableBuffs.length && i <= 19; i++) {
-        const skillElement = document.getElementById("A_skill" + i);
-        if (skillElement) {
-            SaveData[51 + i] = NtoS2(1 * skillElement.value, 1);
-        }
-    }
-    _ = availableBuffs.length;
-    SaveData[50] = NtoS2(_, 1);
-    _++;
-
-    var t = 51 + _ - 1;
-    for (_ = 0; _ <= 21 && 0 == getBuf2FromSC(_); _++)
-        ;
-    22 == _ ? SaveData[t] = NtoS2(0, 1) : (SaveData[t] = NtoS2(1, 1),
-        SaveData[t + 1] = NtoS2(getBuf2FromSC(0), 1),
-        SaveData[t + 2] = NtoS2(getBuf2FromSC(1), 1),
-        SaveData[t + 3] = NtoS2(getBuf2FromSC(4), 1),
-        SaveData[t + 4] = NtoS2(getBuf2FromSC(9), 1),
-        SaveData[t + 5] = NtoS2(getBuf2FromSC(13), 1),
-        SaveData[t + 6] = NtoS2(getBuf2FromSC(14), 1),
-        SaveData[t + 7] = NtoS05(getBuf2FromSC(2), getBuf2FromSC(6)),
-        SaveData[t + 8] = NtoS05(getBuf2FromSC(10), getBuf2FromSC(11)),
-        SaveData[t + 9] = NtoS05(getBuf2FromSC(12), getBuf2FromSC(15)),
-        SaveData[t + 10] = NtoS01(getBuf2FromSC(3), getBuf2FromSC(5), getBuf2FromSC(7), getBuf2FromSC(8), getBuf2FromSC(16)),
-        SaveData[t + 11] = NtoS01(getBuf2FromSC(17), getBuf2FromSC(18), getBuf2FromSC(19), getBuf2FromSC(20), getBuf2FromSC(21)),
-        t += 11),
-        t += 1;
-    for (_ = 0; _ <= 24 && 0 == n_B_debuf[_]; _++)
-        ;
-    25 == _ ? SaveData[t] = NtoS2(0, 1) : (SaveData[t] = NtoS2(1, 1),
-        SaveData[t + 1] = NtoS2(n_B_debuf[0], 1),
-        SaveData[t + 2] = NtoS05(n_B_debuf[1], n_B_debuf[18]),
-        SaveData[t + 3] = NtoS01(n_B_debuf[2], n_B_debuf[3], n_B_debuf[4], n_B_debuf[5], n_B_debuf[6]),
-        SaveData[t + 4] = NtoS01(n_B_debuf[7], n_B_debuf[8], n_B_debuf[9], n_B_debuf[10], n_B_debuf[19]),
-        SaveData[t + 5] = NtoS2(n_B_debuf[11], 1),
-        SaveData[t + 6] = NtoS2(n_B_debuf[12], 1),
-        SaveData[t + 7] = NtoS01(n_B_debuf[13], n_B_debuf[14], n_B_debuf[15], n_B_debuf[16], n_B_debuf[17]),
-        SaveData[t + 8] = NtoS01(n_B_debuf[20], n_B_debuf[21], n_B_debuf[22], 0, 0),
-        SaveData[t + 9] = NtoS05(n_B_debuf[23], n_B_debuf[24]),
-        t += 9),
-        t += 1;
-    for (_ = 0; _ <= 19 && 0 == n_B_buf[_]; _++)
-        ;
-    10 == _ ? SaveData[t] = NtoS2(0, 1) : (SaveData[t] = NtoS2(1, 1),
-        SaveData[t + 1] = NtoS2(n_B_buf[0], 1),
-        SaveData[t + 2] = NtoS01(n_B_buf[1], n_B_buf[2], n_B_buf[3], n_B_buf[4], n_B_buf[9]),
-        SaveData[t + 3] = NtoS2(n_B_buf[6], 2),
-        SaveData[t + 4] = NtoS05(n_B_buf[7], n_B_buf[8]),
-        SaveData[t + 5] = NtoS2(n_B_buf[5], 1),
-        SaveData[t + 6] = NtoS2(n_B_buf[10], 1),
-        SaveData[t + 7] = NtoS2(n_B_buf[11], 1),
-        SaveData[t + 8] = NtoS2(n_B_buf[12], 1),
-        SaveData[t + 9] = NtoS2(n_B_buf[13], 1),
-        SaveData[t + 10] = NtoS2(n_B_buf[14], 1),
-        t += 10),
-        t += 1;
-    var A = [0, 0, 0, 0, 0];
-    for (_ = 0; _ <= 36 && 0 == n_A_Buf3[_]; _++)
-        ;
-    for (37 != _ && (A[0] = 1),
-        _ = 0; _ <= 4 && 0 == n_A_Buf3[40 + _]; _++)
-        ;
-    for (5 != _ && (A[1] = 1),
-        _ = 0; _ <= 23 && 0 == n_A_Buf6[_]; _++)
-        ;
-    for (24 != _ && (A[3] = 1),
-        _ = 0; _ <= 60 && 0 == n_A_Buf7[_]; _++)
-        ;
-    61 != _ && (A[4] = 1),
-        SaveData[t] = NtoS01(A[0], A[1], A[2], A[3], A[4]),
-        A[0] && (SaveData[t + 1] = NtoS2(n_A_Buf3[0], 1),
-            SaveData[t + 2] = NtoS2(n_A_Buf3[1], 1),
-            SaveData[t + 3] = NtoS2(n_A_Buf3[2], 1),
-            SaveData[t + 4] = NtoS2(n_A_Buf3[3], 1),
-            SaveData[t + 5] = NtoS2(n_A_Buf3[4], 1),
-            SaveData[t + 6] = NtoS2(n_A_Buf3[5], 1),
-            SaveData[t + 7] = NtoS2(n_A_Buf3[6], 1),
-            SaveData[t + 8] = NtoS05(n_A_Buf3[7], n_A_Buf3[8]),
-            SaveData[t + 9] = NtoS05(n_A_Buf3[9], n_A_Buf3[10]),
-            SaveData[t + 10] = NtoS01(n_A_Buf3[11], n_A_Buf3[18], 0, 0, 0),
-            SaveData[t + 11] = NtoS2(n_A_Buf3[12], 2),
-            SaveData[t + 12] = NtoS2(n_A_Buf3[13], 2),
-            SaveData[t + 13] = NtoS2(n_A_Buf3[14], 2),
-            SaveData[t + 14] = NtoS2(n_A_Buf3[15], 2),
-            SaveData[t + 15] = NtoS2(n_A_Buf3[16], 2),
-            SaveData[t + 16] = NtoS2(n_A_Buf3[17], 2),
-            SaveData[t + 17] = NtoS2(n_A_Buf3[20], 2),
-            SaveData[t + 18] = NtoS2(n_A_Buf3[30], 1),
-            SaveData[t + 19] = NtoS2(n_A_Buf3[21], 2),
-            SaveData[t + 20] = NtoS2(n_A_Buf3[31], 1),
-            SaveData[t + 21] = NtoS2(n_A_Buf3[22], 2),
-            SaveData[t + 22] = NtoS2(n_A_Buf3[29], 2),
-            SaveData[t + 23] = NtoS2(n_A_Buf3[32], 1),
-            SaveData[t + 24] = NtoS2(n_A_Buf3[23], 2),
-            SaveData[t + 25] = NtoS2(n_A_Buf3[33], 1),
-            SaveData[t + 26] = NtoS2(n_A_Buf3[24], 2),
-            SaveData[t + 27] = NtoS2(n_A_Buf3[34], 1),
-            SaveData[t + 28] = NtoS2(n_A_Buf3[25], 2),
-            SaveData[t + 29] = NtoS2(n_A_Buf3[35], 1),
-            SaveData[t + 30] = NtoS2(n_A_Buf3[26], 2),
-            SaveData[t + 31] = NtoS2(n_A_Buf3[36], 1),
-            t += 31),
-        A[1] && (SaveData[t + 1] = NtoS01(n_A_Buf3[40], 0, 0, 0, 0),
-            SaveData[t + 2] = NtoS05(n_A_Buf3[41], n_A_Buf3[42]),
-            SaveData[t + 3] = NtoS05(n_A_Buf3[43], n_A_Buf3[44]),
-            t += 3),
-        A[3] && (SaveData[t + 1] = NtoS2(n_A_Buf6[5], 1),
-            SaveData[t + 2] = NtoS2(n_A_Buf6[20], 1),
-            SaveData[t + 3] = NtoS05(n_A_Buf6[0], n_A_Buf6[1]),
-            SaveData[t + 4] = NtoS05(n_A_Buf6[2], n_A_Buf6[4]),
-            SaveData[t + 5] = NtoS05(n_A_Buf6[18], n_A_Buf6[19]),
-            SaveData[t + 6] = NtoS01(n_A_Buf6[3], n_A_Buf6[6], n_A_Buf6[7], n_A_Buf6[8], n_A_Buf6[9]),
-            SaveData[t + 7] = NtoS01(n_A_Buf6[10], n_A_Buf6[11], n_A_Buf6[12], n_A_Buf6[13], n_A_Buf6[14]),
-            SaveData[t + 8] = NtoS01(n_A_Buf6[15], n_A_Buf6[16], n_A_Buf6[17], n_A_Buf6[21], n_A_Buf6[22]),
-            t += 8),
-        A[4] && (SaveData[t + 1] = NtoS2(n_A_Buf7[3], 1),
-            SaveData[t + 2] = NtoS2(n_A_Buf7[4], 1),
-            SaveData[t + 3] = NtoS2(n_A_Buf7[5], 1),
-            SaveData[t + 4] = NtoS2(n_A_Buf7[6], 1),
-            SaveData[t + 5] = NtoS2(n_A_Buf7[7], 1),
-            SaveData[t + 6] = NtoS2(n_A_Buf7[8], 1),
-            SaveData[t + 7] = NtoS05(n_A_Buf7[35], n_A_Buf7[42]),
-            SaveData[t + 8] = NtoS05(n_A_Buf7[39], n_A_Buf7[40]),
-            SaveData[t + 9] = NtoS01(n_A_Buf7[0], n_A_Buf7[1], n_A_Buf7[2], n_A_Buf7[9], n_A_Buf7[10]),
-            SaveData[t + 10] = NtoS01(n_A_Buf7[11], n_A_Buf7[12], n_A_Buf7[13], n_A_Buf7[14], 0),
-            SaveData[t + 11] = NtoS01(n_A_Buf7[16], n_A_Buf7[17], n_A_Buf7[18], n_A_Buf7[19], n_A_Buf7[20]),
-            SaveData[t + 12] = NtoS01(n_A_Buf7[21], n_A_Buf7[22], n_A_Buf7[23], n_A_Buf7[24], n_A_Buf7[25]),
-            SaveData[t + 13] = NtoS01(n_A_Buf7[26], n_A_Buf7[27], n_A_Buf7[28], n_A_Buf7[29], n_A_Buf7[30]),
-            SaveData[t + 14] = NtoS01(n_A_Buf7[31], n_A_Buf7[32], n_A_Buf7[33], n_A_Buf7[34], n_A_Buf7[36]),
-            SaveData[t + 15] = NtoS01(n_A_Buf7[37], n_A_Buf7[38], n_A_Buf7[41], n_A_Buf7[43], n_A_Buf7[44]),
-            SaveData[t + 16] = NtoS01(n_A_Buf7[45], n_A_Buf7[46], n_A_Buf7[47], n_A_Buf7[48], n_A_Buf7[49]),
-            SaveData[t + 17] = NtoS01(n_A_Buf7[50], n_A_Buf7[51], n_A_Buf7[52], n_A_Buf7[53], n_A_Buf7[54]),
-            SaveData[t + 18] = NtoS2(n_A_Buf7[55], 1),
-            SaveData[t + 19] = NtoS01(n_A_Buf7[56], 0, 0, 0, 0),
-            t += 19),
-        t += 1;
-    for (_ = 0; _ <= 11 && 0 == n_A_Buf8[_]; _++)
-        ;
-    12 == _ ? SaveData[t] = NtoS2(0, 1) : (SaveData[t] = NtoS2(1, 1),
-        SaveData[t + 1] = NtoS2(n_A_Buf8[0], 2),
-        SaveData[t + 2] = NtoS2(n_A_Buf8[3], 2),
-        SaveData[t + 3] = NtoS2(n_A_Buf8[7], 2),
-        SaveData[t + 4] = NtoS2(n_A_Buf8[8], 2),
-        SaveData[t + 5] = NtoS2(n_A_Buf8[9], 2),
-        SaveData[t + 6] = NtoS2(n_A_Buf8[10], 2),
-        SaveData[t + 7] = NtoS2(n_A_Buf8[11], 2),
-        SaveData[t + 8] = NtoS2(n_A_Buf8[5], 1),
-        SaveData[t + 9] = NtoS2(n_A_Buf8[6], 1),
-        SaveData[t + 10] = NtoS05(n_A_Buf8[1], 0),
-        SaveData[t + 11] = NtoS01(n_A_Buf8[2], 0, 0, 0, 0),
-        t += 11),
-        t += 1;
-    for (_ = 0; _ <= 59 && 0 == n_A_Buf9[_]; _++)
-        ;
-    if (60 == _)
-        SaveData[t] = NtoS2(0, 1);
-    else {
-        for (SaveData[t] = NtoS2(1, 1),
-            SaveData[t + 1] = NtoS2(n_A_Buf9[0], 1),
-            SaveData[t + 2] = NtoS2(n_A_Buf9[1], 2),
-            SaveData[t + 3] = NtoS2(n_A_Buf9[2], 1),
-            SaveData[t + 4] = NtoS2(n_A_Buf9[3], 2),
-            SaveData[t + 5] = NtoS2(n_A_Buf9[4], 1),
-            SaveData[t + 6] = NtoS2(n_A_Buf9[5], 2),
-            SaveData[t + 7] = NtoS2(n_A_Buf9[6], 1),
-            SaveData[t + 8] = NtoS2(n_A_Buf9[7], 2),
-            SaveData[t + 9] = NtoS2(n_A_Buf9[8], 1),
-            SaveData[t + 10] = NtoS2(n_A_Buf9[9], 2),
-            SaveData[t + 11] = NtoS2(n_A_Buf9[10], 1),
-            SaveData[t + 12] = NtoS2(n_A_Buf9[11], 2),
-            SaveData[t + 13] = NtoS2(n_A_Buf9[12], 1),
-            SaveData[t + 14] = NtoS2(n_A_Buf9[13], 2),
-            SaveData[t + 15] = NtoS2(n_A_Buf9[14], 1),
-            SaveData[t + 16] = NtoS2(n_A_Buf9[15], 2),
-            SaveData[t + 17] = NtoS2(n_A_Buf9[16], 1),
-            SaveData[t + 18] = NtoS2(n_A_Buf9[17], 2),
-            SaveData[t + 19] = NtoS2(n_A_Buf9[18], 1),
-            SaveData[t + 20] = NtoS2(n_A_Buf9[19], 2),
-            SaveData[t + 21] = NtoS2(n_A_Buf9[20], 1),
-            SaveData[t + 22] = NtoS2(n_A_Buf9[21], 2),
-            SaveData[t + 23] = NtoS2(n_A_Buf9[22], 1),
-            SaveData[t + 24] = NtoS2(n_A_Buf9[23], 2),
-            SaveData[t + 25] = NtoS2(n_A_Buf9[24], 1),
-            SaveData[t + 26] = NtoS2(n_A_Buf9[25], 2),
-            SaveData[t + 27] = NtoS2(n_A_Buf9[26], 1),
-            SaveData[t + 28] = NtoS2(n_A_Buf9[27], 2),
-            SaveData[t + 29] = NtoS2(n_A_Buf9[28], 1),
-            SaveData[t + 30] = NtoS2(n_A_Buf9[29], 2),
-            SaveData[t + 31] = NtoS2(n_A_Buf9[30], 3),
-            _ = 31; _ <= 59; _++)
-            SaveData[t + _ + 1] = NtoS2(n_A_Buf9[_], 2);
-        t += 60
-    }
-    t += 1;
-    for (_ = 0; _ <= 55 && 0 == n_B_manual[_]; _++)
-        ;
-    for (56 == _ ? SaveData[t] = NtoS2(0, 1) : (SaveData[t] = NtoS2(1, 1),
-        SaveData[t + 1] = NtoS2(n_B_manual[1], 2),
-        SaveData[t + 2] = NtoS2(n_B_manual[2], 1),
-        SaveData[t + 3] = NtoS2(n_B_manual[3], 2),
-        SaveData[t + 4] = NtoS2(n_B_manual[4], 1),
-        SaveData[t + 5] = NtoS2(n_B_manual[5], 2),
-        SaveData[t + 6] = NtoS2(n_B_manual[7], 2),
-        SaveData[t + 7] = NtoS2(n_B_manual[9], 2),
-        SaveData[t + 8] = NtoS2(n_B_manual[21], 2),
-        SaveData[t + 9] = NtoS2(n_B_manual[30], 3),
-        SaveData[t + 10] = NtoS2(n_B_manual[31], 2),
-        SaveData[t + 11] = NtoS2(n_B_manual[34], 2),
-        SaveData[t + 12] = NtoS2(n_B_manual[35], 2),
-        SaveData[t + 13] = NtoS2(n_B_manual[36], 2),
-        SaveData[t + 14] = NtoS2(n_B_manual[37], 2),
-        SaveData[t + 15] = NtoS2(n_B_manual[38], 2),
-        SaveData[t + 16] = NtoS2(n_B_manual[39], 2),
-        SaveData[t + 17] = NtoS2(n_B_manual[40], 3),
-        SaveData[t + 18] = NtoS2(n_B_manual[41], 2),
-        SaveData[t + 19] = NtoS2(n_B_manual[42], 3),
-        SaveData[t + 20] = NtoS2(n_B_manual[43], 3),
-        SaveData[t + 21] = NtoS2(n_B_manual[44], 2),
-        SaveData[t + 22] = NtoS2(n_B_manual[48], 2),
-        SaveData[t + 23] = NtoS2(n_B_manual[49], 2),
-        SaveData[t + 24] = NtoS2(n_B_manual[50], 2),
-        SaveData[t + 25] = NtoS2(n_B_manual[51], 2),
-        SaveData[t + 26] = NtoS2(n_B_manual[52], 2),
-        SaveData[t + 27] = NtoS2(n_B_manual[53], 3),
-        SaveData[t + 28] = NtoS2(n_B_manual[54], 2),
-        SaveData[t + 29] = NtoS2(n_B_manual[55], 2),
-        t += 29),
-        SaveData[t + 1] = NtoS2(1 * c.Conf01.value, 2),
-        SaveData[t + 2] = NtoS2(c.B_num.value, 1),
-        SaveData[t + 3] = NtoS2(c.A8_Skill14.value, 1),
-        //SaveData[t + 4] = NtoS2(c.A8_Skill15.value, 2),
-        SaveData[t + 5] = NtoS01(0, 0, 0, 0, 0),
-        SaveData[t + 6] = NtoS2(c.A_ActiveSkill.value, 2),
-        SaveData[t + 7] = NtoS2(1 * c.A_ActiveSkillLV.value, 1),
-        326 == n_A_ActiveSkill || 159 == n_A_ActiveSkill || 384 == n_A_ActiveSkill || 324 == n_A_ActiveSkill || 131 == n_A_ActiveSkill || 88 == n_A_ActiveSkill || 197 == n_A_ActiveSkill || 394 == n_A_ActiveSkill || 395 == n_A_ActiveSkill || 405 == n_A_ActiveSkill || 429 == n_A_ActiveSkill || SkillSearch(441) && (51 == n_A_ActiveSkill || 54 == n_A_ActiveSkill || 56 == n_A_ActiveSkill || 540 == n_A_ActiveSkill || 541 == n_A_ActiveSkill || 542 == n_A_ActiveSkill) ? SaveData[t + 8] = NtoS2(1 * c.SkillSubNum.value, 3) : SaveData[t + 8] = NtoS2(0, 3),
-        SaveData[t + 9] = NtoS2(n_B[0], 2),
-        SaveData[t + 10] = NtoS2(c.B_AtkSkill.value, 2),
-        444 == n_B_AtkSkill || 445 == n_B_AtkSkill || 125 == n_B_AtkSkill || 131 == n_B_AtkSkill ? SaveData[t + 11] = NtoS2(c.BSkillSubNum.value, 3) : SaveData[t + 11] = NtoS2(0, 3),
-        t += 11,
-        SaveData[t + 1] = NtoS2(c.B_AtkRange.value, 1),
-        SaveData[t + 2] = NtoS2(c.B_AtkElem.value, 1),
-        SaveData[t + 3] = NtoS2(c.theme.value, 1),
-        SaveData[t + 4] = NtoS2(1 * c.server.value, 1),
-        SaveData[t + 5] = NtoS01(0, c.all_dmgSkills.checked, c.restrict_jobequip.checked, c.restrict_lvlequip.checked, c.restrict_equipslot.checked),
-        SaveData[t + 6] = NtoS01(c.restrict_cardslot.checked, c.all_card.checked, 0, 0, 0),
-        t += 6,
-        SaveData[t + 1] = NtoS2(n_A_randopt[0], 2), // save rand options to url
-        SaveData[t + 2] = NtoS2(n_A_randopt[1], 2),
-        SaveData[t + 3] = NtoS2(n_A_randopt[2], 2),
-        SaveData[t + 4] = NtoS2(n_A_randopt[3], 2),
-        SaveData[t + 5] = NtoS2(n_A_randopt[4], 2),
-        SaveData[t + 6] = NtoS2(n_A_randopt[5], 2),
-        SaveData[t + 7] = NtoS2(n_A_randopt[6], 2),
-        SaveData[t + 8] = NtoS2(n_A_randopt[7], 2),
-        SaveData[t + 9] = NtoS2(n_A_randopt[8], 2),
-        SaveData[t + 10] = NtoS2(n_A_randopt[9], 2),
-        SaveData[t + 11] = NtoS2(n_A_randopt[10], 2),
-        SaveData[t + 12] = NtoS2(n_A_randopt[11], 2),
-        SaveData[t + 13] = NtoS2(n_A_randopt[12], 2),
-        SaveData[t + 14] = NtoS2(n_A_randopt[13], 2),
-        SaveData[t + 15] = NtoS2(n_A_randopt[14], 2),
-        SaveData[t + 16] = NtoS2(n_A_randopt[15], 2),
-        SaveData[t + 17] = NtoS2(n_A_randopt[16], 2),
-        SaveData[t + 18] = NtoS2(n_A_randopt[17], 2),
-        SaveData[t + 19] = NtoS2(n_A_randopt[18], 2),
-        SaveData[t + 20] = NtoS2(n_A_randopt[19], 2),
-        SaveData[t + 21] = NtoS2(n_A_randopt[20], 2),
-        SaveData[t + 22] = NtoS2(n_A_randopt[21], 2),
-        SaveData[t + 23] = NtoS2(n_A_randopt[22], 2),
-        SaveData[t + 24] = NtoS2(n_A_randopt[23], 2),
-        SaveData[t + 25] = NtoS2(n_A_randopt[24], 2),
-        SaveData[t + 26] = NtoS2(n_A_randopt[25], 2),
-        SaveData[t + 27] = NtoS2(n_A_randopt[26], 2),
-        SaveData[t + 28] = NtoS2(n_A_randopt[27], 2),
-        t += 28,
-        SaveData[t + 1] = "-",
-        SaveData[t + 2] = NtoS2(n_A_Shadow[0], 2),
-        SaveData[t + 3] = NtoS2(n_A_Shadow[1], 2),
-        SaveData[t + 4] = NtoS2(n_A_Shadow[2], 2),
-        SaveData[t + 5] = NtoS2(n_A_Shadow[3], 2),
-        SaveData[t + 6] = NtoS2(n_A_Shadow[4], 2),
-        SaveData[t + 7] = NtoS2(n_A_Shadow[5], 2),
-        t += 7,
-        SaveData[t + 1] = NtoS01(n_A_Buf3[45], n_A_Buf3[46], n_A_Buf3[47], n_A_Buf3[48], 0),
-        t += 1,
-        SaveData[t + 1] = NtoS2(n_A_Buf3[37], 2),
-        t += 1,
-        SaveData[t + 1] = "-",
-        SaveData[t + 2] = NtoS2(n_A_enchant[0], 2),
-        SaveData[t + 3] = NtoS2(n_A_enchant[1], 2),
-        SaveData[t + 4] = NtoS2(n_A_enchant[2], 2),
-        SaveData[t + 5] = NtoS2(n_A_enchant[3], 2),
-        SaveData[t + 6] = NtoS2(n_A_enchant[4], 2),
-        SaveData[t + 7] = NtoS2(n_A_enchant[5], 2),
-        SaveData[t + 8] = NtoS2(n_A_enchant[6], 2),
-        SaveData[t + 9] = NtoS2(n_A_enchant[7], 2),
-        SaveData[t + 10] = NtoS2(n_A_enchant[8], 2),
-        SaveData[t + 11] = NtoS2(n_A_enchant[9], 2),
-        SaveData[t + 12] = NtoS2(n_A_enchant[10], 2),
-        t += 12,
-        wStr = "" + SaveData[0],
-        _ = 1; _ <= t; _++)
-        wStr += "" + SaveData[_];
-    n = location.href.split("#");
-    c.URL_TEXT.value = n[0] + "#" + wStr,
-        window.location.replace(n[0] + "#" + wStr),
-        alert("Your current character can be saved in your bookmarks/favorites by pressing Ctrl+D on your keyboard.\n\nEl personaje actual puede guardarse en marcadores/favoritos pulsando Ctrl+D en su teclado.")
-}
 function StoNx(_) {
+    const n_NtoS2 = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z", "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
     _ += "";
     for (var n = 0; n <= 61; n++)
         if (_ == n_NtoS2[n])
@@ -3147,785 +3284,753 @@ function StoN2(_) {
         a = StoNx(_.charAt(0));
     return a
 }
+
+// ─── URLOUT ───────────────────────────────────────────────────────────────────
+
+function URLOUT() {
+    calc();
+
+    const passiveSkillLevels = {};
+    const availableBuffs = JOB_AVAILABLE_BUFFS[player.status.job_id] || [];
+    for (let i = 0; i < availableBuffs.length && i <= 14; i++) {
+        const el = document.getElementById("A_skill" + i);
+        if (el) passiveSkillLevels[i] = 1 * el.value;
+    }
+
+    const data = {
+        v: URL_DATA_VERSION,
+
+        job_id: player.status.job_id,
+        job_level: player.status.job_level,
+        base_level: player.status.base_level,
+        adopted: player.status.adopted ? 1 : 0,
+        str: player.status.str,
+        agi: player.status.agi,
+        vit: player.status.vit,
+        int: player.status.int,
+        dex: player.status.dex,
+        luk: player.status.luk,
+
+        equip: player.equip.slice(),
+        refine: player.refine.slice(),
+        card: player.card.slice(),
+        shadow: player.shadow.slice(),
+        randopt: player.randopt.slice(),
+        enchant: player.enchant.slice(),
+
+        weapon_element: player.weapon_element,
+        dual_wield: player.dual_wield ? 1 : 0,
+        arrow: player.arrow,
+
+        active_skill_raw: 1 * c.A_ActiveSkill.value,
+        active_skill_lv: player.active_skill_lv,
+        skill_sub_num: c.SkillSubNum ? 1 * c.SkillSubNum.value : 0,
+
+        passive_skill_levels: passiveSkillLevels,
+
+        // Strip zero vals from SCs to reduce payload size
+        player_sc: player.sc.map(sc => {
+            const e = { type: sc.type, val1: sc.val1 };
+            for (let i = 2; i <= 10; i++)
+                if (sc['val' + i]) e['val' + i] = sc['val' + i];
+            return e;
+        }),
+
+        player_manual_edits: player.manual_edits.map(e => ({ type: e.type, value: e.value })),
+
+        pet: player.pet,
+        temp_effect: player.temp_effect.slice(),
+        exp_modifiers: {
+            party_member_count: player.exp_modifiers.party_member_count,
+            battle_manual: player.exp_modifiers.battle_manual,
+            job_manual: player.exp_modifiers.job_manual ? 1 : 0,
+        },
+
+        monster_id: c.B_Enemy.value,
+        monster_sc: monster.sc.map(sc => {
+            const e = { type: sc.type, val1: sc.val1 };
+            for (let i = 2; i <= 10; i++)
+                if (sc['val' + i]) e['val' + i] = sc['val' + i];
+            return e;
+        }),
+        monster_manual_edits: monster.manual_edits.map(e => ({ type: e.type, value: e.value })),
+        monster_atk_skill: 1 * c.B_AtkSkill.value,
+        monster_atk_range: 1 * c.B_AtkRange.value,
+        monster_atk_elem: 1 * c.B_AtkElem.value,
+        b_num: 1 * c.B_num.value,
+
+        all_dmg_skills: c.all_dmgSkills.checked ? 1 : 0,
+        restrict_jobequip: c.restrict_jobequip.checked ? 1 : 0,
+        restrict_lvlequip: c.restrict_lvlequip.checked ? 1 : 0,
+        restrict_equipslot: c.restrict_equipslot.checked ? 1 : 0,
+        restrict_cardslot: c.restrict_cardslot.checked ? 1 : 0,
+        all_card: c.all_card.checked ? 1 : 0,
+        theme: 1 * c.theme.value,
+        conf01: 1 * c.Conf01.value,
+    };
+
+    const compressed = LZString.compressToEncodedURIComponent(JSON.stringify(data));
+    const base = location.href.split(/[?#]/)[0];
+    const newURL = base + "?d=" + compressed;
+
+    c.URL_TEXT.value = newURL;
+    //window.location.replace(newURL);
+    window.history.replaceState(null, '', newURL);
+    alert("Your current character can be saved in your bookmarks/favorites by pressing Ctrl+D on your keyboard.\n\nEl personaje actual puede guardarse en marcadores/favoritos pulsando Ctrl+D en su teclado.");
+}
+
+// ─── URLIN ────────────────────────────────────────────────────────────────────
+
 function URLIN() {
-    var _ = location.href.match(/\#/)
-        , n = location.href.match(/\?/)
-        , a = otherURL_TEXT.value.match(/\#/)
-        , e = otherURL_TEXT.value.match(/\?/);
-    if (n || e || _ || a) {
-        resetBuf2SC();
-        for (r = 0; r <= 48; r++)
-            n_A_Buf3[r] = 0;
-        for (r = 0; r <= 23; r++)
-            n_A_Buf6[r] = 0;
-        for (r = 0; r <= 60; r++)
-            n_A_Buf7[r] = 0;
-        for (r = 0; r <= 15; r++)
-            n_A_Buf8[r] = 0;
-        for (r = 0; r <= 55; r++)
-            n_A_Buf9[r] = 0;
-        for (r = 0; r <= 55; r++)
-            n_B_manual[r] = 0;
-        for (r = 0; r <= 3; r++)
-            n_A_debuf[r] = 0;
-        for (r = 0; r <= 30; r++)
-            n_B_debuf[r] = 0;
-        for (r = 0; r <= 14; r++)
-            n_B_buf[r] = 0;
-        for (r = 0; r <= 27; r++)
-            n_A_randopt[r] = 0;
-        for (r = 0; r <= 5; r++)
-            n_A_Shadow[r] = 0;
-        for (r = 0; r <= 10; r++)
-            n_A_enchant[r] = 0;
-        n_A_Shadow[1] = 22,
-            n_A_Shadow[3] = 44,
-            n_A_Buf9[2] = 10,
-            n_A_Buf9[4] = 20,
-            n_A_Buf9[6] = 23,
-            n_A_Buf9[10] = 10,
-            n_A_Buf9[12] = 20,
-            n_A_Buf9[14] = 23;
-        var t = new Array;
-        e && (t = otherURL_TEXT.value.split("?")),
-            a && (t = otherURL_TEXT.value.split("#")),
-            n && (t = location.href.split("?")),
-            _ && (t = location.href.split("#")),
-            20 == StoN2((n = t[1].replace(/undefined/g, "a")).substr(1, 2)) && StoN2(n.substr(90, 1)) ? SuperNoviceFullWeaponCHECK = 1 : SuperNoviceFullWeaponCHECK = 0;
-        var A = StoN2(n.substr(0, 1));
-        A >= 6 && (
-            l = n.substr(-16, 1) == "-" ? StoN2(n.substr(-74, 1)) : StoN2(n.substr(-58, 1)),
-            c.all_dmgSkills.checked = Math.floor(l % 16 / 8),
-            c.restrict_equipslot.checked = Math.floor(l % 2 / 1),
-            l = StoN2(n.substr(S + 26, 1)),
-            c.restrict_cardslot.checked = Math.floor(l / 16),
-            c.all_card.checked = Math.floor(l % 16 / 8)),
-            c.A_JOB.value = StoN2(n.substr(1, 2)),
-            ClickJob(StoN2(n.substr(1, 2)), 2),
-            c.A_BaseLV.value = StoN2(n.substr(3, 2)),
-            c.A_JobLV.value = StoN2(n.substr(5, 2)),
-            c.A_STR.value = StoN2(n.substr(7, 2)),
-            c.A_AGI.value = StoN2(n.substr(9, 2)),
-            c.A_VIT.value = StoN2(n.substr(11, 2)),
-            c.A_DEX.value = StoN2(n.substr(13, 2)),
-            c.A_INT.value = StoN2(n.substr(15, 2)),
-            c.A_LUK.value = StoN2(n.substr(17, 2)),
-            n_A_Buf7[35] = Math.floor(StoN2(n.substr(19, 1)) / 10),
-            c.A_Weapon_element.value = StoN2(n.substr(19, 1)) % 10,
-            c.A_weapon1.value = StoN2(n.substr(23, 2)),
-            n_A_WeaponType = StoN2(n.substr(20, 1)),
-            ClickWeaponType(n_A_WeaponType),
-            8 != c.A_JOB.value && 22 != c.A_JOB.value || 11 == n_A_WeaponType || (n_A_Weapon2Type = StoN2(n.substr(21, 1)),
-                ClickWeaponType2(StoN2(n.substr(34, 2)))),
-            n_A_JobSet(),
-            (2 == n_A_JobClass() || 4 == n_A_JobClass() || 45 == n_A_JobClass() && 0 != n_A_WeaponType) && (c.A_Arrow.value = StoN2(n.substr(22, 1))),
-            ClickB_Item(StoN2(n.substr(23, 2))),
-            c.A_Weapon_refine.value = StoN2(n.substr(25, 1)),
-            c.A_weapon1_card1.value = StoN2(n.substr(26, 2)),
-            c.A_weapon1_card2.value = StoN2(n.substr(28, 2)),
-            c.A_weapon1_card3.value = StoN2(n.substr(30, 2)),
-            c.A_weapon1_card4.value = StoN2(n.substr(32, 2)),
-            player.dual_wield ? (c.A_weapon2.value = StoN2(n.substr(34, 2)),
-                c.A_Weapon2_refine.value = StoN2(n.substr(36, 1)),
-                c.A_weapon2_card1.value = StoN2(n.substr(37, 2)),
-                c.A_weapon2_card2.value = StoN2(n.substr(39, 2)),
-                c.A_weapon2_card3.value = StoN2(n.substr(41, 2)),
-                c.A_weapon2_card4.value = StoN2(n.substr(43, 2))) : (c.A_left.value = StoN2(n.substr(34, 2)),
-                    c.A_LEFT_REFINE.value = StoN2(n.substr(36, 1)),
-                    c.A_left_card.value = StoN2(n.substr(37, 2))),
-            c.A_head1.value = StoN2(n.substr(45, 2)),
-            c.A_head1_card.value = StoN2(n.substr(47, 2)),
-            c.A_head2.value = StoN2(n.substr(49, 2)),
-            c.A_head2_card.value = StoN2(n.substr(51, 2)),
-            c.A_head3.value = StoN2(n.substr(53, 2)),
-            c.A_body.value = StoN2(n.substr(55, 2)),
-            c.A_body_card.value = StoN2(n.substr(57, 2)),
-            c.A_shoulder.value = StoN2(n.substr(59, 2)),
-            c.A_shoulder_card.value = StoN2(n.substr(61, 2)),
-            c.A_shoes.value = StoN2(n.substr(63, 2)),
-            c.A_shoes_card.value = StoN2(n.substr(65, 2)),
-            c.A_acces1.value = StoN2(n.substr(67, 2)),
-            c.A_acces1_card.value = StoN2(n.substr(69, 2)),
-            c.A_acces2.value = StoN2(n.substr(71, 2)),
-            c.A_acces2_card.value = StoN2(n.substr(73, 2)),
-            c.A_HEAD_REFINE.value = StoN2(n.substr(75, 1)),
-            c.A_BODY_REFINE.value = StoN2(n.substr(76, 1)),
-            c.A_SHOULDER_REFINE.value = StoN2(n.substr(77, 1)),
-            c.A_SHOES_REFINE.value = StoN2(n.substr(78, 1));
-        var l = StoN2(n.substr(79, 1));
-        if (c.A_adopted.checked = Math.floor(l / 16),
-            A < 4) {
-            var o = StoN2(n.substr(57, 2));
-            c.A_body_card.value = 75 == o ? 139 : 128 == o ? 131 : 129 == o ? 132 : 130 == o ? 133 : 131 == o ? 134 : 132 == o ? 128 : 133 == o ? 135 : 134 == o ? 136 : 135 == o ? 137 : 136 == o ? 138 : 137 == o ? 75 : 138 == o ? 140 : o,
-                c.A_shoulder.value = StoN2(n.substr(59, 2)),
-                o = StoN2(n.substr(61, 2)),
-                c.A_shoulder_card.value = 139 == o ? 141 : o,
-                c.A_shoes.value = StoN2(n.substr(63, 2)),
-                o = StoN2(n.substr(65, 2)),
-                c.A_shoes_card.value = 140 == o ? 129 : o,
-                c.A_acces1.value = StoN2(n.substr(67, 2)),
-                o = StoN2(n.substr(69, 2)),
-                c.A_acces1_card.value = 75 == o ? 139 : 141 == o ? 142 : 142 == o ? 143 : 143 == o ? 144 : 144 == o ? 145 : 145 == o ? 146 : 146 == o ? 147 : 147 == o ? 148 : 148 == o ? 149 : 149 == o ? 150 : 150 == o ? 151 : 151 == o ? 152 : 152 == o ? 130 : o,
-                c.A_acces2.value = StoN2(n.substr(71, 2)),
-                o = StoN2(n.substr(73, 2)),
-                c.A_acces2_card.value = 75 == o ? 139 : 141 == o ? 142 : 142 == o ? 143 : 143 == o ? 144 : 144 == o ? 145 : 145 == o ? 146 : 146 == o ? 147 : 147 == o ? 148 : 148 == o ? 149 : 149 == o ? 150 : 150 == o ? 151 : 151 == o ? 152 : 152 == o ? 130 : o;
-            var u = StoN2(n.substr(80, 1));
-            if (12 == c.A_JOB.value || 26 == c.A_JOB.value) {
-                for (var r = 0; r < 4; r++) {
-                    document.getElementById("A_skill" + r).value = StoN2(n.substr(81 + r, 1))
-                }
-                if (StoN2(n.substr(85, 1)) > 0)
-                    document.getElementById("A_skill4").value = 1;
-                setBuf2ToSC(7, StoN2(n.substr(86, 1)));
-                for (r = 5; r < u - 1; r++) {
-                    document.getElementById("A_skill" + r).value = StoN2(n.substr(82 + r, 1))
-                }
-            } else if (13 == c.A_JOB.value || 27 == c.A_JOB.value) {
-                for (r = 0; r < 8; r++) {
-                    document.getElementById("A_skill" + r).value = StoN2(n.substr(81 + r, 1))
-                }
-                setBuf2ToSC(13, StoN2(n.substr(89, 1))),
-                    document.getElementById("A_skill8").value = StoN2(n.substr(90, 1)),
-                    setBuf2ToSC(15, StoN2(n.substr(91, 1))),
-                    document.getElementById("A_skill9").value = StoN2(n.substr(92, 1)),
-                    setBuf2ToSC(14, StoN2(n.substr(93, 1))),
-                    r += 12
-            } else if (15 == c.A_JOB.value || 29 == c.A_JOB.value) {
-                for (r = 0; r < 3; r++) {
-                    document.getElementById("A_skill" + r).value = StoN2(n.substr(81 + r, 1))
-                }
-                setBuf2ToSC(12, StoN2(n.substr(84, 1)));
-                for (r = 3; r < u - 1; r++) {
-                    document.getElementById("A_skill" + r).value = StoN2(n.substr(82 + r, 1))
-                }
-            } else
-                for (r = 0; r < u; r++) {
-                    document.getElementById("A_skill" + r).value = StoN2(n.substr(81 + r, 1))
-                }
-            var S = 81 + u;
-            if (1 == StoN2(n.substr(S, 1))) {
-                setBuf2ToSC(0, StoN2(n.substr(S + 1, 1)) > 5 ? StoN2(n.substr(S + 1, 1)) / 2 : StoN2(n.substr(S + 1, 1))),
-                    setBuf2ToSC(1, StoN2(n.substr(S + 2, 1)) > 5 ? StoN2(n.substr(S + 2, 1)) / 2 : StoN2(n.substr(S + 2, 1))),
-                    setBuf2ToSC(4, StoN2(n.substr(S + 3, 1))),
-                    setBuf2ToSC(9, StoN2(n.substr(S + 4, 1))),
-                    setBuf2ToSC(2, Math.floor(StoN2(n.substr(S + 5, 1)) / 6)),
-                    setBuf2ToSC(6, StoN2(n.substr(S + 5, 1)) % 6),
-                    setBuf2ToSC(8, Math.min(StoN2(n.substr(S + 6, 1)) / 6, 1)),
-                    setBuf2ToSC(12, StoN2(n.substr(S + 6, 1)) % 6),
-                    setBuf2ToSC(10, Math.floor(StoN2(n.substr(S + 7, 1)) / 6)),
-                    setBuf2ToSC(11, StoN2(n.substr(S + 7, 1)) % 6);
-                l = StoN2(n.substr(S + 8, 1));
-                setBuf2ToSC(3, Math.floor(l / 16)),
-                    setBuf2ToSC(5, Math.floor(l % 16 / 8)),
-                    setBuf2ToSC(7, Math.floor(l % 8 / 4)),
-                    n_A_Buf6[7] = Math.floor(l % 4 / 2),
-                    n_A_Buf7[31] = Math.floor(l % 2 / 1),
-                    S += 8,
-                    12 != c.A_JOB.value && 26 != c.A_JOB.value || StoN2(n.substr(86, 1)) > 0 && (setBuf2ToSC(7, 1)),
-                    15 != c.A_JOB.value && 29 != c.A_JOB.value || StoN2(n.substr(84, 1)) > getBuf2FromSC(12) && (setBuf2ToSC(12, StoN2(n.substr(84, 1))))
-            }
-            var i = S;
-            if (S += 8,
-                S += 1,
-                1 == StoN2(n.substr(S, 1))) {
-                n_B_debuf[0] = StoN2(n.substr(S + 1, 1)),
-                    n_B_debuf[1] = Math.floor(StoN2(n.substr(S + 2, 1)) / 6),
-                    n_B_debuf[18] = StoN2(n.substr(S + 2, 1)) % 6;
-                l = StoN2(n.substr(S + 3, 1));
-                n_B_debuf[2] = Math.floor(l / 16),
-                    n_B_debuf[3] = Math.floor(l % 16 / 8),
-                    n_B_debuf[4] = Math.floor(l % 8 / 4),
-                    n_B_debuf[5] = Math.floor(l % 4 / 2),
-                    n_B_debuf[6] = Math.floor(l % 2 / 1),
-                    l = StoN2(n.substr(S + 4, 1)),
-                    n_B_debuf[7] = Math.floor(l / 16),
-                    n_B_debuf[8] = Math.floor(l % 16 / 8),
-                    n_B_debuf[9] = Math.floor(l % 8 / 4),
-                    n_B_debuf[10] = Math.floor(l % 4 / 2),
-                    n_B_debuf[19] = Math.floor(l % 2 / 1),
-                    n_B_debuf[11] = StoN2(n.substr(S + 5, 1)),
-                    n_B_debuf[12] = StoN2(n.substr(S + 6, 1)),
-                    l = StoN2(n.substr(S + 7, 1)),
-                    n_B_debuf[13] = Math.floor(l / 16),
-                    n_B_debuf[14] = Math.floor(l % 16 / 8),
-                    n_B_debuf[15] = Math.floor(l % 8 / 4),
-                    n_B_debuf[16] = Math.floor(l % 4 / 2),
-                    n_B_debuf[17] = Math.floor(l % 2 / 1),
-                    l = StoN2(n.substr(S + 8, 1)),
-                    n_B_debuf[20] = Math.floor(l / 16),
-                    n_B_debuf[21] = Math.floor(l % 16 / 8),
-                    n_B_debuf[22] = Math.floor(l % 8 / 4),
-                    n_B_debuf[23] = Math.floor(StoN2(n.substr(S + 9, 1)) / 6),
-                    n_B_debuf[24] = StoN2(n.substr(S + 9, 1)) % 6,
-                    S += 9
-            }
-            if (S += 1,
-                1 == StoN2(n.substr(S, 1))) {
-                n_B_buf[0] = StoN2(n.substr(S + 1, 1));
-                l = StoN2(n.substr(S + 2, 1));
-                n_B_buf[1] = Math.floor(l / 16),
-                    n_B_buf[2] = Math.floor(l % 16 / 8),
-                    n_B_buf[3] = Math.floor(l % 8 / 4),
-                    n_B_buf[4] = Math.floor(l % 4 / 2),
-                    n_B_buf[6] = StoN2(n.substr(S + 3, 2)),
-                    n_B_buf[7] = Math.floor(StoN2(n.substr(S + 5, 1)) / 6),
-                    n_B_buf[8] = StoN2(n.substr(S + 5, 1)) % 6,
-                    l = StoN2(n.substr(S + 6, 1)),
-                    n_B_buf[9] = Math.floor(l / 16),
-                    S += 6
-            }
-            var s = [0, 0, 0, 0, 0];
-            if (l = StoN2(n.substr(S + 1, 1)),
-                s[0] = Math.floor(l / 16),
-                s[1] = Math.floor(l % 16 / 8),
-                s[2] = Math.floor(l % 8 / 4),
-                s[3] = Math.floor(l % 4 / 2),
-                s[4] = Math.floor(l % 2 / 1),
-                S += 1,
-                SetDanceSkillsVisibility(0),
-                s[0] && (n_A_Buf3[0] = StoN2(n.substr(S + 1, 1)),
-                    n_A_Buf3[1] = StoN2(n.substr(S + 2, 1)),
-                    n_A_Buf3[2] = StoN2(n.substr(S + 3, 1)),
-                    n_A_Buf3[3] = StoN2(n.substr(S + 4, 1)),
-                    n_A_Buf3[4] = StoN2(n.substr(S + 5, 1)),
-                    n_A_Buf3[5] = StoN2(n.substr(S + 6, 1)),
-                    n_A_Buf3[6] = StoN2(n.substr(S + 7, 1)),
-                    n_A_Buf3[7] = Math.floor(StoN2(n.substr(S + 8, 1)) / 6),
-                    n_A_Buf3[8] = StoN2(n.substr(S + 8, 1)) % 6,
-                    n_A_Buf3[9] = Math.floor(StoN2(n.substr(S + 9, 1)) / 6),
-                    n_A_Buf3[10] = StoN2(n.substr(S + 9, 1)) % 6,
-                    n_A_Buf3[11] = Math.floor(StoN2(n.substr(S + 10, 1)) / 16),
-                    n_A_Buf3[18] = Math.floor(StoN2(n.substr(S + 10, 1)) % 16 / 8),
-                    n_A_Buf3[12] = StoN2(n.substr(S + 11, 2)),
-                    n_A_Buf3[13] = StoN2(n.substr(S + 13, 2)),
-                    n_A_Buf3[14] = StoN2(n.substr(S + 15, 2)),
-                    n_A_Buf3[15] = StoN2(n.substr(S + 17, 2)),
-                    n_A_Buf3[16] = StoN2(n.substr(S + 19, 2)),
-                    n_A_Buf3[17] = StoN2(n.substr(S + 21, 2)),
-                    n_A_Buf3[20] = StoN2(n.substr(S + 23, 2)),
-                    n_A_Buf3[30] = StoN2(n.substr(S + 25, 1)),
-                    n_A_Buf3[21] = StoN2(n.substr(S + 26, 2)),
-                    n_A_Buf3[31] = StoN2(n.substr(S + 28, 1)),
-                    n_A_Buf3[22] = StoN2(n.substr(S + 29, 2)),
-                    n_A_Buf3[29] = StoN2(n.substr(S + 31, 2)),
-                    n_A_Buf3[32] = StoN2(n.substr(S + 33, 1)),
-                    n_A_Buf3[23] = StoN2(n.substr(S + 34, 2)),
-                    n_A_Buf3[33] = StoN2(n.substr(S + 36, 1)),
-                    n_A_Buf3[24] = StoN2(n.substr(S + 37, 2)),
-                    n_A_Buf3[34] = StoN2(n.substr(S + 39, 1)),
-                    n_A_Buf3[25] = StoN2(n.substr(S + 40, 2)),
-                    n_A_Buf3[35] = StoN2(n.substr(S + 42, 1)),
-                    n_A_Buf3[26] = StoN2(n.substr(S + 43, 2)),
-                    n_A_Buf3[36] = StoN2(n.substr(S + 45, 1)),
-                    S += 45),
-                s[1]) {
-                l = StoN2(n.substr(S + 1, 1));
-                n_A_Buf3[40] = Math.floor(l / 16),
-                    n_A_Buf3[41] = Math.floor(StoN2(n.substr(S + 2, 1)) / 6),
-                    n_A_Buf3[42] = StoN2(n.substr(S + 2, 1)) % 6,
-                    n_A_Buf3[43] = Math.floor(StoN2(n.substr(S + 3, 1)) / 6),
-                    n_A_Buf3[44] = StoN2(n.substr(S + 3, 1)) % 6,
-                    S += 3
-            }
-            for (s[2] && (l = StoN2(n.substr(S + 1, 1)),
-                setBuf2ToSC(16, Math.floor(l / 16)),
-                setBuf2ToSC(17, Math.floor(l % 16 / 8)),
-                setBuf2ToSC(18, Math.floor(l % 8 / 4)),
-                setBuf2ToSC(19, Math.floor(l % 4 / 2)),
-                setBuf2ToSC(20, Math.floor(l % 2 / 1)),
-                l = StoN2(n.substr(S + 2, 1)),
-                setBuf2ToSC(21, Math.floor(l / 16)),
-                S += 2),
-                s[3] && (n_A_Buf6[0] = Math.floor(StoN2(n.substr(S + 1, 1)) / 6),
-                    n_A_Buf6[1] = StoN2(n.substr(S + 1, 1)) % 6,
-                    n_A_Buf6[2] = Math.floor(StoN2(n.substr(S + 2, 1)) / 6),
-                    n_A_Buf6[4] = StoN2(n.substr(S + 2, 1)) % 6,
-                    n_A_Buf6[5] = Math.floor(StoN2(n.substr(S + 3, 1)) / 6),
-                    n_A_Buf7[34] = StoN2(n.substr(S + 4, 1)),
-                    l = StoN2(n.substr(S + 5, 1)),
-                    n_A_Buf6[6] = Math.floor(l / 16),
-                    S += 5),
-                s[4] && (n_A_Buf7[3] = StoN2(n.substr(S + 1, 2)),
-                    n_A_Buf7[4] = StoN2(n.substr(S + 3, 2)),
-                    n_A_Buf7[5] = StoN2(n.substr(S + 5, 2)),
-                    n_A_Buf7[6] = StoN2(n.substr(S + 7, 2)),
-                    n_A_Buf7[7] = StoN2(n.substr(S + 9, 2)),
-                    n_A_Buf7[8] = StoN2(n.substr(S + 11, 2)),
-                    l = StoN2(n.substr(S + 13, 1)),
-                    n_A_Buf7[0] = Math.floor(l / 16),
-                    n_A_Buf7[1] = Math.floor(l % 16 / 8),
-                    n_A_Buf7[2] = Math.floor(l % 8 / 4),
-                    n_A_Buf7[9] = Math.floor(l % 4 / 2),
-                    n_A_Buf7[10] = Math.floor(l % 2 / 1),
-                    l = StoN2(n.substr(S + 14, 1)),
-                    n_A_Buf7[11] = Math.floor(l / 16),
-                    n_A_Buf7[12] = Math.floor(l % 16 / 8),
-                    n_A_Buf7[13] = Math.floor(l % 8 / 4),
-                    n_A_Buf7[14] = Math.floor(l % 4 / 2),
-                    S += 14),
-                r = 0; r <= 55; r++)
-                n_A_Buf9[r] = 0;
-            for (n_A_Buf9[2] = 10,
-                n_A_Buf9[4] = 20,
-                n_A_Buf9[6] = 23,
-                n_A_Buf9[10] = 10,
-                n_A_Buf9[12] = 20,
-                n_A_Buf9[14] = 23,
-                n_Skill9SW = 0,
-                r = 0; r <= 55; r++)
-                n_B_manual[r] = 0;
-            n_Skill10SW = 0,
-                c.Conf01.value = StoN2(n.substr(S + 1, 2)),
-                S += 2,
-                A >= 1 && (S += 2),
-                A >= 2 && (S += 2),
-                StCalc(1),
-                ActiveSkillSetPlus(),
-                S = i,
-                c.A_ActiveSkill.value = StoN2(n.substr(S + 1, 2)),
-                ClickActiveSkill(),
-                c.A_ActiveSkillLV.value = StoN2(n.substr(S + 3, 1)),
-                66 != n_A_ActiveSkill && 326 != n_A_ActiveSkill && 159 != n_A_ActiveSkill && 384 != n_A_ActiveSkill && 324 != n_A_ActiveSkill && 131 != n_A_ActiveSkill && 88 != n_A_ActiveSkill && 197 != n_A_ActiveSkill && 394 != n_A_ActiveSkill && 395 != n_A_ActiveSkill && 405 != n_A_ActiveSkill && 429 != n_A_ActiveSkill || (c.SkillSubNum.value = StoN2(n.substr(S + 4, 3))),
-                c.B_Enemy.value = StoN2(n.substr(S + 7, 2))
-        } else if (A >= 4) {
-            for (u = StoN2(n.substr(88, 1)),
-                r = 0; r < u; r++) {
-                document.getElementById("A_skill" + r).value = StoN2(n.substr(89 + r, 1))
-            }
-            SetSupportSkillsVisibility(0);
-            S = 89 + r;
-            if (1 == StoN2(n.substr(S, 1))) {
-                setBuf2ToSC(0, StoN2(n.substr(S + 1, 1)) > 5 ? StoN2(n.substr(S + 1, 1)) / 2 : StoN2(n.substr(S + 1, 1))),
-                    setBuf2ToSC(1, StoN2(n.substr(S + 2, 1)) > 5 ? StoN2(n.substr(S + 2, 1)) / 2 : StoN2(n.substr(S + 2, 1))),
-                    setBuf2ToSC(4, StoN2(n.substr(S + 3, 1))),
-                    setBuf2ToSC(9, StoN2(n.substr(S + 4, 1))),
-                    setBuf2ToSC(13, StoN2(n.substr(S + 5, 1))),
-                    setBuf2ToSC(14, StoN2(n.substr(S + 6, 1))),
-                    setBuf2ToSC(2, Math.floor(StoN2(n.substr(S + 7, 1)) / 6)),
-                    setBuf2ToSC(6, StoN2(n.substr(S + 7, 1)) % 6),
-                    setBuf2ToSC(10, Math.floor(StoN2(n.substr(S + 8, 1)) / 6)),
-                    setBuf2ToSC(11, StoN2(n.substr(S + 8, 1)) % 6),
-                    setBuf2ToSC(12, Math.floor(StoN2(n.substr(S + 9, 1)) / 6)),
-                    setBuf2ToSC(15, StoN2(n.substr(S + 9, 1)) % 6);
-                l = StoN2(n.substr(S + 10, 1));
-                setBuf2ToSC(3, Math.floor(l / 16)),
-                    setBuf2ToSC(5, Math.floor(l % 16 / 8)),
-                    setBuf2ToSC(7, Math.floor(l % 8 / 4)),
-                    setBuf2ToSC(8, Math.floor(l % 4 / 2)),
-                    setBuf2ToSC(16, Math.floor(l % 2 / 1));
-                l = StoN2(n.substr(S + 11, 1));
-                setBuf2ToSC(17, Math.floor(l / 16)),
-                    setBuf2ToSC(18, Math.floor(l % 16 / 8)),
-                    setBuf2ToSC(19, Math.floor(l % 8 / 4)),
-                    setBuf2ToSC(20, Math.floor(l % 4 / 2)),
-                    setBuf2ToSC(21, Math.floor(l % 2 / 1)),
-                    S += 11
-            }
-            if (SetMonsterDebuffsVisibility(0),
-                S += 1,
-                1 == StoN2(n.substr(S, 1))) {
-                n_B_debuf[0] = StoN2(n.substr(S + 1, 1)),
-                    n_B_debuf[1] = Math.floor(StoN2(n.substr(S + 2, 1)) / 6),
-                    n_B_debuf[18] = StoN2(n.substr(S + 2, 1)) % 6;
-                l = StoN2(n.substr(S + 3, 1));
-                n_B_debuf[2] = Math.floor(l / 16),
-                    n_B_debuf[3] = Math.floor(l % 16 / 8),
-                    n_B_debuf[4] = Math.floor(l % 8 / 4),
-                    n_B_debuf[5] = Math.floor(l % 4 / 2),
-                    n_B_debuf[6] = Math.floor(l % 2 / 1),
-                    l = StoN2(n.substr(S + 4, 1)),
-                    n_B_debuf[7] = Math.floor(l / 16),
-                    n_B_debuf[8] = Math.floor(l % 16 / 8),
-                    n_B_debuf[9] = Math.floor(l % 8 / 4),
-                    n_B_debuf[10] = Math.floor(l % 4 / 2),
-                    n_B_debuf[19] = Math.floor(l % 2 / 1),
-                    n_B_debuf[11] = StoN2(n.substr(S + 5, 1)),
-                    n_B_debuf[12] = StoN2(n.substr(S + 6, 1)),
-                    l = StoN2(n.substr(S + 7, 1)),
-                    n_B_debuf[13] = Math.floor(l / 16),
-                    n_B_debuf[14] = Math.floor(l % 16 / 8),
-                    n_B_debuf[15] = Math.floor(l % 8 / 4),
-                    n_B_debuf[16] = Math.floor(l % 4 / 2),
-                    n_B_debuf[17] = Math.floor(l % 2 / 1),
-                    l = StoN2(n.substr(S + 8, 1)),
-                    n_B_debuf[20] = Math.floor(l / 16),
-                    n_B_debuf[21] = Math.floor(l % 16 / 8),
-                    n_B_debuf[22] = Math.floor(l % 8 / 4),
-                    n_B_debuf[23] = Math.floor(StoN2(n.substr(S + 9, 1)) / 6),
-                    n_B_debuf[24] = StoN2(n.substr(S + 9, 1)) % 6,
-                    S += 9
-            }
-            if (SetMonsterBuffsVisibility(0),
-                S += 1,
-                1 == StoN2(n.substr(S, 1))) {
-                n_B_buf[0] = StoN2(n.substr(S + 1, 1));
-                l = StoN2(n.substr(S + 2, 1));
-                n_B_buf[1] = Math.floor(l / 16),
-                    n_B_buf[2] = Math.floor(l % 16 / 8),
-                    n_B_buf[3] = Math.floor(l % 8 / 4),
-                    n_B_buf[4] = Math.floor(l % 4 / 2),
-                    n_B_buf[9] = Math.floor(l % 2 / 1),
-                    n_B_buf[6] = StoN2(n.substr(S + 3, 2)),
-                    n_B_buf[7] = Math.floor(StoN2(n.substr(S + 5, 1)) / 6),
-                    n_B_buf[8] = StoN2(n.substr(S + 5, 1)) % 6,
-                    n_B_buf[5] = StoN2(n.substr(S + 6, 1)),
-                    A >= 5 && (n_B_buf[10] = StoN2(n.substr(S + 7, 1)),
-                        n_B_buf[11] = StoN2(n.substr(S + 8, 1)),
-                        n_B_buf[12] = StoN2(n.substr(S + 9, 1)),
-                        n_B_buf[13] = StoN2(n.substr(S + 10, 1)),
-                        n_B_buf[14] = StoN2(n.substr(S + 11, 1)),
-                        S += 5),
-                    S += 6
-            }
-            s = [0, 0, 0, 0, 0];
-            if (l = StoN2(n.substr(S + 1, 1)),
-                s[0] = Math.floor(l / 16),
-                s[1] = Math.floor(l % 16 / 8),
-                s[2] = Math.floor(l % 8 / 4),
-                s[3] = Math.floor(l % 4 / 2),
-                s[4] = Math.floor(l % 2 / 1),
-                S += 1,
-                SetDanceSkillsVisibility(0),
-                s[0] && (n_A_Buf3[0] = StoN2(n.substr(S + 1, 1)),
-                    n_A_Buf3[1] = StoN2(n.substr(S + 2, 1)),
-                    n_A_Buf3[2] = StoN2(n.substr(S + 3, 1)),
-                    n_A_Buf3[3] = StoN2(n.substr(S + 4, 1)),
-                    n_A_Buf3[4] = StoN2(n.substr(S + 5, 1)),
-                    n_A_Buf3[5] = StoN2(n.substr(S + 6, 1)),
-                    n_A_Buf3[6] = StoN2(n.substr(S + 7, 1)),
-                    n_A_Buf3[7] = Math.floor(StoN2(n.substr(S + 8, 1)) / 6),
-                    n_A_Buf3[8] = StoN2(n.substr(S + 8, 1)) % 6,
-                    n_A_Buf3[9] = Math.floor(StoN2(n.substr(S + 9, 1)) / 6),
-                    n_A_Buf3[10] = StoN2(n.substr(S + 9, 1)) % 6,
-                    n_A_Buf3[11] = Math.floor(StoN2(n.substr(S + 10, 1)) / 16),
-                    n_A_Buf3[18] = Math.floor(StoN2(n.substr(S + 10, 1)) % 16 / 8),
-                    n_A_Buf3[12] = StoN2(n.substr(S + 11, 2)),
-                    n_A_Buf3[13] = StoN2(n.substr(S + 13, 2)),
-                    n_A_Buf3[14] = StoN2(n.substr(S + 15, 2)),
-                    n_A_Buf3[15] = StoN2(n.substr(S + 17, 2)),
-                    n_A_Buf3[16] = StoN2(n.substr(S + 19, 2)),
-                    n_A_Buf3[17] = StoN2(n.substr(S + 21, 2)),
-                    n_A_Buf3[20] = StoN2(n.substr(S + 23, 2)),
-                    n_A_Buf3[30] = StoN2(n.substr(S + 25, 1)),
-                    n_A_Buf3[21] = StoN2(n.substr(S + 26, 2)),
-                    n_A_Buf3[31] = StoN2(n.substr(S + 28, 1)),
-                    n_A_Buf3[22] = StoN2(n.substr(S + 29, 2)),
-                    n_A_Buf3[29] = StoN2(n.substr(S + 31, 2)),
-                    n_A_Buf3[32] = StoN2(n.substr(S + 33, 1)),
-                    n_A_Buf3[23] = StoN2(n.substr(S + 34, 2)),
-                    n_A_Buf3[33] = StoN2(n.substr(S + 36, 1)),
-                    n_A_Buf3[24] = StoN2(n.substr(S + 37, 2)),
-                    n_A_Buf3[34] = StoN2(n.substr(S + 39, 1)),
-                    n_A_Buf3[25] = StoN2(n.substr(S + 40, 2)),
-                    n_A_Buf3[35] = StoN2(n.substr(S + 42, 1)),
-                    n_A_Buf3[26] = StoN2(n.substr(S + 43, 2)),
-                    n_A_Buf3[36] = StoN2(n.substr(S + 45, 1)),
-                    S += 45),
-                SetGuildSkillsVisibility(0),
-                s[1]) {
-                l = StoN2(n.substr(S + 1, 1));
-                n_A_Buf3[40] = Math.floor(l / 16),
-                    n_A_Buf3[41] = Math.floor(StoN2(n.substr(S + 2, 1)) / 6),
-                    n_A_Buf3[42] = StoN2(n.substr(S + 2, 1)) % 6,
-                    n_A_Buf3[43] = Math.floor(StoN2(n.substr(S + 3, 1)) / 6),
-                    n_A_Buf3[44] = StoN2(n.substr(S + 3, 1)) % 6,
-                    S += 3
-            }
-            if (SetMiscEffectsVisibility(0),
-                s[3] && (n_A_Buf6[5] = StoN2(n.substr(S + 1, 1)),
-                    n_A_Buf6[20] = StoN2(n.substr(S + 2, 1)),
-                    n_A_Buf6[0] = Math.floor(StoN2(n.substr(S + 3, 1)) / 6),
-                    n_A_Buf6[1] = StoN2(n.substr(S + 3, 1)) % 6,
-                    n_A_Buf6[2] = Math.floor(StoN2(n.substr(S + 4, 1)) / 6),
-                    n_A_Buf6[4] = StoN2(n.substr(S + 4, 1)) % 6,
-                    n_A_Buf6[18] = Math.floor(StoN2(n.substr(S + 5, 1)) / 6),
-                    n_A_Buf6[19] = StoN2(n.substr(S + 5, 1)) % 6,
-                    l = StoN2(n.substr(S + 6, 1)),
-                    n_A_Buf6[3] = Math.floor(l / 16),
-                    n_A_Buf6[6] = Math.floor(l % 16 / 8),
-                    n_A_Buf6[7] = Math.floor(l % 8 / 4),
-                    n_A_Buf6[8] = Math.floor(l % 4 / 2),
-                    n_A_Buf6[9] = Math.floor(l % 2 / 1),
-                    l = StoN2(n.substr(S + 7, 1)),
-                    n_A_Buf6[10] = Math.floor(l / 16),
-                    n_A_Buf6[11] = Math.floor(l % 16 / 8),
-                    n_A_Buf6[12] = Math.floor(l % 8 / 4),
-                    n_A_Buf6[13] = Math.floor(l % 4 / 2),
-                    n_A_Buf6[14] = Math.floor(l % 2 / 1),
-                    l = StoN2(n.substr(S + 8, 1)),
-                    n_A_Buf6[15] = Math.floor(l / 16),
-                    n_A_Buf6[16] = Math.floor(l % 16 / 8),
-                    n_A_Buf6[17] = Math.floor(l % 8 / 4),
-                    n_A_Buf6[21] = Math.floor(l % 4 / 2),
-                    n_A_Buf6[22] = Math.floor(l % 2 / 1),
-                    S += 8),
-                SetFoodEffectsVisibility(0),
-                s[4] && (n_A_Buf7[3] = StoN2(n.substr(S + 1, 1)),
-                    n_A_Buf7[4] = StoN2(n.substr(S + 2, 1)),
-                    n_A_Buf7[5] = StoN2(n.substr(S + 3, 1)),
-                    n_A_Buf7[6] = StoN2(n.substr(S + 4, 1)),
-                    n_A_Buf7[7] = StoN2(n.substr(S + 5, 1)),
-                    n_A_Buf7[8] = StoN2(n.substr(S + 6, 1)),
-                    n_A_Buf7[35] = Math.floor(StoN2(n.substr(S + 7, 1)) / 6),
-                    n_A_Buf7[42] = StoN2(n.substr(S + 7, 1)) % 6,
-                    n_A_Buf7[39] = Math.floor(StoN2(n.substr(S + 8, 1)) / 6),
-                    n_A_Buf7[40] = StoN2(n.substr(S + 8, 1)) % 6,
-                    l = StoN2(n.substr(S + 9, 1)),
-                    n_A_Buf7[0] = Math.floor(l / 16),
-                    n_A_Buf7[1] = Math.floor(l % 16 / 8),
-                    n_A_Buf7[2] = Math.floor(l % 8 / 4),
-                    n_A_Buf7[9] = Math.floor(l % 4 / 2),
-                    n_A_Buf7[10] = Math.floor(l % 2 / 1),
-                    l = StoN2(n.substr(S + 10, 1)),
-                    n_A_Buf7[11] = Math.floor(l / 16),
-                    n_A_Buf7[12] = Math.floor(l % 16 / 8),
-                    n_A_Buf7[13] = Math.floor(l % 8 / 4),
-                    n_A_Buf7[14] = Math.floor(l % 4 / 2),
-                    l = StoN2(n.substr(S + 11, 1)),
-                    n_A_Buf7[16] = Math.floor(l / 16),
-                    n_A_Buf7[17] = Math.floor(l % 16 / 8),
-                    n_A_Buf7[18] = Math.floor(l % 8 / 4),
-                    n_A_Buf7[19] = Math.floor(l % 4 / 2),
-                    n_A_Buf7[20] = Math.floor(l % 2 / 1),
-                    l = StoN2(n.substr(S + 12, 1)),
-                    n_A_Buf7[21] = Math.floor(l / 16),
-                    n_A_Buf7[22] = Math.floor(l % 16 / 8),
-                    n_A_Buf7[23] = Math.floor(l % 8 / 4),
-                    n_A_Buf7[24] = Math.floor(l % 4 / 2),
-                    n_A_Buf7[25] = Math.floor(l % 2 / 1),
-                    l = StoN2(n.substr(S + 13, 1)),
-                    n_A_Buf7[26] = Math.floor(l / 16),
-                    n_A_Buf7[27] = Math.floor(l % 16 / 8),
-                    n_A_Buf7[28] = Math.floor(l % 8 / 4),
-                    n_A_Buf7[29] = Math.floor(l % 4 / 2),
-                    n_A_Buf7[30] = Math.floor(l % 2 / 1),
-                    l = StoN2(n.substr(S + 14, 1)),
-                    n_A_Buf7[31] = Math.floor(l / 16),
-                    n_A_Buf7[32] = Math.floor(l % 16 / 8),
-                    n_A_Buf7[33] = Math.floor(l % 8 / 4),
-                    n_A_Buf7[34] = Math.floor(l % 4 / 2),
-                    n_A_Buf7[36] = Math.floor(l % 2 / 1),
-                    l = StoN2(n.substr(S + 15, 1)),
-                    n_A_Buf7[37] = Math.floor(l / 16),
-                    n_A_Buf7[38] = Math.floor(l % 16 / 8),
-                    n_A_Buf7[41] = Math.floor(l % 8 / 4),
-                    n_A_Buf7[43] = Math.floor(l % 4 / 2),
-                    n_A_Buf7[44] = Math.floor(l % 2 / 1),
-                    l = StoN2(n.substr(S + 16, 1)),
-                    n_A_Buf7[45] = Math.floor(l / 16),
-                    n_A_Buf7[46] = Math.floor(l % 16 / 8),
-                    n_A_Buf7[47] = Math.floor(l % 8 / 4),
-                    n_A_Buf7[48] = Math.floor(l % 4 / 2),
-                    n_A_Buf7[49] = Math.floor(l % 2 / 1),
-                    A >= 6 && (l = StoN2(n.substr(S + 17, 1)),
-                        n_A_Buf7[50] = Math.floor(l / 16),
-                        n_A_Buf7[51] = Math.floor(l % 16 / 8),
-                        n_A_Buf7[52] = Math.floor(l % 8 / 4),
-                        n_A_Buf7[53] = Math.floor(l % 4 / 2),
-                        n_A_Buf7[54] = Math.floor(l % 2 / 1),
-                        n_A_Buf7[55] = StoN2(n.substr(S + 18, 1)),
-                        l = StoN2(n.substr(S + 19, 1)),
-                        n_A_Buf7[56] = Math.floor(l / 16),
-                        n_A_Buf7[57] = Math.floor(l % 16 / 8),
-                        n_A_Buf7[58] = Math.floor(l % 8 / 4),
-                        n_A_Buf7[59] = Math.floor(l % 4 / 2),
-                        n_A_Buf7[60] = Math.floor(l % 2 / 1),
-                        S += 3),
-                    S += 16),
-                SetAdditionalEffectsVisibility(0),
-                S += 1,
-                1 == StoN2(n.substr(S, 1))) {
-                n_A_Buf8[0] = StoN2(n.substr(S + 1, 2)),
-                    n_A_Buf8[3] = StoN2(n.substr(S + 3, 2)),
-                    n_A_Buf8[7] = StoN2(n.substr(S + 5, 2)),
-                    n_A_Buf8[8] = StoN2(n.substr(S + 7, 2)),
-                    n_A_Buf8[9] = StoN2(n.substr(S + 9, 2)),
-                    n_A_Buf8[10] = StoN2(n.substr(S + 11, 2)),
-                    n_A_Buf8[11] = StoN2(n.substr(S + 13, 2)),
-                    n_A_Buf8[5] = StoN2(n.substr(S + 15, 1)),
-                    n_A_Buf8[6] = StoN2(n.substr(S + 16, 1)),
-                    n_A_Buf8[1] = Math.floor(StoN2(n.substr(S + 17, 1)) / 6);
-                l = StoN2(n.substr(S + 18, 1));
-                n_A_Buf8[2] = Math.floor(l / 16),
-                    S += 18
-            }
-            if (A >= 6) {
-                if (SetPlayerManualEditsVisibility(0),
-                    S += 1,
-                    1 == StoN2(n.substr(S, 1)))
-                    if (n_A_Buf9[0] = StoN2(n.substr(S + 1, 1)),
-                        n_A_Buf9[1] = StoN2(n.substr(S + 2, 2)),
-                        n_A_Buf9[2] = StoN2(n.substr(S + 4, 1)),
-                        n_A_Buf9[3] = StoN2(n.substr(S + 5, 2)),
-                        n_A_Buf9[4] = StoN2(n.substr(S + 7, 1)),
-                        n_A_Buf9[5] = StoN2(n.substr(S + 8, 2)),
-                        n_A_Buf9[6] = StoN2(n.substr(S + 10, 1)),
-                        n_A_Buf9[7] = StoN2(n.substr(S + 11, 2)),
-                        n_A_Buf9[8] = StoN2(n.substr(S + 13, 1)),
-                        n_A_Buf9[9] = StoN2(n.substr(S + 14, 2)),
-                        n_A_Buf9[10] = StoN2(n.substr(S + 16, 1)),
-                        n_A_Buf9[11] = StoN2(n.substr(S + 17, 2)),
-                        n_A_Buf9[12] = StoN2(n.substr(S + 19, 1)),
-                        n_A_Buf9[13] = StoN2(n.substr(S + 20, 2)),
-                        n_A_Buf9[14] = StoN2(n.substr(S + 22, 1)),
-                        n_A_Buf9[15] = StoN2(n.substr(S + 23, 2)),
-                        n_A_Buf9[16] = StoN2(n.substr(S + 25, 1)),
-                        n_A_Buf9[17] = StoN2(n.substr(S + 26, 2)),
-                        n_A_Buf9[18] = StoN2(n.substr(S + 28, 1)),
-                        n_A_Buf9[19] = StoN2(n.substr(S + 29, 2)),
-                        n_A_Buf9[20] = StoN2(n.substr(S + 31, 1)),
-                        n_A_Buf9[21] = StoN2(n.substr(S + 32, 2)),
-                        n_A_Buf9[22] = StoN2(n.substr(S + 34, 1)),
-                        n_A_Buf9[23] = StoN2(n.substr(S + 35, 2)),
-                        n_A_Buf9[24] = StoN2(n.substr(S + 37, 1)),
-                        n_A_Buf9[25] = StoN2(n.substr(S + 38, 2)),
-                        n_A_Buf9[26] = StoN2(n.substr(S + 40, 1)),
-                        n_A_Buf9[27] = StoN2(n.substr(S + 41, 2)),
-                        n_A_Buf9[28] = StoN2(n.substr(S + 43, 1)),
-                        n_A_Buf9[29] = StoN2(n.substr(S + 44, 2)),
-                        n_A_Buf9[30] = StoN2(n.substr(S + 46, 3)),
-                        A >= 7) {
-                        for (r = 31; r <= 59; r++)
-                            n_A_Buf9[r] = StoN2(n.substr(S - 13 + 2 * r, 2));
-                        S += 106
-                    } else {
-                        for (r = 31; r <= 55; r++)
-                            n_A_Buf9[r] = StoN2(n.substr(S - 13 + 2 * r, 2));
-                        S += 98
-                    }
-                SetMonsterManualEditsVisibility(0),
-                    S += 1,
-                    1 == StoN2(n.substr(S, 1)) && (n_B_manual[1] = StoN2(n.substr(S + 1, 2)),
-                        n_B_manual[2] = StoN2(n.substr(S + 3, 1)),
-                        n_B_manual[3] = StoN2(n.substr(S + 4, 2)),
-                        n_B_manual[4] = StoN2(n.substr(S + 6, 1)),
-                        n_B_manual[5] = StoN2(n.substr(S + 7, 2)),
-                        n_B_manual[7] = StoN2(n.substr(S + 9, 2)),
-                        n_B_manual[9] = StoN2(n.substr(S + 11, 2)),
-                        n_B_manual[21] = StoN2(n.substr(S + 13, 2)),
-                        n_B_manual[30] = StoN2(n.substr(S + 15, 3)),
-                        n_B_manual[31] = StoN2(n.substr(S + 18, 2)),
-                        n_B_manual[34] = StoN2(n.substr(S + 20, 2)),
-                        n_B_manual[35] = StoN2(n.substr(S + 22, 2)),
-                        n_B_manual[36] = StoN2(n.substr(S + 24, 2)),
-                        n_B_manual[37] = StoN2(n.substr(S + 26, 2)),
-                        n_B_manual[38] = StoN2(n.substr(S + 28, 2)),
-                        n_B_manual[39] = StoN2(n.substr(S + 30, 2)),
-                        n_B_manual[40] = StoN2(n.substr(S + 32, 3)),
-                        n_B_manual[41] = StoN2(n.substr(S + 35, 2)),
-                        n_B_manual[42] = StoN2(n.substr(S + 37, 3)),
-                        n_B_manual[43] = StoN2(n.substr(S + 40, 3)),
-                        n_B_manual[44] = StoN2(n.substr(S + 43, 2)),
-                        n_B_manual[48] = StoN2(n.substr(S + 45, 2)),
-                        n_B_manual[49] = StoN2(n.substr(S + 47, 2)),
-                        n_B_manual[50] = StoN2(n.substr(S + 49, 2)),
-                        n_B_manual[51] = StoN2(n.substr(S + 51, 2)),
-                        n_B_manual[52] = StoN2(n.substr(S + 53, 2)),
-                        n_B_manual[53] = StoN2(n.substr(S + 55, 3)),
-                        n_B_manual[54] = StoN2(n.substr(S + 58, 2)),
-                        n_B_manual[55] = StoN2(n.substr(S + 60, 2)),
-                        S += 61)
-            }
-            c.Conf01.value = StoN2(n.substr(S + 1, 2)),
-                c.B_num.value = StoN2(n.substr(S + 3, 1)),
-                c.A8_Skill14.value = StoN2(n.substr(S + 4, 1));
-            l = StoN2(n.substr(S + 7, 1));
-            StCalc(1),
-                ActiveSkillSetPlus(),
-                c.A_ActiveSkill.value = StoN2(n.substr(S + 8, 2)),
-                ClickActiveSkill(),
-                c.A_ActiveSkillLV.value = StoN2(n.substr(S + 10, 1)),
-                66 != n_A_ActiveSkill && 326 != n_A_ActiveSkill && 159 != n_A_ActiveSkill && 384 != n_A_ActiveSkill && 324 != n_A_ActiveSkill && 131 != n_A_ActiveSkill && 88 != n_A_ActiveSkill && 197 != n_A_ActiveSkill && 394 != n_A_ActiveSkill && 395 != n_A_ActiveSkill && 405 != n_A_ActiveSkill && 429 != n_A_ActiveSkill || (c.SkillSubNum.value = StoN2(n.substr(S + 11, 3)));
+    const otherVal = (typeof otherURL_TEXT !== 'undefined' && otherURL_TEXT.value) || '';
+    const urlToParse = (otherVal && (otherVal.includes('?') || otherVal.includes('#')))
+        ? otherVal : location.href;
 
-            const doubleCastIndex = JOB_AVAILABLE_BUFFS[n_A_JOB].indexOf(441);
-            if (doubleCastIndex !== -1) {
-                const doubleCastSkillElement = document.getElementById("A_skill" + doubleCastIndex);
+    const hasQuery = urlToParse.includes('?');
+    const hasFragment = urlToParse.includes('#');
 
-                if (doubleCastSkillElement) {
-                    const doubleCastSkillLevel = 1 * doubleCastSkillElement.value;
+    if (!hasQuery && !hasFragment) return;
 
-                    const isCompatibleBoltSkill = n_A_ActiveSkill == 51 || n_A_ActiveSkill == 54 || n_A_ActiveSkill == 56 || n_A_ActiveSkill == 540 || n_A_ActiveSkill == 541 || n_A_ActiveSkill == 542;
-
-                    if (doubleCastSkillLevel > 0 && isCompatibleBoltSkill) {
-                        const averageChance = doubleCastSkillLevel + 3;
-                        myInnerHtml("AASkill", 'Double Bolt chance: <select name="SkillSubNum" onChange="calc()"></select>', 0);
-                        c.SkillSubNum.options[0] = new Option("No chance (0%)", 0);
-                        c.SkillSubNum.options[1] = new Option("Average chance (" + 10 * averageChance + "%)", averageChance);
-                        c.SkillSubNum.options[2] = new Option("Max chance (100%)", 10);
-                        c.SkillSubNum.value = StoN2(n.substr(S + 11, 3));
-                    }
-                }
+    // ── New format: ?d=<lzstring> ─────────────────────────────────────────
+    if (hasQuery) {
+        const params = new URLSearchParams(urlToParse.split('?')[1]);
+        const compressed = params.get('d');
+        if (compressed) {
+            let data;
+            try {
+                const json = LZString.decompressFromEncodedURIComponent(compressed);
+                if (!json) throw new Error('Decompression returned null');
+                data = JSON.parse(json);
+            } catch (e) {
+                alert("Failed to load URL data — the link may be corrupted.");
+                return;
             }
-            n_B[0] = StoN2(n.substr(S + 14, 2)),
-                c.B_Enemy.value = StoN2(n.substr(S + 14, 2)),
-                calc(),
-                LoadEnemySkills(),
-                c.B_AtkSkill.value = StoN2(n.substr(S + 16, 2)),
-                BClickAtkSkill(),
-                n_B_AtkSkill = 1 * c.B_AtkSkill.value,
-                444 != n_B_AtkSkill && 445 != n_B_AtkSkill && 125 != n_B_AtkSkill && 131 != n_B_AtkSkill || (c.BSkillSubNum.value = StoN2(n.substr(S + 18, 3))),
-                A >= 6 && (c.B_AtkRange.value = StoN2(n.substr(S + 21, 1)),
-                    c.B_AtkElem.value = StoN2(n.substr(S + 22, 1)),
-                    c.theme.value = StoN2(n.substr(S + 23, 1)),
-                    c.server.value = StoN2(n.substr(S + 24, 1)))
+            if (data.v === URL_DATA_VERSION) {
+                console.log("Loading data from new URL format", data);
+                loadNewFormat(data);
+                return;
+            }
         }
-        if (n.substr(-23, 1) != "-") {
-            if (n.substr(-16, 1) != "-") {
-                for (x = -56, g = 0; x < 0, g <= 27; x += 2, g++) { // load rand options from url
-                    n_A_randopt[g] = StoN2(n.substr(x, 2));
-                }
-                for (g = 0; g <= 5; g++)
-                    n_A_Shadow[g] = 0;
-                n_A_Shadow[1] = 22;
-                n_A_Shadow[3] = 44;
-                for (g = 0; g <= 3; g++)
-                    n_A_Buf3[45 + g] = 0;
-                n_A_Buf3[37] = 0;
+    }
 
-            } else {
-                for (x = -72, g = 0; x < 0, g <= 27; x += 2, g++) { // load rand options from url
-                    n_A_randopt[g] = StoN2(n.substr(x, 2));
+    console.log("No valid new-format data found in URL, falling back to legacy format if present");
+
+    // ── Legacy format: #<positional base-62> ─────────────────────────────
+    // Decode the positional string into the DOM and global arrays exactly
+    // as before, then translate everything into player/monster objects by
+    // synthesizing a flat sd[] array and passing it to loadLegacyFormat.
+    legacyURLinDecode(urlToParse);
+}
+
+/**
+ * Decodes a legacy #-format URL string directly into player/monster objects.
+ * No global n_A_Buf* arrays are used — everything goes straight to
+ * player.sc, monster.sc, player.manual_edits, monster.manual_edits, etc.
+ */
+function legacyURLinDecode(urlToParse) {
+    const otherVal = (typeof otherURL_TEXT !== 'undefined' && otherURL_TEXT.value) || '';
+
+    let t = [];
+    if (otherVal.includes('?')) t = otherVal.split('?');
+    else if (otherVal.includes('#')) t = otherVal.split('#');
+    else if (urlToParse.includes('?')) t = urlToParse.split('?');
+    else if (urlToParse.includes('#')) t = urlToParse.split('#');
+    else return;
+
+    const n = t[1].replace(/undefined/g, 'a');
+    const A = StoN2(n.substr(0, 1)); // version byte
+
+    // ── Reset ─────────────────────────────────────────────────────────────
+    player.sc = [];
+    monster.sc = [];
+    player.manual_edits = [];
+    monster.manual_edits = [];
+    player.pet = 0;
+    player.temp_effect = [0, 0, 0, 0];
+    player.spiritball = 0;
+
+    // ── UI flags ──────────────────────────────────────────────────────────
+    if (A >= 6) {
+        const uiFlagOffset = n.substr(-16, 1) === '-' ? -74 : -58;
+        const l1 = StoN2(n.substr(uiFlagOffset, 1));
+        c.all_dmgSkills.checked = Math.floor(l1 % 16 / 8);
+        c.restrict_equipslot.checked = Math.floor(l1 % 2 / 1);
+        const l2 = StoN2(n.substr(uiFlagOffset + 1, 1));
+        c.restrict_cardslot.checked = Math.floor(l2 / 16);
+        c.all_card.checked = Math.floor(l2 % 16 / 8);
+    }
+
+    // ── Job/stats/equipment (fixed positions, same in all versions) ───────
+    c.A_JOB.value = StoN2(n.substr(1, 2));
+    ClickJob(StoN2(n.substr(1, 2)));
+    c.A_BaseLV.value = StoN2(n.substr(3, 2));
+    c.A_JobLV.value = StoN2(n.substr(5, 2));
+    c.A_STR.value = StoN2(n.substr(7, 2));
+    c.A_AGI.value = StoN2(n.substr(9, 2));
+    c.A_VIT.value = StoN2(n.substr(11, 2));
+    c.A_DEX.value = StoN2(n.substr(13, 2));
+    c.A_INT.value = StoN2(n.substr(15, 2));
+    c.A_LUK.value = StoN2(n.substr(17, 2));
+
+    // ASPD pot (packed with weapon element in older versions)
+    const elemPot = StoN2(n.substr(19, 1));
+    const aspdPotLegacy = Math.floor(elemPot / 10);
+    c.A_Weapon_element.value = elemPot % 10;
+
+    // Weapon
+    c.A_weapon1.value = StoN2(n.substr(23, 2));
+    const weapType1 = StoN2(n.substr(20, 1));
+    ClickWeaponType(weapType1);
+
+    // Dual wield (Assassin/AssassinCross only)
+    const jobVal = 1 * c.A_JOB.value;
+    if ((jobVal === 8 || jobVal === 22) && weapType1 !== 11) {
+        ClickWeaponType2(StoN2(n.substr(34, 2)));
+    }
+
+    n_A_JobSet();
+    if (n_A_JobClass() === JOB.THIEF || n_A_JobClass() === JOB.ARCHER ||
+        n_A_JobClass() === JOB.GUNSLINGER)
+        c.A_Arrow.value = StoN2(n.substr(22, 1));
+
+    ClickB_Item(StoN2(n.substr(23, 2)));
+    c.A_Weapon_refine.value = StoN2(n.substr(25, 1));
+    c.A_weapon1_card1.value = StoN2(n.substr(26, 2));
+    c.A_weapon1_card2.value = StoN2(n.substr(28, 2));
+    c.A_weapon1_card3.value = StoN2(n.substr(30, 2));
+    c.A_weapon1_card4.value = StoN2(n.substr(32, 2));
+
+    if (player.dual_wield) {
+        c.A_weapon2.value = StoN2(n.substr(34, 2));
+        c.A_Weapon2_refine.value = StoN2(n.substr(36, 1));
+        c.A_weapon2_card1.value = StoN2(n.substr(37, 2));
+        c.A_weapon2_card2.value = StoN2(n.substr(39, 2));
+        c.A_weapon2_card3.value = StoN2(n.substr(41, 2));
+        c.A_weapon2_card4.value = StoN2(n.substr(43, 2));
+    } else {
+        c.A_left.value = StoN2(n.substr(34, 2));
+        c.A_LEFT_REFINE.value = StoN2(n.substr(36, 1));
+        c.A_left_card.value = StoN2(n.substr(37, 2));
+    }
+
+    c.A_head1.value = StoN2(n.substr(45, 2));
+    c.A_head1_card.value = StoN2(n.substr(47, 2));
+    c.A_head2.value = StoN2(n.substr(49, 2));
+    c.A_head2_card.value = StoN2(n.substr(51, 2));
+    c.A_head3.value = StoN2(n.substr(53, 2));
+    c.A_body.value = StoN2(n.substr(55, 2));
+    c.A_body_card.value = StoN2(n.substr(57, 2));
+    c.A_shoulder.value = StoN2(n.substr(59, 2));
+    c.A_shoulder_card.value = StoN2(n.substr(61, 2));
+    c.A_shoes.value = StoN2(n.substr(63, 2));
+    c.A_shoes_card.value = StoN2(n.substr(65, 2));
+    c.A_acces1.value = StoN2(n.substr(67, 2));
+    c.A_acces1_card.value = StoN2(n.substr(69, 2));
+    c.A_acces2.value = StoN2(n.substr(71, 2));
+    c.A_acces2_card.value = StoN2(n.substr(73, 2));
+    c.A_HEAD_REFINE.value = StoN2(n.substr(75, 1));
+    c.A_BODY_REFINE.value = StoN2(n.substr(76, 1));
+    c.A_SHOULDER_REFINE.value = StoN2(n.substr(77, 1));
+    c.A_SHOES_REFINE.value = StoN2(n.substr(78, 1));
+
+    var l = StoN2(n.substr(79, 1));
+    c.A_adopted.checked = Math.floor(l / 16);
+
+    // Old card ID remapping (versions < 4)
+    if (A < 4) {
+        const remapBody = { 75: 139, 128: 131, 129: 132, 130: 133, 131: 134, 132: 128, 133: 135, 134: 136, 135: 137, 136: 138, 137: 75, 138: 140 };
+        const remapShoes = { 140: 129 };
+        const remapAcc = { 75: 139, 141: 142, 142: 143, 143: 144, 144: 145, 145: 146, 146: 147, 147: 148, 148: 149, 149: 150, 150: 151, 151: 152, 152: 130 };
+        let o = StoN2(n.substr(57, 2));
+        c.A_body_card.value = remapBody[o] ?? o;
+        o = StoN2(n.substr(61, 2));
+        c.A_shoulder_card.value = o === 139 ? 141 : o;
+        o = StoN2(n.substr(65, 2));
+        c.A_shoes_card.value = remapShoes[o] ?? o;
+        o = StoN2(n.substr(69, 2));
+        c.A_acces1_card.value = remapAcc[o] ?? o;
+        o = StoN2(n.substr(73, 2));
+        c.A_acces2_card.value = remapAcc[o] ?? o;
+    }
+
+    // ── Variable-position section — S tracks current position ─────────────
+    let S, u, i_var, s;
+
+    if (A < 4) {
+        // VERY VERY old format that is VERY likely not used anymore
+    } else {
+        // A >= 4: modern legacy format
+        u = StoN2(n.substr(88, 1));
+        for (var r = 0; r < u; r++)
+            document.getElementById("A_skill" + r).value = StoN2(n.substr(89 + r, 1));
+
+        SetSupportSkillsVisibility(0);
+        S = 89 + r;
+
+        // Party buffs (BUF2)
+        if (1 === StoN2(n.substr(S, 1))) {
+            if(StoN2(n.substr(S + 1, 1))) sc_start(player, SC.BLESSING, StoN2(n.substr(S + 1, 1)) > 5 ? StoN2(n.substr(S + 1, 1)) / 2 : StoN2(n.substr(S + 1, 1)));
+            if(StoN2(n.substr(S + 2, 1))) sc_start(player, SC.INCREASEAGI, StoN2(n.substr(S + 2, 1)) > 5 ? StoN2(n.substr(S + 2, 1)) / 2 : StoN2(n.substr(S + 2, 1)));
+            if(StoN2(n.substr(S + 3, 1))) sc_start(player, SC.ANGELUS, StoN2(n.substr(S + 3, 1)));
+            if(StoN2(n.substr(S + 4, 1))) sc_start(player, SC.WINDWALK, StoN2(n.substr(S + 4, 1)));
+            if(StoN2(n.substr(S + 5, 1))) sc_start(player, SC.AUTOGUARD, StoN2(n.substr(S + 5, 1)));
+            if(StoN2(n.substr(S + 6, 1))) sc_start(player, SC.SHIELDREFLECT, StoN2(n.substr(S + 6, 1)));
+            if(Math.floor(StoN2(n.substr(S + 7, 1)) / 6)) sc_start(player, SC.IMPOSITIO, Math.floor(StoN2(n.substr(S + 7, 1)) / 6));
+            if((StoN2(n.substr(S + 7, 1)) % 6) == 1) sc_start(player, SC.ADRENALINE);
+            else if((StoN2(n.substr(S + 7, 1)) % 6) == 2) sc_start(player, SC.ADRENALINE2);
+            if(Math.floor(StoN2(n.substr(S + 8, 1)) / 6)) sc_start(player, SC.SUFFRAGIUM, Math.floor(StoN2(n.substr(S + 8, 1)) / 6));
+            if(StoN2(n.substr(S + 8, 1)) % 6) sc_start(player, SC.PROVIDENCE, StoN2(n.substr(S + 8, 1)) % 6);
+            if(Math.floor(StoN2(n.substr(S + 9, 1)) / 6)) player.spiritball = Math.floor(StoN2(n.substr(S + 9, 1)) / 6);
+            if(StoN2(n.substr(S + 9, 1)) % 6) sc_start(player, SC.DEFENDER, StoN2(n.substr(S + 9, 1)) % 6);
+            l = StoN2(n.substr(S + 10, 1));
+            if(Math.floor(l / 16)) sc_start(player, SC.GLORIA);
+            if(Math.floor(l % 16 / 8)) sc_start(player, SC.ASSUMPTIO);
+            if(Math.floor(l % 8 / 4)) sc_start(player, SC.WEAPONPERFECTION);
+            if(Math.floor(l % 4 / 2)) sc_start(player, SC.OVERTHRUST);
+            if(Math.floor(l % 2 / 1)) sc_start(player, SC.INCALLSTATUS, 20);
+            l = StoN2(n.substr(S + 11, 1));
+            if(Math.floor(l / 16)) sc_start(player, SC.INCMHPRATE, 100);
+            if(Math.floor(l % 16 / 8)) sc_start(player, SC.INCMSPRATE, 100);
+            if(Math.floor(l % 8 / 4)) sc_start(player, SC.INCATKRATE, 100);
+            if(Math.floor(l % 4 / 2)) { sc_start(player, SC.INCHIT, 50); sc_start(player, SC.INCFLEE, 50); }
+            if(Math.floor(l % 2 / 1)) sc_start(player, SC.INCDEFRATE, 25);
+            S += 11;
+        }
+
+        SetMonsterDebuffsVisibility(0);
+        S += 1;
+        if (1 === StoN2(n.substr(S, 1))) {
+            _decodeLegacyMonsterDebuf(n, S);
+            S += 9;
+        }
+
+        SetMonsterBuffsVisibility(0);
+        S += 1;
+        if (1 === StoN2(n.substr(S, 1))) {
+            _decodeLegacyMonsterBuf(n, S, A);
+            S += (A >= 5 ? 11 : 6);
+        }
+
+        // Dance/guild/misc/food (flags byte)
+        s = [0, 0, 0, 0, 0];
+        l = StoN2(n.substr(S + 1, 1));
+        s[0] = Math.floor(l / 16); s[1] = Math.floor(l % 16 / 8); s[2] = Math.floor(l % 8 / 4); s[3] = Math.floor(l % 4 / 2); s[4] = Math.floor(l % 2 / 1);
+        S += 1;
+        SetDanceSkillsVisibility(0);
+        if (s[0]) S = _decodeLegacyBuf3Dance(n, S);
+        SetGuildSkillsVisibility(0);
+        if (s[1]) S = _decodeLegacyBuf3Guild(n, S);
+        SetMiscEffectsVisibility(0);
+        if (s[3]) S = _decodeLegacyBuf6Misc(n, S);
+        SetFoodEffectsVisibility(0);
+        if (s[4]) S = _decodeLegacyBuf7Food(n, S, A);
+
+        SetAdditionalEffectsVisibility(0);
+        S += 1;
+        if (1 === StoN2(n.substr(S, 1))) {
+            player.pet = StoN2(n.substr(S + 1, 2));
+
+            player.temp_effect[0] = StoN2(n.substr(S + 7, 2)); 
+            player.temp_effect[1] = StoN2(n.substr(S + 9, 2)); 
+            player.temp_effect[2] = StoN2(n.substr(S + 11, 2)); 
+            player.temp_effect[3] = StoN2(n.substr(S + 13, 2)); 
+            player.exp_modifiers.party_member_count = StoN2(n.substr(S + 15, 1)); 
+            l = StoN2(n.substr(S + 18, 1)); 
+            if(Math.floor(l / 16)) player.exp_modifiers.job_manual = true;
+            S += 18;
+        }
+
+        if (A >= 6) {
+            SetPlayerManualEditsVisibility(0);
+            S += 1;
+            if (1 === StoN2(n.substr(S, 1))) {
+                if(StoN2(n.substr(S + 25, 1))) manualedits_start(player, 290, StoN2(n.substr(S + 25, 1))); 
+                if(StoN2(n.substr(S + 26, 2))) manualedits_start(player, 295, StoN2(n.substr(S + 26, 2)));
+                if(StoN2(n.substr(S + 28, 1))) manualedits_start(player, 78, StoN2(n.substr(S + 28, 1)));
+                if(StoN2(n.substr(S + 46, 3))) manualedits_start(player, 13, StoN2(n.substr(S + 46, 3)));
+
+                if(A >= 7) {
+                    if(StoN2(n.substr(S + 49, 2))) manualedits_start(player, 15, StoN2(n.substr(S + 49, 2)));
+                    if(StoN2(n.substr(S + 51, 2))) manualedits_start(player, 14, StoN2(n.substr(S + 51, 2)));
+                    if(StoN2(n.substr(S + 53, 2))) manualedits_start(player, 16, StoN2(n.substr(S + 53, 2)));
+                    if(StoN2(n.substr(S + 55, 2))) manualedits_start(player, 18, StoN2(n.substr(S + 55, 2)));
+                    if(StoN2(n.substr(S + 57, 2))) manualedits_start(player, 19, StoN2(n.substr(S + 57, 2)));
+                    if(StoN2(n.substr(S + 59, 2))) manualedits_start(player, 8, StoN2(n.substr(S + 59, 2)));
+                    if(StoN2(n.substr(S + 61, 2))) manualedits_start(player, 9, StoN2(n.substr(S + 61, 2)));
+                    if(StoN2(n.substr(S + 63, 2))) manualedits_start(player, 11, StoN2(n.substr(S + 63, 2)));
+                    if(StoN2(n.substr(S + 65, 2))) manualedits_start(player, 10, StoN2(n.substr(S + 65, 2)));
+                    if(StoN2(n.substr(S + 67, 2))) manualedits_start(player, 17, StoN2(n.substr(S + 67, 2)));
+                    if(StoN2(n.substr(S + 69, 2))) manualedits_start(player, 80, StoN2(n.substr(S + 69, 2)));
+                    if(StoN2(n.substr(S + 71, 2))) manualedits_start(player, 88, StoN2(n.substr(S + 71, 2)));
+                    if(StoN2(n.substr(S + 73, 2))) manualedits_start(player, 89, StoN2(n.substr(S + 73, 2)));
+                    if(StoN2(n.substr(S + 75, 2))) manualedits_start(player, 12, StoN2(n.substr(S + 75, 2)));
+                    // S + 77
+                    // S + 79
+                    if(StoN2(n.substr(S + 81, 2))) manualedits_start(player, 1, StoN2(n.substr(S + 81, 2)));
+                    if(StoN2(n.substr(S + 83, 2))) manualedits_start(player, 2, StoN2(n.substr(S + 83, 2)));
+                    if(StoN2(n.substr(S + 85, 2))) manualedits_start(player, 3, StoN2(n.substr(S + 85, 2)));
+                    if(StoN2(n.substr(S + 87, 2))) manualedits_start(player, 4, StoN2(n.substr(S + 87, 2)));
+                    if(StoN2(n.substr(S + 89, 2))) manualedits_start(player, 5, StoN2(n.substr(S + 89, 2)));
+                    if(StoN2(n.substr(S + 91, 2))) manualedits_start(player, 6, StoN2(n.substr(S + 91, 2)));
+                    // S + 93
+                    if(StoN2(n.substr(S + 95, 2))) manualedits_start(player, 354, StoN2(n.substr(S + 95, 2)));
+                    if(StoN2(n.substr(S + 97, 2))) manualedits_start(player, 86, StoN2(n.substr(S + 97, 2)));
+                    if(StoN2(n.substr(S + 99, 2))) manualedits_start(player, 25, StoN2(n.substr(S + 99, 2)));
+                    if(StoN2(n.substr(S + 101, 2))) manualedits_start(player, 70, StoN2(n.substr(S + 101, 2)));
+                    S += 106;
+                } else {
+                    if(StoN2(n.substr(S + 49, 2))) manualedits_start(player, 15, StoN2(n.substr(S + 49, 2)));
+                    if(StoN2(n.substr(S + 51, 2))) manualedits_start(player, 14, StoN2(n.substr(S + 51, 2)));
+                    if(StoN2(n.substr(S + 53, 2))) manualedits_start(player, 16, StoN2(n.substr(S + 53, 2)));
+                    if(StoN2(n.substr(S + 55, 2))) manualedits_start(player, 18, StoN2(n.substr(S + 55, 2)));
+                    if(StoN2(n.substr(S + 57, 2))) manualedits_start(player, 19, StoN2(n.substr(S + 57, 2)));
+                    if(StoN2(n.substr(S + 59, 2))) manualedits_start(player, 8, StoN2(n.substr(S + 59, 2)));
+                    if(StoN2(n.substr(S + 61, 2))) manualedits_start(player, 9, StoN2(n.substr(S + 61, 2)));
+                    if(StoN2(n.substr(S + 63, 2))) manualedits_start(player, 11, StoN2(n.substr(S + 63, 2)));
+                    if(StoN2(n.substr(S + 65, 2))) manualedits_start(player, 10, StoN2(n.substr(S + 65, 2)));
+                    if(StoN2(n.substr(S + 67, 2))) manualedits_start(player, 17, StoN2(n.substr(S + 67, 2)));
+                    if(StoN2(n.substr(S + 69, 2))) manualedits_start(player, 80, StoN2(n.substr(S + 69, 2)));
+                    if(StoN2(n.substr(S + 71, 2))) manualedits_start(player, 88, StoN2(n.substr(S + 71, 2)));
+                    if(StoN2(n.substr(S + 73, 2))) manualedits_start(player, 89, StoN2(n.substr(S + 73, 2)));
+                    if(StoN2(n.substr(S + 75, 2))) manualedits_start(player, 12, StoN2(n.substr(S + 75, 2)));
+                    // S + 77
+                    // S + 79
+                    if(StoN2(n.substr(S + 81, 2))) manualedits_start(player, 1, StoN2(n.substr(S + 81, 2)));
+                    if(StoN2(n.substr(S + 83, 2))) manualedits_start(player, 2, StoN2(n.substr(S + 83, 2)));
+                    if(StoN2(n.substr(S + 85, 2))) manualedits_start(player, 3, StoN2(n.substr(S + 85, 2)));
+                    if(StoN2(n.substr(S + 87, 2))) manualedits_start(player, 4, StoN2(n.substr(S + 87, 2)));
+                    if(StoN2(n.substr(S + 89, 2))) manualedits_start(player, 5, StoN2(n.substr(S + 89, 2)));
+                    if(StoN2(n.substr(S + 91, 2))) manualedits_start(player, 6, StoN2(n.substr(S + 91, 2)));
+                    // S + 93
+                    if(StoN2(n.substr(S + 95, 2))) manualedits_start(player, 354, StoN2(n.substr(S + 95, 2)));
+                    if(StoN2(n.substr(S + 97, 2))) manualedits_start(player, 86, StoN2(n.substr(S + 97, 2)));
+                    S += 98;
                 }
-                for (x = -15, g = 0; x < 0, g <= 5; x += 2, g++) {
-                    n_A_Shadow[g] = StoN2(n.substr(x, 2));
-                }
-                l = StoN2(n.substr(-3, 1));
-                n_A_Buf3[45] = Math.floor(l / 16),
-                    n_A_Buf3[46] = Math.floor(l % 16 / 8),
-                    n_A_Buf3[47] = Math.floor(l % 8 / 4),
-                    n_A_Buf3[48] = Math.floor(l % 4 / 2),
-                    n_A_Buf3[37] = StoN2(n.substr(-2, 2))
             }
 
-            for (g = 0; g <= 10; g++)
-                n_A_enchant[g] = 0;
+            // Monster manual edits (n_B_manual)
+            SetMonsterManualEditsVisibility(0);
+            S += 1;
+            if (1 === StoN2(n.substr(S, 1))) {
+                if(StoN2(n.substr(S + 1, 2))) manualedits_start(monster, 604, StoN2(n.substr(S + 1, 2)));
+                if(StoN2(n.substr(S + 9, 2))) manualedits_start(monster, 602, StoN2(n.substr(S + 9, 2)));
+                if(StoN2(n.substr(S + 11, 2))) manualedits_start(monster, 78, StoN2(n.substr(S + 11, 2)));
+                if(StoN2(n.substr(S + 13, 2))) manualedits_start(monster, 71, StoN2(n.substr(S + 13, 2)));
+
+                if(StoN2(n.substr(S + 15, 3))) manualedits_start(monster, 13, StoN2(n.substr(S + 15, 3)));
+                if(StoN2(n.substr(S + 18, 2))) manualedits_start(monster, 15, StoN2(n.substr(S + 18, 2)));
+                if(StoN2(n.substr(S + 20, 2))) manualedits_start(monster, 18, StoN2(n.substr(S + 20, 2)));
+                if(StoN2(n.substr(S + 22, 2))) manualedits_start(monster, 19, StoN2(n.substr(S + 22, 2)));
+                if(StoN2(n.substr(S + 24, 2))) manualedits_start(monster, 8, StoN2(n.substr(S + 24, 2)));
+                if(StoN2(n.substr(S + 26, 2))) manualedits_start(monster, 9, StoN2(n.substr(S + 26, 2)));
+                //if(StoN2(n.substr(S + 28, 2))) manualedits_start(monster, 17, StoN2(n.substr(S + 28, 2)));
+                //if(StoN2(n.substr(S + 30, 2))) manualedits_start(monster, 80, StoN2(n.substr(S + 30, 2)));
+                if(StoN2(n.substr(S + 32, 3))) manualedits_start(monster, 17, StoN2(n.substr(S + 32, 3)));
+                if(StoN2(n.substr(S + 35, 2))) manualedits_start(monster, 80, StoN2(n.substr(S + 35, 2)));
+                if(StoN2(n.substr(S + 37, 3))) manualedits_start(monster, 88, StoN2(n.substr(S + 37, 3)));
+                //if(StoN2(n.substr(S + 40, 3))) manualedits_start(monster, 4, StoN2(n.substr(S + 40, 3)));
+                //if(StoN2(n.substr(S + 43, 2))) manualedits_start(monster, 88, StoN2(n.substr(S + 43, 2)));
+                if(StoN2(n.substr(S + 45, 2))) manualedits_start(monster, 2, StoN2(n.substr(S + 45, 2)));
+                if(StoN2(n.substr(S + 47, 2))) manualedits_start(monster, 3, StoN2(n.substr(S + 47, 2)));
+                if(StoN2(n.substr(S + 49, 2))) manualedits_start(monster, 4, StoN2(n.substr(S + 49, 2)));
+                if(StoN2(n.substr(S + 51, 2))) manualedits_start(monster, 5, StoN2(n.substr(S + 51, 2)));
+                if(StoN2(n.substr(S + 53, 2))) manualedits_start(monster, 6, StoN2(n.substr(S + 53, 2)));
+                if(StoN2(n.substr(S + 55, 3))) manualedits_start(monster, 87, StoN2(n.substr(S + 55, 3)));
+                if(StoN2(n.substr(S + 58, 2))) manualedits_start(monster, 354, StoN2(n.substr(S + 58, 2)));
+                //if(StoN2(n.substr(S + 60, 2))) manualedits_start(monster, 602, StoN2(n.substr(S + 60, 2)));
+                S += 61;
+            }
+        }
+
+        // Active skill / enemy
+        c.Conf01.value = StoN2(n.substr(S + 1, 2));
+        c.B_num.value = StoN2(n.substr(S + 3, 1));
+        c.A8_Skill14.value = StoN2(n.substr(S + 4, 1));
+        l = StoN2(n.substr(S + 7, 1));
+        StCalc(1);
+        ActiveSkillSetPlus();
+        c.A_ActiveSkill.value = StoN2(n.substr(S + 8, 2));
+        ClickActiveSkill();
+        c.A_ActiveSkillLV.value = StoN2(n.substr(S + 10, 1));
+        const skillsToLoadSubNum = [66, 326, 159, 384, 324, 131, 88, 197, 394, 395, 405, 429];
+        if (c.SkillSubNum && (skillsToLoadSubNum.includes(player.active_skill) || SkillSearch(SKILL.PF_DOUBLECASTING))) c.SkillSubNum.value = StoN2(n.substr(S + 11, 3));
+
+        // Double cast special case
+        const doubleCastIndex = JOB_AVAILABLE_BUFFS[player.status.job_id].indexOf(441);
+        if (doubleCastIndex !== -1) {
+            const dcEl = document.getElementById("A_skill" + doubleCastIndex);
+            if (dcEl && 1 * dcEl.value > 0) {
+                const isCompatibleBolt = [51, 54, 56, 540, 541, 542].includes(n_A_ActiveSkill);
+                if (isCompatibleBolt) {
+                    const avg = 1 * dcEl.value + 3;
+                    myInnerHtml("AASkill", 'Double Bolt chance: <select name="SkillSubNum" onChange="calc()"></select>', 0);
+                    c.SkillSubNum.options[0] = new Option("No chance (0%)", 0);
+                    c.SkillSubNum.options[1] = new Option("Average chance (" + 10 * avg + "%)", avg);
+                    c.SkillSubNum.options[2] = new Option("Max chance (100%)", 10);
+                    c.SkillSubNum.value = StoN2(n.substr(S + 11, 3));
+                }
+            }
+        }
+
+        c.B_Enemy.value = StoN2(n.substr(S + 14, 2));
+        calc();
+        LoadEnemySkills();
+        c.B_AtkSkill.value = StoN2(n.substr(S + 16, 2));
+        BClickAtkSkill();
+        const skillsToLoadSubNumForMonster = [444, 445, 125, 131];
+        if (c.BSkillSubNum && skillsToLoadSubNumForMonster.includes(c.B_AtkSkill.value)) c.BSkillSubNum.value = StoN2(n.substr(S + 18, 3));
+        if (A >= 6) {
+            c.B_AtkRange.value = StoN2(n.substr(S + 21, 1));
+            c.B_AtkElem.value = StoN2(n.substr(S + 22, 1));
+            c.theme.value = StoN2(n.substr(S + 23, 1));
+        }
+    }
+
+    // ── Tail section: randopt, shadow, enchants (detected by sentinel '-') ─
+    if (n.substr(-23, 1) !== '-') {
+        if (n.substr(-16, 1) !== '-') {
+            // No shadow/enchant section
+            for (let g = 0, x = -56; g <= 27; g++, x += 2)
+                player.randopt[g] = StoN2(n.substr(x, 2));
+            player.shadow = [0, 22, 0, 44, 0, 0];
         } else {
-            for (x = -95, g = 0; x < 0, g <= 27; x += 2, g++) { // load rand options from url
-                n_A_randopt[g] = StoN2(n.substr(x, 2));
-            }
-            for (x = -38, g = 0; x < 0, g <= 5; x += 2, g++) {
-                n_A_Shadow[g] = StoN2(n.substr(x, 2));
-            }
-            l = StoN2(n.substr(-26, 1));
-            n_A_Buf3[45] = Math.floor(l / 16),
-                n_A_Buf3[46] = Math.floor(l % 16 / 8),
-                n_A_Buf3[47] = Math.floor(l % 8 / 4),
-                n_A_Buf3[48] = Math.floor(l % 4 / 2),
-                n_A_Buf3[37] = StoN2(n.substr(-25, 2));
+            // Shadow section, no enchant
+            for (let g = 0, x = -72; g <= 27; g++, x += 2)
+                player.randopt[g] = StoN2(n.substr(x, 2));
+            for (let g = 0, x = -15; g <= 5; g++, x += 2)
+                player.shadow[g] = StoN2(n.substr(x, 2));
 
-            for (x = -22, g = 0; x < 0, g <= 10; x += 2, g++) {
-                n_A_enchant[g] = StoN2(n.substr(x, 2));
-            }
+            l = StoN2(n.substr(-3, 1));
+            if (Math.floor(l / 16)) sc_start(player, SC.WHISTLE_SRS);     
+            if (Math.floor(l % 16 / 8)) sc_start(player, SC.ASSNCROS_SRS);   
+            if (Math.floor(l % 8 / 4)) sc_start(player, SC.FORTUNE_SRS);    
+            if (Math.floor(l % 4 / 2)) sc_start(player, SC.HUMMING_SRS);    
         }
-        refreshFields(),
-            calc(),
-            themes()
+        for (let g = 0; g <= 10; g++) player.enchant[g] = 0;
+    } else {
+        // Full tail: randopt + shadow + enchant
+        for (let g = 0, x = -95; g <= 27; g++, x += 2)
+            player.randopt[g] = StoN2(n.substr(x, 2));
+        for (let g = 0, x = -38; g <= 5; g++, x += 2)
+            player.shadow[g] = StoN2(n.substr(x, 2));
+        console.log(player.shadow);
+        l = StoN2(n.substr(-26, 1));
+        if (Math.floor(l / 16)) sc_start(player, SC.WHISTLE_SRS);     
+        if (Math.floor(l % 16 / 8)) sc_start(player, SC.ASSNCROS_SRS);    
+        if (Math.floor(l % 8 / 4)) sc_start(player, SC.FORTUNE_SRS);    
+        if (Math.floor(l % 4 / 2)) sc_start(player, SC.HUMMING_SRS);   
+        for (let g = 0, x = -22; g <= 10; g++, x += 2)
+            player.enchant[g] = StoN2(n.substr(x, 2));
+    }
+
+    // Apply randopt/shadow to DOM
+    reloadRandOpt();
+    reloadShadowEquip();
+    reloadEnchant();
+
+    // ── Final sync: DOM → player object → SC → display ────────────────────
+    PopulatePlayerData();
+    calc();
+    themes();
+    syncBuffDOMFromSC(player);
+    syncBuffDOMFromSC(monster);
+    syncAdditionalEffectsDOMFromData();
+    syncManualEditsDOMFromData(player, 'ID_ARG');
+    syncMonsterManualEditsDOMFromData();
+}
+
+// ── Helper decoders ───────────────────────────────────────────────────────────
+
+function _decodeLegacyMonsterDebuf(n, S) {
+    if(StoN2(n.substr(S + 1, 1))) sc_start(monster, SC.PROVOKE, StoN2(n.substr(S + 1, 1)));
+    if(Math.floor(StoN2(n.substr(S + 2, 1)) / 6)) sc_start(monster, SC.QUAGMIRE, Math.floor(StoN2(n.substr(S + 2, 1)) / 6));
+    if(StoN2(n.substr(S + 2, 1)) % 6) sc_start(monster, SC.MINDBREAKER, StoN2(n.substr(S + 2, 1)) % 6);
+    let l = StoN2(n.substr(S + 3, 1));
+    if(Math.floor(l / 16)) sc_start(monster, SC.POISON);
+    if(Math.floor(l % 16 / 8)) sc_start(monster, SC.BLIND);
+    if(Math.floor(l % 8 / 4)) sc_start(monster, SC.FREEZE);
+    if(Math.floor(l % 4 / 2)) sc_start(monster, SC.BLESSING);
+    if(Math.floor(l % 2 / 1)) sc_start(monster, SC.AETERNA);
+    l = StoN2(n.substr(S + 4, 1));
+    if(Math.floor(l / 16)) sc_start(monster, SC.STUN);
+    if(Math.floor(l % 16 / 8)) sc_start(monster, SC.SLEEP);
+    if(Math.floor(l % 8 / 4)) sc_start(monster, SC.STONE);
+    if(Math.floor(l % 4 / 2)) sc_start(monster, SC.CURSE);
+    if(Math.floor(l % 2 / 1)) sc_start(monster, SC.DONTFORGETME);
+    if(StoN2(n.substr(S + 5, 1))) sc_start(monster, SC.DECREASEAGI, StoN2(n.substr(S + 5, 1)));
+    if(StoN2(n.substr(S + 6, 1))) sc_start(monster, SC.CRUCIS, StoN2(n.substr(S + 6, 1)));
+    l = StoN2(n.substr(S + 7, 1));
+    if(Math.floor(l / 16)) sc_start(monster, SC.STRIPWEAPON);
+    if(Math.floor(l % 16 / 8)) sc_start(monster, SC.STRIPSHIELD);
+    if(Math.floor(l % 8 / 4)) sc_start(monster, SC.STRIPARMOR);
+    if(Math.floor(l % 4 / 2)) sc_start(monster, SC.STRIPHELM);
+    if(Math.floor(l % 2 / 1)) sc_start(monster, SC.SPIDERWEB);
+    l = StoN2(n.substr(S + 8, 1));
+    if(Math.floor(l / 16)) sc_start(monster, SC.ETERNALCHAOS);
+    if(Math.floor(l % 16 / 8)) sc_start(monster, SC.SKA, Math.floor(l % 16 / 8));
+    //if(Math.floor(l % 8 / 4)) sc_start(monster, SC.SKE);
+    if(Math.floor(StoN2(n.substr(S + 9, 1)) / 6)) sc_start(monster, SC.ELEMENTALCHANGE, Math.floor(StoN2(n.substr(S + 9, 1)) / 6), 1);
+    //if(StoN2(n.substr(S + 9, 1)) % 6) sc_start(monster, SC.REDUCE_DEFRATE, StoN2(n.substr(S + 9, 1)) % 6 === 1 ? 50 : 75);
+}
+
+function _decodeLegacyMonsterBuf(n, S, A) {
+    if(StoN2(n.substr(S + 1, 1))) sc_start(monster, SC.INCREASEAGI, StoN2(n.substr(S + 1, 1)));
+    let l = StoN2(n.substr(S + 2, 1));
+    if(Math.floor(l / 16)) sc_start(monster, SC.ASSUMPTIO);
+    if(Math.floor(l % 16 / 8)) sc_start(monster, SC.ADRENALINE);
+    if(Math.floor(l % 8 / 4)) sc_start(monster, SC.MAXIMIZEPOWER);
+    if(Math.floor(l % 4 / 2)) sc_start(monster, SC.POWERUP);
+    if(Math.floor(l % 2 / 1)) sc_start(monster, SC.KEEPING);
+    if(StoN2(n.substr(S + 3, 1))) sc_start(monster, SC.ELEMENTALCHANGE, StoN2(n.substr(S + 3, 1)) > 9 ? Math.floor(StoN2(n.substr(S + 3, 1)) / 10) : 0, StoN2(n.substr(S + 3, 1)) % 10);
+    if(Math.floor(StoN2(n.substr(S + 5, 1)) / 6)) sc_start(monster, SC.ARMORCHANGE, Math.floor(StoN2(n.substr(S + 5, 1)) / 6), SKILL.NPC_STONESKIN);
+    if(StoN2(n.substr(S + 5, 1)) % 6) sc_start(monster, SC.ARMORCHANGE, StoN2(n.substr(S + 5, 1)) % 6, SKILL.NPC_ANTIMAGIC);
+    if(StoN2(n.substr(S + 6, 1))) sc_start(monster, SC.AGIUP, StoN2(n.substr(S + 6, 1)));
+    if(A >= 5) {
+        if(StoN2(n.substr(S + 7, 1))) sc_start(monster, SC.ANGELUS, StoN2(n.substr(S + 7, 1)));
+        if(StoN2(n.substr(S + 8, 1))) sc_start(monster, SC.AUTOGUARD, StoN2(n.substr(S + 8, 1)));
+        if(StoN2(n.substr(S + 9, 1))) sc_start(monster, SC.SHIELDREFLECT, StoN2(n.substr(S + 9, 1)));
+        if(StoN2(n.substr(S + 10, 1))) sc_start(monster, SC.ARMOR, StoN2(n.substr(S + 10, 1)));
+        if(StoN2(n.substr(S + 11, 1))) sc_start(monster, SC.ENERGYCOAT, StoN2(n.substr(S + 11, 1)));
     }
 }
-for (n_NtoS = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"],
-    n_NtoS2 = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z", "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9"],
-    EnName = ["Neutral", "Water", "Earth", "Fire", "Wind", "Poison", "Holy", "Shadow", "Ghost", "Undead"],
-    i = 0; i <= 9; i++)
+
+function _decodeLegacyBuf3Dance(n, S) {
+    console.log("Decoding dance buffs with S =", S);
+    if(StoN2(n.substr(S + 1, 1))) sc_start(player, SC.WHISTLE, StoN2(n.substr(S + 1, 1)), StoN2(n.substr(S + 25, 1)), StoN2(n.substr(S + 23, 2)), 60); // luk stored elsewhere where its REALLY annoying to pull from so just default to 60
+    if(StoN2(n.substr(S + 2, 1))) sc_start(player, SC.ASSNCROS, StoN2(n.substr(S + 2, 1)), StoN2(n.substr(S + 28, 1)), StoN2(n.substr(S + 26, 2)));
+    if(StoN2(n.substr(S + 3, 1))) sc_start(player, SC.POEMBRAGI, StoN2(n.substr(S + 3, 1)), StoN2(n.substr(S + 33, 1)), StoN2(n.substr(S + 29, 2)), StoN2(n.substr(S + 31, 2)));
+    if(StoN2(n.substr(S + 4, 1))) sc_start(player, SC.APPLEIDUN, StoN2(n.substr(S + 4, 1)), StoN2(n.substr(S + 36, 1)), StoN2(n.substr(S + 34, 2)));
+    if(StoN2(n.substr(S + 5, 1))) sc_start(player, SC.HUMMING, StoN2(n.substr(S + 5, 1)), StoN2(n.substr(S + 39, 1)), StoN2(n.substr(S + 37, 2)));
+    if(StoN2(n.substr(S + 6, 1))) sc_start(player, SC.FORTUNE, StoN2(n.substr(S + 6, 1)), StoN2(n.substr(S + 42, 1)), StoN2(n.substr(S + 40, 2)));
+    if(StoN2(n.substr(S + 7, 1))) sc_start(player, SC.SERVICE4U, StoN2(n.substr(S + 7, 1)), StoN2(n.substr(S + 45, 1)), StoN2(n.substr(S + 43, 2)));
+    if(Math.floor(StoN2(n.substr(S + 8, 1)) / 6)) sc_start(player, SC.SIEGFRIED, Math.floor(StoN2(n.substr(S + 8, 1)) / 6));
+    if(StoN2(n.substr(S + 8, 1)) % 6) sc_start(player, SC.RICHMANKIM, StoN2(n.substr(S + 8, 1)) % 6);
+    if(Math.floor(StoN2(n.substr(S + 9, 1)) / 6)) sc_start(player, SC.DRUMBATTLE, Math.floor(StoN2(n.substr(S + 9, 1)) / 6));
+    if(StoN2(n.substr(S + 9, 1)) % 6) sc_start(player, SC.NIBELUNGEN, StoN2(n.substr(S + 9, 1)) % 6);
+    if(Math.floor(StoN2(n.substr(S + 10, 1)) / 16)) sc_start(player, SC.MARIONETTE, Math.floor(StoN2(n.substr(S + 10, 1)) % 16 / 8), StoN2(n.substr(S + 11, 2)), StoN2(n.substr(S + 13, 2)), StoN2(n.substr(S + 15, 2)), StoN2(n.substr(S + 17, 2)), StoN2(n.substr(S + 19, 2)), StoN2(n.substr(S + 21, 2)));
+    console.log("Marionette", Math.floor(StoN2(n.substr(S + 10, 1)) % 16 / 8), StoN2(n.substr(S + 11, 2)), StoN2(n.substr(S + 13, 2)), StoN2(n.substr(S + 15, 2)), StoN2(n.substr(S + 17, 2)), StoN2(n.substr(S + 19, 2)), StoN2(n.substr(S + 21, 2)));
+    S += 45;
+    return S;
+}
+
+function _decodeLegacyBuf3Guild(n, S) {
+    l = StoN2(n.substr(S + 1, 1));
+    if (Math.floor(l / 16)) sc_start(player, SC.BATTLEORDERS);
+    if(Math.floor(StoN2(n.substr(S + 2, 1)) / 6)) sc_start(player, SC.LEADERSHIP, Math.floor(StoN2(n.substr(S + 2, 1)) / 6));
+    if(StoN2(n.substr(S + 2, 1)) % 6) sc_start(player, SC.GLORYWOUNDS, StoN2(n.substr(S + 2, 1)) % 6);
+    if(Math.floor(StoN2(n.substr(S + 3, 1)) / 6)) sc_start(player, SC.SOULCOLD, Math.floor(StoN2(n.substr(S + 3, 1)) / 6));
+    if(StoN2(n.substr(S + 3, 1)) % 6) sc_start(player, SC.HAWKEYES, StoN2(n.substr(S + 3, 1)) % 6);
+    
+    S += 3;
+    return S;
+}
+
+function _decodeLegacyBuf6Misc(n, S) {
+    if(StoN2(n.substr(S + 1, 1))) sc_start(player, SC.PROVOKE, StoN2(n.substr(S + 1, 1)));
+    if(StoN2(n.substr(S + 2, 1))) sc_start(player, SC.DECREASEAGI, StoN2(n.substr(S + 2, 1)));
+    if(Math.floor(StoN2(n.substr(S + 3, 1)) / 6) == 0) sc_start(player, SC.VOLCANO, StoN2(n.substr(S + 3, 1)) % 6);
+    else if(Math.floor(StoN2(n.substr(S + 3, 1)) / 6) == 1) sc_start(player, SC.DELUGE, StoN2(n.substr(S + 3, 1)) % 6);
+    else if(Math.floor(StoN2(n.substr(S + 3, 1)) / 6) == 2) sc_start(player, SC.WHIRLWIND, StoN2(n.substr(S + 3, 1)) % 6);
+    //if(Math.floor(StoN2(n.substr(S + 4, 1)) / 6)) 
+    if(StoN2(n.substr(S + 4, 1)) % 6) sc_start(player, SC.MINDBREAKER, StoN2(n.substr(S + 4, 1)) % 6);
+    if(Math.floor(StoN2(n.substr(S + 5, 1)) / 6)) sc_start(player, SC.CRITICALWOUND, Math.floor(StoN2(n.substr(S + 5, 1)) / 6));
+    if(StoN2(n.substr(S + 5, 1)) % 6) sc_start(player, SC.QUAGMIRE, StoN2(n.substr(S + 5, 1)) % 6);
+    let l = StoN2(n.substr(S + 6, 1));
+    if(Math.floor(l / 16)) sc_start(player, SC.FOGWALL);
+    if(Math.floor(l % 16 / 8)) sc_start(player, SC.BENEDICTIO);
+    if(Math.floor(l % 8 / 4)) sc_start(player, SC.WATK_ELEMENT, ELE.FIRE, 20);
+    if(Math.floor(l % 4 / 2)) sc_start(player, SC.CHANGEUNDEAD);
+    if(Math.floor(l % 2 / 1)) sc_start(player, SC.NOCRIT);
+    l = StoN2(n.substr(S + 7, 1));
+    if(Math.floor(l % 16 / 8)) sc_start(player, SC.BLIND);
+    if(Math.floor(l % 8 / 4)) sc_start(player, SC.STUN);
+    if(Math.floor(l % 4 / 2)) sc_start(player, SC.STONE);
+    if(Math.floor(l % 2 / 1)) sc_start(player, SC.SLEEP);
+    l = StoN2(n.substr(S + 8, 1));
+    if(Math.floor(l / 16)) sc_start(player, SC.FREEZE);
+    if(Math.floor(l % 16 / 8)) sc_start(player, SC.AETERNA);
+    if(Math.floor(l % 8 / 4)) sc_start(player, SC.BLEEDING);
+    if(Math.floor(l % 4 / 2)) sc_start(player, SC.POISON);
+    if(Math.floor(l % 2 / 1)) sc_start(player, SC.CURSE);
+
+    S += 8;
+    return S;
+}
+
+function _decodeLegacyBuf7Food(n, S, A) {
+    if(StoN2(n.substr(S + 1, 1))) sc_start(player, SC.FOOD_STR_CASH, StoN2(n.substr(S + 1, 1)));
+    if(StoN2(n.substr(S + 2, 1))) sc_start(player, SC.FOOD_AGI_CASH, StoN2(n.substr(S + 2, 1)));
+    if(StoN2(n.substr(S + 3, 1))) sc_start(player, SC.FOOD_VIT_CASH, StoN2(n.substr(S + 3, 1)));
+    if(StoN2(n.substr(S + 4, 1))) sc_start(player, SC.FOOD_INT_CASH, StoN2(n.substr(S + 4, 1)));
+    if(StoN2(n.substr(S + 5, 1))) sc_start(player, SC.FOOD_DEX_CASH, StoN2(n.substr(S + 5, 1)));
+    if(StoN2(n.substr(S + 6, 1))) sc_start(player, SC.FOOD_LUK_CASH, StoN2(n.substr(S + 6, 1)));
+    if(Math.floor(StoN2(n.substr(S + 7, 1)) / 6) == 1) sc_start(player, SC.ASPDPOTION0);
+    else if(Math.floor(StoN2(n.substr(S + 7, 1)) / 6) == 2) sc_start(player, SC.ASPDPOTION1);
+    else if(Math.floor(StoN2(n.substr(S + 7, 1)) / 6) == 3) sc_start(player, SC.ASPDPOTION2);
+    else if(Math.floor(StoN2(n.substr(S + 7, 1)) / 6) == 4) sc_start(player, SC.ASPDPOTION3);
+    let l = StoN2(n.substr(S + 9, 1));
+    if(Math.floor(l / 16)) sc_start(player, SC.SESAME_PASTRY, 10);
+    if(Math.floor(l % 16 / 8)) sc_start(player, SC.HONEY_PASTRY, 10);
+    if(Math.floor(l % 8 / 4)) sc_start(player, SC.ORLEANS_MEAL, 7);
+    if(Math.floor(l % 4 / 2)) sc_start(player, SC.RESENTMENT_BOX, 20);
+    if(Math.floor(l % 2 / 1)) sc_start(player, SC.DROWSINESS_BOX, 20);
+    l = StoN2(n.substr(S + 10, 1));
+    if(Math.floor(l / 16)) sc_start(player, SC.ARMOR_ELEMENT_WATER);
+    if(Math.floor(l % 16 / 8)) sc_start(player, SC.ARMOR_ELEMENT_EARTH);
+    if(Math.floor(l % 8 / 4)) sc_start(player, SC.ARMOR_ELEMENT_FIRE);
+    if(Math.floor(l % 4 / 2)) sc_start(player, SC.ARMOR_ELEMENT_WIND);
+    l = StoN2(n.substr(S + 11, 1));
+    if(Math.floor(l / 16)) sc_start(player, SC.ORIENTAL_PASTRY, 10);
+    if(Math.floor(l % 16 / 8)) sc_start(player, SC.RUNE_STRAWBERRY_CAKE, 5);
+    if(Math.floor(l % 8 / 4)) sc_start(player, SC.SCHWARTZWALD_PINE_JUBILEE);
+    if(Math.floor(l % 4 / 2)) sc_start(player, SC.ARUNAFELTZ_DESERT_SANDWICH, 7);
+    if(Math.floor(l % 2 / 1)) sc_start(player, SC.MANU_ATK, 10);
+    l = StoN2(n.substr(S + 12, 1));
+    if(Math.floor(l / 16)) sc_start(player, SC.MANU_MATK, 10);
+    if(Math.floor(l % 16 / 8)) sc_start(player, SC.MANU_DEF, 10);
+    if(Math.floor(l % 8 / 4)) sc_start(player, SC.SPL_ATK, 10);
+    if(Math.floor(l % 4 / 2)) sc_start(player, SC.SPL_MATK, 10);
+    if(Math.floor(l % 2 / 1)) sc_start(player, SC.SPL_DEF, 10);
+    l = StoN2(n.substr(S + 13, 1));
+    if(Math.floor(l / 16)) sc_start(player, SC.GUARANA_CANDY);
+    //if(Math.floor(l % 16 / 8))
+    //if(Math.floor(l % 8 / 4)) 
+    //if(Math.floor(l % 4 / 2)) 
+    //if(Math.floor(l % 2 / 1)) 
+    l = StoN2(n.substr(S + 14, 1));
+    if(Math.floor(l / 16)) sc_start(player, SC.ALOEVERA);
+    if(Math.floor(l % 16 / 8)) sc_start(player, SC.DEF_RATE, 3);
+    if(Math.floor(l % 8 / 4)) sc_start(player, SC.MDEF_RATE, 3);
+    if(Math.floor(l % 4 / 2)) sc_start(player, SC.GLOOM_BOX);
+    if(Math.floor(l % 2 / 1)) sc_start(player, SC.ABRASIVE, 20);
+    l = StoN2(n.substr(S + 15, 1));
+    if(Math.floor(l / 16)) sc_start(player, SC.REGENERATION_POTION, 20);
+    if(Math.floor(l % 16 / 8)) sc_start(player, SC.CHEWY_RICE_CAKE, 10);
+    //if(Math.floor(l % 8 / 4)) 
+    if(Math.floor(l % 4 / 2)) sc_start(player, SC.MACARONCAKE);
+    //if(Math.floor(l % 2 / 1)) 
+    l = StoN2(n.substr(S + 16, 1));
+    /* if(Math.floor(l / 16)) sc_start(player, SC.SUPER_NUTS);
+    if(Math.floor(l % 16 / 8)) sc_start(player, SC.SUPER_CANDY);
+    if(Math.floor(l % 8 / 4)) sc_start(player, SC.SUPER_PASTRY);
+    if(Math.floor(l % 4 / 2)) sc_start(player, SC.SUPER_JUICE);
+    if(Math.floor(l % 2 / 1)) sc_start(player, SC.SUPER_SWEETS); */
+    if(A >= 6) {
+        l = StoN2(n.substr(S + 17, 1));
+        /* if(Math.floor(l / 16)) sc_start(player, SC.INCHEALRATE, 20);
+        if(Math.floor(l % 16 / 8)) sc_start(player, SC.INCHEALRATE, 40);
+        if(Math.floor(l % 8 / 4)) sc_start(player, SC.INCHEALRATE, 60);
+        if(Math.floor(l % 4 / 2)) sc_start(player, SC.INCHEALRATE, 80);
+        if(Math.floor(l % 2 / 1)) sc_start(player, SC.INCHEALRATE, 100); */
+        l = StoN2(n.substr(S + 19, 1));
+        S += 3;
+    }
+
+    S += 16;
+    return S;
+}
+
+for (i = 0; i <= 9; i++)
     document.calcForm.A_Weapon_element.options[i] = new Option(v_Element_[i], i),
         document.calcForm.B_AtkElem.options[i] = new Option(v_Element_[i], i);
 for (document.calcForm.A_Weapon_element.options[0] = new Option("(unchanged)", 0),
@@ -3934,56 +4039,6 @@ for (document.calcForm.A_Weapon_element.options[0] = new Option("(unchanged)", 0
     m_CardShort = [["(card shortcuts)", 0, 0, 0, 0], ["Remove All Cards", 1e4, 0], ["Remove Weapon's Cards", 0, 0, 0, 0], ["+40% [2 Race Card]", 1, 1, 0, 0], ["+60% [3 Race Card]", 1, 1, 1, 0], ["+80% [4 Race Card]", 1, 1, 1, 1], ["+61% [2 Race + 1 Size Cards]", 1, 1, 3, 0], ["+68% [2 Race + 1 Element Cards]", 1, 1, 2, 0], ["+84% [3 Race + 1 Size Cards]", 1, 1, 1, 3], ["+96% [2 Race + 2 Element Cards]", 1, 1, 2, 2], ["+110% [2 AK + 2 Race Cards]", 31, 31, 1, 1], ["+110% [3 AK + 1 Race Cards]", 31, 31, 31, 1], ["+110% [3 AK + 1 Element Cards]", 31, 31, 31, 2], ["2 Size Cards", 3, 3, 0, 0], ["3 Size Cards", 3, 3, 3, 0], ["4 Size Cards", 3, 3, 3, 3], ["1 Elemental Stone + 1 Star Crumb", 0, 106, 0, 0], ["1 Elemental Stone + 2 Star Crumbs", 0, 106, 106, 0], ["3 Star Crumbs", 106, 106, 106, 0], ["+40 ATK [2 Andre Cards]", 11, 11, 0, 0], ["+60 ATK [3 Andre Cards]", 11, 11, 11, 0], ["+80 ATK [4 Andre Cards]", 11, 11, 11, 11], ["+60 ATK [2 Zipper Bear Cards]", 326, 326, 0, 0], ["+90 ATK [3 Zipper Bear Cards]", 326, 326, 326, 0], ["+120 ATK [4 Zipper Bear Cards]", 326, 326, 326, 326], ["+18 CRIT [2 Soldier Skeleton Cards]", 41, 41, 0, 0], ["+27 CRIT [3 Soldier Skeleton Cards]", 41, 41, 41, 0], ["+36 CRIT [4 Soldier Skeleton Cards]", 41, 41, 41, 41], ["+40 HIT [2 Mummy Cards]", 40, 40, 0, 0], ["+60 HIT [3 Mummy Cards]", 40, 40, 40, 0], ["+80 HIT [4 Mummy Cards]", 40, 40, 40, 40], ["+60% [2 Orc Lady Cards]", 252, 252, 0, 0], ["+92% [2 Orc Lady + 1 Hydra Cards]", 252, 252, 13, 0], ["+128% [3 Orc Lady + 1 Hydra Cards]", 252, 252, 252, 13], ["+20% [2 Archer Skeleton Cards]", 107, 107, 0, 0], ["+30% [3 Archer Skeleton Cards]", 107, 107, 107, 0], ["+40% [4 Archer Skeleton Cards]", 107, 107, 107, 107], ["2 Fabre Cards", 4, 4, 0, 0], ["3 Fabre Cards", 4, 4, 4, 0], ["4 Fabre Cards", 4, 4, 4, 4], ["2 Drops Cards", 5, 5, 0, 0], ["3 Drops Cards", 5, 5, 5, 0], ["4 Drops Cards", 5, 5, 5, 5], ["+50% [2 Abysmal Knight Cards]", 31, 31, 0, 0], ["+75% [3 Abysmal Knight Cards]", 31, 31, 31, 0], ["+100% [4 Abysmal Knight Cards]", 31, 31, 31, 31], ["2 Crit Dmg +10%, CRIT +7 Cards", 156, 156, 0, 0], ["3 Crit Dmg +10%, CRIT +7 Cards", 156, 156, 156, 0], ["4 Crit Dmg +10%, CRIT +7 Cards", 156, 156, 156, 156], ["2 Cecil Damon Cards", 160, 160, 0, 0], ["3 Cecil Damon Cards", 160, 160, 160, 0], ["4 Cecil Damon Cards", 160, 160, 160, 160], ["Swordman Set", 1e4, 223, 347, 0, 317, 0, 362, 354, 0], ["Thief Set", 1e4, 233, 0, 0, 0, 295, 391, 395, 260], ["Acolyte Set", 1e4, 253, 383, 307, 301, 0, 0, 270, 0], ["Archer Set", 1e4, 279, 0, 0, 224, 340, 351, 230, 0], ["Magician Set", 1e4, 0, 337, 358, 220, 346, 379, 350, 0], ["Merchant Set", 1e4, 326, 376, 0, 281, 0, 388, 216, 0], ["Crusader Set", 1e4, 0, 347, 0, 190, 0, 362, 354, 0], ["Rogue Set", 1e4, 0, 113, 0, 0, 295, 391, 260, 413], ["Monk Set", 1e4, 253, 383, 0, 181, 0, 0, 270, 0], ["Bard/Dancer Set", 1e4, 279, 0, 0, 224, 340, 408, 230, 0], ["Sage Set", 1e4, 0, 337, 0, 193, 346, 379, 350, 0], ["Alchemist Set", 1e4, 326, 175, 0, 281, 0, 388, 104, 0], ["Test (for now)", 0, 0, 0, 0]],
     i = 0; i <= 63; i++)
     document.calcForm.A_cardshort.options[i] = new Option(m_CardShort[i][0], i);
-for (n_A_Buf3 = new Array,
-    i = 0; i <= 48; i++)
-    n_A_Buf3[i] = 0;
-for (n_A_Buf6 = new Array,
-    i = 0; i <= 23; i++)
-    n_A_Buf6[i] = 0;
-for (n_A_Buf7 = new Array,
-    i = 0; i <= 60; i++)
-    n_A_Buf7[i] = 0;
-for (n_A_Buf8 = new Array,
-    i = 0; i <= 15; i++)
-    n_A_Buf8[i] = 0;
-for (n_A_Buf9 = new Array,
-    i = 0; i <= 59; i++)
-    n_A_Buf9[i] = 0;
-for (n_A_Buf9[2] = 10,
-    n_A_Buf9[4] = 20,
-    n_A_Buf9[6] = 23,
-    n_A_Buf9[10] = 10,
-    n_A_Buf9[12] = 20,
-    n_A_Buf9[14] = 23,
-    n_B_manual = new Array,
-    i = 0; i <= 60; i++)
-    n_B_manual[i] = 0;
-for (n_A_debuf = new Array,
-    i = 0; i <= 3; i++)
-    n_A_debuf[i] = 0;
-for (n_B_debuf = new Array,
-    i = 0; i <= 30; i++)
-    n_B_debuf[i] = 0;
-for (n_B_buf = new Array,
-    i = 0; i <= 14; i++)
-    n_B_buf[i] = 0;
-for (n_A_Equip = new Array,
-    i = 0; i <= 20; i++)
-    n_A_Equip[i] = 0;
-for (n_A_card = new Array,
-    i = 0; i <= 25; i++)
-    n_A_card[i] = 0;
-for (n_A_randopt = new Array,
-    i = 0; i <= 27; i++)
-    n_A_randopt[i] = 0;
-for (n_A_Shadow = new Array,
-    i = 0; i <= 5; i++)
-    n_A_Shadow[i] = 0;
-n_A_Shadow[1] = 22;
-n_A_Shadow[3] = 44;
-for (n_A_enchant = new Array,
-    i = 0; i <= 10; i++)
-    n_A_enchant[i] = 0;
 
 for (i = 0; i < m_TempEffect.length; i++)
     if (1 == m_TempEffect[i][3]) {
@@ -3996,20 +4051,35 @@ for (i = 0; i < m_TempEffect.length; i++)
         0 == m_Card[m_TempEffect[i][4]][3] ? m_Card[m_TempEffect[i][4]][3] = str : m_Card[m_TempEffect[i][4]][3] += "<BR>" + str
     }
 function refreshFields() {
-    ClickB_Item("SW"),
-        SetMonsterDebuffsVisibility(n_debufSW),
-        SetMonsterBuffsVisibility(n_BbufSW),
-        SetSupportSkillsVisibility(n_SkillSW),
-        SetDanceSkillsVisibility(n_Skill3SW),
-        SetGuildSkillsVisibility(n_Skill4SW),
-        SetMiscEffectsVisibility(n_Skill6SW),
-        SetFoodEffectsVisibility(n_Skill7SW),
-        SetAdditionalEffectsVisibility(n_Skill8SW),
-        SetPlayerManualEditsVisibility(n_Skill9SW),
-        SetMonsterManualEditsVisibility(n_Skill10SW),
-        reloadRandOpt()
-    reloadShadowEquip()
-    reloadEnchant()
+    ClickB_Item("SW");
+    SetMonsterDebuffsVisibility(0);
+    SetMonsterBuffsVisibility(0);
+    SetSupportSkillsVisibility(0);
+    SetDanceSkillsVisibility(0);
+    SetGuildSkillsVisibility(0);
+    SetMiscEffectsVisibility(0);
+    SetFoodEffectsVisibility(0);
+    SetAdditionalEffectsVisibility(0);
+    SetPlayerManualEditsVisibility(0);
+    SetMonsterManualEditsVisibility(0);
+    reloadRandOpt();
+    reloadShadowEquip();
+    reloadEnchant();
+}
+
+function refreshTableHeaders() {
+    updateSupportSkillHeader();
+    updateMusicDanceSkillHeader();
+    updateMusicDanceStatLessonVisibility();
+    updateMarionetteVisibility();
+    updateGuildSkillHeader();
+    updateMiscEffectHeader();
+    updateFoodEffectHeader();
+    updateAdditionalEffectHeader();
+    updatePlayerManualEditsHeader();
+    updateMonsterDebuffHeader();
+    updateMonsterBuffHeader();
+    updateEnemyManualEditsHeader();
 }
 
 document.calcForm.B_AtkRange.value = 0,
@@ -4024,6 +4094,7 @@ document.calcForm.restrict_cardslot.checked = !1,
 document.calcForm.all_card.checked = !1,
 document.calcForm.increase_aspdcap.checked = !1,
 document.calcForm.A_JOB.value = 0,
+populateAdditionalEffectSelects();
 ClickJob(0),
 allCard(),
 EnemySort(),
@@ -4032,5 +4103,4 @@ firstLoadFunction(),
 LoadEnemySkills(),
 LoadLocal3(),
 URLIN(),
-refreshFields(),
 restrictCardslot(0);

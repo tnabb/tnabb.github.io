@@ -65,7 +65,7 @@ function status_get_hpbonus(sd, type) {
             bonus += sc_get(player, SC.ANGELUS).val1 * 100;
     } else if (type == STATUS.BONUS_RATE) {
         if(sc_get(player, SC.APPLEIDUN)) // apple of idun
-            bonus += sc_get(player, SC.APPLEIDUN).val2;
+            bonus += sc_get(player, SC.APPLEIDUN).val5;
         if(sc_get(player, SC.DELUGE) && player.battle_status.def_ele == ELE.WATER) // deluge
             bonus += sc_get(player, SC.DELUGE).val2;
         if(sc_get(player, SC.INCMHPRATE)) // gospel +100% max hp
@@ -149,7 +149,7 @@ function status_get_spbonus(sd, type) {
         if((skill_lv = SkillSearch(SKILL.HW_SOULDRAIN)) > 0)
             bonus += 2 * skill_lv;
         if(sc_get(player, SC.SERVICE4U)) // service for you
-            bonus += sc_get(player, SC.SERVICE4U).val2;
+            bonus += sc_get(player, SC.SERVICE4U).val5;
         if(sc_get(player, SC.INCMSPRATE)) // gospel +100% max sp
             bonus += sc_get(player, SC.INCMSPRATE).val1;
 
@@ -494,7 +494,7 @@ function status_calc_hit(player, hit) {
     if(SkillSearch(SKILL.SN_SIGHT))
         hit += 3 * SkillSearch(SKILL.SN_SIGHT);
     if(sc_get(player, SC.HUMMING)) // humming
-        hit += sc_get(player, SC.HUMMING).val2;
+        hit += sc_get(player, SC.HUMMING).val5;
     if(SkillSearch(SKILL.LK_CONCENTRATION))
         hit += 10 * SkillSearch(SKILL.LK_CONCENTRATION);
     if(SkillSearch(SKILL.GS_ADJUSTMENT))
@@ -515,7 +515,7 @@ function status_calc_flee(player, flee) {
     if(sc_get(player, SC.INCFLEE)) // gospel +50 flee
         flee += sc_get(player, SC.INCFLEE).val1;
     if(sc_get(player, SC.WHISTLE)) // a whistle
-        flee += sc_get(player, SC.WHISTLE).val2;
+        flee += sc_get(player, SC.WHISTLE).val5;
     if(sc_get(player, SC.WHIRLWIND) && player.battle_status.def_ele == ELE.WIND) // violent gale
         flee += sc_get(player, SC.WHIRLWIND).val2;
     if(SkillSearch(SKILL.RG_CLOSECONFINE))
@@ -702,14 +702,14 @@ function status_calc_critical(player, critical) {
     if(sc_get(player, SC.ADRENALINE2) && (player.weapontype1 == WEAPON.BOW || (player.weapontype1 >= WEAPON.REVOLVER && player.weapontype1 <= WEAPON.GRENADE))) // full adrenaline rush
         critical += 100;
     if(sc_get(player, SC.FORTUNE)) // fortunes kiss
-        critical += sc_get(player, SC.FORTUNE).val2;
+        critical += sc_get(player, SC.FORTUNE).val5;
     return cap_value(critical, 10, SHRT_MAX);
 }
 
 function status_calc_flee2(player, flee2) {
     
     if(sc_get(player, SC.WHISTLE)) // a whistle
-        flee2 += sc_get(player, SC.WHISTLE).val3 * 10;
+        flee2 += sc_get(player, SC.WHISTLE).val6 * 10;
     
     return cap_value(flee2, 10, SHRT_MAX);
 }
@@ -805,7 +805,7 @@ function status_calc_aspd_rate(player, aspd_rate) {
             case WEAPON.GRENADE:
                 break;
             default:
-                max = Math.max(max, sc_get(player, SC.ASSNCROS).val2);
+                max = Math.max(max, sc_get(player, SC.ASSNCROS).val5);
         }
     }
 
@@ -1005,56 +1005,56 @@ function sc_start(bl, type, val1 = 0, val2 = 0, val3 = 0, val4 = 0, val5 = 0, va
             break;
         case SC.WHISTLE:
             songLessonsLv = val2;
-            val2 = val1 + Math.floor(val3 / 10);
-            val3 = Math.floor((val1 + 1) / 2) + Math.floor(val4 / 30);
+            val5 = val1 + Math.floor(val3 / 10);
+            val6 = Math.floor((val1 + 1) / 2) + Math.floor(val4 / 30);
 
             if(songLessonsLv) {
-                val2 += Math.floor(songLessonsLv / 2);
-                val3 += Math.floor(songLessonsLv / 5);
+                val5 += Math.floor(songLessonsLv / 2);
+                val6 += Math.floor(songLessonsLv / 5);
             }
             break;
         case SC.ASSNCROS:
             songLessonsLv = val2;
-            val2 = Math.floor(songLessonsLv / 2);
-            val2 += 5 + val1 + Math.floor(val3 / 10);
-            val2 *= 10;
+            val5 = Math.floor(songLessonsLv / 2);
+            val5 += 5 + val1 + Math.floor(val3 / 10);
+            val5 *= 10;
             break;
         case SC.POEMBRAGI:
             songLessonsLv = val2;
-            val2 = 3 * val1 + Math.floor(val3 / 10);
-            val3 = (val1 < 10 ? 3 * val1 : 50) + Math.floor(val4 / 5);
+            val5 = 3 * val1 + Math.floor(val3 / 10);
+            val6 = (val1 < 10 ? 3 * val1 : 50) + Math.floor(val4 / 5);
             if(songLessonsLv) {
-                val2 += songLessonsLv;
-                val3 += 2 * songLessonsLv;
+                val5 += songLessonsLv;
+                val6 += 2 * songLessonsLv;
             }
             break;
         case SC.APPLEIDUN:
             songLessonsLv = val2;
-            val2 = (5 + 2 * val1) + Math.floor(val3 / 10);
+            val5 = (5 + 2 * val1) + Math.floor(val3 / 10);
             if(songLessonsLv)
-                val2 += Math.floor(songLessonsLv / 2);
+                val5 += Math.floor(songLessonsLv / 2);
             break;
         case SC.SERVICE4U:
             songLessonsLv = val2;
-            val2 = 15 + val1 + Math.floor(val3 / 10);
-            val3 = 20 + 3 * val1 + Math.floor(val3 / 10);
+            val5 = 15 + val1 + Math.floor(val3 / 10);
+            val6 = 20 + 3 * val1 + Math.floor(val3 / 10);
             if(songLessonsLv) {
-                val2 += Math.floor(songLessonsLv / 2);
-                val3 += Math.floor(songLessonsLv / 2);
+                val5 += Math.floor(songLessonsLv / 2);
+                val6 += Math.floor(songLessonsLv / 2);
             }
             break;
         case SC.FORTUNE:
             songLessonsLv = val2;
-            val2 = 10 + val1 + Math.floor(val3 / 10);
-            val2 *= 10;
+            val5 = 10 + val1 + Math.floor(val3 / 10);
+            val5 *= 10;
             if(songLessonsLv)
-                val2 += 5 * songLessonsLv;
+                val5 += 5 * songLessonsLv;
             break;
         case SC.HUMMING:
             songLessonsLv = val2;
-            val2 = 1 + 2 * val1 + Math.floor(val3 / 10);
+            val5 = 1 + 2 * val1 + Math.floor(val3 / 10);
             if(songLessonsLv)
-                val2 += songLessonsLv;
+                val5 += songLessonsLv;
             break;
         case SC.SIEGFRIED:
             val2 = 55 + val1 * 5;

@@ -4625,7 +4625,7 @@ function skill_castfix(src, skill_id, skill_lv) {
         reduce_cast_rate += 50;
     
     if(sc_get(player, SC.POEMBRAGI)) { // bragi
-        reduce_cast_rate += sc_get(player, SC.POEMBRAGI).val2;
+        reduce_cast_rate += sc_get(player, SC.POEMBRAGI).val5;
     }
 
     if(SkillSearch(SKILL.PF_MEMORIZE))
@@ -4721,7 +4721,7 @@ function skill_delayfix(src, skill_id, skill_lv) {
     let delay = 0;
     if(!skill_get_delaynostatus(skill_id)) {
         if(sc_get(player, SC.POEMBRAGI)) {
-            delay += sc_get(player, SC.POEMBRAGI).val3;
+            delay += sc_get(player, SC.POEMBRAGI).val6;
         }
     }
 

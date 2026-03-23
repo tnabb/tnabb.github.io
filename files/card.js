@@ -871,44 +871,29 @@ function allCard() {
 
 
 function Click_Card(value) {
-	n_A_card[0] = 1 * c.A_weapon1_card1.value;
-	n_A_card[1] = 1 * c.A_weapon1_card2.value;
-	n_A_card[2] = 1 * c.A_weapon1_card3.value;
-	n_A_card[3] = 1 * c.A_weapon1_card4.value;
+	player.card[0] = 1 * c.A_weapon1_card1.value;
+	player.card[1] = 1 * c.A_weapon1_card2.value;
+	player.card[2] = 1 * c.A_weapon1_card3.value;
+	player.card[3] = 1 * c.A_weapon1_card4.value;
 	if (player.dual_wield) {
-		n_A_card[4] = 1 * c.A_weapon2_card1.value;
-		n_A_card[5] = 1 * c.A_weapon2_card2.value;
-		n_A_card[6] = 1 * c.A_weapon2_card3.value;
-		n_A_card[7] = 1 * c.A_weapon2_card4.value;
+		player.card[4] = 1 * c.A_weapon2_card1.value;
+		player.card[5] = 1 * c.A_weapon2_card2.value;
+		player.card[6] = 1 * c.A_weapon2_card3.value;
+		player.card[7] = 1 * c.A_weapon2_card4.value;
 	} else {
-		n_A_card[4] = 0;
-		n_A_card[5] = 0;
-		n_A_card[6] = 0;
-		n_A_card[7] = 0;
+		player.card[4] = 0;
+		player.card[5] = 0;
+		player.card[6] = 0;
+		player.card[7] = 0;
 	}
-	n_A_card[8] = 1 * c.A_head1_card.value;
-	n_A_card[9] = 1 * c.A_head2_card.value;
-	n_A_card[10] = 1 * c.A_left_card.value;
-	n_A_card[11] = 1 * c.A_body_card.value;
-	n_A_card[12] = 1 * c.A_shoulder_card.value;
-	n_A_card[13] = 1 * c.A_shoes_card.value;
-	n_A_card[14] = 1 * c.A_acces1_card.value;
-	n_A_card[15] = 1 * c.A_acces2_card.value;
-
-	if (c.A_Kakutyou.value == 28) {		// prevent calc crash when selecting a Metaling Card or Wikebine Card when "Strip chance & duration" is opened in "Other info"
-		if (CardNumSearch(157) || CardNumSearch(413)) KakutyouKansuu2();		// the <select> (and hence CardNumSearch() ) isn't updated at this point
-		else if (value == 157 && CardNumSearch(157) == 0) KakutyouKansuu2();		// si antes no había 157, crear strip
-		else if (value == 413 && CardNumSearch(413) == 0) KakutyouKansuu2();		// si antes no había 413, crear strip
-		else if (n_A_card[14] != 413 && n_A_card[15] != 413) KakutyouKansuu2();		// quitar strip, else: no cambiar nada
-		else {
-			var quedaMetalingCard = 0;
-			for (i = 0; i <= 7; i++)
-				if (n_A_card[i] == 157)
-					quedaMetalingCard = 1;
-			if (quedaMetalingCard == 0)
-				KakutyouKansuu2();		// quitar strip, else: no cambiar nada
-		}
-	}
+	player.card[8] = 1 * c.A_head1_card.value;
+	player.card[9] = 1 * c.A_head2_card.value;
+	player.card[10] = 1 * c.A_left_card.value;
+	player.card[11] = 1 * c.A_body_card.value;
+	player.card[12] = 1 * c.A_shoulder_card.value;
+	player.card[13] = 1 * c.A_shoes_card.value;
+	player.card[14] = 1 * c.A_acces1_card.value;
+	player.card[15] = 1 * c.A_acces2_card.value;
 
 	StAllCalc();
 	Card(value);
@@ -1037,27 +1022,6 @@ function SetCardName(SENw) {
 					SENstr += "+";
 			}
 			return SENstr;
-		}
-	}
-}
-
-function SetCard() {
-	for (var i = 19; i <= 28; i++)
-		n_A_card[i] = 0;
-
-	var w_SE_num = 19;
-	var w_SE_ch = 0;
-	for (var k = 0; k <= SC_MAXnum; k++) {
-		for (var j = 1; w_SC[k][j] != "NULL" && (w_SE_ch == 1 || (w_SE_ch == 0 && j == 1)); j++) {
-			w_SE_ch = 0;
-			for (var i = 0; i <= 19 && w_SE_ch == 0; i++) {
-				if (n_A_card[i] == w_SC[k][j])
-					w_SE_ch = 1;
-			}
-		}
-		if (w_SE_ch == 1) {
-			n_A_card[w_SE_num] = w_SC[k][0];
-			w_SE_num++;
 		}
 	}
 }
@@ -1223,6 +1187,7 @@ m_RandomOptCrimsonWeapons = [2105, 2106, 2107, 2108, 2109, 2110, 2111, 2113, 211
 m_RandomOptMineWorkerPickaxe = [2178];
 
 function Click_RandOpt(){
+    console.log("Click_RandOpt: " + arguments[0]);
 	player.randopt[0] = 1 * c.A_weapon1_ropt1.value;
 	player.randopt[1] = 1 * c.WEAP1_ROPT1.value;
 	player.randopt[2] = 1 * c.A_weapon1_ropt2.value;
@@ -1359,21 +1324,21 @@ m_AdventurerArcWandEnchant = [
 ];
 
 function Click_Enchant(){
-	n_A_enchant[0] = 1 * c.A_head_enchant.value;
-	n_A_enchant[1] = 1 * c.A_body_enchant1.value;
-	n_A_enchant[2] = 1 * c.A_body_enchant2.value;
-	n_A_enchant[3] = 1 * c.A_shoulder_enchant1.value;
-	n_A_enchant[4] = 1 * c.A_shoulder_enchant2.value;
-	n_A_enchant[5] = 1 * c.A_shoes_enchant1.value;
-	n_A_enchant[6] = 1 * c.A_shoes_enchant2.value;
-	n_A_enchant[7] = 1 * c.A_weapon1_enchant1.value;
-	n_A_enchant[8] = 1 * c.A_weapon1_enchant2.value;
+	player.enchant[0] = 1 * c.A_head_enchant.value;
+	player.enchant[1] = 1 * c.A_body_enchant1.value;
+	player.enchant[2] = 1 * c.A_body_enchant2.value;
+	player.enchant[3] = 1 * c.A_shoulder_enchant1.value;
+	player.enchant[4] = 1 * c.A_shoulder_enchant2.value;
+	player.enchant[5] = 1 * c.A_shoes_enchant1.value;
+	player.enchant[6] = 1 * c.A_shoes_enchant2.value;
+	player.enchant[7] = 1 * c.A_weapon1_enchant1.value;
+	player.enchant[8] = 1 * c.A_weapon1_enchant2.value;
 	if (player.dual_wield) {
-		n_A_enchant[9] = 1 * c.A_weapon2_enchant1.value;
-		n_A_enchant[10] = 1 * c.A_weapon2_enchant2.value;
+		player.enchant[9] = 1 * c.A_weapon2_enchant1.value;
+		player.enchant[10] = 1 * c.A_weapon2_enchant2.value;
 	} else {
-		n_A_enchant[9] = 0;
-		n_A_enchant[10] = 0;
+		player.enchant[9] = 0;
+		player.enchant[10] = 0;
 	}
 }
 

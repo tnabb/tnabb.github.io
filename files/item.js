@@ -2835,28 +2835,6 @@ function SetEquipName(SENw) {
 	}
 }
 
-
-function SetEquip() {
-	for (var i = 11; i <= 20; i++)
-		n_A_Equip[i] = 736;
-
-	var w_num = 11;
-	var w_ch = 0;
-	for (var k = 0; k <= SE_MAXnum; k++) {
-		for (var j = 1; w_SE[k][j] != "NULL" && (w_ch == 1 || (w_ch == 0 && j == 1)); j++) {
-			w_ch = 0;
-			for (var i = 0; i <= 10 && w_ch == 0; i++) {
-				if (n_A_Equip[i] == w_SE[k][j])
-					w_ch = 1;
-			}
-		}
-		if (w_ch == 1) {
-			n_A_Equip[w_num] = w_SE[k][0];
-			w_num++;
-		}
-	}
-}
-
 m_ShadowEquips = [
 	[0, 1, 0, 0, "(no shadow weapon)", "", 0]
 	, [1, 1, 0, 0, "Angel Shadow Weapon [Grade B]", "", 38, 1, 178, 1, 0]
