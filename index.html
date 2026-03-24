@@ -179,7 +179,7 @@ window.onerror=function(){
                                 <option value="0">Project Alfheim</option>
                             </select><br>
                             <input type="checkbox" id="restrict_jobequip" onclick="ClickJob() | StAllCalc() | StCalc()" checked="" disabled="">Equipment job restrictions (this will clear equip, cards, and stats)<br>
-                            <input type="checkbox" id="restrict_lvlequip" onclick="WeaponSet() | ClickWeaponType(0) | WeaponSet2()">Equipment level restrictions<br>
+                            <input type="checkbox" id="restrict_lvlequip" onclick="WeaponSet() | ClickWeaponType(0) | EquipmentSet()">Equipment level restrictions<br>
                             <input type="checkbox" id="restrict_equipslot" onclick="StAllCalc() | calc()">Equipment slot restrictions<br>
                             <input type="checkbox" id="restrict_cardslot" onclick="restrictCardslot(0)">Equipment card slot restrictions<br>
                             <input type="checkbox" id="all_card" onclick="allCard()">All Cards everywhere (with bugs)<br>
@@ -3038,7 +3038,7 @@ window.onerror=function(){
             <table>
                 <tbody>
                     <tr>
-                        <td style="width:44%; vertical-align:top; padding: 0 8px 0 0;">
+                        <td style="width:44%; vertical-align:top; padding: 0 8px 0 0;"> <!-- PASSIVE SKILLS -->
                             <table class="tborder" style="background-color: rgb(255, 255, 255);">
                                 <tbody>
                                     <tr>
@@ -3093,6 +3093,66 @@ window.onerror=function(){
                                         <td id="P_Skill14s" class="data"></td>
                                         <td id="P_Skill15" class="center"></td>
                                         <td id="P_Skill15s"></td>
+                                    </tr>
+                                    <tr>
+                                        <td id="P_Skill16" class="center"></td>
+                                        <td id="P_Skill16s" class="data"></td>
+                                        <td id="P_Skill17" class="center"></td>
+                                        <td id="P_Skill17s"></td>
+                                    </tr>
+                                    <tr>
+                                        <td id="P_Skill18" class="center"></td>
+                                        <td id="P_Skill18s" class="data"></td>
+                                        <td id="P_Skill19" class="center"></td>
+                                        <td id="P_Skill19s"></td>
+                                    </tr>
+                                    <tr>
+                                        <td id="P_Skill20" class="center"></td>
+                                        <td id="P_Skill20s" class="data"></td>
+                                        <td id="P_Skill21" class="center"></td>
+                                        <td id="P_Skill21s"></td>
+                                    </tr>
+                                    <tr>
+                                        <td id="P_Skill22" class="center"></td>
+                                        <td id="P_Skill22s" class="data"></td>
+                                        <td id="P_Skill23" class="center"></td>
+                                        <td id="P_Skill23s"></td>
+                                    </tr>
+                                    <tr>
+                                        <td id="P_Skill24" class="center"></td>
+                                        <td id="P_Skill24s" class="data"></td>
+                                        <td id="P_Skill25" class="center"></td>
+                                        <td id="P_Skill25s"></td>
+                                    </tr>
+                                    <tr>
+                                        <td id="P_Skill26" class="center"></td>
+                                        <td id="P_Skill26s" class="data"></td>
+                                        <td id="P_Skill27" class="center"></td>
+                                        <td id="P_Skill27s"></td>
+                                    </tr>
+                                    <tr>
+                                        <td id="P_Skill28" class="center"></td>
+                                        <td id="P_Skill28s" class="data"></td>
+                                        <td id="P_Skill29" class="center"></td>
+                                        <td id="P_Skill29s"></td>
+                                    </tr>
+                                    <tr>
+                                        <td id="P_Skill30" class="center"></td>
+                                        <td id="P_Skill30s" class="data"></td>
+                                        <td id="P_Skill31" class="center"></td>
+                                        <td id="P_Skill31s"></td>
+                                    </tr>
+                                    <tr>
+                                        <td id="P_Skill32" class="center"></td>
+                                        <td id="P_Skill32s" class="data"></td>
+                                        <td id="P_Skill33" class="center"></td>
+                                        <td id="P_Skill33s"></td>
+                                    </tr>
+                                    <tr>
+                                        <td id="P_Skill34" class="center"></td>
+                                        <td id="P_Skill34s" class="data"></td>
+                                        <td id="P_Skill35" class="center"></td>
+                                        <td id="P_Skill35s"></td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -3313,6 +3373,7 @@ window.onerror=function(){
                                                 <option value="3">3</option>
                                                 <option value="4">4</option>
                                                 <option value="5">5</option>
+                                            </select>
                                         </td>
                                         <td id="buffcell_providence_label" class="center" data-sc="PROVIDENCE">Providence</td>
                                         <td id="buffcell_providence_input" data-sc="PROVIDENCE">
@@ -3323,6 +3384,21 @@ window.onerror=function(){
                                                 <option value="3">3</option>
                                                 <option value="4">4</option>
                                                 <option value="5">5</option>
+                                            </select>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td class="data"></td>
+                                        <td class="center"></td>
+                                        <td class="data"></td>
+                                        <td id="buffcell_kaupe_label" class="center" data-sc="KAUPE">Kaupe</td>
+                                        <td id="buffcell_kaupe_input" data-sc="KAUPE">
+                                            <select name="buff_kaupe" onchange="updateSupportSkillStatus(event, 1)" data-sc="KAUPE">
+                                                <option value="0">0</option>
+                                                <option value="1">1</option>
+                                                <option value="2">2</option>
+                                                <option value="3">3</option>
                                             </select>
                                         </td>
                                     </tr>
@@ -6714,6 +6790,27 @@ window.onerror=function(){
                                 <option value="5">5</option>
                             </select>
                         </td>
+                    </tr>
+                    <tr>
+                        <td id="buffcell_talisman_label" class="right" data-sc="TALISMAN">
+                            <select name="buff_talisman_label" onchange="updateSupportSkillStatus(event, 4)" data-sc="TALISMAN">
+                                <option value="0">Talisman of Blue Dragon</option>
+                                <option value="1">Talisman of Red Phoenix</option>
+                                <option value="2">Talisman of Black Tortoise</option>
+                            </select>
+                        </td>
+                        <td id="buffcell_talisman_input" class="data" data-sc="TALISMAN">
+                            <select name="buff_talisman_lv" onchange="updateSupportSkillStatus(event, 4)" data-sc="TALISMAN">
+                                <option value="0">0</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                            </select>
+                        </td>
+                        <td class="right"></td>
+                        <td></td>
                     </tr>
                 </tbody>
             </table>

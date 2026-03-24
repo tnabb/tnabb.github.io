@@ -1121,6 +1121,20 @@ function battle_calc_magic_attack(src, target, skill_id, skill_lv, mflag) {
                     case SKILL.TK_FALLING_STAR_ATTACK:
                         skillratio += 400;
                         break;
+                    case SKILL.SP_SPA:
+                        skillratio += -100 + 100 * skill_lv;
+                        break;
+                    case SKILL.SP_SWHOO:
+                        skillratio += -100 + 200 * skill_lv;
+                        break;
+                    case SKILL.SOA_EXORCISM_OF_MALICIOUS_SOUL:
+                        skillratio += 150 + 50 * skill_lv;
+                        if(SkillSearch(SKILL.SP_SOULCOLLECT))
+                            skillratio += (75 + 10 * skill_lv) * SkillSearch(SKILL.SP_SOULCOLLECT);
+                        break;
+                    case SKILL.SOA_WRATH_OF_THE_FALLEN:
+                        skillratio += 900;
+                        break;
                 }
 
                 battleDebug && console.log("[battle_calc_magic_attack] skillratio:", skillratio);
@@ -1200,7 +1214,8 @@ function battle_calc_magic_attack(src, target, skill_id, skill_lv, mflag) {
             i = 0;
 
             if(sd) {
-                // red phoenix buff
+                if(sc_get(player, SC.T_RED_PHOENIX_BUFF))
+                    i += sc_get(player, SC.T_RED_PHOENIX_BUFF).val3;
 
                 i += sd.indexed_bonus.ignore_mdef_by_race[tstatus.race] + sd.indexed_bonus.ignore_mdef_by_race[RC.ALL] +
                     sd.indexed_bonus.ignore_mdef_by_ele[tstatus.def_ele] + sd.indexed_bonus.ignore_mdef_by_ele[ELE.MAX] +
@@ -1220,7 +1235,10 @@ function battle_calc_magic_attack(src, target, skill_id, skill_lv, mflag) {
             if(i > 0)
                 mdef -= Math.trunc((mdef * i) / 100);
 
-            // red phoenix buff
+            if(sd && sc_get(sd, SC.T_RED_PHOENIX_BUFF)) {
+                mdef -= sc_get(sd, SC.T_RED_PHOENIX_BUFF).val2;
+                mdef2 = 0;
+            }
 
             if(mdef < 0)
                 mdef = 0;
@@ -1277,7 +1295,7 @@ function battle_calc_magic_attack(src, target, skill_id, skill_lv, mflag) {
         if(ad.crit_damage_max < 1)
             ad.crit_damage_max = 1;
 
-        if(!skill_ignores_element(skill_id)) {
+        if(!skill_ignores_element(skill_id) && skill_id != SKILL.SOA_EXORCISM_OF_MALICIOUS_SOUL && skill_id != SKILL.SOA_WRATH_OF_THE_FALLEN) {
             ad.damage_min = battle_attr_fix(src, target, ad.damage_min, s_ele, tstatus.def_ele, tstatus.ele_lv, 0);
             ad.damage_max = battle_attr_fix(src, target, ad.damage_max, s_ele, tstatus.def_ele, tstatus.ele_lv, 0);
             ad.crit_damage_min = battle_attr_fix(src, target, ad.crit_damage_min, s_ele, tstatus.def_ele, tstatus.ele_lv, 0);
@@ -1964,7 +1982,18 @@ function battle_calc_damage(src, target, wd, damage, skill_id, skill_lv) {
             damage -= Math.trunc((damage * 20 * SkillSearch(SKILL.SL_KAUPE)) / 100);
         }
 
-        // black tortoise damage reduction
+        if(sc_get(player, SC.KAUPE)) {
+            damage -= Math.trunc((damage * sc_get(player, SC.KAUPE).val2) / 100);
+        }
+
+        if(sc_get(player, SC.T_BLACK_TORTOISE_BUFF)) {
+            let damage_reduction = sc_get(player, SC.T_BLACK_TORTOISE_BUFF).val2;
+
+            if(c.A8_Skill14.value == 1) // woe map
+                damage -= Math.trunc((damage * (damage_reduction * 25 / 100)) / 100);
+            else
+                damage -= Math.trunc((damage * damage_reduction) / 100);
+        }
 
         if(SkillSearch(SKILL.TK_READYCOUNTER)) {
             if(SkillSearch(SKILL.TK_READYCOUNTER) == 1)
@@ -2265,6 +2294,7 @@ function battle_calc_cardfix(attack_type, src, target, skill_id, rh_ele, lh_ele,
                 cardfix = Math.trunc((cardfix * (100 + sd.indexed_bonus.magic_addclass[tstatus.class_] + sd.indexed_bonus.magic_addclass[CLASS.ALL])) / 100);
 
                 damage = APPLY_CARDFIX(damage, cardfix);
+                battleDebug && console.log(`[battle_calc_cardfix] after sd atkcard and element bonuses â€” damage=${damage}, cardfix=${cardfix}`);
             }
 
             if(tsd && !skill_ignores_defcard(skill_id)) {
@@ -3075,7 +3105,7 @@ function battle_attack_sc_bonus(wd, src, target, skill_id, skill_lv) {
     wd.crit_basedamage_max = ATK_RATER(wd.crit_basedamage_max, battle_get_atkpercent(src, 0));
 
     if(sd) {
-        if(skill_id == SKILL.AS_SONICBLOW && SkillSearch(SKILL.SL_ASSASSIN) > 0) {
+        if(skill_id == SKILL.AS_SONICBLOW && SkillSearch(SKILL.SL_ASSASIN) > 0) {
             ATK_ADDRATE(wd, src, skill_id, c.A8_Skill14.value == 1 ? 25 : 100);
             CRIT_ATK_ADDRATE(wd, src, skill_id, c.A8_Skill14.value == 1 ? 25 : 100);
         }
@@ -3670,6 +3700,9 @@ function battle_calc_defense_reduction(wd, src, target, skill_id, skill_lv) {
         let i = sd.indexed_bonus.ignore_def_by_race[tstatus.race] + sd.indexed_bonus.ignore_def_by_race[RC.ALL];
         i += sd.indexed_bonus.ignore_def_by_class[tstatus.class_] + sd.indexed_bonus.ignore_def_by_class[CLASS.ALL];
 
+        if(sc_get(sd, SC.T_RED_PHOENIX_BUFF))
+            i += sc_get(sd, SC.T_RED_PHOENIX_BUFF).val3;
+
         // UMOB_IGNORE_IGNOREDEF
         if(status_has_mode(tstatus, MD.IGNOREIGNOREDEF))
             i = 0;
@@ -3700,11 +3733,25 @@ function battle_calc_defense_reduction(wd, src, target, skill_id, skill_lv) {
         def2 = Math.trunc((def2 * (100 - i)) / 100);
     }
 
+    // flat def pierce
+    if(sd) {
+        let i = 0;
+        if(sc_get(player, SC.T_RED_PHOENIX_BUFF))
+            i += sc_get(player, SC.T_RED_PHOENIX_BUFF).val2;
+
+        def1 -= i;
+        if(def1 < 0)
+            def1 = 0;
+    }
+
     if(skill_id == SKILL.AM_ACIDTERROR)
         def2 = 0;
 
     if(def2 < 1)
         def2 = 1;
+
+    if(sd && sc_get(player, SC.T_RED_PHOENIX_BUFF))
+        def2 = 0;
 
     if(tplayer) {
         let skill;
@@ -4652,7 +4699,8 @@ function skill_calc_heal(src, target, skill_id, skill_lv, heal, display = true) 
                 hp += Math.trunc((hp * bonus) / 100);
             }
 
-            // add black tortoise buff
+            if(sc_get(target, SC.T_BLACK_TORTOISE_BUFF))
+                hp += Math.trunc((hp * sc_get(target, SC.T_BLACK_TORTOISE_BUFF).val4) / 100);
         }
     }
 
@@ -4754,7 +4802,7 @@ function skill_delayfix(src, skill_id, skill_lv) {
             break;
     }
 
-    if(skill_id == SKILL.AS_SONICBLOW && SkillSearch(SKILL.SL_ASSASSIN))
+    if(skill_id == SKILL.AS_SONICBLOW && SkillSearch(SKILL.SL_ASSASIN))
         time /= 2;
 
     if(skill_id == SKILL.CR_SHIELDBOOMERANG && n_A_JobClass2() == JOB.CRUSADER)
@@ -4999,6 +5047,9 @@ function skill_get_num(src, skill_id, skill_lv) {
         case SKILL.PR_MAGNUS_JUDEX_HOLYLIGHT:
         case SKILL.HT_BEASTSTRAFE_DOUBLESTRAFE:
         case SKILL.TK_FALLING_STAR_ATTACK:
+        case SKILL.SP_SPA:
+        case SKILL.SL_ESTIN_ESMA:
+        case SKILL.SL_ESTUN_ESMA:
             return 1;
         case SKILL.TF_DOUBLE:
         case SKILL.AC_DOUBLE:
@@ -5063,6 +5114,8 @@ function skill_get_num(src, skill_id, skill_lv) {
         case SKILL.AM_ACIDTERROR:
         case SKILL.RL_SLUGSHOT:
         case SKILL.GS_RAPIDSHOWER:
+        case SKILL.SP_SWHOO:
+        case SKILL.SOA_EXORCISM_OF_MALICIOUS_SOUL:
             return -5;
         case SKILL.LK_SPIRALPIERCE:
         case SKILL.PA_SHIELDCHAIN:
@@ -5115,6 +5168,11 @@ function skill_get_num(src, skill_id, skill_lv) {
             return Math.trunc((skill_lv + 9) / 2);
         case SKILL.NJ_HUUJIN:
             return Math.ceil((skill_lv + 1) / 2);
+        case SKILL.SOA_WRATH_OF_THE_FALLEN:
+            if(1 * c.SkillSubNum.value == 0)
+                return 1;
+            else
+                return 1 * c.SkillSubNum.value + 1;
         default:
             console.error("skill_get_num: unknown skill_id! " + skill_id);
             return 1;
@@ -5300,6 +5358,8 @@ function skill_get_range(skill_id, skill_lv) {
         case SKILL.SL_STIN:
         case SKILL.SL_STUN:
         case SKILL.SL_SMA:
+        case SKILL.SL_ESTIN_ESMA:
+        case SKILL.SL_ESTUN_ESMA:
         case SKILL.HT_POWER:
         case SKILL.NJ_SYURIKEN:
         case SKILL.NJ_KUNAI:
@@ -5348,6 +5408,10 @@ function skill_get_range(skill_id, skill_lv) {
         case SKILL.EM_VENOM_SWAMP:
         case SKILL.CD_ARBITRIUM:
         case SKILL.CD_ARBITRIUM_ATK:
+        case SKILL.SP_SPA:
+        case SKILL.SP_SWHOO:
+        case SKILL.SOA_EXORCISM_OF_MALICIOUS_SOUL:
+        case SKILL.SOA_WRATH_OF_THE_FALLEN:
             return 9;
         case SKILL.KN_CHARGEATK:
         case SKILL.NPC_STUNATTACK:
@@ -5792,8 +5856,6 @@ function skill_get_cast(skill_id, skill_lv) {
             return 1000;
         case SKILL.CR_ACIDDEMONSTRATION:
             return 1000;
-        case SKILL.TK_MISSION:
-            return 500;
         case SKILL.GS_BULLSEYE:
             return 500;
         case SKILL.GS_MADNESSCANCEL:
@@ -5855,6 +5917,10 @@ function skill_get_cast(skill_id, skill_lv) {
             return 1000;
         case SKILL.NW_MISSION_BOMBARD:
             return 8500;
+        case SKILL.SP_SPA:
+            return 750;
+        case SKILL.SP_SWHOO:
+            return 1000;
     }
     return 0;
 }
@@ -5875,6 +5941,13 @@ function skill_get_fix_cast_sub(skill_id, skill_lv) {
             return 334;
         case SKILL.RL_SLUGSHOT:
             return 1600;
+        case SKILL.SOA_EXORCISM_OF_MALICIOUS_SOUL:
+            return 1500;
+        case SKILL.SOA_WRATH_OF_THE_FALLEN:
+            if(1 * c.SkillSubNum.value > 0)
+                return 250 + ((1 * c.SkillSubNum.value) + 1) * 760;
+            else
+                return 775;
     }
 
     return 0;
@@ -6240,6 +6313,10 @@ function skill_get_delay(skill_id, skill_lv) {
             return 1000;
         case SKILL.RL_SLUGSHOT:
             return 2000;
+        case SKILL.SP_SPA:
+            return 500;
+        case SKILL.SP_SWHOO:
+            return 500;
     }
     return 0;
 }
@@ -6290,6 +6367,10 @@ function skill_get_cooldown(skill_id, skill_lv) {
             return 10000;
         case SKILL.RL_SLUGSHOT:
             return 20000;
+        case SKILL.SOA_EXORCISM_OF_MALICIOUS_SOUL:
+            return 1000;
+        case SKILL.SOA_WRATH_OF_THE_FALLEN:
+            return 600000;
     }
     return 0;
 }

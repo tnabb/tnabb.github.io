@@ -173,6 +173,8 @@ function updatePlayerDamageDisplay(d) {
     // ---- delay calculation ----
     switch(d.skill_id) {
         case SKILL.HT_BEASTSTRAFE_DOUBLESTRAFE:
+        case SKILL.SL_ESTIN_ESMA:
+        case SKILL.SL_ESTUN_ESMA:
             isCombo = 2; // number of skills being combined for display purposes - affects how delay is calculated since the delay after the first skill is different from the delay after the second skill
             break;
         case SKILL.PR_MAGNUS_JUDEX_HOLYLIGHT:
@@ -420,6 +422,30 @@ function updatePlayerDamageDisplay(d) {
             damageMinText += minDamage + " ([" + Math.floor(beastStrafeDamage.damage_min / beastStrafeDamage.div_) + " + " + Math.floor(doubleStrafeDamage.damage_min / doubleStrafeDamage.div_) + "] x " + doubleStrafeDamage.div_ + " hits)";
             damageAvgText += avgDamage + " ([" + Math.floor(beastStrafeDamage.getAverageDamage() / beastStrafeDamage.div_) + " + " + Math.floor(doubleStrafeDamage.getAverageDamage() / doubleStrafeDamage.div_) + "] x " + doubleStrafeDamage.div_ + " hits)";
             damageMaxText += maxDamage + " ([" + Math.floor(beastStrafeDamage.damage_max / beastStrafeDamage.div_) + " + " + Math.floor(doubleStrafeDamage.damage_max / doubleStrafeDamage.div_) + "] x " + doubleStrafeDamage.div_ + " hits)";
+            break;
+        case SKILL.SL_ESTIN_ESMA:
+            let estinDamage = battle_calc_attack(BF.MAGIC, player, monster, SKILL.SL_STIN, 5, 0);
+            let esmaDamage = battle_calc_attack(BF.MAGIC, player, monster, SKILL.SL_SMA, player.active_skill_lv, 0);
+
+            minDamage = estinDamage.damage_min + esmaDamage.damage_min;
+            avgDamage = estinDamage.getAverageDamage() + esmaDamage.getAverageDamage();
+            maxDamage = estinDamage.damage_max + esmaDamage.damage_max;
+
+            damageMinText += minDamage + " ([" + Math.floor(estinDamage.damage_min / estinDamage.div_) + " + " + Math.floor(esmaDamage.damage_min / esmaDamage.div_) + "] x " + esmaDamage.div_ + " hits)";
+            damageAvgText += avgDamage + " ([" + Math.floor(estinDamage.getAverageDamage() / estinDamage.div_) + " + " + Math.floor(esmaDamage.getAverageDamage() / esmaDamage.div_) + "] x " + esmaDamage.div_ + " hits)";
+            damageMaxText += maxDamage + " ([" + Math.floor(estinDamage.damage_max / estinDamage.div_) + " + " + Math.floor(esmaDamage.damage_max / esmaDamage.div_) + "] x " + esmaDamage.div_ + " hits)";
+            break;
+        case SKILL.SL_ESTUN_ESMA:
+            let estunDamage = battle_calc_attack(BF.MAGIC, player, monster, SKILL.SL_STUN, 5, 0);
+            let esmaDamage2 = battle_calc_attack(BF.MAGIC, player, monster, SKILL.SL_SMA, player.active_skill_lv, 0);
+
+            minDamage = estunDamage.damage_min + esmaDamage2.damage_min;
+            avgDamage = estunDamage.getAverageDamage() + esmaDamage2.getAverageDamage();
+            maxDamage = estunDamage.damage_max + esmaDamage2.damage_max;
+
+            damageMinText += minDamage + " ([" + Math.floor(estunDamage.damage_min / estunDamage.div_) + " + " + Math.floor(esmaDamage2.damage_min / esmaDamage2.div_) + "] x " + esmaDamage2.div_ + " hits)";
+            damageAvgText += avgDamage + " ([" + Math.floor(estunDamage.getAverageDamage() / estunDamage.div_) + " + " + Math.floor(esmaDamage2.getAverageDamage() / esmaDamage2.div_) + "] x " + esmaDamage2.div_ + " hits)";
+            damageMaxText += maxDamage + " ([" + Math.floor(estunDamage.damage_max / estunDamage.div_) + " + " + Math.floor(esmaDamage2.damage_max / esmaDamage2.div_) + "] x " + esmaDamage2.div_ + " hits)";
             break;
         case SKILL.CR_SHIELDCHARGE:
         case SKILL.CR_SHIELDBOOMERANG:
@@ -1041,7 +1067,7 @@ function displayOtherInfo(val) {
             let skillDelayFind = player.skilldelay.find(it => it.id == player.active_skill);
             let skillDelayFlat = skillDelayFind ? skillDelayFind.val : 0;
             let skillDelayMult = 100;
-            if(player.active_skill == SKILL.AS_SONICBLOW && SkillSearch(SKILL.SL_ASSASSIN))
+            if(player.active_skill == SKILL.AS_SONICBLOW && SkillSearch(SKILL.SL_ASSASIN))
                 skillDelayMult = 50;
             if(player.active_skill == SKILL.CR_SHIELDBOOMERANG && n_A_JobClass2() == JOB.CRUSADER)
                 skillDelayMult = 50;

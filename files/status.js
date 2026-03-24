@@ -663,6 +663,8 @@ function status_calc_speed(player, speed) {
         val = Math.max(val, 25);
     if(TimeItemNumSearch(29) > 0)
         val = Math.max(val, 25);
+    if(sc_get(player, SC.T_BLUE_DRAGON_BUFF))
+        val = Math.max(val, sc_get(player, SC.T_BLUE_DRAGON_BUFF).val3);
     if(player.bonus.speed_rate + player.bonus.speed_add_rate < 0)
         val = Math.max(val, -(player.bonus.speed_rate + player.bonus.speed_add_rate));
 
@@ -761,9 +763,9 @@ function status_calc_pseudobuff_matk(player, matk) {
 function status_calc_aspd_rate(player, aspd_rate) {
     let bonus;
     let max = 0;
-    if((!sc_get(player, SC.QUAGMIRE) && !sc_get(player, SC.DECREASEAGI)) && SkillSearch(SKILL.KN_TWOHANDQUICKEN))
+    if((!sc_get(player, SC.QUAGMIRE) && !sc_get(player, SC.DECREASEAGI)) && SkillSearch(SKILL.KN_TWOHANDQUICKEN) && (player.status.weapon == WEAPON.TWOHANDSWORD))
         max = Math.max(max, 300);
-    if((!sc_get(player, SC.QUAGMIRE) && !sc_get(player, SC.DECREASEAGI)) && SkillSearch(SKILL.KN_ONEHAND))
+    if((!sc_get(player, SC.QUAGMIRE) && !sc_get(player, SC.DECREASEAGI)) && SkillSearch(SKILL.KN_ONEHAND) && (player.status.weapon == WEAPON.ONEHANDSWORD))
         max = Math.max(max, 300);
     if((!sc_get(player, SC.QUAGMIRE) && !sc_get(player, SC.DECREASEAGI)) && (SkillSearch(SKILL.BS_ADRENALINE2) || sc_get(player, SC.ADRENALINE2))) {
         bonus = 0;
@@ -1183,6 +1185,25 @@ function sc_start(bl, type, val1 = 0, val2 = 0, val3 = 0, val4 = 0, val5 = 0, va
             val2 = -15;
             val3 = 0;
             val4 = 20;
+            break;
+        case SC.KAUPE:
+            val2 = val1 == 3 ? 100 : val1 * 20;
+            break;
+        case SC.T_BLUE_DRAGON_BUFF:
+            val2 = 3 * val1;
+            val3 = 50;
+            break;
+        case SC.T_WHITE_TIGER_BUFF:
+            val2 = val1;
+            val3 = 100;
+            break;
+        case SC.T_RED_PHOENIX_BUFF:
+            val2 = 2 * val1;
+            val3 = 3 * val1;
+            break;
+        case SC.T_BLACK_TORTOISE_BUFF:
+            val2 = 3 * val1;
+            val4 = 4 * val1;
             break;
     }
 

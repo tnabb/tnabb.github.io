@@ -37,50 +37,6 @@ function CalculateStatusPoints(_) {
     return wStPoint - statPoint;
 }
 
-function SuperNoviceFullWeapon(enabled) {
-    if (enabled === 1) {
-        SuperNoviceFullWeaponCHECK = 1;
-        if (!JOB_BASE_ASPD[JOB.SUPERNOVICE]) {
-            JOB_BASE_ASPD[JOB.SUPERNOVICE] = {};
-        }
-        JOB_BASE_ASPD[JOB.SUPERNOVICE][WEAPON.TWOHANDAXE] = 1.6;
-    } else {
-        SuperNoviceFullWeaponCHECK = 0;
-
-        if (JOB_BASE_ASPD[JOB.SUPERNOVICE]) {
-            delete JOB_BASE_ASPD[JOB.SUPERNOVICE][WEAPON.TWOHANDAXE];
-        }
-    }
-
-    const currentWeapon = player.equip[EQI.HAND_R];
-    const weaponData = m_Item[currentWeapon];
-    if (weaponData[2] !== WEAPON.TWOHANDAXE && JobEquipItemSearch(weaponData[2])) {
-        ClickWeaponType(weaponData[1]);
-        WeaponSet2();
-        c.A_weapon1.value = currentWeapon;
-    } else {
-        ClickWeaponType(WEAPON.FIST);
-        WeaponSet2();
-    }
-
-    if (JobEquipItemSearch(m_Item[player.equip[EQI.HEAD_TOP]][2])) {
-        c.A_head1.value = player.equip[EQI.HEAD_TOP];
-    }
-    if (JobEquipItemSearch(m_Item[player.equip[EQI.HEAD_MID]][2])) {
-        c.A_head2.value = player.equip[EQI.HEAD_MID];
-    }
-    if (JobEquipItemSearch(m_Item[player.equip[EQI.HEAD_LOW]][2])) {
-        c.A_head3.value = player.equip[EQI.HEAD_LOW];
-    }
-
-    c.A_left.value = player.equip[EQI.SHIELD];
-    c.A_body.value = player.equip[EQI.ARMOR];
-    c.A_shoulder.value = player.equip[EQI.GARMENT];
-    c.A_shoes.value = player.equip[EQI.SHOES];
-    c.A_acces1.value = player.equip[EQI.ACC_L];
-    c.A_acces2.value = player.equip[EQI.ACC_R];
-}
-
 function PopulatePlayerData() {
     console.log("Populating player data from form inputs...");
     player.status.base_level = 1 * c.A_BaseLV.value;
@@ -1014,6 +970,8 @@ function PopulateMonsterData() {
         monster.base_status.mode |= MD.MVP;
     if (monster.notes[7])
         monster.damagetaken = 100 - NotesCalc(monster.mob_id, 7);
+    else
+        monster.damagetaken = 0;
     monster.mhp_percent = 1 * c.EnemyHPPercent.value;
 
     StatusCalcMonsterSub();
@@ -1407,10 +1365,20 @@ function StatusCalcBLMob() {
 }
 
 function StAllCalc() {
+    let previousBaseLv = player.status.base_level;
     restrictEquipslot();
     reloadEnchant();
     ClickB_Enemy(c.B_Enemy.value);
     PopulatePlayerData();
+
+    if(player.status.job_id == JOB.SUPERNOVICE && previousBaseLv < 90 && 1 * c.A_BaseLV.value >= 90) {
+        WeaponSet();
+        EquipmentSet();
+    } else if(player.status.job_id == JOB.SUPERNOVICE && previousBaseLv >= 90 && 1 * c.A_BaseLV.value < 90) {
+        WeaponSet();
+        EquipmentSet();
+    }
+
     KakutyouKansuu();
 }
 
@@ -1447,7 +1415,7 @@ function WeaponSet(jobId) {
 
             if (canEquip && (!levelRestrict || itemLevelRequirement <= c.A_BaseLV.value)) {
                 availableWeapons.push(itemId);
-            } else if (SuperNoviceFullWeaponCHECK && itemLevel == 4) {
+            } else if (player.status.job_id == JOB.SUPERNOVICE && player.status.base_level >= 90 && (weaponType == WEAPON.DAGGER || weaponType == WEAPON.ONEHANDSWORD || weaponType == WEAPON.ONEHANDAXE || weaponType == WEAPON.MACE || weaponType == WEAPON.ROD) && itemLevel == 4) {
                 availableWeapons.push(itemId);
             }
         }
@@ -1546,7 +1514,7 @@ function WeaponSetLeft(jobId) {
     }
 }
 
-function WeaponSet2() {
+function EquipmentSet() {
     const levelRestrict = 1 * c.restrict_lvlequip.checked;
 
     n_A_JobSet();
@@ -1570,8 +1538,10 @@ function WeaponSet2() {
         const slotIdx = SLOT_TYPES.indexOf(itemType);
         if (slotIdx === -1) continue;
 
-        const jobOk = !jobRestrict || SuperNoviceFullWeaponCHECK || JobEquipItemSearch(m_Item[a][2]);
-        const levelOk = !levelRestrict || SuperNoviceFullWeaponCHECK || m_Item[a][7] <= baseLevel;
+        const isHeadgear = itemType >= 50 && itemType <= 52;
+        const snLV90 = player.status.job_id == JOB.SUPERNOVICE && player.status.base_level >= 90 && isHeadgear;
+        const jobOk = !jobRestrict || snLV90 || JobEquipItemSearch(m_Item[a][2]);
+        const levelOk = !levelRestrict || snLV90 || m_Item[a][7] <= baseLevel;
         if (jobOk && levelOk)
             buckets[slotIdx].push(a);
     }
@@ -2092,7 +2062,7 @@ function SaveLocal() {
     // Snapshot all passive skill levels from the DOM
     const passiveSkillLevels = {};
     const availableBuffs = JOB_AVAILABLE_BUFFS[player.status.job_id] || [];
-    for (let i = 0; i < availableBuffs.length && i <= 14; i++) {
+    for (let i = 0; i < availableBuffs.length; i++) {
         const el = document.getElementById("A_skill" + i);
         if (el) passiveSkillLevels[i] = 1 * el.value;
     }
@@ -2102,7 +2072,7 @@ function SaveLocal() {
         name: c.saveDataName.value,
 
         // ── Player character ──────────────────────────────────────────────
-        job_id: player.status.job_id,
+        job_id: 1 * c.A_JOB.value,
         job_level: player.status.job_level,
         base_level: player.status.base_level,
         adopted: player.status.adopted,
@@ -2313,7 +2283,7 @@ function loadNewFormat(data) {
 
     // ── Passive skill levels ──────────────────────────────────────────────
     const availableBuffs = JOB_AVAILABLE_BUFFS[data.job_id] || [];
-    for (let i = 0; i < availableBuffs.length && i <= 14; i++) {
+    for (let i = 0; i < availableBuffs.length; i++) {
         const el = document.getElementById("A_skill" + i);
         if (el) el.value = data.passive_skill_levels[i] ?? 0;
     }
@@ -2482,6 +2452,22 @@ function syncBuffDOMFromSC(entity) {
                 } else if(sc_get(player, SC.WHIRLWIND)) {
                     document.getElementsByName("buff_sage_ground_label")[0].value = 2;
                     document.getElementsByName("buff_sage_ground_lv")[0].value = sc_get(player, SC.WHIRLWIND) ? sc_get(player, SC.WHIRLWIND).val1 : 0;
+                    continue;
+                }
+            }
+
+            if(scAttr == 'TALISMAN') {
+                if(sc_get(player, SC.T_BLUE_DRAGON_BUFF)) {
+                    document.getElementsByName("buff_talisman_label")[0].value = 0;
+                    document.getElementsByName("buff_talisman_lv")[0].value = sc_get(player, SC.T_BLUE_DRAGON_BUFF) ? sc_get(player, SC.T_BLUE_DRAGON_BUFF).val1 : 0;
+                    continue;
+                } else if (sc_get(player, SC.T_RED_PHOENIX_BUFF)) {
+                    document.getElementsByName("buff_talisman_label")[0].value = 1;
+                    document.getElementsByName("buff_talisman_lv")[0].value = sc_get(player, SC.T_RED_PHOENIX_BUFF) ? sc_get(player, SC.T_RED_PHOENIX_BUFF).val1 : 0;
+                    continue;
+                } else if (sc_get(player, SC.T_BLACK_TORTOISE_BUFF)) {
+                    document.getElementsByName("buff_talisman_label")[0].value = 2;
+                    document.getElementsByName("buff_talisman_lv")[0].value = sc_get(player, SC.T_BLACK_TORTOISE_BUFF) ? sc_get(player, SC.T_BLACK_TORTOISE_BUFF).val1 : 0;
                     continue;
                 }
             }

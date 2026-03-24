@@ -1,6 +1,5 @@
 ﻿PvP = 0,
 n_itemSW = 0;
-SuperNoviceFullWeaponCHECK = 0,
 Item_or_Card = "Item",
 ItemCardNumberCheck = 142;
 var c = document.calcForm
@@ -255,20 +254,16 @@ function ClickJob(jobId) {
         c.buff_aspdpot.options.length = 4;
     }
 
-    if(jobId != JOB.SUPERNOVICE)
-        SuperNoviceFullWeaponCHECK = 0;
-
-    if(SuperNoviceFullWeaponCHECK) {
-        JOB_BASE_ASPD[JOB.SUPERNOVICE][WEAPON.TWOHANDAXE] = 1.6;
-    } else {
-        delete JOB_BASE_ASPD[JOB.SUPERNOVICE][WEAPON.TWOHANDAXE];
-    }
-
     WeaponSet(jobId);
 
-    const availableBuffs = JOB_AVAILABLE_BUFFS[jobId] || [];
+    // Reset all passive skill labels and selects
+    for(let i = 0; i <= 35; i++) {
+        myInnerHtml("P_Skill" + i, "", 0);
+        myInnerHtml("P_Skill" + i + "s", "", 0);
+    }
 
-    for (let i = 0; i <= 14; i++) {
+    const availableBuffs = JOB_AVAILABLE_BUFFS[jobId] || [];
+    for (let i = 0; i <= availableBuffs.length; i++) {
         const skillId = availableBuffs[i];
 
         if(skillId === undefined) {
@@ -283,6 +278,7 @@ function ClickJob(jobId) {
         } else if (skillId === 392) {
             myInnerHtml("P_Skill" + i, skillName(m_Skill[skillId][0]), 0);
             myInnerHtml("P_Skill" + i + "s", "<select name=A_skill" + i + " id=A_skill" + i + ' onChange="calc()" style="width:70px;"></select>', 0);
+            console.log(player.status.rebirth);
             if(player.status.rebirth == 0)
                 myInnerHtml("P_Skill" + i, "", 0);
         } else if (skillId === 441) {
@@ -296,7 +292,7 @@ function ClickJob(jobId) {
         }
     }
 
-    for(let i = 0; i <= 14; i++) {
+    for(let i = 0; i <= availableBuffs.length; i++) {
         const skillId = availableBuffs[i];
 
         if(skillId === undefined) continue;
@@ -304,11 +300,13 @@ function ClickJob(jobId) {
         const skillElement = document.getElementById("A_skill" + i);
         if(!skillElement) continue;
 
-        const toggleSkills = [12, 68, 152, 253, 258, 301, 309, 310, 322, 364, 365, 379, 383, 385, 386, 390, 420, 421, 422, 846, 858, SKILL.TK_READYDOWN, SKILL.TK_READYTURN];
+        const toggleSkills = [12, 68, 152, 253, 258, 301, 309, 310, 322, 364, 365, 379, 383, 385, 386, 390, 420, 421, 422, 846, 858, SKILL.TK_READYDOWN, SKILL.TK_READYTURN, SKILL.SL_ASSASIN, SKILL.SL_HIGH];
 
-        if(toggleSkills.includes(skillId)) {
+        if(toggleSkills.includes(skillId) || m_Skill[skillId][1] === 1) {
             skillElement.options[0] = new Option("off", 0);
             skillElement.options[1] = new Option("on", 1);
+            if(skillId == SKILL.SL_HIGH && player.status.rebirth == 0)
+                skillElement.style.visibility = "hidden";
         } else if (skillId === 851) {
             skillElement.options[0] = new Option("off", 0);
             skillElement.options[1] = new Option("Revolver", 1);
@@ -345,7 +343,7 @@ function ClickJob(jobId) {
             skillElement.options[2] = new Option("Skill", 2);
         }else if (skillId == SKILL.TK_MISSION_ELE_BONUS || skillId == SKILL.TK_MISSION_RACE_BONUS) {
             for(let j = 0; j <= 50; j++) {
-                skillElement.options[j] = new Option(j / 10, j / 10);
+                skillElement.options[j] = new Option(j / 10 + "%", j / 10);
             }
         } else {
             for(let j = 0; j <= 10; j++) {
@@ -356,20 +354,11 @@ function ClickJob(jobId) {
             for(let j = 0; j <= maxSkillLevel; j++) {
                 skillElement.options[j] = new Option(j, j);
             }
-
-            if(skillId === 392) {
-                const ecNames = ["off", "on"];
-                for(let j = 0; j <= 3; j++) {
-                    skillElement.options[j] = new Option(ecNames[j], j);
-                }
-                if(player.status.rebirth == 0) 
-                    skillElement.style.visibility = "hidden";
-            }
         }
     }
 
     LoadPlayerSkills();
-    WeaponSet2();
+    EquipmentSet();
 }
 
 function LoadPlayerSkills() {
@@ -849,7 +838,13 @@ function ClickActiveSkill2() {
         [0, 1, 2, 3, 4, 5, 6, 7, 8, 9].forEach((v, i) => c.SkillSubNum.options[i] = new Option(v, i));
         c.SkillSubNum.value = 9;
 
-    } else {
+    } else if (skillId == SKILL.SOA_WRATH_OF_THE_FALLEN) {
+        myInnerHtml("AASkill", 'Number of Fallen: <select name="SkillSubNum" onChange="calc()"></select>', 0);
+        for (let i = 0; i <= 11; i++)
+            c.SkillSubNum.options[i] = new Option(i, i);
+        c.SkillSubNum.value = 0;
+    } 
+    else {
         myInnerHtml("AASkill", "", 0);
     }
 }
@@ -1121,6 +1116,23 @@ function updateSupportSkillStatus(e, tableHeaderFunction) {
         sc_end(player, SC.ASPDPOTION3);
         if(label >= 0)
             sc_start(player, status);
+    } else if (sc === 'TALISMAN') {
+        var label = document.getElementsByName('buff_talisman_label')[0] ? parseInt(document.getElementsByName('buff_talisman_label')[0].value, 10) : 0;
+        var status;
+        if(label == 0)
+            status = SC.T_BLUE_DRAGON_BUFF;
+        else if (label == 1)
+            status = SC.T_RED_PHOENIX_BUFF;
+        else if (label == 2)
+            status = SC.T_BLACK_TORTOISE_BUFF;
+
+        var level = document.getElementsByName("buff_talisman_lv")[0] ? parseInt(document.getElementsByName("buff_talisman_lv")[0].value, 10) : 0;
+        sc_end(player, SC.T_BLUE_DRAGON_BUFF);
+        sc_end(player, SC.T_RED_PHOENIX_BUFF);
+        sc_end(player, SC.T_BLACK_TORTOISE_BUFF);
+        if (level > 0) {
+            sc_start(player, status, level);
+        }
     }
     // Normal case
     else if (el.type === 'checkbox' && el.checked) {
