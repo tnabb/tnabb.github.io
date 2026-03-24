@@ -1078,32 +1078,36 @@ window.onerror=function(){
                                         <td id="A_PefHIT">0</td>
                                     </tr>
                                     <tr>
-                                        <td class="right">HP Regen</td>
-                                        <td class="data" id="A_HPR">1</td>
+                                        <td class="right">ASPD</td>
+                                        <td class="data" id="A_ASPD">150.3</td>
                                         <td class="right">Real MDEF</td>
                                         <td class="data" id="A_RealMDEF">0+1</td>
                                         <td class="right">Critical</td>
                                         <td id="A_CRI">1</td>
                                     </tr>
                                     <tr>
-                                        <td class="right">SP Regen</td>
-                                        <td class="data" id="A_SPR">1</td>
+                                        <td class="right">Mov. Speed</td>
+                                        <td class="data" id="A_MovSPEED">100 %</td>
                                         <td class="right">ATK</td>
                                         <td class="data" id="A_ATK2">1+0</td>
                                         <td class="right">Critical Shield</td>
                                         <td id="A_CRITSHIELD">1.2</td>
                                     </tr>
                                     <tr>
-                                        <td class="right">ASPD</td>
-                                        <td class="data" id="A_ASPD">150.3</td>
+                                        <!--<td class="right">HP Regen</td>
+                                        <td class="data" id="A_HPR">1</td>-->
+                                        <td class="right"></td>
+                                        <td class="data"></td>
                                         <td class="right">Real ATK</td>
                                         <td class="data" id="A_RealATK">1~1</td>
                                         <td class="right">Flee</td>
                                         <td id="A_FLEE">2</td>
                                     </tr>
                                     <tr>
-                                        <td class="right">Mov. Speed</td>
-                                        <td class="data" id="A_MovSPEED">100 %</td>
+                                        <!--<td class="right">SP Regen</td>
+                                        <td class="data" id="A_SPR">1</td>-->
+                                        <td class="right"></td>
+                                        <td class="data"></td>
                                         <td class="right">MATK</td>
                                         <td class="data" id="A_MATK">1~1</td>
                                         <td class="right">WOE Flee</td>
@@ -7287,6 +7291,9 @@ window.onerror=function(){
                     <option value="2">Guild Dungeon</option>
                     <option value="3">URDR Server</option>
                 </select>
+                <br>
+                Enemy Max HP %: <input type="text" inputmode="numeric" maxlength="3" onkeypress="return isNumeric(event)"
+                    onkeyup="calc()" name="EnemyHPPercent" value="100" style="width: 25px; height: 12px;" class="center">
                 <br>
                 <br>
 

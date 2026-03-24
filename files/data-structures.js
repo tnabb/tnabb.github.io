@@ -419,6 +419,7 @@ class MonsterData {
         this.base_exp = 0;
         this.job_exp = 0;
         this.damagetaken = 0;
+        this.mhp_percent = 100; // for damage pattern calcs, store current HP% of the monster
         
         // "Notes"
         this.notes = new Array(10000).fill(0); // "notes" basically special properties or db entries such as "DamageTaken" or flags such as "IgnoreMelee"

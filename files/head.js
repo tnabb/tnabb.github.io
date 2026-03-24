@@ -165,7 +165,6 @@ function restrictCardslot(e) {
         }
     }
     calc();
-    console.log("Card slot restriction " + (card_restrict ? "enabled" : "disabled"));
 }
 
 function ClickJob(jobId) {
@@ -280,20 +279,20 @@ function ClickJob(jobId) {
 
         if(skillId === 385) {
             myInnerHtml("P_Skill" + i, m_Skill[skillId][2], 0);
-            myInnerHtml("P_Skill" + i + "s", '<select name=A_skill' + i + ' id=A_skill' + i + ' onChange="StAllCalc() | WeaponSet(20) | restrictCardslot(1)"></select>', 0);
+            myInnerHtml("P_Skill" + i + "s", '<select name=A_skill' + i + ' id=A_skill' + i + ' onChange="calc() | WeaponSet(20) | restrictCardslot(1)"></select>', 0);
         } else if (skillId === 392) {
             myInnerHtml("P_Skill" + i, skillName(m_Skill[skillId][0]), 0);
-            myInnerHtml("P_Skill" + i + "s", "<select name=A_skill" + i + " id=A_skill" + i + ' onChange="StAllCalc()" style="width:70px;"></select>', 0);
+            myInnerHtml("P_Skill" + i + "s", "<select name=A_skill" + i + " id=A_skill" + i + ' onChange="calc()" style="width:70px;"></select>', 0);
             if(player.status.rebirth == 0)
                 myInnerHtml("P_Skill" + i, "", 0);
         } else if (skillId === 441) {
             myInnerHtml("P_Skill" + i, m_Skill[skillId][2], 0);
-            myInnerHtml("P_Skill" + i + "s", "<select name=A_skill" + i + " id=A_skill" + i + ' onChange="StAllCalc() | ClickActiveSkill2() | calc()"></select>', 0);
+            myInnerHtml("P_Skill" + i + "s", "<select name=A_skill" + i + " id=A_skill" + i + ' onChange="calc() | ClickActiveSkill2() | calc()"></select>', 0);
             if(player.status.rebirth == 0)
                 myInnerHtml("P_Skill" + i, "", 0);
         } else {
             myInnerHtml("P_Skill" + i, skillName(m_Skill[skillId][0]), 0);
-            myInnerHtml("P_Skill" + i + "s", "<select name=A_skill" + i + " id=A_skill" + i + " onChange=StAllCalc()></select>", 0);
+            myInnerHtml("P_Skill" + i + "s", "<select name=A_skill" + i + " id=A_skill" + i + " onChange=calc()></select>", 0);
         }
     }
 
@@ -305,7 +304,7 @@ function ClickJob(jobId) {
         const skillElement = document.getElementById("A_skill" + i);
         if(!skillElement) continue;
 
-        const toggleSkills = [12, 68, 152, 253, 258, 301, 309, 310, 322, 345, 364, 365, 379, 383, 385, 386, 390, 420, 421, 422, 846, 858];
+        const toggleSkills = [12, 68, 152, 253, 258, 301, 309, 310, 322, 364, 365, 379, 383, 385, 386, 390, 420, 421, 422, 846, 858, SKILL.TK_READYDOWN, SKILL.TK_READYTURN];
 
         if(toggleSkills.includes(skillId)) {
             skillElement.options[0] = new Option("off", 0);
@@ -344,6 +343,10 @@ function ClickJob(jobId) {
             skillElement.options[0] = new Option("off", 0);
             skillElement.options[1] = new Option("Auto-attack", 1);
             skillElement.options[2] = new Option("Skill", 2);
+        }else if (skillId == SKILL.TK_MISSION_ELE_BONUS || skillId == SKILL.TK_MISSION_RACE_BONUS) {
+            for(let j = 0; j <= 50; j++) {
+                skillElement.options[j] = new Option(j / 10, j / 10);
+            }
         } else {
             for(let j = 0; j <= 10; j++) {
                 skillElement.options[j] = null;
@@ -709,8 +712,6 @@ function ClickActiveSkill() {
     }
  
     // Keep globals in sync for foot.js until it's migrated
-    n_A_ActiveSkill = skillId;
-    n_A_ActiveSkillLV = skillLv;
     player.active_skill = skillId;
     player.active_skill_lv = skillLv;
  
@@ -841,10 +842,13 @@ function ClickActiveSkill2() {
         c.SkillSubNum.value = m_Item[player.equip[EQI.SHIELD]][6];
  
     } else if (skillId == SKILL.LK_SPIRALPIERCE) {
-        console.log("Spiral Pierce damage bonus is based on weapon weight, but weapon weight is not currently editable in the sim. Please adjust the value below and recalculate to see the effect of different weapon weights.");
         myInnerHtml("AASkill", 'Weapon weight: <input type="text" inputmode="numeric" maxlength="4" name="SkillSubNum" size=2 onkeypress="return isNumeric(event)" onkeyup="calc()">', 0);
         c.SkillSubNum.value = m_Item[player.equip[EQI.HAND_R]][6];
- 
+    } else if (skillId == SKILL.TK_JUMPKICK) {
+        myInnerHtml("AASkill", 'Enemy distance: <select name="SkillSubNum" onChange="calc()"></select>', 0);
+        [0, 1, 2, 3, 4, 5, 6, 7, 8, 9].forEach((v, i) => c.SkillSubNum.options[i] = new Option(v, i));
+        c.SkillSubNum.value = 9;
+
     } else {
         myInnerHtml("AASkill", "", 0);
     }
@@ -860,7 +864,6 @@ function SaveTheme() {
 }
  
 function LoadTheme() {
-    console.log("Loading theme");
     if (typeof Storage === "undefined") {
         alert("Sorry, your browser does not support local storage. If you see this message, please let me know at tnaab on Discord");
         themes();
@@ -881,7 +884,6 @@ function LoadTheme() {
 }
  
 function themes() {
-    console.log("Applying theme " + c.theme.value);
     const e = 1 * c.theme.value;
     const gradient = `linear-gradient(to bottom, ${hBGC1[e]}, ${hBGC2[e]})`;
     const isDark = (e == 3 || e == 5);
@@ -1563,7 +1565,7 @@ function updatePlayerAdditionalEffects(e) {
             player.temp_effect[3] = val;
             break;
         case "EXP_PARTY_MEMBER":
-            player.exp_modifiers.party_member_count = val || 1;
+            player.exp_modifiers.party_member_count = val || 0;
             break;
         case "EXP_BATTLE_MANUAL":
             player.exp_modifiers.battle_manual = val;
@@ -1788,7 +1790,6 @@ function updatePlayerManualEditsHeader() {
 }
 
 function reloadRandOpt(){
-    console.log("Reloading random options from player.randopt:", player.randopt);
     c.A_weapon1_ropt1.value = player.randopt[0];
     c.WEAP1_ROPT1.value = player.randopt[1];
     c.A_weapon1_ropt2.value = player.randopt[2];
@@ -2379,13 +2380,13 @@ function updateMonsterDebuffsDisplay(){
 function calc() {
     StAllCalc();
     let skill_type = BF.WEAPON;
-    if(m_Skill[n_A_ActiveSkill][4] == 1 || m_Skill[n_A_ActiveSkill][4] == 2 || m_Skill[n_A_ActiveSkill][4] == 3)
+    if(m_Skill[player.active_skill][4] == 1 || m_Skill[player.active_skill][4] == 2 || m_Skill[player.active_skill][4] == 3)
         skill_type = BF.WEAPON;
-    else if(m_Skill[n_A_ActiveSkill][4] < 0)
+    else if(m_Skill[player.active_skill][4] < 0)
         skill_type = BF.MAGIC;
-    else if(m_Skill[n_A_ActiveSkill][4] == 5)
+    else if(m_Skill[player.active_skill][4] == 5)
         skill_type = BF.MISC;
-    let playerDamage = battle_calc_attack(skill_type, player, monster, n_A_ActiveSkill, n_A_ActiveSkillLV, 0);
+    let playerDamage = battle_calc_attack(skill_type, player, monster, player.active_skill, player.active_skill_lv, 0);
     updatePlayerDamageDisplay(playerDamage);
 
     let n_B_AtkSkill = 1 * c.B_AtkSkill.value;

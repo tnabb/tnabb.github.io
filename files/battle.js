@@ -624,8 +624,21 @@ function battle_calc_attack(attack_type, bl, target, skill_id, skill_lv, flag) {
     //     battle_vanish_damage(bl, target, d.flag);
     // }
 
+    if(skill_id && !skill_can_crit(skill_id) && attack_type & BF.MAGIC) {
+        if(sc_get(player, SC.FORTUNE_SRS) && skill_id != SKILL.MO_EXTREMITYFIST && skill_id != SKILL.MO_EXTREMITYFIST_MAXSP) {
+            skill_is_critical(d, bl, target); // sets the crit rate
+            CRIT_ATK_ADDRATE(d, bl, skill_id, 15); // 15% damage boost with fortune's kiss SR buff
+            d.crit_from_sr_buff = true; // flag to indicate that the crit damage boost is from the SR buff, used to prevent other things to affect it such as def ignore
+            battleDebug && console.log("[battle_calc_skill_base_damage] APPLIED FORTUNE'S KISS BUFF TO NON-CRIT SKILL");
+        } else {
+            d.crit_from_sr_buff = false;
+        }
+    }
+
     d.skill_id = skill_id;
     d.skill_lv = skill_lv;
+
+
 
     battleDebug && console.log(`%c[battle_calc_attack] END â€” final damage_min=${d.damage_min}, damage_max=${d.damage_max}, damage2_min=${d.damage2_min}, damage2_max=${d.damage2_max}, crit_damage_min=${d.crit_damage_min}, crit_damage_max=${d.crit_damage_max}, crit_damage2_min=${d.crit_damage2_min}, crit_damage2_max=${d.crit_damage2_max}, dmg_lv=${d.dmg_lv}`, 'color: #ff6600; font-weight: bold');
     battleDebug && console.log(`%c[battle_calc_attack] Final damage details: ${JSON.stringify(d)}`, 'color: #ff6600; font-weight: bold');
@@ -1105,6 +1118,9 @@ function battle_calc_magic_attack(src, target, skill_id, skill_lv, mflag) {
                     case SKILL.NPC_SNOWSTORM:
                         skillratio += -100 + 240;
                         break;
+                    case SKILL.TK_FALLING_STAR_ATTACK:
+                        skillratio += 400;
+                        break;
                 }
 
                 battleDebug && console.log("[battle_calc_magic_attack] skillratio:", skillratio);
@@ -1134,7 +1150,13 @@ function battle_calc_magic_attack(src, target, skill_id, skill_lv, mflag) {
             ))
                 imdef = 1;
 
-            // insert stuff for TK_FALLING_STAR_ATTACK's crit check
+            if(skill_id == SKILL.TK_FALLING_STAR_ATTACK) {
+                skill_is_critical(ad, src, target, skill_id); // sets the crit rate
+                let crit_atk_rate = sd.bonus.crit_atk_rate;
+
+                if(crit_atk_rate)
+                    CRIT_ATK_ADDRATE(ad, src, skill_id, crit_atk_rate); 
+            }
         }
         battleDebug && console.log("[battle_calc_magic_attack] before mdef calc - imdef:", imdef, "dmg_min:", ad.damage_min, "dmg_max:", ad.damage_max);
 
@@ -1147,7 +1169,26 @@ function battle_calc_magic_attack(src, target, skill_id, skill_lv, mflag) {
 
         // constant damage before mdef calculation
         switch(skill_id) {
-            // TK_FALLING_STAR_ATTACK
+            case SKILL.TK_FALLING_STAR_ATTACK:
+                let wd = initialize_weapon_data(src, target, skill_id, skill_lv, mflag);
+
+                battle_calc_skill_base_damage(wd, src, target, skill_id, skill_lv);
+
+                if(sd) {
+                    wd.damage_min += sstatus.rhw.atk2;
+                    wd.damage_max += sstatus.rhw.atk2;
+                    wd.crit_damage_min += sstatus.rhw.atk2;
+                    wd.crit_damage_max += sstatus.rhw.atk2;
+                }
+
+                ATK_RATE(wd, src, skill_id, 200);
+                CRIT_ATK_RATE(wd, src, skill_id, 200);
+
+                ad.damage_min = Math.max(1, ad.damage_min + wd.damage_min);
+                ad.damage_max = Math.max(1, ad.damage_max + wd.damage_max);
+                ad.crit_damage_min = Math.max(1, ad.crit_damage_min + wd.crit_damage_min);
+                ad.crit_damage_max = Math.max(1, ad.crit_damage_max + wd.crit_damage_max);
+                break;
         }
 
         // mdef calculation
@@ -1187,8 +1228,10 @@ function battle_calc_magic_attack(src, target, skill_id, skill_lv, mflag) {
             battleDebug && console.log("[battle_calc_magic_attack] mdef:", mdef, "mdef2:", mdef2, "ignore_mdef%:", i);
             ad.damage_min = Math.trunc((ad.damage_min * (100 - mdef)) / 100) - mdef2;
             ad.damage_max = Math.trunc((ad.damage_max * (100 - mdef)) / 100) - mdef2;
-            ad.crit_damage_min = Math.trunc((ad.crit_damage_min * (100 - mdef)) / 100) - mdef2;
-            ad.crit_damage_max = Math.trunc((ad.crit_damage_max * (100 - mdef)) / 100) - mdef2;
+            if(skill_id != SKILL.TK_FALLING_STAR_ATTACK) { // this skill does not have its crit damage affected by mdef
+                ad.crit_damage_min = Math.trunc((ad.crit_damage_min * (100 - mdef)) / 100) - mdef2;
+                ad.crit_damage_max = Math.trunc((ad.crit_damage_max * (100 - mdef)) / 100) - mdef2;
+            }
             battleDebug && console.log("[battle_calc_magic_attack] after mdef dmg_min:", ad.damage_min, "dmg_max:", ad.damage_max);
         }
 
@@ -1360,14 +1403,6 @@ function battle_calc_weapon_attack(src, target, skill_id, skill_lv, wflag) {
     // Now simply sets the critical rate of the crit damage 
     is_attack_critical(wd, src, target, skill_id, skill_lv, true);
 
-    /* if(is_attack_critical(wd, src, target, skill_id, skill_lv, true)) {
-        if(wd.type&DMG.MULTI_HIT)
-            wd.type = DMG.MULTI_HIT_CRITICAL;
-        else
-            wd.type = DMG.CRITICAL;
-        battleDebug && console.log(`[battle_calc_weapon_attack] CRITICAL HIT â€” type=${wd.type}`);
-    } */
-
     if(!is_attack_hitting(wd, src, target, skill_id, skill_lv, true)) {
         battleDebug && console.log(`[battle_calc_weapon_attack] Attack MISSED`);
         wd.dmg_lv = ATK.FLEE;
@@ -1490,7 +1525,8 @@ function battle_calc_weapon_attack(src, target, skill_id, skill_lv, wflag) {
         battleDebug && console.log(`[battle_calc_weapon_attack] Infinite defense (plant) â€” calling battle_calc_attack_plant`);
         battle_calc_attack_plant(wd, src, target, skill_id, skill_lv);
 
-
+        if(skill_id == SKILL.TK_DOWNKICK && (SkillSearch(SKILL.TK_READYDOWN)) && (wd.damage_min + wd.damage_max) <= 0)
+            wd.damage_min = wd.damage_max = wd.crit_damage_min = wd.crit_damage_max = 1;
 
         return wd;
     }
@@ -1506,6 +1542,9 @@ function battle_calc_weapon_attack(src, target, skill_id, skill_lv, wflag) {
 
     battle_calc_weapon_final_atk_modifiers(wd, src, target, skill_id, skill_lv);
     battleDebug && console.log(`%c[battle_calc_weapon_attack] END â€” final damage_min=${wd.damage_min}, damage_max=${wd.damage_max}, damage2_min=${wd.damage2_min}, damage2_max=${wd.damage2_max}, crit_damage_min=${wd.crit_damage_min}, crit_damage_max=${wd.crit_damage_max}, crit_damage2_min=${wd.crit_damage2_min}, crit_damage2_max=${wd.crit_damage2_max}`, 'color: #00cc00; font-weight: bold');
+
+    if((skill_id == 0 || skill_id == SKILL.TK_DOWNKICK) && (SkillSearch(SKILL.TK_READYDOWN)) && (wd.damage_min + wd.damage_max) <= 0)
+        wd.damage_min = wd.damage_max = wd.crit_damage_min = wd.crit_damage_max = 1;
 
     wd.element = right_element;
 
@@ -1831,6 +1870,28 @@ function battle_calc_damage(src, target, wd, damage, skill_id, skill_lv) {
         }
 
         // titanic stance damage increase
+        if(SkillSearch(SKILL.TK_READYTURN)) {
+            let hp_ratio = target.mhp_percent;
+
+            if(hp_ratio > 0) {
+                if(hp_ratio <= 25) {
+                    damage += Math.trunc((damage * 30) / 100);
+                } else if (hp_ratio <= 50) {
+                    damage += Math.trunc((damage * 10) / 100);
+                } else if (hp_ratio <= 75) {
+                    damage += Math.trunc((damage * 5) / 100);
+                }   
+
+                if(skill_id == SKILL.TK_TURNKICK && target.battle_status.class_ == CLASS.BOSS) {
+                    if(hp_ratio <= 25)
+                        damage += Math.trunc((damage * 300) / 100);
+                    else if (hp_ratio <= 50)
+                        damage += Math.trunc((damage * 100) / 100);
+                    else if (hp_ratio <= 75)
+                        damage += Math.trunc((damage * 50) / 100);
+                }
+            }
+        }
 
         // lunar stance damage increase
 
@@ -2179,14 +2240,16 @@ function battle_calc_cardfix(attack_type, src, target, skill_id, rh_ele, lh_ele,
 
                 let race_bonus = (sd.indexed_bonus.magic_addrace[tstatus.race] + sd.indexed_bonus.magic_addrace[RC.ALL] + race2_val) * 100;
 
-                // tk mission bonus
+                if(SkillSearch(SKILL.TK_MISSION_RACE_BONUS))
+                    race_bonus += SkillSearch(SKILL.TK_MISSION_RACE_BONUS) * 100 / 2;
 
                 cardfix = Math.trunc((cardfix * (10000 + race_bonus)) / 10000);
                 if(!skill_ignores_element(skill_id)) {
                     let ele_bonus = (sd.indexed_bonus.magic_addele[tstatus.def_ele] + sd.indexed_bonus.magic_addele[ELE.MAX] +
                         sd.indexed_bonus.magic_addele_script[tstatus.def_ele] + sd.indexed_bonus.magic_addele_script[ELE.MAX]) * 100;
                     
-                    // tk mission bonus
+                    if(SkillSearch(SKILL.TK_MISSION_ELE_BONUS))
+                        ele_bonus += SkillSearch(SKILL.TK_MISSION_ELE_BONUS) * 100 / 2;
 
                     cardfix = Math.trunc((cardfix * (10000 + ele_bonus)) / 10000);
 
@@ -2312,7 +2375,8 @@ function battle_calc_cardfix(attack_type, src, target, skill_id, rh_ele, lh_ele,
                     let race_bonus = (sd.indexed_bonus.addrace[tstatus.race] + sd.indexed_bonus.addrace[RC.ALL]) * 10;
                     battleDebug && console.log(`[battle_calc_cardfix] ARROW â€” addrace[${tstatus.race}]=${sd.indexed_bonus.addrace[tstatus.race]}, addrace[ALL]=${sd.indexed_bonus.addrace[RC.ALL]}, race_bonus=${race_bonus}`);
 
-                    // tk mission bonus
+                    if(SkillSearch(SKILL.TK_MISSION_RACE_BONUS))
+                        race_bonus += SkillSearch(SKILL.TK_MISSION_RACE_BONUS) * 10;
 
                     cardfix = Math.trunc((cardfix * (1000 + race_bonus)) / 1000);
                     battleDebug && console.log(`[battle_calc_cardfix] ARROW after race â€” cardfix=${cardfix}`);
@@ -2331,7 +2395,8 @@ function battle_calc_cardfix(attack_type, src, target, skill_id, rh_ele, lh_ele,
                             ele_fix += it.rate * 10;
                         }
 
-                        // tk mission bonus
+                        if(SkillSearch(SKILL.TK_MISSION_ELE_BONUS))
+                            ele_fix += SkillSearch(SKILL.TK_MISSION_ELE_BONUS) * 10;
 
                         cardfix = Math.trunc((cardfix * (1000 + ele_fix)) / 1000);
                         battleDebug && console.log(`[battle_calc_cardfix] ARROW after ele â€” cardfix=${cardfix}`);
@@ -2366,14 +2431,17 @@ function battle_calc_cardfix(attack_type, src, target, skill_id, rh_ele, lh_ele,
                     }
                     battleDebug && console.log(`[battle_calc_cardfix] MELEE after addele2 loop â€” ele_fix=${ele_fix}`);
 
-                    // tk mission bonus
+                    if(SkillSearch(SKILL.TK_MISSION_ELE_BONUS))
+                        ele_fix += SkillSearch(SKILL.TK_MISSION_ELE_BONUS) * 10;
+
                     cardfix = Math.trunc((cardfix * (1000 + ele_fix)) / 1000);
                     battleDebug && console.log(`[battle_calc_cardfix] MELEE after ele â€” cardfix=${cardfix}`);
 
                     let race_bonus = (sd.indexed_bonus.addrace[tstatus.race] + sd.indexed_bonus.addrace[RC.ALL]) * 10;
                     battleDebug && console.log(`[battle_calc_cardfix] MELEE â€” addrace[${tstatus.race}]=${sd.indexed_bonus.addrace[tstatus.race]}, addrace[ALL]=${sd.indexed_bonus.addrace[RC.ALL]}, race_bonus=${race_bonus}`);
 
-                    // tk mission bonus
+                    if(SkillSearch(SKILL.TK_MISSION_RACE_BONUS))
+                        race_bonus += SkillSearch(SKILL.TK_MISSION_RACE_BONUS) * 10;
 
                     cardfix = Math.trunc((cardfix * (1000 + race_bonus)) / 1000);
                     battleDebug && console.log(`[battle_calc_cardfix] MELEE after race â€” cardfix=${cardfix}`);
@@ -3550,11 +3618,15 @@ function battle_calc_skill_base_damage(wd, src, target, skill_id, skill_lv) {
             if(sd) {
                 let skill;
 
-                //if(is_attack_critical(wd, src, target, skill_id, skill_lv, false)) {
-                    let crit_atk_rate = sd.bonus.crit_atk_rate;
-                    if(crit_atk_rate)
-                        CRIT_ATK_ADDRATE(wd, src, skill_id, crit_atk_rate);
-                //}
+                let crit_atk_rate = sd.bonus.crit_atk_rate;
+
+                if(skill_id == SKILL.TK_TURNKICK && (SkillSearch(SKILL.TK_READYTURN))) {
+                    if(target.mhp_percent <= 25)
+                        crit_atk_rate *= 3;
+                }
+
+                if(crit_atk_rate)
+                    CRIT_ATK_ADDRATE(wd, src, skill_id, crit_atk_rate);
 
                 if(skill_id == SKILL.GS_TRACKING && SkillSearch(SKILL.GS_WEAPON_MASTERY) == 5 && is_attack_critical(wd, src, target, skill_id, skill_lv, false)) {
                     CRIT_ATK_ADDRATE(wd, src, skill_id, 10); // 10% more damage on crit 
@@ -4167,7 +4239,7 @@ function battle_range_type(src, target, skill_id, skill_lv) {
         
         case SKILL.TK_JUMPKICK:
         case SKILL.TK_JUMPKICK_SPRINT:
-            if(1 * c.A8_Skill14.value == 1)
+            if(1 * c.A8_Skill14.value == 0)
                 return BF.SHORT;
             break;
     }
@@ -4346,6 +4418,12 @@ function is_attack_critical(wd, src, target, skill_id, skill_lv, first_call) {
                 if(SkillSearch(SKILL.GS_WEAPON_MASTERY) == 4) {
                     cri += 100;
                     battleDebug && console.log(`[is_attack_critical] GS_RAPIDFIRE mastery crit +100 â€” cri=${cri}`);
+                }
+                break;
+            case SKILL.TK_TURNKICK:
+                if(SkillSearch(SKILL.TK_READYTURN)) {
+                    if(target.mhp_percent <= 25)
+                        cri += 1000;
                 }
                 break;
         }
@@ -4914,12 +4992,13 @@ function skill_get_num(src, skill_id, skill_lv) {
         case SKILL.AB_DUPLELIGHT_MAGIC:
         case SKILL.RA_AIMEDBOLT:
         case SKILL.RL_MASS_SPIRAL:
-        case SKILL.TK_TORNADO_TICK_DAMAGE:
+        case SKILL.TK_STORMKICK_ATK:
         case SKILL.CD_ARBITRIUM:
         case SKILL.CD_ARBITRIUM_ATK:
         case SKILL.EM_VENOM_SWAMP:
         case SKILL.PR_MAGNUS_JUDEX_HOLYLIGHT:
         case SKILL.HT_BEASTSTRAFE_DOUBLESTRAFE:
+        case SKILL.TK_FALLING_STAR_ATTACK:
             return 1;
         case SKILL.TF_DOUBLE:
         case SKILL.AC_DOUBLE:
@@ -5086,7 +5165,8 @@ function skill_get_range(skill_id, skill_lv) {
         case SKILL.AB_DUPLELIGHT:
         case SKILL.AB_DUPLELIGHT_MELEE:
         case SKILL.AB_DUPLELIGHT_MAGIC:
-        case SKILL.TK_TORNADO_TICK_DAMAGE:
+        case SKILL.TK_STORMKICK_ATK:
+        case SKILL.TK_FALLING_STAR_ATTACK:
             return 1;
         case SKILL.TF_POISON:
         case SKILL.KN_PIERCE:
@@ -5364,6 +5444,7 @@ function skill_can_crit(skill_id) {
         case SKILL.GS_TRACKING:
         case SKILL.NJ_KIRIKAGE:
         case SKILL.GS_RAPIDFIRE:
+        case SKILL.TK_FALLING_STAR_ATTACK:
             return true;
     }
     return false;
@@ -6248,8 +6329,68 @@ function skill_get_unitdelay(skill_id) {
             return 450;
         case SKILL.AM_DEMONSTRATION:
             return 1000;
-        case SKILL.TK_TORNADO_TICK_DAMAGE:
+        case SKILL.TK_STORMKICK_ATK:
             return 450;
     }
     return 0;
+}
+
+function skill_is_aoe( skill_id, flag )
+{
+	switch( skill_id ){
+		case 0:
+			if( !(flag&(BF.SKILL)) ) // If a normal attack is a skill, it's splash damage.
+			break;
+		case SKILL.SM_MAGNUM:
+		case SKILL.MG_FIREBALL:
+		case SKILL.MG_FIREWALL:
+		case SKILL.MG_THUNDERSTORM:
+		case SKILL.AC_SHOWER:
+		case SKILL.MC_CARTREVOLUTION:
+		case SKILL.KN_BOWLINGBASH:
+		case SKILL.KN_BRANDISHSPEAR:
+		case SKILL.WZ_FROSTNOVA:
+		case SKILL.WZ_HEAVENDRIVE:
+		case SKILL.WZ_VERMILION:
+		case SKILL.WZ_METEOR:
+		case SKILL.WZ_STORMGUST:
+		case SKILL.HW_GRAVITATION:
+		case SKILL.HW_NAPALMVULCAN:
+		case SKILL.HT_CLAYMORETRAP:
+		case SKILL.HT_BLITZBEAT:
+		case SKILL.SN_FALCONASSAULT:
+		case SKILL.SN_SHARPSHOOTING:
+		case SKILL.AS_GRIMTOOTH:
+		case SKILL.AS_VENOMDUST:
+		case SKILL.AS_SPLASHER:
+		case SKILL.ASC_METEORASSAULT:
+		case SKILL.PR_MAGNUS:
+		case SKILL.PR_SANCTUARY:
+		case SKILL.CR_GRANDCROSS:
+		case SKILL.BA_DISSONANCE:
+		case SKILL.NPC_SELFDESTRUCTION: // from AM_SPHEREMINE
+		case SKILL.AM_DEMONSTRATION:
+		case SKILL.RG_RAID:
+		case SKILL.TK_STORMKICK:
+		case SKILL.SG_MOON_WARM:
+		case SKILL.SG_SUN_WARM:
+		case SKILL.SG_STAR_WARM:
+		case SKILL.NJ_HUUMA:
+		case SKILL.NJ_KAENSIN:
+		case SKILL.MG_NAPALMBEAT:
+		case SKILL.NJ_BAKUENRYU:
+		case SKILL.NJ_HYOUSYOURAKU:
+		case SKILL.NJ_RAIGEKISAI:
+		case SKILL.NJ_KAMAITACHI:
+		case SKILL.GS_DESPERADO:
+		case SKILL.GS_SPREADATTACK:
+		case SKILL.GS_GROUNDDRIFT:
+		case SKILL.WM_REVERBERATION:
+		case SKILL.NW_HASTY_FIRE_IN_THE_HOLE:
+		case SKILL.NW_BASIC_GRENADE:
+		case SKILL.RL_SLUGSHOT:
+		case SKILL.NW_MISSION_BOMBARD:
+			return true;
+		}
+	return false;
 }

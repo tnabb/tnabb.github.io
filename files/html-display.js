@@ -28,8 +28,8 @@ function updatePlayerStatDisplay() {
     setVal("A_MaxSP", status.max_sp);
 
     // hp/sp regen
-    setVal("A_HPR", "ADDING LATER");
-    setVal("A_SPR", "ADDING LATER");
+    /* setVal("A_HPR", "ADDING LATER");
+    setVal("A_SPR", "ADDING LATER"); */
 
     setVal("A_ASPD", (2000 - status.amotion) / 10);
     setVal("A_MovSPEED", Math.trunc(60000 / status.speed) + " CPM"); // is a bit fucked rn - fix later
@@ -1223,6 +1223,15 @@ function displayOtherInfo(val) {
                 weaponLv2Rate += c.A_KakutyouAnvil.value * 1;
                 weaponLv3Rate += c.A_KakutyouAnvil.value * 1;
 
+                if(player.status.adopted) {
+                    weaponLv1Rate = (weaponLv1Rate * 50) / 100;
+                    weaponLv2Rate = (weaponLv2Rate * 50) / 100;
+                    weaponLv3Rate = (weaponLv3Rate * 50) / 100;
+                    ironRate = (ironRate * 50) / 100;
+                    steelRate = (steelRate * 50) / 100;
+                    elementalStoneRate = (elementalStoneRate * 50) / 100;
+                }
+
                 displayData += `<br>`;
                 displayData += `<table><tbody>`;
                 displayData += `<tr><td><b>Weapon Lvl 1:</b> ${(weaponLv1Rate / 100).toFixed(2)}%</td>`;
@@ -1275,11 +1284,19 @@ function displayOtherInfo(val) {
                         break;
                 }
 
+                if(player.status.adopted) {
+                    minRate = (minRate * 50) / 100;
+                    maxRate = (maxRate * 50) / 100;
+                }
+
                 displayData += `<br><b>Success rate: </b>${(((minRate + maxRate) / 2) / 100).toFixed(2)}% [ ${(minRate / 100).toFixed(2)} % ~ ${(maxRate / 100).toFixed(2)} % ]`;
             } else if(player.status.job_id == JOB.ASSASSIN_CROSS) {
                 let potionBottleRate = (2000 + 40 * player.battle_status.dex + 20 * player.battle_status.luk);
                 
-                    displayData += `<br><b>Success rate: </b>${(potionBottleRate / 100).toFixed(2)}%`;
+                if(player.status.adopted)
+                    potionBottleRate = (potionBottleRate * 50) / 100;
+
+                displayData += `<br><b>Success rate: </b>${(potionBottleRate / 100).toFixed(2)}%`;
             }
             setVal("A_KakutyouData", displayData);
             break;

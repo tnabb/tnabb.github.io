@@ -92,7 +92,11 @@ function PopulatePlayerData() {
     player.status.int = 1 * c.A_INT.value;
     player.status.dex = 1 * c.A_DEX.value;
     player.status.luk = 1 * c.A_LUK.value;
-    player.status.adopted = 1 * c.A_adopted.value;
+    if(c.A_adopted.checked)
+        player.status.adopted = true;
+    else
+        player.status.adopted = false;
+
     player.status.status_point = CalculateStatusPoints();
 
     player.weapontype1 = m_Item[c.A_weapon1.value][1];
@@ -160,7 +164,6 @@ function PopulatePlayerData() {
     player.card[14] = 1 * c.A_acces1_card.value;
     player.card[15] = 1 * c.A_acces2_card.value;
 
-    console.log("Loading random options from form inputs...");
     player.randopt[0] = 1 * c.A_weapon1_ropt1.value;
     player.randopt[1] = 1 * c.WEAP1_ROPT1.value;
     player.randopt[2] = 1 * c.A_weapon1_ropt2.value;
@@ -392,7 +395,7 @@ function StatusCalcPlayerSub() {
     base_status.aspd_rate = 1000;
     base_status.ele_lv = 1;
     base_status.race = RC.DEMIHUMAN;
-    base_status.size = SZ.MEDIUM;
+    base_status.size = player.status.adopted ? SZ.SMALL : SZ.MEDIUM;
     base_status.class_ = CLASS.NORMAL;
 
     player.skillatk = [];
@@ -1011,6 +1014,7 @@ function PopulateMonsterData() {
         monster.base_status.mode |= MD.MVP;
     if (monster.notes[7])
         monster.damagetaken = 100 - NotesCalc(monster.mob_id, 7);
+    monster.mhp_percent = 1 * c.EnemyHPPercent.value;
 
     StatusCalcMonsterSub();
     updateMonsterStatDisplay();
@@ -1408,7 +1412,6 @@ function StAllCalc() {
     ClickB_Enemy(c.B_Enemy.value);
     PopulatePlayerData();
     KakutyouKansuu();
-    console.log("StAllCalc complete");
 }
 
 function WeaponSet(jobId) {
@@ -1968,12 +1971,12 @@ function calcAvgHitsToKill(monsterIndex) {
 
     // Run the damage calc — same logic as calc()
     let skill_type = BF.WEAPON;
-    if (m_Skill[n_A_ActiveSkill][4] < 0)
+    if (m_Skill[player.active_skill][4] < 0)
         skill_type = BF.MAGIC;
-    else if (m_Skill[n_A_ActiveSkill][4] == 5)
+    else if (m_Skill[player.active_skill][4] == 5)
         skill_type = BF.MISC;
 
-    const d = battle_calc_attack(skill_type, player, monster, n_A_ActiveSkill, n_A_ActiveSkillLV, 0);
+    const d = battle_calc_attack(skill_type, player, monster, player.active_skill, player.active_skill_lv, 0);
 
     // Compute avgHits the same way updatePlayerDamageDisplay does
     const avgDamage = d.getAverageDamage();
@@ -2154,6 +2157,7 @@ function SaveLocal() {
         monster_atk_range: 1 * c.B_AtkRange.value,
         monster_atk_elem: 1 * c.B_AtkElem.value,
         b_num: 1 * c.B_num.value,
+        monster_mhp_percent: 1 * c.EnemyHPPercent.value,
 
         // ── UI state ──────────────────────────────────────────────────────
         all_dmg_skills: c.all_dmgSkills.checked,
@@ -2339,6 +2343,8 @@ function loadNewFormat(data) {
         new ManualEdit(e.type, e.value)
     );
 
+    c.EnemyHPPercent.value = data.monster_mhp_percent || 100;
+
     // ── Active skill ──────────────────────────────────────────────────────
     c.Conf01.value = data.conf01;
     StCalc(1);
@@ -2367,7 +2373,6 @@ function loadNewFormat(data) {
     syncAdditionalEffectsDOMFromData();
     syncManualEditsDOMFromData(player, 'ID_ARG');
     syncMonsterManualEditsDOMFromData();
-    console.log("End of load new format");
 }
 
 // ─── SLOT LIST ────────────────────────────────────────────────────────────────
@@ -2559,7 +2564,6 @@ function syncBuffDOMFromSC(entity) {
 
         for (const entry of songMap) {
             const activeSC = sc_get(player, entry.sc);
-            console.log(`Syncing ${entry.sc}: active=${!!activeSC}, val1=${activeSC ? activeSC.val1 : 0}, val2=${activeSC ? activeSC.val2 : 0}, val3=${activeSC ? activeSC.val3 : 0}, val4=${activeSC ? activeSC.val4 : 0}`);
 
             // val1=level (already handled by data-sc above)
             // val2=lesson, val3=stat1, val4=stat2
@@ -2578,7 +2582,6 @@ function syncBuffDOMFromSC(entity) {
                 document.getElementsByName("buff_marionette_status_compensation")[0].checked = true;
             else
                 document.getElementsByName("buff_marionette_status_compensation")[0].checked = false;
-            console.log(`Syncing MARIONETTE: val1=${marionetteSC.val1}, val2=${marionetteSC.val2}, val3=${marionetteSC.val3}, val4=${marionetteSC.val4}, val5=${marionetteSC.val5}, val6=${marionetteSC.val6}, val7=${marionetteSC.val7}`);
             setEl("buff_marionette_str", marionetteSC.val2 || 0);
             setEl("buff_marionette_agi", marionetteSC.val3 || 0);
             setEl("buff_marionette_vit", marionetteSC.val4 || 0);
@@ -2731,9 +2734,7 @@ function syncAdditionalEffectsDOMFromData() {
 
         switch (dataId) {
             case 'PET':
-                console.log("Restoring pet value:", player.pet);
                 el.value = player.pet || 0;
-                console.log(el.value);
                 break;
             case 'TEMP_EFFECTS_1':
                 el.value = player.temp_effect[0] || 0;
@@ -2748,7 +2749,7 @@ function syncAdditionalEffectsDOMFromData() {
                 el.value = player.temp_effect[3] || 0;
                 break;
             case 'EXP_PARTY_MEMBER':
-                el.value = player.exp_modifiers.party_member_count || 1;
+                el.value = player.exp_modifiers.party_member_count || 0;
                 break;
             case 'EXP_BATTLE_MANUAL':
                 el.value = player.exp_modifiers.battle_manual || 0;
@@ -2943,7 +2944,6 @@ function loadLegacyFormat(sd) {
     // ── Random options, shadow, enchants ──────────────────────────────────
     for (let i = 0; i <= 27; i++) player.randopt[i] = sd[436 + i] || 0;
     reloadRandOpt();
-    console.log("Loaded randopts:", player.randopt);
     for (let i = 0; i <= 5; i++)  player.shadow[i] = sd[464 + i] || 0;
     if (player.shadow[1] === 0) player.shadow[1] = 22;
     if (player.shadow[3] === 0) player.shadow[3] = 44;
@@ -3212,7 +3212,6 @@ function loadLegacyFormat(sd) {
     if (sd[422]) manualedits_start(monster, 610, (sd[420] * 10) + sd[421]);
     if (sd[424]) manualedits_start(monster, 611, sd[423]);
 
-    console.log("Loaded legacy monster debuffs (sd[253..280]) but exact mapping to monster.sc entries is not implemented yet");
     // ── Active skill ──────────────────────────────────────────────────────
     c.Conf01.value = sd[237];
     c.B_num.value = sd[238];
@@ -3222,7 +3221,6 @@ function loadLegacyFormat(sd) {
     c.A_ActiveSkill.value = sd[243];
     ClickActiveSkill();
     c.A_ActiveSkillLV.value = sd[244];
-    console.log("Loaded active skill ID:", sd[243], "level:", sd[244], "subnum:", sd[245]);
     const skillsToLoadSubNum = [66, 326, 159, 384, 324, 131, 88, 197, 394, 395, 405, 429];
     if (c.SkillSubNum && (skillsToLoadSubNum.includes(player.active_skill) || SkillSearch(SKILL.PF_DOUBLECASTING))) c.SkillSubNum.value = sd[245] || 0;
 
@@ -3241,7 +3239,6 @@ function loadLegacyFormat(sd) {
     c.saveDataName.value = sd[500] || "";
 
     // ── Sync all buff table DOM controls from the SC state we just built ──
-    console.log("Loaded legacy save, translating n_A_Buf* → player.sc and syncing buff DOM");
 
     refreshFields();
     StCalc(1);
@@ -3358,6 +3355,7 @@ function URLOUT() {
         monster_atk_range: 1 * c.B_AtkRange.value,
         monster_atk_elem: 1 * c.B_AtkElem.value,
         b_num: 1 * c.B_num.value,
+        monster_mhp_percent: 1 * c.EnemyHPPercent.value,
 
         all_dmg_skills: c.all_dmgSkills.checked ? 1 : 0,
         restrict_jobequip: c.restrict_jobequip.checked ? 1 : 0,
@@ -3406,14 +3404,11 @@ function URLIN() {
                 return;
             }
             if (data.v === URL_DATA_VERSION) {
-                console.log("Loading data from new URL format", data);
                 loadNewFormat(data);
                 return;
             }
         }
     }
-
-    console.log("No valid new-format data found in URL, falling back to legacy format if present");
 
     // ── Legacy format: #<positional base-62> ─────────────────────────────
     // Decode the positional string into the DOM and global arrays exactly
@@ -3760,7 +3755,7 @@ function legacyURLinDecode(urlToParse) {
         if (doubleCastIndex !== -1) {
             const dcEl = document.getElementById("A_skill" + doubleCastIndex);
             if (dcEl && 1 * dcEl.value > 0) {
-                const isCompatibleBolt = [51, 54, 56, 540, 541, 542].includes(n_A_ActiveSkill);
+                const isCompatibleBolt = [51, 54, 56, 540, 541, 542].includes(player.active_skill);
                 if (isCompatibleBolt) {
                     const avg = 1 * dcEl.value + 3;
                     myInnerHtml("AASkill", 'Double Bolt chance: <select name="SkillSubNum" onChange="calc()"></select>', 0);
@@ -3813,7 +3808,6 @@ function legacyURLinDecode(urlToParse) {
             player.randopt[g] = StoN2(n.substr(x, 2));
         for (let g = 0, x = -38; g <= 5; g++, x += 2)
             player.shadow[g] = StoN2(n.substr(x, 2));
-        console.log(player.shadow);
         l = StoN2(n.substr(-26, 1));
         if (Math.floor(l / 16)) sc_start(player, SC.WHISTLE_SRS);     
         if (Math.floor(l % 16 / 8)) sc_start(player, SC.ASSNCROS_SRS);    
@@ -3895,7 +3889,6 @@ function _decodeLegacyMonsterBuf(n, S, A) {
 }
 
 function _decodeLegacyBuf3Dance(n, S) {
-    console.log("Decoding dance buffs with S =", S);
     if(StoN2(n.substr(S + 1, 1))) sc_start(player, SC.WHISTLE, StoN2(n.substr(S + 1, 1)), StoN2(n.substr(S + 25, 1)), StoN2(n.substr(S + 23, 2)), 60); // luk stored elsewhere where its REALLY annoying to pull from so just default to 60
     if(StoN2(n.substr(S + 2, 1))) sc_start(player, SC.ASSNCROS, StoN2(n.substr(S + 2, 1)), StoN2(n.substr(S + 28, 1)), StoN2(n.substr(S + 26, 2)));
     if(StoN2(n.substr(S + 3, 1))) sc_start(player, SC.POEMBRAGI, StoN2(n.substr(S + 3, 1)), StoN2(n.substr(S + 33, 1)), StoN2(n.substr(S + 29, 2)), StoN2(n.substr(S + 31, 2)));
@@ -3908,7 +3901,6 @@ function _decodeLegacyBuf3Dance(n, S) {
     if(Math.floor(StoN2(n.substr(S + 9, 1)) / 6)) sc_start(player, SC.DRUMBATTLE, Math.floor(StoN2(n.substr(S + 9, 1)) / 6));
     if(StoN2(n.substr(S + 9, 1)) % 6) sc_start(player, SC.NIBELUNGEN, StoN2(n.substr(S + 9, 1)) % 6);
     if(Math.floor(StoN2(n.substr(S + 10, 1)) / 16)) sc_start(player, SC.MARIONETTE, Math.floor(StoN2(n.substr(S + 10, 1)) % 16 / 8), StoN2(n.substr(S + 11, 2)), StoN2(n.substr(S + 13, 2)), StoN2(n.substr(S + 15, 2)), StoN2(n.substr(S + 17, 2)), StoN2(n.substr(S + 19, 2)), StoN2(n.substr(S + 21, 2)));
-    console.log("Marionette", Math.floor(StoN2(n.substr(S + 10, 1)) % 16 / 8), StoN2(n.substr(S + 11, 2)), StoN2(n.substr(S + 13, 2)), StoN2(n.substr(S + 15, 2)), StoN2(n.substr(S + 17, 2)), StoN2(n.substr(S + 19, 2)), StoN2(n.substr(S + 21, 2)));
     S += 45;
     return S;
 }

@@ -1187,7 +1187,6 @@ m_RandomOptCrimsonWeapons = [2105, 2106, 2107, 2108, 2109, 2110, 2111, 2113, 211
 m_RandomOptMineWorkerPickaxe = [2178];
 
 function Click_RandOpt(){
-    console.log("Click_RandOpt: " + arguments[0]);
 	player.randopt[0] = 1 * c.A_weapon1_ropt1.value;
 	player.randopt[1] = 1 * c.WEAP1_ROPT1.value;
 	player.randopt[2] = 1 * c.A_weapon1_ropt2.value;

@@ -334,6 +334,8 @@ function status_calc_agi(player, agi) {
     }
     if(sc_get(player, SC.DECREASEAGI)) // decrease agi
         agi -= sc_get(player, SC.DECREASEAGI).val2;
+    if(SkillSearch(SKILL.TK_READYDOWN) && n_A_JobClass2() != JOB.SOUL_LINKER)
+        agi += Math.trunc(player.battle_status.int / 2);
     return cap_value(agi, 0, USHRT_MAX);
 }
 
