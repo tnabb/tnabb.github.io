@@ -249,6 +249,24 @@ function updatePlayerDamageDisplay(d) {
             break;
     }
 
+    switch(d.skill_id) {
+        case SKILL.SG_MILD_HEAT_ATK:
+            delayLabelStr = "Time/Hit";
+            delayUsed = 0.25;
+            delayStr = delayUsed + " seconds";
+            break;
+        case SKILL.SG_RISING_HEAT_ATK:
+            delayLabelStr = "Time/Hit";
+            delayUsed = 0.125;
+            delayStr = delayUsed + " seconds";
+            break;
+        case SKILL.SKE_UNLEASHED_HEAT_ATK:
+            delayLabelStr = "Time/Hit";
+            delayUsed = 0.02;
+            delayStr = delayUsed + " seconds";
+            break;
+    }
+
     if(isCombo > 0)
         delayLabelStr += " x" + isCombo;
 
@@ -483,7 +501,7 @@ function updatePlayerDamageDisplay(d) {
     }
 
     // --- Expected damage calculation considering TA > DA > Crit priority ---
-    let canCrit = (d.crit_from_sr_buff && d.skill_id != SKILL.MO_EXTREMITYFIST && d.skill_id != SKILL.MO_EXTREMITYFIST_MAXSP && d.skill_id != SKILL.CR_GRANDCROSS && d.skill_id != SKILL.NPC_GRANDDARKNESS) || d.skill_id == 0 || skill_can_crit(d.skill_id);
+    let canCrit = (d.crit_from_sr_buff && d.skill_id != SKILL.MO_EXTREMITYFIST && d.skill_id != SKILL.MO_EXTREMITYFIST_MAXSP && d.skill_id != SKILL.CR_GRANDCROSS && d.skill_id != SKILL.NPC_GRANDDARKNESS) || d.skill_id == 0 || skill_can_crit(d.skill_id) || SkillSearch(SKILL.SG_FUSION);
 
     if(d.skill_id == SKILL.NV_BASIC_ATTACK) {
         let taRate = hasTripleAttack ? 0.30 : 0;
@@ -809,8 +827,8 @@ function displayOtherInfo(val) {
                 maxWeight += 2000 * c.A_KakutyouSelNum.value; // enlarge weight limit
             if(SkillSearch(SKILL.KN_CAVALIERMASTERY) > 0)
                 maxWeight += 10000;
-            if(SkillSearch(SKILL.SG_KNOWLEDGE) > 0)
-                maxWeight += 2000 * SkillSearch(SKILL.SG_KNOWLEDGE);
+            if(n_A_JobClass2() == JOB.STAR_GLADIATOR)
+                maxWeight += 2000 * c.A_KakutyouSelNum.value; // stellar courier
             maxWeight += 2000 * c.A_KakutyouSelNum2.value; // enlarge weight limit R
 
             displayData += `<br><b><font color="red">Weight Limit:</font></b> ${maxWeight / 10}`;
@@ -1547,6 +1565,11 @@ function displayOtherInfoSelect(val) {
                 selectData += `Enlarge Weight Limit Lvl: <select name="A_KakutyouSelNum" onchange="StAllCalc()"></select><br>`;
             }
 
+            let hasStellarCourier = n_A_JobClass2() == JOB.STAR_GLADIATOR;
+            if(hasStellarCourier) {
+                selectData += `Stellar Courier Lvl: <select name="A_KakutyouSelNum" onchange="StAllCalc()"></select><br>`;
+            }
+
             selectData += `Enlarge Weight Limit R Lvl: <select name="A_KakutyouSelNum2" onchange="StAllCalc()"></select>`;
             selectData += `<br>Elite Gym Pass: <input type="checkbox" name="A_KakutyouChk" onclick="StAllCalc()">`;
 
@@ -1554,6 +1577,12 @@ function displayOtherInfoSelect(val) {
 
             if(hasEnlargeWeightLimit) {
                 for(let i = 0; i <= 10; i++)
+                    c.A_KakutyouSelNum.options[i] = new Option(i, i);
+                c.A_KakutyouSelNum.value = 0;
+            }
+
+            if(hasStellarCourier) {
+                for(let i = 0; i <= 5; i++)
                     c.A_KakutyouSelNum.options[i] = new Option(i, i);
                 c.A_KakutyouSelNum.value = 0;
             }

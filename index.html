@@ -7567,10 +7567,19 @@ window.onerror=function(){
                             </td>
                         </tr>
                         <tr>
-                            <td id="" class="center dotB"></td>
-                            <td id="" class="data dotB"></td>
-                            <td id="debuffcell_fling_label" class="center dotB">Fling</td>
-                            <td id="debuffcell_fling_input" class="dotB" data-sc="FLING">
+                            <td id="debuffcell_seared_label" class="center">Seared</td>
+                            <td id="debuffcell_seared_input" class="data" data-sc="SEARED">
+                                <select name="debuff_seared" onchange="updateStatusMonster(event, 1)" data-sc="SEARED">
+                                    <option value="0">0</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                </select>
+                            </td>
+                            <td id="debuffcell_fling_label" class="center">Fling</td>
+                            <td id="debuffcell_fling_input" data-sc="FLING">
                                 <select name="debuff_fling" onchange="updateStatusMonster(event, 1)" data-sc="FLING">
                                     <option value="0">0</option>
                                     <option value="1">1</option>
@@ -7580,6 +7589,19 @@ window.onerror=function(){
                                     <option value="5">5</option>
                                 </select>
                             </td>
+                        </tr>
+                        <tr>
+                            <td id="debuffcell_melee_fragility_label" class="center dotB">Melee Fragility</td>
+                            <td id="debuffcell_melee_fragility_input" class="data dotB" data-sc="MELEE_FRAGILITY">
+                                <select name="debuff_melee_fragility" onchange="updateStatusMonster(event, 1)" data-sc="MELEE_FRAGILITY">
+                                    <option value="0">0</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                </select>
+                            </td>
+                            <td class="center dotB"></td>
+                            <td class="dotB"></td>
                         </tr>
                         <tr>
                             <td class="center" colspan="4">

@@ -1569,7 +1569,7 @@ function EquipmentSet() {
 }
 
 function JobEquipItemSearch(searchId) {
-    if (searchId >= 2000 && (player.status.job_id <= JOB.HIGH_MERCHANT || player.status.job_id == JOB.NIGHT_WATCH || player.status.job_id == JOB.SOUL_ASCETIC)) {
+    if (searchId >= 2000 && (player.status.job_id <= JOB.HIGH_MERCHANT || player.status.job_id == JOB.NIGHT_WATCH || player.status.job_id == JOB.SOUL_ASCETIC || player.status.job_id == JOB.SKY_EMPEROR)) {
         searchId -= 2000;
     }
 
@@ -1589,7 +1589,7 @@ function JobEquipItemSearch(searchId) {
 function n_A_JobSet() {
     let newJob = 1 * c.A_JOB.value;
 
-    const isRebornJob = (newJob >= JOB.LORD_KNIGHT && newJob <= JOB.HIGH_MERCHANT) || (newJob >= JOB.NIGHT_WATCH && newJob <= JOB.SOUL_ASCETIC);
+    const isRebornJob = (newJob >= JOB.LORD_KNIGHT && newJob <= JOB.HIGH_MERCHANT) || (newJob >= JOB.NIGHT_WATCH && newJob <= JOB.SKY_EMPEROR);
 
     if (isRebornJob) {
         if (newJob >= JOB.HIGH_NOVICE && newJob <= JOB.HIGH_MERCHANT) {
@@ -1650,6 +1650,7 @@ function n_A_JobClass() {
         [JOB.STAR_GLADIATOR]: 41,
         [JOB.SOUL_LINKER]: 41,
         [JOB.SOUL_ASCETIC]: 41,
+        [JOB.SKY_EMPEROR]: 41,
 
         [JOB.NINJA]: 44,
 
@@ -1704,8 +1705,11 @@ function n_A_JobClass2() {
         [JOB.ALCHEMIST]: 19,
         [JOB.CREATOR]: 19,
 
+        [JOB.STAR_GLADIATOR]: 42,
+        [JOB.SKY_EMPEROR]: 42,
+
         [JOB.SOUL_LINKER]: 43,
-        [JOB.SOUL_ASCETIC]: 43
+        [JOB.SOUL_ASCETIC]: 43,
     }
 
     return jobClassMap[player.status.job_id] ?? 0;
@@ -2271,6 +2275,7 @@ function loadNewFormat(data) {
     // ── Shadow, random options, enchants ──────────────────────────────────
     for (let i = 0; i < data.shadow.length; i++)
         player.shadow[i] = data.shadow[i];
+    reloadShadowEquip();
     for (let i = 0; i < data.randopt.length; i++)
         player.randopt[i] = data.randopt[i];
     reloadRandOpt();
@@ -3275,7 +3280,7 @@ function URLOUT() {
 
     const passiveSkillLevels = {};
     const availableBuffs = JOB_AVAILABLE_BUFFS[player.status.job_id] || [];
-    for (let i = 0; i < availableBuffs.length && i <= 14; i++) {
+    for (let i = 0; i < availableBuffs.length; i++) {
         const el = document.getElementById("A_skill" + i);
         if (el) passiveSkillLevels[i] = 1 * el.value;
     }

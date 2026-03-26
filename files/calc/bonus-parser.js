@@ -778,6 +778,8 @@ function CalculateEquipmentBonuses() {
     }
     if(player.equip[EQI.SHOES] == 2170 && player.refine[EQI.SHOES] >= 9) // vigilante shoes
         PlayerApplyBonus(STAT.DEX + 1, 1);
+    if(player.equip[EQI.GARMENT] == 2167) // vigilante stole
+        PlayerApplyBonus(STAT.LUK + 1, Math.floor(player.refine[EQI.GARMENT] / 3));
 
     // flat atk calculations
     if(EquipNumSearch(1120) > 0 && n_A_JobClass() == JOB.ARCHER) // archer figure

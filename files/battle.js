@@ -1912,6 +1912,11 @@ function battle_calc_damage(src, target, wd, damage, skill_id, skill_lv) {
         }
 
         // lunar stance damage increase
+        if(SkillSearch(SKILL.SJ_CAMOUFLAGE) && flag&BF.SKILL) {
+            if(target.id != 504 && target.id != 44) {
+                damage += Math.trunc((damage * 30) / 100);
+            }
+        }
 
         // lunar stance camouflage damage increase
 
@@ -1925,6 +1930,19 @@ function battle_calc_damage(src, target, wd, damage, skill_id, skill_lv) {
 
             damage += Math.trunc((damage * damage_bonus) / 100);
             battleDebug && console.log(`[battle_calc_damage] after TK_POWER â€” damage_bonus=${damage_bonus}, damage=${damage}`);
+        }
+
+        if(SkillSearch(SKILL.SG_HATE) && SkillSearch(SKILL.SG_HATE_STACKS) > 0) {
+            damage += Math.trunc((damage * SkillSearch(SKILL.SG_HATE_STACKS) * SkillSearch(SKILL.SG_HATE)) * 2 / 1000)
+        }
+
+        if(sc_get(target, SC.SEARED)) {
+            let damage_increase = n_A_JobClass2() == JOB.STAR_GLADIATOR ? 5 : 1;
+            damage += Math.trunc((damage * damage_increase * sc_get(target, SC.SEARED).val1) / 100);
+        }
+
+        if(sc_get(target, SC.MELEE_FRAGILITY) && flag&(BF.SHORT | BF.WEAPON)) {
+            damage += Math.trunc((damage * (sc_get(target, SC.MELEE_FRAGILITY).val1 * 5)) / 100);
         }
 
         // damage decrease from notes
@@ -3402,7 +3420,7 @@ function battle_calc_attack_skill_ratio(wd, src, target, skill_id, skill_lv) {
 			skillratio += 50 * skill_lv;
 
             if(sd && SkillSearch(SKILL.SG_TAEKWON_KICK_MASTERY) > 0)
-                skillratio += skillratio * Math.trunc((SkillSearch(SKILL.SG_TAEKWON_KICK_MASTERY) * 5) / 100);
+                skillratio += Math.trunc((skillratio * (SkillSearch(SKILL.SG_TAEKWON_KICK_MASTERY) * 5)) / 100);
 
 			if (sd && skill_id == SKILL.TK_COUNTER && SkillSearch(SKILL.TK_COUNTER_DMG_RECEIVED) > 0)
 				skillratio *= SkillSearch(SKILL.TK_COUNTER_DMG_RECEIVED) + 1;
@@ -3411,14 +3429,13 @@ function battle_calc_attack_skill_ratio(wd, src, target, skill_id, skill_lv) {
 			skillratio += 50;
 			break;
 		case SKILL.SKE_UNLEASHED_HEAT_ATK:
-			if (sd && SkillSearch(SKILL.SKE_DAWN_BREAK) > 0)
-				skillratio = Math.trunc(skillratio / 2);
+            skillratio = Math.trunc(skillratio / 2);
 			break;
 		case SKILL.TK_JUMPKICK:
             skillratio += -100 + 50 * skill_lv + 10 * c.SkillSubNum.value;
 
             if (sd && SkillSearch(SKILL.SG_TAEKWON_KICK_MASTERY) > 0)
-                skillratio += skillratio * Math.trunc((SkillSearch(SKILL.SG_TAEKWON_KICK_MASTERY) * 5) / 100);
+                skillratio += Math.trunc((skillratio * (SkillSearch(SKILL.SG_TAEKWON_KICK_MASTERY) * 5)) / 100);
 
             if (sc_get(target, SC.STUN))
                 skillratio *= 3;
@@ -3519,6 +3536,33 @@ function battle_calc_attack_skill_ratio(wd, src, target, skill_id, skill_lv) {
             break;
         case SKILL.NW_MISSION_BOMBARD:
             skillratio += -100 + Math.trunc((500 + (skill_lv > 1 ? 250 : 0)) / 16);
+            break;
+        case SKILL.SJ_PROMINENCEKICK:
+            skillratio += -100 + 100 * skill_lv;
+            if(sc_get(target, SC.SEARED))
+                skillratio += (100 * skill_lv) * sc_get(target, SC.SEARED).val1;
+            break;
+        case SKILL.SJ_SOLARBURST:
+            skillratio += -100 + 750 * skill_lv;
+            break;
+        case SKILL.SKE_SUNSET_BLAST:
+            skillratio += -100 + 500 * skill_lv;
+            break;
+        case SKILL.SJ_NEWMOONKICK:
+            skillratio += -100 + 200 * skill_lv;
+            if(SkillSearch(SKILL.SJ_LUNARSTANCE))
+                skillratio *= 2;
+            break;
+        case SKILL.SJ_FULLMOONKICK:
+            skillratio += -100 + 375 * skill_lv;
+            if(SkillSearch(SKILL.SJ_LUNARSTANCE) && target.mhp_percent >= 50)
+                skillratio *= 2;
+            break;
+        case SKILL.SKE_ALL_IN_THE_SKY:
+            skillratio += -100 + 400 * skill_lv;
+            break;
+        case SKILL.SKE_DAWN_BREAK:
+            skillratio += 1900;
             break;
     }
 
@@ -3650,6 +3694,9 @@ function battle_calc_skill_base_damage(wd, src, target, skill_id, skill_lv) {
 
                 let crit_atk_rate = sd.bonus.crit_atk_rate;
 
+                if (player.status.weapon == WEAPON.BOOK && (skill = SkillSearch(SKILL.SKE_WAR_BOOK_MASTERY)) > 0)
+                    crit_atk_rate += Math.trunc((skill + 1) / 2); // 1% crit atk rate per 2 levels of War Book Mastery
+
                 if(skill_id == SKILL.TK_TURNKICK && (SkillSearch(SKILL.TK_READYTURN))) {
                     if(target.mhp_percent <= 25)
                         crit_atk_rate *= 3;
@@ -3725,9 +3772,6 @@ function battle_calc_defense_reduction(wd, src, target, skill_id, skill_lv) {
         if(SkillSearch(SKILL.GS_WEAPON_MASTERY_STACKS_CONSUMED) > 0 && (skill_id == SKILL.NW_HASTY_FIRE_IN_THE_HOLE || skill_id == SKILL.NW_MISSION_BOMBARD))
             i += 50;
 
-        if(SkillSearch(SKILL.SG_FUSION) && is_attack_critical(wd, src, target, skill_id, skill_lv, false))
-            i += 50;
-
         i = Math.min(i, 100);
         def1 = Math.trunc((def1 * (100 - i)) / 100);
         def2 = Math.trunc((def2 * (100 - i)) / 100);
@@ -3798,14 +3842,25 @@ function battle_calc_defense_reduction(wd, src, target, skill_id, skill_lv) {
     battleDebug && console.log(`[battle_calc_defense_reduction] Before crit adjustments â€” crit_damage_min=${wd.crit_damage_min}, crit_damage_max=${wd.crit_damage_max}, crit_basedamage_min=${wd.crit_basedamage_min}, crit_basedamage_max=${wd.crit_basedamage_max}`);
     battleDebug && console.log(`[battle_calc_defense_reduction] Crit adjustments â€” crit_from_sr_buff=${wd.crit_from_sr_buff}, is_attack_critical=${is_attack_critical(wd, src, target, skill_id, skill_lv, false)}`);
     if(wd.crit_from_sr_buff || (SkillSearch(SKILL.SG_FUSION) && is_attack_critical(wd, src, target, skill_id, skill_lv, false))) {
+        let crit_def1 = def1;
+        let crit_def2 = def2;
+        if(SkillSearch(SKILL.SG_FUSION) && is_attack_critical(wd, src, target, skill_id, skill_lv, false)) {
+            crit_def1 = Math.trunc((crit_def1 * 50) / 100);
+            crit_def2 = Math.trunc((crit_def2 * 50) / 100);
+
+            vit_def_min = vit_def_max = Math.trunc(crit_def2 / 20) * Math.trunc(crit_def2 / 20);
+            vit_def_max = crit_def2 + 0;
+            vit_def_min = crit_def2 + (vit_def_min > 0 ? vit_def_min - 1 : 0);
+        }
+        
         CRIT_ATK_RATE4(wd, src, skill_id, 
-            attack_ignores_def(wd, src, target, skill_id, skill_lv, EQI.HAND_R, true) ? 100 : (is_attack_piercing(wd, src, target, skill_id, skill_lv, EQI.HAND_R) ? is_attack_piercing(wd, src, target, skill_id, skill_lv, EQI.HAND_R) * (def1+vit_def_min) : (100-def1)),
-            attack_ignores_def(wd, src, target, skill_id, skill_lv, EQI.HAND_R, true) ? 100 : (is_attack_piercing(wd, src, target, skill_id, skill_lv, EQI.HAND_R) ? is_attack_piercing(wd, src, target, skill_id, skill_lv, EQI.HAND_R) * (def1+vit_def_max) : (100-def1)),
-            attack_ignores_def(wd, src, target, skill_id, skill_lv, EQI.HAND_L, true) ? 100 : (is_attack_piercing(wd, src, target, skill_id, skill_lv, EQI.HAND_L) ? is_attack_piercing(wd, src, target, skill_id, skill_lv, EQI.HAND_L) * (def1+vit_def_min) : (100-def1)),
-            attack_ignores_def(wd, src, target, skill_id, skill_lv, EQI.HAND_L, true) ? 100 : (is_attack_piercing(wd, src, target, skill_id, skill_lv, EQI.HAND_L) ? is_attack_piercing(wd, src, target, skill_id, skill_lv, EQI.HAND_L) * (def1+vit_def_max) : (100-def1))
+            attack_ignores_def(wd, src, target, skill_id, skill_lv, EQI.HAND_R, true) ? 100 : (is_attack_piercing(wd, src, target, skill_id, skill_lv, EQI.HAND_R) ? is_attack_piercing(wd, src, target, skill_id, skill_lv, EQI.HAND_R) * (crit_def1+vit_def_min) : (100-crit_def1)),
+            attack_ignores_def(wd, src, target, skill_id, skill_lv, EQI.HAND_R, true) ? 100 : (is_attack_piercing(wd, src, target, skill_id, skill_lv, EQI.HAND_R) ? is_attack_piercing(wd, src, target, skill_id, skill_lv, EQI.HAND_R) * (crit_def1+vit_def_max) : (100-crit_def1)),
+            attack_ignores_def(wd, src, target, skill_id, skill_lv, EQI.HAND_L, true) ? 100 : (is_attack_piercing(wd, src, target, skill_id, skill_lv, EQI.HAND_L) ? is_attack_piercing(wd, src, target, skill_id, skill_lv, EQI.HAND_L) * (crit_def1+vit_def_min) : (100-crit_def1)),
+            attack_ignores_def(wd, src, target, skill_id, skill_lv, EQI.HAND_L, true) ? 100 : (is_attack_piercing(wd, src, target, skill_id, skill_lv, EQI.HAND_L) ? is_attack_piercing(wd, src, target, skill_id, skill_lv, EQI.HAND_L) * (crit_def1+vit_def_max) : (100-crit_def1))
         );
-        wd.crit_basedamage_min = ATK_RATER(wd.crit_basedamage_min, 100 - def1);
-        wd.crit_basedamage_max = ATK_RATER(wd.crit_basedamage_max, 100 - def1);
+        wd.crit_basedamage_min = ATK_RATER(wd.crit_basedamage_min, 100 - crit_def1);
+        wd.crit_basedamage_max = ATK_RATER(wd.crit_basedamage_max, 100 - crit_def1);
         CRIT_ATK_ADD4(wd, src, skill_id,
             attack_ignores_def(wd, src, target, skill_id, skill_lv, EQI.HAND_R, true) || is_attack_piercing(wd, src, target, skill_id, skill_lv, EQI.HAND_R) ? 0 : -vit_def_min,
             attack_ignores_def(wd, src, target, skill_id, skill_lv, EQI.HAND_R, true) || is_attack_piercing(wd, src, target, skill_id, skill_lv, EQI.HAND_R) ? 0 : -vit_def_max,
@@ -4289,6 +4344,8 @@ function battle_range_type(src, target, skill_id, skill_lv) {
             if(1 * c.A8_Skill14.value == 0)
                 return BF.SHORT;
             break;
+        case SKILL.SKE_ALL_IN_THE_SKY:
+            return BF.SHORT;
     }
 
     if(src.type == BL.MOB) {
@@ -4367,7 +4424,7 @@ function is_skill_using_arrow(src, skill_id) {
  */
 function is_attack_critical(wd, src, target, skill_id, skill_lv, first_call) {
     if(!first_call)
-        return (wd.type == DMG.CRITICAL || wd.type == DMG.MULTI_HIT_CRITICAL);
+        return wd.crit_rate > 0;
 
     battleDebug && console.log(`[is_attack_critical] START â€” skill_id=${skill_id}, skill_lv=${skill_lv}`);
 
@@ -4385,7 +4442,7 @@ function is_attack_critical(wd, src, target, skill_id, skill_lv, first_call) {
         return false;
     }
 
-    if(skill_id && !skill_can_crit(skill_id)) {
+    if(skill_id && !skill_can_crit(skill_id) && !SkillSearch(SKILL.SG_FUSION)) {
         battleDebug && console.log(`[is_attack_critical] skill ${skill_id} cannot crit`);
         wd.crit_rate = 0;
         return false;
@@ -5050,6 +5107,11 @@ function skill_get_num(src, skill_id, skill_lv) {
         case SKILL.SP_SPA:
         case SKILL.SL_ESTIN_ESMA:
         case SKILL.SL_ESTUN_ESMA:
+        case SKILL.SG_MILD_HEAT_ATK:
+        case SKILL.SG_RISING_HEAT_ATK:
+        case SKILL.SJ_PROMINENCEKICK:
+        case SKILL.SKE_DAWN_BREAK:
+        case SKILL.SKE_UNLEASHED_HEAT_ATK:
             return 1;
         case SKILL.TF_DOUBLE:
         case SKILL.AC_DOUBLE:
@@ -5083,6 +5145,9 @@ function skill_get_num(src, skill_id, skill_lv) {
         case SKILL.NW_HASTY_FIRE_IN_THE_HOLE:
         case SKILL.AB_JUDEX:
         case SKILL.NJ_BAKUENRYU:
+        case SKILL.SJ_SOLARBURST:
+        case SKILL.SJ_NEWMOONKICK:
+        case SKILL.SJ_FULLMOONKICK:
             return -3;
         case SKILL.GS_DESPERADO:
             return (1 * c.SkillSubNum.value) + 1;
@@ -5093,6 +5158,7 @@ function skill_get_num(src, skill_id, skill_lv) {
         case SKILL.NPC_DARKCROSS:
         case SKILL.NW_BASIC_GRENADE:
         case SKILL.AG_FLORAL_FLARE_ROAD:
+        case SKILL.SKE_SUNSET_BLAST:
             return -2;
         case SKILL.MG_FIREBOLT:
         case SKILL.MG_COLDBOLT:
@@ -5173,6 +5239,11 @@ function skill_get_num(src, skill_id, skill_lv) {
                 return 1;
             else
                 return 1 * c.SkillSubNum.value + 1;
+        case SKILL.SKE_ALL_IN_THE_SKY:
+            if(SkillSearch(SKILL.SJ_LUNARSTANCE))
+                return 2;
+            else
+                return 1;
         default:
             console.error("skill_get_num: unknown skill_id! " + skill_id);
             return 1;
@@ -5225,6 +5296,14 @@ function skill_get_range(skill_id, skill_lv) {
         case SKILL.AB_DUPLELIGHT_MAGIC:
         case SKILL.TK_STORMKICK_ATK:
         case SKILL.TK_FALLING_STAR_ATTACK:
+        case SKILL.SG_MILD_HEAT_ATK:
+        case SKILL.SG_RISING_HEAT_ATK:
+        case SKILL.SJ_PROMINENCEKICK:
+        case SKILL.SJ_SOLARBURST:
+        case SKILL.SJ_NEWMOONKICK:
+        case SKILL.SJ_FULLMOONKICK:
+        case SKILL.SKE_DAWN_BREAK:
+        case SKILL.SKE_UNLEASHED_HEAT_ATK:
             return 1;
         case SKILL.TF_POISON:
         case SKILL.KN_PIERCE:
@@ -5246,6 +5325,7 @@ function skill_get_range(skill_id, skill_lv) {
         case SKILL.TK_COUNTER:
         case SKILL.NPC_DARKCROSS:
         case SKILL.CD_EFFLIGO:
+        case SKILL.SKE_SUNSET_BLAST:
             return 2;
         case SKILL.HT_LANDMINE:
         case SKILL.HT_FREEZINGTRAP:
@@ -5412,6 +5492,7 @@ function skill_get_range(skill_id, skill_lv) {
         case SKILL.SP_SWHOO:
         case SKILL.SOA_EXORCISM_OF_MALICIOUS_SOUL:
         case SKILL.SOA_WRATH_OF_THE_FALLEN:
+        case SKILL.SKE_ALL_IN_THE_SKY:
             return 9;
         case SKILL.KN_CHARGEATK:
         case SKILL.NPC_STUNATTACK:
@@ -5509,6 +5590,9 @@ function skill_can_crit(skill_id) {
         case SKILL.NJ_KIRIKAGE:
         case SKILL.GS_RAPIDFIRE:
         case SKILL.TK_FALLING_STAR_ATTACK:
+        case SKILL.SJ_NEWMOONKICK:
+        case SKILL.SJ_FULLMOONKICK:
+        case SKILL.SKE_ALL_IN_THE_SKY:
             return true;
     }
     return false;
@@ -6371,6 +6455,14 @@ function skill_get_cooldown(skill_id, skill_lv) {
             return 1000;
         case SKILL.SOA_WRATH_OF_THE_FALLEN:
             return 600000;
+        case SKILL.SJ_PROMINENCEKICK:
+            return 5000;
+        case SKILL.SJ_SOLARBURST:
+            return 5000;
+        case SKILL.SJ_NEWMOONKICK:
+            return 3000;
+        case SKILL.SJ_FULLMOONKICK:
+            return 5000;
     }
     return 0;
 }
