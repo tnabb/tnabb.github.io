@@ -409,7 +409,7 @@ window.onerror=function(){
                                     </tr>
                                     <tr>
                                         <td class="right">Adopted</td>
-                                        <td><input name="A_adopted" onclick="calc()" type="checkbox"></td>
+                                        <td><input name="A_adopted" onclick="updateStatOptions() | StAllCalc() | calc()" type="checkbox"></td>
                                     </tr>
                                     <tr>
                                         <td class="right">Race &amp; Size</td>
@@ -2029,7 +2029,7 @@ window.onerror=function(){
                                             <select name="A_acces1"
                                                 style="width: 200px; background-color: rgb(255, 204, 136);"
                                                 onchange="StAllCalc()|ClickB_Item(this[this.selectedIndex].value)|restrictCardslot(9)">
-                                                <option value="326">(no accessory)</option>
+                                                <option value="326">(no left accessory)</option>
                                             </select>
                                             <select name="A_acces1_card"
                                                 onchange="Click_Card(this[this.selectedIndex].value)"
@@ -2043,7 +2043,7 @@ window.onerror=function(){
                                             <select name="A_acces2"
                                                 style="width: 200px; background-color: rgb(255, 204, 136);"
                                                 onchange="StAllCalc()|ClickB_Item(this[this.selectedIndex].value)|restrictCardslot(10)">
-                                                <option value="326">(no accessory)</option>
+                                                <option value="326">(no right accessory)</option>
                                             </select>
                                             <select name="A_acces2_card"
                                                 onchange="Click_Card(this[this.selectedIndex].value)"

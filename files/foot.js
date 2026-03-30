@@ -38,7 +38,6 @@ function CalculateStatusPoints(_) {
 }
 
 function PopulatePlayerData() {
-    console.log("Populating player data from form inputs...");
     player.status.base_level = 1 * c.A_BaseLV.value;
     player.status.job_level = 1 * c.A_JobLV.value;
     n_A_JobSet();
@@ -1520,51 +1519,68 @@ function EquipmentSet() {
     n_A_JobSet();
 
     // Slot indices: 0=head1, 1=head2, 2=head3, 3=shield, 4=armor, 5=garment, 6=shoes, 7=accessory
-    const SLOT_TYPES = [50, 51, 52, 61, 60, 62, 63, 64];
-    const SLOT_SELECTS = [c.A_head1, c.A_head2, c.A_head3, c.A_left, c.A_body, c.A_shoulder, c.A_shoes, c.A_acces1];
+    const SLOT_TYPES = [50, 51, 52, 61, 60, 62, 63];
+    const SLOT_SELECTS = [c.A_head1, c.A_head2, c.A_head3, c.A_left, c.A_body, c.A_shoulder, c.A_shoes];
 
     // Clear all dropdowns
     for (const sel of SLOT_SELECTS)
         sel.options.length = 0;
+    c.A_acces1.options.length = 0;
+    c.A_acces2.options.length = 0;
 
     const jobRestrict = 1 * c.restrict_jobequip.checked;
     const baseLevel = player.status.base_level;
 
     // Bucket items by slot type
     const buckets = SLOT_TYPES.map(() => []);
+    const bucketL = []; // left accessory:  types 64 + 65
+    const bucketR = []; // right accessory: types 64 + 66
 
     for (let a = 0; a <= ItemMax; a++) {
         const itemType = m_Item[a][1];
-        const slotIdx = SLOT_TYPES.indexOf(itemType);
-        if (slotIdx === -1) continue;
+
+        // Skip the "no accessory" sentinel (id 326) - inserted manually below
+        if (m_Item[a][0] === 326) continue;
 
         const isHeadgear = itemType >= 50 && itemType <= 52;
         const snLV90 = player.status.job_id == JOB.SUPERNOVICE && player.status.base_level >= 90 && isHeadgear;
         const jobOk = !jobRestrict || snLV90 || JobEquipItemSearch(m_Item[a][2]);
         const levelOk = !levelRestrict || snLV90 || m_Item[a][7] <= baseLevel;
-        if (jobOk && levelOk)
+        if (!jobOk || !levelOk) continue;
+
+        const slotIdx = SLOT_TYPES.indexOf(itemType);
+
+        if (slotIdx !== -1) {
             buckets[slotIdx].push(a);
+        }
+
+        if (itemType === 64 || itemType === 65) bucketL.push(a);
+        if (itemType === 64 || itemType === 66) bucketR.push(a);
     }
 
-    // Sort each bucket alphabetically by item name
-    for (const bucket of buckets)
+    for (const bucket of [...buckets, bucketL, bucketR])
         bucket.sort((a, b) => m_Item[a][8] > m_Item[b][8] ? 1 : m_Item[a][8] < m_Item[b][8] ? -1 : 0);
 
-    // Populate dropdowns
+    // Populate non-accessory dropdowns
     for (let s = 0; s < SLOT_SELECTS.length; s++) {
         const sel = SLOT_SELECTS[s];
         for (let i = 0; i < buckets[s].length; i++) {
             const o = buckets[s][i];
-            const label = m_Item[o][8] + (m_Item[o][5] ? ` [${m_Item[o][5]}]` : "");
-            sel.options[i] = new Option(label, m_Item[o][0]);
+            sel.options[i] = new Option(m_Item[o][8] + (m_Item[o][5] ? ` [${m_Item[o][5]}]` : ""), m_Item[o][0]);
         }
     }
-    // Accessory 2 mirrors accessory 1
-    c.A_acces2.options.length = 0;
-    for (let i = 0; i < buckets[7].length; i++) {
-        const o = buckets[7][i];
-        const label = m_Item[o][8] + (m_Item[o][5] ? ` [${m_Item[o][5]}]` : "");
-        c.A_acces2.options[i] = new Option(label, m_Item[o][0]);
+ 
+    // Populate accessory dropdowns with slot-specific "no X" sentinel first
+    c.A_acces1.options[0] = new Option("(no left accessory)", 326);
+    for (let i = 0; i < bucketL.length; i++) {
+        const o = bucketL[i];
+        c.A_acces1.options[i + 1] = new Option(m_Item[o][8] + (m_Item[o][5] ? ` [${m_Item[o][5]}]` : ""), m_Item[o][0]);
+    }
+ 
+    c.A_acces2.options[0] = new Option("(no right accessory)", 326);
+    for (let i = 0; i < bucketR.length; i++) {
+        const o = bucketR[i];
+        c.A_acces2.options[i + 1] = new Option(m_Item[o][8] + (m_Item[o][5] ? ` [${m_Item[o][5]}]` : ""), m_Item[o][0]);
     }
 }
 
@@ -2204,6 +2220,9 @@ function loadNewFormat(data) {
 
     // ── Job + levels ──────────────────────────────────────────────────────
     c.A_JOB.value = data.job_id;
+    player.status.base_level = data.base_level;
+    player.status.job_level = data.job_level;
+    player.status.adopted = data.adopted;
     ClickJob(data.job_id);
     c.A_JobLV.value = data.job_level;
     c.A_BaseLV.value = data.base_level;
@@ -2860,6 +2879,8 @@ function loadLegacyFormat(sd) {
     c.all_card.checked = sd[433];
 
     // ── Job + levels ──────────────────────────────────────────────────────
+    player.status.base_level = sd[4];
+    player.status.job_level = sd[3];
     c.A_JOB.value = sd[2];
     ClickJob(sd[2]);
     c.A_JobLV.value = sd[3];
@@ -4078,6 +4099,7 @@ document.calcForm.all_card.checked = !1,
 document.calcForm.increase_aspdcap.checked = !1,
 document.calcForm.A_JOB.value = 0,
 populateAdditionalEffectSelects();
+ClickB_Item("SW");
 ClickJob(0),
 allCard(),
 EnemySort(),

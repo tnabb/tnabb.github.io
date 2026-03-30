@@ -252,12 +252,12 @@ function updatePlayerDamageDisplay(d) {
     switch(d.skill_id) {
         case SKILL.SG_MILD_HEAT_ATK:
             delayLabelStr = "Time/Hit";
-            delayUsed = 0.25;
+            delayUsed = 0.2;
             delayStr = delayUsed + " seconds";
             break;
         case SKILL.SG_RISING_HEAT_ATK:
             delayLabelStr = "Time/Hit";
-            delayUsed = 0.125;
+            delayUsed = 0.1;
             delayStr = delayUsed + " seconds";
             break;
         case SKILL.SKE_UNLEASHED_HEAT_ATK:

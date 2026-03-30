@@ -166,6 +166,20 @@ function restrictCardslot(e) {
     calc();
 }
 
+function updateStatOptions() {
+    const maxStat = c.A_adopted.checked ? 80 : 99;
+    const statSelects = [c.A_STR, c.A_AGI, c.A_VIT, c.A_INT, c.A_DEX, c.A_LUK];
+ 
+    for (const sel of statSelects) {
+        const current = Math.min(1 * sel.value, maxStat);
+        sel.options.length = 0;
+        for (let i = 1; i <= maxStat; i++) {
+            sel.options[i - 1] = new Option(i, i);
+        }
+        sel.value = current;
+    }
+}
+
 function ClickJob(jobId) {
     myInnerHtml("A_KakutyouSel", "", 0);
     myInnerHtml("A_KakutyouData", "", 0);
@@ -173,14 +187,10 @@ function ClickJob(jobId) {
     n_A_JobSet();
     jobId = player.status.job_id;
 
+    updateStatOptions();
+
     for(let i = 1; i <= 99; i++) {
         c.A_BaseLV.options[i - 1] = new Option(i, i);
-        c.A_STR.options[i - 1] = new Option(i, i);
-        c.A_AGI.options[i - 1] = new Option(i, i);
-        c.A_VIT.options[i - 1] = new Option(i, i);
-        c.A_INT.options[i - 1] = new Option(i, i);
-        c.A_DEX.options[i - 1] = new Option(i, i);
-        c.A_LUK.options[i - 1] = new Option(i, i);
     }
 
     c.A_JobLV.options.length = 0;
@@ -278,7 +288,6 @@ function ClickJob(jobId) {
         } else if (skillId === 392) {
             myInnerHtml("P_Skill" + i, skillName(m_Skill[skillId][0]), 0);
             myInnerHtml("P_Skill" + i + "s", "<select name=A_skill" + i + " id=A_skill" + i + ' onChange="calc()" style="width:70px;"></select>', 0);
-            console.log(player.status.rebirth);
             if(player.status.rebirth == 0)
                 myInnerHtml("P_Skill" + i, "", 0);
         } else if (skillId === 441) {
@@ -477,11 +486,11 @@ function ClickWeaponType(weaponType) {
     c.A_Arrow.options.length = 0;
 
     if(weaponType == WEAPON.BOW || weaponType == WEAPON.INSTRUMENT || weaponType == WEAPON.WHIP) {
-        for(let i = 0; i <= m_Arrow.length; i++) {
+        for(let i = 0; i < m_Arrow.length; i++) {
             c.A_Arrow.options[i] = new Option(m_Arrow[i][2], i);
         }
     } else if (weaponType >= WEAPON.REVOLVER && weaponType <= WEAPON.GRENADE) {
-        for(let i = 0; i <= m_Bullet.length; i++) {
+        for(let i = 0; i < m_Bullet.length; i++) {
             c.A_Arrow.options[i] = new Option(m_Bullet[i][2], i);
         }
     } else {
@@ -2412,8 +2421,6 @@ function calc() {
         skill_type = BF.MISC;
     let monsterDamage = battle_calc_attack(skill_type, monster, player, n_B_AtkSkill, n_B_AtkSkill > 0 ? m_Monster[monsterId][2 * c.B_AtkSkill.selectedIndex + 22] : 0, 0);
     updateMonsterDamageDisplay(monsterDamage);
-
-    console.log("calc called with");
 }
 
 function SkillSearch(skillId) {

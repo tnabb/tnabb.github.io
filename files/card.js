@@ -1168,7 +1168,7 @@ m_RandomOptForged = [
 
 m_RandomOptCrimson = [
 	[0, 17, 18, 24, 25, "NULL"],
-	[0, 49, 50, 51, 53, 9, 10, 15, 16, 101, "NULL"],
+	[0, 49, 50, 51, 53, 9, 10, 15, 16, 101, "NULL"]
 ];
 
 m_RandomOptPickaxe = [

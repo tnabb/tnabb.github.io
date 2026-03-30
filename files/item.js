@@ -1986,7 +1986,7 @@ m_Item = [
 	, [1979, 62, 99, 2, 0, 1, 60, 40, "Flame Rune Manteau", 0, "", 341, 5, 343, -5, 0]
 	, [1980, 60, 99, 2, 0, 1, 100, 40, "Glacial Robe", 0, "", 343, 5, 341, -5, 0]
 	, [1981, 100, 0, 0, 0, 0, 0, 0, "Glacial Robe + Flame Rune Manteau", 0, "Deal -12% MATK based damage against Players.", 340, 12, 0]
-	, [1982, 64, 0, 0, 0, 1, 10, 80, "Alchemy Glove", 0, "Auto Cast Rate -10%<br><b>Only Left Accessory</b>", 4, 1, 5, 1, 383, 5, 381, 5, 384, 5, 382, 5, 388, 5, 386, 5, 387, 5, 63, -5, 61, -5, 64, -5, 62, -5, 68, -5, 66, -5, 67, -5, 5125, -10, 0]
+	, [1982, 66, 0, 0, 0, 1, 10, 80, "Alchemy Glove", 0, "Auto Cast Rate -10%<br><b>Only Left Accessory</b>", 4, 1, 5, 1, 383, 5, 381, 5, 384, 5, 382, 5, 388, 5, 386, 5, 387, 5, 63, -5, 61, -5, 64, -5, 62, -5, 68, -5, 66, -5, 67, -5, 5125, -10, 0]
 	, [1983, 9, 132, 150, 4, 1, 100, 80, "Royal Alchemy Staff", 0, "", 5, 2, 4, 4, 89, 20, 0]
 	, [1984, 100, 0, 0, 0, 0, 0, 0, "Alchemy Glove + Royal Alchemy Staff", 0, "[Fire Bolt] skill damage +(2*refine)%<br>[Cold Bolt] skill damage +(2*refine)%<br>[Lightning Bolt] skill damage +(2*refine)%<br>[Earth Spike] skill damage +(2*refine)%", 0]
 	, [1985, 60, 0, 6, 0, 1, 200, 0, "Imperial Clergy Robe", 0, "When receiving ATK based damage, 2% chance to inflict [Curse] status on your attacker.", 13, 400, 159, 50, 153, 50, 0]
@@ -2155,7 +2155,7 @@ m_Item = [
 	, [2143, 1, 95, 120, 4, 2, 120, 50, "Volcano Knife", 0, "", 89, 15, 4, 3, 5, 3, 42, 15, 342, 15, 0]
 	, [2144, 52, 0, 0, 0, 0, 0, 1, "Show Me The Zeny", 0, "Enables the use of [Overcharge] Lvl 10<br>Enables the use of [Discount] Lvl 10<br><b>Note: This does not give the new passive effects of Overcharge and Discount, which are stricly limited to Merchant classes.</b>", 0]
 	// patch a3.7
-	, [2145, 64, 109, 0, 0, 0, 0, 50, "Ring of Archbishop", 0, "[Heal] After-cast Delay -50%<br><b>Only Left Accessory</b>", 4, 1, 99, 3, 93, 10, 0]
+	, [2145, 65, 109, 0, 0, 0, 0, 50, "Ring of Archbishop", 0, "[Heal] After-cast Delay -50%<br><b>Only Left Accessory</b>", 4, 1, 99, 3, 93, 10, 0]
 	, [2146, 15, 0, 200, 4, 2, 140, 70, "Safety Whip", 0, "<b>[Refine Rate 7~10]</b><br>[Severe Rainstorm] Cast time -100%<br>Enables the use of [Barrier] Lvl 1<br>[Barrier] reduces incoming damage by 50% for 1.5 seconds when activated and has a 30 second cooldown. [Barrier] cannot be used in PVP, BGs, WOE, or RWC maps and modes.", 0]
 	, [2147, 3, 0, 220, 4, 1, 250, 70, "Claw Sword", 0, "<b>For each refine level:</b><br>CRIT +2<br><b>[Refine Rate 9~10]</b><br>Critical damage +5%", 12, 5, 10, 20, 0]
 	, [2148, 8, 53, 80, 3, 2, 80, 70, "Rubber Hammer", 0, "<b>For every 3 base VIT:</b><br>Your [Heal], [Sanctuary], and [Aid Potion] effectiveness +1%<br><b>[Refine Rate = 10]</b><br>Nullifies gemstone cost of all skills.", 13, 600, 60, 5, 61, 5, 62, 5, 63, 5, 64, 5, 65, 5, 66, 5, 67, 5, 68, 5, 69, 5, 0]
@@ -2182,7 +2182,7 @@ m_Item = [
 	, [2168, 60, 0, 2, 0, 1, 70, 70, "Vigilante Suit", 0, "", 2, 3, 10, 3, 70, 3, 0]
 	, [2169, 100, 0, 0, 0, 0, 0, 0, "Vigilante Stole + Suit", 0, "", 2, 2, 6, 5, 70, 5, 0]
 	, [2170, 63, 0, 0, 0, 1, 50, 90, "Vigilante Shoes", 0, "<b>[Refine Rate 9~10]</b> DEX +1", 5, 1, 9, -10, 18, -5, 0]
-	, [2171, 64, 157, 0, 0, 1, 1, 50, "Metal Guitar Pick", 0, "", 5, 1, 25, 2, 5199, 25, 5207, 25, 0]
+	, [2171, 65, 157, 0, 0, 1, 1, 50, "Metal Guitar Pick", 0, "", 5, 1, 25, 2, 5199, 25, 5207, 25, 0]
 	, [2172, 61, 0, 3, 0, 1, 50, 30, "Rubber Shield", 0, "", 19, 5, 64, 20, 0]
 	, [2173, 10, 114, 150, 3, 3, 100, 50, "Vigilante Bow", 0, "Enable the use of [Double Attack] Lvl 1 with any weapons.<BR>If you learned a level higher than 1, you will use that level instead.<br>When performing an ATK based attack, 10% chance to cast [Steal] Lvl 10<br><b>For each refine level:</b><br>Increases [Double Attack] success rate by 5%.", 0]
 	, [2174, 12, 118, 120, 3, 3, 80, 60, "Elemental Origin", 0, "Disables Reflect effects<br>Physical Attack Range +2<br>100% chance to absorb 100 HP when performing an ATK based attack.<br><b>For each refine level:</b><br>Perfect Dodge +2<br>Max HP +50", 89, 15, 221, 176, 221, 177, 221, 178, 221, 179, 0]
@@ -2195,7 +2195,7 @@ m_Item = [
 	, [2181, 100, 0, 0, 0, 0, 0, 0, "Flame Rune Armor + Flame Rune Manteau", 0, "", 341, 7, 0]
 	, [2182, 64, 0, 0, 0, 0, 20, 30, "Sheriff's Right Badge", 0, "", 17, 10, 88, 10, 14, 50, 73, -3, 8, 5, 9, 5, 0]
 	, [2183, 64, 0, 0, 0, 0, 20, 30, "Sheriff's Left Badge", 0, "", 17, 8, 88, 8, 14, 30, 73, -2, 8, 3, 9, 3, 0]
-	, [2184, 64, 122, 0, 0, 0, 10, 80, "License to Clown", 0, "", 4, 5, 17, 10, 74, 5, 5263, 5, 0]
+	, [2184, 65, 122, 0, 0, 0, 10, 80, "License to Clown", 0, "", 4, 5, 17, 10, 74, 5, 5263, 5, 0]
 	, [2185, 100, 0, 0, 0, 0, 0, 0, "Metal Stick + Falcon Muffler", 0, "<b>For each refine level on [Falcon Muffler]:</b><br>Decrease damage from all size monsters by 1%<br>[<b style='color:#A89682'>Neutral</b>] element resistance +2%", 190, 10, 191, 10, 192, 10, 0]
 	, [2186, 100, 0, 0, 0, 0, 0, 0, "Mine Worker's Pickaxe + King's Manteau", 0, "<b>For each refine level on [King's Manteau]:</b><br>Decrease damage from all size monsters by 1%", 190, 10, 191, 10, 192, 10, 0]
 	, [2187, 60, 0, 8, 0, 0, 0, 1, "Mine Worker's Vest", 0, "", 193, 1, 13, 200, 14, 50, 19, 4, 374, 10, 0]
@@ -2230,10 +2230,6 @@ ItemMax = m_Item.length - 1;
 m_ForgedItems = [2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025, 2026, 2027, 2028, 2029, 2030, 2031, 2032, 2033, 2034, 2035, 2036, 2037, 2038, 2039, 2040, 2041, 2042, 2043, 2044, 2045, 2046, 2047, 2048, 2049, 2050, 2051, 2052, 2053, 2054, 2055, 2056, 2057, 2058, 2059, 2060, 2061, 2062, 2063];
 
 function Click_Item(value) {
-	//	if(EquipNumSearch(633) && c.A_Kakutyou.value == 28){
-	if (c.A_Kakutyou.value == 28) {
-		KakutyouKansuu2();		// prevent calc crash when selecting Drill Katar when "Strip chance & duration" is opened in "Other info"
-	}
 	StAllCalc();
 	ClickB_Item(value);
 }
