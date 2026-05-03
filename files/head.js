@@ -444,14 +444,13 @@ function applyRandOpts(weaponType, oldWeaponType, newWeapon, oldWeapon) {
 
         // Re-acquire references AFTER reset recreates the DOM elements
         const slotControls = [c.A_weapon1_ropt1, c.A_weapon1_ropt2, c.A_weapon1_ropt3, c.A_weapon1_ropt4];
-        const blank = new Option(m_RandomOpt[0][1], m_RandomOpt[0][0]);
 
         for (let s = 0; s < activeSlots; s++)
             for (let i = 0; dataArrays[s][i] !== "NULL"; i++)
                 slotControls[s].options[i] = new Option(m_RandomOpt[dataArrays[s][i]][1], m_RandomOpt[dataArrays[s][i]][0]);
 
         for (let s = activeSlots; s < 4; s++)
-            slotControls[s].options[0] = blank;
+            slotControls[s].options[0] = new Option(m_RandomOpt[0][1], m_RandomOpt[0][0]);
     }
 
     if (weaponType == 0 || (m_ForgedItems.includes(newWeapon) && !m_RandomOptForgedWeapons.includes(newWeapon))) {
@@ -656,14 +655,13 @@ function applyRandOptsWeapon2(newWeapon, oldWeapon) {
     function fillSlots(dataArrays, activeSlots) {
         RandOptWeapon2Reset();
         const slotControls = [c.A_weapon2_ropt1, c.A_weapon2_ropt2, c.A_weapon2_ropt3, c.A_weapon2_ropt4];
-        const blank = new Option(m_RandomOpt[0][1], m_RandomOpt[0][0]);
  
         for (let s = 0; s < activeSlots; s++)
             for (let i = 0; dataArrays[s][i] !== "NULL"; i++)
                 slotControls[s].options[i] = new Option(m_RandomOpt[dataArrays[s][i]][1], m_RandomOpt[dataArrays[s][i]][0]);
  
         for (let s = activeSlots; s < 4; s++)
-            slotControls[s].options[0] = blank;
+            slotControls[s].options[0] = new Option(m_RandomOpt[0][1], m_RandomOpt[0][0]);
     }
  
     if (m_ForgedItems.includes(newWeapon) && !m_RandomOptForgedWeapons.includes(newWeapon)) {

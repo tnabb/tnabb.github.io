@@ -1028,7 +1028,7 @@ const SKILL = Object.freeze({
     SL_ESTIN_ESMA: 514,
     SL_ESTUN_ESMA: 515,
     PR_MAGNUS_JUDEX_HOLYLIGHT: 516,
-    // 517
+    HP_MANARECHARGE: 517,
     // 518
     // 519
     // 520

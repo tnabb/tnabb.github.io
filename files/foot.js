@@ -468,8 +468,9 @@ function StatusCalcPlayerSub() {
                 }
             }
 
-            let card_values = EQI.HAND_R ? [player.card[0], player.card[1], player.card[2], player.card[3]] : [player.card[4], player.card[5], player.card[6], player.card[7]];
+            let card_values = i == EQI.HAND_R ? [player.card[0], player.card[1], player.card[2], player.card[3]] : [player.card[4], player.card[5], player.card[6], player.card[7]];
             if (card_values[0] == 106 || card_values[1] == 106 || card_values[2] == 106) {
+                wd.star = 0; // reset star bonus before counting
                 let count_106 = card_values.filter(value => value == 106).length;
                 wd.star += count_106 * 5; // star crumb adds 5 damage
                 if (wd.star >= 15) wd.star = 40;
@@ -545,7 +546,7 @@ function StatusCalcPlayerSub() {
         }
     }
 
-    if (player.status.job_id == CLASS.SUPERNOVICE && player.status.job_level >= 80) {
+    if (player.status.job_id == JOB.SUPERNOVICE && player.status.job_level >= 80) {
         base_status.str += 10;
         base_status.agi += 10;
         base_status.vit += 10;

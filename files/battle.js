@@ -2,7 +2,7 @@
  * Check if target should be treated as a player in damage calculations
  * This includes both actual players (BL.PC) and [Custom Player]
  * 
- * @param {PlayerData|MobData} bl - Entity to check
+ * @param {PlayerData|MonsterData} bl - Entity to check
  */
 function is_player_for_battle(bl) {
     return bl.type === BL.PC || (bl.type === BL.MOB && bl.is_custom_player);
@@ -12,7 +12,7 @@ function is_player_for_battle(bl) {
  * Check if target can have player skills/buffs
  * [Custom Player] returns false here since they use monster debuff system
  * 
- * @param {PlayerData|MobData} bl - Entity to check
+ * @param {PlayerData|MonsterData} bl - Entity to check
  */
 function is_player_object(bl) {
     return bl.type === BL.PC && !bl.is_custom_player;
@@ -21,7 +21,7 @@ function is_player_object(bl) {
 /**
  * Check if target is an actual monster (not custom player)
  * 
- * @param {PlayerData|MobData} bl - Entity to check
+ * @param {PlayerData|MonsterData} bl - Entity to check
  */
 function is_monster_object(bl) {
     return bl.type === BL.MOB && !bl.is_custom_player;
@@ -89,7 +89,7 @@ function ATK_RATER(damage, rate) {
  * Modeled after rAthena's ATK_RATE macro
  * 
  * @param {Damage} wd - Weapon damage struct to modify
- * @param {PlayerData|MobData} src - Attacker
+ * @param {PlayerData|MonsterData} src - Attacker
  * @param {number} skill_id - Skill ID
  * @param {number} rate - Rate to modify damage (e.g., 50 for -50%, 150 for +50%)
  */
@@ -107,7 +107,7 @@ function ATK_RATE(wd, src, skill_id, rate) {
  * Modeled after rAthena's ATK_RATE macro
  * 
  * @param {Damage} wd - Weapon damage struct to modify
- * @param {PlayerData|MobData} src - Attacker
+ * @param {PlayerData|MonsterData} src - Attacker
  * @param {number} skill_id - Skill ID
  * @param {number} rate - Rate to modify damage (e.g., 50 for -50%, 150 for +50%)
  */
@@ -125,7 +125,7 @@ function CRIT_ATK_RATE(wd, src, skill_id, rate) {
  * Modeled after rAthena's MATK_RATE macro
  * 
  * @param {Damage} ad - Magic damage struct to modify
- * @param {PlayerData|MobData} src - Attacker
+ * @param {PlayerData|MonsterData} src - Attacker
  * @param {number} skill_id - Skill ID
  * @param {number} rate - Rate to modify damage (e.g., 50 for -50%, 150 for +50%)
  */
@@ -141,7 +141,7 @@ function MATK_RATE(ad, src, skill_id, rate) {
  * Modeled after rAthena's ATK_RATE2 macro
  * 
  * @param {Damage} wd - Weapon damage struct to modify
- * @param {PlayerData|MobData} src - Attacker
+ * @param {PlayerData|MonsterData} src - Attacker
  * @param {number} skill_id - Skill ID
  * @param {number} rate - Rate to modify right-hand damage (e.g., 50 for -50%, 150 for +50%)
  * @param {number} rate2 - Rate to modify left-hand damage (e.g., 50 for -50%, 150 for +50%)
@@ -160,7 +160,7 @@ function ATK_RATE2(wd, src, skill_id, rate, rate2) {
  * Modeled after rAthena's ATK_RATE2 macro
  * 
  * @param {Damage} wd - Weapon damage struct to modify
- * @param {PlayerData|MobData} src - Attacker
+ * @param {PlayerData|MonsterData} src - Attacker
  * @param {number} skill_id - Skill ID
  * @param {number} rate - Rate to modify right-hand damage (e.g., 50 for -50%, 150 for +50%)
  * @param {number} rate2 - Rate to modify left-hand damage (e.g., 50 for -50%, 150 for +50%)
@@ -179,7 +179,7 @@ function CRIT_ATK_RATE2(wd, src, skill_id, rate, rate2) {
  * Modeled after rAthena's ATK_RATE4 macro
  * 
  * @param {Damage} wd - Weapon damage struct to modify
- * @param {PlayerData|MobData} src - Attacker
+ * @param {PlayerData|MonsterData} src - Attacker
  * @param {number} skill_id - Skill ID
  * @param {number} rate_min - Rate to modify min right-hand damage (e.g., 50 for -50%, 150 for +50%)
  * @param {number} rate_max - Rate to modify max right-hand damage (e.g., 50 for -50%, 150 for +50%)
@@ -200,7 +200,7 @@ function ATK_RATE4(wd, src, skill_id, rate_min, rate_max, rate2_min, rate2_max) 
  * Modeled after rAthena's ATK_RATE4 macro
  * 
  * @param {Damage} wd - Weapon damage struct to modify
- * @param {PlayerData|MobData} src - Attacker
+ * @param {PlayerData|MonsterData} src - Attacker
  * @param {number} skill_id - Skill ID
  * @param {number} rate_min - Rate to modify min right-hand damage (e.g., 50 for -50%, 150 for +50%)
  * @param {number} rate_max - Rate to modify max right-hand damage (e.g., 50 for -50%, 150 for +50%)
@@ -221,7 +221,7 @@ function CRIT_ATK_RATE4(wd, src, skill_id, rate_min, rate_max, rate2_min, rate2_
  * Modeled after rAthena's ATK_ADDRATE macro
  * 
  * @param {Damage} wd - Weapon damage struct to modify
- * @param {PlayerData|MobData} src - Attacker
+ * @param {PlayerData|MonsterData} src - Attacker
  * @param {number} skill_id - Skill ID
  * @param {number} rate - Rate to add (e.g., 50 for +50%)
  */
@@ -239,7 +239,7 @@ function ATK_ADDRATE(wd, src, skill_id, rate) {
  * Modeled after rAthena's MATK_ADDRATE macro
  * 
  * @param {Damage} ad - Magic damage struct to modify
- * @param {PlayerData|MobData} src - Attacker
+ * @param {PlayerData|MonsterData} src - Attacker
  * @param {number} skill_id - Skill ID
  * @param {number} rate - Rate to add (e.g., 50 for +50%)
  */
@@ -255,7 +255,7 @@ function MATK_ADDRATE(ad, src, skill_id, rate) {
  * Modeled after rAthena's ATK_ADDRATE macro
  * 
  * @param {Damage} wd - Weapon damage struct to modify
- * @param {PlayerData|MobData} src - Attacker
+ * @param {PlayerData|MonsterData} src - Attacker
  * @param {number} skill_id - Skill ID
  * @param {number} rate - Rate to add (e.g., 50 for +50%)
  */
@@ -273,7 +273,7 @@ function CRIT_ATK_ADDRATE(wd, src, skill_id, rate) {
  * Modeled after rAthena's ATK_ADD macro
  * 
  * @param {Damage} wd - Weapon damage struct to modify
- * @param {PlayerData|MobData} src - Attacker
+ * @param {PlayerData|MonsterData} src - Attacker
  * @param {number} skill_id - Skill ID
  * @param {number} rate - Rate to add (e.g., 50 for +50 flat damage)
  */
@@ -291,7 +291,7 @@ function ATK_ADD(wd, src, skill_id, rate) {
  * Modeled after rAthena's MATK_ADD macro
  * 
  * @param {Damage} ad - Magic damage struct to modify
- * @param {PlayerData|MobData} src - Attacker
+ * @param {PlayerData|MonsterData} src - Attacker
  * @param {number} skill_id - Skill ID
  * @param {number} rate - Rate to add (e.g., 50 for +50 flat damage)
  */
@@ -307,7 +307,7 @@ function MATK_ADD(ad, src, skill_id, rate) {
  * Modeled after rAthena's ATK_ADD macro
  * 
  * @param {Damage} wd - Weapon damage struct to modify
- * @param {PlayerData|MobData} src - Attacker
+ * @param {PlayerData|MonsterData} src - Attacker
  * @param {number} skill_id - Skill ID
  * @param {number} rate - Rate to add (e.g., 50 for +50 flat damage)
  */
@@ -325,7 +325,7 @@ function CRIT_ATK_ADD(wd, src, skill_id, rate) {
  * Modeled after rAthena's ATK_ADD macro
  * 
  * @param {Damage} wd - Weapon damage struct to modify
- * @param {PlayerData|MobData} src - Attacker
+ * @param {PlayerData|MonsterData} src - Attacker
  * @param {number} skill_id - Skill ID
  * @param {number} rate_min - Rate to add (e.g., 50 for +50 flat damage)
  * @param {number} rate_max - Rate to add (e.g., 50 for +50 flat damage)
@@ -344,7 +344,7 @@ function ATK_ADD2(wd, src, skill_id, rate_min, rate_max) {
  * Modeled after rAthena's ATK_ADD macro
  * 
  * @param {Damage} wd - Weapon damage struct to modify
- * @param {PlayerData|MobData} src - Attacker
+ * @param {PlayerData|MonsterData} src - Attacker
  * @param {number} skill_id - Skill ID
  * @param {number} rate_min - Rate to add (e.g., 50 for +50 flat damage)
  * @param {number} rate_max - Rate to add (e.g., 50 for +50 flat damage)
@@ -363,7 +363,7 @@ function CRIT_ATK_ADD2(wd, src, skill_id, rate_min, rate_max) {
  * Modeled after rAthena's ATK_ADD macro
  * 
  * @param {Damage} wd - Weapon damage struct to modify
- * @param {PlayerData|MobData} src - Attacker
+ * @param {PlayerData|MonsterData} src - Attacker
  * @param {number} skill_id - Skill ID
  * @param {number} rate_min - Rate to add (e.g., 50 for +50 flat damage)
  * @param {number} rate_max - Rate to add (e.g., 50 for +50 flat damage)
@@ -384,7 +384,7 @@ function ATK_ADD4(wd, src, skill_id, rate_min, rate_max, rate2_min, rate2_max) {
  * Modeled after rAthena's ATK_ADD macro
  * 
  * @param {Damage} wd - Weapon damage struct to modify
- * @param {PlayerData|MobData} src - Attacker
+ * @param {PlayerData|MonsterData} src - Attacker
  * @param {number} skill_id - Skill ID
  * @param {number} rate_min - Rate to add (e.g., 50 for +50 flat damage)
  * @param {number} rate_max - Rate to add (e.g., 50 for +50 flat damage)
@@ -529,7 +529,7 @@ function get_element_modifier(atk_ele, def_ele_lv, def_ele) {
 /**
  * Check if attack uses left hand
  * 
- * @param {PlayerData|MobData} src - Attacker
+ * @param {PlayerData|MonsterData} src - Attacker
  * @param {number} skill_id - Skill ID
  * @returns {boolean} True if left-handed attack
  */
@@ -569,8 +569,8 @@ function is_attack_right_handed(src, skill_id) {
  * Modeled after rAthena's battle_calc_attack
  * 
  * @param {number} attack_type - Type of attack (BF.WEAPON, BF.MAGIC, BF.MISC)
- * @param {PlayerData|MobData} bl - Attacker block list
- * @param {PlayerData|MobData} target - Target block list
+ * @param {PlayerData|MonsterData} bl - Attacker block list
+ * @param {PlayerData|MonsterData} target - Target block list
  * @param {number} skill_id - Skill ID being used
  * @param {number} skill_lv - Skill level
  * @param {number} flag - Additional flags
@@ -648,8 +648,8 @@ function battle_calc_attack(attack_type, bl, target, skill_id, skill_lv, flag) {
 /**
  * Calculate misc attack damage
  * 
- * @param {PlayerData|MobData} src - Attacker
- * @param {PlayerData|MobData} target - Target
+ * @param {PlayerData|MonsterData} src - Attacker
+ * @param {PlayerData|MonsterData} target - Target
  * @param {number} skill_id - Skill ID
  * @param {number} skill_lv - Skill level
  * @param {number} wflag - Additional flags
@@ -837,8 +837,8 @@ function battle_get_misc_element(src, target, skill_id, skill_lv, mflag) {
 /**
  * Calculate magic attack damage
  * 
- * @param {PlayerData|MobData} src - Attacker
- * @param {PlayerData|MobData} target - Target
+ * @param {PlayerData|MonsterData} src - Attacker
+ * @param {PlayerData|MonsterData} target - Target
  * @param {number} skill_id - Skill ID
  * @param {number} skill_lv - Skill level
  * @param {number} wflag - Additional flags
@@ -1391,8 +1391,8 @@ function battle_get_magic_element(src, target, skill_id, skill_lv, mflag) {
 /**
  * Calculate weapon (physical) attack damage
  * 
- * @param {PlayerData|MobData} src - Attacker
- * @param {PlayerData|MobData} target - Target
+ * @param {PlayerData|MonsterData} src - Attacker
+ * @param {PlayerData|MonsterData} target - Target
  * @param {number} skill_id - Skill ID
  * @param {number} skill_lv - Skill level
  * @param {number} wflag - Additional flags
@@ -1590,8 +1590,8 @@ function battle_calc_weapon_attack(src, target, skill_id, skill_lv, wflag) {
  * 
  * @param {BF} attack_type 
  * @param {Damage} wd 
- * @param {PlayerData|MobData} src 
- * @param {PlayerData|MobData} target 
+ * @param {PlayerData|MonsterData} src 
+ * @param {PlayerData|MonsterData} target 
  * @param {int} skill_id 
  * @param {int} skill_lv 
  */
@@ -1621,8 +1621,8 @@ function battle_do_reflect(attack_type, wd, src, target, skill_id, skill_lv) {
 
 /**
  * 
- * @param {PlayerData|MobData} target 
- * @param {PlayerData|MobData} src 
+ * @param {PlayerData|MonsterData} target 
+ * @param {PlayerData|MonsterData} src 
  * @param {*} dmg 
  * @param {*} flag 
  * @param {*} skill_id 
@@ -1846,7 +1846,6 @@ function battle_calc_damage(src, target, wd, damage, skill_id, skill_lv) {
         battleDebug && console.log(`[battle_calc_damage] after defender â€” damage=${damage}`);
 
         // stone skin & anti magic
-
         if(sc_get(target, SC.ARMORCHANGE)) {
             if(flag&BF.WEAPON)
                 damage -= Math.trunc(damage * sc_get(target, SC.ARMORCHANGE).val2 / 100);
@@ -1862,10 +1861,6 @@ function battle_calc_damage(src, target, wd, damage, skill_id, skill_lv) {
 
         if(!damage)
             return 0;
-
-        // seared damage increase
-        
-        // melee fragility damage increase
 
         if(SkillSearch(SKILL.GS_WEAPON_MASTERY_STACKS) && flag&BF.WEAPON) {
             damage += Math.trunc(damage * SkillSearch(SKILL.GS_WEAPON_MASTERY_STACKS) / 100);
@@ -1917,10 +1912,6 @@ function battle_calc_damage(src, target, wd, damage, skill_id, skill_lv) {
                 damage += Math.trunc((damage * 30) / 100);
             }
         }
-
-        // lunar stance camouflage damage increase
-
-        // hatred damage increase
 
         if(SkillSearch(SKILL.TK_POWER) && flag&(BF.SHORT|BF.WEAPON)) {
             let damage_bonus = SkillSearch(SKILL.TK_POWER) * 8;
@@ -2465,25 +2456,27 @@ function battle_calc_cardfix(attack_type, src, target, skill_id, rh_ele, lh_ele,
                 } else {
                     let skill = 0;
 
-                    let ele_fix = (sd.indexed_bonus.addele[tstatus.def_ele] + sd.indexed_bonus.addele[ELE.MAX]) * 10;
-                    battleDebug && console.log(`[battle_calc_cardfix] MELEE â€” addele[${tstatus.def_ele}]=${sd.indexed_bonus.addele[tstatus.def_ele]}, addele[ALL]=${sd.indexed_bonus.addele[ELE.MAX]}, ele_fix=${ele_fix}`);
+                    if(!skill_ignores_element(skill_id)) {
+                        let ele_fix = (sd.indexed_bonus.addele[tstatus.def_ele] + sd.indexed_bonus.addele[ELE.MAX]) * 10;
+                        battleDebug && console.log(`[battle_calc_cardfix] MELEE â€” addele[${tstatus.def_ele}]=${sd.indexed_bonus.addele[tstatus.def_ele]}, addele[ALL]=${sd.indexed_bonus.addele[ELE.MAX]}, ele_fix=${ele_fix}`);
 
-                    for(const it of sd.addele2) {
-                        if(it.ele != ELE.MAX && it.ele != tstatus.def_ele)
-                            continue;
-                        if(!(((it.flag)&flag)&BF.WEAPONMASK &&
-                            ((it.flag)&flag)&BF.RANGEMASK &&
-                            ((it.flag)&flag)&BF.SKILLMASK))
-                            continue;
-                        ele_fix += it.rate * 10;
+                        for(const it of sd.addele2) {
+                            if(it.ele != ELE.MAX && it.ele != tstatus.def_ele)
+                                continue;
+                            if(!(((it.flag)&flag)&BF.WEAPONMASK &&
+                                ((it.flag)&flag)&BF.RANGEMASK &&
+                                ((it.flag)&flag)&BF.SKILLMASK))
+                                continue;
+                            ele_fix += it.rate * 10;
+                        }
+                        battleDebug && console.log(`[battle_calc_cardfix] MELEE after addele2 loop â€” ele_fix=${ele_fix}`);
+
+                        if(SkillSearch(SKILL.TK_MISSION_ELE_BONUS))
+                            ele_fix += SkillSearch(SKILL.TK_MISSION_ELE_BONUS) * 10;
+
+                        cardfix = Math.trunc((cardfix * (1000 + ele_fix)) / 1000);
+                        battleDebug && console.log(`[battle_calc_cardfix] MELEE after ele â€” cardfix=${cardfix}`);
                     }
-                    battleDebug && console.log(`[battle_calc_cardfix] MELEE after addele2 loop â€” ele_fix=${ele_fix}`);
-
-                    if(SkillSearch(SKILL.TK_MISSION_ELE_BONUS))
-                        ele_fix += SkillSearch(SKILL.TK_MISSION_ELE_BONUS) * 10;
-
-                    cardfix = Math.trunc((cardfix * (1000 + ele_fix)) / 1000);
-                    battleDebug && console.log(`[battle_calc_cardfix] MELEE after ele â€” cardfix=${cardfix}`);
 
                     let race_bonus = (sd.indexed_bonus.addrace[tstatus.race] + sd.indexed_bonus.addrace[RC.ALL]) * 10;
                     battleDebug && console.log(`[battle_calc_cardfix] MELEE â€” addrace[${tstatus.race}]=${sd.indexed_bonus.addrace[tstatus.race]}, addrace[ALL]=${sd.indexed_bonus.addrace[RC.ALL]}, race_bonus=${race_bonus}`);
@@ -2942,6 +2935,8 @@ function battle_get_spiritball_damage(wd, src, skill_id) {
         return 0;
 
     let damage = 3 * src.spiritball; // number of spiritballs
+    if(SkillSearch(SKILL.GS_GLITTERING) > 0)
+        damage = 3 * SkillSearch(SKILL.GS_GLITTERING); // 
 
     return damage;
 }
@@ -3702,7 +3697,7 @@ function battle_calc_skill_base_damage(wd, src, target, skill_id, skill_lv) {
                         crit_atk_rate *= 3;
                 }
 
-                if(crit_atk_rate)
+                if(crit_atk_rate && (skill_id == 0 || skill_can_crit(skill_id) || SkillSearch(SKILL.SG_FUSION)))
                     CRIT_ATK_ADDRATE(wd, src, skill_id, crit_atk_rate);
 
                 if(skill_id == SKILL.GS_TRACKING && SkillSearch(SKILL.GS_WEAPON_MASTERY) == 5 && is_attack_critical(wd, src, target, skill_id, skill_lv, false)) {
@@ -3836,6 +3831,12 @@ function battle_calc_defense_reduction(wd, src, target, skill_id, skill_lv) {
     );
     wd.basedamage_min -= vit_def_max;
     wd.basedamage_max -= vit_def_min;
+
+    if(wd.damage_min > wd.damage_max) {
+        let tempDamageMax = wd.damage_max;
+        wd.damage_max = wd.damage_min;
+        wd.damage_min = tempDamageMax;
+    }
 
     // "crit" damage from fortune's kiss SR buff should not be affected by def ignore or piercing, but should be affected by defense reduction from vit def, since it's technically not a "crit" damage but rather a damage boost that applies only when the attack is critical, so we need to apply the vit def reduction to it but not the def1 reduction
     // crits under fusion that can originally not crit can crit due to the fusion buff but should still be affected by def 
@@ -4086,8 +4087,8 @@ function initialize_weapon_data(src, target, skill_id, skill_lv, wflag) {
  * Stores the proc rate in wd.multi_attack_rate for DPS calculation
  * 
  * @param {Damage} wd - Weapon damage struct (modified in place)
- * @param {PlayerData|MobData} src - Attacker
- * @param {PlayerData|MobData} target - Target
+ * @param {PlayerData|MonsterData} src - Attacker
+ * @param {PlayerData|MonsterData} target - Target
  * @param {number} skill_id - Skill ID
  * @param {number} skill_lv - Skill level
  */
@@ -4415,8 +4416,8 @@ function is_skill_using_arrow(src, skill_id) {
  * Stores the crit rate in wd.crit_rate for DPS calculation
  * 
  * @param {Damage} wd - Weapon damage struct
- * @param {PlayerData|MobData} src - Attacker
- * @param {PlayerData|MobData} target - Target
+ * @param {PlayerData|MonsterData} src - Attacker
+ * @param {PlayerData|MonsterData} target - Target
  * @param {number} skill_id - Skill ID
  * @param {number} skill_lv - Skill level
  * @param {boolean} first_call - True if this is the initial check, false if checking existing flag
@@ -4553,7 +4554,7 @@ function is_attack_hitting(wd, src, target, skill_id, skill_lv, first_call) {
     let flee, hitrate;
 
     if(!first_call)
-        return (wd.dmg_lv != ATK.FLEE);
+        return wd.hit_rate > 0;
     // no longer used as crit damage is a separate field
     /* if(is_attack_critical(wd, src, target, skill_id, skill_lv, false)) {
         wd.hit_rate = 100;
@@ -6058,7 +6059,7 @@ function skill_get_delay(skill_id, skill_lv) {
         case SKILL.SM_MAGNUM:
             return 2000;
         case SKILL.MG_NAPALMBEAT:
-            switch(skill_id) {
+            switch(skill_lv) {
                 case 1:
                 case 2:
                 case 3:
@@ -6078,7 +6079,7 @@ function skill_get_delay(skill_id, skill_lv) {
             }
             return 0;
         case SKILL.MG_SOULSTRIKE:
-            switch(skill_id) {
+            switch(skill_lv) {
                 case 1:
                     return 1200;
                 case 2:
@@ -6350,7 +6351,7 @@ function skill_get_delay(skill_id, skill_lv) {
             return 2000;
         case SKILL.NPC_DARKSTRIKE:
         case SKILL.NPC_DARKSTRIKE2:
-            switch(skill_id) {
+            switch(skill_lv) {
                 case 1:
                     return 1200;
                 case 2:

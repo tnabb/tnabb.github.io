@@ -126,7 +126,6 @@ function updatePlayerDamageDisplay(d) {
         if(el) el.innerHTML = value;
     }
 
-    setVal("BattleHIT", d.hit_rate);
     setVal("A_WeaponElement", `<b style="color: ${getEleColor(d.element)}">${getEleName(d.element)}</b>` + " (" + get_element_modifier(d.element, tstatus.ele_lv, tstatus.def_ele) + "% vs " + `<b style="color: ${getEleColor(tstatus.def_ele)}">${getEleName(tstatus.def_ele)}</b>` + tstatus.ele_lv + ")");
 
     // weapon/skill size modifier
@@ -295,6 +294,11 @@ function updatePlayerDamageDisplay(d) {
     let tripleAttackDmgMin = 0, tripleAttackDmgAvg = 0, tripleAttackDmgMax = 0;
     let hasTripleAttack = false;
 
+    setVal("bSUB4name", "");
+    setVal("bSUB4", "");
+    setVal("bSUB3name", "");
+    setVal("bSUB3", "");
+
     switch(d.skill_id) {
         case SKILL.NV_BASIC_ATTACK:
             if(d.damage2_min > 0 || d.damage2_max > 0) {
@@ -420,8 +424,8 @@ function updatePlayerDamageDisplay(d) {
         case SKILL.CR_GRANDCROSS:
         case SKILL.NPC_GRANDDARKNESS:
             let gcSelfDamage = battle_calc_attack(BF.MAGIC, player, player, d.skill_id, d.skill_lv, 0);
-            setVal("CRIATKname", "<font color=\"#FF0000\">Health drain</font>");
-            setVal("CRIATK", "<font color=\"#FF0000\">" + Math.floor((sstatus.max_hp * 20) / 100) + "</font>");
+            setVal("bSUB4name", "<font color=\"#FF0000\">Health drain</font>");
+            setVal("bSUB4", "<font color=\"#FF0000\">" + Math.floor((sstatus.max_hp * 20) / 100) + "</font>");
             setVal("bSUB3name", "<font color=\"#FF0000\">Damage backlash</font>");
             setVal("bSUB3", "<font color=\"#FF0000\">" + gcSelfDamage.damage_min + "~" + gcSelfDamage.damage_max + " ([" + Math.floor(gcSelfDamage.damage_min / gcSelfDamage.div_) + " ~ " + Math.floor(gcSelfDamage.damage_max / gcSelfDamage.div_) + "] x " + gcSelfDamage.div_ + " hits)</font>");
 
@@ -503,6 +507,10 @@ function updatePlayerDamageDisplay(d) {
     // --- Expected damage calculation considering TA > DA > Crit priority ---
     let canCrit = (d.crit_from_sr_buff && d.skill_id != SKILL.MO_EXTREMITYFIST && d.skill_id != SKILL.MO_EXTREMITYFIST_MAXSP && d.skill_id != SKILL.CR_GRANDCROSS && d.skill_id != SKILL.NPC_GRANDDARKNESS) || d.skill_id == 0 || skill_can_crit(d.skill_id) || SkillSearch(SKILL.SG_FUSION);
 
+    let critRatePct = (canCrit && !d.crit_from_sr_buff) ? (d.crit_rate / 10) : 0; // convert to percentage for display
+    let effectiveHitRate = Math.min(100, d.hit_rate + critRatePct * (100 - d.hit_rate) / 100); // effective hit rate considering crit rate for display
+
+    setVal("BattleHIT", Math.round(effectiveHitRate * 10 / 10));
     if(d.skill_id == SKILL.NV_BASIC_ATTACK) {
         let taRate = hasTripleAttack ? 0.30 : 0;
         let daRate = (d.div_ > 1 && d.multi_attack_rate > 0) ? d.multi_attack_rate / 100 : 0;
@@ -561,12 +569,12 @@ function updatePlayerDamageDisplay(d) {
         maxDamage = Math.floor(normalMax * normalRate + daMax * effectiveDA + tripleAttackDmgMax * effectiveTA + critMax * effectiveCrit);
 
         // Hit rate adjustment
-        if(d.hit_rate < 100) {
+        if(effectiveHitRate < 100) {
             avgDamage = Math.floor(avgDamage * (d.hit_rate / 100));
         }
     } else {
         // Non-basic-attack skills: hit rate + crit adjustment
-        if(d.hit_rate < 100) {
+        if(effectiveHitRate < 100) {
             avgDamage = avgDamage * (d.hit_rate / 100);
         }
 
@@ -590,8 +598,6 @@ function updatePlayerDamageDisplay(d) {
             setVal("CRInum", "");
             setVal("CRIATKname", "");
             setVal("CRIATK", "");
-            setVal("bSUB3name", "");
-            setVal("bSUB3", "");
         }
     }
 
@@ -603,12 +609,12 @@ function updatePlayerDamageDisplay(d) {
 
     setVal("AveSecondATK", damagePerSecond);
 
-    if(d.hit_rate < 100)
-        avgHits = Math.ceil(avgHits / (d.hit_rate / 100));
+    if(effectiveHitRate < 100)
+        avgHits = Math.ceil(avgHits / (effectiveHitRate / 100));
 
     setVal("MinATKnum", minHits >= 10000 ? "Over 10000 hits" : minHits);
     setVal("AveATKnum", avgHits >= 10000 ? "Over 10000 hits" : avgHits);
-    setVal("MaxATKnum", d.hit_rate < 100 ? "Infinite (no 100% hit)" : maxHits >= 10000 ? "Over 10000 hits" : maxHits);
+    setVal("MaxATKnum", effectiveHitRate < 100 ? "Infinite (no 100% hit)" : maxHits >= 10000 ? "Over 10000 hits" : maxHits);
 
     // ave battle duration
     let battleTime = Math.floor(totalCycleTime * avgHits * 100) / 100;

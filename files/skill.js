@@ -554,7 +554,7 @@ m_Skill = [		//ID, max level, iRO name, alternative name, 0=nodamage 1=melee/ran
 	[514, 10, "Estin + Esma", 0, -3, 11],
 	[515, 10, "Estun + Esma", 0, -3, 11],
 	[516, 1, "Magnus Exorcismus (10) + Judex (5) + Holy Light", 0, -3, 6],
-	[517, 1, "", 0, 0, 0],
+	[517, 5, "Mana Recharge", 0, 0, 0],
 	[518, 1, "", 0, 0, 0],
 	[519, 1, "", 0, 0, 0],
 	[520, 1, "", 0, 0, 0],
@@ -1269,12 +1269,12 @@ const JOB_AVAILABLE_BUFFS = {
     [JOB.DANCER]: [38, 39, 42, 206],
     [JOB.SAGE]: [58, 224, 228, 229, 234],
     [JOB.ALCHEMIST]: [60, 61, 64, 68, 152, 241],
-    [JOB.SUPERNOVICE]: [3, 13, 14, 23, 24, 38, 39, 42, 253, 385, 9, 309, 196, 310],
+    [JOB.SUPERNOVICE]: [3, 13, 14, 23, 24, 38, 39, 42, 253, 9, 196, 310],
     
     // Transcendent Jobs
     [JOB.LORD_KNIGHT]: [3, 4, 12, 69, 74, 78, 254, 256, 258, 255, 386, 9],
     [JOB.ASSASSIN_CROSS]: [13, 14, 79, 80, 81, 262, 266, 381, SKILL.SL_ASSASIN],
-    [JOB.HIGH_PRIEST]: [23, 24, 89, 269, 91],
+    [JOB.HIGH_PRIEST]: [23, 24, 89, 269, 91, SKILL.HP_MANARECHARGE],
     [JOB.SNIPER]: [38, 39, 42, 116, 118, 119, 270, 273, 390],
     [JOB.HIGH_WIZARD]: [58, 274, 276],
     [JOB.WHITESMITH]: [60, 61, 64, 68, 152, 146, 148, 150, 154, 155, 327, 389, 311],

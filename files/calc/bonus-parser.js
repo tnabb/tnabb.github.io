@@ -704,7 +704,7 @@ function CalculateEquipmentBonuses() {
         bonus = 0; // represents the type of bonus witchs robe gives
         if(n_A_JobClass() == JOB.MAGICIAN || n_A_JobClass() == JOB.ACOLYTE || n_A_JobClass2() == JOB.SOUL_LINKER || player.status.job_id == JOB.NINJA || player.status.job_id == JOB.SUPERNOVICE)
             bonus = STAT.INT;
-        else if(n_A_JobClass() == JOB.SWORDMAN || n_A_JobClass() == JOB.THIEF || n_A_JobClass() == JOB.MERCHANT || player.status.job_id == JOB.TAEKWON || player.status.job_id == JOB.STAR_GLADIATOR)
+        else if(n_A_JobClass() == JOB.SWORDMAN || n_A_JobClass() == JOB.THIEF || n_A_JobClass() == JOB.MERCHANT || player.status.job_id == JOB.TAEKWON || n_A_JobClass2() == JOB.STAR_GLADIATOR)
             bonus = STAT.STR;
         else if(n_A_JobClass() == JOB.ARCHER || n_A_JobClass() == JOB.GUNSLINGER)
             bonus = STAT.DEX;
@@ -744,7 +744,7 @@ function CalculateEquipmentBonuses() {
     }
     if(player.equip[EQI.HEAD_MID] == 1670) { // sigruns wings
         bonus = 0; // represents the type of bonus sigrun's wings gives
-        if(n_A_JobClass() == JOB.SWORDMAN || n_A_JobClass() == JOB.THIEF || n_A_JobClass() == JOB.MERCHANT || player.status.job_id == JOB.TAEKWON || player.status.job_id == JOB.STAR_GLADIATOR)
+        if(n_A_JobClass() == JOB.SWORDMAN || n_A_JobClass() == JOB.THIEF || n_A_JobClass() == JOB.MERCHANT || player.status.job_id == JOB.TAEKWON || n_A_JobClass2() == JOB.STAR_GLADIATOR)
             bonus = STAT.STR;
         else if (n_A_JobClass() == JOB.MAGICIAN || n_A_JobClass() == JOB.ACOLYTE || n_A_JobClass2() == JOB.SOUL_LINKER || player.status.job_id == JOB.NINJA)
             bonus = STAT.INT;
@@ -844,37 +844,37 @@ function CalculateEquipmentBonuses() {
     // max hp calculations
 
     if(EquipNumSearch(1116) > 0 && n_A_JobClass() == JOB.NOVICE) // novice figure
-        status.max_hp += 30 * EquipNumSearch(1116);
+        player.bonus.hp += 30 * EquipNumSearch(1116);
     if(EquipNumSearch(1117) > 0 && n_A_JobClass() == JOB.SWORDMAN) // swordsman figure
-        status.max_hp += 150 * EquipNumSearch(1117);
+        player.bonus.hp += 150 * EquipNumSearch(1117);
     if(player.equip[EQI.ARMOR] == 1864) // elegant suit
-        status.max_hp += (25 * Math.floor(player.status.job_level / 9)) - (15 * Math.floor(player.status.vit / 10));
+        player.bonus.hp += (25 * Math.floor(player.status.job_level / 9)) - (15 * Math.floor(player.status.vit / 10));
     if(player.equip[EQI.SHOES] == 836) // diabolus boots
-        status.max_hp += 10 * player.status.base_level;
+        player.bonus.hp += 10 * player.status.base_level;
     if(player.equip[EQI.ARMOR] == 859) // brynhild
-        status.max_hp += 20 * player.status.base_level;
+        player.bonus.hp += 20 * player.status.base_level;
     if(player.equip[EQI.ARMOR] == 986) // chameleon armor
-        status.max_hp += 7 * player.status.base_level;
+        player.bonus.hp += 7 * player.status.base_level;
     if(CardNumSearch(225) > 0 && player.refine[EQI.ARMOR] >= 9) // apocalypse card
-        status.max_hp += 800;
+        player.bonus.hp += 800;
     if(player.equip[EQI.HAND_R] == 1168 && player.refine[EQI.HAND_R] >= 6) // dead tree cane staff
-        status.max_hp -= 200 * (player.refine[EQI.HAND_R] - 5);
+        player.bonus.hp -= 200 * (player.refine[EQI.HAND_R] - 5);
     if(player.equip[EQI.SHIELD] == 1960) // imperial guard
-        status.max_hp += 30 * player.refine[EQI.SHIELD];
+        player.bonus.hp += 30 * player.refine[EQI.SHIELD];
     if(player.equip[EQI.HEAD_TOP] == 955) // mandragora cap
-        status.max_hp += 50 * player.refine[EQI.HEAD_TOP];
+        player.bonus.hp += 50 * player.refine[EQI.HEAD_TOP];
     if(player.equip[EQI.HEAD_MID] == 1670 && n_A_JobClass() == JOB.NOVICE) // sigruns wings
-        status.max_hp += 80;
+        player.bonus.hp += 80;
     if(EquipNumSearch(2085)) // survivor's shoes combo
-        status.max_hp += 50 * player.refine[EQI.SHOES];
+        player.bonus.hp += 50 * player.refine[EQI.SHOES];
     if(EquipNumSearch(2087)) // time guardian ring
-        status.max_hp += 5 * Math.floor(player.status.base_level / 2) * EquipNumSearch(2087);
+        player.bonus.hp += 5 * Math.floor(player.status.base_level / 2) * EquipNumSearch(2087);
     if(player.equip[EQI.HAND_R] == 2099) // guardian staff
-        status.max_hp += 80 * player.refine[EQI.HAND_R];
+        player.bonus.hp += 80 * player.refine[EQI.HAND_R];
     if(player.equip[EQI.HAND_R] == 2174) // elemental origin
-        status.max_hp += 50 * player.refine[EQI.HAND_R];
+        player.bonus.hp += 50 * player.refine[EQI.HAND_R];
     if(player.equip[EQI.SHOES] == 536 && (n_A_JobClass() == JOB.MAGICIAN || n_A_JobClass() == JOB.ARCHER || n_A_JobClass() == JOB.ACOLYTE || n_A_JobClass() == JOB.GUNSLINGER)) // valkyrie shoes
-        status.max_hp += 5 * player.status.base_level;
+        player.bonus.hp += 5 * player.status.base_level;
 
     // max hp % calculations
 
@@ -888,29 +888,29 @@ function CalculateEquipmentBonuses() {
     // flat max sp calculations
 
     if(EquipNumSearch(1118) > 0 && n_A_JobClass() == JOB.ACOLYTE) // acolyte figure
-        status.max_sp += 50 * EquipNumSearch(1118);
+        player.bonus.sp += 50 * EquipNumSearch(1118);
     if(EquipNumSearch(1116) > 0 && n_A_JobClass() == JOB.NOVICE) // novice figure
-        status.max_sp += 30 * EquipNumSearch(1116);
+        player.bonus.sp += 30 * EquipNumSearch(1116);
     if(player.equip[EQI.ARMOR] == 859) // brynhild
-        status.max_sp += 5 * player.status.base_level;
+        player.bonus.sp += 5 * player.status.base_level;
     if(player.equip[EQI.ARMOR] == 986) // chameleon armor
-        status.max_sp += Math.floor(player.status.base_level / 2);
+        player.bonus.sp += Math.floor(player.status.base_level / 2);
     if(player.equip[EQI.HAND_R] == 1671) // kronos
-        status.max_sp += 50 * Math.floor(player.refine[EQI.HAND_R] / 2);
+        player.bonus.sp += 50 * Math.floor(player.refine[EQI.HAND_R] / 2);
     if(player.equip[EQI.GARMENT] == 1193) // nydhorgg's shadow garb
-        status.max_sp += Math.floor(player.status.base_level / 3) + 10 * player.refine[EQI.GARMENT];
+        player.bonus.sp += Math.floor(player.status.base_level / 3) + 10 * player.refine[EQI.GARMENT];
     if(player.equip[EQI.HAND_R] == 642 && player.refine[EQI.HAND_R] >= 9) // lich's bone wand
-        status.max_sp += 300;
+        player.bonus.sp += 300;
     if(player.equip[EQI.HAND_R] == 1168 && player.refine[EQI.HAND_R] >= 6) // dead tree cane staff
-        status.max_sp -= 100 * (player.refine[EQI.HAND_R] - 5);
+        player.bonus.sp -= 100 * (player.refine[EQI.HAND_R] - 5);
     if(player.equip[EQI.SHOES] == 1866) // elegant shoes
-        status.max_sp += (10 * Math.flooor(player.status.base_level / 10)) - (5 * Math.floor(player.status.int / 10));
+        player.bonus.sp += (10 * Math.trunc(player.status.base_level / 10)) - (5 * Math.floor(player.status.int / 10));
     if(player.equip[EQI.SHIELD] == 1960 && player.status.job_id == JOB.SUPERNOVICE) // imperial guard
-        status.max_sp += 150;
+        player.bonus.sp += 150;
     if(player.equip[EQI.HEAD_MID] == 1670 && n_A_JobClass() == JOB.NOVICE) // sigruns wings
-        status.max_sp += 30;
-    if(player.equip[EQI.SHOES] == 536 && (n_A_JobClass() == JOB.SWORDMAN || n_A_JobClass() == JOB.THIEF || n_A_JobClass() == JOB.MERCHANT)) // valkyrie shoes
-        status.max_sp += 2 * player.status.job_level;
+        player.bonus.sp += 30;
+    if(player.equip[EQI.SHOES] == 536 && (n_A_JobClass() == JOB.SWORDMAN || n_A_JobClass() == JOB.THIEF || n_A_JobClass() == JOB.MERCHANT || n_A_JobClass2() == JOB.STAR_GLADIATOR)) // valkyrie shoes
+        player.bonus.sp += 2 * player.status.job_level;
 
     // max sp % calculations
 
@@ -942,7 +942,7 @@ function CalculateEquipmentBonuses() {
         status.def -= player.refine[EQI.HEAD_TOP] + player.refine[EQI.SHIELD];
     if(EquipNumSearch(742) && n_A_JobClass() == JOB.SWORDMAN) // odin blessing + magnis cap + stone buckler combo
         status.def += 6;
-    if(player.equip[EQI.ARMOR] == 986 && (n_A_JobClass() == JOB.SWORDMAN || n_A_JobClass() == JOB.MERCHANT || n_A_JobClass() == JOB.THIEF)) // chameleon armor
+    if(player.equip[EQI.ARMOR] == 986 && (n_A_JobClass() == JOB.SWORDMAN || n_A_JobClass() == JOB.MERCHANT || n_A_JobClass() == JOB.THIEF || n_A_JobClass2() == JOB.STAR_GLADIATOR)) // chameleon armor
         status.def += 3;
     if(TimeItemNumSearch(8)) // ulfhedinn temp effect
         status.def += 20;
@@ -1358,11 +1358,11 @@ function CalculateEquipmentBonuses() {
         player.indexed_bonus.subele[ELE.NEUTRAL] += player.refine[EQI.GARMENT] * 3;
 
     // atk% calculations
-    if(player.equip[EQI.ARMOR] == 1825 && (n_A_JobClass() == JOB.SWORDMAN || n_A_JobClass() == JOB.THIEF || n_A_JobClass() == JOB.MERCHANT || player.status.job_id == JOB.TAEKWON || player.status.job_id == JOB.STAR_GLADIATOR))
+    if(player.equip[EQI.ARMOR] == 1825 && (n_A_JobClass() == JOB.SWORDMAN || n_A_JobClass() == JOB.THIEF || n_A_JobClass() == JOB.MERCHANT || player.status.job_id == JOB.TAEKWON || n_A_JobClass2() == JOB.STAR_GLADIATOR))
         player.indexed_bonus.addclass[CLASS.ALL] += 3;
     if(player.equip[EQI.HEAD_TOP] == 1973 && player.refine[EQI.HEAD_TOP] >= 9) // khalitzburg knight helm
         player.indexed_bonus.addclass[CLASS.ALL] += 2;
-    if(player.equip[EQI.HEAD_TOP == 565] && player.refine[EQI.HEAD_TOP] >= 7) // dress hat
+    if(player.equip[EQI.HEAD_TOP] == 565 && player.refine[EQI.HEAD_TOP] >= 7) // dress hat
         player.indexed_bonus.addclass[CLASS.ALL] += 1;
     if(player.equip[EQI.GARMENT] == 2098) // angry bear bag
         player.indexed_bonus.addclass[CLASS.ALL] += Math.floor(player.refine[EQI.GARMENT] / 2);
@@ -1456,7 +1456,7 @@ function CalculateEquipmentBonuses() {
         player.indexed_bonus.magic_addclass[CLASS.ALL] += player.refine[EQI.HAND_R];
     
     // reflect damage back calculations
-    if(player.equip[EQI.GARMENT] == 535 && (n_A_JobClass() == JOB.SWORDMAN || n_A_JobClass() == JOB.THIEF || n_A_JobClass() == JOB.MERCHANT)) // valkyrie manteau
+    if(player.equip[EQI.GARMENT] == 535 && (n_A_JobClass() == JOB.SWORDMAN || n_A_JobClass() == JOB.THIEF || n_A_JobClass() == JOB.MERCHANT || n_A_JobClass2() == JOB.STAR_GLADIATOR)) // valkyrie manteau
         player.bonus.short_weapon_damage_return += 5 + player.refine[EQI.GARMENT] * 2;
     if(TimeItemNumSearch(28) > 0) // shield of naga temp effect
         player.bonus.short_weapon_damage_return += 3 * player.refine[EQI.SHIELD];
@@ -1591,11 +1591,11 @@ function CalculateAdditionalBonuses() {
 
     // flat max hp calculations
     if(CardNumSearch(474) > 0 && n_A_JobClass() == JOB.MAGICIAN) // banshee card
-        status.max_hp -= 100 * CardNumSearch(474);
+        player.bonus.hp -= 100 * CardNumSearch(474);
     if(CardNumSearch(477) > 0 && n_A_JobClass() == JOB.SWORDMAN) // echio card
-        status.max_hp += 500 * CardNumSearch(477);
+        player.bonus.hp += 500 * CardNumSearch(477);
     if(CardNumSearch(186) > 0) // remover card
-        status.max_hp -= 40 * player.refine[EQI.ARMOR];
+        player.bonus.hp -= 40 * player.refine[EQI.ARMOR];
 
     // max hp % calculations
 
@@ -1615,21 +1615,21 @@ function CalculateAdditionalBonuses() {
         player.hprate += 10;
     if(CardNumSearch(407) > 0 && player.refine[EQI.SHOES] <= 4) // gold acidus card
         player.hprate += 4;
-    if(CardNumSearch(405) > 0 && (n_A_JobClass() == JOB.SWORDMAN || n_A_JobClass() == JOB.THIEF || n_A_JobClass() == JOB.MERCHANT))
+    if(CardNumSearch(405) > 0 && (n_A_JobClass() == JOB.SWORDMAN || n_A_JobClass() == JOB.THIEF || n_A_JobClass() == JOB.MERCHANT)) // aliot card
         player.hprate += 5;
 
     // flat max sp calculations
 
     if(player.card[9] == 179) // blue acidus card on mid headgear
-        status.max_sp += 40;
+        player.bonus.sp += 40;
     if(player.card[8] == 179 && player.refine[EQI.HEAD_TOP] <= 4) // blue acidus card on top headgear
-        status.max_sp += 40;
+        player.bonus.sp += 40;
     if(player.card[8] == 298 && player.refine[EQI.HEAD_TOP] >= 9) // carat card on top headgear
-        status.max_sp += 150;
+        player.bonus.sp += 150;
     if(CardNumSearch(474) > 0 && n_A_JobClass() == JOB.MAGICIAN) // banshee card
-        status.max_sp += 100 * CardNumSearch(474);
+        player.bonus.sp += 100 * CardNumSearch(474);
     if(CardNumSearch(476) > 0 && n_A_JobClass() == JOB.MAGICIAN) // agav card
-        status.max_sp += 100;
+        player.bonus.sp += 100;
 
     // max sp % calculations
 
@@ -1639,7 +1639,7 @@ function CalculateAdditionalBonuses() {
         player.sprate += 10;
     if(CardNumSearch(407) > 0 && player.refine[EQI.SHOES] <= 4) // gold acidus card
         player.sprate += 4;
-    if(CardNumSearch(405) > 0 && (n_A_JobClass() == JOB.ACOLYTE || n_A_JobClass() == JOB.MAGICIAN  || n_A_JobClass() == JOB.ARCHER || n_A_JobClass() == JOB.GUNSLINGER)) // aliot card
+    if(CardNumSearch(405) > 0 && (n_A_JobClass() == JOB.ACOLYTE || n_A_JobClass() == JOB.MAGICIAN  || n_A_JobClass() == JOB.ARCHER)) // aliot card
         player.sprate += 5;
     if(CardNumSearch(662) > 0) // abandoned teddy bear card
         player.sprate += player.refine[EQI.SHOES];
