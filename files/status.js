@@ -263,6 +263,8 @@ function status_calc_str(player, str) {
         str += SkillSearch(SKILL.NJ_NEN);
     if(sc_get(player, SC.BLESSING))
         str += sc_get(player, SC.BLESSING).val1 * 2;
+    if(SkillSearch(SKILL.MC_LOUD))
+        str += 4;
     if(SkillSearch(SKILL.SN_SIGHT))
         str += 5;
     if(SkillSearch(SKILL.TK_RUN_STR) && player.weapontype1 == WEAPON.FIST)

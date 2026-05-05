@@ -1584,7 +1584,7 @@ m_Item = [
 	, [1580, 999, 0, 0, 0, 0, 0, 0, "Sakura Coronet + Romantic White Flower", 0, "<b>[Refine Rate 2~10]</b><br>All skill's SP cost -(Refine Rate)%", 0]
 	, [1581, 999, 0, 0, 0, 0, 0, 0, "Sakura Coronet + Romantic Flower", 0, "<b>[Refine Rate 6~10]</b><br>MaxSP +(Refine Rate)%", 0]
 	, [1582, 999, 0, 0, 0, 0, 0, 0, "Sakura Coronet + Romantic Leaf", 0, "<b>[Refine Rate 5~10]</b><br>All skill's After-cast Delay -(Refine Rate - 4)%", 5, 1, 0]
-	, [1583, 52, 0, 1, 0, 0, 1, 1, "Spare Card", 0, "30% chance to obtain a [Blank Card] item when killing a monster.", 11, 1, 0]
+	, [1583, 52, 0, 0, 0, 0, 1, 1, "Spare Card", 0, "30% chance to obtain a [Blank Card] item when killing a monster.", 11, 1, 0]
 	, [1584, 999, 132, 40, 3, 1, 50, 102, "Mental Stick (aRO)", 0, "Reduces [Psychic Wave] variable cast time by 3 seconds, but increases the cost of [Psychic Wave] by 60 sp.<br>Each refine above +6 increases [Psychic Wave] attack power by 2%, but decreases MaxHP by 2%.<br>When unequipping the weapon, you lose 100 SP.", 88, 170, 0]
 	, [1585, 999, 0, 30, 3, 0, 50, 100, "Laphine Staff (aRO)", 0, "Each refine decreases fixed cast time by 1% (does not stack with other fixed cast time effects).", 88, 180, 0]
 	, [1586, 999, 117, 1, 0, 1, 30, 65, "Dance Shoes", 0, "Reduces the SP cost of [Swing Dance] by 32.", 2, 1, 12, 2, 0]

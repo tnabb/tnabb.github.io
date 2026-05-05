@@ -997,15 +997,15 @@ function CalculateEquipmentBonuses() {
     // flat perfect dodge calculations
 
     if(player.equip[EQI.HAND_R] == 1956 && player.status.job_id == JOB.STALKER) // save the king
-        status.flee2 += 10;
+        status.flee2 += 10 * 10;
     if(player.equip[EQI.SHIELD] == 2089 && player.refine[EQI.SHIELD] >= 4) // time keeper shield
-        status.flee2 += player.refine[EQI.SHIELD] - 4;
+        status.flee2 += (player.refine[EQI.SHIELD] - 4) * 10;
     if(player.equip[EQI.HAND_R] == 2174) // elemental origin
-        status.flee2 += player.refine[EQI.HAND_R] * 2;
+        status.flee2 += (player.refine[EQI.HAND_R] * 2) * 10;
     if(player.equip[EQI.GARMENT] == 535 && (n_A_JobClass() == JOB.MAGICIAN || n_A_JobClass() == JOB.ARCHER || n_A_JobClass() == JOB.ACOLYTE || n_A_JobClass() == JOB.GUNSLINGER || n_A_JobClass2() == JOB.SOUL_LINKER))
-        status.flee2 += player.refine[EQI.GARMENT] * 2;
+        status.flee2 += (player.refine[EQI.GARMENT] * 2) * 10;
     if(player.equip[EQI.HEAD_MID] == 678 && n_A_JobClass() == JOB.TAEKWON) // hahoe mask
-        status.flee2 += 2;
+        status.flee2 += 2 * 10;
 
     // flat crit calculations
 
@@ -1709,11 +1709,11 @@ function CalculateAdditionalBonuses() {
     // perfect dodge calculations
 
     if(CardNumSearch(354) > 0 && n_A_JobClass() == JOB.SWORDMAN) // heater card
-        status.flee2 += 3 * CardNumSearch(354);
+        status.flee2 += (3 * CardNumSearch(354)) * 10;
     if(CardNumSearch(391) > 0 && n_A_JobClass() == JOB.THIEF) // wild rose card
-        status.flee2 += 5;
+        status.flee2 += 5 * 10;
     if(CardNumSearch(401) > 0 && player.refine[EQI.GARMENT] <= 4) // kavach icarus card
-        status.flee2 += 1;
+        status.flee2 += 1 * 10;
 
     // flat crit calculations
 

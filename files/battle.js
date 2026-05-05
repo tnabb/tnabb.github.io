@@ -3816,10 +3816,10 @@ function battle_calc_defense_reduction(wd, src, target, skill_id, skill_lv) {
     if(def1 > 100) def1 = 100;
     battleDebug && console.log(`[battle_calc_defense_reduction] After reductions â€” def1=${def1}, def2=${def2}, vit_def_min=${vit_def_min}, vit_def_max=${vit_def_max}`);
     ATK_RATE4(wd, src, skill_id, 
-        attack_ignores_def(wd, src, target, skill_id, skill_lv, EQI.HAND_R) ? 100 : (is_attack_piercing(wd, src, target, skill_id, skill_lv, EQI.HAND_R) ? is_attack_piercing(wd, src, target, skill_id, skill_lv, EQI.HAND_R) * (def1+vit_def_min) : (100-def1)),
         attack_ignores_def(wd, src, target, skill_id, skill_lv, EQI.HAND_R) ? 100 : (is_attack_piercing(wd, src, target, skill_id, skill_lv, EQI.HAND_R) ? is_attack_piercing(wd, src, target, skill_id, skill_lv, EQI.HAND_R) * (def1+vit_def_max) : (100-def1)),
-        attack_ignores_def(wd, src, target, skill_id, skill_lv, EQI.HAND_L) ? 100 : (is_attack_piercing(wd, src, target, skill_id, skill_lv, EQI.HAND_L) ? is_attack_piercing(wd, src, target, skill_id, skill_lv, EQI.HAND_L) * (def1+vit_def_min) : (100-def1)),
-        attack_ignores_def(wd, src, target, skill_id, skill_lv, EQI.HAND_L) ? 100 : (is_attack_piercing(wd, src, target, skill_id, skill_lv, EQI.HAND_L) ? is_attack_piercing(wd, src, target, skill_id, skill_lv, EQI.HAND_L) * (def1+vit_def_max) : (100-def1))
+        attack_ignores_def(wd, src, target, skill_id, skill_lv, EQI.HAND_R) ? 100 : (is_attack_piercing(wd, src, target, skill_id, skill_lv, EQI.HAND_R) ? is_attack_piercing(wd, src, target, skill_id, skill_lv, EQI.HAND_R) * (def1+vit_def_min) : (100-def1)),
+        attack_ignores_def(wd, src, target, skill_id, skill_lv, EQI.HAND_L) ? 100 : (is_attack_piercing(wd, src, target, skill_id, skill_lv, EQI.HAND_L) ? is_attack_piercing(wd, src, target, skill_id, skill_lv, EQI.HAND_L) * (def1+vit_def_max) : (100-def1)),
+        attack_ignores_def(wd, src, target, skill_id, skill_lv, EQI.HAND_L) ? 100 : (is_attack_piercing(wd, src, target, skill_id, skill_lv, EQI.HAND_L) ? is_attack_piercing(wd, src, target, skill_id, skill_lv, EQI.HAND_L) * (def1+vit_def_min) : (100-def1))
     );
     wd.basedamage_min = ATK_RATER(wd.basedamage_min, 100 - def1);
     wd.basedamage_max = ATK_RATER(wd.basedamage_max, 100 - def1);
@@ -4011,7 +4011,8 @@ function battle_add_weapon_damage(src, damage_min, damage_max, type) {
             break;
     }
 
-    damage_min += 0;
+    if(overrefine_bonus > 0)
+        damage_min += 1;
     damage_max += overrefine_bonus;
 
     battleDebug && console.log(`[battle_add_weapon_damage] END â€” overrefine_bonus=${overrefine_bonus}, damage_min=${damage_min}, damage_max=${damage_max}`);
