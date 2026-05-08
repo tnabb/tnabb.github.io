@@ -483,8 +483,8 @@ m_Skill = [		//ID, max level, iRO name, alternative name, 0=nodamage 1=melee/ran
 	[443, 2, "Earthquake", 0, -3, 0],
 	[444, 10, "Earthquake (melee)", 0, -3, 0],
 	[445, 10, "Earthquake (ranged)", 0, -3, 0],
-	[446, 10, "Hell's Judgement (melee)", 0, 2, 10],	//Damage and curse all players within the monster’s screen.
-	[447, 10, "Hell's Judgement (ranged)", 0, 3, 10],	//Damage and curse all players within the monster’s screen.
+	[446, 10, "Hell's Judgement (melee)", 0, 2, 11],	//Damage and curse all players within the monster’s screen.
+	[447, 10, "Hell's Judgement (ranged)", 0, 3, 11],	//Damage and curse all players within the monster’s screen.
 	[448, 5, "Pulse Strike (melee)", 0, 2, 0],		//Damage all players in a 15 x 15 cell around the boss monster, and push them 7 cells away.
 	[449, 5, "Pulse Strike (ranged)", 0, 3, 0],		//Damage all players in a 15 x 15 cell around the boss monster, and push them 7 cells away.
 	[450, 10, "Neutral Attribute Attack / Neutral Attack", 0, 2, 0],

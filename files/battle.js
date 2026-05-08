@@ -2840,10 +2840,9 @@ function battle_calc_element_damage(wd, src, target, skill_id, skill_lv) {
     if(sd && !skill_ignores_element(skill_id) && !skill_ignores_atkcard(skill_id) && ((wd.getAverageDamage() > 0 || wd.getAverageDamage2() > 0) || (wd.getAverageCritDamage() > 0 || wd.getAverageCritDamage2() > 0))) {
         if(SkillSearch(SKILL.ASC_EDP)) {
             let edp_rate = 50 * (SkillSearch(SKILL.ASC_EDP) + 1);
-            let edp_dmg_rate = monster.notes[0];
-            if(edp_dmg_rate != 0)
-                edp_rate = Math.trunc(edp_rate * edp_dmg_rate / 100);
-            battleDebug && console.log(`[battle_calc_element_damage] EDP â€” edp_lv=${SkillSearch(SKILL.ASC_EDP)}, edp_rate=${edp_rate}, edp_dmg_rate=${edp_dmg_rate}, damage_min before=${wd.damage_min}, damage_max before=${wd.damage_max}, crit_damage_min before=${wd.crit_damage_min}, crit_damage_max before=${wd.crit_damage_max}`);
+            if(monster.notes[0])
+                edp_rate = Math.trunc(edp_rate * monster.notes[0] / 100);
+            battleDebug && console.log(`[battle_calc_element_damage] EDP â€” edp_lv=${SkillSearch(SKILL.ASC_EDP)}, edp_rate=${edp_rate}, edp_dmg_rate=${monster.notes[0]}, damage_min before=${wd.damage_min}, damage_max before=${wd.damage_max}, crit_damage_min before=${wd.crit_damage_min}, crit_damage_max before=${wd.crit_damage_max}`);
             wd.damage_min += Math.trunc((wd.damage_min * edp_rate) / 100);
             wd.damage_max += Math.trunc((wd.damage_max * edp_rate) / 100);
 
