@@ -711,7 +711,7 @@ function StatusCalcPlayerSub() {
     if ((skill = SkillSearch(SKILL.GS_SINGLEACTION)) > 0 && player.status.weapon >= WEAPON.REVOLVER && player.status.weapon <= WEAPON.GRENADE)
         base_status.aspd_rate -= Math.trunc((skill + 1) / 2) * 10;
     if ((skill = SkillSearch(SKILL.KN_CAVALIERMASTERY)) > 0)
-        base_status.aspd_rate += 500 - 100 * skill;
+        base_status.aspd_rate += 500 - 100 * (skill - 1);
     base_status.adelay = AMOTION_DIVIDER_PC * base_status.amotion;
 
     // dmotion
