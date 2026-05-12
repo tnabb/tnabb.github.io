@@ -221,6 +221,8 @@ function updatePlayerDamageDisplay(d) {
                 pingDelay *= isCombo;
                 delayUsed *= isCombo;
             }
+            if(d.skill_id == SKILL.TK_FALLING_STAR_ATTACK)
+                aspdDelay *= 2;
             if(d.skill_id == 0) {
                 delayLabelStr = "Time/Hit";
                 delayStr = aspdDelay + " seconds";
