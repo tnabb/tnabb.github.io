@@ -514,7 +514,7 @@ m_Card = [
 	, [510, 2, "Dark Pinguicula", "When killing a monster, 0.2% chance to obtain an Aloe.", 17, 10, 0]
 	, [511, 2, "Duneyrr", "When dealing ATK based damage, 1% chance you gain Perfect Dodge +10 for 4 seconds.", 17, 10, 0]
 	, [512, 2, "Phylla", "When dealing ATK based damage, 1.5% chance you gain CRIT +20 for 4 seconds.", 2, 1, 5, 1, 0]
-	, [513, 3, "Rhyncho", "<b>[Priest Classes]</b><BR>INT +1<br><hr><b>When compounded into a [Rose of Eden]:</b><br>Your [Heal], [Sanctuary], and [Aid Potion] effectiveness +5%", 190, 12, 191, 12, 192, 12, 99, 5, 0]		//COMPROBAR SCRIPT
+	, [513, 3, "Rhyncho", "<b>[Priest Classes]</b><BR>INT +1<br><hr><b>When compounded into a [Rose of Eden]:</b><br>Your healing effectiveness +5%", 190, 12, 191, 12, 192, 12, 99, 5, 0]		//COMPROBAR SCRIPT
 	, [514, 1, "Zakudam", "<b>[Weapon Level 1~2]</b> Deal +3% MATK based damage against [<b style='color:orange'>Demi-Human</b>] race monsters.<BR><b>[Weapon Level 3~4]</b> Deal +8% MATK based damage against [<b style='color:orange'>Demi-Human</b>] race monsters.", 0]
 	, [515, 1, "Pinguicula", "<b>[Weapon Level 1~2]</b> Deal +3% MATK based damage against [<b style='color:green'>Insect</b>] race monsters.<BR><b>[Weapon Level 3~4]</b> Deal +8% MATK based damage against [<b style='color:green'>Insect</b>] race monsters.", 0]
 	, [516, 1, "Nepenthes", "<b>[Weapon Level 1~2]</b> Deal +3% MATK based damage against [<b style='color:#00DD00'>Plant</b>] race monsters.<BR><b>[Weapon Level 3~4]</b> Deal +8% MATK based damage against [<b style='color:#00DD00'>Plant</b>] race monsters.", 0]
@@ -624,7 +624,7 @@ m_Card = [
 	, [618, 3, "Khalitzburg Knight", "", 190, -15, 191, 18, 192, 18, 0]
 	, [619, 1, "White Knight", "", 17, 10, 28, 13, 29, 13, 0]
 	, [620, 100, 0, 0, 357, 4, 358, 4, 0]
-	, [621, 100, 0, 0, 28, 5, 29, 5, 0]
+	, [621, 100, 0, 0, 28, 12, 29, 12, 191, 2, 192, 2, 0]
 	, [622, 6, "Polluted Spider Queen", "Auto Cast Rate +100%", 12, 5, 0]
 	, [623, 2, "Polluted Dark Lord", "", 1, 2, 292, 30, 0]
 	, [624, 5, "Bloody Wraith", "", 15, 5, 0]
@@ -1181,7 +1181,7 @@ m_RandomOptMeleeType = [1, 2, 3, 4, 5, 6, 7, 8, 11, 13];
 m_RandomOptRangedType = [10, 14, 15, 16, 17, 18, 19, 20, 21];
 m_RandomOptMagicType = [9];
 m_RandomOptSpecialType = [12];
-m_RandomOptSpecialWeapons = [395, 939, 93, 539, 1839, 1869, 1870, 1871, 1851, 2011, 2102, 2143];
+m_RandomOptSpecialWeapons = [395, 939, 93, 539, 1839, 1869, 1870, 1871, 1851, 2011, 2102, 2143, 2212];
 m_RandomOptForgedWeapons = [2019, 2020, 2027, 2028, 2029, 2030, 2034, 2035, 2036, 2043, 2044, 2045, 2049, 2050, 2056, 2057, 2058, 2062, 2063, 2064];
 m_RandomOptCrimsonWeapons = [2105, 2106, 2107, 2108, 2109, 2110, 2111, 2113, 2114, 2115, 2116, 2117, 2118, 2119, 2120, 2121, 2122, 2123, 2124];
 m_RandomOptMineWorkerPickaxe = [2178];

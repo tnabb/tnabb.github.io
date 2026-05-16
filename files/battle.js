@@ -915,7 +915,7 @@ function battle_calc_magic_attack(src, target, skill_id, skill_lv, mflag) {
                 break;
             case SKILL.ALL_RESURRECTION:
             case SKILL.PR_TURNUNDEAD:
-                i = 20 * skill_lv + sstatus.luk + sstatus.int + sd.status.base_level + 200 - 200; // - 200 * tstatus.hp / tstatus.max_hp; // not factoring in maxhp ratio YET
+                i = 20 * skill_lv + sstatus.luk + sstatus.int + sd.status.base_level + 200 - 200 * (target.mhp_percent / 100); 
                 if(i > 700)
                     i = 700;
 
@@ -1799,6 +1799,9 @@ function battle_calc_damage(src, target, wd, damage, skill_id, skill_lv) {
             damage -= Math.trunc(damage * tsd.special_state.no_misc_damage / 100);
         }
 
+        if(src.type == BL.MOB && skill_id && tsd.bonus.skill_defrate)
+            damage -= Math.trunc(damage * tsd.bonus.skill_defrate / 100);
+
         if(!damage)
             return 0;
     }
@@ -1935,6 +1938,9 @@ function battle_calc_damage(src, target, wd, damage, skill_id, skill_lv) {
         if(sc_get(target, SC.MELEE_FRAGILITY) && flag&(BF.SHORT | BF.WEAPON)) {
             damage += Math.trunc((damage * (sc_get(target, SC.MELEE_FRAGILITY).val1 * 5)) / 100);
         }
+
+        if(SkillSearch(SKILL.SL_ENEMYORBSTACKS) > 0)
+            damage += Math.trunc((damage * SkillSearch(SKILL.SL_ENEMYORBSTACKS) * 25) / 1000);
 
         // damage decrease from notes
         if(monster.damagetaken > 0) {
@@ -3854,10 +3860,10 @@ function battle_calc_defense_reduction(wd, src, target, skill_id, skill_lv) {
         }
         
         CRIT_ATK_RATE4(wd, src, skill_id, 
-            attack_ignores_def(wd, src, target, skill_id, skill_lv, EQI.HAND_R, true) ? 100 : (is_attack_piercing(wd, src, target, skill_id, skill_lv, EQI.HAND_R) ? is_attack_piercing(wd, src, target, skill_id, skill_lv, EQI.HAND_R) * (crit_def1+vit_def_min) : (100-crit_def1)),
             attack_ignores_def(wd, src, target, skill_id, skill_lv, EQI.HAND_R, true) ? 100 : (is_attack_piercing(wd, src, target, skill_id, skill_lv, EQI.HAND_R) ? is_attack_piercing(wd, src, target, skill_id, skill_lv, EQI.HAND_R) * (crit_def1+vit_def_max) : (100-crit_def1)),
-            attack_ignores_def(wd, src, target, skill_id, skill_lv, EQI.HAND_L, true) ? 100 : (is_attack_piercing(wd, src, target, skill_id, skill_lv, EQI.HAND_L) ? is_attack_piercing(wd, src, target, skill_id, skill_lv, EQI.HAND_L) * (crit_def1+vit_def_min) : (100-crit_def1)),
-            attack_ignores_def(wd, src, target, skill_id, skill_lv, EQI.HAND_L, true) ? 100 : (is_attack_piercing(wd, src, target, skill_id, skill_lv, EQI.HAND_L) ? is_attack_piercing(wd, src, target, skill_id, skill_lv, EQI.HAND_L) * (crit_def1+vit_def_max) : (100-crit_def1))
+            attack_ignores_def(wd, src, target, skill_id, skill_lv, EQI.HAND_R, true) ? 100 : (is_attack_piercing(wd, src, target, skill_id, skill_lv, EQI.HAND_R) ? is_attack_piercing(wd, src, target, skill_id, skill_lv, EQI.HAND_R) * (crit_def1+vit_def_min) : (100-crit_def1)),
+            attack_ignores_def(wd, src, target, skill_id, skill_lv, EQI.HAND_L, true) ? 100 : (is_attack_piercing(wd, src, target, skill_id, skill_lv, EQI.HAND_L) ? is_attack_piercing(wd, src, target, skill_id, skill_lv, EQI.HAND_L) * (crit_def1+vit_def_max) : (100-crit_def1)),
+            attack_ignores_def(wd, src, target, skill_id, skill_lv, EQI.HAND_L, true) ? 100 : (is_attack_piercing(wd, src, target, skill_id, skill_lv, EQI.HAND_L) ? is_attack_piercing(wd, src, target, skill_id, skill_lv, EQI.HAND_L) * (crit_def1+vit_def_min) : (100-crit_def1))
         );
         wd.crit_basedamage_min = ATK_RATER(wd.crit_basedamage_min, 100 - crit_def1);
         wd.crit_basedamage_max = ATK_RATER(wd.crit_basedamage_max, 100 - crit_def1);
@@ -4113,9 +4119,12 @@ function battle_calc_multi_attack(wd, src, target, skill_id, skill_lv) {
         }
         
         // Double Attack check
-        if(wd.div_ == 1 && ((skill_lv = SkillSearch(SKILL.TF_DOUBLE)) > 0 && sd.weapontype1 == WEAPON.DAGGER)
-            || (sd.bonus.double_rate > 0 && sd.weapontype1 != WEAPON.FIST))
+        if(wd.div_ == 1 && (((skill_lv = SkillSearch(SKILL.TF_DOUBLE)) > 0) && sd.weapontype1 == WEAPON.DAGGER)
+            || (sd.bonus.double_rate > 0 && sd.weapontype1 != WEAPON.FIST)
+            || check_double_attack(src) > 0 && sd.weapontype1 != WEAPON.FIST)
         {
+            if(skill_lv < check_double_attack(src))
+                skill_lv = check_double_attack(src);
             double_attack_rate = Math.max(5 * skill_lv, sd.bonus.double_rate);
             double_attack_rate += sd.bonus.double_add_rate;
 
@@ -4144,18 +4153,18 @@ function battle_calc_multi_attack(wd, src, target, skill_id, skill_lv) {
 }
 
 function check_double_attack(src) {
-    let double_attack_rate = 0;
+    let double_attack_lv = 0;
     if(src.type == BL.PC) {
         if(CardNumSearch(43))
-            double_attack_rate = 5;
-        else if(player.equip[EQI.HEAD_TOP] == 570)
-            double_attack_rate = 10;
-        else if(player.equip[EQI.HEAD_TOP] == 1321)
-            double_attack_rate = 25;
-        else if(player.equip[EQI.HAND_R] == 2173)
-            double_attack_rate = 5;
+            double_attack_lv = 1;
+        if(player.equip[EQI.HAND_R] == 2173)
+            double_attack_lv = 1;
+        if(player.equip[EQI.HEAD_TOP] == 570)
+            double_attack_lv = 2;
+        if(player.equip[EQI.HEAD_TOP] == 1321)
+            double_attack_lv = 5;
     }
-    return double_attack_rate;
+    return double_attack_lv;
 }
 
 function pc_skillatk_bonus(src, skill_id) {

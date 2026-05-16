@@ -1399,6 +1399,7 @@ const SKILL = Object.freeze({
     SKE_DAWN_BREAK: 883,
     SKE_UNLEASHED_HEAT_ATK: 884,
     SJ_CAMOUFLAGE: 885,
+    SL_ENEMYORBSTACKS: 886,
 
     // 4th job skills
     AG_SOUL_VC_STRIKE: 1000,

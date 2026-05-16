@@ -259,7 +259,7 @@ m_Item = [
 	, [256, 51, 1, 1, 0, 0, 20, 20, "Opera Phantom Mask", 0, "", 0]
 	, [257, 51, 1, 1, 0, 0, 10, 1, "Mini Glasses", 0, "", 0]
 	, [258, 51, 0, 1, 0, 0, 10, 1, "Purple Glasses", 0, "", 154, 10, 0]
-	, [259, 51, 54, 1, 0, 0, 10, 50, "Binoculars", 0, "", 5, 1, 0]
+	, [259, 51, 159, 1, 0, 0, 10, 50, "Binoculars", 0, "", 5, 1, 0]
 	, [260, 51, 0, 1, 0, 0, 10, 1, "Angled Glasses", 0, "", 0]
 	, [261, 51, 1, 1, 0, 0, 10, 1, "Gas Mask", 0, "", 200, 3, 150, 100, 0]
 	, [262, 51, 1, 1, 0, 0, 10, 1, "Goblin Mask", 0, "", 200, 3, 0]
@@ -347,7 +347,7 @@ m_Item = [
 	, [344, 64, 54, 0, 0, "0/1", 10, 65, "Bow Thimble", 0, "", 25, 3, 0]
 	, [345, 64, 1, 1, 0, 0, 10, 35, "Matyr's Leash", 0, "", 2, 1, 0]
 	, [346, 64, 1, 1, 0, 0, 10, 35, "Celebrant's Mitten", 0, "", 4, 1, 0]
-	, [347, 64, 0, 1, 0, 0, 150, 94, "Brisingamen", 0, "", 1, 6, 2, 6, 3, 6, 4, 6, 5, 6, 6, 10, 19, 5, 0]
+	, [347, 64, 0, 1, 0, 0, 150, 94, "Brisingamen", 0, "", 1, 6, 2, 6, 3, 6, 4, 6, 5, 4, 6, 10, 19, 5, 0]
 	, [348, 64, 0, 2, 0, 0, 400, 94, "Meginjard", 0, "", 1, 20, 19, 7, 0]
 	, [349, 64, 1, 3, 0, 0, 10, 40, "Safety Ring", 0, "", 19, 3, 0]
 	, [350, 50, 1, 0, 0, 0, 10, 75, "Crown of Mistress", 0, "", 4, 2, 14, 100, 0]
@@ -565,7 +565,7 @@ m_Item = [
 	, [562, 999, 0, 4, 0, 1, 20, 1, "Note Headphones", 0, "", 200, 1, 151, 10, 152, 10, 19, 3, 0]
 	, [563, 999, 0, 2, 0, 0, 50, 50, "Wandering Minstrel Hat", 0, "", 4, 1, 5, 1, 0]
 	, [564, 50, 0, 2, 0, 0, 20, 1, "Pumpkin-Head", 0, "", 56, 5, 0]
-	, [565, 50, 0, 2, 0, 1, 20, 20, "Dress Hat", 0, "<b>[Refine Rate 7~10]</b><br>MATK +1%<br>ATK based damage +1% (versus Normal/Boss/Guardian)<br>Your [Heal], [Sanctuary], and [" + skillName(245) + "] effectiveness +1%", 19, 7, 1, 1, 4, 1, 89, 2, 80, 2, 99, 5, 0]
+	, [565, 50, 0, 2, 0, 1, 20, 20, "Dress Hat", 0, "<b>[Refine Rate 7~10]</b><br>MATK +1%<br>ATK based damage +1% (versus Normal/Boss/Guardian)<br>Your healing effectiveness +1%", 19, 7, 1, 1, 4, 1, 89, 2, 80, 2, 99, 5, 0]
 	, [566, 999, 0, 3, 0, 1, 100, 30, "Satellite Hat", 0, "", 13, 50, 14, 10, 220, 10, 0]
 	, [567, 50, 0, 3, 0, 0, 20, 1, "Moonlight Flower Hat", 0, "", 200, 1, 5, 2, 221, 15, 0]
 	, [568, 999, 0, 2, 0, 0, 20, 1, "Sheila Hairnet", 0, "", 19, 3, 2, 2, 0]
@@ -644,7 +644,7 @@ m_Item = [
 	, [641, 12, 0, 137, 4, 2, 100, 85, "Ledger of Death", 0, "ASPD +(refine)%<br>When performing an ATK based attack, 0.1% chance to cause [Coma] status effect on your target (only [" + v_Race[7] + "] race monsters, works even on [Boss] type monsters!).<br><b>[Sage, Scholar (alt. name: Professor)]</b><br>2% chance to cast [Hell's Judgment] Lvl 5 on your target when performing an ATK based attack.", 89, 15, 1, 3, 4, 3, 6, -20, 0]
 	, [642, 9, 1001, 60, 3, 2, 80, 70, "Lich's Bone Wand", 0, "When receiving ATK based damage, 10+(Refine)% chance to cause [Curse] status effect on all enemies in the screen.<br><b>[Refine Rate 9~10]</b> MATK +3%, MaxSP +300", 89, 20, 4, 1, 5, 1, 20, 9, 0]
 	, [643, 999, 1, 0, 0, 0, 10, 1, "Dark Blinder", 0, "", 154, 100, 151, 2, 0]
-	, [644, 9, 53, 10, 3, 0, 40, 55, "Healing Staff", 0, "Your [Heal], [Sanctuary], and [" + skillName(245) + "] effectiveness +(refine*3/2)", 20, 6, 89, 15, 0]
+	, [644, 9, 53, 10, 3, 0, 40, 55, "Healing Staff", 0, "Your healing effectiveness +(refine*3/2)", 20, 6, 89, 15, 0]
 	, [645, 9, 1001, 80, 3, 0, 50, 70, "Piercing Staff", 0, "Ignore 10+(refine)% of target's MDEF.", 89, 15, 4, 4, 0]
 	, [646, 9, 125, 130, 4, 1, 250, 80, "Staff of Destruction", 0, "[" + skillName(276) + "] skill Casting Time -50%<br><b>Each two refine levels:</b> MATK +1%<br>All skill's SP cost +(refine*2)%<br>When receiving ATK based damage, (Refine*2)% chance to cast [Jupitel Thunder] Lvl 5 on your attacker.", 195, 1, 89, 25, 4, 3, 2, 10, 0]
 	, [647, 9, 63, 120, 4, 0, 150, 70, "Divine Cross", 0, "", 195, 1, 89, 15, 20, 6, 5, 4, 51, 15, 56, 15, 0]
@@ -1000,7 +1000,7 @@ m_Item = [
 	, [997, 62, 134, 2, 0, 1, 50, 70, "Musika", 0, "When receiving ATK based damage, 2% chance to cast [Heal] Lvl 1 on yourself.<br>If you learned a higher level of [Heal], that level will be casted instead.", 19, 3, 0]
 	, [998, 63, 3079, 2, 0, 1, 30, 1, "Sprint Shoes", 0, "", 2, 1, 76, 5, 0]
 	, [999, 100, 0, 0, 0, 0, 0, 0, "Sprint Set", 0, "", 15, 7, 16, 7, 73, -3, 74, 15, 0]
-	, [1000, 64, 3079, 0, 0, 0, 10, 70, "Angelic Ring", 0, "When using [Heal], [Sanctuary], and [" + skillName(245) + "] skills, 5% chance your [Heal], [Sanctuary], and [" + skillName(245) + "] effectiveness +20% for 3 seconds.", 4, 2, 5, 1, 19, 2, 0]
+	, [1000, 64, 3079, 0, 0, 0, 10, 70, "Angelic Ring", 0, "When using healing skills, 5% chance your healing effectiveness +20% for 3 seconds.", 4, 2, 5, 1, 19, 2, 0]
 	, [1001, 64, 3079, 0, 0, 0, 10, 1, "Sprint Ring", 0, "", 73, -10, 74, -5, 0]
 	, [1002, 64, 3079, 0, 0, 1, 20, 1, "Pinguicula Corsage", 0, "", 19, 2, 14, 25, 0]
 	, [1003, 64, 122, 1, 0, 0, 10, 80, "Cold Heart", 0, "", 2, 3, 0]
@@ -1118,7 +1118,7 @@ m_Item = [
 	, [1115, 999, 0, 0, 0, 0, 0, 0, "Glorious Ring + BG accessories", 0, "", 87, 5, 89, 3, 91, 5, 94, 5, 0]
 	, [1116, 64, 0, 0, 0, 0, 10, 1, "Novice Figure", 0, "<b>[Novice Class]</b><br>MaxHP +30<br>MaxSP +30", 13, 70, 0]
 	, [1117, 64, 0, 0, 0, 0, 10, 1, "Swordsman Figure", 0, "<b>[Swordsman Class]</b><br>DEF +2<br>MaxHP +150", 3, 1, 0]
-	, [1118, 64, 0, 0, 0, 0, 10, 1, "Acolyte Figure", 0, "<b>[Acolyte Class]</b><br>MaxSP +50<br>Your [Heal], [Sanctuary], and [Aid Potion] effectiveness +5%", 4, 1, 0]
+	, [1118, 64, 0, 0, 0, 0, 10, 1, "Acolyte Figure", 0, "<b>[Acolyte Class]</b><br>MaxSP +50<br>Your healing effectiveness +5%", 4, 1, 0]
 	, [1119, 64, 0, 0, 0, 0, 10, 1, "Magician Figure", 0, "<b>[Magician Class]</b><br>After-cast delay -5%", 4, 1, 0]
 	, [1120, 64, 0, 0, 0, 0, 10, 1, "Archer Figure", 0, "<b>[Archer Class]</b><br>ATK +10", 5, 1, 0]
 	, [1121, 64, 0, 0, 0, 0, 10, 1, "Thief Figure", 0, "<b>[Thief Class]</b><br>ASPD +3%", 2, 1, 0]
@@ -1161,7 +1161,7 @@ m_Item = [
 	, [1158, 2, 1070, 170, 3, 1, 150, 50, "Ruber", 0, "When dealing ATK based damage, 0.5% chance to increase [Bash] and [Bowling Bash] skills damage +20% for 15 seconds.", 0]
 	, [1159, 999, 51, 180, 4, 1, 200, 80, "Veteran Sword", 0, "If the user has mastered [Bash], increases it's damage by 50%<br>If the user has mastered [Bowling Bash], increases it's damage by 50%", 1, 1, 5, 1, 0]
 	, [1160, 3, 1051, 200, 2, 3, 380, 50, "Krasnaya", 0, "<b>[Base STR >= 95]</b> ATK +20", 0]
-	, [1161, 8, 53, 160, 3, 2, 180, 80, "Veteran Hammer", 0, "For each level of [Divine Protection] the user has learned, user's [Heal], [Sanctuary], and [" + skillName(245) + "] effectiveness +1%<br>For each level of [Mace Mastery] the user has learned, CRIT +2", 4, 1, 6, 1, 0]
+	, [1161, 8, 53, 160, 3, 2, 180, 80, "Veteran Hammer", 0, "For each level of [Divine Protection] the user has learned, user's healing effectiveness +1%<br>For each level of [Mace Mastery] the user has learned, CRIT +2", 4, 1, 6, 1, 0]
 	, [1162, 8, 1001, 130, 3, 2, 50, 50, "Erde", 0, "", 14, 50, 5244, 20, 5248, 20, 99, 10, 0]
 	, [1163, 8, 1001, 130, 3, 2, 50, 50, "Red Square Bag", 0, "5% chance to obtain a [Red Potion] item when killing a monster.<br>2% chance to obtain an [Orange Potion] item when killing a monster.<br>2% chance to obtain a [Yellow Potion] item when killing a monster.<br>2% chance to obtain a [White Potion] item when killing a monster.<br>1% chance to obtain a [Blue Potion] item when killing a monster.<br><b>[Base STR >= 90]</b> When performing an ATK based attack, 5% chance to cause [Stun] status effect on your target.", 13, 200, 5244, 20, 5248, 20, 0]
 	, [1164, 6, 1070, 140, 3, 2, 150, 50, "Vecer Axe", 0, "<b>[Base LUK >= 90]</b> ATK +20<br><b>[Base DEX >= 90]</b> CRIT +5<br><b>[Base LUK >= 90 and Base DEX >= 90]</b> [Mammonite] skill damage +15%", 0]
@@ -1277,7 +1277,7 @@ m_Item = [
 	, [1274, 999, 0, 3, 0, 0, 30, 70, "Aquarius Crown", 0, "<b>[Refine Rate 7~10]</b><br>DEF +1<br>ATK +15", 64, 5, 9, 10, 1, 2, 0]
 	, [1275, 999, 0, 3, 0, 0, 30, 70, "Aquarius Diadem", 0, "<b>[Refine Rate 7~10]</b><br>DEF +1<br>ATK +15", 64, 5, 9, 10, 1, 2, 0]
 	, [1276, 999, 0, 3, 0, 0, 30, 70, "Cancer Crown", 0, "<b>[Refine Rate 7~10]</b><br>DEF +1<br>ATK +15<br>FLEE +10", 61, 5, 1, 2, 0]
-	, [1277, 999, 0, 3, 0, 0, 30, 70, "Cancer Diadem", 0, "<b>[Refine Rate 7~10]</b><br>MDEF +1<br>MATK +2%<br>Your [Heal], [Sanctuary], and [" + skillName(245) + "] effectiveness +3%", 61, 5, 4, 2, 0]
+	, [1277, 999, 0, 3, 0, 0, 30, 70, "Cancer Diadem", 0, "<b>[Refine Rate 7~10]</b><br>MDEF +1<br>MATK +2%<br>Your healing effectiveness +3%", 61, 5, 4, 2, 0]
 	, [1278, 999, 0, 3, 0, 1, 30, 1, "Capricorn Crown", 0, "<b>[Refine Rate 7~10]</b><br>Small chance to cast [" + skillName(346) + "] Lvl 1 (" + v_Element[2] + " Endow) when receiving ATK based damage.", 3, 2, 5, 2, 0]
 	, [1279, 999, 0, 3, 0, 0, 30, 1, "Capricorn Diadem (old)", 0, "<b>[Refine Rate 7~10]</b><br>INT +2<br><b>[Refine Rate 8~10]</b><br>Casting Time -3%<br><b>[Refine Rate 9~10]</b><br>[Heal] and [Sanctuary] effectiveness +4%<br><b>[Refine Rate 10]</b><br>When receiving ATK based damage, 1% chance to cast [Hammer Fall] Lvl 5", 62, 5, 19, 5, 5, 2, 0]
 	, [1280, 999, 0, 4, 0, 0, 30, 70, "Gemini Crown", 0, "<b>[Refine Rate 7~10]</b><br>DEF +1<br>MATK +15<br>FLEE +10<br>[" + v_Element[4] + "] element resistance +5%", 19, 5, 2, 2, 17, 2, 0]
@@ -1672,7 +1672,7 @@ m_Item = [
 	, [1668, 999, 0, 0, 0, 0, 0, 0, "Judgement Shoes + Judgement Shawl + Judgement Robe + Empowered Mace of Judgement [1]", 0, "[Adoramus] skill damage +200%<BR>[Adoramus] skill SP cost +30", 31, 30, 171, 30, 0]
 	, [1669, 999, 109, 0, 0, 0, 30, 60, "Robe Of Judgement (RMS)", 0, "Increases damage of Judex by 30%, but increases SP cost by 40.", 198, 7, 19, 10, 1, 2, 4, 1, 51, 10, 56, 10, 50, -10, 52, -10, 53, -10, 54, -10, 55, -10, 57, -10, 58, -10, 59, -10, 0]
 	, [1670, 51, 0, 2, 0, 0, 10, 80, "Sigrun's Wings", 0, "<b>[Swordman Class, Merchant Class, Thief Class, Taekwon]</b> STR +1<BR><b>[Mage Class, Acolyte Class, Ninja, Soul Linker]</b> INT +1<BR><b>[Archer Class, Gunslinger]</b> DEX +1<BR><b>[Novice, Super Novice]</b> HP +80, SP +30<BR><hr><b>When equipping [Corrupted Wanderer Card]+[Sigrun's Wings] at the same time:</b><br>When dealing ATK based damage, 2% chance you gain 1% of the damage inflicted on your target as SP.", 0]
-	, [1671, 9, 1055, 30, 4, 0, 100, 50, "Kronos", 0, "When dealing MATK based damage, 0.1% chance you gain MATK +12% and all skill's SP cost -20% for 5 seconds.<br><b>For each two refine levels:</b><br>INT +1, MaxSP +50<BR><b>[Special Effect: [MATK +12%] can be activated under 'Additional Effects' at 'BUFF, ITEMS AND OTHER STUFF']</b>", 195, 1, 89, 15, 4, 3, 13, 300, 0]
+	, [1671, 9, 1055, 30, 4, 0, 100, 50, "Kronos", 0, "When dealing MATK based damage, 0.1% chance you gain MATK +12% and all skill's SP cost -20% for 5 seconds.<br><b>For each two refine levels:</b><br>INT +1, MaxSP +50<BR><b>[Special Effect: [MATK +12%] can be activated under 'Additional Effects' at 'Temporary Card/Item active Effects']</b>", 195, 1, 89, 15, 4, 3, 13, 300, 0]
 	// implementar -- a lot of these are renewal items -- 
 	, [1672, 999, 109, 30, 3, 2, 50, 60, "Affection Staff", 0, "", 196, 4, 20, 6, 88, 160, 4, 1, 99, 10, 370, 15, 0]
 	, [1673, 999, 109, 30, 3, 1, 120, 60, "Empowered Affection Staff", 0, "", 88, 180, 4, 4, 99, 20, 0]
@@ -1770,8 +1770,8 @@ m_Item = [
 	, [1765, 999, 0, 1, 0, 1, 10, 30, "Skull Hood", 0, "", 200, 1, 0]
 	, [1766, 999, 0, 0, 0, 1, 50, 45, "Mother's Kindness", 0, "", 200, 1, 56, 5, 51, 5, 221, 159, 0]
 	, [1767, 999, 0, 5, 0, 0, 30, 1, "Triangle Rune Cap", 0, "<b>[Refine Rate 7~10]</b><BR>MATK +10<BR>15% chance to cast [Magic Mirror] Lvl 8 when receiving ATK based damage.<BR>15% chance to cast [Magic Mirror] Lvl 7 when receiving ATK based damage.", 99, 2, 0]
-	, [1768, 50, 0, 1, 0, 1, 50, 30, "Benevolent Guardian", 0, "Items recover 5% more HP.<BR><b>[Refine Rate 7~10]</b><BR>Your [Heal], [Sanctuary], and [Aid Potion] effectiveness +3%", 99, 2, 100, 5, 0]     //implementar efecto si está refinado
-	, [1769, 100, 0, 0, 0, 0, 0, 0, "Benevolent Healing Set", 0, "Your [Heal], [Sanctuary], and [Aid Potion] effectiveness +(weapon refine)%", 0]   //implementar efecto si está refinado
+	, [1768, 50, 0, 1, 0, 1, 50, 30, "Benevolent Guardian", 0, "Items recover 5% more HP.<BR><b>[Refine Rate 7~10]</b><BR>Your healing effectiveness +3%", 99, 2, 100, 5, 0]     //implementar efecto si está refinado
+	, [1769, 100, 0, 0, 0, 0, 0, 0, "Benevolent Healing Set", 0, "Your healing effectiveness +(weapon refine)%", 0]   //implementar efecto si está refinado
 	, [1770, 999, 0, 0, 0, 0, 0, 0, "Benevolent Holy Set", 0, "<b>*IS NOT IMPLEMENTED IN-GAME*</b><br>Increases the recovery power of the user's healing skills by an additional 3% per refine on the Holy Stick.", 0]     //implementar efecto si está refinado
 	, [1771, 999, 0, 0, 0, 0, 30, 80, "Paw of Cat", 0, "Enables use of [Cat Cry] Lvl 1.", 2, 1, 9, 5, 0]   //implementar la skill Cat Cry
 	, [1772, 999, 55, 80, 4, 0, 180, 60, "Staff Of Light", 0, "", 20, 6, 89, 18, 4, 6, 0]
@@ -1917,7 +1917,7 @@ m_Item = [
 	, [1911, 52, 0, 0, 0, 0, 10, 0, "Chatty Parrot", 0, "", 1, 1, 220, 50, 0]
 	, [1912, 10, 110, 115, 4, 1, 150, 40, "Sagittarius Bow", 0, "<b>For each refine level:</b> STR +1<br><b>For every 9 base STR up until 90:</b> [Beast Charge] skill damage +1%", 5391, 10, 0]
 	, [1913, 60, 0, 4, 0, 1, 100, 40, "Kardui Robe", 0, "", 19, 2, 2, 2, 89, 1, 0]
-	, [1914, 61, 109, 3, 0, 1, 50, 65, "Rose of Eden", 0, "<hr><b>When compounded with a [Rhyncho Card]:</b><br>Your [Heal], [Sanctuary], and [Aid Potion] effectiveness +5%", 99, 5, 0]
+	, [1914, 61, 109, 3, 0, 1, 50, 65, "Rose of Eden", 0, "<hr><b>When compounded with a [Rhyncho Card]:</b><br>Your healing effectiveness +5%", 99, 5, 0]
 	, [1915, 52, 0, 0, 0, 0, 20, 10, "Scissorhand Model", 0, "", 12, 1, 0]
 	, [1916, 52, 0, 0, 0, 0, 20, 20, "CD in Mouth", 0, "When performing an ATK based attack, 6% chance to activate a 5 second buff, which randomly casts Lvl 1~5 [Fire Bolt], [Cold Bolt], [Lightning Bolt], [Earth Spike] or [Soul Strike] on every hit.", 0]
 	, [1917, 52, 0, 1, 0, 0, 0, 1, "Umbala Spirit", 0, "+25% HP restoration with [Meat] item.<br>Chance to obtain [Meat] item when killing a monster.", 15, 1, 0]
@@ -1960,7 +1960,7 @@ m_Item = [
 	, [1953, 10, 124, 140, 4, 0, 150, 50, "Royal Guard's Bow", 0, "<b>[Base INT >= 90]</b> Deal +20% ranged ATK based damage.", 11, 10, 5106, 20, 5111, 20, 5112, 20, 5113, 20, 220, 51, 0]
 	, [1954, 5, 127, 160, 4, 1, 300, 50, "Royal Guard's Spear", 0, "[Holy Cross] SP Cost -10", 290, 35, 5161, 20, 0]
 	, [1955, 61, 0, 2, 0, 1, 150, 80, "Aegis of the Immortal", 0, "Gain the Immortal buff while wearing this item. This buff is lost upon taking damage.<br>Upon taking fatal damage lose the Immortal buff, and enter Stasis for 3 seconds.<br>While in Stasis, recover back to full HP over 3 seconds.<br>After Stasis ends, the Immortal buff goes on cooldown for 30 minutes.", 0]
-	, [1956, 2, 97, 170, 4, 2, 250, 60, "Save the King", 0, "<b>[Lord Knight]</b><br>[Bowling Bash] Cast time -(10*refine)%<br><br><b>[Paladin]</b><br>[Shield Chain] Range +4<br>[Shield Chain] skill damage +(1*refine)%<br><br><b>[Assassin Cross]</b><br>ASPD +7%<br>ATK +60<br>Reduces physical damage by 30%<br>Damage reduction does not affect [Soul Destroyer] or [Meteor Assault]<br><br><b>[Stalker]</b><br>VIT +3<br>DEX +3<br>Perfect Dodge +10<br>When performing an ATK based attack, chance to remove all [Chemical Protection] buffs from enemy.<br>[Raid] skill damage +50%<br><br><b>[Biochemist]</b><br>Deal +10% ranged ATK based damage.<br>Your [Heal], [Sanctuary], and [Aid Potion] effectiveness +10%<br>When performing an ATK based attack, 3.5% chance to cast [Stun], [Curse], [Silence], [Sleep], [Freeze], [Confusion], [Blind], or [Stone Curse] randomly on enemy.<br><br><b>[Whitesmith]</b><br>[Cart Revolution] skill damage +25%<br>DEF +5<br>MDEF +5<br>Received [Heal], [Sanctuary], and [Potion Pitcher] effectiveness +20%<br>Items recover 20% more HP", 194, 1, 0]
+	, [1956, 2, 97, 170, 4, 2, 250, 60, "Save the King", 0, "<b>[Lord Knight]</b><br>[Bowling Bash] Cast time -(10*refine)%<br><br><b>[Paladin]</b><br>[Shield Chain] Range +4<br>[Shield Chain] skill damage +(1*refine)%<br><br><b>[Assassin Cross]</b><br>ASPD +7%<br>ATK +60<br>Reduces physical damage by 30%<br>Damage reduction does not affect [Soul Destroyer] or [Meteor Assault]<br><br><b>[Stalker]</b><br>VIT +3<br>DEX +3<br>Perfect Dodge +10<br>When performing an ATK based attack, chance to remove all [Chemical Protection] buffs from enemy.<br>[Raid] skill damage +50%<br><br><b>[Biochemist]</b><br>Deal +10% ranged ATK based damage.<br>Your healing effectiveness +10%<br>When performing an ATK based attack, 3.5% chance to cast [Stun], [Curse], [Silence], [Sleep], [Freeze], [Confusion], [Blind], or [Stone Curse] randomly on enemy.<br><br><b>[Whitesmith]</b><br>[Cart Revolution] skill damage +25%<br>DEF +5<br>MDEF +5<br>Received [Heal], [Sanctuary], and [Potion Pitcher] effectiveness +20%<br>Items recover 20% more HP", 194, 1, 0]
 	, [1957, 100, 0, 0, 0, 0, 0, 0, "Save the King + Evil Jester Hat", 0, 0, 74, 5, 0]
 	, [1958, 64, 0, 0, 0, 1, 10, 90, "Cursed Royal Pendant", 0, "", 1, 2, 290, 1, 0]
 	, [1959, 64, 0, 0, 0, 1, 10, 90, "Ring of Mimir", 0, "", 4, 2, 295, 1, 0]
@@ -2142,14 +2142,14 @@ m_Item = [
 	, [2130, 21, 146, 150, 3, 1, 200, 30, "Cyanide Launcher", 0, "When dealing long ranged ATK based damage, 5% chance of inflicting Stun, Curse, Silence, and Poison on the target.", 0]
 	, [2131, 18, 146, 150, 3, 2, 200, 30, "Winchester Rifle", 0, "", 48, 10, 10, 20, 0]
 	, [2132, 20, 146, 100, 3, 2, 250, 10, "Tempest", 0, "", 12, 3, 10, 25, 0]
-	, [2133, 50, 0, 4, 0, 1, 40, 1, "Lava Leather Hood", 0, "", 17, 5, 0]
-	, [2134, 60, 0, 5, 0, 1, 100, 1, "Lava Leather Suit", 0, "", 63, 5, 43, 5, 0]
-	, [2135, 62, 0, 3, 0, 1, 50, 1, "Lava Leather Manteau", 0, "", 50, 5, 0]
-	, [2136, 63, 0, 3, 0, 1, 50, 1, "Lava Leather Shoes", 0, "", 159, 5, 0]
+	, [2133, 50, 0, 4, 0, 1, 40, 1, "Lava Leather Hood", 0, "", 17, 10, 88, 10, 12, 2, 0]
+	, [2134, 60, 0, 5, 0, 1, 100, 1, "Lava Leather Suit", 0, "", 63, 5, 43, 5, 343, 3, 7, 1, 0]
+	, [2135, 62, 0, 3, 0, 1, 50, 1, "Lava Leather Manteau", 0, "", 50, 5, 390, 5, 0]
+	, [2136, 63, 0, 3, 0, 1, 50, 1, "Lava Leather Shoes", 0, "", 159, 5, 13, 500, 14, 75, 192, 3, 0]
 	, [2137, 100, 0, 0, 0, 0, 0, 0, "Lava Leather Manteau + Shoes", 0, "", 159, 30, 0]
 	, [2138, 100, 0, 0, 0, 0, 0, 0, "Lava Leather Armor Set", 0, "", 43, 10, 343, 10, 0]
-	, [2139, 100, 0, 0, 0, 0, 0, 0, "Lava Leather Hood + Binoculars", 0, "", 5, 2, 9, 5, 0]
-	, [2140, 100, 0, 0, 0, 0, 0, 0, "Lava Leather Hood + Evil Wing Ears", 0, "", 1, 2, 18, 3, 0]
+	, [2139, 100, 0, 0, 0, 0, 0, 0, "Lava Leather Hood + Binoculars", 0, "", 5, 2, 9, 5, 12, 1, 0]
+	, [2140, 100, 0, 0, 0, 0, 0, 0, "Lava Leather Hood + Evil Wing Ears", 0, "", 1, 2, 18, 3, 12, 1, 0]
 	, [2141, 62, 0, 3, 0, 1, 30, 1, "Manteau of Flame Heart", 0, "", 63, 10, 61, -10, 0]
 	, [2142, 9, 156, 60, 4, 2, 70, 70, "Flaming Wand", 0, "<b>For each refine:</b><br>Increases [<b style='color:red'>Fire</b>] property magic damage by 2%.<br>[Fire Ball] skill damage +5%", 89, 20, 4, 4, 5, 2, 13, 200, 14, 100, 0]
 	, [2143, 1, 95, 120, 4, 2, 120, 50, "Volcano Knife", 0, "", 89, 15, 4, 3, 5, 3, 42, 15, 342, 15, 0]
@@ -2158,7 +2158,7 @@ m_Item = [
 	, [2145, 65, 109, 0, 0, 0, 0, 50, "Ring of Archbishop", 0, "[Heal] After-cast Delay -50%<br><b>Only Left Accessory</b>", 4, 1, 99, 3, 93, 10, 0]
 	, [2146, 15, 0, 200, 4, 2, 140, 70, "Safety Whip", 0, "<b>[Refine Rate 7~10]</b><br>[Severe Rainstorm] Cast time -100%<br>Enables the use of [Barrier] Lvl 1<br>[Barrier] reduces incoming damage by 50% for 1.5 seconds when activated and has a 30 second cooldown. [Barrier] cannot be used in PVP, BGs, WOE, or RWC maps and modes.", 0]
 	, [2147, 3, 0, 220, 4, 1, 250, 70, "Claw Sword", 0, "<b>For each refine level:</b><br>CRIT +2<br><b>[Refine Rate 9~10]</b><br>Critical damage +5%", 12, 5, 10, 20, 0]
-	, [2148, 8, 53, 80, 3, 2, 80, 70, "Rubber Hammer", 0, "<b>For every 3 base VIT:</b><br>Your [Heal], [Sanctuary], and [Aid Potion] effectiveness +1%<br><b>[Refine Rate = 10]</b><br>Nullifies gemstone cost of all skills.", 13, 600, 60, 5, 61, 5, 62, 5, 63, 5, 64, 5, 65, 5, 66, 5, 67, 5, 68, 5, 69, 5, 0]
+	, [2148, 8, 53, 80, 3, 2, 80, 70, "Rubber Hammer", 0, "<b>For every 3 base VIT:</b><br>Your healing effectiveness +1%<br><b>[Refine Rate = 10]</b><br>Nullifies gemstone cost of all skills.", 13, 600, 60, 5, 61, 5, 62, 5, 63, 5, 64, 5, 65, 5, 66, 5, 67, 5, 68, 5, 69, 5, 0]
 	, [2149, 9, 111, 80, 3, 3, 100, 50, "Detecting Staff", 0, "<b>The following effects are not implemented in the calculator:</b><br>[Meteor Storm], [Storm Gust], [Lord of Vermillion] Cooldown +4 seconds<br><b>For each refine level:</b><br>[Meteor Storm] After-cast Delay -0.6 seconds<br>[Storm Gust] After-cast Delay -0.4 seconds<br>[Lord of Vermillion] After-cast Delay -0.4 seconds", 89, 20, 4, 2, 5, 2, 0]
 	, [2150, 64, 0, 0, 0, 1, 20, 70, "Safety Pendant", 0, "", 17, 10, 88, 10, 60, 1, 61, 3, 62, 3, 63, 3, 64, 3, 65, 3, 66, 3, 67, 3, 68, 3, 69, 3, 0]
 	// patch a4
@@ -2220,6 +2220,12 @@ m_Item = [
 	, [2205, 12, 118, 300, 3, 2, 70, 50, "Eldric's Tome", 0, "", 10, 50, 70, 50, 0]
     , [2206, 50, 0, 1, 0, 1, 40, 1, "Shaman Hat", 0, "", 60, 3, 61, 3, 62, 3, 63, 3, 64, 3, 65, 3, 66, 3, 67, 3, 68, 3, 69, 3, 0]
     , [2207, 12, 0, 110, 3, 2, 200, 70, "Encyclopedia", 0, "<b>For every 5 Base LUK:</b> CRIT +1", 89, 15, 4, 3, 5, 3, 10, 20, 0]
+    // patch a5.3
+	, [2208, 100, 0, 0, 0, 0, 0, 0, "Lava Leather Hood + Black Frame Glasses", 0, "", 4, 2, 13, 100, 12, 1, 0]
+	, [2209, 61, 0, 3, 0, 1, 80, 60, "Royal Guard's Shield", 0, "<b>For each refine level:</b> MaxHP +75", 57, 5, 0]
+	, [2210, 50, 0, 0, 0, 1, 50, 60, "White Knight Helm", 0, "<b>For each refine level:</b> MaxHP +30", 57, 8, 0]
+	, [2211, 2, 0, 140, 4, 2, 150, 60, "Royal Guard's Rapier", 0, "5% chance to absorb 15% HP when performing an ATK based attack.<br><b>For every 2 refine levels:</b> MaxHP +1%", 194, 1, 89, 20, 0]
+	, [2212, 2, 0, 140, 4, 2, 150, 60, "Royal Guard's Rapier (Special)", 0, "5% chance to absorb 15% HP when performing an ATK based attack.<br><b>For every 2 refine levels:</b> MaxHP +1%", 194, 1, 89, 20, 0]
 ];
 
 //[ id, display location, job that can use, atk/def, level of weapon, slots, weight, level required to use, "name of item", ?, "description", effect1, effect2, ..., 0 =? ]
@@ -2457,9 +2463,9 @@ function Item_Setumei(nC1, nC2) {
 	if (98 == nC1)
 		CBIstr += "Received [" + skillName(245) + "] effectiveness" + wIS + nC2 + "%<BR>";
 	if (99 == nC1)
-		CBIstr += "Your [Heal], [Sanctuary], and [" + skillName(245) + "] effectiveness" + wIS + nC2 + "%<BR>";		//healpower
+		CBIstr += "Your healing effectiveness" + wIS + nC2 + "%<BR>";		//healpower
 	if (100 == nC1)
-		CBIstr += "Received [Heal], [Sanctuary], and [" + skillName(245) + "] effectiveness" + wIS + nC2 + "%<BR>";	//healpower2
+		CBIstr += "Received healing effectiveness" + wIS + nC2 + "%<BR>";	//healpower2
 	if (110 <= nC1 && nC1 <= 119)
 		//		CBIstr += "Increases the critical rate against [" + v_Race[nC1-110] +"] race monsters by "+ wIS + nC2 +"<BR>";
 		CBIstr += "CRIT" + wIS + nC2 + " against [" + v_Race[nC1 - 110] + "] race monsters.<BR>";
@@ -2592,6 +2598,8 @@ function Item_Setumei(nC1, nC2) {
         CBIstr += "Receive " + wISS + (-1 * nC2) + "% damage from short-range attacks.<BR>";
     if(380 <= nC1 && nC1 <= 389)
         CBIstr += "[" + v_Element[nC1 - 380] + "] element magic damage " + wIS + nC2 + "%<BR>";
+    if(390 == nC1)
+        CBIstr += "Receive " + wISS + (-1 * nC2) + "% damage from monster's skills.<BR>";
 	if (5000 <= nC1 && nC1 <= 6999)		//mejorar: bastaría con 5000~5999
 		//		CBIstr += "["+ m_Skill[nC1 -5000][2] +"] skill damage"+ wIS + nC2 +"%<BR>";		// original
 		CBIstr += "[" + skillName(m_Skill[nC1 - 5000][0]) + "] skill damage" + wIS + nC2 + "%<BR>";
@@ -2806,6 +2814,7 @@ w_SE = [[737, 436, 475, "NULL"]
 	, [2181, 2180, 1979, "NULL"]
 	, [2185, 2162, 703, "NULL"]
 	, [2186, 2178, 1975, "NULL"]
+	, [2208, 2133, 887, "NULL"]
 ];
 SE_MAXnum = w_SE.length - 1;
 for (var i = 0; i <= SE_MAXnum; i++) {

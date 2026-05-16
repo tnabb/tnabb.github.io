@@ -373,7 +373,8 @@ class PlayerData {
             skill_ratio: 0,
 
             normalatk_dmgrate: 0,
-            plagiarized_skillatk: 0
+            plagiarized_skillatk: 0,
+            skill_defrate: 0,
         }
 
         this.castrate = 0;

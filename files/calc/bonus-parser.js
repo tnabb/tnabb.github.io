@@ -493,6 +493,9 @@ function PlayerApplyBonus(type, val) {
         case 389:
             player.indexed_bonus.magic_atk_ele[type - 380] += val;
             break;
+        case 390: // monster skill damage resistance
+            player.bonus.skill_defrate += val;
+            break;
         default:
             // special cases for 5000 - 6999 (skill damage increase)
             // and 7000 - 8999 (skill cast time reduction) can be handled here if needed
@@ -875,6 +878,10 @@ function CalculateEquipmentBonuses() {
         player.bonus.hp += 50 * player.refine[EQI.HAND_R];
     if(player.equip[EQI.SHOES] == 536 && (n_A_JobClass() == JOB.MAGICIAN || n_A_JobClass() == JOB.ARCHER || n_A_JobClass() == JOB.ACOLYTE || n_A_JobClass() == JOB.GUNSLINGER)) // valkyrie shoes
         player.bonus.hp += 5 * player.status.base_level;
+    if(player.equip[EQI.SHIELD] == 2209) // royal guard's shield
+        player.bonus.hp += 75 * player.refine[EQI.SHIELD];
+    if(player.equip[EQI.HEAD_TOP] == 2210) // white knight helm
+        player.bonus.hp += 30 * player.refine[EQI.HEAD_TOP];
 
     // max hp % calculations
 
@@ -884,6 +891,15 @@ function CalculateEquipmentBonuses() {
         player.hprate += 10;
     if(player.equip[EQI.SHOES] == 1945 && player.status.vit >= 90) // vit temporal boots
         player.hprate += 12;
+    if(player.equip[EQI.HAND_R] == 2211) // royal guard's rapier
+        player.hprate += 1 * Math.trunc(player.refine[EQI.HAND_R] / 2);
+    if(player.equip[EQI.HAND_L] == 2211) // royal guard's rapier
+        player.hprate += 1 * Math.trunc(player.refine[EQI.HAND_L] / 2);
+    if(player.equip[EQI.HAND_R] == 2212) // royal guard's rapier (Special)
+        player.hprate += 1 * Math.trunc(player.refine[EQI.HAND_R] / 2);
+    if(player.equip[EQI.HAND_L] == 2212) // royal guard's rapier (Special)
+        player.hprate += 1 * Math.trunc(player.refine[EQI.HAND_L] / 2);
+    
     
     // flat max sp calculations
 

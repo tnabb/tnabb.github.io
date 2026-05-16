@@ -419,7 +419,8 @@ function StatusCalcPlayerSub() {
         skill_ratio: 0,
 
         plagiarized_skillatk: 0,
-        normalatk_dmgrate: 0
+        normalatk_dmgrate: 0,
+        skill_defrate: 0,
     };
 
     pc_calc_weapontype(player);
@@ -4047,12 +4048,12 @@ for (document.calcForm.A_Weapon_element.options[0] = new Option("(unchanged)", 0
 
 for (i = 0; i < m_TempEffect.length; i++)
     if (1 == m_TempEffect[i][3]) {
-        var str = "<B>(Special Effect: [" + m_TempEffect[i][2] + "] can be activated under 'Additional Effects' at 'BUFF, ITEMS AND OTHER STUFF')</B>";
+        var str = "<B>(Special Effect: [" + m_TempEffect[i][2] + "] can be activated under 'Additional Effects' at 'Temporary Card/Item active Effects')</B>";
         0 == m_Item[m_TempEffect[i][4]][10] ? m_Item[m_TempEffect[i][4]][10] = str : m_Item[m_TempEffect[i][4]][10] += "<BR>" + str
     }
 for (i = 0; i < m_TempEffect.length; i++)
     if (2 == m_TempEffect[i][3]) {
-        str = "<B>(Special Effect: [" + m_TempEffect[i][2] + "] can be activated under 'Additional Effects' at 'BUFF, ITEMS AND OTHER STUFF')</B>";
+        str = "<B>(Special Effect: [" + m_TempEffect[i][2] + "] can be activated under 'Additional Effects' at 'Temporary Card/Item active Effects')</B>";
         0 == m_Card[m_TempEffect[i][4]][3] ? m_Card[m_TempEffect[i][4]][3] = str : m_Card[m_TempEffect[i][4]][3] += "<BR>" + str
     }
 function refreshFields() {
