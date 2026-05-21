@@ -230,7 +230,7 @@ m_Skill = [		//ID, max level, iRO name, alternative name, 0=nodamage 1=melee/ran
 	[190, 1, "Snap", "Body Relocation", 0, 0],
 	[191, 10, "Flee", "Dodge", 0, 0],
 	[192, 5, "Throw Spirit Spheres", "Finger Offensive", 3, 11],
-	[193, 5, "Occult Impaction", "Investigate", 2, 11],
+	[193, 5, "Occult Impaction", "Investigate", 2, 0],
 	[194, 5, "Root", "Blade Stop", 0, 0],
 	[195, 5, "Fury", "Critical Explosion", 0, 0],
 	[196, 5, "Mental Strength", "Steel Body", 0, 0],

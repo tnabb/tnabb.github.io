@@ -206,6 +206,10 @@ function updatePlayerDamageDisplay(d) {
         delayUsed = inputLimit - castTime;
         delayType = 4;
     }
+    if(c.Conf03.value > 0) {
+        delayUsed = c.Conf03.value / 1000;
+        delayType = 5; // custom delay set by user - overrides every other form of delay
+    }
 
     if(delayType == 1 && pingDelay > 0 && d.skill_id != 0) {
         delayUsed += pingDelay;
@@ -246,29 +250,35 @@ function updatePlayerDamageDisplay(d) {
             delayLabelStr = "Delay (Input Limit)";
             delayStr = inputLimit + " seconds";
             break;
+        case 5:
+            delayLabelStr = "Delay (Forced by User)";
+            delayStr = delayUsed + " seconds";
+            break;
         default:
             break;
     }
 
-    switch(d.skill_id) {
-        case SKILL.SG_MILD_HEAT_ATK:
-            delayLabelStr = "Time/Hit";
-            delayUsed = 0.2;
-            delayStr = delayUsed + " seconds";
-            break;
-        case SKILL.SG_RISING_HEAT_ATK:
-            delayLabelStr = "Time/Hit";
-            delayUsed = 0.1;
-            delayStr = delayUsed + " seconds";
-            break;
-        case SKILL.SKE_UNLEASHED_HEAT_ATK:
-            delayLabelStr = "Time/Hit";
-            delayUsed = 0.02;
-            delayStr = delayUsed + " seconds";
-            break;
+    if(delayType != 5) {
+        switch(d.skill_id) {
+            case SKILL.SG_MILD_HEAT_ATK:
+                delayLabelStr = "Time/Hit";
+                delayUsed = 0.2;
+                delayStr = delayUsed + " seconds";
+                break;
+            case SKILL.SG_RISING_HEAT_ATK:
+                delayLabelStr = "Time/Hit";
+                delayUsed = 0.1;
+                delayStr = delayUsed + " seconds";
+                break;
+            case SKILL.SKE_UNLEASHED_HEAT_ATK:
+                delayLabelStr = "Time/Hit";
+                delayUsed = 0.02;
+                delayStr = delayUsed + " seconds";
+                break;
+        }
     }
 
-    if(isCombo > 0)
+    if(isCombo > 0 && delayType != 5)
         delayLabelStr += " x" + isCombo;
 
     setVal("bSUB2name", delayLabelStr);

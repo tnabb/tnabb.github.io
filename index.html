@@ -61,6 +61,16 @@
                             there's any errors.
                             <br><br>
                             <details open>
+                                <summary style="cursor: pointer; font-weight: bold;">(A) Changelog 2026-05-21</summary>
+                                <div>
+                                    • Fixed link to Skill Tree Simulator.
+                                    <br>• Added +10% Formless physical/magic damage bonus to Lava Leather Set.
+                                    <br>• Investigate/Occult Impact is now forced Neutral.
+                                    <br>• Added field to "Set time between Active Skills" to forcibly set a delay between Active Skills.
+                                </div>
+                            </details>
+                            <br>
+                            <details>
                                 <summary style="cursor: pointer; font-weight: bold;">(A) Changelog 2026-05-16</summary>
                                 <div>
                                     • Added Royal Guard's Shield, Royal Guard's Rapier, Royal Guard's Rapier (Special), and White Knight's Helm.
@@ -144,7 +154,6 @@
                             <input type="checkbox" id="restrict_equipslot" onclick="StAllCalc() | calc()">Equipment slot restrictions<br>
                             <input type="checkbox" id="restrict_cardslot" onclick="restrictCardslot(0)">Equipment card slot restrictions<br>
                             <input type="checkbox" id="all_card" onclick="allCard()">All Cards everywhere (with bugs)<br>
-                            <input type="checkbox" id="increase_aspdcap" onclick="StAllCalc() | calc()">Increase ASPD cap to 193<br>
                         </td>
                     </tr>
                 </tbody>
@@ -7342,6 +7351,11 @@
                     <option value="50">0.5s (2 per second)</option>
                 </select>
                 <br>
+                Set time between Active Skills (this overrides every other form of delay):
+                <input type="text" inputmode="numeric" maxlength="4" onkeypress="return isNumeric(event)"
+                    onkeyup="calc()" name="Conf03" value="0" style="width: 25px; height: 12px;" class="center">
+                ms
+                <br>
                 Ping to server:
                 <input type="text" inputmode="numeric" maxlength="3" onkeypress="return isNumeric(event)"
                     onkeyup="calc()" name="Conf02" value="0" style="width: 25px; height: 12px;" class="center">
@@ -8096,7 +8110,7 @@
         <br><br>
 
         <div class="links" style="background-image: linear-gradient(rgb(51, 85, 85), rgb(68, 119, 119));">
-            <b>Useful Links:</b> [<a href="https://xellie.com/RO/pa/skill/">Xellie's Skill Tree Simulator for
+            <b>Useful Links:</b> [<a href="https://projectalfheim.net/skillsim/">Sonikki's Skill Tree Simulator for
                 Alfheim</a>]
         </div>
         <br>

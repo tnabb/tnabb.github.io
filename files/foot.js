@@ -4098,7 +4098,6 @@ document.calcForm.restrict_lvlequip.checked = !1,
 document.calcForm.restrict_equipslot.checked = !1,
 document.calcForm.restrict_cardslot.checked = !1,
 document.calcForm.all_card.checked = !1,
-document.calcForm.increase_aspdcap.checked = !1,
 document.calcForm.A_JOB.value = 0,
 populateAdditionalEffectSelects();
 ClickB_Item("SW");
