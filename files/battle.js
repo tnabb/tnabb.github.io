@@ -3788,11 +3788,21 @@ function battle_calc_defense_reduction(wd, src, target, skill_id, skill_lv) {
             def1 = 0;
     }
 
-    if(skill_id == SKILL.AM_ACIDTERROR)
-        def2 = 0;
+    if(target.type == BL.PC) {
+        let target_count = 1 * c.B_num.value;
 
-    if(def2 < 1)
-        def2 = 1;
+        target_count = Math.min(target_count, Math.trunc(100 / 5) + 2);
+        if(target_count >= 3){
+            if(!SkillSearch(SKILL.MO_STEELBODY)) {
+                def1 = Math.trunc((def1 * (100 - (target_count - 2) * 5)) / 100);
+            }
+            def2 = Math.trunc((def2 * (100 - (target_count - 2) * 5)) / 100);
+        }
+        if(skill_id == SKILL.AM_ACIDTERROR)
+            def2 = 0;
+        if(def2 < 1)
+            def2 = 1;
+    }
 
     if(sd && sc_get(player, SC.T_RED_PHOENIX_BUFF))
         def2 = 0;
@@ -4589,6 +4599,16 @@ function is_attack_hitting(wd, src, target, skill_id, skill_lv, first_call) {
 
     flee = tstatus.flee;
     hitrate = 80;
+
+    // reduce by number of enemies hitting
+    if(target.type == BL.PC) {
+        let attacker_count = 1 * c.B_num.value;
+        if(attacker_count >= 3) {
+            flee = Math.trunc((flee * (100 - (attacker_count - 2) * 10)) / 100);
+        }
+        if(flee < 1)
+            flee = 1;
+    }
 
     hitrate += sstatus.hit - flee;
 

@@ -151,7 +151,7 @@ function PlayerApplyBonus(type, val) {
             player.castrate += val;
             break;
         case 74: // cast delay reduction
-            player.bonus.delayrate += -val;
+            player.bonus.delayrate += val;
             break;
         case 75: // hp regen rate
             player.hprecov_rate += val;
@@ -1212,19 +1212,19 @@ function CalculateEquipmentBonuses() {
     
     // after cast delay calculations
     if(player.equip[EQI.HAND_R] == 936) // thorn staff of darkness
-        player.bonus.delayrate += -(Math.floor(3 * player.refine[EQI.HAND_R] / 2));
+        player.bonus.delayrate += Math.floor(3 * player.refine[EQI.HAND_R] / 2);
     if(player.equip[EQI.HAND_R] == 934 && player.refine[EQI.HAND_R] >= 9) // tae goo lynn
-        player.bonus.delayrate += -20;
+        player.bonus.delayrate += 20;
     if(player.equip[EQI.HAND_R] == 1839 && player.refine[EQI.HAND_R] >= 7) // cursed jackknife
-        player.bonus.delayrate += -10;
+        player.bonus.delayrate += 10;
     if(player.equip[EQI.HAND_R] == 1843 && player.refine[EQI.HAND_R] >= 7) // demon slayer
-        player.bonus.delayrate += -5;
+        player.bonus.delayrate += 5;
     if(EquipNumSearch(1119) > 0 && n_A_JobClass() == JOB.MAGICIAN) // magician figure
-        player.bonus.delayrate += -(5 * EquipNumSearch(1119));
+        player.bonus.delayrate += 5 * EquipNumSearch(1119);
     if(player.equip[EQI.HAND_R] == 2155 && player.refine[EQI.HAND_R] >= 7) // calf python
-        player.bonus.delayrate += -10;
+        player.bonus.delayrate += 10;
     if(TimeItemNumSearch(33) > 0) // rata temp effect
-        player.bonus.delayrate += -20 * TimeItemNumSearch(33);
+        player.bonus.delayrate += 20 * TimeItemNumSearch(33);
 
     // skill specific after cast delay calculations
     if(EquipNumSearch(1838) > 0) // evil jester hat + clown nose combo
@@ -1757,6 +1757,8 @@ function CalculateAdditionalBonuses() {
     // flat matk calculations
 
     // matk% calculations
+    if(CardNumSearch(479) && n_A_JobClass2() == JOB.ROGUE) // byorgue card
+        player.matk_rate += 10;
 
     // speed calculations
 
@@ -1821,7 +1823,7 @@ function CalculateAdditionalBonuses() {
         player.indexed_bonus.subele[ELE.NEUTRAL] += 5;
 
     // atk% calculations
-    if(CardNumSearch(479) && n_A_JobClass2() == JOB.STALKER) // byorgue card
+    if(CardNumSearch(479) && n_A_JobClass2() == JOB.ROGUE) // byorgue card
         player.indexed_bonus.addclass[CLASS.ALL] += 10;
 
     // magic damage race% cards

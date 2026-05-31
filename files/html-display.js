@@ -1090,8 +1090,8 @@ function displayOtherInfo(val) {
                 bragiDelay = sc_get(player, SC.POEMBRAGI).val6;
             }
 
-            // Gear delay reduction (stored as negative in bonus-parser, so negate it)
-            let gearDelay = -(player.bonus.delayrate || 0);
+            // Gear delay reduction
+            let gearDelay = player.bonus.delayrate || 0;
 
             // Muspel solo
             let muspelDelay = monster.mob_id == 763 ? 50 : 0;
