@@ -620,7 +620,6 @@ function updatePlayerDamageDisplay(d) {
     avgHits = Math.ceil(tstatus.max_hp / avgDamage);
     maxHits = Math.ceil(tstatus.max_hp / minDamage);
 
-    console.log(avgDamage, totalCycleTime);
     damagePerSecond = Math.floor(avgDamage / totalCycleTime * 100) / 100;
 
     setVal("AveSecondATK", damagePerSecond);

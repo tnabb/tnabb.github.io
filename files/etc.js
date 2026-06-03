@@ -2859,10 +2859,10 @@ m_TempEffect = [
 	, [28, "Shield of Naga", "Reflect Melee Physical Attacks by 3*(refine)%", 1, 993, 0]
 	, [29, "Flare Whip", "ATK +33 [Windmill Rush]", 1, 1996, 0]
 	, [30, "Jackson Rhoads", "MATK +33 [Moonlight Serenade]", 1, 1997, 0]
-	, [31, "Guardian Staff", "50% damage reduction [Barrier]", 1, 2099, 371, 50, 0]
-	, [32, "Safety Whip", "50% damage reduction [Barrier]", 1, 2146, 371, 50, 0]
+	, [31, "Guardian Staff", "50% damage reduction [Barrier]", 1, 2099, 0]
+	, [32, "Safety Whip", "50% damage reduction [Barrier]", 1, 2146, 0]
 	, [33, "Rata Card", "Cast Delay -20%", 2, 509, 0]
-	, [34, "Recognized Spell", "Changes MATK to be average of min and max MATK.", 1, 0]
+	, [34, "Recognized Spell", "Changes MATK to be average of min and max MATK.", 1, 2100, 0]
 ];
 //m_TempEffect = [ id, name, description, item/card, item/card ID, ... ]
 m_TempEffect_SORT = [0, 5, 9, 4, 15, 3, 17, 24, 11, 26, 29, 31, 18, 2, 1, 6, 30, 21, 19, 13, 10, 25, 27, 33, 34, 20, 23, 12, 28, 14, 8, 7, 16, 22]

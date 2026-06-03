@@ -2062,8 +2062,8 @@ function battle_calc_damage(src, target, wd, damage, skill_id, skill_lv) {
             }
     }
 
-    if(tsd) {
-        // barrier
+    if(tsd && damage > 0 && (TimeItemNumSearch(31) || TimeItemNumSearch(32))) {
+        damage = Math.max(Math.trunc(damage / 2), 1);
     }
 
     battleDebug && console.log(`[battle_calc_damage] END â€” damage=${damage}`);
