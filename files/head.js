@@ -1034,6 +1034,8 @@ function updateSupportSkillStatus(e, tableHeaderFunction) {
             var int_ = document.getElementsByName('buff_marionette_int')[0];
             var dex = document.getElementsByName('buff_marionette_dex')[0];
             var luk = document.getElementsByName('buff_marionette_luk')[0];
+            sc_end(player, SC.MARIONETTE);
+            calc();
             sc_start(player, SC.MARIONETTE, statCom, str ? parseInt(str.value, 10) : 0, agi ? parseInt(agi.value, 10) : 0, vit ? parseInt(vit.value, 10) : 0, int_ ? parseInt(int_.value, 10) : 0, dex ? parseInt(dex.value, 10) : 0, luk ? parseInt(luk.value, 10) : 0);
         }
     }

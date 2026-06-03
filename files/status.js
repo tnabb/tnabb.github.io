@@ -1079,14 +1079,16 @@ function sc_start(bl, type, val1 = 0, val2 = 0, val3 = 0, val4 = 0, val5 = 0, va
         case SC.MARIONETTE:
             let max_stat = 99;
             let status2 = player.battle_status;
-            let caster_stats = {str: Math.floor(val2 / 2), agi: Math.floor(val3 / 2), vit: Math.floor(val4 / 2), int: Math.floor(val5 / 2), dex: Math.floor(val6 / 2), luk: Math.floor(val7 / 2)};
-
-            val2 = cap_value(Math.min(caster_stats.str, max_stat - status2.str), 0, 0xFF);
-            val3 = cap_value(Math.min(caster_stats.agi, max_stat - status2.agi), 0, 0xFF);
-            val4 = cap_value(Math.min(caster_stats.vit, max_stat - status2.vit), 0, 0xFF);
-            val5 = cap_value(Math.min(caster_stats.int, max_stat - status2.int), 0, 0xFF);
-            val6 = cap_value(Math.min(caster_stats.dex, max_stat - status2.dex), 0, 0xFF);
-            val7 = cap_value(Math.min(caster_stats.luk, max_stat - status2.luk), 0, 0xFF);
+            if(!val1) {
+                let caster_stats = {str: Math.floor(val2 / 2), agi: Math.floor(val3 / 2), vit: Math.floor(val4 / 2), int: Math.floor(val5 / 2), dex: Math.floor(val6 / 2), luk: Math.floor(val7 / 2)};
+                
+                val2 = cap_value(Math.min(caster_stats.str, max_stat - status2.str), 0, 255);
+                val3 = cap_value(Math.min(caster_stats.agi, max_stat - status2.agi), 0, 255);
+                val4 = cap_value(Math.min(caster_stats.vit, max_stat - status2.vit), 0, 255);
+                val5 = cap_value(Math.min(caster_stats.int, max_stat - status2.int), 0, 255);
+                val6 = cap_value(Math.min(caster_stats.dex, max_stat - status2.dex), 0, 255);
+                val7 = cap_value(Math.min(caster_stats.luk, max_stat - status2.luk), 0, 255);
+            }
             break;
         case SC.VOLCANO:
             {
