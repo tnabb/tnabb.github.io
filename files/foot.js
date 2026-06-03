@@ -908,6 +908,10 @@ function StatusCalcBLMain() {
 
     if (SkillSearch(SKILL.SOA_TALISMAN_OF_MAGICIAN))
         matk_min = Math.max(matk_min, matk_max);
+    else if(TimeItemNumSearch(34)) { // recognized spell
+        matk_min = Math.trunc((matk_min + matk_max) / 2);
+        matk_max = matk_min;
+    }
 
     matk_min = status_calc_pseudobuff_matk(player, matk_min);
     matk_max = status_calc_pseudobuff_matk(player, matk_max);

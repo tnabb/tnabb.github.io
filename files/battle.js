@@ -1165,7 +1165,7 @@ function battle_calc_magic_attack(src, target, skill_id, skill_lv, mflag) {
                 imdef = 1;
 
             if(skill_id == SKILL.TK_FALLING_STAR_ATTACK) {
-                skill_is_critical(ad, src, target, skill_id); // sets the crit rate
+                is_attack_critical(ad, src, target, skill_id, skill_lv, true); // sets the crit rate
                 let crit_atk_rate = sd.bonus.crit_atk_rate;
 
                 if(crit_atk_rate)
