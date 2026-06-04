@@ -1759,6 +1759,8 @@ function CalculateAdditionalBonuses() {
     // matk% calculations
     if(CardNumSearch(479) && n_A_JobClass2() == JOB.ROGUE) // byorgue card
         player.matk_rate += 10;
+    if(player.card[8] == 177 && player.refine[EQI.HEAD_TOP] >= 9) // kathryne keyron card on top headgear
+        player.matk_rate += 2;
 
     // speed calculations
 
