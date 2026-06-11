@@ -255,6 +255,7 @@ class PlayerData {
             no_misc_damage: false,
             no_sizefix: false,
             lr_flag: LR_FLAG.NONE,
+            arrow_atk: false, // used to determine if the attack should take arrow atk into account
         };
 
         this.indexed_bonus = {

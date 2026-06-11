@@ -579,6 +579,16 @@ function is_attack_right_handed(src, skill_id) {
 function battle_calc_attack(attack_type, bl, target, skill_id, skill_lv, flag) {
     battleDebug && console.log(`%c[battle_calc_attack] START â€” attack_type=${attack_type}, skill_id=${skill_id}, skill_lv=${skill_lv}, flag=${flag}`, 'color: #ff6600; font-weight: bold');
     let d = new Damage();
+    let sd = is_player_object(bl) ? bl : null; // get player data if src is player, otherwise null
+
+    // determine if attack takes arrow atk into account (this is on skill_check_condition_castbegin and end in rA so we just check it right at the beginning)
+    if(sd) {
+        if(skill_id == 0) {
+            sd.special_state.arrow_atk = (sd.status.weapon == WEAPON.BOW || (sd.status.weapon >= WEAPON.REVOLVER && sd.status.weapon <= WEAPON.GRENADE));
+        } else {
+            sd.special_state.arrow_atk = skill_get_ammotype(skill_id) ? 1 : 0;
+        }
+    }
 
     // Call appropriate damage calculation function based on attack type
     switch(attack_type) {
@@ -675,6 +685,10 @@ function battle_calc_misc_attack(src, target, skill_id, skill_lv, mflag) {
     md.dmg_lv = ATK.DEF;
     md.flag = BF.MISC|BF.SKILL;
     md.miscflag = mflag;
+
+    if(sd) {
+        sd.special_state.arrow_atk = 0;
+    }
 
     s_ele = battle_get_misc_element(src, target, skill_id, skill_lv, mflag);
     battleDebug && console.log("[battle_calc_misc_attack] s_ele:", s_ele, "div_:", md.div_);
@@ -881,6 +895,10 @@ function battle_calc_magic_attack(src, target, skill_id, skill_lv, mflag) {
             if(tstatus.race == RC.DEMON || tstatus.race == RC.UNDEAD)
                 imdef = 1;
             break;
+    }
+    
+    if(sd) {
+        sd.special_state.arrow_atk = 0;
     }
     
     ad.flag |= battle_range_type(src, target, skill_id, skill_lv);
@@ -4410,7 +4428,7 @@ function is_skill_using_arrow(src, skill_id) {
     let sd = is_player_object(src) ? src : null;
 
     if(sd) {
-        if(sd.bonus.arrow_atk > 0)
+        if(sd.special_state.arrow_atk)
             return true;
     } else {
         let sstatus = status_get_status_data(src);
@@ -6596,4 +6614,39 @@ function skill_is_aoe( skill_id, flag )
 			return true;
 		}
 	return false;
+}
+
+function skill_get_ammotype(skill_id) {
+    switch(skill_id) {
+        case SKILL.AC_DOUBLE:
+        case SKILL.AC_SHOWER:
+        case SKILL.AC_CHARGEARROW:
+        case SKILL.BA_MUSICALSTRIKE:
+        case SKILL.DC_THROWARROW:
+        case SKILL.SN_SHARPSHOOTING:
+        case SKILL.CG_ARROWVULCAN:
+        case SKILL.HT_POWER:
+        case SKILL.GS_TRIPLEACTION:
+        case SKILL.GS_BULLSEYE:
+        case SKILL.GS_CRACKER:
+        case SKILL.GS_TRACKING:
+        case SKILL.GS_DISARM:
+        case SKILL.GS_PIERCINGSHOT:
+        case SKILL.GS_RAPIDSHOWER:
+        case SKILL.GS_DESPERADO:
+        case SKILL.GS_DUST:
+        case SKILL.GS_FULLBUSTER:
+        case SKILL.GS_SPREADATTACK:
+        case SKILL.NJ_SYURIKEN:
+        case SKILL.NJ_KUNAI:
+        case SKILL.AS_VENOMKNIFE:
+        case SKILL.RA_AIMEDBOLT:
+        case SKILL.WM_REVERBERATION:
+        case SKILL.RL_MASS_SPIRAL:
+        case SKILL.NW_BASIC_GRENADE:
+        case SKILL.NW_HASTY_FIRE_IN_THE_HOLE:
+        case SKILL.GS_RAPIDFIRE:
+        case SKILL.RL_SLUGSHOT:
+            return true;
+    }
 }

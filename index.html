@@ -61,96 +61,10 @@
                             there's any errors.
                             <br><br>
                             <details open>
-                                <summary style="cursor: pointer; font-weight: bold;">(A) Changelog 2026-06-03</summary>
+                                <summary style="cursor: pointer; font-weight: bold;">(A) Changelog 2026-06-11</summary>
                                 <div>
-                                    • Fixed Falling Star not properly taking Fusion into account for CRIT calculation.
-                                    <br>• Fixed Encyclopedia having 3 DEX instead of 2.
-                                    <br>• Falling Star now properly uses the doubled motion delay for Damage Per Second calculations.
-                                    <br>• Added Recognized Spell to "Temporary Card/Item active Effects" section.
-                                    <br>• Fixed Barrier skill not reducing damage properly.
-                                    <br>• Fixed "Status Compensation" from Marionette Control not working.
-                                    <br>• Fixed Kathryne Keyron Card's MATK bonus not being applied.
-                                </div>
-                            </details>
-                            <br>
-                            <details>
-                                <summary style="cursor: pointer; font-weight: bold;">(A) Changelog 2026-05-31</summary>
-                                <div>
-                                    • Fixed Byorgue Card not applying its bonuses.
-                                    <br>• Fixed cast delay from being inverted in the value.
-                                    <br>• FLEE, DEF, and soft DEF are now properly reduced based on number of enemies attacking the player.
-                                </div>
-                            </details>
-                            <br>
-                            <details>
-                                <summary style="cursor: pointer; font-weight: bold;">(A) Changelog 2026-05-21</summary>
-                                <div>
-                                    • Fixed link to Skill Tree Simulator.
-                                    <br>• Added +10% Formless physical/magic damage bonus to Lava Leather Set.
-                                    <br>• Investigate/Occult Impact is now forced Neutral.
-                                    <br>• Added field to "Set time between Active Skills" to forcibly set a delay between Active Skills.
-                                </div>
-                            </details>
-                            <br>
-                            <details>
-                                <summary style="cursor: pointer; font-weight: bold;">(A) Changelog 2026-05-16</summary>
-                                <div>
-                                    • Added Royal Guard's Shield, Royal Guard's Rapier, Royal Guard's Rapier (Special), and White Knight's Helm.
-                                    <br>• Added changes to Lava Leather items.
-                                    <br>• Added changes to White Knight and Khalitzburg Knight combo.
-                                    <br>• Added a new "passive" skill to Soul Linker/Ascetic for number of orb stacks on enemy.
-                                    <br>• Each orb stack on an enemy makes the enemy take 2.5% more damage from the Soul Linker/Ascetic.
-                                    <br>• Fixed Double Attack from items not showing properly.
-                                    <br>• Fixed Resurrection/Turn Undead not being properly affected by target's remaining Max HP%.
-                                    <br>• Binoculars can now also be equipped by Gunslinger/Night Watch.
-                                </div>
-                            </details>
-                            <br>
-                            <details>
-                                <summary style="cursor: pointer; font-weight: bold;">(A) Changelog 2026-05-11</summary>
-                                <div>
-                                    • Fixed base Max HP on Star Gladiator and Sky Emperor being slightly wrong.
-                                    <br>• Fixed Cavalier Mastery accidentally giving +10% ASPD at level 5 instead of 0% ASPD.
-                                    <br>• Motion Delay (ASPD based) is now doubled on Falling Star Damage to match it falling every other basic attack.
-                                </div>
-                            </details>
-                            <br>
-                            <details>
-                                <summary style="cursor: pointer; font-weight: bold;">(A) Changelog 2026-05-08</summary>
-                                <div>
-                                    • Fixed EDP causing NaN to players damage.
-                                    <br>• Changed Grave Worm's DEF from 50 -> 45 and MDEF from 60 -> 40.
-                                    <br>• Fixed Hardrock Mammoth using the wrong Water Ball skill.
-                                    <br>• Fixed Hell's Judgement having "Unknown element" instead of using weapon element.
-                                </div>
-                            </details>
-                            <br>
-                            <details>
-                                <summary style="cursor: pointer; font-weight: bold;">(A) Changelog 2026-05-05</summary>
-                                <div>
-                                    • Fixed slight damage mismatch when using piercing attacks (Ice Pick etc).
-                                    <br>• Fixed Loud Exclamation not giving STR bonus.
-                                    <br>• Fixed Perfect Dodge bonus from cards and equipment not being calculated correctly.
-                                    <br>• Fixed Spare Card giving 1 DEF instead of 0.
-                                </div>
-                            </details>
-                            <br>
-                            <details>
-                                <summary style="cursor: pointer; font-weight: bold;">(A) Changelog 2026-05-03</summary>
-                                <div>
-                                    • Almost full rewrite of calculator.
-                                    <br>• Removed outdated and unused code, and removed everything not related to Alfheim.
-                                    <br>• Rewrote all damage calculation to follow rAthena functions directly.
-                                    <br>• Rewrote all status calculation to follow rAthena functions directly.
-                                    <br>• Rewrote all stat calculation to follow rAthena functions directly.
-                                    <br>• This should make calculator significantly more accurate, and also easier for me to update in the future.
-                                    <br>• Rewrote saving and loading system, which should make it more stable and less prone to bugs.
-                                    <br>• Old saves and URLs should still work, but they will be converted to the new format when loaded.
-                                    <br>• However, I recommend everyone to make new saves and URLs after this update, as the new format is more efficient and less prone to bugs.
-                                    <br>• There may be some bugs that I missed during the rewrite, so if you find any, please report them to me through Discord.
-                                    <br>
-                                    <br>• Added Soul Ascetic and Sky Emperor to the calculator.
-                                    <br>• Added all new skills and skill adjustments. Find all the new changes <a href="https://projectalfheim.net/wiki/index.php/Episode_A_5_0">here</a>.
+                                    • Fixed CRIT to a specific race giving 1/10th of the intended CRIT.
+                                    <br>• Fixed non-ammo consuming skills taking arrow attack into account when using a Bow weapon (such as Bowling Bash).
                                 </div>
                             </details>
                             <!-- <br>• Made an item database based on the client's itemInfo.lub file. It can be found <a href="itemdb/index.html">here</a>. -->

@@ -345,7 +345,8 @@ function StatusCalcPlayerSub() {
         no_magic_damage: false,
         no_misc_damage: false,
         no_sizefix: false,
-        lr_flag: LR_FLAG.NONE
+        lr_flag: LR_FLAG.NONE,
+        arrow_atk: false
     };
     base_status.aspd_rate = 1000;
     base_status.ele_lv = 1;

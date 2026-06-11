@@ -237,7 +237,7 @@ function PlayerApplyBonus(type, val) {
         case 117:
         case 118:
         case 119:
-            player.indexed_bonus.critaddrace[type - 110] += val;
+            player.indexed_bonus.critaddrace[type - 110] += val * 10;
             break;
         case 120: // increased exp vs race
         case 121:
