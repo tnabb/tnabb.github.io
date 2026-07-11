@@ -896,7 +896,7 @@ function battle_calc_magic_attack(src, target, skill_id, skill_lv, mflag) {
                 imdef = 1;
             break;
     }
-    
+
     if(sd) {
         sd.special_state.arrow_atk = 0;
     }
@@ -1934,11 +1934,11 @@ function battle_calc_damage(src, target, wd, damage, skill_id, skill_lv) {
             }
         }
 
-        if(SkillSearch(SKILL.TK_POWER) && flag&(BF.SHORT|BF.WEAPON)) {
-            let damage_bonus = SkillSearch(SKILL.TK_POWER) * 8;
+        if(SkillSearch(SKILL.TK_POWER) && (flag&(BF.SHORT|BF.WEAPON)) == (BF.SHORT|BF.WEAPON)) {
+            let damage_bonus = SkillSearch(SKILL.TK_POWER) * 4;
 
             if(SkillSearch(SKILL.TK_POWER_STACKS))
-                damage_bonus += SkillSearch(SKILL.TK_POWER_STACKS) * 4 * SkillSearch(SKILL.TK_POWER);
+                damage_bonus += SkillSearch(SKILL.TK_POWER_STACKS) * 2 * SkillSearch(SKILL.TK_POWER);
 
             damage += Math.trunc((damage * damage_bonus) / 100);
             battleDebug && console.log(`[battle_calc_damage] after TK_POWER â€” damage_bonus=${damage_bonus}, damage=${damage}`);
@@ -1949,12 +1949,12 @@ function battle_calc_damage(src, target, wd, damage, skill_id, skill_lv) {
         }
 
         if(sc_get(target, SC.SEARED)) {
-            let damage_increase = n_A_JobClass2() == JOB.STAR_GLADIATOR ? 5 : 1;
+            let damage_increase = n_A_JobClass2() == JOB.STAR_GLADIATOR ? 2 : 1;
             damage += Math.trunc((damage * damage_increase * sc_get(target, SC.SEARED).val1) / 100);
         }
 
-        if(sc_get(target, SC.MELEE_FRAGILITY) && flag&(BF.SHORT | BF.WEAPON)) {
-            damage += Math.trunc((damage * (sc_get(target, SC.MELEE_FRAGILITY).val1 * 5)) / 100);
+        if(sc_get(target, SC.MELEE_FRAGILITY) && (flag&(BF.SHORT | BF.WEAPON)) == (BF.SHORT | BF.WEAPON)) {
+            damage += Math.trunc((damage * 10) / 100);
         }
 
         if(SkillSearch(SKILL.SL_ENEMYORBSTACKS) > 0)
@@ -3437,8 +3437,14 @@ function battle_calc_attack_skill_ratio(wd, src, target, skill_id, skill_lv) {
 		case SKILL.TK_TURNKICK:
 			skillratio += 50 * skill_lv;
 
-            if(sd && SkillSearch(SKILL.SG_TAEKWON_KICK_MASTERY) > 0)
-                skillratio += Math.trunc((skillratio * (SkillSearch(SKILL.SG_TAEKWON_KICK_MASTERY) * 5)) / 100);
+            if(sd && SkillSearch(SKILL.SG_TAEKWON_KICK_MASTERY) > 0) {
+                if(SkillSearch(SKILL.SKE_DAWN_BREAK))
+                    i = 10;
+                else
+                    i = 20;
+
+                skillratio += Math.trunc((skillratio * (SkillSearch(SKILL.SG_TAEKWON_KICK_MASTERY) * i)) / 100);
+            }
 
 			if (sd && skill_id == SKILL.TK_COUNTER && SkillSearch(SKILL.TK_COUNTER_DMG_RECEIVED) > 0)
 				skillratio *= SkillSearch(SKILL.TK_COUNTER_DMG_RECEIVED) + 1;
@@ -3452,8 +3458,14 @@ function battle_calc_attack_skill_ratio(wd, src, target, skill_id, skill_lv) {
 		case SKILL.TK_JUMPKICK:
             skillratio += -100 + 50 * skill_lv + 10 * c.SkillSubNum.value;
 
-            if (sd && SkillSearch(SKILL.SG_TAEKWON_KICK_MASTERY) > 0)
-                skillratio += Math.trunc((skillratio * (SkillSearch(SKILL.SG_TAEKWON_KICK_MASTERY) * 5)) / 100);
+            if(sd && SkillSearch(SKILL.SG_TAEKWON_KICK_MASTERY) > 0) {
+                if(SkillSearch(SKILL.SKE_DAWN_BREAK))
+                    i = 10;
+                else
+                    i = 20;
+
+                skillratio += Math.trunc((skillratio * (SkillSearch(SKILL.SG_TAEKWON_KICK_MASTERY) * i)) / 100);
+            }
 
             if (sc_get(target, SC.STUN))
                 skillratio *= 3;
