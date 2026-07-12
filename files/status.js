@@ -239,6 +239,9 @@ function status_base_amotion(sd, status) {
     let job_aspd = JOB_BASE_ASPD[sd.status.job_id];
     let amotion = (sd.status.weapon < WEAPON.MAX) ? (job_aspd[sd.status.weapon] * 500) : ((job_aspd[sd.weapontype1] * 500) + Math.floor(((job_aspd[sd.weapontype2] * 500) * 7) / 10));
 
+    if(sd.status.job_id == JOB.SUPERNOVICE && sd.status.weapon == WEAPON.TWOHANDAXE)
+        amotion = 2000;
+
     amotion -= Math.floor((amotion * (4 * status.agi + status.dex)) / 1000);
 
     amotion += sd.bonus.aspd_add;

@@ -1399,7 +1399,7 @@ function WeaponSet(jobId) {
     const jobWeapons = JOB_BASE_ASPD[jobId] || {};
 
     for (let weaponType = 1; weaponType < WEAPON.MAX; weaponType++) {
-        if (jobWeapons[weaponType] === undefined)
+        if (jobWeapons[weaponType] === undefined && !(player.status.job_id == JOB.SUPERNOVICE && player.status.base_level >= 90 && weaponType == WEAPON.TWOHANDAXE))
             continue;
 
         const optGroup = document.createElement("OPTGROUP");
@@ -1421,7 +1421,7 @@ function WeaponSet(jobId) {
 
             if (canEquip && (!levelRestrict || itemLevelRequirement <= c.A_BaseLV.value)) {
                 availableWeapons.push(itemId);
-            } else if (player.status.job_id == JOB.SUPERNOVICE && player.status.base_level >= 90 && (weaponType == WEAPON.DAGGER || weaponType == WEAPON.ONEHANDSWORD || weaponType == WEAPON.ONEHANDAXE || weaponType == WEAPON.MACE || weaponType == WEAPON.ROD) && itemLevel == 4) {
+            } else if (player.status.job_id == JOB.SUPERNOVICE && player.status.base_level >= 90 && (weaponType == WEAPON.DAGGER || weaponType == WEAPON.ONEHANDSWORD || weaponType == WEAPON.ONEHANDAXE || weaponType == WEAPON.MACE || weaponType == WEAPON.ROD || weaponType == WEAPON.TWOHANDAXE) && itemLevel == 4) {
                 availableWeapons.push(itemId);
             }
         }
