@@ -3542,7 +3542,7 @@ function battle_calc_attack_skill_ratio(wd, src, target, skill_id, skill_lv) {
             skillratio += Math.trunc((skill_lv - 1) % 5 + 1) * 100;
             break;
         case SKILL.AB_DUPLELIGHT_MELEE:
-            skillratio += 10 * 9 * skill_lv;
+            skillratio += 10 + 9 * skill_lv;
             break;
         case SKILL.RA_AIMEDBOLT:
             skillratio += -100 + 180 + 20 * skill_lv;
