@@ -282,19 +282,17 @@ function ClickJob(jobId) {
             continue;
         }
 
-        if(skillId === 385) {
+        if(skillId === SKILL.SL_SUPERNOVICE) {
             myInnerHtml("P_Skill" + i, m_Skill[skillId][2], 0);
             myInnerHtml("P_Skill" + i + "s", '<select name=A_skill' + i + ' id=A_skill' + i + ' onChange="calc() | WeaponSet(20) | restrictCardslot(1)"></select>', 0);
-        } else if (skillId === 392) {
+        } else if (skillId === SKILL.SL_HIGH) {
             myInnerHtml("P_Skill" + i, skillName(m_Skill[skillId][0]), 0);
             myInnerHtml("P_Skill" + i + "s", "<select name=A_skill" + i + " id=A_skill" + i + ' onChange="calc()" style="width:70px;"></select>', 0);
             if(player.status.rebirth == 0)
                 myInnerHtml("P_Skill" + i, "", 0);
-        } else if (skillId === 441) {
-            myInnerHtml("P_Skill" + i, m_Skill[skillId][2], 0);
+        } else if (skillId === SKILL.PF_DOUBLECASTING || skillId == SKILL.SA_AUTOSPELL || skillId == SKILL.SA_AUTOSPELL_SKILL || skillId == SKILL.SA_AUTOSPELL_SKILL_LV) {
+            myInnerHtml("P_Skill" + i, skillName(m_Skill[skillId][0]), 0);
             myInnerHtml("P_Skill" + i + "s", "<select name=A_skill" + i + " id=A_skill" + i + ' onChange="calc() | ClickActiveSkill2() | calc()"></select>', 0);
-            if(player.status.rebirth == 0)
-                myInnerHtml("P_Skill" + i, "", 0);
         } else {
             myInnerHtml("P_Skill" + i, skillName(m_Skill[skillId][0]), 0);
             myInnerHtml("P_Skill" + i + "s", "<select name=A_skill" + i + " id=A_skill" + i + " onChange=calc()></select>", 0);
@@ -316,37 +314,32 @@ function ClickJob(jobId) {
             skillElement.options[1] = new Option("on", 1);
             if(skillId == SKILL.SL_HIGH && player.status.rebirth == 0)
                 skillElement.style.visibility = "hidden";
-        } else if (skillId === 851) {
+        } else if (skillId === SKILL.GS_WEAPON_MASTERY) {
             skillElement.options[0] = new Option("off", 0);
             skillElement.options[1] = new Option("Revolver", 1);
             skillElement.options[2] = new Option("Shotgun", 2);
             skillElement.options[3] = new Option("Gatling Gun", 3);
             skillElement.options[4] = new Option("Rifle", 4);
             skillElement.options[5] = new Option("Grenade Launcher", 5);
-        } else if (skillId === 852) {
+        } else if (skillId === SKILL.GS_WEAPON_MASTERY_STACKS_CONSUMED) {
             skillElement.options[0] = new Option("off", 0);
             skillElement.options[1] = new Option("5-9 stacks", 1);
             skillElement.options[2] = new Option("10 stacks", 2);
-        } else if (skillId === 58) {
+        } else if (skillId === SKILL.MG_ENERGYCOAT) {
             const damageReduction = ["0", "6% Reduction", "12% Reduction", "18% Reduction", "24% Reduction", "30% Reduction"];
             for(let j = 0; j <= 5; j++) {
                 skillElement.options[j] = new Option(damageReduction[j], j);
             }
-        } else if (skillId === 78) {
+        } else if (skillId === SKILL.KN_CAVALIERMASTERY) {
             const pecoLevels = ["(no Peco)", "0", "1", "2", "3", "4", "5"];
             for(let j = 0; j <= 6; j++) {
                 skillElement.options[j] = new Option(pecoLevels[j], j);
             }
-        } else if (skillId === 367) {
-            const smsBlessing = [0, 1, 2, 3, 4, 5, 6, 8, 10];
-            for(let j = 0; j <= 8; j++) {
-                skillElement.options[j] = new Option(10 * smsBlessing[j] + "%", smsBlessing[j]);
-            }
-        } else if (skillId === 336) {
+        } else if (skillId === SKILL.TK_READYCOUNTER) {
             skillElement.options[0] = new Option("off", 0);
             skillElement.options[1] = new Option("20% damage reduction", 1);
             skillElement.options[2] = new Option("50% damage reduction", 2);
-        } else if (skillId === 859) {
+        } else if (skillId === SKILL.TK_COUNTER_DMG_RECEIVED) {
             skillElement.options[0] = new Option("off", 0);
             skillElement.options[1] = new Option("Auto-attack", 1);
             skillElement.options[2] = new Option("Skill", 2);
@@ -354,6 +347,15 @@ function ClickJob(jobId) {
             for(let j = 0; j <= 50; j++) {
                 skillElement.options[j] = new Option(j / 10 + "%", j / 10);
             }
+        } else if (skillId == SKILL.SA_AUTOSPELL_SKILL) {
+            skillElement.options[0] = new Option("(no skill)", 0);
+            skillElement.options[1] = new Option("Fire Bolt", SKILL.MG_FIREBOLT);
+            skillElement.options[2] = new Option("Cold Bolt", SKILL.MG_COLDBOLT);
+            skillElement.options[3] = new Option("Lightning Bolt", SKILL.MG_LIGHTNINGBOLT);
+            skillElement.options[4] = new Option("Napalm Beat", SKILL.MG_NAPALMBEAT);
+            skillElement.options[5] = new Option("Soul Strike", SKILL.MG_SOULSTRIKE);
+            skillElement.options[6] = new Option("Fire Ball", SKILL.MG_FIREBALL);
+            skillElement.options[7] = new Option("Frost Diver", SKILL.MG_FROSTDIVER);
         } else {
             for(let j = 0; j <= 10; j++) {
                 skillElement.options[j] = null;
@@ -820,7 +822,7 @@ function ClickActiveSkill2() {
         for (let i = 1; i <= 99; i++)
             c.SkillSubNum.options[i - 1] = new Option(i, i);
  
-    } else if (doubleCastingLv && doubleCastingBoltSkills.includes(skillId)) {
+    } else if (doubleCastingLv && (doubleCastingBoltSkills.includes(skillId) || (skillId == SKILL.NV_BASIC_ATTACK && SkillSearch(SKILL.SA_AUTOSPELL) && SkillSearch(SKILL.SA_AUTOSPELL_SKILL) && SkillSearch(SKILL.SA_AUTOSPELL_SKILL_LV)))) {
         const avgChance = doubleCastingLv + 3;
         myInnerHtml("AASkill", 'Double Bolt chance: <select name="SkillSubNum" onChange="calc()"></select>', 0);
         c.SkillSubNum.options[0] = new Option("Bad luck (0%)", 0);

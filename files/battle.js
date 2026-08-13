@@ -1561,7 +1561,7 @@ function battle_calc_weapon_attack(src, target, skill_id, skill_lv, wflag) {
         battleDebug && console.log(`[battle_calc_weapon_attack] Infinite defense (plant) â€” calling battle_calc_attack_plant`);
         battle_calc_attack_plant(wd, src, target, skill_id, skill_lv);
 
-        if(skill_id == SKILL.TK_DOWNKICK && (SkillSearch(SKILL.TK_READYDOWN)) && (wd.damage_min + wd.damage_max) <= 0)
+        if(skill_id == SKILL.TK_DOWNKICK && (SkillSearch(SKILL.TK_READYDOWN) || SkillSearch(SKILL.SJ_STARSTANCE)) && (wd.damage_min + wd.damage_max) <= 0)
             wd.damage_min = wd.damage_max = wd.crit_damage_min = wd.crit_damage_max = 1;
 
         return wd;
@@ -1579,7 +1579,7 @@ function battle_calc_weapon_attack(src, target, skill_id, skill_lv, wflag) {
     battle_calc_weapon_final_atk_modifiers(wd, src, target, skill_id, skill_lv);
     battleDebug && console.log(`%c[battle_calc_weapon_attack] END â€” final damage_min=${wd.damage_min}, damage_max=${wd.damage_max}, damage2_min=${wd.damage2_min}, damage2_max=${wd.damage2_max}, crit_damage_min=${wd.crit_damage_min}, crit_damage_max=${wd.crit_damage_max}, crit_damage2_min=${wd.crit_damage2_min}, crit_damage2_max=${wd.crit_damage2_max}`, 'color: #00cc00; font-weight: bold');
 
-    if((skill_id == 0 || skill_id == SKILL.TK_DOWNKICK) && (SkillSearch(SKILL.TK_READYDOWN)) && (wd.damage_min + wd.damage_max) <= 0)
+    if((skill_id == 0 || skill_id == SKILL.TK_DOWNKICK) && (SkillSearch(SKILL.TK_READYDOWN) || SkillSearch(SKILL.SJ_STARSTANCE)) && (wd.damage_min + wd.damage_max) <= 0)
         wd.damage_min = wd.damage_max = wd.crit_damage_min = wd.crit_damage_max = 1;
 
     wd.element = right_element;
@@ -1947,6 +1947,9 @@ function battle_calc_damage(src, target, wd, damage, skill_id, skill_lv) {
         if(SkillSearch(SKILL.SG_HATE) && SkillSearch(SKILL.SG_HATE_STACKS) > 0) {
             damage += Math.trunc((damage * SkillSearch(SKILL.SG_HATE_STACKS) * SkillSearch(SKILL.SG_HATE)) * 2 / 1000)
         }
+
+        if(skill_id == SKILL.TK_FALLING_STAR_ATTACK && SkillSearch(SKILL.SJ_STARSTANCE))
+            damage -= Math.floor((damage * 50) / 100);
 
         if(sc_get(target, SC.SEARED)) {
             let damage_increase = n_A_JobClass2() == JOB.STAR_GLADIATOR ? 2 : 1;

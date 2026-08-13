@@ -308,6 +308,11 @@ function updatePlayerDamageDisplay(d) {
     // triple attack damage (saved for expected damage calculation)
     let tripleAttackDmgMin = 0, tripleAttackDmgAvg = 0, tripleAttackDmgMax = 0;
     let hasTripleAttack = false;
+    let blitzBeatDamage = null;
+    let blitzBeatChance = 0;
+    let dupleLightDamage = new Damage();
+    let hindsightDamage = new Damage();
+    let fallingStarDamage = new Damage();
 
     setVal("bSUB4name", "");
     setVal("bSUB4", "");
@@ -331,6 +336,54 @@ function updatePlayerDamageDisplay(d) {
                 tripleAttackDmgMax = tripleAttackDamage.damage_max;
 
                 setVal("bSUB3", `${tripleAttackDamage.damage_min}~${tripleAttackDamage.damage_max} (30%)`);
+            } else if (SkillSearch(SKILL.HT_BLITZBEAT)) {
+                setVal("bSUB3name", "Blitz Beat damage (chance)");
+                blitzBeatDamage = battle_calc_attack(BF.MISC, player, monster, SKILL.HT_BLITZBEAT, SkillSearch(SKILL.HT_BLITZBEAT), 0);
+                blitzBeatChance = (Math.floor(player.battle_status.luk * 10 / 3) + 1) / 10;
+                setVal("bSUB3", `${blitzBeatDamage.getAverageDamage()} (${(blitzBeatChance).toFixed(1)}%)`);
+            } else if (SkillSearch(SKILL.AB_DUPLELIGHT)) {
+                setVal("bSUB3name", "Duple Light damage (chance)");
+                let dupleLightMelee = battle_calc_attack(BF.WEAPON, player, monster, SKILL.AB_DUPLELIGHT_MELEE, SkillSearch(SKILL.AB_DUPLELIGHT), 0);
+                let dupleLightMagic = battle_calc_attack(BF.MAGIC, player, monster, SKILL.AB_DUPLELIGHT_MAGIC, SkillSearch(SKILL.AB_DUPLELIGHT), 0);
+
+                dupleLightDamage.damage_min = dupleLightMelee.damage_min + dupleLightMagic.damage_min;
+                dupleLightDamage.damage_max = dupleLightMelee.damage_max + dupleLightMagic.damage_max;
+
+                setVal("bSUB3", `[${dupleLightMelee.damage_min}+${dupleLightMagic.damage_min}]~[${dupleLightMelee.damage_max}+${dupleLightMagic.damage_max}] (${(10 + 2 * SkillSearch(SKILL.AB_DUPLELIGHT)).toFixed(1)}%)`);
+            } else if (SkillSearch(SKILL.TK_READYDOWN) || SkillSearch(SKILL.SJ_STARSTANCE)) {
+                setVal("bSUB3name", "Falling Star damage [CRIT damage] (chance)");
+                fallingStarDamage = battle_calc_attack(BF.MAGIC, player, monster, SKILL.TK_FALLING_STAR_ATTACK, 1, 0);
+                setVal("bSUB3", `${fallingStarDamage.damage_min}~${fallingStarDamage.damage_max} [${fallingStarDamage.crit_damage_min}~${fallingStarDamage.crit_damage_max}] (50%)`);
+            }
+
+            if(SkillSearch(SKILL.SA_AUTOSPELL) && SkillSearch(SKILL.SA_AUTOSPELL_SKILL) && SkillSearch(SKILL.SA_AUTOSPELL_SKILL_LV)) {
+                let hindsightSkillId = SkillSearch(SKILL.SA_AUTOSPELL_SKILL);
+                let hindsightSkillLv = SkillSearch(SKILL.SA_AUTOSPELL_SKILL_LV);
+                let hindsightLv = SkillSearch(SKILL.SA_AUTOSPELL);
+                let maxlv = 1;
+
+                if(hindsightSkillId == SKILL.MG_NAPALMBEAT) maxlv = 3;
+                else if(hindsightSkillId == SKILL.MG_FIREBOLT || hindsightSkillId == SKILL.MG_COLDBOLT || hindsightSkillId == SKILL.MG_LIGHTNINGBOLT) {
+                    if(n_A_JobClass2() == JOB.SAGE)
+                        maxlv = 10;
+                    else if(hindsightLv == 2) maxlv = 1;
+                    else if(hindsightLv == 3) maxlv = 2;
+                    else if(hindsightLv >= 4) maxlv = 3;
+                } else if (hindsightSkillId == SKILL.MG_SOULSTRIKE) {
+                    if(hindsightLv == 5) maxlv = 1;
+                    else if(hindsightLv == 6) maxlv = 2;
+                    else if(hindsightLv >= 7) maxlv = 3;
+                } else if(hindsightSkillId == SKILL.MG_FIREBALL) {
+                    if(hindsightLv == 8) maxlv = 1;
+                    else if(hindsightLv >= 9) maxlv = 2;
+                } else if(hindsightSkillId == SKILL.MG_FROSTDIVER) maxlv = 1;
+
+                maxlv = Math.min(hindsightSkillLv, maxlv);
+
+                hindsightDamage = battle_calc_attack(BF.MAGIC, player, monster, hindsightSkillId, maxlv, 0);
+
+                setVal("bSUB4name", `Hindsight damage [${skillName(hindsightSkillId)} ${maxlv}] (chance)`);
+                setVal("bSUB4", `${hindsightDamage.damage_min}~${hindsightDamage.damage_max} (${5 + hindsightLv * 2}%)`);
             }
 
             if(d.div_ > 1) {
@@ -380,7 +433,7 @@ function updatePlayerDamageDisplay(d) {
                 avgDamage = Math.floor(avgDamage * hindsightChance);
                 maxDamage = Math.floor(maxDamage * hindsightChance);
             }
-            if(SkillSearch(SKILL.PF_DOUBLECASTING)) {
+            if(SkillSearch(SKILL.PF_DOUBLECASTING) && c.SkillSubNum) {
                 let doubleCastChance = c.SkillSubNum.value * 10; // in percentage
 
                 minDamage = Math.floor(minDamage * (1 + doubleCastChance / 100));
@@ -582,6 +635,43 @@ function updatePlayerDamageDisplay(d) {
         minDamage = Math.floor(normalMin * normalRate + daMin * effectiveDA + tripleAttackDmgMin * effectiveTA + critMin * effectiveCrit);
         avgDamage = Math.floor(normalAvg * normalRate + daAvg * effectiveDA + tripleAttackDmgAvg * effectiveTA + critAvg * effectiveCrit);
         maxDamage = Math.floor(normalMax * normalRate + daMax * effectiveDA + tripleAttackDmgMax * effectiveTA + critMax * effectiveCrit);
+
+        if(SkillSearch(SKILL.HT_BLITZBEAT)) {
+            minDamage += Math.floor(blitzBeatDamage.damage_min * (blitzBeatChance / 100));
+            avgDamage += Math.floor(blitzBeatDamage.getAverageDamage() * (blitzBeatChance / 100));
+            maxDamage += Math.floor(blitzBeatDamage.damage_max * (blitzBeatChance / 100));
+        }
+
+        if(SkillSearch(SKILL.AB_DUPLELIGHT)) {
+            let dupleLightChance = (10 + 2 * SkillSearch(SKILL.AB_DUPLELIGHT)) / 100;
+            minDamage += Math.floor(dupleLightDamage.damage_min * dupleLightChance);
+            avgDamage += Math.floor(dupleLightDamage.getAverageDamage() * dupleLightChance);
+            maxDamage += Math.floor(dupleLightDamage.damage_max * dupleLightChance);
+        }
+
+        if(SkillSearch(SKILL.SA_AUTOSPELL) && SkillSearch(SKILL.SA_AUTOSPELL_SKILL) && SkillSearch(SKILL.SA_AUTOSPELL_SKILL_LV)) {
+            if(SkillSearch(SKILL.PF_DOUBLECASTING) && (hindsightDamage.skill_id == SKILL.MG_FIREBOLT || hindsightDamage.skill_id == SKILL.MG_COLDBOLT || hindsightDamage.skill_id == SKILL.MG_LIGHTNINGBOLT) && c.SkillSubNum) {
+                let doubleCastChance = c.SkillSubNum.value * 10; // in percentage
+
+                hindsightDamage.damage_min = Math.floor(hindsightDamage.damage_min * (1 + doubleCastChance / 100));
+                hindsightDamage.damage_max = Math.floor(hindsightDamage.damage_max * (1 + doubleCastChance / 100));
+            }
+
+            let hindsightChance = (5 + SkillSearch(SKILL.SA_AUTOSPELL) * 2) / 100;
+            minDamage += Math.floor(hindsightDamage.damage_min * hindsightChance);
+            avgDamage += Math.floor(hindsightDamage.getAverageDamage() * hindsightChance);
+            maxDamage += Math.floor(hindsightDamage.damage_max * hindsightChance);
+        }
+
+        if(SkillSearch(SKILL.TK_READYDOWN) || SkillSearch(SKILL.SJ_STARSTANCE)) {
+            let fallingStarChance = 50 / 100;
+            let fallingStarMinDamage = Math.floor(fallingStarDamage.damage_min * normalRate + fallingStarDamage.crit_damage_min * effectiveCrit);
+            let fallingStarAvgDamage = Math.floor(fallingStarDamage.getAverageDamage() * normalRate + fallingStarDamage.getAverageCritDamage() * effectiveCrit);
+            let fallingStarMaxDamage = Math.floor(fallingStarDamage.damage_max * normalRate + fallingStarDamage.crit_damage_max * effectiveCrit);
+            minDamage += Math.floor(fallingStarMinDamage * fallingStarChance);
+            avgDamage += Math.floor(fallingStarAvgDamage * fallingStarChance);
+            maxDamage += Math.floor(fallingStarMaxDamage * fallingStarChance);
+        }
 
         // Hit rate adjustment
         if(effectiveHitRate < 100) {

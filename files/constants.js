@@ -1029,8 +1029,8 @@ const SKILL = Object.freeze({
     SL_ESTUN_ESMA: 515,
     PR_MAGNUS_JUDEX_HOLYLIGHT: 516,
     HP_MANARECHARGE: 517,
-    // 518
-    // 519
+    SA_AUTOSPELL_SKILL: 518,
+    SA_AUTOSPELL_SKILL_LV: 519,
     // 520
     // 521
     // 522
@@ -1400,6 +1400,7 @@ const SKILL = Object.freeze({
     SKE_UNLEASHED_HEAT_ATK: 884,
     SJ_CAMOUFLAGE: 885,
     SL_ENEMYORBSTACKS: 886,
+    SJ_STARSTANCE: 887,
 
     // 4th job skills
     AG_SOUL_VC_STRIKE: 1000,
