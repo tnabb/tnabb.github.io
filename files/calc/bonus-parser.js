@@ -1828,6 +1828,10 @@ function CalculateAdditionalBonuses() {
     if(CardNumSearch(479) && n_A_JobClass2() == JOB.ROGUE) // byorgue card
         player.indexed_bonus.addclass[CLASS.ALL] += 10;
 
+    // ele change
+    if(CardNumSearch(456) && n_A_JobClass2() == JOB.CRUSADER) // crusader card set
+        player.base_status.def_ele = ELE.HOLY;
+
     // magic damage race% cards
     if(CardNumSearch(606) > 0 && player.refine[EQI.SHOES] >= 9) // piranha card
         player.indexed_bonus.magic_addrace[RC.FISH] += 5;
